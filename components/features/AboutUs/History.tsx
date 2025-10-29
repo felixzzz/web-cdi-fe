@@ -22,7 +22,10 @@ export const History: React.FC = () => {
         title={historyBlock1.title}
       >
         <p className="ql-align-justify">
-          <span style={{ backgroundColor: "transparent" }} className="">
+          <span style={{
+              backgroundColor: "transparent",
+              color: "rgb(255, 255, 255)",
+            }} className="">
             Located in Banten Province on the southern coast of Java Island,
             Cilegon offers strategic access to international ports and is
             ideally situated near Jakarta, making it prime location for
@@ -32,7 +35,10 @@ export const History: React.FC = () => {
           </span>
         </p>
         <p className="ql-align-justify">
-          <span style={{ backgroundColor: "transparent" }}>
+          <span style={{
+              backgroundColor: "transparent",
+              color: "rgb(255, 255, 255)",
+            }}>
             The Indonesian government strongly supports the growth of Cilegon
             with policies designed to foster the development of industrial
             sector. This includes ongoing infrastructure upgrades, investment

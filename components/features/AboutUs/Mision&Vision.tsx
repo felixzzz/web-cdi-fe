@@ -85,7 +85,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
               
             />
 
-            <p className="text-xl font-medium leading-relaxed min-h-[112px]">
+            <p className="text-3xl font-medium leading-relaxed min-h-[200px]">
               {visionData.statement}
             </p>
 
@@ -104,9 +104,10 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
               width={160}
               height={160}
               className="mb-8"
+
             />
 
-            <p className="text-xl font-medium leading-relaxed min-h-[112px]">
+            <p className="text-3xl font-medium min-h-[200px]">
               {missionData.statement}
             </p>
 

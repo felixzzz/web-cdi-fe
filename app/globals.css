@@ -13,7 +13,7 @@
 
   .hover-underline-middle::after {
     @apply content-[''] absolute bottom-0 left-0 w-full h-[1.5px];
-    @apply bg-current; 
+    @apply bg-current;
     @apply scale-x-0 origin-center;
     @apply transition-transform duration-300 ease-out;
   }
@@ -79,8 +79,6 @@
   }
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
@@ -91,7 +89,7 @@
 }
 
 .text-awards {
-  color: #0000; /* Ini sama dengan color: transparent */
+  color: #0000;
   background: linear-gradient(
     90deg,
     #b38d2c,
@@ -101,5 +99,12 @@
   );
   -webkit-background-clip: text;
   background-clip: text;
+}
 
+#our-history > div:first-child .overlay-history {
+  @apply bg-gradient-to-r from-black/80 to-transparent;
+}
+
+#our-history > div:last-child .overlay-history {
+  @apply bg-gradient-to-t from-black/80 to-transparent;
 }
