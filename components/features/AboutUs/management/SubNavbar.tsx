@@ -18,7 +18,7 @@ export const SubNavbar: React.FC<SubNavProps> = ({ links }) => {
 
   return (
     <nav 
-      className="bg-[#091A24] sticky top-0 z-10"
+      className="bg-[#091A24] sticky top-0 z-10 py-4"
       aria-label="Secondary" 
     >
       <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem]">

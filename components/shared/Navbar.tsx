@@ -120,7 +120,7 @@ export function Navbar() {
           (e) => e.isIntersecting && e.boundingClientRect.top > 88
         );
         if (!anyIntersectingBelow) {
-          currentTheme = "dark"; 
+          currentTheme = "dark";
         }
       }
       setNavbarStyle(currentTheme);
@@ -143,7 +143,7 @@ export function Navbar() {
     if (sections.length > 0) {
       sections.forEach((section) => observer.observe(section));
     } else {
-      setNavbarStyle("white"); 
+      setNavbarStyle("white");
     }
 
     return () => {
@@ -158,7 +158,7 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []); 
+  }, []);
 
   const toggleMobileDropdown = (id: string) => {
     setOpenMobileDropdown((prev) => (prev === id ? null : id));
@@ -170,13 +170,14 @@ export function Navbar() {
   };
 
   return (
-    <section ref={headerRef} className="top-0 z-[99] w-full sticky">
+    <section ref={headerRef} className="top-0 w-full fixed z-50">
       <header
         id="nav-header"
         className={clsx(
-          "w-full py-10 flex items-center left-0 right-0 transition-all duration-300",
+          "w-full py-4 flex items-center left-0 right-0 transition-all duration-300",
           !isScrolled
-            ? "bg-transparent text-neutral-900"
+            // ? "bg-transparent text-white"
+            ? " text-white bg-gradient-to-b from-black/60 to-transparent"
             : navbarStyle === "light"
             ? "bg-white/80 backdrop-blur-lg text-neutral-900 shadow-md"
             : "backdrop-blur-3xl bg-[#091A24]/10 text-white"
@@ -228,7 +229,7 @@ export function Navbar() {
                     />
                   </button>
                   {openDesktopDropdown === link.id && (
-                    <div className="absolute top-6 left-1/2 -translate-x-1/2 w-max z-10 pt-2">
+                    <div className="absolute top-8 left-1/2 -translate-x-1/2 w-max z-10 pt-2">
                       <Image
                         src="https://chandradaya-investasi.com/assets/frontend/icons/polygon.svg"
                         alt="Dropdown arrow"
