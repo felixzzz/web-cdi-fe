@@ -120,7 +120,7 @@ export default async function Page() {
         linkIcon={<ArrowUpRight size={14} />}
       >
         <div
-          className="text-[12px] leading-[24px] font-normal text-white"
+          className="text-[12px] leading-[24px] font-normal text-white space-y-6"
           dangerouslySetInnerHTML={{ __html: home_about_section.content || "" }}
         />
       </AboutUs>
@@ -146,7 +146,7 @@ export default async function Page() {
         links={linksData}
       >
         <div
-          className="text-[12px] leading-[24px] font-normal text-white py-1"
+          className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
           dangerouslySetInnerHTML={{
             __html: home_journey_content.content || "",
           }}

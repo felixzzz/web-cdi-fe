@@ -89,3 +89,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+.text-awards {
+  color: #0000; /* Ini sama dengan color: transparent */
+  background: linear-gradient(
+    90deg,
+    #b38d2c,
+    #f7ef8a 35%,
+    #d1ab46 65%,
+    #eac666
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+
+}

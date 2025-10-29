@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { VisionMissionCard } from "./VisionMissionCard";
 
 const DecorativeCorners: React.FC = () => {
   const size = 30;
@@ -58,7 +57,6 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
   visionData,
   missionData,
 }) => {
-
   return (
     <section
       className="py-28 bg-[#091A24] text-white bg-cover relative"
@@ -67,28 +65,55 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
         <h2
           id="vision-mission-title"
-          className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-16 text-center relative w-fit py-3 px-15 mx-auto"
+          className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-16 text-center relative w-fit py-3 px-12 mx-auto"
         >
           <DecorativeCorners />
           {title}
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
-          <VisionMissionCard
-            label="Our Vision"
-            statement={visionData.statement}
-            imageUrl={visionData.imageUrl}
-            imageWidth={200}
-            imageHeight={200}
-          />
+          <div
+            className="rounded-xl p-8 pt-12 flex flex-col items-center text-center"
+            style={{ backgroundImage: "linear-gradient(#00253b, #0b5581)" }}
+          >
+            <Image
+              src={visionData.imageUrl}
+              alt="Our Vision graphic"
+              width={160}
+              height={160}
+              className="mb-8"
+              
+            />
 
-          <VisionMissionCard
-            label="Our Mission"
-            statement={missionData.statement}
-            imageUrl={missionData.imageUrl}
-            imageWidth={200}
-            imageHeight={200}
-          />
+            <p className="text-xl font-medium leading-relaxed min-h-[112px]">
+              {visionData.statement}
+            </p>
+
+            <hr className="w-full border-white/30 my-6" />
+
+            <p className="text-base font-medium">Our Vision</p>
+          </div>
+
+          <div
+            className="rounded-xl p-8 pt-12 flex flex-col items-center text-center"
+            style={{ backgroundImage: "linear-gradient(#00253b, #0b5581)" }}
+          >
+            <Image
+              src={missionData.imageUrl}
+              alt="Our Mission graphic"
+              width={160}
+              height={160}
+              className="mb-8"
+            />
+
+            <p className="text-xl font-medium leading-relaxed min-h-[112px]">
+              {missionData.statement}
+            </p>
+
+            <hr className="w-full border-white/30 my-6" />
+
+            <p className="text-base font-medium">Our Mission</p>
+          </div>
         </div>
       </div>
     </section>

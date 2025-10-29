@@ -23,7 +23,7 @@ export const SubNavbar: React.FC<SubNavProps> = ({ links }) => {
     >
       <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         
-        <ul className="gap-10 flex items-center overflow-x-auto">
+        <ul className="gap-10 flex items-center overflow-x-auto overflow-y-hidden">
           {links.map((link) => {
             const isActive = pathname === link.href;
 

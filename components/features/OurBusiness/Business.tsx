@@ -64,7 +64,7 @@ export function Business({ overview }: BusinessProps) {
         <div className="bg-[#091A24] text-white pt-10 pb-20">
           <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
             <div
-              className="content !text-neutral-4 text-base max-w-4xl mx-auto text-center"
+              className="content !text-neutral-4 text-base mx-auto"
               dangerouslySetInnerHTML={{ __html: overview.content }}
             />
           </div>

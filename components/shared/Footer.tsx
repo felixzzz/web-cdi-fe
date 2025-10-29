@@ -60,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({
           <div>
             <Link
               href={contactHref}
-              className="bg-white text-blue-base px-6 py-2 rounded-full whitespace-nowrap"
+              className="bg-white text-[#2474a5] px-6 py-2 rounded-full whitespace-nowrap"
             >
               {contactText}
             </Link>

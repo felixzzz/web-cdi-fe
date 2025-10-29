@@ -176,9 +176,9 @@ export function Navbar() {
         className={clsx(
           "w-full py-10 flex items-center left-0 right-0 transition-all duration-300",
           !isScrolled
-            ? "bg-transparent text-neutral-13"
+            ? "bg-transparent text-neutral-900"
             : navbarStyle === "light"
-            ? "bg-white/80 backdrop-blur-lg text-neutral-13 shadow-md"
+            ? "bg-white/80 backdrop-blur-lg text-neutral-900 shadow-md"
             : "backdrop-blur-3xl bg-[#091A24]/10 text-white"
         )}
       >
@@ -241,7 +241,7 @@ export function Navbar() {
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="text-neutral-13 hover-underline-middle nav-item hover:text-blue-base justify-start text-sm"
+                            className="text-neutral-900 hover-underline-middle nav-item hover:text-[#2474a5] justify-start text-sm"
                             onClick={() => setOpenDesktopDropdown(null)}
                           >
                             {child.label}
@@ -295,7 +295,7 @@ export function Navbar() {
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
-                        className="text-neutral-13 flex items-center gap-2 cursor-pointer text-sm hover:text-blue-base"
+                        className="text-neutral-900 flex items-center gap-2 cursor-pointer text-sm hover:text-blue-base"
                         onClick={() => {
                           setIsLangDropdownOpen(false);
                         }}
@@ -339,7 +339,7 @@ export function Navbar() {
 
         <div
           className={clsx(
-            "absolute top-0 right-0 bottom-0 w-[80%] max-w-sm bg-white text-neutral-13 transition-transform duration-300 ease-out",
+            "absolute top-0 right-0 bottom-0 w-[80%] max-w-sm bg-white text-neutral-900 transition-transform duration-300 ease-out",
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >

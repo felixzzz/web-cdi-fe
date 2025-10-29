@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = {
   images: {
+     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -18,7 +19,14 @@ const nextConfig = {
         port: '',
         pathname: '/file-storage/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'chandradaya-investasi.com',
+        port: '',
+        pathname: '/assets/frontend/**',
+      },
     ],
+    // dangerouslyAllowSVG       : true,
   },
 };
 

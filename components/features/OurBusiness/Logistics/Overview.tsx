@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 interface OverviewProps {
   title: string;
@@ -14,8 +12,6 @@ export function Overview({
   title,
   description,
   imageUrl,
-  linkUrl,
-  linkTitle,
 }: OverviewProps) {
   return (
     <section className="py-28 text-white bg-[#091A24] relative overflow-hidden">
@@ -47,17 +43,6 @@ export function Overview({
             dangerouslySetInnerHTML={{ __html: description || "" }}
           ></div>
 
-          {linkUrl && linkTitle && (
-            <Link
-              href={linkUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white text-blue-base px-4 py-2 border border-neutral-13 rounded-full whitespace-nowrap gap-3 flex items-center w-fit mt-8 text-sm font-medium"
-            >
-              {linkTitle}
-              <ArrowRight size={16} />
-            </Link>
-          )}
         </div>
       </section>
     </section>

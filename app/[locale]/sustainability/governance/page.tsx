@@ -4,7 +4,8 @@ import { CyberSecurity } from "@/components/features/Sustainability/Governance/C
 import { GovernancePerformance } from "@/components/features/Sustainability/Governance/GovernancePerformance";
 import { GrievanceMechanism } from "@/components/features/Sustainability/Governance/GrievanceMechanism";
 import { Hero } from "@/components/features/Sustainability/Governance/Hero";
-import { SecuritySlider } from "@/components/features/Sustainability/Governance/SecuritySlider";
+import { Ciso } from "@/components/features/Sustainability/Governance/SecuritySlider";
+// import { SecuritySlider } from "@/components/features/Sustainability/Governance/SecuritySlider";
 import { SustainableProcurement } from "@/components/features/Sustainability/Governance/SustainableProcurement";
 import { governanceService } from "@/services/Sustainability/GovernanceServices";
 
@@ -35,7 +36,8 @@ export default async function Page() {
         <GrievanceMechanism />
         <SustainableProcurement />
         <CyberSecurity />
-        <SecuritySlider />
+        <Ciso title="Three fundamental components of information security management" />
+        {/* <SecuritySlider /> */}
         <GovernancePerformance />
       </div>
     </>

@@ -96,7 +96,7 @@ export default async function Page() {
           videoTitle="Company Profile Video - CDI Group"
         >
           <div
-            className="text-[12px] leading-[24px] font-normal text-white py-1"
+          className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
             dangerouslySetInnerHTML={{
               __html: about_us_company_overview.content || "",
             }}

@@ -160,8 +160,8 @@ export function FinancialCalendar() {
                 setCurrentPage(1);
               }}
               className={clsx(
-                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-blue-base border border-blue-base hover:bg-blue-base hover:text-white transition",
-                activeType === type && "bg-blue-base text-white"
+                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-blue-base hover:bg-blue-base transition",
+                activeType === type && "bg-blue-base"
               )}
             >
               {type}

@@ -26,33 +26,42 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
       )}
       <div className="table-main overflow-x-auto">
         <table className="w-full">
-          <thead>
+          {/* --- PERUBAHAN DI SINI: Menambahkan styling thead --- */}
+          <thead className="bg-[#2474A5] text-white">
             <tr>
               {headers.map((header) => (
                 <th
                   scope="col"
                   key={header.text}
-                  className={
+                  // --- PERUBAHAN DI SINI: Menambahkan padding, font, dan clsx ---
+                  className={clsx(
+                    "py-4 px-6 font-medium",
                     header.text.toLowerCase().includes("shareholders")
                       ? "text-left"
                       : "text-right"
-                  }
+                  )}
                 >
                   {header.text}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          {/* --- PERUBAHAN DI SINI: Menambahkan warna teks tbody --- */}
+          <tbody className="text-neutral-13">
             {tableData.map((row, rowIndex) => {
               // This component only has simple rows, not groups
               if (Array.isArray(row)) {
                 return (
-                  <tr key={rowIndex}>
+                  // --- PERUBAHAN DI SINI: Menambahkan border antar baris ---
+                  <tr key={rowIndex} className="border-b border-neutral-4">
                     {row.map((cell, cellIndex) => (
                       <td
                         key={cellIndex}
-                        className={cellIndex === 0 ? "" : "text-right"}
+                        // --- PERUBAHAN DI SINI: Menambahkan padding dan clsx ---
+                        className={clsx(
+                          "py-4 px-6",
+                          cellIndex === 0 ? "text-left" : "text-right"
+                        )}
                       >
                         {cell.text}
                       </td>
@@ -99,11 +108,11 @@ interface StocksInformationProps {
 }
 
 type TabId = "shareholders" | "dividend";
-  interface TabDataItem {
-    id: TabId;
-    title: string;
-    content: React.ReactElement;
-  }
+interface TabDataItem {
+  id: TabId;
+  title: string;
+  content: React.ReactElement;
+}
 
 export function StocksInformation({
   tabOneTitle,
@@ -116,7 +125,7 @@ export function StocksInformation({
   const [activeTab, setActiveTab] = useState<TabId>("shareholders");
 
   // Build tabs dynamically based on show flags
-const tabsData: TabDataItem[] = [];
+  const tabsData: TabDataItem[] = [];
   if (showShareholders) {
     tabsData.push({
       id: "shareholders",
@@ -131,7 +140,7 @@ const tabsData: TabDataItem[] = [];
       content: <DividendContent data={dividendData} />,
     });
   }
-React.useEffect(() => {
+  React.useEffect(() => {
     if (showShareholders) {
       setActiveTab("shareholders");
     } else if (showDividend) {
@@ -142,10 +151,12 @@ React.useEffect(() => {
     <div className="py-20">
       <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          <nav className="flex lg:flex-col lg:items-start w-full lg:border-t-2 border-t-neutral-4 max-lg:border-b-2 border-b-neutral-4">
+          {/* --- PERUBAHAN DI SINI: Menyederhanakan Nav Sidebar --- */}
+          <nav className="flex lg:flex-col lg:items-start w-full border-b-2 border-b-neutral-4">
             <a
               href="https://chandradaya-investasi.com/investor/shares-information?tab=stocks"
-              className="border-b-2 border-b-neutral-4 text-neutral-13 text-lg text-center p-4 max-lg:hover:border-b-blue-base max-lg:hover:border-b-4 hover:font-bold transition relative border-l-before-hover lg:w-full lg:text-start max-lg:border-b-4 max-lg:!border-b-blue-base lg:font-bold border-l-before"
+              // --- PERUBAHAN DI SINI: Mengganti class 'a' agar sesuai gambar ---
+              className="text-neutral-13 text-lg p-4 lg:w-full lg:text-start font-medium border-l-4 border-blue-base"
             >
               Stocks
             </a>

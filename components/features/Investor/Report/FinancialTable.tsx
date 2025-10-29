@@ -32,9 +32,11 @@ export function FinancialTable({ data }: FinancialTableProps) {
         <table className="w-full">
           <caption className="sr-only">Financial Data Table</caption>
 
-          <thead className="bg-[#2474A5] text-white">
+          <thead className="bg-[#2474A5] text-white"> 
             <tr className="border-b border-neutral-700">
-              {/* 5. Render dynamic headers */}
+              <th></th>
+              <th></th>
+              <th></th>
               {headers.map((header) => (
                 <th
                   scope="col"
@@ -65,7 +67,7 @@ export function FinancialTable({ data }: FinancialTableProps) {
                     <th
                       scope="colgroup"
                       colSpan={headers.length}
-                      className="group bg-neutral-800 font-medium text-left py-4 px-6"
+                      className="group text-neutral-800 font-bold text-left py-4 px-6"
                     >
                       {row.label.text}
                     </th>
