@@ -6,9 +6,22 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .hover-underline-middle {
+    @apply relative pb-1;
+  }
+
+  .hover-underline-middle::after {
+    @apply content-[''] absolute bottom-0 left-0 w-full h-[1.5px];
+    @apply bg-current; 
+    @apply scale-x-0 origin-center;
+    @apply transition-transform duration-300 ease-out;
+  }
+
+  .hover-underline-middle:hover::after {
+    @apply scale-x-100;
+  }
 }
-
-
 
 @layer base {
   :root {

@@ -12,6 +12,12 @@ const nextConfig = {
         hostname: "cmlabs-co.s3.ap-southeast-1.amazonaws.com",
         port: "",
       },
+      {
+        protocol: 'https',
+        hostname: 'chandradaya-investasi.com',
+        port: '',
+        pathname: '/file-storage/**',
+      },
     ],
   },
 };
