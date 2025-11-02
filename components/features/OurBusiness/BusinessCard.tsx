@@ -25,10 +25,14 @@ export function BusinessCard({
   return (
     <motion.article
       layout
-      animate={{ flexGrow: isExpanded ? 3 : 1 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
+      animate={{ flexGrow: isExpanded ? 2 : 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 200,
+        damping: 40,
+      }}
       className={clsx(
-        "relative w-full cursor-pointer overflow-hidden transition-all duration-700",
+        "relative cursor-pointer overflow-hidden",
         "h-64 lg:h-auto"
       )}
       onMouseEnter={() => setIsExpanded(true)}
@@ -46,7 +50,7 @@ export function BusinessCard({
       <div className="overlay-card-2 absolute inset-0 z-[1] bg-black/50"></div>
 
       <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 pb-5 text-white lg:p-10 lg:pb-10">
-        <h3 className="font-medium text-2xl lg:text-[32px] 2xl:text-[40px] 3xl:text-[52px] 3xl:leading-[60px]">
+        <h3 className="font-medium text-2xl lg:text-[32px] 2xl:text-[40px] 3xl:text-[52px] 3xl:leading-[60px] mb-5">
           {title}
         </h3>
 
@@ -56,11 +60,15 @@ export function BusinessCard({
               initial={{ opacity: 0, maxHeight: 0 }}
               animate={{ opacity: 1, maxHeight: "500px" }}
               exit={{ opacity: 0, maxHeight: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              transition={{
+                duration: 0.6,
+                ease: "easeInOut",
+                delay: 0.1,
+              }}
               className="overflow-hidden"
             >
               <div
-                className="content !text-white !text-sm !font-light mt-4"
+              className="text-[12px] leading-[24px] font-light text-white space-y-6"
                 dangerouslySetInnerHTML={{ __html: descriptionHtml }}
               />
 

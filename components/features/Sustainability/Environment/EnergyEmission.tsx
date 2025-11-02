@@ -6,6 +6,8 @@ const BACKGROUND_IMAGE_URL =
 const TITLE = "Energy & Emission";
 const CONTENT_HTML =
   "<p>At CDI Group, we are committed to advancing Indonesia’s transition towards renewable energy. CDI Group’s subsidiary, PT Krakatau Chandra Energi (KCE), plays a crucial role in this effort by providing clean energy solutions.</p>";
+    const gradientStyle =
+    "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
 
 export function EnergyEmission() {
   return (
@@ -22,7 +24,10 @@ export function EnergyEmission() {
         priority
       />
 
-      <div className="absolute inset-0 overlay-business z-10"></div>
+      <div
+        className="absolute inset-0 overlay-business z-[1]"
+        style={{ backgroundImage: gradientStyle }}
+      ></div>
 
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
         <div className="lg:max-w-[45%] ms-auto">
@@ -34,7 +39,7 @@ export function EnergyEmission() {
           </h2>
 
           <div
-            className="content !text-neutral-5"
+          className="prose prose-invert prose-base text-neutral-50"
             dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
           ></div>
         </div>

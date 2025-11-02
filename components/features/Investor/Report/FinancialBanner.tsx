@@ -1,13 +1,11 @@
 import Image from "next/image";
-import { SimpleInvestorSection } from "@/types/Investor/Report"; // 1. Import the type
+import { SimpleInvestorSection } from "@/types/Investor/Report"; 
 
-// 2. Define the props interface
 interface FinancialBannerProps {
   data: SimpleInvestorSection;
 }
 
 export function FinancialBanner({ data }: FinancialBannerProps) {
-  // 3. Use the props for dynamic content
   const backgroundImageUrl = data.file_url;
   const title = data.title || "";
   const descriptionHtml = data.content || "";
@@ -20,7 +18,7 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
       <div className="p-6 rounded-3xl w-full bg-blue-base relative overflow-hidden">
         <Image
           src={backgroundImageUrl}
-          alt={title || "Financial Banner"} // Use title for alt text
+          alt={title || "Financial Banner"} 
           layout="fill"
           objectFit="cover"
           className="z-0"
@@ -36,7 +34,7 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
           </h2>
 
           <div
-            className="content !text-white max-w-[864px] font-light"
+            className="content text-left !text-white max-w-[864px] font-light"
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}
           ></div>
         </div>

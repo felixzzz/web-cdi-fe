@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
 
 const config: Config = {
   darkMode: ["class"],
@@ -14,6 +15,8 @@ const config: Config = {
         sans: ["var(--font-jakarta-sans)", "sans-serif"],
       },
       colors: {
+        "blue-lighter": "#47C1EA", 
+
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -55,13 +58,44 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
       },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        run: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        run: 'run 3s linear infinite', 
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      typography: {
+        invert: {
+          css: {
+            'ol': {
+              'list-style-type': 'disc',
+            },
+            'ol > li::marker': {
+              'color': '#FFF',
+            },
+            'ul > li::marker': {
+              'color': '#FFF',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [animate],
+  plugins: [animate, typography],
 };
 export default config;
+

@@ -9,6 +9,12 @@ const CONTENT_HTML = `
   <p>We are committed to maintaining high governance standards by regularly evaluating compliance with our ethical guidelines, which enhances transparency and accountability while mitigating risks.</p>
 `;
 
+
+const customGradient =
+  "linear-gradient(#091a24, #091a244d 8%, #091a2427 25%, #091a2400 75%, #091a2466 82%, #091a24)";
+
+
+
 export function GovernancePerformance() {
   return (
     <section
@@ -24,7 +30,10 @@ export function GovernancePerformance() {
         priority
       />
 
-      <div className="absolute inset-0 overlay-business z-10"></div>
+<div
+          className="absolute inset-0 overlay-business z-[1]"
+          style={{ backgroundImage: customGradient }}
+        ></div>
 
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
         <div className="lg:max-w-[45%] ms-auto">
@@ -36,7 +45,7 @@ export function GovernancePerformance() {
           </h2>
 
           <div
-            className="content !text-neutral-5"
+            className="max-w-3xl prose prose-invert prose-base"
             dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
           ></div>
         </div>

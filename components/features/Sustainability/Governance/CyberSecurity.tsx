@@ -24,7 +24,7 @@ export function CyberSecurity() {
   return (
     <section
       aria-labelledby="cyber-security-heading"
-      className="py-28 text-white bg-[#091A24] !bg-blue-dark-black relative overflow-hidden"
+      className="py-28 text-white bg-[#051119] !bg-blue-dark-black relative overflow-hidden"
     >
       <Image
         src={BACKGROUND_IMAGE_URL}
@@ -45,7 +45,7 @@ export function CyberSecurity() {
           >
             {TITLE}
           </h2>
-          <div className="text-neutral-4 font-light lg:col-span-2 lg:max-w-[80%]">
+          <div className="lg:col-span-2 lg:max-w-[80%] prose prose-invert prose-base">
             <p>{INTRO_TEXT}</p>
           </div>
         </div>
@@ -57,7 +57,7 @@ export function CyberSecurity() {
                 <h3 className="text-[22px] font-medium text-blue-lighter">
                   {point.title}
                 </h3>
-                <div className="content !text-neutral-6 lg:!text-sm">
+                <div className="max-w-3xl prose prose-invert prose-base">
                   <p>{point.text}</p>
                 </div>
               </div>

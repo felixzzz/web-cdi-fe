@@ -9,6 +9,9 @@ const CONTENT_HTML = `
   <p><br></p>
   <p>The Waste Bank was built to handle waste processing and make people aware of a healthy, clean and neat environment.</p>
 `;
+    const gradientStyle =
+    "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
+
 
 export function WasteManagement() {
   return (
@@ -25,7 +28,10 @@ export function WasteManagement() {
         priority
       />
 
-      <div className="absolute inset-0 overlay-business z-10"></div>
+ <div
+        className="absolute inset-0 overlay-business z-[1]"
+        style={{ backgroundImage: gradientStyle }}
+      ></div>
 
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
         <div className="lg:max-w-[45%] me-auto">
@@ -37,7 +43,7 @@ export function WasteManagement() {
           </h2>
 
           <div
-            className="content !text-neutral-5"
+           className="prose prose-invert prose-base text-neutral-300"
             dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
           ></div>
         </div>

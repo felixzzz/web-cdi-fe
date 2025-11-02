@@ -105,9 +105,9 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
         <button
           onClick={() => handleTabClick("news")}
           className={clsx(
-            "border-b-2 text-neutral-13 text-lg text-center p-4 hover:border-b-blue-base hover:border-b-4 hover:font-medium transition",
+            "border-b-2 text-neutral-13 text-lg text-center p-4 hover:border-b-[#2474A5] hover:border-b-4 hover:font-medium transition",
             activeTab === "news"
-              ? "border-b-4 !border-b-blue-base font-medium"
+              ? "border-b-4 !border-b-[#2474A5] font-medium"
               : "border-b-neutral-6"
           )}
         >
@@ -116,9 +116,9 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
         <button
           onClick={() => handleTabClick("press-release")}
           className={clsx(
-            "border-b-2 text-neutral-13 text-lg text-center p-4 hover:border-b-blue-base hover:border-b-4 hover:font-medium transition",
+            "border-b-2 text-neutral-13 text-lg text-center p-4 hover:border-b-[#2474A5] hover:border-b-4 hover:font-medium transition",
             activeTab === "press-release"
-              ? "border-b-4 !border-b-blue-base font-medium"
+              ? "border-b-4 !border-b-[#2474A5] font-medium"
               : "border-b-neutral-6"
           )}
         >
@@ -132,8 +132,8 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
             key={category}
             onClick={() => handleCategoryClick(category)}
             className={clsx(
-              "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-blue-base border border-blue-base hover:bg-blue-base hover:text-white transition",
-              activeCategory === category && "bg-blue-base text-white"
+              "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition",
+              activeCategory === category && "bg-[#2474A5] text-white"
             )}
             style={{
               display:
@@ -221,7 +221,7 @@ function ArticleCard({
           <h3 className="text-[22px] font-medium mt-4 mb-7 line-clamp-3 grow">
             {title}
           </h3>
-          <div className="text-blue-base flex items-center gap-2 cursor-pointer mt-auto">
+          <div className="text-[#2474A5] flex items-center gap-2 cursor-pointer mt-auto">
             Baca artikel selengkapnya <ArrowRight className="text-2xl" />
           </div>
         </div>
@@ -245,7 +245,7 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
         href={downloadUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex-shrink-0 text-xs lg:text-base cursor-pointer px-6 py-3 rounded-full flex items-center gap-2 text-white bg-blue-base border border-blue-base hover:bg-blue-dark transition"
+        className="flex-shrink-0 text-xs lg:text-base cursor-pointer px-6 py-3 rounded-full flex items-center gap-2 text-white bg-[#2474A5] border border-[#2474A5] hover:bg-blue-dark transition"
       >
         <Download size={18} />
         Download ({item.file_id.size})
@@ -273,7 +273,7 @@ function Pagination({
       aria-label="Pagination"
       className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col lg:flex-row"
     >
-      <p className="text-neutral-10 text-sm max-lg:hidden">
+      <p className="text-neutral-900 text-sm max-lg:hidden">
         {startItem}-{endItem} dari {totalItems} items
       </p>
       <ul className="flex items-center justify-center gap-2">
@@ -319,7 +319,7 @@ function Pagination({
           </button>
         </li>
       </ul>
-      <div className="text-neutral-10 text-sm lg:hidden">
+      <div className="text-neutral-900 text-sm lg:hidden">
         {startItem}-{endItem} dari {totalItems} items
       </div>
     </nav>

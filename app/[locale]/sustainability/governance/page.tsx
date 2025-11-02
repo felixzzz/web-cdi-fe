@@ -10,15 +10,18 @@ import { SustainableProcurement } from "@/components/features/Sustainability/Gov
 import { governanceService } from "@/services/Sustainability/GovernanceServices";
 
 export default async function Page() {
-  const governanceData = await governanceService.getGovernancePageData();
+  const [governanceData, contentData] = await Promise.all([
+      governanceService.getGovernancePageData(),
+      governanceService.getGovernanceContentData() 
+    ]);
 
   const {
     sustainability_governance_banner,
-    sustainability_governance_overview,
   } = governanceData;
 
-  console.log('sustainability_governance_banner.file_url')
-  console.log(sustainability_governance_banner.file_url)
+  const businessEthicsData = contentData.find(
+    (item) => item.name === "Business Ethics"
+  );
 
   return (
     <>
@@ -31,8 +34,8 @@ export default async function Page() {
           }
           iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
         />
-        <BusinessEthics data={sustainability_governance_overview} />
-        <AntiCorruption />
+        <BusinessEthics data={businessEthicsData} />
+          <AntiCorruption />
         <GrievanceMechanism />
         <SustainableProcurement />
         <CyberSecurity />

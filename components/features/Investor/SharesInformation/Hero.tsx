@@ -36,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           <div className="flex items-center gap-10">
-            <div className="h-[2px] w-full bg-neutral-6 hidden lg:block relative overflow-hidden">
+            <div className="h-[2px] w-full bg-neutral-200 hidden lg:block relative overflow-hidden">
               <div className="absolute h-full bg-blue-lighter animate-colorChange" />
             </div>
             <img src={iconSrc} alt="" />

@@ -12,7 +12,6 @@ export default async function Page() {
     overview_title,
     overview_description,
     overview_image,
-    heading_tab_title,
     tabs,
     link_url,
     link_title_en,
@@ -33,7 +32,7 @@ export default async function Page() {
           linkUrl={link_url}
           linkTitle={link_title_en}
         />
-        <BusinessPillars title={heading_tab_title} tabs={tabs} />
+        <BusinessPillars tabs={tabs} />
       </div>
     </>
   );

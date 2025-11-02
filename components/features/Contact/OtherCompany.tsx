@@ -35,13 +35,13 @@ export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
             return (
               <li key={company.id} className="flex gap-2">
                 <p
-                  className="text-neutral-7/30 font-medium text-[52px]"
+                  className="text-neutral-300 font-medium text-[52px]"
                   aria-hidden="true"
                 >
                   {index + 1}
                 </p>
                 <div className="rounded-xl border border-neutral-4 p-4 bg-white w-full">
-                  <h3 className="mb-4 text-[22px] text-blue-base font-medium">
+                  <h3 className="mb-4 text-[22px] text-[#2474A5] font-medium">
                     {company.name}
                   </h3>
 
@@ -63,15 +63,15 @@ export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
                         <address className="text-neutral-8 text-sm not-italic">
                           {loc.address}
                         </address>
-                        <div className="flex items-center gap-4 text-neutral-8">
+                        <div className="flex items-center gap-4 text-neutral-400">
                           {loc.phone && (
                             <div className="flex items-center text-xs lg:text-sm gap-2">
-                              <Phone size={14} aria-hidden="true" /> {loc.phone}
+                              <Phone className="text-[#2474A5]" size={14} aria-hidden="true" /> {loc.phone}
                             </div>
                           )}
                           {loc.fax && (
                             <div className="flex items-center text-xs lg:text-sm gap-2">
-                              <Printer size={14} aria-hidden="true" /> {loc.fax}
+                              <Printer className="text-[#2474A5]" size={14} aria-hidden="true" /> {loc.fax}
                             </div>
                           )}
                         </div>

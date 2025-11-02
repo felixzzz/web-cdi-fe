@@ -1,24 +1,24 @@
-import { AboutUs } from "@/components/features/homepage/AboutUs";
+import { AboutUs } from "@/components/features/Homepage/AboutUs";
 // import { Article } from "@/components/features/homepage/Article";
-import { Discover } from "@/components/features/homepage/Discover";
-import { Hero } from "@/components/features/homepage/Hero";
+import { Discover } from "@/components/features/Homepage/Discover";
+import { Hero } from "@/components/features/Homepage/Hero";
 import {
   Information,
   QuickLink,
-} from "@/components/features/homepage/Information";
+} from "@/components/features/Homepage/Information";
 import {
   Journey,
   JourneyLink,
   JourneyStat,
-} from "@/components/features/homepage/Journey";
-import { Report } from "@/components/features/homepage/Report";
-import { ReportItemProps } from "@/components/features/homepage/ReportItem";
-import { Solution } from "@/components/features/homepage/Solution";
+} from "@/components/features/Homepage/Journey";
+import { Report } from "@/components/features/Homepage/Report";
+import { ReportItemProps } from "@/components/features/Homepage/ReportItem";
+import { Solution } from "@/components/features/Homepage/Solution";
 import { homeService } from "@/services/Homepage/homeService";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 // import { useTranslations } from "next-intl";
 
-const quickLinksData: QuickLink[] = [
+export const quickLinksData: QuickLink[] = [
   { href: "/about-us", text: "Who We Are" },
   { href: "/about-us/management", text: "Management & Structure" },
   { href: "/investor/financial-information", text: "Financial Information" },

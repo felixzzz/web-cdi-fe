@@ -14,7 +14,7 @@ export const Stakeholder: React.FC<StakeholderSectionProps> = ({
 }) => {
   return (
     <section
-      className="pb-20 bg-[#091A24] bg-no-repeat bg-contain"
+      className="pb-20 bg-[#091A24] bg-no-repeat bg-cover"
       style={{
         backgroundImage: `url(${backgroundImageUrl})`,
         backgroundPositionY: "48px",

@@ -26,16 +26,16 @@ const phoneIconUrl =
 const faxIconUrl =
   "https://chandradaya-investasi.com/assets/frontend/icons/ic_printer.svg";
 
-export function SupportingInstitutions() {
+export const SupportingInstitutions = () => {
   return (
     <section
       aria-labelledby="institutions-heading"
       className="bg-[#F6F6F6] py-20"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[2rem] 2xl:px-[3rem]">
         <h2
           id="institutions-heading"
-          className="text-neutral-13 text-2xl lg:text-[38px] lg:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-6 mb-8"
+          className="text-neutral-13 text-2xl lg:text-[38px] lg:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-400 mb-8"
         >
           Supporting Institutions & Professionals
         </h2>
@@ -43,30 +43,30 @@ export function SupportingInstitutions() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {institutionsData.map((inst) => (
             <div key={inst.id} className="flex gap-2">
-              <p className="text-neutral-7/30 font-medium text-[52px]">
+              <p className="text-neutral-300 font-medium text-[52px]">
                 {inst.id}
               </p>
               <div className="rounded-xl border border-neutral-4 p-4 bg-white w-full">
-                <h3 className="mb-4 text-[22px] text-blue-base font-medium">
+                <h3 className="mb-4 text-[22px] text-[#2474A5] font-medium">
                   {inst.name}
                 </h3>
 
                 <div className="flex flex-col gap-2">
-                  <p className="text-neutral-13 text-sm font-medium">
+                  <p className="text-neutral-950 text-sm font-medium">
                     {inst.role}
                   </p>
 
-                  <address className="text-neutral-8 text-sm not-italic">
+                  <address className="text-neutral-600 text-sm not-italic">
                     {inst.address}
                   </address>
 
-                  <div className="flex items-center gap-4 text-neutral-8">
+                  <div className="flex items-center gap-4 text-neutral-600">
                     <div className="flex items-center text-sm gap-2">
-                      <Image src={phoneIconUrl} alt="" width={16} height={16} />
+                      <Image src={phoneIconUrl} alt="" width={20} height={20} />
                       Tel. {inst.phone}
                     </div>
                     <div className="flex items-center text-sm gap-2">
-                      <Image src={faxIconUrl} alt="" width={16} height={16} />
+                      <Image src={faxIconUrl} alt="" width={20} height={20} />
                       Fax. {inst.fax}
                     </div>
                   </div>
@@ -79,5 +79,3 @@ export function SupportingInstitutions() {
     </section>
   );
 }
-
-export default SupportingInstitutions;

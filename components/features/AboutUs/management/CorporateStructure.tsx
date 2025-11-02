@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, ZoomIn } from "lucide-react";
+import { ChevronDown, ZoomIn } from "lucide-react";
 import { ImageZoomModal } from "./ImageZoomModal";
 import { CorporateStructureTable } from "./CorporateStructureTable";
 
@@ -50,7 +50,7 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
       <h2 className="sr-only">{TITLE}</h2>
       <div
         className={`bg-neutral-3 text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] transition hover:bg-[#2474A5] hover:text-white
-          ${isOpen ? "!bg-blue-base !text-white" : ""}
+          ${isOpen ? "!bg-[#2474A5] !text-white" : ""}
         `}
       >
         <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
@@ -61,7 +61,7 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
             aria-controls="corp-structure-content"
           >
             <span>{TITLE}</span>
-            <ArrowDown
+            <ChevronDown
               size={24}
               className={`transition-transform duration-200 ${
                 isOpen ? "rotate-180" : ""
@@ -82,7 +82,7 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
             className="py-20 overflow-hidden"
           >
             <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-              <h3 className="text-2xl lg:text-[28px] font-medium text-blue-base mb-6">
+              <h3 className="text-2xl lg:text-[28px] font-medium text-[#2474A5] mb-6">
                 {TITLE}
               </h3>
               <Image

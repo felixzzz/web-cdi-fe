@@ -57,13 +57,16 @@ export const Hero = ({
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
+            {/* <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
               <div className="absolute h-full bg-blue-lighter animate-colorChange" />
+            </div> */}
+            <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
+              <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
             </div>
 
             <Link
               href={linkHref}
-              className="bg-white  text-[#151718] px-3 py-[5px] lg:px-4 lg:py-[5px] border border-neutral-13 rounded-full whitespace-nowrap gap-4 flex items-center w-fit text-xs lg:text-base"
+              className="bg-white  text-[#151718] px-3 py-[5px] lg:px-4 lg:py-[5px] border border-neutral-950 rounded-full whitespace-nowrap gap-4 flex items-center w-fit text-xs lg:text-base"
             >
               {linkText}
               {linkIcon}

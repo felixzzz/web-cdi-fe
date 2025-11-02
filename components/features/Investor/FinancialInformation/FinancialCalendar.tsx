@@ -5,14 +5,12 @@ import { clsx } from "clsx";
 import {
   Languages,
   Search,
-  FileText,
-  Eye,
-  Download,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
+import Image from "next/image";
 
 const allReportsData = [
   {
@@ -117,7 +115,7 @@ export function FinancialCalendar() {
     >
       <h2
         id="calendar-heading"
-        className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-3"
+        className="text-neutral-800 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-3"
       >
         Financial Calendar
       </h2>
@@ -129,7 +127,7 @@ export function FinancialCalendar() {
       </div>
       <nav
         aria-label="Filter by year"
-        className="gap-10 flex items-center overflow-y-auto mt-10 border-b-2 border-b-neutral-6"
+        className="gap-10 flex items-center overflow-y-auto mt-10 border-b-2 border-b-gray-300"
       >
         {yearFilters.map((year) => (
           <button
@@ -139,8 +137,8 @@ export function FinancialCalendar() {
               setCurrentPage(1);
             }}
             className={clsx(
-              "text-base font-normal text-neutral-8 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
-              activeYear === year && "!text-blue-base !border-b-blue-base"
+              "text-base font-normal text-neutral-800 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
+              activeYear === year && "!text-[#2474A5] !border-b-[#2474A5]"
             )}
           >
             {year}
@@ -161,7 +159,7 @@ export function FinancialCalendar() {
               }}
               className={clsx(
                 "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-blue-base hover:bg-blue-base transition",
-                activeType === type && "bg-blue-base"
+                activeType === type && "bg-[#2474A5] text-white"
               )}
             >
               {type}
@@ -189,7 +187,7 @@ export function FinancialCalendar() {
         {reportKeys.length > 0 ? (
           reportKeys.map((year) => (
             <div key={year} className="flex lg:gap-6 flex-col lg:flex-row mt-5">
-              <h3 className="text-blue-base font-medium text-[48px] w-full lg:w-auto">
+              <h3 className="text-[#2474A5] font-medium text-[48px] w-full lg:w-auto">
                 {year}
               </h3>
               <div className="w-full">
@@ -211,7 +209,13 @@ export function FinancialCalendar() {
                           <span>{report.size}</span>
                           <span>.</span>
                         </p>
-                        <FileText size={16} aria-label="PDF Document" />
+                        <Image
+                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                                        width={24}
+                                        height={16}
+                                        alt="See all icon"
+                                        className="inline-block"
+                                      />
                       </div>
                     </div>
                     <div className="flex lg:items-center gap-8 w-full lg:w-fit">
@@ -221,7 +225,13 @@ export function FinancialCalendar() {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-blue-base font-medium"
                       >
-                        <Eye size={16} /> View
+                        <Image
+                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                                        width={16}
+                                        height={16}
+                                        alt="See all icon"
+                                        className="inline-block"
+                                      /> View
                       </a>
                       <a
                         href={report.downloadUrl}
@@ -229,7 +239,13 @@ export function FinancialCalendar() {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-blue-base font-medium"
                       >
-                        <Download size={16} /> Download
+                        <Image
+                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                                        width={16}
+                                        height={16}
+                                        alt="Download icon"
+                                        className="inline-block"
+                                      /> Download
                       </a>
                     </div>
                   </article>

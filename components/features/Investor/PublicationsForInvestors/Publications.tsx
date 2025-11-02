@@ -4,14 +4,13 @@ import React, { useState, useMemo } from "react";
 import { clsx } from "clsx";
 import {
   Search,
-  FileText,
-  Eye,
-  Download,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const publicationsData = {
   prospectus: [
@@ -134,10 +133,10 @@ export function Publications() {
                   setSearchQuery("");
                 }}
                 className={clsx(
-                  "border-b-2 border-b-neutral-4 text-lg text-center p-4 transition lg:w-full lg:text-start",
+                  "border-b-[1px] border-b-neutral-100 border-t-[1px] border-t-neutral-100 text-lg text-center p-4 transition lg:w-full lg:text-start",
                   activeTab === link.id
-                    ? "text-neutral-13 font-medium" // Gaya aktif
-                    : "text-neutral-8 font-normal hover:text-neutral-13" // Gaya inaktif
+                    ? "text-neutral-13 font-medium border-l-4 !border-l-[#2474A5]"
+                    : "text-neutral-8 font-normal hover:text-neutral-13"
                 )}
               >
                 {link.title}
@@ -182,31 +181,49 @@ export function Publications() {
                       </h3>
                       <div className="flex items-center text-base text-neutral-8 gap-3">
                         <p className="flex items-baseline gap-3">
-                          <time dateTime={item.date}>{item.displayDate}</time>
-                          <span>.</span>
-                          <span>{item.size}</span>
-                          <span>.</span>
+                          <time className="text-neutral-500" dateTime={item.date}>{item.displayDate}</time>
+                          <span className="text-neutral-500">.</span>
+                          <span className="text-neutral-500">{item.size}</span>
+                          <span className="text-neutral-500">.</span>
                         </p>
-                        <FileText size={16} aria-label="PDF Document" />
+                        <Image
+                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                                        width={30}
+                                        height={22}
+                                        alt="See all icon"
+                                        className="inline-block"
+                                      />
                       </div>
                     </div>
                     <div className="flex lg:items-center gap-8 w-full lg:w-fit">
-                      <a
+                      <Link
                         href={item.viewUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-neutral-10 font-medium hover:text-neutral-13"
+                        className="flex items-center gap-2 text-[#2474A5] font-medium hover:text-neutral-13"
                       >
-                        <Eye size={16} /> View
-                      </a>
-                      <a
+                        <Image
+                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                                        width={20}
+                                        height={20}
+                                        alt="See all icon"
+                                        className="inline-block"
+                                      /> View
+                      </Link>
+                      <Link
                         href={item.downloadUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-neutral-10 font-medium hover:text-neutral-13"
+                        className="flex items-center gap-2 text-[#2474A5] font-medium hover:text-neutral-13"
                       >
-                        <Download size={16} /> Download
-                      </a>
+                        <Image
+                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                                        width={20}
+                                        height={20}
+                                        alt="Download icon"
+                                        className="inline-block"
+                                      /> Download
+                      </Link>
                     </div>
                   </article>
                 ))

@@ -16,8 +16,20 @@ export interface SustainabilitySocialSection {
   content: string | null;
   content_table_trans: unknown | null;
 }
-
+export interface ContentItem {
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+  align: string;
+}
 export interface SustainabilitySocialApiResponse {
   sustainability_social_banner: SustainabilitySocialSection;
   sustainability_social_overview: SustainabilitySocialSection;
+}
+
+export interface SustainabilitySocialTab {
+  id: number;
+  title: string;
+  contents: ContentItem[];
 }

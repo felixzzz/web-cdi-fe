@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import { CheckCircle } from "lucide-react";
 
 const BACKGROUND_IMAGE_URL =
   "https://chandradaya-investasi.com/file-storage/KzIvM0t1dnphOGtpY291aXFYZ3JBdER1b0NQemhQSkd0N3Q2WnJua2ZGajljTGZ0enRPNWxFblJRNkhDNWFIZXpKMXFMUnhwdHNOc2QrOFhTMldsaEJxblluMm5SM1c5NFBLNHE5MFZtMDg9.webp";
@@ -23,6 +22,9 @@ const keyPoints = [
   },
 ];
 
+const customGradient =
+  "linear-gradient(#091a24, #091a244d 8%, #091a2427 25%, #091a2400 75%, #091a2466 82%, #091a24)";
+
 export function AntiCorruption() {
   return (
     <section
@@ -38,7 +40,7 @@ export function AntiCorruption() {
             >
               {TITLE}
             </h2>
-            <div className="text-neutral-6 font-light">
+            <div className="max-w-2xl prose prose-invert prose-base">
               <p>{INTRO_TEXT}</p>
             </div>
           </div>
@@ -53,22 +55,29 @@ export function AntiCorruption() {
           objectFit="cover"
           className="z-0"
         />
-        <div className="absolute inset-0 overlay-business z-10"></div>
+
+        <div
+          className="absolute inset-0 overlay-business z-[1]"
+          style={{ backgroundImage: customGradient }}
+        ></div>
 
         <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
           <div className="lg:max-w-[35%] ms-auto">
             <ul className="flex flex-col gap-4">
               {keyPoints.map((point) => (
                 <li key={point.title} className="flex items-start gap-2">
-                  <CheckCircle
-                    className="shrink-0 text-blue-lighter w-6 h-6"
-                    aria-hidden="true"
+                  <Image
+                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_bold_duotone_check_circle.svg"
+                    width={26}
+                    height={26}
+                    alt="check"
+                    className="inline-block"
                   />
                   <div>
                     <h3 className="text-lg font-medium mb-3 text-blue-lighter">
                       {point.title}
                     </h3>
-                    <div className="text-neutral-5 text-base font-normal">
+                    <div className="max-w-2xl prose prose-invert prose-base">
                       {point.text}
                     </div>
                   </div>

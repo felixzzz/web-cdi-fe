@@ -26,7 +26,7 @@ export function Policy() {
               {TITLE}
             </h2>
             <div
-              className="content"
+            className="max-w-full prose prose-invert prose-base"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
             

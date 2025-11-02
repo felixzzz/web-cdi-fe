@@ -7,12 +7,17 @@ interface BusinessPillarsProps {
   tab: BusinessTab; 
 }
 
+
+const customGradient =
+  "linear-gradient(#091a24, #091a244d 8%, #091a2427 25%, #091a2400 75%, #091a2466 82%, #091a24)";
+
+
 export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
   const keyAssetsTitle = tab?.contents[0]?.heading || "Key Assets";
   return (
     <article aria-labelledby="pillars-heading-ports" className="bg-[#091A24] text-white">
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <h2 id="pillars-heading-ports" className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] text-center pt-20">
+        <h2 id="pillars-heading-ports" className="font-semibold text-2xl lg:text-[38px] lg:leading-[44px] text-center pt-20">
           {title || "Business Pillars"}
         </h2>
       </div>
@@ -26,7 +31,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
             <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] grid grid-cols-1 lg:grid-cols-3 gap-20 max-lg:gap-y-10">
               <div className="relative w-full aspect-square">
                 <Image
-                  src={tab.image} // 6. Use dynamic image
+                  src={tab.image} 
                   alt={tab.title}
                   layout="fill"
                   objectFit="cover"
@@ -38,12 +43,12 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
                   id={`company-heading-${tab.id}`}
                   className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-4 text-white"
                 >
-                  {tab.title} {/* 7. Use dynamic title */}
+                  {tab.title} 
                 </h3>
                 <div
-                  className="content !text-neutral-5"
+                  className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
                   dangerouslySetInnerHTML={{
-                    __html: tab.description || "", // 8. Use dynamic description
+                    __html: tab.description || "", 
                   }}
                 ></div>
               </div>
@@ -60,12 +65,11 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
                   id="key-assets-heading"
                   className="font-medium text-2xl lg:text-[28px] mb-4 text-white text-center"
                 >
-                  {keyAssetsTitle} {/* 9. Use dynamic heading */}
+                  {keyAssetsTitle}
                 </h3>
               </div>
             </div>
 
-            {/* 10. Map over the dynamic contents array */}
             {tab.contents.map((asset) => (
               <AssetBlock
                 key={asset.id}
@@ -109,7 +113,10 @@ function AssetBlock({
         objectFit="cover"
         className="z-0"
       />
-      <div className="absolute inset-0 overlay-business z-[1]"></div>
+      <div
+        className="absolute inset-0 overlay-business z-[1]"
+        style={{ backgroundImage: customGradient }}
+      ></div>
 
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[2]">
         <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
@@ -117,7 +124,7 @@ function AssetBlock({
             {title}
           </h4>
           <div
-            className="content !text-neutral-5"
+          className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>

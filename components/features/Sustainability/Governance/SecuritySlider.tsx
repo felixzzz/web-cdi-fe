@@ -8,7 +8,7 @@ interface CisoCardProps {
 
 const CisoCard: React.FC<CisoCardProps> = ({ number, title, description }) => (
   <div
-    className="p-8 rounded-xl min-h-[220px] shadow-lg flex flex-col justify-between"
+    className="p-8 rounded-xl min-h-[320px] shadow-lg flex flex-col justify-between"
     style={{
       background:
         "linear-gradient(#0f2e42b8, #0f2e4200 30%, #0f2e4200 55.5%, #0f2e42b8 82.83%)",
@@ -20,7 +20,7 @@ const CisoCard: React.FC<CisoCardProps> = ({ number, title, description }) => (
       </span>
       <h3 className="text-white text-2xl font-semibold">{title}</h3>
     </div>
-    <p className="text-neutral-4 text-sm font-light leading-relaxed">
+    <p className="max-w-3xl prose prose-invert prose-base">
       {description}
     </p>
   </div>
@@ -38,7 +38,7 @@ export const Ciso: React.FC<CisoSectionProps> = ({ title }) => {
           {title}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <CisoCard
             number="1"
             title="Confidentiality"

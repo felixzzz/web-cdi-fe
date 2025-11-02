@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface HeroProps {
@@ -24,22 +25,28 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="text-white grid lg:grid-cols-2 gap-2 relative z-[1] items-end">
           <div>
             <h1
-              className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium max-w-2xl"
+              className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium max-w-2xl mb-6"
               id="home_banner_title"
             >
               {title}
             </h1>
             <div
-              className="content max-w-2xl text-xs lg:text-base !text-neutral-4"
+             className="max-w-2xl prose prose-invert prose-base"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
           </div>
 
           <div className="flex items-center gap-10">
-            <div className="h-[2px] w-full bg-neutral-6 hidden lg:block relative overflow-hidden">
-              <div className="absolute h-full bg-blue-lighter animate-colorChange" />
-            </div>
-            <img src={iconSrc} alt="" />
+            <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
+                                      <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
+                                    </div>
+                                    <Image
+                                                  width={46}
+                                                  height={46}
+                                                  alt="icon"
+                                                  className="bg-cover"
+                                                  src={iconSrc}
+                                                />
           </div>
         </div>
       </section>

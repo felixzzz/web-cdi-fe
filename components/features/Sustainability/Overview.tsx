@@ -9,6 +9,8 @@ export function Overview({ data }: OverviewProps) {
   const imageUrl = data.file_url;
   const title = data.title || "Overview";
   const content = data.content || "";
+    const gradientStyle =
+    "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
 
   return (
     <section
@@ -24,7 +26,10 @@ export function Overview({ data }: OverviewProps) {
         priority
       />
 
-      <div className="absolute inset-0 overlay-business z-10"></div>
+      <div
+        className="absolute inset-0 overlay-business z-[1]"
+        style={{ backgroundImage: gradientStyle }}
+      ></div>
 
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
         <div className="lg:max-w-[45%] ms-auto">
@@ -36,7 +41,7 @@ export function Overview({ data }: OverviewProps) {
           </h2>
 
           <div
-            className="content !text-neutral-5"
+          className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
             dangerouslySetInnerHTML={{ __html: content }}
           ></div>
         </div>

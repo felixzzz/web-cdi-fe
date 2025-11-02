@@ -10,7 +10,7 @@ export function HumanRights() {
   return (
     <section
       aria-labelledby="human-rights-heading"
-      className="py-28 text-white bg-[#091A24] !bg-blue-dark-black relative"
+      className="py-28 text-white bg-[#051119] !bg-blue-dark-black relative"
     >
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
         <div className="flex flex-col gap-8 lg:max-w-[100%] me-auto">
@@ -23,7 +23,7 @@ export function HumanRights() {
             </h2>
 
             <div
-              className="content !text-neutral-6"
+            className="prose prose-invert prose-base max-w-full"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             ></div>
           </div>

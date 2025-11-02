@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { FileText, Eye, Download } from "lucide-react";
+import { Eye, Download } from "lucide-react";
 
 const data = {
   section: {
@@ -39,7 +39,7 @@ export function InternalAudit() {
               {data.section.title}
             </h2>
             <div
-              className="content"
+              className="max-w-full prose prose-invert prose-base"
               dangerouslySetInnerHTML={{ __html: data.section.contentHtml }}
             />
           </div>
@@ -56,40 +56,47 @@ export function InternalAudit() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-8">
-          <div className="button-gradient-custom">
-            <div className="flex flex-col gap-2">
-              <h3 className="text-[22px] font-medium">{data.cta.title}</h3>
-              <div className="flex items-center text-base text-white gap-3">
-                <div className="flex items-baseline gap-3">
-                  <span>{data.cta.fileSize}</span>
-                  <span>.</span>
-                </div>
-                <FileText
-                  size={16}
-                  className="inline-block"
-                  aria-hidden="true"
-                />
-              </div>
+        <div
+          className="mt-8 p-6 flex flex-col md:flex-row md:items-center md:justify-between w-full
+                      border 
+                      bg-[linear-gradient(#d6f5ff29,#091a2429)] 
+                      rounded-lg"
+          style={{
+            borderColor: "color-mix(in oklab, #676869 40%, transparent)",
+          }}
+        >
+          <div className="flex flex-col gap-2 mb-4 md:mb-0">
+            <h3 className="text-2xl font-medium">{data.cta.title}</h3>
+            <div className="flex items-center text-base text-white gap-2">
+              <span className="text-sm">{data.cta.fileSize}</span>
+              <span className="text-sm">.</span>
+              <Image
+                src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf_white.svg"
+                width={26}
+                height={20}
+                alt="See all icon"
+                className="inline-block"
+              />
             </div>
-            <div className="flex lg:items-center gap-8 w-full lg:w-fit">
-              <a
-                href={data.cta.viewUrl}
-                className="flex items-center gap-2 text-white font-medium"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Eye size={16} aria-hidden="true" /> View
-              </a>
-              <a
-                href={data.cta.downloadUrl}
-                className="flex items-center gap-2 text-white font-medium"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Download size={16} aria-hidden="true" /> Download
-              </a>
-            </div>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <a
+              href={data.cta.viewUrl}
+              className="flex items-center gap-2 text-white font-medium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Eye size={20} /> View
+            </a>
+            <a
+              href={data.cta.downloadUrl}
+              className="flex items-center gap-2 text-white font-medium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Download size={20} /> Download
+            </a>
           </div>
         </div>
       </div>

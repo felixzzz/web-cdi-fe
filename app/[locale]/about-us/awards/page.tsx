@@ -1,6 +1,8 @@
 import { Awards } from "@/components/features/AboutUs/awards/Awards";
 import { Hero } from "@/components/features/AboutUs/awards/Hero";
+import { Information } from "@/components/features/Homepage/Information";
 import { awardsService } from "@/services/AboutUs/AwardsService";
+import { quickLinksData } from "../../page";
 
 export default async function Page() {
   const awardsData = await awardsService.getAwardsPageData();
@@ -23,6 +25,12 @@ export default async function Page() {
         title={about_us_award_overview.title}
         description={about_us_award_overview.content}
       />
+      <Information
+                      eyebrow="QUICK LINKS"
+                      title="Need to access detailed information?"
+                      backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
+                      links={quickLinksData}
+                    />
     </div>
   );
 }

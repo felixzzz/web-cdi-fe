@@ -2,7 +2,7 @@ import { FinancialBanner } from "@/components/features/Investor/Report/Financial
 import { FinancialCalendar } from "@/components/features/Investor/Report/FinancialCalendar";
 import { FinancialTable } from "@/components/features/Investor/Report/FinancialTable";
 import { Hero } from "@/components/features/Investor/Report/Hero";
-import SupportingInstitutions from "@/components/features/Investor/Report/Institutions";
+import { SupportingInstitutions } from "@/components/features/Investor/Report/Institutions";
 import { reportService } from "@/services/Investor/ReportServices";
 // import { useTranslations } from "next-intl";
 

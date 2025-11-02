@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 interface OverviewProps {
   title: string;
@@ -14,13 +12,14 @@ export function Overview({
   title,
   description,
   imageUrl,
-  linkUrl,
-  linkTitle,
 }: OverviewProps) {
+  const gradientStyle =
+    "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
+
   return (
     <section className="py-28 text-white bg-[#091A24] relative overflow-hidden">
       <Image
-        src={imageUrl} 
+        src={imageUrl}
         alt={title || "Overview"}
         layout="fill"
         objectFit="cover"
@@ -28,7 +27,10 @@ export function Overview({
         priority
       />
 
-      <div className="absolute inset-0 overlay-business z-[1]"></div>
+      <div
+        className="absolute inset-0 overlay-business z-[1]"
+        style={{ backgroundImage: gradientStyle }}
+      ></div>
 
       <section
         aria-labelledby="overview-heading"
@@ -43,21 +45,11 @@ export function Overview({
           </h2>
 
           <div
-            className="content !text-neutral-5"
-            dangerouslySetInnerHTML={{ __html: description || "" }}
-          ></div>
-
-          {linkUrl && linkTitle && (
-            <Link
-              href={linkUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white text-blue-base px-4 py-2 border border-neutral-13 rounded-full whitespace-nowrap gap-3 flex items-center w-fit mt-8 text-sm font-medium"
-            >
-              {linkTitle}
-              <ArrowRight size={16} />
-            </Link>
-          )}
+            className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
+            dangerouslySetInnerHTML={{
+              __html: description || "",
+            }}
+          />
         </div>
       </section>
     </section>

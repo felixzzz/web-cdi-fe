@@ -21,8 +21,7 @@ export function Whistleblowing() {
       className="bg-[#091A24] py-20 text-white"
     >
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8 items-center">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8 ">
           <div className="lg:col-span-3">
             <h2
               id="whistleblowing-heading"
@@ -31,7 +30,7 @@ export function Whistleblowing() {
               {TITLE}
             </h2>
             <div
-              className="content"
+            className="max-w-full prose prose-invert prose-base"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
             <Link

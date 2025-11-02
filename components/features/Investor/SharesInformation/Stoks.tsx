@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { clsx } from "clsx";
 import { TableInvestorSection } from "@/types/Investor/Shares";
+import Link from "next/link";
 
 interface ShareholdersContentProps {
   data: TableInvestorSection;
@@ -17,7 +18,6 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
       <h2 className="mb-10 text-2xl lg:text-[28px] font-medium text-neutral-13">
         {data.title || "Top 10 Shareholders"}
       </h2>
-      {/* Render description if it exists */}
       {data.content && (
         <div
           className="content primary mb-10 !text-neutral-8"
@@ -26,19 +26,17 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
       )}
       <div className="table-main overflow-x-auto">
         <table className="w-full">
-          {/* --- PERUBAHAN DI SINI: Menambahkan styling thead --- */}
           <thead className="bg-[#2474A5] text-white">
             <tr>
               {headers.map((header) => (
                 <th
                   scope="col"
                   key={header.text}
-                  // --- PERUBAHAN DI SINI: Menambahkan padding, font, dan clsx ---
                   className={clsx(
-                    "py-4 px-6 font-medium",
+                    "py-4 px-6 font-medium border",
                     header.text.toLowerCase().includes("shareholders")
                       ? "text-left"
-                      : "text-right"
+                      : "text-left"
                   )}
                 >
                   {header.text}
@@ -46,21 +44,17 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
               ))}
             </tr>
           </thead>
-          {/* --- PERUBAHAN DI SINI: Menambahkan warna teks tbody --- */}
           <tbody className="text-neutral-13">
             {tableData.map((row, rowIndex) => {
-              // This component only has simple rows, not groups
               if (Array.isArray(row)) {
                 return (
-                  // --- PERUBAHAN DI SINI: Menambahkan border antar baris ---
-                  <tr key={rowIndex} className="border-b border-neutral-4">
+                  <tr key={rowIndex} className="border border-neutral-4">
                     {row.map((cell, cellIndex) => (
                       <td
                         key={cellIndex}
-                        // --- PERUBAHAN DI SINI: Menambahkan padding dan clsx ---
                         className={clsx(
-                          "py-4 px-6",
-                          cellIndex === 0 ? "text-left" : "text-right"
+                          "py-4 px-6 border",
+                          cellIndex === 0 ? "text-left" : "text-left"
                         )}
                       >
                         {cell.text}
@@ -78,7 +72,6 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
   );
 };
 
-// --- Sub-component for Dividend Tab ---
 interface DividendContentProps {
   data: TableInvestorSection;
 }
@@ -86,18 +79,14 @@ interface DividendContentProps {
 const DividendContent: React.FC<DividendContentProps> = ({ data }) => {
   return (
     <div>
-      <h2 className="mb-10 text-2xl lg:text-[28px] font-medium text-neutral-13">
-        {data.title || "Dividend Information"}
-      </h2>
       <div
-        className="content primary mb-10 !text-neutral-8"
+                  className="text-[12px] leading-[24px] font-normal text-neutral-950 space-y-6"
         dangerouslySetInnerHTML={{ __html: data.content || "" }}
       ></div>
     </div>
   );
 };
 
-// --- Main StocksInformation Component ---
 interface StocksInformationProps {
   tabOneTitle: string | null;
   tabTwoTitle: string | null;
@@ -124,7 +113,6 @@ export function StocksInformation({
 }: StocksInformationProps) {
   const [activeTab, setActiveTab] = useState<TabId>("shareholders");
 
-  // Build tabs dynamically based on show flags
   const tabsData: TabDataItem[] = [];
   if (showShareholders) {
     tabsData.push({
@@ -151,15 +139,13 @@ export function StocksInformation({
     <div className="py-20">
       <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          {/* --- PERUBAHAN DI SINI: Menyederhanakan Nav Sidebar --- */}
-          <nav className="flex lg:flex-col lg:items-start w-full border-b-2 border-b-neutral-4">
-            <a
+          <nav className="flex lg:flex-col lg:items-start w-full ">
+            <Link
               href="https://chandradaya-investasi.com/investor/shares-information?tab=stocks"
-              // --- PERUBAHAN DI SINI: Mengganti class 'a' agar sesuai gambar ---
-              className="text-neutral-13 text-lg p-4 lg:w-full lg:text-start font-medium border-l-4 border-blue-base"
+              className="text-neutral-13 text-lg p-4 lg:w-full lg:text-start font-medium border-l-4 border-l-[#2474A5] border-t-2 border-t-neutral-100 border-b-2 border-b-neutral-100"
             >
               Stocks
-            </a>
+            </Link>
           </nav>
 
           <div className="lg:col-span-4">
@@ -177,9 +163,9 @@ export function StocksInformation({
                   aria-controls={`panel-${tab.id}`}
                   onClick={() => setActiveTab(tab.id)}
                   className={clsx(
-                    "border-b-2 border-b-transparent text-neutral-13 text-lg text-center p-4 hover:border-b-blue-base hover:border-b-4 hover:font-medium transition cursor-pointer",
+                    "border-b-2 border-b-transparent text-neutral-13 text-lg text-center p-4 hover:border-b-[#2474A5] hover:border-b-4 hover:font-medium transition cursor-pointer",
                     activeTab === tab.id &&
-                      "border-b-4 !border-b-blue-base font-medium"
+                      "border-b-4 !border-b-[#2474A5] font-medium"
                   )}
                 >
                   {tab.title}

@@ -54,7 +54,7 @@ export function SustainabilityFacts() {
               </div>
               <div className="flex flex-col gap-4">
                 <div
-                  className="content !text-neutral-6 lg:!text-sm"
+                className="prose prose-invert prose-base text-neutral-300"
                   dangerouslySetInnerHTML={{ __html: item.descriptionHtml }}
                 ></div>
               </div>

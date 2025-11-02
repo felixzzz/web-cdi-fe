@@ -37,12 +37,12 @@ export function HealthAndSafety() {
           <div>
             <h2
               id="health-safety-heading"
-              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4 text-blue-lighter"
+              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
             >
               {TITLE}
             </h2>
             <div
-              className="content !text-neutral-4"
+            className="max-w-2xl prose prose-invert prose-base"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             ></div>
           </div>
@@ -51,7 +51,7 @@ export function HealthAndSafety() {
             <ul className="items-center lg:max-w-[60%] ms-auto grid grid-cols-2 gap-8 lg:gap-x-16">
               {stats.map((stat) => (
                 <li key={stat.label} className={stat.className || ""}>
-                  <p className="text-[#47C1EA] font-bold text-3xl lg:text-[48px]">
+                  <p className="text-[#47C1EA] font-bold text-3xl mb-4 lg:text-[48px]">
                     {stat.value}
                   </p>
                   <p>{stat.label}</p>

@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import * as Select from "@radix-ui/react-select"; // Impor Radix Select
+import * as Select from "@radix-ui/react-select";
 import { Award, AwardCard } from "./AwardCard";
 import { ImageModal } from "./ImageModal";
 import { clsx } from "clsx";
-import { ChevronDown } from "lucide-react"; // Impor ikon
+import { ChevronDown } from "lucide-react";
 
 interface AwardsProps {
   title: string | null;
@@ -44,14 +44,12 @@ const allAwardsData: Award[] = [
 const TABS = ["Awards", "Certification", "Membership"];
 const YEARS = ["All Year", "2023"];
 
-// --- Component now accepts props ---
 export const Awards: React.FC<AwardsProps> = ({ title, description }) => {
   const [activeTab, setActiveTab] = useState("Awards");
   const [selectedYear, setSelectedYear] = useState("All Year");
   const [modalImageUrl, setModalImageUrl] = useState<string | null>(null);
 
   const filteredAwards = useMemo(() => {
-    // Logika filter tidak perlu diubah
     return allAwardsData.filter((award) => {
       const yearMatch =
         selectedYear === "All Year" || award.year === selectedYear;
@@ -64,15 +62,14 @@ export const Awards: React.FC<AwardsProps> = ({ title, description }) => {
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
           <h2 id="awards-title" className="text-awards text-7xl">
-  {title || "Recognized for our commitment"}
-</h2>
+            {title || "Recognized for our commitment"}
+          </h2>
           <div
             className="content !text-neutral-4 text-[12px] leading-[24px] font-normal text-white py-1"
             dangerouslySetInnerHTML={{ __html: description || "" }}
           />
         </div>
 
-        {/* Bagian Tab (Gaya Diperbarui) */}
         <nav
           className="border-b-2 border-b-neutral-6 mb-8"
           aria-label="Content categories"
@@ -85,8 +82,8 @@ export const Awards: React.FC<AwardsProps> = ({ title, description }) => {
                   className={clsx(
                     "px-6 py-3 text-base lg:text-lg font-medium transition-colors duration-200",
                     activeTab === tab
-                      ? "bg-gradient-to-b from-[#E3C16B] to-[#B38B2F] text-[#091A24] rounded-t-lg" // Gaya Aktif
-                      : "text-neutral-4 hover:text-white" // Gaya Inaktif
+                      ? "bg-gradient-to-b from-[#E3C16B] to-[#B38B2F] text-[#091A24] rounded-t-lg"
+                      : "text-neutral-200 hover:text-white"
                   )}
                 >
                   {tab}
@@ -96,11 +93,10 @@ export const Awards: React.FC<AwardsProps> = ({ title, description }) => {
           </ul>
         </nav>
 
-        {/* Bagian Filter Tahun (Diganti dengan Select) */}
         <div className="mb-8">
           <Select.Root value={selectedYear} onValueChange={setSelectedYear}>
             <Select.Trigger
-              className="flex items-center justify-between gap-2 w-[150px] rounded-lg border border-neutral-6 px-5 py-2 text-base text-white hover:border-white transition-colors duration-200"
+              className="flex items-center justify-between gap-2 w-[150px] rounded-full border border-neutral-6 px-5 py-2 text-base text-white hover:border-white transition-colors duration-200"
               aria-label="Filter by year"
             >
               <Select.Value />
@@ -130,7 +126,6 @@ export const Awards: React.FC<AwardsProps> = ({ title, description }) => {
           </Select.Root>
         </div>
 
-        {/* Bagian Daftar Penghargaan (Tidak Berubah) */}
         <div>
           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-7 gap-y-16 text-white">
             {filteredAwards.map((award) => (
@@ -142,7 +137,6 @@ export const Awards: React.FC<AwardsProps> = ({ title, description }) => {
         </div>
       </div>
 
-      {/* Bagian Modal (Tidak Berubah) */}
       {modalImageUrl && (
         <ImageModal
           imageUrl={modalImageUrl}

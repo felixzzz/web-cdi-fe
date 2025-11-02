@@ -1,5 +1,6 @@
 import React from "react";
-import { Eye, Download, FileText } from "lucide-react"; // Mengganti <img>
+import Image from "next/image";
+import Link from "next/link";
 
 interface CompanyProfileProps {
   id?: string;
@@ -33,7 +34,7 @@ export const Downloads: React.FC<CompanyProfileProps> = ({
         >
           {title}
         </h2>
-        <div className="content primary !text-neutral-8 text-center mb-16">
+        <div className="content primary !text-neutral-8  mb-16">
           <p className="ql-align-center">{subtitle}</p>
         </div>
 
@@ -47,30 +48,47 @@ export const Downloads: React.FC<CompanyProfileProps> = ({
                 <span>{itemSize}</span>
                 <span>.</span>
               </div>
-              <FileText size={16} />
+              <Image
+                src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                width={28}
+                height={20}
+                alt="See all icon"
+                className="inline-block"
+              />
             </div>
           </div>
 
-          {/* Tombol Aksi Item */}
           <div className="flex lg:items-center gap-8 w-full lg:w-fit">
-            <a
+            <Link
               href={itemViewUrl}
               className="flex items-center gap-2 text-blue-base font-medium"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Eye size={16} />
+              <Image
+                src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                width={20}
+                height={20}
+                alt="See all icon"
+                className="inline-block"
+              />
               View
-            </a>
-            <a
+            </Link>
+            <Link
               href={itemDownloadUrl}
               className="flex items-center gap-2 text-blue-base font-medium"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Download size={16} />
+              <Image
+                src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                width={20}
+                height={20}
+                alt="Download icon"
+                className="inline-block"
+              />
               Download
-            </a>
+            </Link>
           </div>
         </article>
       </div>

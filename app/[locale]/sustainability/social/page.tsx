@@ -5,10 +5,18 @@ import { HumanRights } from "@/components/features/Sustainability/Social/HumanRi
 import { socialService } from "@/services/Sustainability/SocialServices";
 
 export default async function Page() {
-  const sosialData = await socialService.getSocialPageData();
+  const [sosialData, tabsData] = await Promise.all([
+    socialService.getSocialPageData(),
+    socialService.getSocialTabData(), 
+  ]);
 
   const { sustainability_social_banner, sustainability_social_overview } =
     sosialData;
+
+const empoweringData = {
+    ...sustainability_social_overview,
+    tabs: tabsData,
+  };
 
   return (
     <>
@@ -22,7 +30,7 @@ export default async function Page() {
           subtitle={sustainability_social_banner.content_en}
           iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
         />
-        <EmpoweringCommunities data={sustainability_social_overview} />
+        <EmpoweringCommunities data={empoweringData} />
         <HealthAndSafety />
         <HumanRights />
       </div>

@@ -1,42 +1,38 @@
 import React from "react";
-import { TableInvestorSection } from "@/types/Investor/Report"; // 1. Import the type
+import { TableInvestorSection } from "@/types/Investor/Report";
 
-// 2. Define the props interface
 interface FinancialTableProps {
   data: TableInvestorSection;
 }
 
 export function FinancialTable({ data }: FinancialTableProps) {
-  // 3. Get headers, rows, note, and footnotes from props
   const headers = data.content_table_trans?.headers || [];
   const tableRows = data.content_table_trans?.tableData || [];
   const note = data.title;
   const footnotes = data.content;
+  let dataRowIndex = 1;
+  const columnCount = headers.length;
 
   return (
     <section
       aria-labelledby="financial-data-heading"
       className="container mx-auto py-[1rem] px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]"
     >
-      {/* 4. Use dynamic note */}
       {note && (
         <p
           id="financial-data-heading"
-          className="text-end text-red-6 text-sm mb-2"
+          className="text-end text-red-600 text-sm mb-2"
         >
           {note}
         </p>
       )}
 
-      <div className="table-main overflow-x-auto rounded-lg border border-neutral-700">
-        <table className="w-full">
+      <div className="table-main overflow-x-auto border border-neutral-500">
+        <table className="w-full border-collapse">
           <caption className="sr-only">Financial Data Table</caption>
 
-          <thead className="bg-[#2474A5] text-white"> 
-            <tr className="border-b border-neutral-700">
-              <th></th>
-              <th></th>
-              <th></th>
+          <thead className="bg-[#2474A5] text-white">
+            <tr className="border-b border-neutral-500">
               {headers.map((header) => (
                 <th
                   scope="col"
@@ -44,7 +40,7 @@ export function FinancialTable({ data }: FinancialTableProps) {
                   className={`font-medium py-4 px-6 ${
                     header.text.toLowerCase() === "explanation"
                       ? "text-left"
-                      : "text-right"
+                      : "text-right border-l border-neutral-300"
                   }`}
                 >
                   {header.text}
@@ -53,21 +49,21 @@ export function FinancialTable({ data }: FinancialTableProps) {
             </tr>
           </thead>
 
-          <tbody className="text-white">
-            {/* 6. Render dynamic table rows */}
+          <tbody className="bg-white">
             {tableRows.map((row, rowIndex) => {
-              // Check if the row is a group header (object with 'label')
               if (
                 !Array.isArray(row) &&
                 row.label &&
                 typeof row.label === "object"
               ) {
+                dataRowIndex = 1;
+
                 return (
-                  <tr key={rowIndex} className="border-b border-neutral-700">
+                  <tr key={rowIndex} className="border-b border-neutral-500">
                     <th
                       scope="colgroup"
-                      colSpan={headers.length}
-                      className="group text-neutral-800 font-bold text-left py-4 px-6"
+                      colSpan={columnCount}
+                      className="group text-neutral-800 font-bold text-left py-4 px-6 italic"
                     >
                       {row.label.text}
                     </th>
@@ -75,15 +71,24 @@ export function FinancialTable({ data }: FinancialTableProps) {
                 );
               }
 
-              // Otherwise, it's a data row (array of cells)
               if (Array.isArray(row)) {
+                const isOdd = dataRowIndex % 2 !== 0;
+                dataRowIndex++;
+
                 return (
-                  <tr key={rowIndex} className="border-b border-neutral-700">
-                    {row.map((cell, cellIndex) => (
+                  <tr
+                    key={rowIndex}
+                    className={`border-b border-neutral-500 ${
+                      isOdd ? "bg-gray-50" : ""
+                    }`}
+                  >
+                    {row.slice(0, columnCount).map((cell, cellIndex) => (
                       <td
                         key={cellIndex}
                         className={`py-4 px-6 text-neutral-900 ${
-                          cellIndex === 0 ? "text-left font-normal" : "text-right"
+                          cellIndex === 0
+                            ? "text-left font-normal"
+                            : "text-right border-l border-neutral-400"
                         }`}
                       >
                         {cell.text}
@@ -98,10 +103,9 @@ export function FinancialTable({ data }: FinancialTableProps) {
         </table>
       </div>
 
-      {/* 7. Render dynamic footnotes */}
       {footnotes && (
         <div
-          className="content mt-10 !text-neutral-950 primary"
+          className="text-[12px] leading-[24px] font-extralight text-gray-600 py-1 space-y-2 mt-6"
           dangerouslySetInnerHTML={{ __html: footnotes }}
         ></div>
       )}

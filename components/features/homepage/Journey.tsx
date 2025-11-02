@@ -51,7 +51,7 @@ export const Journey: React.FC<JourneySectionProps> = ({
           {stats.map((stat) => (
             <div
               key={stat.value}
-              className="border-l-2 border-l-blue-lighter px-8 py-4 lg:py-0"
+              className="border-l-2 border-l-[#47C1EA] px-8 py-4 lg:py-0"
             >
               <p className="text-shadow-1 font-medium text-4xl md:text-[62px] xl:text-[80px] mb-2 leading-[88.8889px]">
                 {stat.value}

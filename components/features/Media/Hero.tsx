@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 
 const BACKGROUND_IMAGE_URL =
   "https://chandradaya-investasi.com/file-storage/N0YzSzZULzNFMm4yTWhCaWVhVXNTYXgrWXd3S1VZbzR5NDVMQXR1SThBV2pkaFlqYy9PNmVKckpkYWF0WW5QZCtCV09tc3NiUlozaXhzWjlaNW5FT1E9PQ.webp";
@@ -45,9 +45,9 @@ export function HeroNews() {
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-10">
         <h2
           id="latest-news-heading"
-          className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium text-white mb-9"
+          className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-semibold text-white mb-9"
         >
-          <span className="text-blue-lighter">Berita</span> Terbaru
+          <span className="text-[#47C1EA]">Berita</span> Terbaru
         </h2>
 
         <Swiper
@@ -75,7 +75,7 @@ export function HeroNews() {
                   />
                 </div>
                 <div className="p-6 rounded-xl bg-[#E6F0FA] border border-neutral-5 backdrop-blur-2xl">
-                  <span className="bg-blue-base text-white px-3 py-1 text-sm rounded-full me-4">
+                  <span className="bg-[#2474A5] text-white px-3 py-1 text-sm rounded-full me-4">
                     {slide.category}
                   </span>
                   <span className="text-sm text-neutral-10">{slide.date}</span>
@@ -84,15 +84,15 @@ export function HeroNews() {
                     {slide.title}
                   </h3>
                   <p
-                    className="text-sm mt-2 mb-6 line-clamp-2 text-neutral-10"
+                  className="max-w-2xl prose prose-invert prose-base text-neutral-700 mb-2"
                     dangerouslySetInnerHTML={{ __html: slide.description }}
                   ></p>
                   <Link
                     href={slide.linkUrl}
-                    className="text-blue-base flex items-center gap-2"
+                    className="text-[#2474A5] flex items-center text-[12px] gap-2"
                   >
                     Baca selengkapnya
-                    <ArrowRight className="text-2xl" />
+                    <ChevronRight className="text-2xl" />
                   </Link>
                 </div>
               </article>

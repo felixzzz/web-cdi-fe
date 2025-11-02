@@ -1,4 +1,5 @@
-import { Download, Eye, FileText } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export interface ReportItemProps {
   title: string;
@@ -26,29 +27,47 @@ export const ReportItem: React.FC<ReportItemProps> = ({
             <span>{size}</span>
             <span>.</span>
           </div>
-          <FileText size={16} />
+          <Image
+            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+            width={28}
+            height={20}
+            alt="See all icon"
+            className="inline-block"
+          />
         </div>
       </div>
 
       <div className="flex lg:items-center gap-8 w-full lg:w-fit">
-        <a
+        <Link
           href={viewUrl}
           className="flex items-center gap-2 text-blue-base font-medium"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Eye size={16} />
+          <Image
+            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+            width={24}
+            height={24}
+            alt="See all icon"
+            className="inline-block"
+          />
           View
-        </a>
-        <a
+        </Link>
+        <Link
           href={downloadUrl}
           className="flex items-center gap-2 text-blue-base font-medium"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Download size={16} />
+          <Image
+            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+            width={24}
+            height={24}
+            alt="Download icon"
+            className="inline-block"
+          />
           Download
-        </a>
+        </Link>
       </div>
     </li>
   );

@@ -1,4 +1,5 @@
 import { CodeOfConduct } from "@/components/features/Governance/CodeOfConduct";
+import { Committee } from "@/components/features/Governance/Committee";
 import { CorporateSecretary } from "@/components/features/Governance/CorporateSecretary";
 import { RiskManagement } from "@/components/features/Governance/DecorativeBackground";
 import { Information, QuickLink } from "@/components/features/Governance/Information";
@@ -43,6 +44,7 @@ export default async function Page() {
         <SubNavbar links={aboutLinks} />
         <CorporateSecretary />
         <InternalAudit />
+        <Committee />
         <RiskManagement />
         <CodeOfConduct />
         <Policy />

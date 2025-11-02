@@ -6,8 +6,10 @@ import { People } from "@/components/features/AboutUs/management/People";
 import { Stakeholder } from "@/components/features/AboutUs/management/Stakeholder";
 import { SubNavbar } from "@/components/features/AboutUs/management/SubNavbar";
 import { TeamMember } from "@/components/features/AboutUs/management/TeamMemberCard";
+import { Information } from "@/components/features/Homepage/Information";
 import { managementService } from "@/services/AboutUs/ManagementService";
 import { TableManagementSection } from "@/types/AboutUs/Management";
+import { quickLinksData } from "../../page";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -118,6 +120,12 @@ export default async function Page() {
           itemViewUrl="https://chandradaya-investasi.com/file/preview/default/company_profile/Company_Profile_1018/"
           itemDownloadUrl="https://chandradaya-investasi.com/file/download/default/company_profile/Company_Profile_1018/"
         />
+        <Information
+                eyebrow="QUICK LINKS"
+                title="Need to access detailed information?"
+                backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
+                links={quickLinksData}
+              />
       </div>
     </>
   );

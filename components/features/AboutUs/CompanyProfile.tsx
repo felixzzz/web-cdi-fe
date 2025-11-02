@@ -1,5 +1,5 @@
 import React from "react";
-import { Eye, Download, FileText } from "lucide-react"; // Mengganti <img>
+import Image from "next/image";
 
 interface CompanyProfileProps {
   id?: string;
@@ -47,11 +47,16 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                 <span>{itemSize}</span>
                 <span>.</span>
               </div>
-              <FileText size={16} />
+              <Image
+                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                          width={24}
+                          height={16}
+                          alt="See all icon"
+                          className="inline-block"
+                        />
             </div>
           </div>
 
-          {/* Tombol Aksi Item */}
           <div className="flex lg:items-center gap-8 w-full lg:w-fit">
             <a
               href={itemViewUrl}
@@ -59,7 +64,13 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Eye size={16} />
+              <Image
+                              src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                              width={16}
+                              height={16}
+                              alt="See all icon"
+                              className="inline-block"
+                            />
               View
             </a>
             <a
@@ -68,7 +79,13 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Download size={16} />
+              <Image
+                              src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                              width={16}
+                              height={16}
+                              alt="Download icon"
+                              className="inline-block"
+                            />
               Download
             </a>
           </div>

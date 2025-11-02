@@ -25,6 +25,12 @@ const nextConfig = {
         port: '',
         pathname: '/assets/frontend/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'nusantaracrocodic.reprime.id',
+        port: '',
+        // pathname: '/assets/frontend/**',
+      },
     ],
     // dangerouslyAllowSVG       : true,
   },

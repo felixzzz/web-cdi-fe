@@ -21,7 +21,7 @@ export function EnvironmentalResponsibility({ data }: EnvResponsibilityProps) {
           </h2>
 
           <div
-            className="content !text-neutral-50 text-base"
+          className="prose prose-invert prose-base text-neutral-50"
             dangerouslySetInnerHTML={{ __html: data.content || "" }}
           >
           </div>

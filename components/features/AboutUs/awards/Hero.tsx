@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface HeroProps {
@@ -36,10 +37,16 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           <div className="flex items-center gap-10">
-            <div className="h-[2px] w-full bg-neutral-6 hidden lg:block relative overflow-hidden">
-              <div className="absolute h-full bg-blue-lighter animate-colorChange" />
+            <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
+              <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
             </div>
-            <img src={iconSrc} alt="" />
+            <Image
+                          width={46}
+                          height={46}
+                          alt="icon"
+                          className="bg-cover"
+                          src={iconSrc}
+                        />
           </div>
         </div>
       </section>

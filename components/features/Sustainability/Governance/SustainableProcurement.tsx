@@ -21,7 +21,7 @@ export function SustainableProcurement() {
   return (
     <section
       aria-labelledby="procurement-heading"
-      className="py-28 text-white bg-[#091A24] !bg-blue-dark-black relative"
+      className="py-28 text-white bg-[#051119] !bg-blue-dark-black relative"
     >
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
         <div className="mb-16 grid grid-cols-1 gap-4 lg:grid-cols-2 items-center">
@@ -31,7 +31,7 @@ export function SustainableProcurement() {
           >
             {TITLE}
           </h2>
-          <div className="text-neutral-4 font-light">
+          <div className="max-w-3xl prose prose-invert prose-base text-neutral-200">
             <p>{INTRO_TEXT}</p>
           </div>
         </div>
@@ -40,7 +40,7 @@ export function SustainableProcurement() {
           {procurementPoints.map((point) => (
             <li key={point.id} className="flex gap-4 items-start">
               <div
-                className="content !text-neutral-6 lg:!text-sm"
+               className="max-w-3xl prose prose-invert prose-base text-neutral-400"
                 dangerouslySetInnerHTML={{ __html: point.contentHtml }}
               ></div>
             </li>

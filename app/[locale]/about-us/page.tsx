@@ -6,6 +6,9 @@ import { VisionMission } from "@/components/features/AboutUs/Mision&Vision";
 import { SubNavbar } from "@/components/features/AboutUs/SubNavbar";
 import { Overview } from "@/components/features/AboutUs/Overview";
 import { aboutService, extractYouTubeId } from "@/services/AboutUs/AboutService";
+import { convertHtmlToReact } from "@/lib/htmlUtils";
+import { Information } from "@/components/features/Homepage/Information";
+import { quickLinksData } from "../page";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -68,8 +71,6 @@ export default async function Page() {
     imageUrl: about_us_mission.file_url,
   };
 
-  // console.log(aboutData);
-
   return (
     <>
       <div>
@@ -96,11 +97,10 @@ export default async function Page() {
           videoTitle="Company Profile Video - CDI Group"
         >
           <div
-          className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
-            dangerouslySetInnerHTML={{
-              __html: about_us_company_overview.content || "",
-            }}
-          />
+          className="text-[12px] leading-[24px] text-white py-1 space-y-6"
+          >
+            {convertHtmlToReact(about_us_company_overview.content)}
+          </div>
         </Overview>
         <VisionMission
           title={about_us_vision_mission_tagline.title || "Vision & Mission"}
@@ -132,6 +132,12 @@ export default async function Page() {
           itemViewUrl="https://chandradaya-investasi.com/file/preview/default/company_profile/Company_Profile_1018/"
           itemDownloadUrl="https://chandradaya-investasi.com/file/download/default/company_profile/Company_Profile_1018/"
         />
+        <Information
+                        eyebrow="QUICK LINKS"
+                        title="Need to access detailed information?"
+                        backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
+                        links={quickLinksData}
+                      />
       </div>
     </>
   );

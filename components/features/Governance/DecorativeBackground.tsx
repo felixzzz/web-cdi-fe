@@ -10,6 +10,8 @@ const CONTENT_HTML = `
 `;
 
 export function RiskManagement() {
+  const activeGradient = "linear-gradient(#051119, #091a24)";
+
   return (
     <section
       id="risk-management"
@@ -22,9 +24,14 @@ export function RiskManagement() {
         layout="fill"
         objectFit="contain"
         objectPosition="right"
-        className="z-0"
+        className="z-[1]"
         priority
       />
+
+      <div
+        className="absolute inset-0 overlay-business z-0"
+        style={{ backgroundImage: activeGradient }}
+      ></div>
 
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-8">
@@ -36,7 +43,7 @@ export function RiskManagement() {
               {TITLE}
             </h2>
             <div
-              className="content"
+              className="max-w-full prose prose-invert prose-base"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
           </div>

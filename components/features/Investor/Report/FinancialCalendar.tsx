@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { clsx } from "clsx";
-import { Languages, Search, FileText, Eye, Download } from "lucide-react";
+import { Languages, Search } from "lucide-react";
+import Image from "next/image";
 
 const allReportsData = [
   {
@@ -77,8 +78,8 @@ export function FinancialCalendar() {
             key={year}
             onClick={() => setActiveYear(year)}
             className={clsx(
-              "text-base font-normal text-neutral-8 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
-              activeYear === year && "!text-blue-base !border-b-blue-base"
+              "text-base font-normal text-neutral-900 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
+              activeYear === year && "!text-[#2474A5] !border-b-[#2474A5]"
             )}
           >
             {year}
@@ -96,8 +97,8 @@ export function FinancialCalendar() {
               key={type}
               onClick={() => setActiveType(type)}
               className={clsx(
-                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-blue-base hover:bg-blue-base  transition",
-                activeType === type && "bg-blue-base "
+                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5]  transition",
+                activeType === type && "bg-[#2474A5] text-gray-100"
               )}
             >
               {type}
@@ -112,7 +113,7 @@ export function FinancialCalendar() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-blue-base"
+            className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-[#2474A5]"
             placeholder="Search anything..."
           />
         </div>
@@ -136,7 +137,13 @@ export function FinancialCalendar() {
                     <span>{report.size}</span>
                     <span>.</span>
                   </p>
-                  <FileText size={16} aria-label="PDF Document" />
+                  <Image
+                                  src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                                  width={28}
+                                  height={20}
+                                  alt="See all icon"
+                                  className="inline-block"
+                                />
                 </div>
               </div>
               <div className="flex lg:items-center gap-8 w-full lg:w-fit">
@@ -144,17 +151,29 @@ export function FinancialCalendar() {
                   href={report.viewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-blue-base font-medium"
+                  className="flex items-center gap-2 text-[#2474A5] font-medium"
                 >
-                  <Eye size={16} /> View
+                  <Image
+                                  src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                                  width={20}
+                                  height={20}
+                                  alt="See all icon"
+                                  className="inline-block"
+                                /> View
                 </a>
                 <a
                   href={report.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-blue-base font-medium"
+                  className="flex items-center gap-2 text-[#2474A5] font-medium"
                 >
-                  <Download size={16} /> Download
+                  <Image
+                                  src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                                  width={20}
+                                  height={20}
+                                  alt="Download icon"
+                                  className="inline-block"
+                                /> Download
                 </a>
               </div>
             </article>
