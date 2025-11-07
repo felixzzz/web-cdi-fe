@@ -2,13 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { ReportItem, ReportItemProps } from "./ReportItem";
 import { Languages, MoveRight } from "lucide-react";
+import { ApiReportItem } from "@/types/Homepage/home";
 
 interface ReportSectionProps {
   eyebrow: string;
   title: string;
   downloadAllUrl: string;
   seeAllUrl: string;
-  reports: ReportItemProps[];
+  reports: ApiReportItem[];
 }
 
 export const Report: React.FC<ReportSectionProps> = ({
@@ -71,10 +72,18 @@ export const Report: React.FC<ReportSectionProps> = ({
           </span>
         </div>
 
-        <ul className="mt-4">
-          {reports.map((report) => (
-            <ReportItem key={report.title} {...report} />
-          ))}
+       <ul className="mt-4">
+          {reports.map((report) => {
+            const transformedProps: ReportItemProps = {
+              title: report.name_en,
+              date: report.date,
+              size: report.file.size, 
+              viewUrl: `https://chandradaya-investasi.com/file/preview/default/${report.type}/${report.ulid}/${report.name_slug_en}`,
+              downloadUrl: `https://chandradaya-investasi.com/file/download/default/${report.type}/${report.ulid}/`,
+            };
+
+            return <ReportItem key={report.id} {...transformedProps} />;
+          })}
         </ul>
       </div>
     </section>

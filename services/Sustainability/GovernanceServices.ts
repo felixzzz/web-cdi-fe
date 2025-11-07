@@ -1,5 +1,5 @@
 import {
-  SustainabilityContentSection,
+  ApiContentResponse,
   SustainabilityGovernanceApiResponse,
 } from "@/types/Sustainabilitys/Governance";
 
@@ -33,7 +33,7 @@ export async function getGovernancePageData(): Promise<SustainabilityGovernanceA
 }
 
 export async function getGovernanceContentData(): Promise<
-  SustainabilityContentSection[]
+  ApiContentResponse
 > {
   try {
     const res = await fetch(API_URL_CONTENT, {
@@ -50,7 +50,7 @@ export async function getGovernanceContentData(): Promise<
       throw new Error(`Failed to fetch home data: ${res.statusText}`);
     }
 
-    const data: SustainabilityContentSection[] = await res.json();
+    const data: ApiContentResponse = await res.json();
     return data;
   } catch (error) {
     console.error("Error in getHomePageData:", error);

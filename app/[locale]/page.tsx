@@ -1,10 +1,10 @@
 import { AboutUs } from "@/components/features/Homepage/AboutUs";
+import { Article } from "@/components/features/Homepage/Article";
 // import { Article } from "@/components/features/homepage/Article";
 import { Discover } from "@/components/features/Homepage/Discover";
 import { Hero } from "@/components/features/Homepage/Hero";
 import {
   Information,
-  QuickLink,
 } from "@/components/features/Homepage/Information";
 import {
   Journey,
@@ -12,39 +12,19 @@ import {
   JourneyStat,
 } from "@/components/features/Homepage/Journey";
 import { Report } from "@/components/features/Homepage/Report";
-import { ReportItemProps } from "@/components/features/Homepage/ReportItem";
 import { Solution } from "@/components/features/Homepage/Solution";
+import { informationService } from "@/services/Global/informationService";
 import { homeService } from "@/services/Homepage/homeService";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 // import { useTranslations } from "next-intl";
 
-export const quickLinksData: QuickLink[] = [
-  { href: "/about-us", text: "Who We Are" },
-  { href: "/about-us/management", text: "Management & Structure" },
-  { href: "/investor/financial-information", text: "Financial Information" },
-  { href: "/investor/report", text: "Report" },
-  { href: "/governance/policy", text: "Code of Conduct" },
-];
-
-const reportsData: ReportItemProps[] = [
-  {
-    title: "Audited Financial Report - 30 Jun 2025",
-    date: "15 September 2025",
-    size: "2.1 MB",
-    viewUrl: "https://...",
-    downloadUrl: "https://...",
-  },
-  {
-    title: "Audited Report 2024",
-    date: "14 April 2025",
-    size: "3.59 MB",
-    viewUrl: "https://...",
-    downloadUrl: "https://...",
-  },
-];
-
 export default async function Page() {
-  const homeData = await homeService.getHomePageData();
+  const [homeData, reportData, quickLinksData, articleData] = await Promise.all([
+    homeService.getHomePageData(),
+    homeService.getHomeReportData(),
+    informationService.getHomeQuickLinks(),
+    homeService.getHomeArticle(),
+  ]);
   // const t = useTranslations("homepage");
 
   // console.log(homeData);
@@ -71,7 +51,7 @@ export default async function Page() {
   } = homeData;
 
   const stripHtml = (html: string | null) =>
-  html ? html.replace(/<[^>]+>/g, "") : "";
+    html ? html.replace(/<[^>]+>/g, "") : "";
 
   const statsData: JourneyStat[] = [
     {
@@ -89,17 +69,17 @@ export default async function Page() {
   ];
 
   const linksData: JourneyLink[] = [
-  {
-    href: "https.careers.capcx.com/",
-    text: "Join with Us",
-    external: true,
-  },
-  {
-    href: "/about-us/awards",
-    text: "All Awards",
-    external: false,
-  },
-];
+    {
+      href: "https.careers.capcx.com/",
+      text: "Join with Us",
+      external: true,
+    },
+    {
+      href: "/about-us/awards",
+      text: "All Awards",
+      external: false,
+    },
+  ];
 
   return (
     <main>
@@ -157,9 +137,9 @@ export default async function Page() {
         title="Financial Reports"
         downloadAllUrl="https://..."
         seeAllUrl="/investor/financial-information"
-        reports={reportsData}
+        reports={reportData}
       />
-      {/* <Article /> */}
+      <Article articles={articleData} />
       <Information
         eyebrow="QUICK LINKS"
         title="Need to access detailed information?"

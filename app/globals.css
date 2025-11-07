@@ -123,3 +123,18 @@
     rgba(0, 0, 0, 0.6) 100%
   );
 }
+
+.custom-dot-button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-dot-button.active {
+  background-color: #2474A5;
+}

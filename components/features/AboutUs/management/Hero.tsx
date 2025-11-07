@@ -19,7 +19,14 @@ export const Hero: React.FC<HeroProps> = ({
       className="relative overflow-hidden aspect-[4/3] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end bg-cover"
       style={{ backgroundImage: `url("${imageSrc}")` }}
     >
-      <div className="overlay-banner h-full w-full absolute left-0 right-0 top-0 bottom-0" />
+      <div
+        className="overlay-history absolute inset-0 z-0"
+        aria-hidden="true"
+        style={{
+          background:
+            "linear-gradient(#0000, #07151e72 85%, #07161fcc 92%, #091a24)",
+        }}
+      />
 
       <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         <div className="text-white grid lg:grid-cols-2 gap-2 relative z-[1] items-end">
@@ -37,10 +44,10 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           <div className="flex items-center gap-10">
-            <div className="h-[2px] w-full bg-neutral-6 hidden lg:block relative overflow-hidden">
-              <div className="absolute h-full bg-blue-lighter animate-colorChange" />
-            </div>
-            <Image
+            <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
+                          <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
+                        </div>
+                        <Image
                           width={46}
                           height={46}
                           alt="icon"

@@ -8,6 +8,12 @@ export default async function Page() {
 
   const publicationData = await publicationService.getPublicationPageData();
 
+  const initialTab = "prospectus";
+  const initialData = await publicationService.getPublicationTabData(
+    initialTab,
+    1
+  );
+
   const { investor_publication_banner } = publicationData;
 
   return (
@@ -20,7 +26,7 @@ export default async function Page() {
         }
         iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
       />
-      <Publications />
+      <Publications initialData={initialData} initialTab={initialTab} />
     </main>
   );
 }

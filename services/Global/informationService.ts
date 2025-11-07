@@ -1,10 +1,10 @@
-import { EnergyApiResponse } from "@/types/OurBusiness/Energy";
+import { QuickLinksApiResponse } from "@/types/Homepage/home";
 
-const API_URL = "https://chandradaya-investasi.com/api/business/detail/energy";
+const API_URL_LINKS = "https://chandradaya-investasi.com/api/utility/quick-link/home";
 
-export async function getEnergyPageData(): Promise<EnergyApiResponse> {
+export async function getHomeQuickLinks(): Promise<QuickLinksApiResponse> {
   try {
-    const res = await fetch(API_URL, {
+    const res = await fetch(API_URL_LINKS, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export async function getEnergyPageData(): Promise<EnergyApiResponse> {
       throw new Error(`Failed to fetch home data: ${res.statusText}`);
     }
 
-    const data: EnergyApiResponse = await res.json();
+    const data: QuickLinksApiResponse = await res.json();
     return data;
   } catch (error) {
     console.error("Error in getHomePageData:", error);
@@ -26,7 +26,6 @@ export async function getEnergyPageData(): Promise<EnergyApiResponse> {
   }
 }
 
-
-export const energyService = {
-  getEnergyPageData,
+export const informationService = {
+  getHomeQuickLinks
 };

@@ -1,17 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
-export interface QuickLink {
-  href: string;
-  text: string;
-}
+import { ApiQuickLink } from "@/types/Homepage/home";
 
 interface InformationSectionProps {
   eyebrow: string;
   title: string;
   backgroundImageUrl: string;
-  links: QuickLink[];
+  links: ApiQuickLink[];
 }
 
 export const Information: React.FC<InformationSectionProps> = ({
@@ -42,12 +38,12 @@ export const Information: React.FC<InformationSectionProps> = ({
           <nav aria-label="Quick links">
             <ul className="flex flex-col gap-8">
               {links.map((link) => (
-                <li key={link.href}>
+                <li key={link.url}>
                   <Link
-                    href={link.href}
+                    href={link.url}
                     className="flex items-center justify-between text-neutral-13 border-b border-b-neutral-5 pb-8"
                   >
-                    <p className="text-[22px] font-medium">{link.text}</p>
+                    <p className="text-[22px] font-medium">{link.name}</p>
                     <ArrowRight size={24} />
                   </Link>
                 </li>

@@ -5,10 +5,13 @@ import { Milestone } from "@/components/features/AboutUs/Milestone";
 import { VisionMission } from "@/components/features/AboutUs/Mision&Vision";
 import { SubNavbar } from "@/components/features/AboutUs/SubNavbar";
 import { Overview } from "@/components/features/AboutUs/Overview";
-import { aboutService, extractYouTubeId } from "@/services/AboutUs/AboutService";
+import {
+  aboutService,
+  extractYouTubeId,
+} from "@/services/AboutUs/AboutService";
 import { convertHtmlToReact } from "@/lib/htmlUtils";
 import { Information } from "@/components/features/Homepage/Information";
-import { quickLinksData } from "../page";
+import { informationService } from "@/services/Global/informationService";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -18,33 +21,17 @@ const aboutLinks = [
   { text: "Company Profile", href: "/about-us/company-profile" },
 ];
 
-const milestoneData = [
-  {
-    year: "2023",
-    achievements: [
-      "CDI Group was established as an investment holding company...",
-      "An investment of US$194 million from Electric Generating Public Company Limited...",
-      "Acquired 70% of PT Krakatau Chandra Energi (KCE)...",
-      "Expanded energy sector acquisitions...",
-    ],
-  },
-  {
-    year: "2024",
-    achievements: [
-      "Commenced solar panel business outside Cilegon",
-      "Commenced Port and Storage business",
-      "Started the operation of a desalination plant...",
-      "Established PT Chandra Shipping International (CSI)...",
-      "Established PT Chandra Cold Chain (CCC)...",
-    ],
-  },
-];
-
 const stripHtml = (html: string | null) =>
   html ? html.replace(/<[^>]+>/g, "") : "";
 
 export default async function Page() {
-  const aboutData = await aboutService.getAboutPageData();
+  const [aboutData, quickLinksData, historyData, milstoneData, profileData] = await Promise.all([
+    aboutService.getAboutPageData(),
+    informationService.getHomeQuickLinks(),
+    aboutService.getHistoryData(),
+    aboutService.getMilstoneData(),
+    aboutService.getProfileData(),
+  ]);
 
   const {
     about_us_banner,
@@ -96,9 +83,7 @@ export default async function Page() {
           youtubeVideoId={youtubeId}
           videoTitle="Company Profile Video - CDI Group"
         >
-          <div
-          className="text-[12px] leading-[24px] text-white py-1 space-y-6"
-          >
+          <div className="text-[12px] leading-[24px] text-white py-1 space-y-6">
             {convertHtmlToReact(about_us_company_overview.content)}
           </div>
         </Overview>
@@ -107,7 +92,7 @@ export default async function Page() {
           visionData={visionData}
           missionData={missionData}
         />
-        <History />
+        <History data={historyData} />
         <Milestone
           title={about_us_milestone.title || "From Then to Now"}
           subtitle={
@@ -115,7 +100,7 @@ export default async function Page() {
             "Explore PT Chandra Daya Investasi Tbk key milestones over the years."
           }
           backgroundImageUrl={about_us_milestone.file_url}
-          data={milestoneData} 
+          data={milstoneData}
         />
         <CompanyProfile
           id="company-profile"
@@ -127,17 +112,14 @@ export default async function Page() {
             stripHtml(about_us_company_profile.content) ||
             "Gain deeper insights into our story, growth, and latest achievements by downloading our company profile"
           }
-          itemTitle="Company Profile CDI Group"
-          itemSize="2.01 MB"
-          itemViewUrl="https://chandradaya-investasi.com/file/preview/default/company_profile/Company_Profile_1018/"
-          itemDownloadUrl="https://chandradaya-investasi.com/file/download/default/company_profile/Company_Profile_1018/"
+          data={profileData}
         />
         <Information
-                        eyebrow="QUICK LINKS"
-                        title="Need to access detailed information?"
-                        backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
-                        links={quickLinksData}
-                      />
+          eyebrow="QUICK LINKS"
+          title="Need to access detailed information?"
+          backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
+          links={quickLinksData}
+        />
       </div>
     </>
   );

@@ -1,21 +1,17 @@
 import Image from "next/image";
 import React from "react";
+import { ApiDataItem } from "@/types/Sustainabilitys/Social"; 
 
-const BACKGROUND_IMAGE_URL =
-  "https://chandradaya-investasi.com/file-storage/KzIvM0t1dnphOGtpY291aXFYZ3JBdkg1aVZ0d0xTUGJQOFdHenZML3ZpVFZsd2VzNkFldVRXTnBaaGN0eE1keVRYckJUZkdNMDUwRVExZlBuVTNZYnphRCtFYndZUzQ4eHlTRTNWQXN2SmM9.webp";
-const TITLE = "Health and Safety Culture";
-const CONTENT_HTML = `
-  <p>CDI Group's safety commitment is reflected in the SMK3-certified Occupational Health & Safety System, also complemented by the ISO 45001:2018 certification. Through strict safety protocols, CDI Group has maintained a zero Lost Time Accident (LTA) record for three consecutive years (2021-2024).</p>
-  <p>In recognition of CDI Group's workplace safety excellence, CDI Group received the <strong>Zero Accident Award </strong>from the Banten Provincial Manpower and Transmigration Office, and Ministry of Manpower. </p>
-`;
+interface HealthAndSafetyProps {
+  data: ApiDataItem;
+}
 
-const stats = [
-  { value: "ZERO", label: "Lost Time Accident 2021-2024" },
-  { value: "100%", label: "Certified ISO 45001", className: "row-span-2" },
-  { value: "ZERO", label: "Accident" },
-];
+export function HealthAndSafety({ data }: HealthAndSafetyProps) {
+  const BACKGROUND_IMAGE_URL = data.image;
+  const TITLE = data.title || "Health and Safety Culture";
+  const CONTENT_HTML = data.content || "";
+  const stats = data.content_json || [];
 
-export function HealthAndSafety() {
   return (
     <section
       aria-labelledby="health-safety-heading"
@@ -23,7 +19,7 @@ export function HealthAndSafety() {
     >
       <Image
         src={BACKGROUND_IMAGE_URL}
-        alt="Health and safety workers at an industrial facility"
+        alt={TITLE}
         layout="fill"
         objectFit="cover"
         className="z-0"
@@ -42,7 +38,7 @@ export function HealthAndSafety() {
               {TITLE}
             </h2>
             <div
-            className="max-w-2xl prose prose-invert prose-base"
+              className="max-w-2xl prose prose-invert prose-base"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             ></div>
           </div>
@@ -50,11 +46,14 @@ export function HealthAndSafety() {
           <div>
             <ul className="items-center lg:max-w-[60%] ms-auto grid grid-cols-2 gap-8 lg:gap-x-16">
               {stats.map((stat) => (
-                <li key={stat.label} className={stat.className || ""}>
+                <li
+                  key={stat.description}
+                  className={stat.title === "100%" ? "row-span-2" : ""}
+                >
                   <p className="text-[#47C1EA] font-bold text-3xl mb-4 lg:text-[48px]">
-                    {stat.value}
+                    {stat.title}
                   </p>
-                  <p>{stat.label}</p>
+                  <p>{stat.description}</p>
                 </li>
               ))}
             </ul>

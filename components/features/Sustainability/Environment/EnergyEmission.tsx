@@ -1,15 +1,19 @@
 import Image from "next/image";
 import React from "react";
+import { ApiDataItem } from "@/types/Sustainabilitys/Environment"; // Import the type
 
-const BACKGROUND_IMAGE_URL =
-  "https://chandradaya-investasi.com/file-storage/KzIvM0t1dnphOGtpY291aXFYZ3JBcTk2cnNCME03dFBnQU9Jbk9rL0UzNU5meXE3cjVaVEZ6bzdNMDRJd0hZaA.webp";
-const TITLE = "Energy & Emission";
-const CONTENT_HTML =
-  "<p>At CDI Group, we are committed to advancing Indonesia’s transition towards renewable energy. CDI Group’s subsidiary, PT Krakatau Chandra Energi (KCE), plays a crucial role in this effort by providing clean energy solutions.</p>";
-    const gradientStyle =
-    "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
+interface EnergyEmissionProps {
+  data: ApiDataItem;
+}
 
-export function EnergyEmission() {
+const gradientStyle =
+  "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
+
+export function EnergyEmission({ data }: EnergyEmissionProps) {
+  const BACKGROUND_IMAGE_URL = data.image;
+  const TITLE = data.title || "Energy & Emission"; 
+  const CONTENT_HTML = data.content || ""; 
+
   return (
     <section
       aria-labelledby="energy-heading"
@@ -17,7 +21,7 @@ export function EnergyEmission() {
     >
       <Image
         src={BACKGROUND_IMAGE_URL}
-        alt="Abstract blue energy background"
+        alt={TITLE} 
         layout="fill"
         objectFit="cover"
         className="z-0"
@@ -30,7 +34,11 @@ export function EnergyEmission() {
       ></div>
 
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
-        <div className="lg:max-w-[45%] ms-auto">
+        <div
+          className={`lg:max-w-[45%] ${
+            data.align === "right" ? "ms-auto" : "me-auto"
+          }`}
+        >
           <h2
             id="energy-heading"
             className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-6 text-blue-lighter"
@@ -39,7 +47,7 @@ export function EnergyEmission() {
           </h2>
 
           <div
-          className="prose prose-invert prose-base text-neutral-50"
+          className="max-w-2xl prose prose-invert prose-base"
             dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
           ></div>
         </div>

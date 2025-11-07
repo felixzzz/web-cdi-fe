@@ -70,3 +70,54 @@ export interface AboutUsManagementApiResponse {
   about_us_guideline: SimpleManagementSection;
   about_us_corporate_structure_table_show: SimpleManagementSection;
 }
+
+interface FileDetails {
+  path: string;
+  size: string;
+  format: string;
+}
+
+interface ManagementItem {
+  id: number;
+  ulid: string;
+  type: string;
+  name: string;
+  position: string;
+  image: string;
+  image_hero: string;
+  description_en: string;
+  description_id: string;
+  created_at: string;
+  updated_at: string;
+  
+  cv_file: FileDetails | null;
+  
+  resume_file: FileDetails | null;
+}
+
+export type ManagementApiResponse = ManagementItem[];
+
+interface FileDetails {
+  path: string;
+  size: string;
+  format: string;
+}
+
+interface GuidelineItem {
+  id: number;
+  ulid: string;
+  unique_key: string;
+  type: string;
+  name_en: string;
+  name_id: string;
+  file_en: FileDetails | null;
+  file_id: FileDetails | null;
+  created_at: string;
+  updated_at: string;
+  sort: number;
+  show_on_governance: number;
+  file: FileDetails | null;
+  name: string;
+}
+
+export type GuidelineApiResponse = GuidelineItem[];

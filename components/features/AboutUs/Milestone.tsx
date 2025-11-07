@@ -2,17 +2,13 @@
 
 import Image from "next/image";
 import React from "react";
-
-interface MilestoneData {
-  year: string;
-  achievements: string[];
-}
+import { MilestoneApiResponse } from "@/types/AboutUs/About";
 
 interface MilestoneSectionProps {
   title: string;
   subtitle: string;
   backgroundImageUrl: string;
-  data: MilestoneData[];
+  data: MilestoneApiResponse;
 }
 
 export const Milestone: React.FC<MilestoneSectionProps> = ({
@@ -43,7 +39,7 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
             {data.map((milestone) => (
-              <div key={milestone.year}>
+              <div key={milestone.ulid || milestone.id}>
                 <h3 className="text-3xl font-bold text-white mb-5">
                   {milestone.year}
                 </h3>
@@ -61,13 +57,14 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
                     background: "linear-gradient(#d6f5ff29, #091a2429)",
                   }}
                 >
-                  <ul className="list-disc list-inside space-y-4 text-neutral-200">
-                    {milestone.achievements.map((item, index) => (
-                      <li className="text-[12px] leading-[24px]" key={index}>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                  {/* <div className="prose prose-invert prose-base max-w-none text-neutral-200">
+                    {convertHtmlToReact(milestone.content)}
+                  </div> */}
+                  <div
+              className="prose prose-invert prose-base max-w-none text-neutral-200"
+              // className="content max-w-2xl text-xs lg:text-base !text-neutral-4"
+              dangerouslySetInnerHTML={{ __html: milestone.content || "" }}
+            />
                 </div>
               </div>
             ))}

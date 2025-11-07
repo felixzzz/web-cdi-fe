@@ -6,7 +6,10 @@ import { financialService } from "@/services/Investor/FinancialServices";
 export default async function Page() {
   // const t = useTranslations("homepage");
 
-  const financialData = await financialService.getFinancialPageData();
+  const [financialData, initialCalendarData] = await Promise.all([
+    financialService.getFinancialPageData(),
+    financialService.getFinancialCalendarData(1),
+  ]);
 
   const { investor_financial_banner } = financialData;
 
@@ -20,7 +23,7 @@ export default async function Page() {
         }
         iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
       />
-      <FinancialCalendar />
+      <FinancialCalendar initialData={initialCalendarData} />
     </main>
   );
 }

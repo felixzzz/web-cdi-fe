@@ -6,8 +6,6 @@ import { waterService } from "@/services/OurBusiness/WaterService";
 export default async function Page() {
   const waterData = await waterService.getWaterPageData();
 
-  console.log(waterData);
-
   return (
     <>
       <div>

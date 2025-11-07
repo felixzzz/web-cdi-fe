@@ -1,21 +1,19 @@
+import { ApiDataItem } from "@/types/Sustainabilitys/Governance";
 import Image from "next/image";
 import React from "react";
 
-const BACKGROUND_IMAGE_URL =
-  "https://chandradaya-investasi.com/file-storage/KzIvM0t1dnphOGtpY291aXFYZ3JBdWZISFVkendHbnY1d281bStJK2dISnZ4NXlMQjRKM3Jrc05EM2QrVU9McCs1UUNBaThtUzNPcFhieFJhS0w3OEgxUzZqTEtoWGlwakNYdFRxSjhaUWM9.webp";
-const TITLE = "Governance Performance";
-const CONTENT_HTML = `
-  <p>In terms of governance, our performance is guided by our Code of Conduct and includes thorough supply chain assessments to ensure ethical practices across our operations.</p>
-  <p>We are committed to maintaining high governance standards by regularly evaluating compliance with our ethical guidelines, which enhances transparency and accountability while mitigating risks.</p>
-`;
-
+interface GovernancePerformanceProps {
+  data: ApiDataItem;
+}
 
 const customGradient =
   "linear-gradient(#091a24, #091a244d 8%, #091a2427 25%, #091a2400 75%, #091a2466 82%, #091a24)";
 
+export function GovernancePerformance({ data }: GovernancePerformanceProps) {
+  const BACKGROUND_IMAGE_URL = data.image;
+  const TITLE = data.title;
+  const CONTENT_HTML = data.content || "";
 
-
-export function GovernancePerformance() {
   return (
     <section
       aria-labelledby="governance-heading"
@@ -23,20 +21,24 @@ export function GovernancePerformance() {
     >
       <Image
         src={BACKGROUND_IMAGE_URL}
-        alt="Abstract blue background for governance performance section"
+        alt={TITLE}
         layout="fill"
         objectFit="cover"
         className="z-0"
         priority
       />
 
-<div
-          className="absolute inset-0 overlay-business z-[1]"
-          style={{ backgroundImage: customGradient }}
-        ></div>
+      <div
+        className="absolute inset-0 overlay-business z-[1]"
+        style={{ backgroundImage: customGradient }}
+      ></div>
 
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
-        <div className="lg:max-w-[45%] ms-auto">
+        <div
+          className={`lg:max-w-[45%] ${
+            data.align === "right" ? "ms-auto" : "me-auto"
+          }`}
+        >
           <h2
             id="governance-heading"
             className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-6 text-blue-lighter"

@@ -38,3 +38,82 @@ export interface HomePageApiResponse {
   home_journey_info_2: HomePageSection;
   home_journey_info_3: HomePageSection;
 }
+
+export interface ReportFile {
+  path: string;
+  size: string;
+  format: string;
+}
+
+export interface ApiReportItem {
+  id: number;
+  ulid: string;
+  type: string;
+  name_en: string;
+  name_id: string;
+  file_en: ReportFile;
+  file_id: ReportFile;
+  created_at: string;
+  updated_at: string;
+  datetime: string;
+  file: ReportFile;
+  name: string;
+  name_slug: string;
+  name_slug_id: string;
+  name_slug_en: string;
+  date: string;
+}
+
+export type ReportApiResponse = ApiReportItem[];
+
+export interface ApiQuickLink {
+  id: number;
+  ulid: string;
+  category: number;
+  name_en: string;
+  name_id: string;
+  url: string;
+  sort: number;
+  created_at: string;
+  updated_at: string;
+  name: string;
+}
+
+export type QuickLinksApiResponse = ApiQuickLink[];
+
+export interface ArticleCategory {
+  id: number;
+  ulid: string;
+  name_en: string;
+  name_id: string;
+  is_sustainability: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ApiArticle {
+  id: number;
+  ulid: string;
+  thumbnail: string;
+  article_category_id: number;
+  category: string;
+  slug: string;
+  title_en: string;
+  title_id: string;
+  content_en: string;
+  content_id: string;
+  tags: string[];
+  status: number;
+  created_at: string;
+  updated_at: string;
+  datetime: string;
+  category_name: string;
+  title: string;
+  short_content: string;
+  image: string;
+  date: string;
+  route: string;
+  article_category: ArticleCategory;
+}
+
+export type ApiArticleResponse = ApiArticle[];

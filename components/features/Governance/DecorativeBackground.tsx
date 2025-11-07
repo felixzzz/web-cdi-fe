@@ -1,16 +1,17 @@
 import Image from "next/image";
 import React from "react";
+import { GovernanceSection } from "@/types/Governances/Governance";
 
-const BACKGROUND_IMAGE_URL =
-  "https://chandradaya-investasi.com/file-storage/UTR6TEcrd2lmTWRmalFqYi9GL2FkSUYzSDNSTHRZeVErcHhUVU5TVFNoSmlkeS9jaGVqdlBHWTlnVTRIODBlT2pOeVQzODNnOTg1V2pkSmZpUXhycmc9PQ.webp";
-const TITLE = "Risk Management";
-const CONTENT_HTML = `
-  <p>CDI Group acknowledges risks as part of its business operations. The company has established a detailed and structured risk management framework as a foundation to refer to when facing risks, ensuring they are mitigated for smooth business operations. These measures enable CDI Group to identify risk levels and the right strategies to address them.</p>
-  <p><br></p>
-`;
+interface RiskManagementProps {
+  data: GovernanceSection;
+}
 
-export function RiskManagement() {
+export function RiskManagement({ data }: RiskManagementProps) {
   const activeGradient = "linear-gradient(#051119, #091a24)";
+
+  const BACKGROUND_IMAGE_URL = data.file_url;
+  const TITLE = data.title || "Risk Management";
+  const CONTENT_HTML = data.content || "";
 
   return (
     <section
@@ -20,7 +21,7 @@ export function RiskManagement() {
     >
       <Image
         src={BACKGROUND_IMAGE_URL}
-        alt="Abstract background pattern for risk management section"
+        alt={TITLE || "Abstract background pattern"}
         layout="fill"
         objectFit="contain"
         objectPosition="right"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { clsx } from "clsx";
 import {
   Languages,
@@ -9,99 +9,153 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  Loader2, // Import loader icon
 } from "lucide-react";
 import Image from "next/image";
+import {
+  CalendarApiResponse,
+  CalendarEventItem,
+  PaginationMeta,
+} from "@/types/Investor/Financial"; // Corrected import path
 
-const allReportsData = [
-  {
-    id: 1,
-    title: "Audited Financial Report - 30 Jun 2025",
-    date: "2025-09-15",
-    displayDate: "15 September 2025",
-    size: "2.1 MB",
-    type: "Financial Report",
-    year: 2025,
-    viewUrl: "#",
-    downloadUrl: "#",
-  },
-  {
-    id: 2,
-    title: "Audited Report 2024",
-    date: "2025-04-14",
-    displayDate: "14 April 2025",
-    size: "3.59 MB",
-    type: "Annual Report",
-    year: 2025,
-    viewUrl: "#",
-    downloadUrl: "#",
-  },
-  {
-    id: 3,
-    title: "Q1 Financial Report 2024",
-    date: "2024-05-20",
-    displayDate: "20 May 2024",
-    size: "1.8 MB",
-    type: "Financial Report",
-    year: 2024,
-    viewUrl: "#",
-    downloadUrl: "#",
-  },
-  {
-    id: 4,
-    title: "Annual Report 2023",
-    date: "2024-03-15",
-    displayDate: "15 March 2024",
-    size: "4.1 MB",
-    type: "Annual Report",
-    year: 2024,
-    viewUrl: "#",
-    downloadUrl: "#",
-  },
-];
+// --- Helper Types & Functions ---
 
-const yearFilters = ["All Year", 2025, 2024];
+interface Report {
+  id: number;
+  title: string;
+  date: string;
+  displayDate: string;
+  size: string;
+  type: string;
+  year: number;
+  viewUrl: string;
+  downloadUrl: string;
+}
+
+// Formats "financial_report" to "Financial Report"
+const formatReportType = (type: string): string => {
+  return type
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
+// Converts "Financial Report" back to "financial_report"
+const unformatReportType = (type: string): string => {
+  if (type === "All Type") return "";
+  return type.toLowerCase().replace(" ", "_");
+};
+
+const FILE_PREVIEW_BASE_URL =
+  "https://chandradaya-investasi.com/file/preview/default/report/";
+const FILE_DOWNLOAD_BASE_URL =
+  "https://chandradaya-investasi.com/file/download/default/report/";
+
+// Flattens the API's year-grouped items into a single array
+const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
+  return data.items.flatMap((yearGroup) => yearGroup.items);
+};
+
+// Transforms a single API item into the 'Report' shape
+const transformItem = (item: CalendarEventItem): Report => ({
+  id: item.id,
+  title: item.name,
+  date: item.datetime, // Use datetime for sorting
+  displayDate: item.date, // Use date for display
+  size: item.file.size,
+  type: formatReportType(item.type),
+  year: item.year,
+  viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
+  downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
+});
+
+
 const typeFilters = ["All Type", "Annual Report", "Financial Report"];
-const ITEMS_PER_PAGE = 5;
 
-export function FinancialCalendar() {
+interface FinancialCalendarProps {
+  initialData: CalendarApiResponse;
+}
+
+export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
+  // State for raw API items, pagination, filters, and loading
+  const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
+    flattenData(initialData)
+  );
+  const [pagination, setPagination] = useState<PaginationMeta>(
+    initialData.meta
+  );
   const [activeYear, setActiveYear] = useState<string | number>("All Year");
   const [activeType, setActiveType] = useState<string>("All Type");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const filteredReports = useMemo(() => {
-    return allReportsData
-      .filter((report) => {
-        const yearMatch =
-          activeYear === "All Year" || report.year === activeYear;
-        const typeMatch =
-          activeType === "All Type" || report.type === activeType;
-        const searchMatch = report.title
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase());
-        return yearMatch && typeMatch && searchMatch;
-      })
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }, [activeYear, activeType, searchQuery]);
+  // --- Dynamic Year Filters ---
+  const yearFilters = useMemo(() => {
+    // Use the first page of data to build the initial year list
+    const years = Array.from(
+      new Set(flattenData(initialData).map((r) => r.year))
+    );
+    return ["All Year", ...years.sort((a, b) => b - a)];
+  }, [initialData]);
 
-  const { paginatedAndGroupedReports, totalPages, totalItems } = useMemo(() => {
-    const totalItems = filteredReports.length;
-    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    const paginatedItems = filteredReports.slice(startIndex, endIndex);
+  // --- Data Fetching Effect ---
+  // Runs when page, year, or type changes
+  useEffect(() => {
+    // Don't refetch on the initial render
+    if (
+      currentPage === 1 &&
+      activeYear === "All Year" &&
+      activeType === "All Type"
+    ) {
+      setReportItems(flattenData(initialData));
+      setPagination(initialData.meta);
+      return;
+    }
 
-    const grouped = paginatedItems.reduce((acc, report) => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const apiType = unformatReportType(activeType);
+      const apiYear = activeYear === "All Year" ? "" : activeYear;
+
+      try {
+        const res = await fetch(
+          `https://chandradaya-investasi.com/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch data");
+        const data: CalendarApiResponse = await res.json();
+
+        setReportItems(flattenData(data));
+        setPagination(data.meta);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, activeYear, activeType, initialData]);
+
+  // --- Client-side Search & Grouping (Memoized) ---
+  const { paginatedAndGroupedReports, totalItems } = useMemo(() => {
+    const transformed = reportItems.map(transformItem);
+
+    const filtered = transformed.filter((report) =>
+      report.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const grouped = filtered.reduce((acc, report) => {
       const year = report.year;
       if (!acc[year]) {
         acc[year] = [];
       }
       acc[year].push(report);
       return acc;
-    }, {} as Record<number, typeof paginatedItems>);
+    }, {} as Record<number, Report[]>);
 
-    return { paginatedAndGroupedReports: grouped, totalPages, totalItems };
-  }, [filteredReports, currentPage]);
+    return { paginatedAndGroupedReports: grouped, totalItems: pagination.total };
+  }, [reportItems, searchQuery, pagination.total]);
 
   const reportKeys = Object.keys(paginatedAndGroupedReports).sort(
     (a, b) => Number(b) - Number(a)
@@ -134,7 +188,7 @@ export function FinancialCalendar() {
             key={year}
             onClick={() => {
               setActiveYear(year);
-              setCurrentPage(1);
+              setCurrentPage(1); // Reset page on filter change
             }}
             className={clsx(
               "text-base font-normal text-neutral-800 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
@@ -155,7 +209,7 @@ export function FinancialCalendar() {
               key={type}
               onClick={() => {
                 setActiveType(type);
-                setCurrentPage(1);
+                setCurrentPage(1); // Reset page on filter change
               }}
               className={clsx(
                 "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-blue-base hover:bg-blue-base transition",
@@ -175,7 +229,7 @@ export function FinancialCalendar() {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              setCurrentPage(1);
+              // Client-side search, no page reset needed
             }}
             className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-blue-base"
             placeholder="Search anything..."
@@ -183,8 +237,12 @@ export function FinancialCalendar() {
         </div>
       </div>
 
-      <section aria-label="Financial reports list">
-        {reportKeys.length > 0 ? (
+      <section aria-label="Financial reports list" className="min-h-[400px]">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full min-h-[400px]">
+            <Loader2 className="animate-spin text-[#2474A5]" size={48} />
+          </div>
+        ) : reportKeys.length > 0 ? (
           reportKeys.map((year) => (
             <div key={year} className="flex lg:gap-6 flex-col lg:flex-row mt-5">
               <h3 className="text-[#2474A5] font-medium text-[48px] w-full lg:w-auto">
@@ -210,12 +268,12 @@ export function FinancialCalendar() {
                           <span>.</span>
                         </p>
                         <Image
-                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
-                                        width={24}
-                                        height={16}
-                                        alt="See all icon"
-                                        className="inline-block"
-                                      />
+                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                          width={24}
+                          height={16}
+                          alt="See all icon"
+                          className="inline-block"
+                        />
                       </div>
                     </div>
                     <div className="flex lg:items-center gap-8 w-full lg:w-fit">
@@ -226,12 +284,13 @@ export function FinancialCalendar() {
                         className="flex items-center gap-2 text-blue-base font-medium"
                       >
                         <Image
-                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
-                                        width={16}
-                                        height={16}
-                                        alt="See all icon"
-                                        className="inline-block"
-                                      /> View
+                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                          width={16}
+                          height={16}
+                          alt="See all icon"
+                          className="inline-block"
+                        />{" "}
+                        View
                       </a>
                       <a
                         href={report.downloadUrl}
@@ -240,12 +299,13 @@ export function FinancialCalendar() {
                         className="flex items-center gap-2 text-blue-base font-medium"
                       >
                         <Image
-                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
-                                        width={16}
-                                        height={16}
-                                        alt="Download icon"
-                                        className="inline-block"
-                                      /> Download
+                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                          width={16}
+                          height={16}
+                          alt="Download icon"
+                          className="inline-block"
+                        />{" "}
+                        Download
                       </a>
                     </div>
                   </article>
@@ -260,22 +320,19 @@ export function FinancialCalendar() {
         )}
       </section>
 
-      {totalPages > 1 && (
+      {pagination.last_page > 1 && (
         <nav
           aria-label="Pagination"
           className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col lg:flex-row"
         >
           <p className="text-neutral-10 text-sm max-lg:hidden">
-            {`${(currentPage - 1) * ITEMS_PER_PAGE + 1}-${Math.min(
-              currentPage * ITEMS_PER_PAGE,
-              totalItems
-            )} of ${totalItems} items`}
+            {`${pagination.from}-${pagination.to} of ${totalItems} items`}
           </p>
           <ul className="flex items-center justify-center gap-2">
             <li>
               <button
                 onClick={() => setCurrentPage(1)}
-                disabled={currentPage === 1}
+                disabled={currentPage === 1 || isLoading}
                 className="pagination-btn"
               >
                 <ChevronsLeft size={16} />
@@ -284,19 +341,19 @@ export function FinancialCalendar() {
             <li>
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
+                disabled={currentPage === 1 || isLoading}
                 className="pagination-btn"
               >
                 <ChevronLeft size={16} />
               </button>
             </li>
-            <li className="font-medium">{`Page ${currentPage} of ${totalPages}`}</li>
+            <li className="font-medium">{`Page ${currentPage} of ${pagination.last_page}`}</li>
             <li>
               <button
                 onClick={() =>
-                  setCurrentPage((p) => Math.min(totalPages, p + 1))
+                  setCurrentPage((p) => Math.min(pagination.last_page, p + 1))
                 }
-                disabled={currentPage === totalPages}
+                disabled={currentPage === pagination.last_page || isLoading}
                 className="pagination-btn"
               >
                 <ChevronRight size={16} />
@@ -304,8 +361,8 @@ export function FinancialCalendar() {
             </li>
             <li>
               <button
-                onClick={() => setCurrentPage(totalPages)}
-                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage(pagination.last_page)}
+                disabled={currentPage === pagination.last_page || isLoading}
                 className="pagination-btn"
               >
                 <ChevronsRight size={16} />
@@ -313,10 +370,7 @@ export function FinancialCalendar() {
             </li>
           </ul>
           <p className="text-neutral-10 text-sm lg:hidden">
-            {`${(currentPage - 1) * ITEMS_PER_PAGE + 1}-${Math.min(
-              currentPage * ITEMS_PER_PAGE,
-              totalItems
-            )} of ${totalItems} items`}
+            {`${pagination.from}-${pagination.to} of ${totalItems} items`}
           </p>
         </nav>
       )}

@@ -5,57 +5,200 @@ import * as Select from "@radix-ui/react-select";
 import { Award, AwardCard } from "./AwardCard";
 import { ImageModal } from "./ImageModal";
 import { clsx } from "clsx";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Loader2 } from "lucide-react";
+import {
+  AwardsApiResponse,
+  AwardItem,
+  CertificationApiResponse,
+  CertificationItem,
+  MembershipApiResponse,
+  MembershipItem,
+} from "@/types/AboutUs/Awards";
+import { Pagination } from "./Pagination";
+
+const mapAwardToCard = (item: AwardItem): Award => ({
+  year: item.year,
+  title: item.name,
+  description: item.content,
+  awarder: item.awarder,
+  imageUrl: item.image,
+});
+
+const mapCertificationToCard = (item: CertificationItem): Award => ({
+  year: item.date ? new Date(item.date).getFullYear().toString() : "N/A",
+  title: item.name,
+  description: item.content,
+  awarder: item.awarder,
+  imageUrl: item.thumbnail,
+});
+
+const mapMembershipToCard = (item: MembershipItem): Award => ({
+  year: item.date ? new Date(item.date).getFullYear().toString() : "N/A",
+  title: item.name,
+  description: item.content,
+  awarder: item.awarder,
+  imageUrl: item.thumbnail,
+});
+
+type TabName = "Awards" | "Certification" | "Membership";
+
+const TABS: TabName[] = ["Awards", "Certification", "Membership"];
+const BASE_API_URL = "https://chandradaya-investasi.com/api";
 
 interface AwardsProps {
   title: string | null;
   description: string | null;
+  initialAwardsResponse: AwardsApiResponse;
+  initialCertificationResponse: CertificationApiResponse;
+  initialMembershipResponse: MembershipApiResponse;
 }
 
-const allAwardsData: Award[] = [
-  {
-    year: "2023",
-    title: "Zero Accident Award",
-    description:
-      "Krakatau Chandra Energi (KCE) received the Zero Accident Award...",
-    awarder: "Minister of Manpower of the Republic of Indonesia",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/NG9uODVmT3Y1d2tWbjlCaW5WeDZnT2JGN1lEK2xEblVvQWhzNEJvUDRzRT0.webp",
-  },
-  {
-    year: "2023",
-    title: "Implementative Energy Provider Private Company...",
-    description:
-      "Krakatau Chandra Energi (KCE) was honored as an Implementative Energy...",
-    awarder: "National Energy Council",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/cU9KbEJwQmo3b3E4dUV6VzJORVpmZXBLdGVZZXZyL0xGOFhHdExIUUFFST0.webp",
-  },
-  {
-    year: "2023",
-    title: "Occupational Safety and Health Management System",
-    description: "Krakatau Chandra Energi (KCE) has obtained a certificate...",
-    awarder: "Minister of Manpower of the Republic of Indonesia",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/NG9uODVmT3Y1d2tWbjlCaW5WeDZnUHV6T2dTQUtyN0U3NmI2TUxuNlRjUT0.webp",
-  },
-];
-
-const TABS = ["Awards", "Certification", "Membership"];
-const YEARS = ["All Year", "2023"];
-
-export const Awards: React.FC<AwardsProps> = ({ title, description }) => {
-  const [activeTab, setActiveTab] = useState("Awards");
+export const Awards: React.FC<AwardsProps> = ({
+  title,
+  description,
+  initialAwardsResponse,
+  initialCertificationResponse,
+  initialMembershipResponse,
+}) => {
+  const [activeTab, setActiveTab] = useState<TabName>("Awards");
   const [selectedYear, setSelectedYear] = useState("All Year");
   const [modalImageUrl, setModalImageUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const filteredAwards = useMemo(() => {
-    return allAwardsData.filter((award) => {
-      const yearMatch =
-        selectedYear === "All Year" || award.year === selectedYear;
-      return yearMatch;
+  const [awardsData, setAwardsData] = useState(initialAwardsResponse.items);
+  const [certificationData, setCertificationData] = useState(
+    initialCertificationResponse.items
+  );
+  const [membershipData, setMembershipData] = useState(
+    initialMembershipResponse.items
+  );
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [paginationMeta, setPaginationMeta] = useState(
+    initialAwardsResponse.meta
+  );
+
+  const YEARS = useMemo(() => {
+    const allItems = [
+      ...initialAwardsResponse.items.map(mapAwardToCard),
+      ...initialCertificationResponse.items.map(mapCertificationToCard),
+      ...initialMembershipResponse.items.map(mapMembershipToCard),
+    ];
+    const yearsSet = new Set(allItems.map((item) => item.year));
+    return ["All Year", ...Array.from(yearsSet).sort((a, b) => b.localeCompare(a))];
+  }, [
+    initialAwardsResponse,
+    initialCertificationResponse,
+    initialMembershipResponse,
+  ]);
+
+  const filteredData = useMemo(() => {
+    let transformedData: Award[] = [];
+
+    switch (activeTab) {
+      case "Awards":
+        transformedData = awardsData.map(mapAwardToCard);
+        break;
+      case "Certification":
+        transformedData = certificationData.map(mapCertificationToCard);
+        break;
+      case "Membership":
+        transformedData = membershipData.map(mapMembershipToCard);
+        break;
+    }
+
+    return transformedData.filter((item) => {
+      return selectedYear === "All Year" || item.year === selectedYear;
     });
-  }, [selectedYear, activeTab]);
+  }, [selectedYear, activeTab, awardsData, certificationData, membershipData]);
+
+  // const filteredData = useMemo(() => {
+  //   let rawData: any[] = [];
+  //   let mapper: (item: any) => Award;
+
+  //   switch (activeTab) {
+  //     case "Awards":
+  //       rawData = awardsData;
+  //       mapper = mapAwardToCard;
+  //       break;
+  //     case "Certification":
+  //       rawData = certificationData;
+  //       mapper = mapCertificationToCard;
+  //       break;
+  //     case "Membership":
+  //       rawData = membershipData;
+  //       mapper = mapMembershipToCard;
+  //       break;
+  //   }
+
+  //   const transformedData = rawData.map(mapper);
+
+  //   return transformedData.filter((item) => {
+  //     return selectedYear === "All Year" || item.year === selectedYear;
+  //   });
+  // }, [selectedYear, activeTab, awardsData, certificationData, membershipData]);
+
+  const handlePageChange = async (page: number) => {
+    if (page === currentPage) return;
+
+    setIsLoading(true);
+    setCurrentPage(page);
+
+    let url = "";
+    switch (activeTab) {
+      case "Awards":
+        url = `${BASE_API_URL}/awards/list?tab=awards&page=${page}`;
+        break;
+      case "Certification":
+        url = `${BASE_API_URL}/certificates/list?tab=certification&page=${page}`;
+        break;
+      case "Membership":
+        url = `${BASE_API_URL}/memberships/list?tab=membership&page=${page}`;
+        break;
+    }
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Failed to fetch new page");
+      const data = await res.json();
+
+      if (activeTab === "Awards") {
+        setAwardsData(data.items);
+      } else if (activeTab === "Certification") {
+        setCertificationData(data.items);
+      } else if (activeTab === "Membership") {
+        setMembershipData(data.items);
+      }
+      setPaginationMeta(data.meta);
+    } catch (error) {
+      console.error("Error fetching paginated data:", error);
+      setCurrentPage(paginationMeta.current_page);
+    } finally {
+      setIsLoading(false);
+      setSelectedYear("All Year");
+    }
+  };
+
+  const handleTabClick = (tab: TabName) => {
+    setActiveTab(tab);
+    setCurrentPage(1);
+    setSelectedYear("All Year");
+
+    switch (tab) {
+      case "Awards":
+        setPaginationMeta(initialAwardsResponse.meta);
+        setAwardsData(initialAwardsResponse.items);
+        break;
+      case "Certification":
+        setPaginationMeta(initialCertificationResponse.meta);
+        setCertificationData(initialCertificationResponse.items);
+        break;
+      case "Membership":
+        setPaginationMeta(initialMembershipResponse.meta);
+        setMembershipData(initialMembershipResponse.items);
+        break;
+    }
+  };
 
   return (
     <section className="py-20 bg-[#091A24]" aria-labelledby="awards-title">
@@ -78,7 +221,7 @@ export const Awards: React.FC<AwardsProps> = ({ title, description }) => {
             {TABS.map((tab) => (
               <li key={tab}>
                 <button
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => handleTabClick(tab)}
                   className={clsx(
                     "px-6 py-3 text-base lg:text-lg font-medium transition-colors duration-200",
                     activeTab === tab
@@ -126,14 +269,35 @@ export const Awards: React.FC<AwardsProps> = ({ title, description }) => {
           </Select.Root>
         </div>
 
-        <div>
-          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-7 gap-y-16 text-white">
-            {filteredAwards.map((award) => (
-              <li key={award.title}>
-                <AwardCard award={award} onImageClick={setModalImageUrl} />
-              </li>
-            ))}
-          </ul>
+        <div className="min-h-[400px]">
+          {isLoading ? (
+            <div className="flex justify-center items-center h-full min-h-[400px]">
+              <Loader2 className="animate-spin text-white" size={48} />
+            </div>
+          ) : filteredData.length > 0 ? (
+            <>
+              <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-7 gap-y-16 text-white">
+                {filteredData.map((award) => (
+                  <li key={award.title + award.year}>
+                    <AwardCard award={award} onImageClick={setModalImageUrl} />
+                  </li>
+                ))}
+              </ul>
+              {paginationMeta.last_page > 1 && (
+                <div className="mt-16">
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={paginationMeta.last_page}
+                    onPageChange={handlePageChange}
+                  />
+                </div>
+              )}
+            </>
+          ) : (
+            <p className="text-white text-center text-lg min-h-[400px]">
+              No items found for the selected criteria.
+            </p>
+          )}
         </div>
       </div>
 

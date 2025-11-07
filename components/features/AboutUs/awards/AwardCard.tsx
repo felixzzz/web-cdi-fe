@@ -34,9 +34,10 @@ export const AwardCard: React.FC<AwardCardProps> = ({
       <div>
         <p className="text-sm text-neutral-6 mb-1">{award.year}</p>
         <h3 className="text-2xl font-medium text-white mb-4">{award.title}</h3>
-        <div className="mb-4 content !text-sm !leading-normal">
-          <p>{award.description}</p>
-        </div>
+        <div
+          className="mb-4 content !text-sm !leading-normal"
+          dangerouslySetInnerHTML={{ __html: award.description }}
+        />
         <div>
           <p className="text-sm font-medium mb-1">Awarder</p>
           <p className="font-light text-neutral-6 text-sm">{award.awarder}</p>

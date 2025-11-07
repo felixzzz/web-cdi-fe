@@ -38,15 +38,15 @@ export const Hero: React.FC<HeroProps> = ({
 
           <div className="flex items-center gap-10">
             <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
-                                                              <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
-                                                            </div>
-                                                            <Image
-                                                                          width={46}
-                                                                          height={46}
-                                                                          alt="icon"
-                                                                          className="bg-cover"
-                                                                          src={iconSrc}
-                                                                        />
+              <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
+            </div>
+            <Image
+              width={46}
+              height={46}
+              alt="icon"
+              className="bg-cover"
+              src={iconSrc}
+            />
           </div>
         </div>
       </section>

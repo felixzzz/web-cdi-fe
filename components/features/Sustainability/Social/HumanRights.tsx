@@ -1,12 +1,17 @@
 import React from "react";
+import Link from "next/link";
+import { Download } from "lucide-react";
+import { ApiDataItem } from "@/types/Sustainabilitys/Social";
 
-const TITLE = "Human Rights";
-const CONTENT_HTML = `
-  <p>CDI Group's places significant emphasis on respecting human rights and fostering justice in the workplace, guided by fundamental principles of equality and fairness without bias. We hold ourselves to international human rights norms and are committed to equitable treatment, equal opportunities, and a supportive workplace culture that values employee contributions. This is ensured through training on human rights for everyone who works for or with CDI Group.</p>
-  <p>Our Human Rights Policy showcases a deep commitment to upholding essential human rights that are aligned with the United Nations Universal as well as the International Labor Organization. This policy reflects stringent business ethics standards and includes a Whistleblowing Management Policy, providing a secure channel for employees and stakeholders to report concerns of discrimination or unfair treatment confidentially, fostering a culture of support and respect within the organization.</p>
-`;
+interface HumanRightsProps {
+  data: ApiDataItem;
+}
 
-export function HumanRights() {
+export function HumanRights({ data }: HumanRightsProps) {
+  const TITLE = data.title || "Human Rights";
+  const CONTENT_HTML = data.content || "";
+  const fileInfo = data.file_information;
+
   return (
     <section
       aria-labelledby="human-rights-heading"
@@ -23,9 +28,26 @@ export function HumanRights() {
             </h2>
 
             <div
-            className="prose prose-invert prose-base max-w-full"
+              className="prose prose-invert prose-base max-w-full"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             ></div>
+
+            {fileInfo && (
+              <div className="mt-8">
+                <Link
+                  href={`https://chandradaya-investasi.com/file-storage/${fileInfo.path}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-blue-sky px-6 py-3 font-medium text-blue-dark transition-all hover:bg-blue-sky/90"
+                >
+                  <Download size={20} />
+                  <span>
+                    Download Policy
+                    {fileInfo.format && ` (.${fileInfo.format})`}
+                  </span>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

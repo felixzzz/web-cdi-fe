@@ -94,3 +94,41 @@ export interface PressReleaseApiResponse {
   meta: PaginationMeta;
   items: PressReleaseItem[];
 }
+
+interface MetaTag {
+  description: string | null;
+  keyword: string | null;
+}
+
+interface ArticleData {
+  id: number;
+  ulid: string;
+  thumbnail: string;
+  article_category_id: number;
+  category: string;
+  slug: string;
+  title_en: string;
+  title_id: string;
+  content_en: string;
+  content_id: string;
+  tags: string[];
+  meta_tag: MetaTag;
+  status: number;
+  created_at: string; 
+  updated_at: string; 
+  datetime: string;
+  category_name: string;
+  title: string;
+  short_content: string;
+  image: string;
+  date: string;
+  route: string;
+  article_category: ArticleCategory;
+}
+
+interface ApiResponseItem {
+  title: string;
+  data: ArticleData;
+}
+
+export type ApiLatestNewsResponse = ApiResponseItem[];

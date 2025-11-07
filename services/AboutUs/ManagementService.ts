@@ -1,6 +1,14 @@
-import { AboutUsManagementApiResponse } from "@/types/AboutUs/Management";
+import {
+  AboutUsManagementApiResponse,
+  GuidelineApiResponse,
+  ManagementApiResponse,
+} from "@/types/AboutUs/Management";
 
-const API_URL = "https://chandradaya-investasi.com/api/utility/about-us/management";
+const API_URL =
+  "https://chandradaya-investasi.com/api/utility/about-us/management";
+const API_URL_BOD = "https://chandradaya-investasi.com/api/utility/teams/bod";
+const API_URL_BOC = "https://chandradaya-investasi.com/api/utility/teams/boc";
+const API_URL_GUIDE = "https://chandradaya-investasi.com/api/utility/additional-file/guideline";
 
 export async function getManagementPageData(): Promise<AboutUsManagementApiResponse> {
   try {
@@ -26,13 +34,87 @@ export async function getManagementPageData(): Promise<AboutUsManagementApiRespo
   }
 }
 
+export async function getManagementBodData(): Promise<ManagementApiResponse> {
+  try {
+    const res = await fetch(API_URL_BOD, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch home data: ${res.statusText}`);
+    }
+
+    const data: ManagementApiResponse = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getManagementPageData:", error);
+    throw new Error("Could not fetch homepage data.");
+  }
+}
+
+export async function getManagementBocData(): Promise<ManagementApiResponse> {
+  try {
+    const res = await fetch(API_URL_BOC, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch home data: ${res.statusText}`);
+    }
+
+    const data: ManagementApiResponse = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getManagementPageData:", error);
+    throw new Error("Could not fetch homepage data.");
+  }
+}
+
+export async function getManagementGuideData(): Promise<GuidelineApiResponse> {
+  try {
+    const res = await fetch(API_URL_GUIDE, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch home data: ${res.statusText}`);
+    }
+
+    const data: GuidelineApiResponse = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getManagementPageData:", error);
+    throw new Error("Could not fetch homepage data.");
+  }
+}
+
 export const managementService = {
   getManagementPageData,
+  getManagementBodData,
+  getManagementBocData,
+  getManagementGuideData,
 };
 
-
 // export const extractYouTubeId = (url: string | null): string => {
-//   if (!url) return "GMJycZe_zpE"; 
+//   if (!url) return "GMJycZe_zpE";
 //   try {
 //     const urlObj = new URL(url);
 //     if (urlObj.pathname.startsWith("/embed/")) {

@@ -12,6 +12,7 @@ export interface BusinessCardProps {
   imageUrl: string;
   descriptionHtml: string;
   tags: string[];
+  route: string; // Add route prop
 }
 
 export function BusinessCard({
@@ -19,6 +20,7 @@ export function BusinessCard({
   imageUrl,
   descriptionHtml,
   tags,
+  route, // Destructure route
 }: BusinessCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -68,15 +70,16 @@ export function BusinessCard({
               className="overflow-hidden"
             >
               <div
-              className="text-[12px] leading-[24px] font-light text-white space-y-6"
+                className="text-[12px] leading-[24px] font-light text-white space-y-6"
                 dangerouslySetInnerHTML={{ __html: descriptionHtml }}
               />
 
               <ul className="mt-8 flex flex-wrap gap-2">
                 {tags.map((tag) => (
                   <li key={tag}>
+                    {/* Update Link href to use the route */}
                     <Link
-                      href="#"
+                      href={route} // Use the business's main route
                       className="flex cursor-pointer items-center gap-2 rounded-full border border-white px-[15px] py-[6px] text-sm transition-colors hover:bg-white/20"
                     >
                       {tag}

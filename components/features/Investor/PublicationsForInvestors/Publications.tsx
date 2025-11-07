@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { clsx } from "clsx";
 import {
   Search,
@@ -8,56 +8,49 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  Loader2, // Added loader
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  PublicationApiResponse,
+  PublicationItem,
+  PaginationMeta,
+  PublicationTab,
+} from "@/types/Investor/Publication";
+import {
+  publicationService,
+} from "@/services/Investor/PublicationServices";
 
-const publicationsData = {
-  prospectus: [
-    {
-      id: "prospectus-1",
-      title: "Prospectus CDIA",
-      date: "2025-07-02",
-      displayDate: "02 July 2025",
-      size: "3.95 MB",
-      viewUrl: "#",
-      downloadUrl: "#",
-    },
-  ],
-  gms: [
-    {
-      id: "gms-1",
-      title: "GMS Announcement Q2 2025",
-      date: "2025-06-15",
-      displayDate: "15 June 2025",
-      size: "1.2 MB",
-      viewUrl: "#",
-      downloadUrl: "#",
-    },
-  ],
-  disclosure: [
-    {
-      id: "disclosure-1",
-      title: "Public Disclosure May 2025",
-      date: "2025-05-30",
-      displayDate: "30 May 2025",
-      size: "0.8 MB",
-      viewUrl: "#",
-      downloadUrl: "#",
-    },
-  ],
-  earnings: [
-    {
-      id: "earnings-1",
-      title: "Q1 2025 Earnings Update",
-      date: "2025-04-28",
-      displayDate: "28 April 2025",
-      size: "2.5 MB",
-      viewUrl: "#",
-      downloadUrl: "#",
-    },
-  ],
-};
+// --- Helper types and functions ---
+interface TransformedItem {
+  id: string; // Use ulid or id
+  title: string;
+  date: string; // datetime for sorting
+  displayDate: string; // date for display
+  size: string;
+  viewUrl: string;
+  downloadUrl: string;
+}
+
+// Base URLs for file links (you may need to adjust the path)
+const FILE_PREVIEW_BASE_URL =
+  "https://chandradaya-investasi.com/file/preview/default/investor-publication/";
+const FILE_DOWNLOAD_BASE_URL =
+  "https://chandradaya-investasi.com/file/download/default/investor-publication/";
+
+// Transform API item to component item
+const transformItem = (item: PublicationItem): TransformedItem => ({
+  id: item.ulid,
+  title: item.name,
+  date: item.datetime,
+  displayDate: item.date,
+  size: item.file.size,
+  // Note: The slug logic might differ per tab; check API response
+  viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
+  downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
+});
+// --- End Helpers ---
 
 const navLinks: NavLink[] = [
   {
@@ -82,39 +75,99 @@ const navLinks: NavLink[] = [
   },
 ];
 
-type PublicationTab = keyof typeof publicationsData;
-
 type NavLink = {
   id: PublicationTab;
   title: string;
   href: string;
 };
 
-const ITEMS_PER_PAGE = 5;
+interface PublicationsProps {
+  initialData: PublicationApiResponse;
+  initialTab: PublicationTab;
+}
 
-export function Publications() {
-  const [activeTab, setActiveTab] = useState<PublicationTab>("prospectus");
+export function Publications({ initialData, initialTab }: PublicationsProps) {
+  const [activeTab, setActiveTab] = useState<PublicationTab>(initialTab);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // State for the raw API items and pagination meta
+  const [items, setItems] = useState<PublicationItem[]>(initialData.items);
+  const [pagination, setPagination] = useState<PaginationMeta>(
+    initialData.meta
+  );
+
+  // --- Data Fetching Effect ---
+  useEffect(() => {
+    // Skip fetch for initial render (data is already passed)
+    if (currentPage === 1 && activeTab === initialTab) {
+      setItems(initialData.items);
+      setPagination(initialData.meta);
+      return;
+    }
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const data = await publicationService.getPublicationTabData(
+          activeTab,
+          currentPage
+        );
+        setItems(data.items);
+        setPagination(data.meta);
+      } catch (error) {
+        console.error("Failed to fetch publication data:", error);
+        setItems([]); // Clear items on error
+        // Reset pagination to a default state
+        setPagination({
+          total: 0,
+          per_page: 15,
+          current_page: 1,
+          last_page: 1,
+          from: 0,
+          to: 0,
+          range: "0-0 of 0 items",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [activeTab, currentPage, initialTab, initialData]);
+
+  // --- Client-side Search & Transformation ---
   const { paginatedItems, totalPages, totalItems } = useMemo(() => {
-    const currentItems = publicationsData[activeTab] || [];
+    const transformed = items.map(transformItem);
 
-    const filtered = currentItems.filter((item) =>
+    // Client-side search filters the results from the current page
+    const filtered = transformed.filter((item) =>
       item.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const total = filtered.length;
-    const pages = Math.ceil(total / ITEMS_PER_PAGE);
-    const paginated = filtered.slice(
-      (currentPage - 1) * ITEMS_PER_PAGE,
-      currentPage * ITEMS_PER_PAGE
-    );
-
-    return { paginatedItems: paginated, totalPages: pages, totalItems: total };
-  }, [activeTab, searchQuery, currentPage]);
+    return {
+      paginatedItems: filtered,
+      totalPages: pagination.last_page,
+      totalItems: pagination.total,
+    };
+  }, [items, searchQuery, pagination]);
 
   const activeLink = navLinks.find((link) => link.id === activeTab);
+
+  // --- Event Handlers ---
+  const handleTabClick = (tab: PublicationTab) => {
+    setActiveTab(tab);
+    setCurrentPage(1); // Reset page
+    setSearchQuery(""); // Reset search
+  };
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages || isLoading) return;
+    setCurrentPage(page);
+    setSearchQuery(""); // Reset search on page change
+    window.scrollTo(0, 0); // Scroll to top
+  };
 
   return (
     <div className="py-20">
@@ -127,11 +180,7 @@ export function Publications() {
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => {
-                  setActiveTab(link.id);
-                  setCurrentPage(1);
-                  setSearchQuery("");
-                }}
+                onClick={() => handleTabClick(link.id)} // Use new handler
                 className={clsx(
                   "border-b-[1px] border-b-neutral-100 border-t-[1px] border-t-neutral-100 text-lg text-center p-4 transition lg:w-full lg:text-start",
                   activeTab === link.id
@@ -160,7 +209,7 @@ export function Publications() {
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
-                    setCurrentPage(1);
+                    // No page reset needed, search is client-side
                   }}
                   className="w-full rounded-full border border-neutral-7 pl-10 pr-4 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-blue-base"
                   placeholder="Search anything..."
@@ -168,8 +217,12 @@ export function Publications() {
               </div>
             </div>
 
-            <section aria-live="polite">
-              {paginatedItems.length > 0 ? (
+            <section aria-live="polite" className="min-h-[300px]">
+              {isLoading ? (
+                <div className="flex justify-center items-center h-full min-h-[300px]">
+                  <Loader2 className="animate-spin text-[#2474A5]" size={48} />
+                </div>
+              ) : paginatedItems.length > 0 ? (
                 paginatedItems.map((item) => (
                   <article
                     key={item.id}
@@ -181,18 +234,25 @@ export function Publications() {
                       </h3>
                       <div className="flex items-center text-base text-neutral-8 gap-3">
                         <p className="flex items-baseline gap-3">
-                          <time className="text-neutral-500" dateTime={item.date}>{item.displayDate}</time>
+                          <time
+                            className="text-neutral-500"
+                            dateTime={item.date}
+                          >
+                            {item.displayDate}
+                          </time>
                           <span className="text-neutral-500">.</span>
-                          <span className="text-neutral-500">{item.size}</span>
+                          <span className="text-neutral-500">
+                            {item.size}
+                          </span>
                           <span className="text-neutral-500">.</span>
                         </p>
                         <Image
-                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
-                                        width={30}
-                                        height={22}
-                                        alt="See all icon"
-                                        className="inline-block"
-                                      />
+                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                          width={30}
+                          height={22}
+                          alt="See all icon"
+                          className="inline-block"
+                        />
                       </div>
                     </div>
                     <div className="flex lg:items-center gap-8 w-full lg:w-fit">
@@ -203,12 +263,13 @@ export function Publications() {
                         className="flex items-center gap-2 text-[#2474A5] font-medium hover:text-neutral-13"
                       >
                         <Image
-                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
-                                        width={20}
-                                        height={20}
-                                        alt="See all icon"
-                                        className="inline-block"
-                                      /> View
+                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                          width={20}
+                          height={20}
+                          alt="See all icon"
+                          className="inline-block"
+                        />{" "}
+                        View
                       </Link>
                       <Link
                         href={item.downloadUrl}
@@ -217,19 +278,20 @@ export function Publications() {
                         className="flex items-center gap-2 text-[#2474A5] font-medium hover:text-neutral-13"
                       >
                         <Image
-                                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
-                                        width={20}
-                                        height={20}
-                                        alt="Download icon"
-                                        className="inline-block"
-                                      /> Download
+                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                          width={20}
+                          height={20}
+                          alt="Download icon"
+                          className="inline-block"
+                        />{" "}
+                        Download
                       </Link>
                     </div>
                   </article>
                 ))
               ) : (
                 <p className="text-center text-neutral-8 py-16">
-                  No publications found.
+                  No publications found matching your search.
                 </p>
               )}
             </section>
@@ -240,16 +302,15 @@ export function Publications() {
                 className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col lg:flex-row"
               >
                 <p className="text-neutral-10 text-sm max-lg:hidden">
-                  {`${(currentPage - 1) * ITEMS_PER_PAGE + 1}-${Math.min(
-                    currentPage * ITEMS_PER_PAGE,
-                    totalItems
-                  )} of ${totalItems} items`}
+                  {`${pagination.from || 0}-${
+                    pagination.to || 0
+                  } of ${totalItems} items`}
                 </p>
                 <ul className="flex items-center justify-center gap-2">
                   <li>
                     <button
-                      onClick={() => setCurrentPage(1)}
-                      disabled={currentPage === 1}
+                      onClick={() => handlePageChange(1)}
+                      disabled={currentPage === 1 || isLoading}
                       className="pagination-btn"
                       aria-label="First page"
                     >
@@ -258,8 +319,8 @@ export function Publications() {
                   </li>
                   <li>
                     <button
-                      onClick={() => setCurrentPage((p) => p - 1)}
-                      disabled={currentPage === 1}
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1 || isLoading}
                       className="pagination-btn"
                       aria-label="Previous page"
                     >
@@ -269,8 +330,8 @@ export function Publications() {
                   <li className="font-medium px-2">{`Page ${currentPage} of ${totalPages}`}</li>
                   <li>
                     <button
-                      onClick={() => setCurrentPage((p) => p + 1)}
-                      disabled={currentPage === totalPages}
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages || isLoading}
                       className="pagination-btn"
                       aria-label="Next page"
                     >
@@ -279,8 +340,8 @@ export function Publications() {
                   </li>
                   <li>
                     <button
-                      onClick={() => setCurrentPage(totalPages)}
-                      disabled={currentPage === totalPages}
+                      onClick={() => handlePageChange(totalPages)}
+                      disabled={currentPage === totalPages || isLoading}
                       className="pagination-btn"
                       aria-label="Last page"
                     >
@@ -289,10 +350,9 @@ export function Publications() {
                   </li>
                 </ul>
                 <div className="text-neutral-10 text-sm lg:hidden">
-                  {`${(currentPage - 1) * ITEMS_PER_PAGE + 1}-${Math.min(
-                    currentPage * ITEMS_PER_PAGE,
-                    totalItems
-                  )} of ${totalItems} items`}
+                  {`${pagination.from || 0}-${
+                    pagination.to || 0
+                  } of ${totalItems} items`}
                 </div>
               </nav>
             )}

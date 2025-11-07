@@ -50,7 +50,6 @@ export function HeroForm() {
   });
 
   function onSubmit(values: ContactUsFormValues) {
-    console.log("Form submitted:", values);
     alert(JSON.stringify(values, null, 2));
   }
 

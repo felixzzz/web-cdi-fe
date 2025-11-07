@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import { SustainabilityContentSection } from "@/types/Sustainabilitys/Governance";
+import { ApiDataItem } from "@/types/Sustainabilitys/Governance";
 
 interface BusinessEthicsProps {
-  data: SustainabilityContentSection | undefined;
+  data: ApiDataItem;
 }
 
 export function BusinessEthics({ data }: BusinessEthicsProps) {

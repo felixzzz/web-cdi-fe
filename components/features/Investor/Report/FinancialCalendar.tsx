@@ -1,53 +1,148 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { clsx } from "clsx";
-import { Languages, Search } from "lucide-react";
+import { Languages, Search, Loader2 } from "lucide-react";
 import Image from "next/image";
+import {
+  CalendarApiResponse,
+  CalendarEventItem,
+  PaginationMeta,
+} from "@/types/Investor/Report";
 
-const allReportsData = [
-  {
-    id: 1,
-    title: "Audited Financial Report - 30 Jun 2025",
-    date: "15 September 2025",
-    size: "2.1 MB",
-    type: "Financial Report",
-    year: 2025,
-    viewUrl:
-      "https://chandradaya-investasi.com/file/preview/default/report/01k56e7f91xf14e4yx40emaaax/Audited_Financial_Report_30_Jun_2025",
-    downloadUrl:
-      "https://chandradaya-investasi.com/file/download/default/report/01k56e7f91xf14e4yx40emaaax/Audited_Financial_Report_30_Jun_2025",
-  },
-  {
-    id: 2,
-    title: "Audited Report 2024",
-    date: "14 April 2025",
-    size: "3.59 MB",
-    type: "Annual Report",
-    year: 2024,
-    viewUrl:
-      "https://chandradaya-investasi.com/file/preview/default/report/01js16gw15g0kvyev54ybab55t/Audited_Report_2024",
-    downloadUrl:
-      "https://chandradaya-investasi.com/file/download/default/report/01js16gw15g0kvyev54ybab55t/Audited_Report_2024",
-  },
-];
+interface Report {
+  id: number;
+  title: string;
+  date: string;
+  size: string;
+  type: string;
+  year: number;
+  viewUrl: string;
+  downloadUrl: string;
+}
 
-const yearFilters = ["All Year", 2025, 2024];
-const typeFilters = ["All Type", "Annual Report", "Financial Report"];
+const formatReportType = (type: string): string => {
+  return type
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
 
-export function FinancialCalendar() {
+const unformatReportType = (type: string): string => {
+  if (type === "All Type") return "";
+  return type.toLowerCase().replace(" ", "_");
+};
+
+const FILE_PREVIEW_BASE_URL =
+  "https://chandradaya-investasi.com/file/preview/default/report/";
+const FILE_DOWNLOAD_BASE_URL =
+  "https://chandradaya-investasi.com/file/download/default/report/";
+
+const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
+  return data.items.flatMap((yearGroup) => yearGroup.items);
+};
+
+const transformItem = (item: CalendarEventItem): Report => ({
+  id: item.id,
+  title: item.name,
+  date: item.date,
+  size: item.file.size,
+  type: formatReportType(item.type),
+  year: item.year,
+  viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
+  downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
+});
+
+
+interface FinancialCalendarProps {
+  initialData: CalendarApiResponse;
+}
+
+export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
+  const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
+    flattenData(initialData)
+  );
+  const [pagination, setPagination] = useState<PaginationMeta>(
+    initialData.meta
+  );
+  const [currentPage, setCurrentPage] = useState(1);
   const [activeYear, setActiveYear] = useState<string | number>("All Year");
   const [activeType, setActiveType] = useState<string>("All Type");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const filteredReports = allReportsData.filter((report) => {
-    const yearMatch = activeYear === "All Year" || report.year === activeYear;
-    const typeMatch = activeType === "All Type" || report.type === activeType;
-    const searchMatch = report.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    return yearMatch && typeMatch && searchMatch;
-  });
+  const allItemsForFilters = useMemo(
+    () => flattenData(initialData),
+    [initialData]
+  );
+  const yearFilters = useMemo(() => {
+    const years = Array.from(new Set(allItemsForFilters.map((r) => r.year)));
+    return ["All Year", ...years.sort((a, b) => b - a)];
+  }, [allItemsForFilters]);
+
+  const typeFilters = useMemo(() => {
+    const types = Array.from(
+      new Set(allItemsForFilters.map((r) => formatReportType(r.type)))
+    );
+    return ["All Type", ...types.sort()];
+  }, [allItemsForFilters]);
+
+  useEffect(() => {
+    if (
+      currentPage === 1 &&
+      activeYear === "All Year" &&
+      activeType === "All Type"
+    ) {
+      setReportItems(flattenData(initialData));
+      setPagination(initialData.meta);
+      return;
+    }
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      const apiType = unformatReportType(activeType);
+      const apiYear = activeYear === "All Year" ? "" : activeYear;
+
+      try {
+        const res = await fetch(
+          `https://chandradaya-investasi.com/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch data");
+        const data: CalendarApiResponse = await res.json();
+
+        setReportItems(flattenData(data));
+        setPagination(data.meta);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, activeYear, activeType, initialData]);
+
+  const displayedReports = useMemo(() => {
+    return reportItems.map(transformItem).filter((report) => {
+      return report.title.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+  }, [reportItems, searchQuery]);
+
+  const handleYearClick = (year: string | number) => {
+    setActiveYear(year);
+    setCurrentPage(1); 
+  };
+
+  const handleTypeClick = (type: string) => {
+    setActiveType(type);
+    setCurrentPage(1); 
+  };
+
+  const handlePageChange = (page: number) => {
+    if (page === currentPage || isLoading) return;
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <section
@@ -76,7 +171,7 @@ export function FinancialCalendar() {
         {yearFilters.map((year) => (
           <button
             key={year}
-            onClick={() => setActiveYear(year)}
+            onClick={() => handleYearClick(year)}
             className={clsx(
               "text-base font-normal text-neutral-900 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
               activeYear === year && "!text-[#2474A5] !border-b-[#2474A5]"
@@ -95,9 +190,9 @@ export function FinancialCalendar() {
           {typeFilters.map((type) => (
             <button
               key={type}
-              onClick={() => setActiveType(type)}
+              onClick={() => handleTypeClick(type)}
               className={clsx(
-                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5]  transition",
+                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5]  transition",
                 activeType === type && "bg-[#2474A5] text-gray-100"
               )}
             >
@@ -119,9 +214,13 @@ export function FinancialCalendar() {
         </div>
       </div>
 
-      <section aria-label="Financial reports list">
-        {filteredReports.length > 0 ? (
-          filteredReports.map((report) => (
+      <section aria-label="Financial reports list" className="min-h-[300px]">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full min-h-[300px]">
+            <Loader2 className="animate-spin text-[#2474A5]" size={48} />
+          </div>
+        ) : displayedReports.length > 0 ? (
+          displayedReports.map((report) => (
             <article
               key={report.id}
               className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0"
@@ -138,12 +237,12 @@ export function FinancialCalendar() {
                     <span>.</span>
                   </p>
                   <Image
-                                  src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
-                                  width={28}
-                                  height={20}
-                                  alt="See all icon"
-                                  className="inline-block"
-                                />
+                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                    width={28}
+                    height={20}
+                    alt="See all icon"
+                    className="inline-block"
+                  />
                 </div>
               </div>
               <div className="flex lg:items-center gap-8 w-full lg:w-fit">
@@ -154,12 +253,13 @@ export function FinancialCalendar() {
                   className="flex items-center gap-2 text-[#2474A5] font-medium"
                 >
                   <Image
-                                  src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
-                                  width={20}
-                                  height={20}
-                                  alt="See all icon"
-                                  className="inline-block"
-                                /> View
+                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                    width={20}
+                    height={20}
+                    alt="See all icon"
+                    className="inline-block"
+                  />{" "}
+                  View
                 </a>
                 <a
                   href={report.downloadUrl}
@@ -168,12 +268,13 @@ export function FinancialCalendar() {
                   className="flex items-center gap-2 text-[#2474A5] font-medium"
                 >
                   <Image
-                                  src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
-                                  width={20}
-                                  height={20}
-                                  alt="Download icon"
-                                  className="inline-block"
-                                /> Download
+                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                    width={20}
+                    height={20}
+                    alt="Download icon"
+                    className="inline-block"
+                  />{" "}
+                  Download
                 </a>
               </div>
             </article>
@@ -184,6 +285,33 @@ export function FinancialCalendar() {
           </p>
         )}
       </section>
+
+      {/* --- Pagination Controls --- */}
+      {pagination.last_page > 1 && (
+        <div className="mt-16">
+          <div className="flex justify-center gap-2">
+            <button
+              onClick={() => handlePageChange(pagination.current_page - 1)}
+              disabled={pagination.current_page === 1 || isLoading}
+              className="px-4 py-2 border rounded disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <span className="px-4 py-2">
+              Page {pagination.current_page} of {pagination.last_page}
+            </span>
+            <button
+              onClick={() => handlePageChange(pagination.current_page + 1)}
+              disabled={
+                pagination.current_page === pagination.last_page || isLoading
+              }
+              className="px-4 py-2 border rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

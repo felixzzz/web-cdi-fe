@@ -88,3 +88,58 @@ export interface InvestorPublicationApiResponse {
   investor_share_bonds_table_show: SimpleInvestorSection;
   investor_report_table_show: SimpleInvestorSection;
 }
+
+interface PaginationLinkParams {
+  page: string;
+  tab?: string;
+}
+
+export interface PaginationLink {
+  url: string | null;
+  label: string;
+  active: boolean;
+  params: PaginationLinkParams | null;
+}
+
+export interface PaginationMeta {
+  total: number;
+  per_page: number;
+  current_page: number;
+  last_page: number;
+  from: number;
+  to: number;
+  range: string;
+}
+
+export interface FileDetails {
+  path: string;
+  size: string;
+  format: string;
+}
+
+export interface PublicationItem {
+  id: number;
+  ulid: string;
+  type: string; 
+  name_en: string;
+  name_id: string;
+  file_en: FileDetails;
+  file_id: FileDetails;
+  created_at: string;
+  updated_at: string;
+  datetime: string;
+  name: string;
+  name_slug: string;
+  name_slug_id: string;
+  name_slug_en: string;
+  file: FileDetails;
+  date: string; 
+}
+
+export interface PublicationApiResponse {
+  links: PaginationLink[];
+  meta: PaginationMeta;
+  items: PublicationItem[];
+}
+
+export type PublicationTab = "prospectus" | "gms" | "disclosure" | "earnings";

@@ -1,14 +1,18 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { GovernanceSection } from "@/types/Governances/Governance";
 
-const TITLE = "Policy";
-const CONTENT_HTML = `
-  <p>CDI Group is committed to implementing the CDI Group Code of Ethics, as well as upholding and complying with relevant provisions that apply both domestically and internationally. This policy is supported by good business practices and ethical corporate governance to fulfil our obligations to shareholders and stakeholders and must be followed to by all CDI Group employees</p>
-`;
+interface PolicyProps {
+  data: GovernanceSection;
+}
+
 const LINK_URL = "https://chandradaya-investasi.com/governance/policy";
 
-export function Policy() {
+export function Policy({ data }: PolicyProps) {
+  const TITLE = data.title || "Policy";
+  const CONTENT_HTML = data.content || "";
+
   return (
     <section
       id="policy"
@@ -18,7 +22,6 @@ export function Policy() {
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8">
           <div className="lg:col-span-3">
-            
             <h2
               id="policy-heading"
               className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
@@ -26,10 +29,10 @@ export function Policy() {
               {TITLE}
             </h2>
             <div
-            className="max-w-full prose prose-invert prose-base"
+              className="max-w-full prose prose-invert prose-base"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
-            
+
             <Link
               href={LINK_URL}
               target="_blank"
@@ -40,8 +43,7 @@ export function Policy() {
               <ArrowUpRight size={16} />
             </Link>
           </div>
-          <div className="lg:col-span-2">
-          </div>
+          <div className="lg:col-span-2"></div>
         </div>
       </div>
     </section>

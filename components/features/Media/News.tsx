@@ -10,14 +10,13 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-  Download,
 } from "lucide-react";
 import {
   NewsApiResponse,
   PressReleaseApiResponse,
   ArticleItem,
   PressReleaseItem,
-} from "@/types/Media/Media"; 
+} from "@/types/Media/Media";
 
 interface NewsProps {
   mediaData: NewsApiResponse;
@@ -25,6 +24,7 @@ interface NewsProps {
 }
 
 const ITEMS_PER_PAGE = 6;
+const FILE_STORAGE_URL = "https://chandradaya-investasi.com/file-storage/";
 
 export function News({ mediaData, pressReleaseData }: NewsProps) {
   const [activeTab, setActiveTab] = useState("news");
@@ -152,10 +152,10 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
           {paginatedArticles.map((article: ArticleItem) => (
             <ArticleCard
               key={article.id}
-              href={`/media/news/${article.slug}`} 
+              href={`/media/news/${article.slug}`}
               imageUrl={article.image}
               category={article.article_category.name_id}
-              date={article.date} 
+              date={article.date}
               title={article.title_id}
             />
           ))}
@@ -163,11 +163,11 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
       )}
 
       {activeTab === "press-release" && (
-        <div className="flex flex-col gap-4">
+        <ul className="flex flex-col">
           {paginatedPressReleases.map((press: PressReleaseItem) => (
             <PressReleaseCard key={press.id} item={press} />
           ))}
-        </div>
+        </ul>
       )}
 
       {totalPages > 1 && (
@@ -231,26 +231,90 @@ function ArticleCard({
 }
 
 function PressReleaseCard({ item }: { item: PressReleaseItem }) {
-  const downloadUrl = `https://chandradaya-investasi.com/file-storage/${item.file_id.path}`;
+  const viewUrl = `${FILE_STORAGE_URL}${item.file_en.path}`;
+  const downloadUrlEn = `${FILE_STORAGE_URL}${item.file_en.path}`;
+  const downloadUrlId = `${FILE_STORAGE_URL}${item.file_id.path}`;
+
+  const pdfIcon =
+    "https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg";
+  const viewIcon =
+    "https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg";
+  const downloadIcon =
+    "https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg";
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-6 bg-white rounded-xl shadow-article border border-neutral-5 w-full">
-      <div className="flex-1">
-        <span className="text-sm text-neutral-10">{item.date}</span>
-        <h3 className="text-[22px] font-medium mt-2 text-neutral-13 line-clamp-2">
+    <li className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0">
+      <div>
+        <h3 className="text-neutral-13 mb-2 text-lg font-medium line-clamp-2">
           {item.name_id}
         </h3>
+        <div className="flex items-center text-base text-neutral-8 gap-3">
+          <div className="flex items-baseline gap-3">
+            <span>{item.date}</span>
+            <span>.</span>
+            <span>{item.file_en.size}</span>
+            <span>.</span>
+          </div>
+          <Image
+            src={pdfIcon}
+            width={28}
+            height={20}
+            alt="PDF icon"
+            className="inline-block"
+          />
+        </div>
       </div>
-      <a
-        href={downloadUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex-shrink-0 text-xs lg:text-base cursor-pointer px-6 py-3 rounded-full flex items-center gap-2 text-white bg-[#2474A5] border border-[#2474A5] hover:bg-blue-dark transition"
-      >
-        <Download size={18} />
-        Download ({item.file_id.size})
-      </a>
-    </div>
+
+      <div className="flex flex-col items-start sm:flex-row sm:items-center gap-4 sm:gap-8 w-full lg:w-fit">
+        <Link
+          href={viewUrl}
+          className="flex items-center gap-2 text-blue-base font-medium"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src={viewIcon}
+            width={24}
+            height={24}
+            alt="View icon"
+            className="inline-block"
+          />
+          View
+        </Link>
+        <Link
+          href={downloadUrlEn}
+          className="flex items-center gap-2 text-blue-base font-medium"
+          target="_blank"
+          rel="noopener noreferrer"
+          download
+        >
+          <Image
+            src={downloadIcon}
+            width={24}
+            height={24}
+            alt="Download icon"
+            className="inline-block"
+          />
+          Download-EN
+        </Link>
+        <Link
+          href={downloadUrlId}
+          className="flex items-center gap-2 text-blue-base font-medium"
+          target="_blank"
+          rel="noopener noreferrer"
+          download
+        >
+          <Image
+            src={downloadIcon}
+            width={24}
+            height={24}
+            alt="Download icon"
+            className="inline-block"
+          />
+          Download-ID
+        </Link>
+      </div>
+    </li>
   );
 }
 

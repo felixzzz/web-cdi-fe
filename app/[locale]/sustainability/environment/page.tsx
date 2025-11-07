@@ -6,12 +6,26 @@ import { WasteManagement } from "@/components/features/Sustainability/Environmen
 import { environmentService } from "@/services/Sustainability/EnvironmentServices";
 
 export default async function Page() {
-  const environmentData = await environmentService.getEnviromentPageData();
+
+  const [environmentData, contentEnviroment] = await Promise.all([
+    environmentService.getEnviromentPageData(),
+    environmentService.getEnviromentContentData(),
+  ]);
 
   const {
     sustainability_environment_banner,
     sustainability_environment_overview,
   } = environmentData;
+
+  const energyData = contentEnviroment.find(
+    (item) => item.name === "Energy & Emission"
+  );
+  const factsData = contentEnviroment.find(
+    (item) => item.grid_type === "icon_content_card"
+  );
+  const wasteData = contentEnviroment.find(
+    (item) => item.name === "Waste Management"
+  );
 
   return (
     <>
@@ -26,9 +40,9 @@ export default async function Page() {
           iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
         />
         <EnvironmentalResponsibility data={sustainability_environment_overview} />
-        <EnergyEmission />
-        <SustainabilityFacts />
-        <WasteManagement />
+        <EnergyEmission data={energyData!} />
+        <SustainabilityFacts data={factsData!} />
+        <WasteManagement data={wasteData!} />
       </div>
     </>
   );

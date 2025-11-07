@@ -1,5 +1,5 @@
 import { CorporateStructure } from "@/components/features/AboutUs/management/CorporateStructure";
-import { Downloads } from "@/components/features/AboutUs/management/Dawnload";
+import { DownloadItem, Downloads } from "@/components/features/AboutUs/management/Dawnload";
 import { Hero } from "@/components/features/AboutUs/management/Hero";
 import { OrganizationStructure } from "@/components/features/AboutUs/management/OrganizationStructure";
 import { People } from "@/components/features/AboutUs/management/People";
@@ -9,7 +9,7 @@ import { TeamMember } from "@/components/features/AboutUs/management/TeamMemberC
 import { Information } from "@/components/features/Homepage/Information";
 import { managementService } from "@/services/AboutUs/ManagementService";
 import { TableManagementSection } from "@/types/AboutUs/Management";
-import { quickLinksData } from "../../page";
+import { informationService } from "@/services/Global/informationService";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -19,44 +19,14 @@ const aboutLinks = [
   { text: "Company Profile", href: "/about-us/company-profile" },
 ];
 
-const directorsData: TeamMember[] = [
-  {
-    name: "Fransiskus Ruly Aryawan",
-    role: "President Director",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/Z2MvK2ZtalhtNklaVkJZZGNxMEtQaVF1eUc0V2ZoTnNFcG9jYWIwZ2h2ZDBLQ2c3WWEvZ2hQVHJYenp4VEhWR1hsYnJBVUg5aXlKZEJWbC9BWmc3emc9PQ.webp",
-    href: "/about-us/management/team/01jq8vg1w70e49n2b2xrx4fxmz",
-  },
-  {
-    name: "Jonathan Kandinata",
-    role: "Director",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/dEQ1dXNXcXZ4YzNaaDQyUTBRaEcyRzFzMnJRNEhsM1dGSUpIZ25vODI3MkhSWW9WeVAvWVo4dDNhc1YwRUYvR0VlTExQSWNFTDNCQXNMVDV0dnBiYnc9PQ.webp",
-    href: "/about-us/management/team/01jq8vg1wmaywxk4hmsmtmmhvx",
-  },
-];
-
-const commissionersData: TeamMember[] = [
-  {
-    name: "Erry Riyana Hardjapamekas",
-    role: "President Commissioner",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/N3dzb2k2Y3NKR01lZm5MaHgyWVVoTUxDNS81bzcyME9oREtIb1FBL0M0VStaNkhkMGlxcGtyVUVwMVNYSlNtSDE4MkpEZDdaL2dQRDdBb3dCYzlYOFE9PQ.webp",
-    href: "/about-us/management/team/01jq8vg1xcn4q5rwddt6m9tcgw",
-  },
-  {
-    name: "Erwin Ciputra",
-    role: "Commissioner",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/UTVSdzlTV2JpdWJjM2JMYnRzWU1mTzdvdnpOTk0zZGg4TGtjZ0hSQ2Nid1pCWFU2SjZkaW1KTk90YWF2T01JdGJ1L2RHcVlPeTdlYXlBT2ZKRDZTWWc9PQ.webp",
-    href: "/about-us/management/team/01jq8vg1xxj48mrc0a40hk4s63",
-  },
-];
-
 export default async function Page() {
-  const managementData = await managementService.getManagementPageData();
-
-  // console.log(managementData);
+  const [managementData, quickLinksData, BodData, BocData, GuideData] = await Promise.all([
+    managementService.getManagementPageData(),
+    informationService.getHomeQuickLinks(),
+    managementService.getManagementBodData(),
+    managementService.getManagementBocData(),
+    managementService.getManagementGuideData(),
+  ]);
 
   const {
     about_us_management_banner,
@@ -69,6 +39,34 @@ export default async function Page() {
 
   const tableData =
     about_us_corporate_structure_table as TableManagementSection;
+
+  const IMAGE_BASE_URL = "https://chandradaya-investasi.com/file-storage/";
+  const FILE_PREVIEW_BASE_URL =
+    "https://chandradaya-investasi.com/file/preview/"; 
+  const FILE_DOWNLOAD_BASE_URL =
+    "https://chandradaya-investasi.com/file/download/";
+
+  const transformedBodData: TeamMember[] = BodData.map((member) => ({
+    name: member.name,
+    role: member.position,
+    imageUrl: `${IMAGE_BASE_URL}${member.image}`,
+    href: `/about-us/management/team/${member.ulid}`,
+  }));
+
+  const transformedBocData: TeamMember[] = BocData.map((member) => ({
+    name: member.name,
+    role: member.position,
+    imageUrl: `${IMAGE_BASE_URL}${member.image}`,
+    href: `/about-us/management/team/${member.ulid}`,
+  }));
+
+  const guidelineItems: DownloadItem[] = GuideData.map((guide) => ({ 
+    title: guide.name, 
+    size: guide.file?.size || "N/A",
+    viewUrl: `${FILE_PREVIEW_BASE_URL}${guide.file?.path || ""}`, 
+    downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${guide.file?.path || ""}`, 
+    format: guide.file?.format || "pdf", 
+  }));
 
   return (
     <>
@@ -97,12 +95,12 @@ export default async function Page() {
         </People>
         <Stakeholder
           backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/about/world_map.webp"
-          directors={directorsData}
-          commissioners={commissionersData}
+          directors={transformedBodData}
+          commissioners={transformedBocData}
         />
         <OrganizationStructure
           chartImageUrl={about_us_organization_structure.file_url}
-          chartImageAlt="Organization Structure Chart" 
+          chartImageAlt="Organization Structure Chart"
         />
         <CorporateStructure
           chartImageUrl={about_us_corporate_structure.file_url}
@@ -111,21 +109,18 @@ export default async function Page() {
           tableData={tableData.content_table_trans}
           showTable={about_us_corporate_structure_table_show.content === "show"}
         />
-        <Downloads
+       <Downloads
           id="company-profile"
           title="Curious to learn more about Chandra Daya Investasi?"
           subtitle="Gain deeper insights into our story, growth, and latest achievements by downloading our company profile"
-          itemTitle="Company Profile CDI Group"
-          itemSize="2.01 MB"
-          itemViewUrl="https://chandradaya-investasi.com/file/preview/default/company_profile/Company_Profile_1018/"
-          itemDownloadUrl="https://chandradaya-investasi.com/file/download/default/company_profile/Company_Profile_1018/"
+          items={guidelineItems}
         />
         <Information
-                eyebrow="QUICK LINKS"
-                title="Need to access detailed information?"
-                backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
-                links={quickLinksData}
-              />
+          eyebrow="QUICK LINKS"
+          title="Need to access detailed information?"
+          backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
+          links={quickLinksData}
+        />
       </div>
     </>
   );

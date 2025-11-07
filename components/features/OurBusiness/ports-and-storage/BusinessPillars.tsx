@@ -124,7 +124,7 @@ function AssetBlock({
             {title}
           </h4>
           <div
-          className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
+          className="prose prose-invert prose-base max-w-none"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>

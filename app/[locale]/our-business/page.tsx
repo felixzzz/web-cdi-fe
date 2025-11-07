@@ -6,7 +6,11 @@ const stripHtml = (html: string | null) =>
   html ? html.replace(/<[^>]+>/g, "") : "";
 
 export default async function Page() {
-  const businessData = await businessService.getBusinessPageData();
+
+  const [businessData, overviewData] = await Promise.all([
+    businessService.getBusinessPageData(),
+    businessService.getOverviewData(),
+  ]);
 
   const { our_business_banner, our_business_overview } = businessData;
 
@@ -19,7 +23,7 @@ export default async function Page() {
           subtitle={stripHtml(our_business_banner.content)}
           iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
         />
-        <Business overview={our_business_overview} />
+        <Business items={overviewData} overview={our_business_overview} />
       </div>
     </>
   );
