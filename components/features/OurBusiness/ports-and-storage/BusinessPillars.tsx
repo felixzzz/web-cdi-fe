@@ -16,8 +16,8 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
   const keyAssetsTitle = tab?.contents[0]?.heading || "Key Assets";
   return (
     <article aria-labelledby="pillars-heading-ports" className="bg-[#091A24] text-white">
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <h2 id="pillars-heading-ports" className="font-semibold text-2xl lg:text-[38px] lg:leading-[44px] text-center pt-20">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <h2 id="pillars-heading-ports" className="font-semibold text-2xl md:text-[38px] md:leading-[44px] text-center pt-20">
           {title || "Business Pillars"}
         </h2>
       </div>
@@ -28,7 +28,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
             aria-labelledby={`company-heading-${tab.id}`}
             className="py-16 bg-blue-dark"
           >
-            <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] grid grid-cols-1 lg:grid-cols-3 gap-20 max-lg:gap-y-10">
+            <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 grid grid-cols-1 md:grid-cols-3 gap-20 max-lg:gap-y-10">
               <div className="relative w-full aspect-square">
                 <Image
                   src={tab.image} 
@@ -38,15 +38,15 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
                   className="rounded-[20px]"
                 />
               </div>
-              <div className="lg:col-span-2">
+              <div className="md:col-span-2">
                 <h3
                   id={`company-heading-${tab.id}`}
-                  className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-4 text-white"
+                  className="font-medium text-2xl md:text-[38px] md:leading-[44px] mb-4 text-white"
                 >
                   {tab.title} 
                 </h3>
                 <div
-                  className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
+                className="prose prose-invert prose-base max-w-none text-justify"
                   dangerouslySetInnerHTML={{
                     __html: tab.description || "", 
                   }}
@@ -60,10 +60,10 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
             className="bg-blue-dark"
           >
             <div className="py-10">
-              <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+              <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
                 <h3
                   id="key-assets-heading"
-                  className="font-medium text-2xl lg:text-[28px] mb-4 text-white text-center"
+                  className="font-medium text-2xl md:text-[28px] mb-4 text-white text-center"
                 >
                   {keyAssetsTitle}
                 </h3>
@@ -118,13 +118,13 @@ function AssetBlock({
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[2]">
-        <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
-          <h4 className="text-2xl lg:text-[28px] font-medium mb-6 text-blue-lighter">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[2]">
+        <div className={clsx("md:max-w-[45%]", alignmentClass)}>
+          <h4 className="text-2xl md:text-[28px] font-medium mb-6 text-blue-lighter">
             {title}
           </h4>
           <div
-          className="prose prose-invert prose-base max-w-none"
+          className="prose prose-invert prose-base max-w-none text-justify"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>

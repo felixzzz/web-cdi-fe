@@ -21,16 +21,16 @@ export function AntiCorruption({ data }: AntiCorruptionProps) {
       className="text-white bg-[#091A24]"
     >
       <div className="py-20">
-        <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
-          <div className="mb-16 grid grid-cols-1 gap-4 lg:grid-cols-2 items-center">
+        <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[1]">
+          <div className="mb-16 grid grid-cols-1 gap-4 md:grid-cols-2 items-center">
             <h2
               id="anti-corruption-heading"
-              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium text-blue-lighter max-w-[277px]"
+              className="text-2xl md:text-[38px] md:leading-[44px] font-medium text-blue-lighter max-w-[277px]"
             >
               {TITLE}
             </h2>
             <div
-              className="max-w-2xl prose prose-invert prose-base"
+              className="max-w-2xl prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: INTRO_TEXT }}
             ></div>
           </div>
@@ -51,9 +51,9 @@ export function AntiCorruption({ data }: AntiCorruptionProps) {
           style={{ backgroundImage: customGradient }}
         ></div>
 
-        <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
+        <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-20">
           <div
-            className={`lg:max-w-[35%] ${
+            className={`md:max-w-[35%] ${
               data.align === "right" ? "ms-auto" : "me-auto"
             }`}
           >
@@ -72,7 +72,7 @@ export function AntiCorruption({ data }: AntiCorruptionProps) {
                       {point.title}
                     </h3>
                     <div
-                      className="max-w-2xl prose prose-invert prose-base"
+                      className="max-w-2xl prose prose-invert prose-base text-justify"
                       dangerouslySetInnerHTML={{ __html: point.description }}
                     ></div>
                   </div>

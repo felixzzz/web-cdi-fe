@@ -48,6 +48,7 @@ export default async function Page() {
             sustainability_governance_banner.title ||
             "Financial Information for Investors"
           }
+          subtitle={sustainability_governance_banner.content || ""}
           iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
         />
         <BusinessEthics data={businessEthicsData!} />

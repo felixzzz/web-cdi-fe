@@ -16,7 +16,7 @@ export function FinancialTable({ data }: FinancialTableProps) {
   return (
     <section
       aria-labelledby="financial-data-heading"
-      className="container mx-auto py-[1rem] px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]"
+      className="container mx-auto py-[1rem] px-4 md:px-8 lg:px-20 2xl:px-44"
     >
       {note && (
         <p
@@ -105,7 +105,8 @@ export function FinancialTable({ data }: FinancialTableProps) {
 
       {footnotes && (
         <div
-          className="text-[12px] leading-[24px] font-extralight text-gray-600 py-1 space-y-2 mt-6"
+        className="prose prose-invert prose-base text-justify font-extralight text-gray-500 py-1 space-y-2 mt-6"
+          // className="text-[12px] leading-[24px] font-extralight text-gray-600 py-1 space-y-2 mt-6"
           dangerouslySetInnerHTML={{ __html: footnotes }}
         ></div>
       )}

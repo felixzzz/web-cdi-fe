@@ -44,7 +44,7 @@ export const BusinessPillars: React.FC<BusinessPillarsProps> = ({ title, tabs })
   return (
     <section className="bg-[#091A24]">
       <div
-        className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]"
+        className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44"
         role="tablist"
       >
          <h2

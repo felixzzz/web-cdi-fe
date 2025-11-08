@@ -27,11 +27,11 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
     >
       <h2 className="sr-only">{TITLE}</h2>
       <div
-        className={`bg-neutral-50 text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] transition hover:bg-[#2474A5] hover:text-white
+        className={`bg-neutral-50 text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] transition hover:bg-[#2474A5] hover:text-white
           ${isOpen ? "!bg-[#2474A5] !text-white" : ""}
         `}
       >
-        <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+        <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex items-center justify-between py-8 cursor-pointer w-full"
@@ -59,8 +59,8 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="py-20 overflow-hidden"
           >
-            <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-              <h3 className="text-2xl lg:text-[28px] font-medium text-[#2474A5] mb-6">
+            <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+              <h3 className="text-2xl md:text-[28px] font-medium text-[#2474A5] mb-6">
                 {TITLE}
               </h3>
               <Image

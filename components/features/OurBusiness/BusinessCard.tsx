@@ -35,7 +35,7 @@ export function BusinessCard({
       }}
       className={clsx(
         "relative cursor-pointer overflow-hidden",
-        "h-64 lg:h-auto"
+        "h-64 md:h-auto"
       )}
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
@@ -51,8 +51,8 @@ export function BusinessCard({
 
       <div className="overlay-card-2 absolute inset-0 z-[1] bg-black/50"></div>
 
-      <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 pb-5 text-white lg:p-10 lg:pb-10">
-        <h3 className="font-medium text-2xl lg:text-[32px] 2xl:text-[40px] 3xl:text-[52px] 3xl:leading-[60px] mb-5">
+      <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 pb-5 text-white md:p-10 md:pb-10">
+        <h3 className="font-medium text-2xl md:text-[32px] 2xl:text-[40px] 3xl:text-[52px] 3xl:leading-[60px] mb-5">
           {title}
         </h3>
 

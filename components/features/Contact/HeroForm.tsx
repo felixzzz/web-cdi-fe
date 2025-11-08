@@ -55,8 +55,8 @@ export function HeroForm() {
 
   return (
     <div className="bg-gray-100 py-20">
-      <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid lg:grid-cols-3 gap-16">
+      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid md:grid-cols-3 gap-16">
           <ContactInfoCard
             imageSrc="https://chandradaya-investasi.com/file-storage/YnBrNUxBOEdFaU9WTjJmc0tydThZRjJOUkxvOVlsb09UQXJkQUcveDJQZCtZZVBKYmovTlU2VWE2ckt5MmpidXhKc1d4aGpsd3FkRWpOd3dhZGxHTXc9PQ.webp"
             imageAlt="CDI Group Team"
@@ -67,8 +67,8 @@ export function HeroForm() {
             email="(+62-21) 530 8930"
           />
 
-          <div className="lg:col-span-2">
-            <p className="text-gray-900 font-medium text-2xl lg:text-[38px] mb-8">
+          <div className="md:col-span-2">
+            <p className="text-gray-900 font-medium text-2xl md:text-[38px] mb-8">
               Thank you for your interest in CDI Group
             </p>
 

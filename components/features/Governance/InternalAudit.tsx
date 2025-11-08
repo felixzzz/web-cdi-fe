@@ -20,22 +20,22 @@ export function InternalAudit({ data, filesData }: InternalAuditProps) {
       aria-labelledby="internal-audit-heading"
       className="pt-16 pb-20 bg-[#091A24] text-white"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8">
-          <div className="lg:col-span-2">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8">
+          <div className="md:col-span-2">
             <h2
               id="internal-audit-heading"
-              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
+              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
             >
               {data.title}
             </h2>
             <div
-              className="max-w-full prose prose-invert prose-base"
+              className="max-w-full prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: data.content || "" }}
             />
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="md:col-span-3">
             <Image
               src={data.file_url}
               alt={data.title || "Internal audit unit graph"}

@@ -34,18 +34,19 @@ export function Overview({
 
       <section
         aria-labelledby="overview-heading"
-        className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[2]"
+        className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[2]"
       >
-        <div className="lg:max-w-[45%] ms-auto">
+        <div className="md:max-w-[45%] ms-auto">
           <h2
             id="overview-heading"
-            className="text-2xl lg:text-[28px] font-medium mb-6 text-[#47C1EA]"
+            className="text-2xl md:text-[28px] font-medium mb-6 text-[#47C1EA]"
           >
             {title}
           </h2>
 
           <div
-          className="text-[12px] leading-[24px] font-normal text-white space-y-6"
+          className="max-w-2xl prose prose-invert prose-base text-justify"
+          // className="text-[12px] leading-[24px] font-normal text-white space-y-6"
             dangerouslySetInnerHTML={{
               __html: description || "",
             }}

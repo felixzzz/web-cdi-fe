@@ -3,12 +3,12 @@ import { Committee } from "@/components/features/Governance/Committee";
 import { CommitteeTabData } from "@/components/features/Governance/CommitteeTabPanel";
 import { CorporateSecretary } from "@/components/features/Governance/CorporateSecretary";
 import { RiskManagement } from "@/components/features/Governance/DecorativeBackground";
+import { Hero } from "@/components/features/Governance/Hero";
 import { Information } from "@/components/features/Governance/Information";
 import { InternalAudit } from "@/components/features/Governance/InternalAudit";
 import { Policy } from "@/components/features/Governance/Policy";
 import { SubNavbar } from "@/components/features/Governance/SubNavbar";
 import { Whistleblowing } from "@/components/features/Governance/Whistleblowing";
-import { Hero } from "@/components/features/Sustainability/Governance/Hero";
 import { informationService } from "@/services/Global/informationService";
 import { governanceService } from "@/services/Governance/GovernanceService";
 

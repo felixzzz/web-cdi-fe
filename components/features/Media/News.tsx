@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { clsx } from "clsx";
 import {
-  ArrowRight,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -80,10 +79,8 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
       };
     }, [currentPage, pressReleaseData.items]);
 
-  const totalPages =
-    activeTab === "news" ? totalNewsPages : totalPressPages;
-  const totalItems =
-    activeTab === "news" ? totalNewsItems : totalPressItems;
+  const totalPages = activeTab === "news" ? totalNewsPages : totalPressPages;
+  const totalItems = activeTab === "news" ? totalNewsItems : totalPressItems;
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -99,7 +96,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
   return (
     <section
       id="content-media-section"
-      className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] py-20 bg-white"
+      className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 py-20 bg-white"
     >
       <nav className="grid grid-cols-2">
         <button
@@ -132,7 +129,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
             key={category}
             onClick={() => handleCategoryClick(category)}
             className={clsx(
-              "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition",
+              "text-xs md:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition",
               activeCategory === category && "bg-[#2474A5] text-white"
             )}
             style={{
@@ -148,7 +145,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
       </nav>
 
       {activeTab === "news" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {paginatedArticles.map((article: ArticleItem) => (
             <ArticleCard
               key={article.id}
@@ -203,17 +200,12 @@ function ArticleCard({
       <article className="flex flex-col text-neutral-13 w-full">
         <div className="w-full aspect-square overflow-hidden">
           <div className="relative w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110">
-            <Image
-              src={imageUrl}
-              alt={title}
-              layout="fill"
-              objectFit="cover"
-            />
+            <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
           </div>
         </div>
         <div className="p-6 flex flex-col grow">
           <div className="flex items-center gap-4">
-            <span className="bg-neutral-5 px-3 py-1 text-sm rounded-full">
+            <span className="bg-neutral-300 px-3 py-1 text-sm rounded-full">
               {category}
             </span>
             <span className="text-sm text-neutral-10">{date}</span>
@@ -222,7 +214,7 @@ function ArticleCard({
             {title}
           </h3>
           <div className="text-[#2474A5] flex items-center gap-2 cursor-pointer mt-auto">
-            Baca artikel selengkapnya <ArrowRight className="text-2xl" />
+            Baca artikel selengkapnya <ChevronRight className="text-2xl" />
           </div>
         </div>
       </article>
@@ -243,11 +235,16 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
     "https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg";
 
   return (
-    <li className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0">
-      <div>
+    <li
+       className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 md:gap-y-0"
+    >
+      <div className="w-full max-w-3xl">
         <h3 className="text-neutral-13 mb-2 text-lg font-medium line-clamp-2">
           {item.name_id}
         </h3>
+      </div>
+
+      <div className="flex flex-col md:flex-row justify-between w-full">
         <div className="flex items-center text-base text-neutral-8 gap-3">
           <div className="flex items-baseline gap-3">
             <span>{item.date}</span>
@@ -263,56 +260,55 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
             className="inline-block"
           />
         </div>
-      </div>
-
-      <div className="flex flex-col items-start sm:flex-row sm:items-center gap-4 sm:gap-8 w-full lg:w-fit">
-        <Link
-          href={viewUrl}
-          className="flex items-center gap-2 text-blue-base font-medium"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            src={viewIcon}
-            width={24}
-            height={24}
-            alt="View icon"
-            className="inline-block"
-          />
-          View
-        </Link>
-        <Link
-          href={downloadUrlEn}
-          className="flex items-center gap-2 text-blue-base font-medium"
-          target="_blank"
-          rel="noopener noreferrer"
-          download
-        >
-          <Image
-            src={downloadIcon}
-            width={24}
-            height={24}
-            alt="Download icon"
-            className="inline-block"
-          />
-          Download-EN
-        </Link>
-        <Link
-          href={downloadUrlId}
-          className="flex items-center gap-2 text-blue-base font-medium"
-          target="_blank"
-          rel="noopener noreferrer"
-          download
-        >
-          <Image
-            src={downloadIcon}
-            width={24}
-            height={24}
-            alt="Download icon"
-            className="inline-block"
-          />
-          Download-ID
-        </Link>
+        <div className="flex flex-row items-center gap-4 sm:gap-8 w-full md:w-fit">
+          <Link
+            href={viewUrl}
+            className="flex items-center gap-2 text-blue-base font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={viewIcon}
+              width={24}
+              height={24}
+              alt="View icon"
+              className="inline-block"
+            />
+            View
+          </Link>
+          <Link
+            href={downloadUrlEn}
+            className="flex items-center gap-2 text-blue-base font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+          >
+            <Image
+              src={downloadIcon}
+              width={24}
+              height={24}
+              alt="Download icon"
+              className="inline-block"
+            />
+            Download-EN
+          </Link>
+          <Link
+            href={downloadUrlId}
+            className="flex items-center gap-2 text-blue-base font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+          >
+            <Image
+              src={downloadIcon}
+              width={24}
+              height={24}
+              alt="Download icon"
+              className="inline-block"
+            />
+            Download-ID
+          </Link>
+        </div>
       </div>
     </li>
   );
@@ -335,7 +331,7 @@ function Pagination({
   return (
     <nav
       aria-label="Pagination"
-      className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col lg:flex-row"
+      className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col md:flex-row"
     >
       <p className="text-neutral-900 text-sm max-lg:hidden">
         {startItem}-{endItem} dari {totalItems} items

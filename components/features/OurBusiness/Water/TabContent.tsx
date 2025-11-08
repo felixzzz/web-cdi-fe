@@ -41,17 +41,17 @@ function ContentBlock({
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[2]">
-        <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[2]">
+        <div className={clsx("md:max-w-[45%]", alignmentClass)}>
           {tagline && <p className="text-neutral-300 mb-4">{tagline}</p>}
 
           {title && (
-            <h3 className="text-2xl lg:text-[28px] font-medium mb-6 text-[#47C1EA]">
+            <h3 className="text-2xl md:text-[28px] font-medium mb-6 text-[#47C1EA]">
               {title}
             </h3>
           )}
           <div
-            className="prose prose-invert prose-base max-w-none"
+            className="prose prose-invert prose-base max-w-none text-justify"
             dangerouslySetInnerHTML={{ __html: contentHtml || "" }}
           />
         </div>
@@ -71,15 +71,15 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
       {/* BLOK INTRO (HTML Tipe 1) */}
       {(tab.sub_title || tab.description) && (
         <div className="py-16 bg-[#091A24]">
-          <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+          <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
             {tab.sub_title && (
-              <h2 className="text-3xl lg:text-[38px] lg:leading-[44px] font-medium text-white mb-6">
+              <h2 className="text-3xl md:text-[38px] md:leading-[44px] font-medium text-white mb-6">
                 {tab.sub_title}
               </h2>
             )}
             {tab.description && (
               <div
-                className="prose prose-invert prose-base max-w-none"
+                className="prose prose-invert prose-base max-w-none text-justify"
                 dangerouslySetInnerHTML={{ __html: tab.description }}
               />
             )}
@@ -92,8 +92,8 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
           <React.Fragment key={content.id}>
             {content.heading && (
               <div className="py-10 bg-[#091A24]">
-                <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-                  <h3 className="font-medium text-2xl lg:text-[28px] mb-4 text-white text-start">
+                <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+                  <h3 className="font-medium text-2xl md:text-[28px] mb-4 text-white text-start">
                     {content.heading}
                   </h3>
                 </div>

@@ -23,13 +23,13 @@ export const Information: React.FC<InformationSectionProps> = ({
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       aria-labelledby="quick-links-title"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid grid-cols-1 md:grid-cols-2">
           <div>
             <p className="text-neutral-7 text-base mb-4">{eyebrow}</p>
             <h2
               id="quick-links-title"
-              className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-0 max-w-[414px]"
+              className="text-neutral-900 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-0 max-w-[414px]"
             >
               {title}
             </h2>
@@ -44,7 +44,7 @@ export const Information: React.FC<InformationSectionProps> = ({
                     className="flex items-center justify-between text-neutral-13 border-b border-b-neutral-5 pb-8"
                   >
                     <p className="text-[22px] font-medium">{link.name}</p>
-                    <ArrowRight size={24} />
+                    <ArrowRight size={20} />
                   </Link>
                 </li>
               ))}

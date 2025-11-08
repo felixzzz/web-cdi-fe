@@ -15,11 +15,11 @@ export function SustainableProcurement({ data }: SustainableProcurementProps) {
       aria-labelledby="procurement-heading"
       className="py-28 text-white bg-[#051119] !bg-blue-dark-black relative"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
-        <div className="mb-16 grid grid-cols-1 gap-4 lg:grid-cols-2 items-center">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[1]">
+        <div className="mb-16 grid grid-cols-1 gap-4 md:grid-cols-2 items-center">
           <h2
             id="procurement-heading"
-            className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium"
+            className="text-2xl md:text-[38px] md:leading-[44px] font-medium"
           >
             {TITLE}
           </h2>
@@ -29,11 +29,11 @@ export function SustainableProcurement({ data }: SustainableProcurementProps) {
           ></div>
         </div>
 
-        <ul className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {procurementPoints.map((point, index) => (
             <li key={index} className="flex gap-4 items-start">
               <div
-                className="max-w-3xl prose prose-invert prose-base text-neutral-400"
+              className="max-w-3xl prose prose-invert prose-base text-justify"
                 dangerouslySetInnerHTML={{ __html: point.description }}
               ></div>
             </li>

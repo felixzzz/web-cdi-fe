@@ -28,29 +28,29 @@ export function HealthAndSafety({ data }: HealthAndSafetyProps) {
 
       <div className="absolute inset-0 overlay-business z-10"></div>
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:items-center">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:items-center">
           <div>
             <h2
               id="health-safety-heading"
-              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
+              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
             >
               {TITLE}
             </h2>
             <div
-              className="max-w-2xl prose prose-invert prose-base"
+              className="max-w-2xl prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             ></div>
           </div>
 
           <div>
-            <ul className="items-center lg:max-w-[60%] ms-auto grid grid-cols-2 gap-8 lg:gap-x-16">
+            <ul className="items-center md:max-w-[60%] ms-auto grid grid-cols-2 gap-8 md:gap-x-16">
               {stats.map((stat) => (
                 <li
                   key={stat.description}
                   className={stat.title === "100%" ? "row-span-2" : ""}
                 >
-                  <p className="text-[#47C1EA] font-bold text-3xl mb-4 lg:text-[48px]">
+                  <p className="text-[#47C1EA] font-bold text-3xl mb-4 md:text-[48px]">
                     {stat.title}
                   </p>
                   <p>{stat.description}</p>

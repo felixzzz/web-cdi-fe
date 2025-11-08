@@ -24,7 +24,7 @@ export function Business({ overview, items }: BusinessProps) {
         Our Business Sectors
       </h2>
 
-      <div className="flex w-full flex-col lg:flex-row lg:aspect-video">
+      <div className="flex w-full flex-col md:flex-row md:aspect-video">
         {cardData.map((card) => (
           <BusinessCard
             key={card.title}
@@ -39,7 +39,7 @@ export function Business({ overview, items }: BusinessProps) {
 
       {overview.content && (
         <div className="bg-[#091A24] text-white pt-10 pb-20">
-          <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+          <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
             <div
               className="text-[12px] leading-[24px] font-normal text-white space-y-6"
               dangerouslySetInnerHTML={{ __html: overview.content }}

@@ -17,6 +17,7 @@ import {
   CalendarEventItem,
   PaginationMeta,
 } from "@/types/Investor/Financial"; // Corrected import path
+import Link from "next/link";
 
 // --- Helper Types & Functions ---
 
@@ -68,7 +69,6 @@ const transformItem = (item: CalendarEventItem): Report => ({
   viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
   downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
 });
-
 
 const typeFilters = ["All Type", "Annual Report", "Financial Report"];
 
@@ -154,7 +154,10 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
       return acc;
     }, {} as Record<number, Report[]>);
 
-    return { paginatedAndGroupedReports: grouped, totalItems: pagination.total };
+    return {
+      paginatedAndGroupedReports: grouped,
+      totalItems: pagination.total,
+    };
   }, [reportItems, searchQuery, pagination.total]);
 
   const reportKeys = Object.keys(paginatedAndGroupedReports).sort(
@@ -165,11 +168,11 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
     <section
       id="content-media-section"
       aria-labelledby="calendar-heading"
-      className="container mx-auto py-20 px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]"
+      className="container mx-auto py-20 px-4 md:px-8 lg:px-20 2xl:px-44"
     >
       <h2
         id="calendar-heading"
-        className="text-neutral-800 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-3"
+        className="text-neutral-800 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-3"
       >
         Financial Calendar
       </h2>
@@ -188,7 +191,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
             key={year}
             onClick={() => {
               setActiveYear(year);
-              setCurrentPage(1); // Reset page on filter change
+              setCurrentPage(1);
             }}
             className={clsx(
               "text-base font-normal text-neutral-800 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
@@ -209,7 +212,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
               key={type}
               onClick={() => {
                 setActiveType(type);
-                setCurrentPage(1); // Reset page on filter change
+                setCurrentPage(1);
               }}
               className={clsx(
                 "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-blue-base hover:bg-blue-base transition",
@@ -220,7 +223,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
             </button>
           ))}
         </nav>
-        <div className="relative w-full lg:w-[264px] lg:ms-auto">
+        <div className="relative w-full md:w-[264px] md:ms-auto">
           <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-7">
             <Search size={16} />
           </div>
@@ -229,7 +232,6 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              // Client-side search, no page reset needed
             }}
             className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-blue-base"
             placeholder="Search anything..."
@@ -244,21 +246,23 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
           </div>
         ) : reportKeys.length > 0 ? (
           reportKeys.map((year) => (
-            <div key={year} className="flex lg:gap-6 flex-col lg:flex-row mt-5">
-              <h3 className="text-[#2474A5] font-medium text-[48px] w-full lg:w-auto">
+            <div key={year} className="flex md:gap-6 flex-col md:flex-row mt-5">
+              <h3 className="text-[#2474A5] font-medium text-[48px] w-full md:w-auto">
                 {year}
               </h3>
               <div className="w-full">
                 {paginatedAndGroupedReports[Number(year)].map((report) => (
                   <article
                     key={report.id}
-                    className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0"
+                    className="py-8 border-b border-b-neutral-5 flex items-center justify-start flex-col gap-y-4 md:gap-y-0"
                   >
-                    <div>
+                    <div className="flex w-full">
                       <h4 className="text-neutral-13 mb-2 text-lg font-medium">
                         {report.title}
                       </h4>
-                      <div className="flex items-center text-base text-neutral-8 gap-3">
+                    </div>
+                    <div className="flex flex-col md:flex-row justify-start md:justify-between w-full">
+                      <div className="flex items-center justify-start text-base text-neutral-8 gap-3 w-full">
                         <p className="flex items-baseline gap-3">
                           <time dateTime={report.date}>
                             {report.displayDate}
@@ -269,44 +273,44 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                         </p>
                         <Image
                           src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
-                          width={24}
-                          height={16}
+                          width={30}
+                          height={24}
                           alt="See all icon"
                           className="inline-block"
                         />
                       </div>
-                    </div>
-                    <div className="flex lg:items-center gap-8 w-full lg:w-fit">
-                      <a
-                        href={report.viewUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-blue-base font-medium"
-                      >
-                        <Image
-                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
-                          width={16}
-                          height={16}
-                          alt="See all icon"
-                          className="inline-block"
-                        />{" "}
-                        View
-                      </a>
-                      <a
-                        href={report.downloadUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-blue-base font-medium"
-                      >
-                        <Image
-                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
-                          width={16}
-                          height={16}
-                          alt="Download icon"
-                          className="inline-block"
-                        />{" "}
-                        Download
-                      </a>
+                      <div className="flex items-center justify-start md:justify-end gap-8 w-full">
+                        <Link
+                          href={report.viewUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-blue-base font-medium"
+                        >
+                          <Image
+                            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                            width={20}
+                            height={20}
+                            alt="See all icon"
+                            className="inline-block"
+                          />{" "}
+                          View
+                        </Link>
+                        <a
+                          href={report.downloadUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-blue-base font-medium"
+                        >
+                          <Image
+                            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                            width={20}
+                            height={20}
+                            alt="Download icon"
+                            className="inline-block"
+                          />{" "}
+                          Download
+                        </a>
+                      </div>
                     </div>
                   </article>
                 ))}
@@ -323,7 +327,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
       {pagination.last_page > 1 && (
         <nav
           aria-label="Pagination"
-          className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col lg:flex-row"
+          className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col md:flex-row"
         >
           <p className="text-neutral-10 text-sm max-lg:hidden">
             {`${pagination.from}-${pagination.to} of ${totalItems} items`}

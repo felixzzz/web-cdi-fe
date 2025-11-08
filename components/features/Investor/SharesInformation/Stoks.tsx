@@ -15,12 +15,12 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
 
   return (
     <div>
-      <h2 className="mb-10 text-2xl lg:text-[28px] font-medium text-neutral-13">
+      <h2 className="mb-10 text-2xl md:text-[28px] font-medium text-neutral-13">
         {data.title || "Top 10 Shareholders"}
       </h2>
       {data.content && (
         <div
-          className="content primary mb-10 !text-neutral-8"
+        className="prose prose-invert prose-base text-justify text-neutral-500 w-full"
           dangerouslySetInnerHTML={{ __html: data.content }}
         />
       )}
@@ -80,7 +80,7 @@ const DividendContent: React.FC<DividendContentProps> = ({ data }) => {
   return (
     <div>
       <div
-                  className="text-[12px] leading-[24px] font-normal text-neutral-950 space-y-6"
+      className="prose prose-invert prose-base text-justify text-neutral-500 max-w-full"
         dangerouslySetInnerHTML={{ __html: data.content || "" }}
       ></div>
     </div>
@@ -137,18 +137,18 @@ export function StocksInformation({
   }, [showShareholders, showDividend]);
   return (
     <div className="py-20">
-      <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          <nav className="flex lg:flex-col lg:items-start w-full ">
+      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
+          <nav className="flex md:flex-col md:items-start w-full ">
             <Link
               href="https://chandradaya-investasi.com/investor/shares-information?tab=stocks"
-              className="text-neutral-13 text-lg p-4 lg:w-full lg:text-start font-medium border-l-4 border-l-[#2474A5] border-t-2 border-t-neutral-100 border-b-2 border-b-neutral-100"
+              className="text-neutral-13 text-lg p-4 md:w-full md:text-start font-medium border-l-4 border-l-[#2474A5] border-t-2 border-t-neutral-100 border-b-2 border-b-neutral-100"
             >
               Stocks
             </Link>
           </nav>
 
-          <div className="lg:col-span-4">
+          <div className="md:col-span-4">
             <nav
               role="tablist"
               aria-label="Stock Information Tabs"

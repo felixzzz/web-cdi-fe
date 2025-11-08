@@ -35,7 +35,7 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
   return (
     <section
       aria-labelledby="latest-news-heading"
-      className="py-28 lg:py-40 relative overflow-hidden"
+      className="py-28 md:py-40 relative overflow-hidden"
     >
       <Image
         src={BACKGROUND_IMAGE_URL}
@@ -46,10 +46,10 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
         priority
       />
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-10">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-10">
         <h2
           id="latest-news-heading"
-          className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-semibold text-white mb-9"
+          className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-semibold text-white mb-9"
           dangerouslySetInnerHTML={{ __html: heroTitle }}
         ></h2>
 
@@ -68,8 +68,8 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
         >
           {sliderData.map((slide) => (
             <SwiperSlide key={slide.id}>
-              <article className="grid lg:grid-cols-2 gap-4">
-                <div className="relative aspect-video lg:aspect-auto lg:h-[380px] w-full rounded-xl overflow-hidden">
+              <article className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="relative aspect-video md:aspect-auto md:h-[380px] w-full rounded-xl overflow-hidden">
                   <Image
                     src={slide.imageUrl}
                     alt={slide.title}

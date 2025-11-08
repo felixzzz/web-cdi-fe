@@ -28,7 +28,8 @@ export const CorporateStructureTable: React.FC<
         {title || "List of Subsidiaries & Associate Companies"}
       </h3>
 
-      <div className="table-main overflow-hidden">
+<div className="table-main w-full overflow-x-auto">
+      {/* <div className="table-main overflow-hidden"> */}
         <table className="w-full text-left">
           <thead className="bg-[#2474A5] text-white border">
             <tr>

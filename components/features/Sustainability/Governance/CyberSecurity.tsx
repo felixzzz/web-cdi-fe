@@ -28,21 +28,21 @@ export function CyberSecurity({ data }: CyberSecurityProps) {
 
       <div className="absolute inset-0 overlay-business-darkest z-10"></div>
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
-        <div className="mb-16 grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-20">
+        <div className="mb-16 grid grid-cols-1 gap-4 md:grid-cols-2">
           <h2
             id="cyber-security-heading"
-            className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium lg:col-span-2"
+            className="text-2xl md:text-[38px] md:leading-[44px] font-medium md:col-span-2"
           >
             {TITLE}
           </h2>
           <div
-            className="lg:col-span-2 lg:max-w-[80%] prose prose-invert prose-base"
+            className="md:col-span-2 md:max-w-[80%] prose prose-invert prose-base"
             dangerouslySetInnerHTML={{ __html: INTRO_TEXT }}
           ></div>
         </div>
 
-        <ul className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {keyPoints.map((point) => (
             <li key={point.title} className="flex gap-4 items-start">
               <div className="flex flex-col gap-4">
@@ -50,7 +50,7 @@ export function CyberSecurity({ data }: CyberSecurityProps) {
                   {point.title}
                 </h3>
                 <div
-                  className="max-w-3xl prose prose-invert prose-base"
+                  className="max-w-3xl prose prose-invert prose-base text-justify"
                   dangerouslySetInnerHTML={{ __html: point.description }}
                 ></div>
               </div>

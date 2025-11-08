@@ -20,6 +20,9 @@ export const ReportItem: React.FC<ReportItemProps> = ({
     <li className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-2 lg:gap-y-0">
       <div>
         <h3 className="text-neutral-13 mb-2 text-lg font-medium">{title}</h3>
+      </div>
+
+      <div className="flex lg:items-center justify-between gap-8 w-full lg:w-fit">
         <div className="flex items-center text-base text-neutral-8 gap-3">
           <div className="flex items-baseline gap-3">
             <span>{date}</span>
@@ -35,39 +38,38 @@ export const ReportItem: React.FC<ReportItemProps> = ({
             className="inline-block"
           />
         </div>
-      </div>
-
-      <div className="flex lg:items-center gap-8 w-full lg:w-fit">
-        <Link
-          href={viewUrl}
-          className="flex items-center gap-2 text-blue-base font-medium"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
-            width={24}
-            height={24}
-            alt="See all icon"
-            className="inline-block"
-          />
-          View
-        </Link>
-        <Link
-          href={downloadUrl}
-          className="flex items-center gap-2 text-blue-base font-medium"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
-            width={24}
-            height={24}
-            alt="Download icon"
-            className="inline-block"
-          />
-          Download
-        </Link>
+        <div className="flex flex-row gap-8">
+          <Link
+            href={viewUrl}
+            className="flex items-center gap-2 text-blue-base font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+              width={24}
+              height={24}
+              alt="See all icon"
+              className="inline-block"
+            />
+            View
+          </Link>
+          <Link
+            href={downloadUrl}
+            className="flex items-center gap-2 text-blue-base font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+              width={24}
+              height={24}
+              alt="Download icon"
+              className="inline-block"
+            />
+            Download
+          </Link>
+        </div>
       </div>
     </li>
   );

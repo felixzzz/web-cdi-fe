@@ -147,11 +147,11 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
   return (
     <section
       aria-labelledby="calendar-heading"
-      className="container mx-auto py-20 px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]"
+      className="container mx-auto py-20 px-4 md:px-8 lg:px-20 2xl:px-44"
     >
       <h2
         id="calendar-heading"
-        className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-3"
+        className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-3"
       >
         Financial Calendar
       </h2>
@@ -182,7 +182,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
         ))}
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-4 my-10">
+      <div className="grid md:grid-cols-2 gap-4 my-10">
         <nav
           aria-label="Filter by report type"
           className="flex items-center gap-2 flex-wrap"
@@ -192,7 +192,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
               key={type}
               onClick={() => handleTypeClick(type)}
               className={clsx(
-                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5]  transition",
+                "text-xs md:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5]  transition",
                 activeType === type && "bg-[#2474A5] text-gray-100"
               )}
             >
@@ -200,7 +200,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
             </button>
           ))}
         </nav>
-        <div className="relative w-full lg:w-[264px] lg:ms-auto">
+        <div className="relative w-full md:w-[264px] md:ms-auto">
           <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-7">
             <Search size={16} />
           </div>
@@ -223,7 +223,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
           displayedReports.map((report) => (
             <article
               key={report.id}
-              className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0"
+              className="py-8 border-b border-b-neutral-5 flex md:items-center justify-between flex-col md:flex-row gap-y-4 md:gap-y-0"
             >
               <div>
                 <h3 className="text-neutral-13 mb-2 text-lg font-medium">
@@ -245,7 +245,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                   />
                 </div>
               </div>
-              <div className="flex lg:items-center gap-8 w-full lg:w-fit">
+              <div className="flex md:items-center gap-8 w-full md:w-fit">
                 <a
                   href={report.viewUrl}
                   target="_blank"
@@ -286,7 +286,6 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
         )}
       </section>
 
-      {/* --- Pagination Controls --- */}
       {pagination.last_page > 1 && (
         <div className="mt-16">
           <div className="flex justify-center gap-2">

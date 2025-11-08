@@ -87,7 +87,8 @@ export default async function Page() {
           }
         >
           <div
-            className="text-[12px] leading-[24px] font-normal text-white py-1"
+          className="prose prose-invert prose-base text-neutral-300"
+            // className="text-[12px] leading-[24px] font-normal text-white py-1"
             dangerouslySetInnerHTML={{
               __html: about_us_management_overview.content || "",
             }}

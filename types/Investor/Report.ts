@@ -146,3 +146,31 @@ export interface CalendarApiResponse {
   meta: PaginationMeta;
   items: CalendarYearGroup[];
 }
+ 
+interface MainOffice {
+  fax: string;
+  phone: string;
+  address_en: string;
+  address_id: string;
+  location_name_en: string;
+  location_name_id: string;
+}
+ 
+interface LocalizedMainOffice extends MainOffice {
+  location_name: string;
+  address: string;
+}
+ 
+interface ApiDataItem {
+  id: number;
+  ulid: string;
+  name: string;
+  main: MainOffice;
+  branchs: unknown[];
+  created_at: string;
+  updated_at: string;
+  localized_main: LocalizedMainOffice;
+  localized_branches: unknown[];
+}
+ 
+export type ApiInstitutionResponse = ApiDataItem[];

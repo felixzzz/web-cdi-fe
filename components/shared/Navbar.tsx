@@ -174,7 +174,7 @@ export function Navbar() {
       <header
         id="nav-header"
         className={clsx(
-          "w-full py-4 flex items-center left-0 right-0 transition-all duration-300",
+          "w-full py-7 flex items-center left-0 right-0 transition-all duration-300",
           !isScrolled
             // ? "bg-transparent text-white"
             ? " text-white bg-gradient-to-b from-black/60 to-transparent"

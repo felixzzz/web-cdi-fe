@@ -31,16 +31,16 @@ export function EmpoweringCommunities({ data }: EmpoweringCommunitiesProps) {
   return (
     <article aria-labelledby="empowering-heading">
       <div className="py-20 bg-[#091A24]">
-        <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
+        <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
             <h2
               id="empowering-heading"
-              className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium text-[#47C1EA] max-w-[580px]"
+              className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-medium text-[#47C1EA] max-w-[580px]"
             >
               {data.title || "Empowering Communities"}
             </h2>
             <div
-              className="prose prose-invert prose-base text-neutral-50"
+              className="prose prose-invert prose-base text-neutral-50 text-justify"
               dangerouslySetInnerHTML={{ __html: data.content || "" }}
             ></div>
           </div>
@@ -48,7 +48,7 @@ export function EmpoweringCommunities({ data }: EmpoweringCommunitiesProps) {
       </div>
 
       <div className="bg-[#091A24] text-white">
-        <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+        <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
           <nav
             role="tablist"
             aria-label="Community Initiatives"
@@ -115,13 +115,13 @@ function TabPanelContent({ tab, isActive }: TabPanelProps) {
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
-        <div className="lg:max-w-[45%] ms-auto">
-          <h3 className="text-2xl lg:text-[28px] font-medium mb-6 text-blue-lighter">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-20">
+        <div className="md:max-w-[45%] ms-auto">
+          <h3 className="text-2xl md:text-[28px] font-medium mb-6 text-blue-lighter">
             {content.title}
           </h3>
           <div
-            className="max-w-2xl prose prose-invert prose-base"
+            className="max-w-2xl prose prose-invert prose-base text-justify"
             dangerouslySetInnerHTML={{ __html: content.content }}
           ></div>
         </div>

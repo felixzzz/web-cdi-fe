@@ -50,12 +50,12 @@ export const BusinessPillars: React.FC<BusinessPillarsProps> = ({
   return (
     <section className="bg-[#091A24]">
       <div
-        className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]"
+        className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44"
         role="tablist"
       >
         <h2
           id="pillars-heading"
-          className="font-medium text-white text-2xl lg:text-[38px] lg:leading-[44px] text-center pt-20"
+          className="font-medium text-white text-2xl md:text-[38px] md:leading-[44px] text-center pt-20"
         >
           {title || "Business Pillars"}
         </h2>

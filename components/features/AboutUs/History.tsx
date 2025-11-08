@@ -24,7 +24,9 @@ export const History: React.FC<HistoryProps> = ({ data }) => {
           eyebrow={item.tagline}
           title={item.title}
         >
-          <div dangerouslySetInnerHTML={{ __html: item.content }} />
+          <div
+          className="prose prose-invert prose-base text-neutral-300 text-justify max-w-full"
+          dangerouslySetInnerHTML={{ __html: item.content }} />
           {/* {convertHtmlToReact(item.content)} */}
         </HistoryBlock>
       ))}

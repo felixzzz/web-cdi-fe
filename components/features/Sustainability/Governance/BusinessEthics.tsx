@@ -32,24 +32,24 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
 
       <div className="absolute inset-0 overlay-business-2 z-10"></div>
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
-        <div className="flex flex-col gap-8 lg:max-w-[45%] me-auto">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-20">
+        <div className="flex flex-col gap-8 md:max-w-[45%] me-auto">
           <div>
             <h2
               id="business-ethics-heading"
-              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
+              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
             >
               {title || "Business Ethics"}
             </h2>
             <div
-              className="max-w-2xl prose prose-invert prose-base"
+              className="max-w-2xl prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: content || "" }}
             ></div>
           </div>
 
           {fileInfo && (
             <div
-              className="button-gradient-custom p-4 !flex-col !items-start lg:min-w-[50%] lg:w-fit 
+              className="button-gradient-custom p-4 !flex-col !items-start md:min-w-[50%] md:w-fit 
               border 
               bg-[linear-gradient(#d6f5ff29,#091a2429)] 
               rounded-lg"

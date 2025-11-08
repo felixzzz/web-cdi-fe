@@ -17,10 +17,10 @@ export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
       aria-labelledby="other-addresses-heading"
       className="bg-[#F6F6F6] py-20"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <h2
           id="other-addresses-heading"
-          className="text-neutral-13 text-2xl lg:text-[38px] lg:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-6 mb-8"
+          className="text-neutral-13 text-2xl md:text-[38px] md:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-6 mb-8"
         >
           Other Company Addresses:
         </h2>
@@ -40,7 +40,7 @@ export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
                 >
                   {index + 1}
                 </p>
-                <div className="rounded-xl border border-neutral-4 p-4 bg-white w-full">
+                <div className="rounded-xl border border-neutral-50 p-4 bg-white w-full">
                   <h3 className="mb-4 text-[22px] text-[#2474A5] font-medium">
                     {company.name}
                   </h3>
@@ -60,17 +60,17 @@ export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
                             {loc.location_name}
                           </p>
                         )}
-                        <address className="text-neutral-8 text-sm not-italic">
+                        <address className="text-neutral-8 text-sm not-italic text-neutral-500">
                           {loc.address}
                         </address>
-                        <div className="flex items-center gap-4 text-neutral-400">
+                        <div className="flex items-center gap-4 text-neutral-500">
                           {loc.phone && (
-                            <div className="flex items-center text-xs lg:text-sm gap-2">
+                            <div className="flex items-center text-xs md:text-sm gap-2">
                               <Phone className="text-[#2474A5]" size={14} aria-hidden="true" /> {loc.phone}
                             </div>
                           )}
                           {loc.fax && (
-                            <div className="flex items-center text-xs lg:text-sm gap-2">
+                            <div className="flex items-center text-xs md:text-sm gap-2">
                               <Printer className="text-[#2474A5]" size={14} aria-hidden="true" /> {loc.fax}
                             </div>
                           )}

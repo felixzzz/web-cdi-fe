@@ -29,12 +29,12 @@ export const Article: React.FC<ArticleProps> = ({ articles }) => {
       aria-labelledby="article-section-title"
     >
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="flex lg:items-center justify-between mb-2 flex-col lg:flex-row">
+        <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
           <div>
             <p className="text-neutral-500 text-base mb-4">LATEST ARTICLE</p>
             <h2
               id="article-section-title"
-              className="text-neutral-900 font-medium text-2xl lg:text-[28px] mb-0 max-w-sm"
+              className="text-neutral-900 font-medium text-4xl lg:text-[28px] mb-0 max-w-sm"
             >
               Discover the latest from the energy industry
             </h2>

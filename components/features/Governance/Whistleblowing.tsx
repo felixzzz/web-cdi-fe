@@ -20,12 +20,12 @@ export function Whistleblowing() {
       aria-labelledby="whistleblowing-heading"
       className="bg-[#091A24] py-20 text-white"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8 ">
-          <div className="lg:col-span-3">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8 ">
+          <div className="md:col-span-3">
             <h2
               id="whistleblowing-heading"
-              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
+              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
             >
               {TITLE}
             </h2>
@@ -44,7 +44,7 @@ export function Whistleblowing() {
             </Link>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="md:col-span-2">
             <Image
               src={IMAGE_URL}
               alt={IMAGE_ALT}

@@ -48,7 +48,7 @@ export const Overview: React.FC<OverviewSectionProps> = ({
         aria-hidden="true"
       />
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[1]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           <div className="lg:col-span-6">
             <Image
@@ -66,7 +66,7 @@ export const Overview: React.FC<OverviewSectionProps> = ({
               {eyebrowText}
             </h2>
 
-            <div className="content">{children}</div>
+            <div className="content text-justify">{children}</div>
           </div>
 
           <div className="lg:col-span-6">
@@ -84,7 +84,7 @@ export const Overview: React.FC<OverviewSectionProps> = ({
         className="bg-blue-dark relative py-12 lg:py-20"
         aria-label={videoTitle} 
       >
-        <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+        <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
           <figure className="aspect-video w-full">
             <iframe
               className="w-full h-full rounded-xl"

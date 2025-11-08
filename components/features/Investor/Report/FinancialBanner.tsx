@@ -13,7 +13,7 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
   return (
     <section
       aria-labelledby="financial-banner-heading"
-      className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] mt-28 mb-16"
+      className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 mt-28 mb-16"
     >
       <div className="p-6 rounded-3xl w-full bg-blue-base relative overflow-hidden">
         <Image
@@ -28,13 +28,13 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
         <div className="relative z-10 flex flex-col w-full items-center text-center gap-6">
           <h2
             id="financial-banner-heading"
-            className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] text-white max-w-[680px]"
+            className="font-medium text-2xl md:text-[38px] md:leading-[44px] text-white max-w-[680px]"
           >
             {title}
           </h2>
 
           <div
-            className="content text-left !text-white max-w-[864px] font-light"
+          className="prose prose-invert prose-base text-justify w-full max-w-6xl"
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}
           ></div>
         </div>

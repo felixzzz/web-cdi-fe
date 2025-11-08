@@ -1,73 +1,60 @@
 import Image from "next/image";
 import React from "react";
-
-const institutionsData = [
-  {
-    id: "1",
-    name: "PT Datindo Entrycom",
-    role: "SHARE REGISTRAR",
-    address: "Jl. Hayam Wuruk No. 28, Lt. 2, Jakarta 10120, Indonesia",
-    phone: "(62-21) 3508077",
-    fax: "(62-21) 3508076",
-  },
-  {
-    id: "2",
-    name: "Liana Ramon Xenia & Rekan",
-    role: "PUBLIC ACCOUNTING FIRM",
-    address:
-      "The Plaza Office Tower Lt. 32 Jl. M. H. Thamrin Kav. 28 – 30 Jakarta 10350",
-    phone: "(62-21) 5081 8000",
-    fax: "(62-21) 2992 8300",
-  },
-];
+import { ApiInstitutionResponse } from "@/types/Investor/Report"; 
 
 const phoneIconUrl =
   "https://chandradaya-investasi.com/assets/frontend/icons/ic_phone.svg";
 const faxIconUrl =
   "https://chandradaya-investasi.com/assets/frontend/icons/ic_printer.svg";
 
-export const SupportingInstitutions = () => {
+interface SupportingInstitutionsProps {
+  data: ApiInstitutionResponse;
+}
+
+export const SupportingInstitutions = ({
+  data,
+}: SupportingInstitutionsProps) => {
   return (
     <section
       aria-labelledby="institutions-heading"
       className="bg-[#F6F6F6] py-20"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[2rem] 2xl:px-[3rem]">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <h2
           id="institutions-heading"
-          className="text-neutral-13 text-2xl lg:text-[38px] lg:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-400 mb-8"
+          className="text-neutral-13 text-2xl md:text-[38px] md:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-400 mb-8"
         >
           Supporting Institutions & Professionals
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {institutionsData.map((inst) => (
-            <div key={inst.id} className="flex gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {data.map((item, index) => (
+            <div key={item.id} className="flex gap-2">
               <p className="text-neutral-300 font-medium text-[52px]">
-                {inst.id}
+                {index + 1}
               </p>
               <div className="rounded-xl border border-neutral-4 p-4 bg-white w-full">
                 <h3 className="mb-4 text-[22px] text-[#2474A5] font-medium">
-                  {inst.name}
+                  {item.name}
                 </h3>
 
                 <div className="flex flex-col gap-2">
                   <p className="text-neutral-950 text-sm font-medium">
-                    {inst.role}
+                    {item.localized_main.location_name}
                   </p>
 
                   <address className="text-neutral-600 text-sm not-italic">
-                    {inst.address}
+                    {item.localized_main.address}
                   </address>
 
                   <div className="flex items-center gap-4 text-neutral-600">
                     <div className="flex items-center text-sm gap-2">
                       <Image src={phoneIconUrl} alt="" width={20} height={20} />
-                      Tel. {inst.phone}
+                      {item.localized_main.phone}
                     </div>
                     <div className="flex items-center text-sm gap-2">
                       <Image src={faxIconUrl} alt="" width={20} height={20} />
-                      Fax. {inst.fax}
+                      {item.localized_main.fax}
                     </div>
                   </div>
                 </div>
@@ -78,4 +65,4 @@ export const SupportingInstitutions = () => {
       </div>
     </section>
   );
-}
+};

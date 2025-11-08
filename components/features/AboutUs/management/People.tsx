@@ -12,11 +12,11 @@ export const People: React.FC<PeopleSectionProps> = ({
       className="pt-20 pb-16 bg-[#091A24]"
       aria-labelledby="people-section-title"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
           <h2
             id="people-section-title"
-            className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium text-[#47C1EA]"
+            className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-medium text-[#47C1EA]"
           >
             {title}
           </h2>

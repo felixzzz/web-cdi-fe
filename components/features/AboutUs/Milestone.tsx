@@ -25,7 +25,7 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
       >
         <div className="absolute inset-0 overlay-business" aria-hidden="true" />
 
-        <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
+        <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[1]">
           <div className="mb-16">
             <div>
               <h2 className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-2">
@@ -40,7 +40,7 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
             {data.map((milestone) => (
               <div key={milestone.ulid || milestone.id}>
-                <h3 className="text-3xl font-bold text-white mb-5">
+                <h3 className="text-3xl font-bold text-[#47C1EA] mb-5">
                   {milestone.year}
                 </h3>
                 <Image

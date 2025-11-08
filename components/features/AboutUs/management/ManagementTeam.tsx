@@ -16,7 +16,7 @@ export const ManagementTeam: React.FC<ManagementTeamProps> = ({
     <section id={id} aria-labelledby={`${id}-title`}>
       <h2
         id={`${id}-title`}
-        className="text-white font-medium text-2xl lg:text-[38px] lg:leading-[44px] text-center mb-16"
+        className="text-white font-medium text-2xl md:text-[38px] md:leading-[44px] text-center mb-16"
       >
         {title}
       </h2>

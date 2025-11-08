@@ -9,9 +9,10 @@ import { reportService } from "@/services/Investor/ReportServices";
 export default async function Page() {
   // const t = useTranslations("homepage");
 
-  const [reportData, financialData] = await Promise.all([
+  const [reportData, financialData, institutions] = await Promise.all([
     reportService.getReportPageData(),
     reportService.getFinancialData(),
+    reportService.getInstitutionsData(),
   ]);
 
   const {
@@ -30,7 +31,7 @@ export default async function Page() {
       />
       <FinancialBanner data={investor_report_overview} />
       <FinancialTable data={investor_report_table} />
-      <SupportingInstitutions />
+      <SupportingInstitutions data={institutions} />
       <FinancialCalendar initialData={financialData} />
     </main>
   );

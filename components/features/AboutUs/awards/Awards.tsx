@@ -202,13 +202,14 @@ export const Awards: React.FC<AwardsProps> = ({
 
   return (
     <section className="py-20 bg-[#091A24]" aria-labelledby="awards-title">
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
           <h2 id="awards-title" className="text-awards text-7xl">
             {title || "Recognized for our commitment"}
           </h2>
           <div
-            className="content !text-neutral-4 text-[12px] leading-[24px] font-normal text-white py-1"
+          className="prose prose-invert prose-base text-neutral-100"
+            // className="content !text-neutral-4 text-[12px] leading-[24px] text-justify font-normal text-white py-1"
             dangerouslySetInnerHTML={{ __html: description || "" }}
           />
         </div>
@@ -276,7 +277,7 @@ export const Awards: React.FC<AwardsProps> = ({
             </div>
           ) : filteredData.length > 0 ? (
             <>
-              <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-7 gap-y-16 text-white">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-7 gap-y-16 text-white">
                 {filteredData.map((award) => (
                   <li key={award.title + award.year}>
                     <AwardCard award={award} onImageClick={setModalImageUrl} />

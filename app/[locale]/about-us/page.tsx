@@ -83,7 +83,9 @@ export default async function Page() {
           youtubeVideoId={youtubeId}
           videoTitle="Company Profile Video - CDI Group"
         >
-          <div className="text-[12px] leading-[24px] text-white py-1 space-y-6">
+          <div
+          className="prose prose-invert prose-base text-neutral-300" 
+          >
             {convertHtmlToReact(about_us_company_overview.content)}
           </div>
         </Overview>

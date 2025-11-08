@@ -3,9 +3,7 @@ import { Article } from "@/components/features/Homepage/Article";
 // import { Article } from "@/components/features/homepage/Article";
 import { Discover } from "@/components/features/Homepage/Discover";
 import { Hero } from "@/components/features/Homepage/Hero";
-import {
-  Information,
-} from "@/components/features/Homepage/Information";
+import { Information } from "@/components/features/Homepage/Information";
 import {
   Journey,
   JourneyLink,
@@ -19,12 +17,14 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 // import { useTranslations } from "next-intl";
 
 export default async function Page() {
-  const [homeData, reportData, quickLinksData, articleData] = await Promise.all([
-    homeService.getHomePageData(),
-    homeService.getHomeReportData(),
-    informationService.getHomeQuickLinks(),
-    homeService.getHomeArticle(),
-  ]);
+  const [homeData, reportData, quickLinksData, articleData] = await Promise.all(
+    [
+      homeService.getHomePageData(),
+      homeService.getHomeReportData(),
+      informationService.getHomeQuickLinks(),
+      homeService.getHomeArticle(),
+    ]
+  );
   // const t = useTranslations("homepage");
 
   // console.log(homeData);
@@ -126,7 +126,8 @@ export default async function Page() {
         links={linksData}
       >
         <div
-          className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
+          className="prose prose-invert prose-base text-neutral-300"
+          // className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
           dangerouslySetInnerHTML={{
             __html: home_journey_content.content || "",
           }}

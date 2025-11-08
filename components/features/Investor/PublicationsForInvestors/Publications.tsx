@@ -171,18 +171,18 @@ export function Publications({ initialData, initialTab }: PublicationsProps) {
 
   return (
     <div className="py-20">
-      <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           <nav
             aria-label="Publications categories"
-            className="flex lg:flex-col lg:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap"
+            className="flex md:flex-col md:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap"
           >
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => handleTabClick(link.id)} // Use new handler
                 className={clsx(
-                  "border-b-[1px] border-b-neutral-100 border-t-[1px] border-t-neutral-100 text-lg text-center p-4 transition lg:w-full lg:text-start",
+                  "border-b-[1px] border-b-neutral-100 border-t-[1px] border-t-neutral-100 text-lg text-center p-4 transition md:w-full md:text-start",
                   activeTab === link.id
                     ? "text-neutral-13 font-medium border-l-4 !border-l-[#2474A5]"
                     : "text-neutral-8 font-normal hover:text-neutral-13"
@@ -193,14 +193,14 @@ export function Publications({ initialData, initialTab }: PublicationsProps) {
             ))}
           </nav>
 
-          <div className="lg:col-span-4">
-            <div className="grid lg:grid-cols-2 gap-4 pb-10 border-b border-b-neutral-5">
+          <div className="md:col-span-4">
+            <div className="grid md:grid-cols-2 gap-4 pb-10 border-b border-b-neutral-5">
               <div>
-                <h2 className="text-2xl lg:text-[28px] font-medium text-neutral-13">
+                <h2 className="text-2xl md:text-[28px] font-medium text-neutral-13">
                   {activeLink?.title}
                 </h2>
               </div>
-              <div className="relative w-full lg:w-[264px] lg:ms-auto">
+              <div className="relative w-full md:w-[264px] md:ms-auto">
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-7">
                   <Search size={16} />
                 </div>
@@ -226,66 +226,63 @@ export function Publications({ initialData, initialTab }: PublicationsProps) {
                 paginatedItems.map((item) => (
                   <article
                     key={item.id}
-                    className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0"
+                    className="py-8 border-b border-b-neutral-5 flex items-center justify-start flex-col gap-y-4 md:gap-y-0"
                   >
-                    <div>
-                      <h3 className="text-neutral-13 mb-2 text-lg font-medium">
+                    <div className="flex w-full">
+                      <h4 className="text-neutral-13 mb-2 text-lg font-medium">
                         {item.title}
-                      </h3>
-                      <div className="flex items-center text-base text-neutral-8 gap-3">
+                      </h4>
+                    </div>
+                    <div className="flex flex-col md:flex-row justify-start md:justify-between w-full">
+                      <div className="flex items-center justify-start text-base text-neutral-8 gap-3 w-full">
                         <p className="flex items-baseline gap-3">
-                          <time
-                            className="text-neutral-500"
-                            dateTime={item.date}
-                          >
+                          <time dateTime={item.date}>
                             {item.displayDate}
                           </time>
-                          <span className="text-neutral-500">.</span>
-                          <span className="text-neutral-500">
-                            {item.size}
-                          </span>
-                          <span className="text-neutral-500">.</span>
+                          <span>.</span>
+                          <span>{item.size}</span>
+                          <span>.</span>
                         </p>
                         <Image
                           src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
                           width={30}
-                          height={22}
+                          height={24}
                           alt="See all icon"
                           className="inline-block"
                         />
                       </div>
-                    </div>
-                    <div className="flex lg:items-center gap-8 w-full lg:w-fit">
-                      <Link
-                        href={item.viewUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-[#2474A5] font-medium hover:text-neutral-13"
-                      >
-                        <Image
-                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
-                          width={20}
-                          height={20}
-                          alt="See all icon"
-                          className="inline-block"
-                        />{" "}
-                        View
-                      </Link>
-                      <Link
-                        href={item.downloadUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-[#2474A5] font-medium hover:text-neutral-13"
-                      >
-                        <Image
-                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
-                          width={20}
-                          height={20}
-                          alt="Download icon"
-                          className="inline-block"
-                        />{" "}
-                        Download
-                      </Link>
+                      <div className="flex items-center justify-start md:justify-end gap-8 w-full">
+                        <Link
+                          href={item.viewUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-blue-base font-medium"
+                        >
+                          <Image
+                            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                            width={20}
+                            height={20}
+                            alt="See all icon"
+                            className="inline-block"
+                          />{" "}
+                          View
+                        </Link>
+                        <a
+                          href={item.downloadUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-blue-base font-medium"
+                        >
+                          <Image
+                            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                            width={20}
+                            height={20}
+                            alt="Download icon"
+                            className="inline-block"
+                          />{" "}
+                          Download
+                        </a>
+                      </div>
                     </div>
                   </article>
                 ))
@@ -299,7 +296,7 @@ export function Publications({ initialData, initialTab }: PublicationsProps) {
             {totalPages > 1 && (
               <nav
                 aria-label="Pagination"
-                className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col lg:flex-row"
+                className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col md:flex-row"
               >
                 <p className="text-neutral-10 text-sm max-lg:hidden">
                   {`${pagination.from || 0}-${

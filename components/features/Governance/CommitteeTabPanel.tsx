@@ -27,7 +27,7 @@ export const CommitteeTabPanel: React.FC<CommitteeTabPanelProps> = ({ tab }) => 
       <h3 className="font-medium text-[22px] mb-3">{tab.title}</h3>
       
       <div
-        className="content prose prose-invert prose-base max-w-none"
+        className="content prose prose-invert prose-base max-w-none text-justify"
         dangerouslySetInnerHTML={{ __html: tab.contentHtml }}
       />
 

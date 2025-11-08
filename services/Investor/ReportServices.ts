@@ -1,7 +1,8 @@
-import { CalendarApiResponse, InvestorReportApiResponse } from "@/types/Investor/Report";
+import { ApiInstitutionResponse, CalendarApiResponse, InvestorReportApiResponse } from "@/types/Investor/Report";
 
 const API_URL = "https://chandradaya-investasi.com/api/utility/investor";
 const API_URL_FINANCIAL = "https://chandradaya-investasi.com/api/investor/calendar/list";
+const API_URL_INSTITUTION = "https://chandradaya-investasi.com/api/institutions/list";
 
 export async function getReportPageData(): Promise<InvestorReportApiResponse> {
   try {
@@ -20,6 +21,30 @@ export async function getReportPageData(): Promise<InvestorReportApiResponse> {
     }
 
     const data: InvestorReportApiResponse = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getHomePageData:", error);
+    throw new Error("Could not fetch homepage data.");
+  }
+}
+
+export async function getInstitutionsData(): Promise<ApiInstitutionResponse> {
+  try {
+    const res = await fetch(API_URL_INSTITUTION, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch home data: ${res.statusText}`);
+    }
+
+    const data: ApiInstitutionResponse = await res.json();
     return data;
   } catch (error) {
     console.error("Error in getHomePageData:", error);
@@ -59,5 +84,6 @@ async function getFinancialData(
 
 export const reportService = {
   getReportPageData,
+  getInstitutionsData,
   getFinancialData,
 };

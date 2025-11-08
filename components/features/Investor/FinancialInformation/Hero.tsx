@@ -19,11 +19,11 @@ export const Hero: React.FC<HeroProps> = ({
     >
       <div className="overlay-banner h-full w-full absolute left-0 right-0 top-0 bottom-0" />
 
-      <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="text-white grid lg:grid-cols-2 gap-2 relative z-[1] items-end">
+      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="text-white grid md:grid-cols-2 gap-2 relative z-[1] items-end">
           <div>
             <h1
-              className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium max-w-2xl"
+              className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-medium max-w-2xl"
               id="home_banner_title"
             >
               {title}
@@ -31,7 +31,7 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           <div className="flex items-center gap-10">
-            <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
+            <div className="h-[2px] w-full bg-[#BFBFBF] hidden md:block relative overflow-hidden">
                                       <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
                                     </div>
                                     <Image

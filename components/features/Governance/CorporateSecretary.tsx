@@ -25,9 +25,9 @@ export function CorporateSecretary({
       aria-labelledby="corporate-secretary-heading"
       className="pt-20 bg-[#091A24] text-white"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-          <aside className="lg:col-span-2">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-16">
+          <aside className="md:col-span-2">
             <div className="relative aspect-square w-full rounded-[20px] overflow-hidden mb-6">
               <Image
                 src={personData.file_url}
@@ -36,23 +36,23 @@ export function CorporateSecretary({
                 objectFit="cover"
               />
             </div>
-            <h3 className="mb-3 font-medium text-lg lg:text-[22px]">
+            <h3 className="mb-3 font-medium text-lg md:text-[22px]">
               {personData.title}
             </h3>
-            <p className="prose prose-invert prose-base content text-sm lg:text-base !font-light !text-white">
+            <p className="prose prose-invert prose-base content text-sm md:text-base !font-light !text-white">
               {personData.content}
             </p>
           </aside>
 
-          <main className="lg:col-span-3">
+          <main className="md:col-span-3">
             <h2
               id="corporate-secretary-heading"
-              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
+              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
             >
               {sectionData.title}
             </h2>
             <div
-              className="max-w-full prose prose-invert prose-base"
+              className="max-w-full prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: sectionData.content || "" }}
             />
 

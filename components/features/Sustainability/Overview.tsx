@@ -31,17 +31,17 @@ export function Overview({ data }: OverviewProps) {
         style={{ backgroundImage: gradientStyle }}
       ></div>
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-20">
-        <div className="lg:max-w-[45%] ms-auto">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-20">
+        <div className="md:max-w-[45%] ms-auto">
           <h2
             id="overview-heading"
-            className="text-2xl lg:text-[28px] font-medium mb-6 text-blue-lighter"
+            className="text-2xl md:text-[28px] font-medium mb-6 text-blue-lighter"
           >
             {title}
           </h2>
 
           <div
-          className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
+          className="max-w-full prose prose-invert prose-base text-justify"
             dangerouslySetInnerHTML={{ __html: content }}
           ></div>
         </div>

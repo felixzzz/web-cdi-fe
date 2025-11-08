@@ -11,8 +11,8 @@ export function SustainabilityFacts({ data }: SustainabilityFactsProps) {
 
   return (
     <section className="py-28 text-white bg-[#091A24] bg-cover relative bg-center">
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[1]">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {factoidData.map((item, index) => (
             <div key={index} className="flex gap-4 items-start flex-col">
               <div className="flex shrink-0 w-[48px]">
@@ -26,7 +26,7 @@ export function SustainabilityFacts({ data }: SustainabilityFactsProps) {
               </div>
               <div className="flex flex-col gap-4">
                 <div
-                className="max-w-2xl prose prose-invert prose-base"
+          className="max-w-2xl prose prose-invert prose-base text-justify"
                   dangerouslySetInnerHTML={{ __html: item.description }}
                 ></div>
               </div>
