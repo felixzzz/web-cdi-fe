@@ -3,8 +3,9 @@ import { Hero } from "@/components/features/AboutUs/awards/Hero";
 import { Information } from "@/components/features/Homepage/Information";
 import { awardsService } from "@/services/AboutUs/AwardsService";
 import { informationService } from "@/services/Global/informationService";
+import { AwardsPageProps } from "@/types/AboutUs/Awards";
 
-export default async function Page() {
+export default async function Page({ params: { locale } }: AwardsPageProps) {
   const [
     awardsPageData,
     quickLinksData,
@@ -12,11 +13,11 @@ export default async function Page() {
     certificationResponse,
     membershipResponse,
   ] = await Promise.all([
-    awardsService.getAwardsPageData(),
-    informationService.getHomeQuickLinks(),
-    awardsService.getAwardsTabPageData(),
-    awardsService.getCertificationTabPageData(),
-    awardsService.getMembershipTabPageData(),
+    awardsService.getAwardsPageData(locale),
+    informationService.getHomeQuickLinks(locale),
+    awardsService.getAwardsTabPageData(locale),
+    awardsService.getCertificationTabPageData(locale),
+    awardsService.getMembershipTabPageData(locale),
   ]);
 
   const { about_us_award_banner, about_us_award_overview } = awardsPageData;

@@ -1,3 +1,9 @@
+export interface AboutPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface AboutUsSection {
   id: number;
   ulid: string;

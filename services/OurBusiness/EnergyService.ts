@@ -2,12 +2,13 @@ import { EnergyApiResponse } from "@/types/OurBusiness/Energy";
 
 const API_URL = "https://chandradaya-investasi.com/api/business/detail/energy";
 
-export async function getEnergyPageData(): Promise<EnergyApiResponse> {
+export async function getEnergyPageData(locale: string): Promise<EnergyApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

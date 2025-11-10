@@ -1,3 +1,9 @@
+export interface AwardsPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface AwardSection {
   id: number;
   ulid: string;

@@ -4,12 +4,13 @@ const API_URL = "https://chandradaya-investasi.com/api/utility/investor";
 const API_URL_FINANCIAL = "https://chandradaya-investasi.com/api/investor/calendar/list";
 const API_URL_INSTITUTION = "https://chandradaya-investasi.com/api/institutions/list";
 
-export async function getReportPageData(): Promise<InvestorReportApiResponse> {
+export async function getReportPageData(locale: string): Promise<InvestorReportApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -28,12 +29,13 @@ export async function getReportPageData(): Promise<InvestorReportApiResponse> {
   }
 }
 
-export async function getInstitutionsData(): Promise<ApiInstitutionResponse> {
+export async function getInstitutionsData(locale: string): Promise<ApiInstitutionResponse> {
   try {
     const res = await fetch(API_URL_INSTITUTION, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -53,6 +55,7 @@ export async function getInstitutionsData(): Promise<ApiInstitutionResponse> {
 }
 
 async function getFinancialData(
+  locale: string,
   page: number = 1,
   type: string = "",
   year: string | number = ""
@@ -69,7 +72,7 @@ async function getFinancialData(
 
     const res = await fetch(`${API_URL_FINANCIAL}?${params.toString()}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", lang: locale },
       next: { revalidate: 3600 },
     });
     if (!res.ok) {

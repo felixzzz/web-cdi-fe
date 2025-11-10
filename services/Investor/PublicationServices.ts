@@ -3,12 +3,13 @@ import { InvestorPublicationApiResponse, PublicationApiResponse, PublicationTab 
 const API_URL = "https://chandradaya-investasi.com/api/utility/investor";
 const API_BASE_URL = "https://chandradaya-investasi.com/api/investor";
 
-export async function getPublicationPageData(): Promise<InvestorPublicationApiResponse> {
+export async function getPublicationPageData(locale: string): Promise<InvestorPublicationApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -28,6 +29,7 @@ export async function getPublicationPageData(): Promise<InvestorPublicationApiRe
 }
 
 export async function getPublicationTabData(
+  locale: string,
   tab: PublicationTab,
   page: number = 1
 ): Promise<PublicationApiResponse> {
@@ -40,7 +42,7 @@ export async function getPublicationTabData(
   try {
     const res = await fetch(url, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", lang: locale },
       next: { revalidate: 300 }, 
     });
 

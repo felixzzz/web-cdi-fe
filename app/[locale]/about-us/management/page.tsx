@@ -8,7 +8,7 @@ import { SubNavbar } from "@/components/features/AboutUs/management/SubNavbar";
 import { TeamMember } from "@/components/features/AboutUs/management/TeamMemberCard";
 import { Information } from "@/components/features/Homepage/Information";
 import { managementService } from "@/services/AboutUs/ManagementService";
-import { TableManagementSection } from "@/types/AboutUs/Management";
+import { ManagementPageProps, TableManagementSection } from "@/types/AboutUs/Management";
 import { informationService } from "@/services/Global/informationService";
 
 const aboutLinks = [
@@ -19,13 +19,13 @@ const aboutLinks = [
   { text: "Company Profile", href: "/about-us/company-profile" },
 ];
 
-export default async function Page() {
+export default async function Page({ params: { locale } }: ManagementPageProps) {
   const [managementData, quickLinksData, BodData, BocData, GuideData] = await Promise.all([
-    managementService.getManagementPageData(),
-    informationService.getHomeQuickLinks(),
-    managementService.getManagementBodData(),
-    managementService.getManagementBocData(),
-    managementService.getManagementGuideData(),
+    managementService.getManagementPageData(locale),
+    informationService.getHomeQuickLinks(locale),
+    managementService.getManagementBodData(locale),
+    managementService.getManagementBocData(locale),
+    managementService.getManagementGuideData(locale),
   ]);
 
   const {

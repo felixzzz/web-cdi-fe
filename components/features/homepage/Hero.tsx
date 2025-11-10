@@ -23,7 +23,7 @@ export const Hero = ({
   return (
     <header className="relative overflow-hidden aspect-square lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end">
       <div
-        className="overlay-history absolute inset-0 z-0"
+        className="overlay-history absolute inset-0 z-[1]"
         aria-hidden="true"
         style={{
           background: "linear-gradient(#18214700, #1821478f)",
@@ -46,7 +46,7 @@ export const Hero = ({
 
       <div className="overlay-banner h-full w-full absolute left-0 right-0 top-0 bottom-0" />
       <section
-        className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[1]"
+        className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[2]"
         aria-labelledby="home_banner_title"
       >
         <div className="text-white grid lg:flex-col gap-2 items-end">

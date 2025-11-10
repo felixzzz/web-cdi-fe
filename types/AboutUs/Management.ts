@@ -1,3 +1,9 @@
+export interface ManagementPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 interface BaseManagementSection {
   id: number;
   ulid: string;
@@ -89,9 +95,9 @@ interface ManagementItem {
   description_id: string;
   created_at: string;
   updated_at: string;
-  
+
   cv_file: FileDetails | null;
-  
+
   resume_file: FileDetails | null;
 }
 

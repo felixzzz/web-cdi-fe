@@ -4,12 +4,13 @@ import {
   mediaService,
   pressReleaseService,
 } from "@/services/Media/MediaService";
+import { NewsPageProps } from "@/types/Media/Media";
 
-export default async function Page() {
+export default async function Page({params: {locale}}: NewsPageProps) {
   const [mediaData, pressReleaseData, latestNewsData] = await Promise.all([
-    mediaService.getMediaPageData(),
-    pressReleaseService.getPressReleasePageData(),
-    pressReleaseService.getLatestNewsData(),
+    mediaService.getMediaPageData(locale),
+    pressReleaseService.getPressReleasePageData(locale),
+    pressReleaseService.getLatestNewsData(locale),
   ]);
   return (
     <>

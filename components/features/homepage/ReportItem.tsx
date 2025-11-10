@@ -17,12 +17,12 @@ export const ReportItem: React.FC<ReportItemProps> = ({
   downloadUrl,
 }) => {
   return (
-    <li className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-2 lg:gap-y-0">
-      <div>
+    <li className="py-8 border-b border-b-neutral-5 flex justify-between flex-col gap-y-2 lg:gap-y-0">
+      <div className="w-full">
         <h3 className="text-neutral-13 mb-2 text-lg font-medium">{title}</h3>
       </div>
 
-      <div className="flex lg:items-center justify-between gap-8 w-full lg:w-fit">
+      <div className="flex lg:items-center justify-between gap-8 w-full">
         <div className="flex items-center text-base text-neutral-8 gap-3">
           <div className="flex items-baseline gap-3">
             <span>{date}</span>

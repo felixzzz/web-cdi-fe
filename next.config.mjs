@@ -27,6 +27,18 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'cdi-be.cmlabs.dev',
+        port: '',
+        pathname: '/file-storage/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdi-be.cmlabs.dev',
+        port: '',
+        pathname: '/assets/frontend/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'nusantaracrocodic.reprime.id',
         port: '',
         // pathname: '/assets/frontend/**',

@@ -3,12 +3,13 @@ import { HealthAndSafety } from "@/components/features/Sustainability/Social/Hea
 import { Hero } from "@/components/features/Sustainability/Social/Hero";
 import { HumanRights } from "@/components/features/Sustainability/Social/HumanRights";
 import { socialService } from "@/services/Sustainability/SocialServices";
+import { SocialPageProps } from "@/types/Sustainabilitys/Social";
 
-export default async function Page() {
+export default async function Page({params: {locale}}: SocialPageProps) {
   const [sosialData, tabsData, contentData] = await Promise.all([
-    socialService.getSocialPageData(),
-    socialService.getSocialTabData(), 
-    socialService.getSocialContentData(), 
+    socialService.getSocialPageData(locale),
+    socialService.getSocialTabData(locale), 
+    socialService.getSocialContentData(locale), 
   ]);
 
   const { sustainability_social_banner, sustainability_social_overview } =
@@ -35,7 +36,7 @@ const empoweringData = {
             sustainability_social_banner.title ||
             "Financial Information for Investors"
           }
-          subtitle={sustainability_social_banner.content_en}
+          subtitle={sustainability_social_banner.content}
           iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
         />
         <EmpoweringCommunities data={empoweringData} />

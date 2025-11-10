@@ -1,3 +1,10 @@
+export interface NewsPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
+
 export interface PaginationParams {
   page: string;
 }

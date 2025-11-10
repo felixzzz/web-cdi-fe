@@ -11,6 +11,7 @@ import { SubNavbar } from "@/components/features/Governance/SubNavbar";
 import { Whistleblowing } from "@/components/features/Governance/Whistleblowing";
 import { informationService } from "@/services/Global/informationService";
 import { governanceService } from "@/services/Governance/GovernanceService";
+import { GovernancePageProps } from "@/types/Governances/Governance";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -20,7 +21,9 @@ const aboutLinks = [
   { text: "Company Profile", href: "/about-us/company-profile" },
 ];
 
-export default async function Page() {
+export default async function Page({
+  params: { locale },
+}: GovernancePageProps) {
   const [
     governanceData,
     corporateFiles,
@@ -30,13 +33,13 @@ export default async function Page() {
     tabsData,
     quickLinksData,
   ] = await Promise.all([
-    governanceService.getGovernancePageData(),
-    governanceService.getCorporateFileData(),
-    governanceService.getInternalFileData(),
-    governanceService.getComiteFileData(),
-    governanceService.getProductFileData(),
-    governanceService.getGovernanceData(),
-    informationService.getHomeQuickLinks(),
+    governanceService.getGovernancePageData(locale),
+    governanceService.getCorporateFileData(locale),
+    governanceService.getInternalFileData(locale),
+    governanceService.getComiteFileData(locale),
+    governanceService.getProductFileData(locale),
+    governanceService.getGovernanceData(locale),
+    informationService.getHomeQuickLinks(locale),
   ]);
 
   const {
@@ -48,6 +51,7 @@ export default async function Page() {
     governance_code_of_conduct,
     governance_policy,
     governance_audit_committe,
+    governance_whistleblowing,
   } = governanceData;
 
   const BASE_URL = "https://chandradaya-investasi.com";
@@ -109,7 +113,7 @@ export default async function Page() {
           data={governance_code_of_conduct}
         />
         <Policy data={governance_policy} />
-        <Whistleblowing />
+        <Whistleblowing data={governance_whistleblowing} />
         <Information
           eyebrow="QUICK LINKS"
           title="Need to access detailed information?"

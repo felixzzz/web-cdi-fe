@@ -2,12 +2,13 @@ import { LogisticsApiResponse } from "@/types/OurBusiness/Logistic";
 
 const API_URL = "https://chandradaya-investasi.com/api/business/detail/logistic";
 
-export async function getLogisticPageData(): Promise<LogisticsApiResponse> {
+export async function getLogisticPageData(locale: string): Promise<LogisticsApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

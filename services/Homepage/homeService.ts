@@ -5,12 +5,13 @@ const API_URL_REPORT = "https://chandradaya-investasi.com/api/utility/latest-rep
 // wconst API_URL_LINKS = "https://chandradaya-investasi.com/api/utility/quick-link/home";
 const API_URL_ARTICLE = "https://chandradaya-investasi.com/api/article/latest?category_id=all";
 
-export async function getHomePageData(): Promise<HomePageApiResponse> {
+export async function getHomePageData(locale: string): Promise<HomePageApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -29,12 +30,13 @@ export async function getHomePageData(): Promise<HomePageApiResponse> {
   }
 }
 
-export async function getHomeReportData(): Promise<ReportApiResponse> {
+export async function getHomeReportData(locale: string): Promise<ReportApiResponse> {
   try {
     const res = await fetch(API_URL_REPORT, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -53,12 +55,13 @@ export async function getHomeReportData(): Promise<ReportApiResponse> {
   }
 }
 
-export async function getHomeArticle(): Promise<ApiArticleResponse> {
+export async function getHomeArticle(locale: string): Promise<ApiArticleResponse> {
   try {
     const res = await fetch(API_URL_ARTICLE, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,

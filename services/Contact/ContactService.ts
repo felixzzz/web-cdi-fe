@@ -2,12 +2,13 @@ import { OtherCompanyAddressesApiResponse } from "@/types/Contact/Contact";
 
 const API_URL = "https://chandradaya-investasi.com/api/utility/other-offices";
 
-export async function getCompanyAddressPageData(): Promise<OtherCompanyAddressesApiResponse> {
+export async function getCompanyAddressPageData(locale: string): Promise<OtherCompanyAddressesApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

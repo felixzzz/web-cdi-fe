@@ -82,11 +82,12 @@ type NavLink = {
 };
 
 interface PublicationsProps {
+  locale: string,
   initialData: PublicationApiResponse;
   initialTab: PublicationTab;
 }
 
-export function Publications({ initialData, initialTab }: PublicationsProps) {
+export function Publications({ locale, initialData, initialTab }: PublicationsProps) {
   const [activeTab, setActiveTab] = useState<PublicationTab>(initialTab);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -111,6 +112,7 @@ export function Publications({ initialData, initialTab }: PublicationsProps) {
       setIsLoading(true);
       try {
         const data = await publicationService.getPublicationTabData(
+          locale,
           activeTab,
           currentPage
         );

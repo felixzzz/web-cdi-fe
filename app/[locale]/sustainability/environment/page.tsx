@@ -4,12 +4,13 @@ import { EnvironmentalResponsibility } from "@/components/features/Sustainabilit
 import { SustainabilityFacts } from "@/components/features/Sustainability/Environment/SustainabilityFacts";
 import { WasteManagement } from "@/components/features/Sustainability/Environment/WasteManagement";
 import { environmentService } from "@/services/Sustainability/EnvironmentServices";
+import { EnvironmentPageProps } from "@/types/Sustainabilitys/Environment";
 
-export default async function Page() {
+export default async function Page({params: {locale}}: EnvironmentPageProps) {
 
   const [environmentData, contentEnviroment] = await Promise.all([
-    environmentService.getEnviromentPageData(),
-    environmentService.getEnviromentContentData(),
+    environmentService.getEnviromentPageData(locale),
+    environmentService.getEnviromentContentData(locale),
   ]);
 
   const {
@@ -36,7 +37,7 @@ export default async function Page() {
             sustainability_environment_banner.title ||
             "Financial Information for Investors"
           }
-          subtitle={sustainability_environment_banner.content_en}
+          subtitle={sustainability_environment_banner.content}
           iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
         />
         <EnvironmentalResponsibility data={sustainability_environment_overview} />

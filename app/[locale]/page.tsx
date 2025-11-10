@@ -13,21 +13,19 @@ import { Report } from "@/components/features/Homepage/Report";
 import { Solution } from "@/components/features/Homepage/Solution";
 import { informationService } from "@/services/Global/informationService";
 import { homeService } from "@/services/Homepage/homeService";
+import { HomePageProps } from "@/types/Homepage/home";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 // import { useTranslations } from "next-intl";
 
-export default async function Page() {
+export default async function Page({ params: { locale } }: HomePageProps) {
   const [homeData, reportData, quickLinksData, articleData] = await Promise.all(
     [
-      homeService.getHomePageData(),
-      homeService.getHomeReportData(),
-      informationService.getHomeQuickLinks(),
-      homeService.getHomeArticle(),
+      homeService.getHomePageData(locale),
+      homeService.getHomeReportData(locale),
+      informationService.getHomeQuickLinks(locale), 
+      homeService.getHomeArticle(locale),
     ]
   );
-  // const t = useTranslations("homepage");
-
-  // console.log(homeData);
 
   const {
     home_banner,

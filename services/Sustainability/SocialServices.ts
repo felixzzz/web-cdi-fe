@@ -4,12 +4,13 @@ const API_URL_MAIN = "https://chandradaya-investasi.com/api/utility/sustainabili
 const API_URL_TAB = "https://chandradaya-investasi.com/api/sustainability/tab-contents/social";
 const API_URL_CONTENT = "https://chandradaya-investasi.com/api/sustainability/contents/social";
 
-export async function getSocialPageData(): Promise<SustainabilitySocialApiResponse> {
+export async function getSocialPageData(locale: string): Promise<SustainabilitySocialApiResponse> {
   try {
     const res = await fetch(API_URL_MAIN, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -28,12 +29,13 @@ export async function getSocialPageData(): Promise<SustainabilitySocialApiRespon
   }
 }
 
-export async function getSocialTabData(): Promise<SustainabilitySocialTab[]> {
+export async function getSocialTabData(locale: string): Promise<SustainabilitySocialTab[]> {
   try {
     const res = await fetch(API_URL_TAB, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -52,12 +54,13 @@ export async function getSocialTabData(): Promise<SustainabilitySocialTab[]> {
   }
 }
 
-export async function getSocialContentData(): Promise<ApiContentResponse> {
+export async function getSocialContentData(locale: string): Promise<ApiContentResponse> {
   try {
     const res = await fetch(API_URL_CONTENT, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

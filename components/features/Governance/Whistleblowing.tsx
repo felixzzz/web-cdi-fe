@@ -2,18 +2,22 @@ import Image from "next/image";
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { GovernanceSection } from "@/types/Governances/Governance"; // Import the type
+
+interface WhistleblowingProps {
+  data: GovernanceSection;
+}
 
 const SECTION_ID = "whistleblowing";
-const TITLE = "Whistleblowing";
-const CONTENT_HTML = `
-  <p>The Whistleblowing Management Policy reflects our dedication to upholding our Code of Conduct. This system is designed as a tool to assist all CDI Group employees, including those in our subsidiaries and joint ventures and stakeholder including but not limited to business partner, supplier or vendor, customer, contractor, agent, consultant and/or any other third party who works with, for or represents CDI Group in are also encouraged to consult with or report any suspected violations to CDI Group management.</p>
-`;
 const LINK_URL = "https://chandradaya-investasi.com/governance/whistleblowing";
-const IMAGE_URL =
-  "https://chandradaya-investasi.com/file-storage/MVFzUEt2c2NxWFM2YnRBd1FGRS95ZjAyc2lYdFg1QmRBTUpXWEMxUjRNQXZPQVR3N01vUjBLR21MQkdOY3F0TnppbkdWWjNDVUtGdnVTQ2dmRVowZ3dySU1KSnc2OFEvK1M5L0ZmbFlZbnhFT25yTHp6YzJmNTdWek44TkJPdHg.webp";
-const IMAGE_ALT = "Whistleblowing concept illustration";
 
-export function Whistleblowing() {
+export function Whistleblowing({ data }: WhistleblowingProps) {
+  // Use data from props.
+  const TITLE = data.title || "Whistleblowing";
+  const CONTENT_HTML = data.content || "";
+  const IMAGE_URL = data.file_url;
+  const IMAGE_ALT = data.title || "Whistleblowing concept illustration";
+
   return (
     <section
       id={SECTION_ID}
@@ -30,7 +34,7 @@ export function Whistleblowing() {
               {TITLE}
             </h2>
             <div
-            className="max-w-full prose prose-invert prose-base"
+              className="max-w-full prose prose-invert prose-base"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
             <Link
@@ -48,8 +52,8 @@ export function Whistleblowing() {
             <Image
               src={IMAGE_URL}
               alt={IMAGE_ALT}
-              width={600} 
-              height={400} 
+              width={600}
+              height={400}
               className="w-full h-auto rounded-lg"
               priority
             />

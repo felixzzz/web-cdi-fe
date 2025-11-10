@@ -1,14 +1,15 @@
 import { FinancialCalendar } from "@/components/features/Investor/FinancialInformation/FinancialCalendar";
 import { Hero } from "@/components/features/Investor/FinancialInformation/Hero";
 import { financialService } from "@/services/Investor/FinancialServices";
+import { FinancialPageProps } from "@/types/Investor/Financial";
 // import { useTranslations } from "next-intl";
 
-export default async function Page() {
+export default async function Page({ params: { locale } }: FinancialPageProps) {
   // const t = useTranslations("homepage");
 
   const [financialData, initialCalendarData] = await Promise.all([
-    financialService.getFinancialPageData(),
-    financialService.getFinancialCalendarData(1),
+    financialService.getFinancialPageData(locale),
+    financialService.getFinancialCalendarData(locale, 1),
   ]);
 
   const { investor_financial_banner } = financialData;

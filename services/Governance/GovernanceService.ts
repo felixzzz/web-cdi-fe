@@ -7,12 +7,13 @@ const API_URL_COMITE_FILE = "https://chandradaya-investasi.com/api/utility/addit
 const API_URL_PRODUCT_FILE = "https://chandradaya-investasi.com/api/utility/additional-file/code_of_conduct";
 const API_URL_TAB_GOVERNANCE_FILE = "https://chandradaya-investasi.com/api/utility/governance-committes";
 
-export async function getGovernancePageData(): Promise<InvestorGovernanceApiResponse> {
+export async function getGovernancePageData(locale: string): Promise<InvestorGovernanceApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -31,12 +32,13 @@ export async function getGovernancePageData(): Promise<InvestorGovernanceApiResp
   }
 }
 
-export async function getCorporateFileData(): Promise<ApiFileResponse> {
+export async function getCorporateFileData(locale: string): Promise<ApiFileResponse> {
   try {
     const res = await fetch(API_URL_CORPORATE_FILE, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -55,12 +57,13 @@ export async function getCorporateFileData(): Promise<ApiFileResponse> {
   }
 }
 
-export async function getInternalFileData(): Promise<ApiFileResponse> {
+export async function getInternalFileData(locale: string): Promise<ApiFileResponse> {
   try {
     const res = await fetch(API_URL_INTERNAL_FILE, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -79,12 +82,13 @@ export async function getInternalFileData(): Promise<ApiFileResponse> {
   }
 }
 
-export async function getComiteFileData(): Promise<ApiFileResponse> {
+export async function getComiteFileData(locale: string): Promise<ApiFileResponse> {
   try {
     const res = await fetch(API_URL_COMITE_FILE, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -103,12 +107,13 @@ export async function getComiteFileData(): Promise<ApiFileResponse> {
   }
 }
 
-export async function getProductFileData(): Promise<ApiFileResponse> {
+export async function getProductFileData(locale: string): Promise<ApiFileResponse> {
   try {
     const res = await fetch(API_URL_PRODUCT_FILE, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -127,12 +132,13 @@ export async function getProductFileData(): Promise<ApiFileResponse> {
   }
 }
 
-export async function getGovernanceData(): Promise<ApiTabsResponse> {
+export async function getGovernanceData(locale: string): Promise<ApiTabsResponse> {
   try {
     const res = await fetch(API_URL_TAB_GOVERNANCE_FILE, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

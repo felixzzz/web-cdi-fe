@@ -1,3 +1,9 @@
+export interface GovernancePageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface SustainabilityGovernanceSection {
   id: number;
   ulid: string;

@@ -2,9 +2,10 @@ import { BusinessPillars } from "@/components/features/OurBusiness/Water/Busines
 import { Hero } from "@/components/features/OurBusiness/Water/Hero";
 import { Overview } from "@/components/features/OurBusiness/Water/Overview";
 import { waterService } from "@/services/OurBusiness/WaterService";
+import { WaterPageProps } from "@/types/OurBusiness/Water";
 
-export default async function Page() {
-  const waterData = await waterService.getWaterPageData();
+export default async function Page({ params: { locale } }: WaterPageProps) {
+  const waterData = await waterService.getWaterPageData(locale);
 
   return (
     <>

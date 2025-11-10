@@ -8,14 +8,18 @@ const API_URL =
   "https://chandradaya-investasi.com/api/utility/about-us/management";
 const API_URL_BOD = "https://chandradaya-investasi.com/api/utility/teams/bod";
 const API_URL_BOC = "https://chandradaya-investasi.com/api/utility/teams/boc";
-const API_URL_GUIDE = "https://chandradaya-investasi.com/api/utility/additional-file/guideline";
+const API_URL_GUIDE =
+  "https://chandradaya-investasi.com/api/utility/additional-file/guideline";
 
-export async function getManagementPageData(): Promise<AboutUsManagementApiResponse> {
+export async function getManagementPageData(
+  locale: string
+): Promise<AboutUsManagementApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -34,12 +38,15 @@ export async function getManagementPageData(): Promise<AboutUsManagementApiRespo
   }
 }
 
-export async function getManagementBodData(): Promise<ManagementApiResponse> {
+export async function getManagementBodData(
+  locale: string
+): Promise<ManagementApiResponse> {
   try {
     const res = await fetch(API_URL_BOD, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -58,12 +65,15 @@ export async function getManagementBodData(): Promise<ManagementApiResponse> {
   }
 }
 
-export async function getManagementBocData(): Promise<ManagementApiResponse> {
+export async function getManagementBocData(
+  locale: string
+): Promise<ManagementApiResponse> {
   try {
     const res = await fetch(API_URL_BOC, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -82,12 +92,15 @@ export async function getManagementBocData(): Promise<ManagementApiResponse> {
   }
 }
 
-export async function getManagementGuideData(): Promise<GuidelineApiResponse> {
+export async function getManagementGuideData(
+  locale: string
+): Promise<GuidelineApiResponse> {
   try {
     const res = await fetch(API_URL_GUIDE, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,

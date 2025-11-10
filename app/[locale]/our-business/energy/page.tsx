@@ -2,10 +2,10 @@ import { BusinessPillars } from "@/components/features/OurBusiness/Energy/Busine
 import { Hero } from "@/components/features/OurBusiness/Energy/Hero";
 import { Overview } from "@/components/features/OurBusiness/Energy/Overview";
 import { energyService } from "@/services/OurBusiness/EnergyService";
-import { EnergyApiResponse } from "@/types/OurBusiness/Energy";
+import { EnergyApiResponse, EnergyPageProps } from "@/types/OurBusiness/Energy";
 
-export default async function Page() {
-  const energyData: EnergyApiResponse = await energyService.getEnergyPageData();
+export default async function Page({ params: { locale } }: EnergyPageProps) {
+  const energyData: EnergyApiResponse = await energyService.getEnergyPageData(locale);
 
   return (
     <>

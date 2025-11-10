@@ -8,12 +8,13 @@ const API_URL_MAIN =
 const API_URL_CONTENT =
   "https://chandradaya-investasi.com/api/sustainability/contents/governance";
 
-export async function getGovernancePageData(): Promise<SustainabilityGovernanceApiResponse> {
+export async function getGovernancePageData(locale: string): Promise<SustainabilityGovernanceApiResponse> {
   try {
     const res = await fetch(API_URL_MAIN, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -32,7 +33,7 @@ export async function getGovernancePageData(): Promise<SustainabilityGovernanceA
   }
 }
 
-export async function getGovernanceContentData(): Promise<
+export async function getGovernanceContentData(locale: string): Promise<
   ApiContentResponse
 > {
   try {
@@ -40,6 +41,7 @@ export async function getGovernanceContentData(): Promise<
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

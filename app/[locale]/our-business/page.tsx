@@ -1,15 +1,16 @@
 import { Business } from "@/components/features/OurBusiness/Business";
 import { Hero } from "@/components/features/OurBusiness/Hero";
 import { businessService } from "@/services/OurBusiness/BussinesService";
+import { BussinesPageProps } from "@/types/OurBusiness/Bussines";
 
 const stripHtml = (html: string | null) =>
   html ? html.replace(/<[^>]+>/g, "") : "";
 
-export default async function Page() {
+export default async function Page({ params: { locale } }: BussinesPageProps) {
 
   const [businessData, overviewData] = await Promise.all([
-    businessService.getBusinessPageData(),
-    businessService.getOverviewData(),
+    businessService.getBusinessPageData(locale),
+    businessService.getOverviewData(locale),
   ]);
 
   const { our_business_banner, our_business_overview } = businessData;

@@ -2,12 +2,13 @@ import { InvestorSharesApiResponse } from "@/types/Investor/Shares";
 
 const API_URL = "https://chandradaya-investasi.com/api/utility/investor";
 
-export async function getSharesPageData(): Promise<InvestorSharesApiResponse> {
+export async function getSharesPageData(locale: string): Promise<InvestorSharesApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

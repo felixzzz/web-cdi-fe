@@ -4,12 +4,13 @@ const API_URL = "https://chandradaya-investasi.com/api/utility/investor";
 const API_URL_CALENDAR =
   "https://chandradaya-investasi.com/api/investor/calendar/list";
 
-export async function getFinancialPageData(): Promise<InvestorFinancialApiResponse> {
+export async function getFinancialPageData(locale: string): Promise<InvestorFinancialApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -29,9 +30,10 @@ export async function getFinancialPageData(): Promise<InvestorFinancialApiRespon
 }
 
 export async function getFinancialCalendarData(
+  locale: string,
   page: number = 1,
   type: string = "",
-  year: string | number = ""
+  year: string | number = "",
 ): Promise<CalendarApiResponse> {
   try {
     const params = new URLSearchParams();
@@ -45,7 +47,7 @@ export async function getFinancialCalendarData(
 
     const res = await fetch(`${API_URL_CALENDAR}?${params.toString()}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", lang: locale },
       next: { revalidate: 3600 },
     });
     if (!res.ok) {

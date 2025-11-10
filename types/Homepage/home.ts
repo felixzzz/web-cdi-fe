@@ -1,3 +1,9 @@
+export interface HomePageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface HomePageSection {
   id: number;
   ulid: string;

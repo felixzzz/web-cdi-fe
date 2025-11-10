@@ -2,9 +2,10 @@ import { BusinessPillars } from "@/components/features/OurBusiness/Logistics/Bus
 import { Hero } from "@/components/features/OurBusiness/Logistics/Hero";
 import { Overview } from "@/components/features/OurBusiness/Logistics/Overview";
 import { logisticService } from "@/services/OurBusiness/LogisticService";
+import { LogisticPageProps } from "@/types/OurBusiness/Logistic";
 
-export default async function Page() {
-  const logisticData = await logisticService.getLogisticPageData();
+export default async function Page({ params: { locale } }: LogisticPageProps) {
+  const logisticData = await logisticService.getLogisticPageData(locale);
 
   const {
     banner_image,

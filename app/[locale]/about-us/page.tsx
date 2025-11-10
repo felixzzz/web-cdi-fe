@@ -12,6 +12,7 @@ import {
 import { convertHtmlToReact } from "@/lib/htmlUtils";
 import { Information } from "@/components/features/Homepage/Information";
 import { informationService } from "@/services/Global/informationService";
+import { AboutPageProps } from "@/types/AboutUs/About";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -24,14 +25,15 @@ const aboutLinks = [
 const stripHtml = (html: string | null) =>
   html ? html.replace(/<[^>]+>/g, "") : "";
 
-export default async function Page() {
-  const [aboutData, quickLinksData, historyData, milstoneData, profileData] = await Promise.all([
-    aboutService.getAboutPageData(),
-    informationService.getHomeQuickLinks(),
-    aboutService.getHistoryData(),
-    aboutService.getMilstoneData(),
-    aboutService.getProfileData(),
-  ]);
+export default async function Page({ params: { locale } }: AboutPageProps) {
+  const [aboutData, quickLinksData, historyData, milstoneData, profileData] =
+    await Promise.all([
+      aboutService.getAboutPageData(locale),
+      informationService.getHomeQuickLinks(locale),
+      aboutService.getHistoryData(locale),
+      aboutService.getMilstoneData(locale),
+      aboutService.getProfileData(locale),
+    ]);
 
   const {
     about_us_banner,
@@ -83,9 +85,7 @@ export default async function Page() {
           youtubeVideoId={youtubeId}
           videoTitle="Company Profile Video - CDI Group"
         >
-          <div
-          className="prose prose-invert prose-base text-neutral-300" 
-          >
+          <div className="prose prose-invert prose-base text-neutral-300">
             {convertHtmlToReact(about_us_company_overview.content)}
           </div>
         </Overview>

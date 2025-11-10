@@ -2,9 +2,10 @@ import { BusinessPillars } from "@/components/features/OurBusiness/ports-and-sto
 import { Hero } from "@/components/features/OurBusiness/ports-and-storage/Hero";
 import { Overview } from "@/components/features/OurBusiness/ports-and-storage/Overview";
 import { portStorageService } from "@/services/OurBusiness/PortsStorageService";
+import { PortStoragePageProps } from "@/types/OurBusiness/Ports&Storage";
 
-export default async function Page() {
-  const portStorageData = await portStorageService.getPortStoragePageData();
+export default async function Page({ params: { locale } }: PortStoragePageProps) {
+  const portStorageData = await portStorageService.getPortStoragePageData(locale);
 
   const {
     banner_image,

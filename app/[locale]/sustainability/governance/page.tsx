@@ -7,11 +7,12 @@ import { Hero } from "@/components/features/Sustainability/Governance/Hero";
 import { Ciso } from "@/components/features/Sustainability/Governance/SecuritySlider";
 import { SustainableProcurement } from "@/components/features/Sustainability/Governance/SustainableProcurement";
 import { governanceService } from "@/services/Sustainability/GovernanceServices";
+import { GovernancePageProps } from "@/types/Sustainabilitys/Governance";
 
-export default async function Page() {
+export default async function Page({params: {locale}}: GovernancePageProps) {
   const [governanceData, contentData] = await Promise.all([
-    governanceService.getGovernancePageData(),
-    governanceService.getGovernanceContentData(),
+    governanceService.getGovernancePageData(locale),
+    governanceService.getGovernanceContentData(locale),
   ]);
 
   const { sustainability_governance_banner } = governanceData;

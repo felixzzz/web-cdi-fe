@@ -4,15 +4,16 @@ import { FinancialTable } from "@/components/features/Investor/Report/FinancialT
 import { Hero } from "@/components/features/Investor/Report/Hero";
 import { SupportingInstitutions } from "@/components/features/Investor/Report/Institutions";
 import { reportService } from "@/services/Investor/ReportServices";
+import { ReportPageProps } from "@/types/Investor/Report";
 // import { useTranslations } from "next-intl";
 
-export default async function Page() {
+export default async function Page({ params: { locale } }: ReportPageProps) {
   // const t = useTranslations("homepage");
 
   const [reportData, financialData, institutions] = await Promise.all([
-    reportService.getReportPageData(),
-    reportService.getFinancialData(),
-    reportService.getInstitutionsData(),
+    reportService.getReportPageData(locale),
+    reportService.getFinancialData(locale),
+    reportService.getInstitutionsData(locale),
   ]);
 
   const {

@@ -1,3 +1,9 @@
+export interface SocialPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface SustainabilitySocialSection {
   id: number;
   ulid: string;

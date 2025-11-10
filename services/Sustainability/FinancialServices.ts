@@ -2,12 +2,13 @@ import { InvestorSustainabilityApiResponse } from "@/types/Sustainabilitys/Susta
 
 const API_URL = "https://chandradaya-investasi.com/api/utility/sustainability/overview";
 
-export async function getSustainabilityPageData(): Promise<InvestorSustainabilityApiResponse> {
+export async function getSustainabilityPageData(locale: string): Promise<InvestorSustainabilityApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

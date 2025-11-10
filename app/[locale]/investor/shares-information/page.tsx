@@ -1,13 +1,13 @@
 import { Hero } from "@/components/features/Investor/SharesInformation/Hero";
 import { StocksInformation } from "@/components/features/Investor/SharesInformation/Stoks";
 import { sharesService } from "@/services/Investor/SharesServices";
-import { TableInvestorSection } from "@/types/Investor/Shares";
+import { SharesPageProps, TableInvestorSection } from "@/types/Investor/Shares";
 // import { useTranslations } from "next-intl";
 
-export default async function Page() {
+export default async function Page({ params: { locale } }: SharesPageProps) {
   // const t = useTranslations("homepage");
 
-    const SharesData = await sharesService.getSharesPageData();
+    const SharesData = await sharesService.getSharesPageData(locale);
 
     const {
     investor_share_banner,

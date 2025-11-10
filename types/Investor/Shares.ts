@@ -1,3 +1,9 @@
+export interface SharesPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 interface BaseInvestorSection {
   id: number;
   ulid: string;

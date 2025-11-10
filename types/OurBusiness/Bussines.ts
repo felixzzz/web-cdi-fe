@@ -1,3 +1,9 @@
+export interface BussinesPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface BusinessSection {
   id: number;
   ulid: string;

@@ -12,12 +12,15 @@ const API_URL_CERTIFICATION =
 const API_URL_MEMBERSHIP =
   "https://chandradaya-investasi.com/api/memberships/list?tab=membership";
 
-export async function getAwardsPageData(): Promise<AboutUsAwardApiResponse> {
+export async function getAwardsPageData(
+  locale: string
+): Promise<AboutUsAwardApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -36,12 +39,15 @@ export async function getAwardsPageData(): Promise<AboutUsAwardApiResponse> {
   }
 }
 
-export async function getAwardsTabPageData(): Promise<AwardsApiResponse> {
+export async function getAwardsTabPageData(
+  locale: string
+): Promise<AwardsApiResponse> {
   try {
     const res = await fetch(API_URL_AWARDS, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -60,11 +66,13 @@ export async function getAwardsTabPageData(): Promise<AwardsApiResponse> {
   }
 }
 
-export async function getCertificationTabPageData(): Promise<CertificationApiResponse> {
+export async function getCertificationTabPageData(
+  locale: string
+): Promise<CertificationApiResponse> {
   try {
     const res = await fetch(API_URL_CERTIFICATION, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", lang: locale },
       next: { revalidate: 3600 },
     });
     if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
@@ -75,11 +83,13 @@ export async function getCertificationTabPageData(): Promise<CertificationApiRes
   }
 }
 
-export async function getMembershipTabPageData(): Promise<MembershipApiResponse> {
+export async function getMembershipTabPageData(
+  locale: string
+): Promise<MembershipApiResponse> {
   try {
     const res = await fetch(API_URL_MEMBERSHIP, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", lang: locale },
       next: { revalidate: 3600 },
     });
     if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);

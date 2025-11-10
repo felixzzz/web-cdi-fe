@@ -3,12 +3,13 @@ import { ApiContentResponse, SustainabilityEnvironmentApiResponse } from "@/type
 const API_URL = "https://chandradaya-investasi.com/api/utility/sustainability/environment";
 const API_URL_CONTENT = "https://chandradaya-investasi.com/api/sustainability/contents/environment";
 
-export async function getEnviromentPageData(): Promise<SustainabilityEnvironmentApiResponse> {
+export async function getEnviromentPageData(locale: string): Promise<SustainabilityEnvironmentApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -27,12 +28,13 @@ export async function getEnviromentPageData(): Promise<SustainabilityEnvironment
   }
 }
 
-export async function getEnviromentContentData(): Promise<ApiContentResponse> {
+export async function getEnviromentContentData(locale: string): Promise<ApiContentResponse> {
   try {
     const res = await fetch(API_URL_CONTENT, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

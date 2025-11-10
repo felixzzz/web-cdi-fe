@@ -75,10 +75,10 @@ export const Report: React.FC<ReportSectionProps> = ({
         <ul className="mt-4">
           {reports.map((report) => {
             const transformedProps: ReportItemProps = {
-              title: report.name_en,
+              title: report.name,
               date: report.date,
               size: report.file.size,
-              viewUrl: `https://chandradaya-investasi.com/file/preview/default/${report.type}/${report.ulid}/${report.name_slug_en}`,
+              viewUrl: `https://chandradaya-investasi.com/file/preview/default/${report.type}/${report.ulid}/${report.name_slug}`,
               downloadUrl: `https://chandradaya-investasi.com/file/download/default/${report.type}/${report.ulid}/`,
             };
 

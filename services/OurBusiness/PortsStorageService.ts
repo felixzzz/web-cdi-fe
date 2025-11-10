@@ -2,12 +2,13 @@ import { PortsAndStorageApiResponse } from "@/types/OurBusiness/Ports&Storage";
 
 const API_URL = "https://chandradaya-investasi.com/api/business/detail/port_storage";
 
-export async function getPortStoragePageData(): Promise<PortsAndStorageApiResponse> {
+export async function getPortStoragePageData(locale: string): Promise<PortsAndStorageApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

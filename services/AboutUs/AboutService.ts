@@ -5,12 +5,13 @@ const API_URL_HISTORY = "https://chandradaya-investasi.com/api/utility/our-histo
 const API_URL_MILSTONE = "https://chandradaya-investasi.com/api/utility/milestones";
 const API_URL_PROFILE = "https://chandradaya-investasi.com/api/utility/additional-file/company-profile";
 
-export async function getAboutPageData(): Promise<AboutUsWhoWeAreApiResponse> {
+export async function getAboutPageData(locale: string): Promise<AboutUsWhoWeAreApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -29,12 +30,13 @@ export async function getAboutPageData(): Promise<AboutUsWhoWeAreApiResponse> {
   }
 }
 
-export async function getHistoryData(): Promise<HistoryApiResponse> {
+export async function getHistoryData(locale: string): Promise<HistoryApiResponse> {
   try {
     const res = await fetch(API_URL_HISTORY, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -53,12 +55,13 @@ export async function getHistoryData(): Promise<HistoryApiResponse> {
   }
 }
 
-export async function getMilstoneData(): Promise<MilestoneApiResponse> {
+export async function getMilstoneData(locale: string): Promise<MilestoneApiResponse> {
   try {
     const res = await fetch(API_URL_MILSTONE, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -77,12 +80,13 @@ export async function getMilstoneData(): Promise<MilestoneApiResponse> {
   }
 }
 
-export async function getProfileData(): Promise<CompanyProfileResponse> {
+export async function getProfileData(locale: string): Promise<CompanyProfileResponse> {
   try {
     const res = await fetch(API_URL_PROFILE, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
