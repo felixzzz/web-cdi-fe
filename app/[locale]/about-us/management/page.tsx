@@ -1,5 +1,5 @@
 import { CorporateStructure } from "@/components/features/AboutUs/management/CorporateStructure";
-import { DownloadItem, Downloads } from "@/components/features/AboutUs/management/Dawnload";
+import { Downloads } from "@/components/features/AboutUs/management/Dawnload";
 import { Hero } from "@/components/features/AboutUs/management/Hero";
 import { OrganizationStructure } from "@/components/features/AboutUs/management/OrganizationStructure";
 import { People } from "@/components/features/AboutUs/management/People";
@@ -8,7 +8,7 @@ import { SubNavbar } from "@/components/features/AboutUs/management/SubNavbar";
 import { TeamMember } from "@/components/features/AboutUs/management/TeamMemberCard";
 import { Information } from "@/components/features/Homepage/Information";
 import { managementService } from "@/services/AboutUs/ManagementService";
-import { ManagementPageProps, TableManagementSection } from "@/types/AboutUs/Management";
+import { DownloadItem, ManagementPageProps, TableManagementSection } from "@/types/AboutUs/Management";
 import { informationService } from "@/services/Global/informationService";
 
 const aboutLinks = [

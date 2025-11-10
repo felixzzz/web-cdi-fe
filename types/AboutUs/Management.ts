@@ -127,3 +127,11 @@ interface GuidelineItem {
 }
 
 export type GuidelineApiResponse = GuidelineItem[];
+
+export interface DownloadItem {
+  title: string;
+  size: string;
+  viewUrl: string;
+  downloadUrl: string;
+  format: string;
+}

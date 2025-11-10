@@ -17,6 +17,7 @@ import { HomePageProps } from "@/types/Homepage/home";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 // import { useTranslations } from "next-intl";
 
+
 export default async function Page({ params: { locale } }: HomePageProps) {
   const [homeData, reportData, quickLinksData, articleData] = await Promise.all(
     [

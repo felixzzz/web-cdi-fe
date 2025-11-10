@@ -1,45 +1,34 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { DownloadItem } from "@/types/AboutUs/Management";
+import Image from "next/image";
 
-interface DownloadsProps {
-  id?: string;
-  title: string;
-  subtitle: string;
+interface DocumentDownloadProps {
+  title?: string;
   items: DownloadItem[];
 }
 
-export const Downloads: React.FC<DownloadsProps> = ({
-  id,
-  title,
-  subtitle,
+export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
+  title = "Document",
   items,
 }) => {
+  if (!items || items.length === 0) {
+    return null;
+  }
+
   return (
     <section
-      id={id}
-      className="py-28 bg-neutral-3"
-      aria-labelledby={`${id || "downloads"}-title`}
+      aria-labelledby="document-download-title"
+      className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 my-16"
     >
-      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
-        <h2
-          id={`${id || "downloads"}-title`}
-          className="font-medium text-2xl md:text-[38px] md:leading-[44px] mb-4 text-center"
-        >
-          {title}
-        </h2>
-        <div 
-        // className="content primary !text-neutral-8  mb-16"
-        className="prose prose-invert prose-base text-neutral-500 mb-16" 
-        >
-          <div
-            className="ql-align-center"
-            dangerouslySetInnerHTML={{ __html: subtitle }}
-          />
-        </div>
+      <h2
+        id="document-download-title"
+        className="text-2xl lg:text-3xl font-medium text-neutral-13"
+      >
+        {title}
+      </h2>
 
-        {/* Loop over the items array */}
+      <div className="flex flex-col gap-6">
         {items.map((item) => (
           <article
             key={item.title}
