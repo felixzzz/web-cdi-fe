@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { ApiInstitutionResponse } from "@/types/Investor/Report"; 
+import { useTranslations } from "next-intl";
 
 const phoneIconUrl =
   "https://chandradaya-investasi.com/assets/frontend/icons/ic_phone.svg";
@@ -14,6 +15,7 @@ interface SupportingInstitutionsProps {
 export const SupportingInstitutions = ({
   data,
 }: SupportingInstitutionsProps) => {
+  const t = useTranslations('Investor.Report')
   return (
     <section
       aria-labelledby="institutions-heading"
@@ -24,7 +26,7 @@ export const SupportingInstitutions = ({
           id="institutions-heading"
           className="text-neutral-13 text-2xl md:text-[38px] md:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-400 mb-8"
         >
-          Supporting Institutions & Professionals
+          {t('institution_title')}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">

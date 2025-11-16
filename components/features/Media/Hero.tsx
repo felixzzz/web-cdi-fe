@@ -8,6 +8,7 @@ import { Navigation, Pagination } from "swiper/modules";
 
 import { ChevronRight } from "lucide-react";
 import { ApiLatestNewsResponse } from "@/types/Media/Media";
+import { useTranslations } from "next-intl";
 
 const BACKGROUND_IMAGE_URL =
   "https://chandradaya-investasi.com/file-storage/N0YzSzZULzNFMm4yTWhCaWVhVXNTYXgrWXd3S1VZbzR5NDVMQXR1SThBV2pkaFlqYy9PNmVKckpkYWF0WW5QZCtCV09tc3NiUlozaXhzWjlaNW5FT1E9PQ.webp";
@@ -17,6 +18,7 @@ interface HeroNewsProps {
 }
 
 export function HeroNews({ latestNewsData }: HeroNewsProps) {
+  const t = useTranslations('Media')
   const sliderData = latestNewsData.map((item) => ({
     id: item.data.id,
     title: item.data.title,
@@ -93,7 +95,7 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
                     href={slide.linkUrl}
                     className="text-[#2474A5] flex items-center text-[12px] gap-2"
                   >
-                    Baca selengkapnya
+                    {t('Media')}
                     <ChevronRight className="text-2xl" />
                   </Link>
                 </div>

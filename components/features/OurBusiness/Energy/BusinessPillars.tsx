@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { TabButton } from "./TabButton";
 import { TabContent } from "./TabContent";
+import { useTranslations } from "next-intl";
 
 interface TabContentItem {
   id: number;
@@ -29,6 +30,7 @@ interface BusinessPillarsProps {
 }
 
 export const BusinessPillars: React.FC<BusinessPillarsProps> = ({ title, tabs }) => {
+  const t = useTranslations('OurBusiness.Energy')
   const [activeTabId, setActiveTabId] = useState(tabs[0]?.id || null);
 
   const handleTabClick = (tabId: number) => {
@@ -70,7 +72,7 @@ export const BusinessPillars: React.FC<BusinessPillarsProps> = ({ title, tabs })
           <TabContent tab={activeTab} />  
         ) : (
           <div className="text-white p-20 text-center">
-            Please select a tab.
+            {t('help')}
           </div>
         )}
       </div>

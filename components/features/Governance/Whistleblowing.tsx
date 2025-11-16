@@ -3,6 +3,7 @@ import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { GovernanceSection } from "@/types/Governances/Governance"; // Import the type
+import { useTranslations } from "next-intl";
 
 interface WhistleblowingProps {
   data: GovernanceSection;
@@ -12,6 +13,7 @@ const SECTION_ID = "whistleblowing";
 const LINK_URL = "https://chandradaya-investasi.com/governance/whistleblowing";
 
 export function Whistleblowing({ data }: WhistleblowingProps) {
+  const t = useTranslations('Investor.Governance')
   // Use data from props.
   const TITLE = data.title || "Whistleblowing";
   const CONTENT_HTML = data.content || "";
@@ -43,7 +45,7 @@ export function Whistleblowing({ data }: WhistleblowingProps) {
               rel="noopener noreferrer"
               className="px-6 py-2 rounded-full border border-white flex items-center gap-2 w-fit mt-8"
             >
-              Submit Your Concerns
+              {t('cta_whistle')}
               <ArrowUpRight size={16} />
             </Link>
           </div>

@@ -69,6 +69,7 @@ export const Solution: React.FC<BusinessSolutionsProps> = ({
             description={solution.description || ""} 
             imageUrl={solution.imageUrl}
             linkHref={solution.linkHref}
+            linkText={"Learn More"}
           />
         ))}
       </div>

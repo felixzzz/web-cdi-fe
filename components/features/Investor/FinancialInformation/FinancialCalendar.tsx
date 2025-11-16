@@ -18,6 +18,7 @@ import {
   PaginationMeta,
 } from "@/types/Investor/Financial"; // Corrected import path
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 // --- Helper Types & Functions ---
 
@@ -77,6 +78,7 @@ interface FinancialCalendarProps {
 }
 
 export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
+  const t = useTranslations('Investor.Financial')
   // State for raw API items, pagination, filters, and loading
   const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
     flattenData(initialData)
@@ -174,12 +176,12 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
         id="calendar-heading"
         className="text-neutral-800 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-3"
       >
-        Financial Calendar
+        {t('title')}
       </h2>
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
         <span>
-          Documents are available in both English and Bahasa Indonesia.
+        {t('subtitle')}
         </span>
       </div>
       <nav
@@ -234,7 +236,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
               setSearchQuery(e.target.value);
             }}
             className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-blue-base"
-            placeholder="Search anything..."
+            placeholder={t('search')}
           />
         </div>
       </div>
@@ -293,7 +295,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                             alt="See all icon"
                             className="inline-block"
                           />{" "}
-                          View
+                          {t('download_view')}
                         </Link>
                         <a
                           href={report.downloadUrl}
@@ -308,7 +310,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                             alt="Download icon"
                             className="inline-block"
                           />{" "}
-                          Download
+                          {t('download_download')}
                         </a>
                       </div>
                     </div>
@@ -319,7 +321,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
           ))
         ) : (
           <p className="text-center text-neutral-8 py-20">
-            No reports found matching your criteria.
+            {t('not_found')}
           </p>
         )}
       </section>

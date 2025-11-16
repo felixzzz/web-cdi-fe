@@ -4,8 +4,10 @@ import { Information } from "@/components/features/Homepage/Information";
 import { awardsService } from "@/services/AboutUs/AwardsService";
 import { informationService } from "@/services/Global/informationService";
 import { AwardsPageProps } from "@/types/AboutUs/Awards";
+import { getTranslations } from "next-intl/server";
 
 export default async function Page({ params: { locale } }: AwardsPageProps) {
+  const t = await getTranslations("Awards")
   const [
     awardsPageData,
     quickLinksData,
@@ -38,8 +40,8 @@ export default async function Page({ params: { locale } }: AwardsPageProps) {
         initialMembershipResponse={membershipResponse}
       />
       <Information
-        eyebrow="QUICK LINKS"
-        title="Need to access detailed information?"
+        eyebrow={t('eye_information')}
+        title={t('title_information')}
         backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
         links={quickLinksData}
       />

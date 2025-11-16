@@ -1,11 +1,13 @@
 import React from "react";
 import { TableInvestorSection } from "@/types/Investor/Report";
+import { useTranslations } from "next-intl";
 
 interface FinancialTableProps {
   data: TableInvestorSection;
 }
 
 export function FinancialTable({ data }: FinancialTableProps) {
+  const t = useTranslations('Investor.Report')
   const headers = data.content_table_trans?.headers || [];
   const tableRows = data.content_table_trans?.tableData || [];
   const note = data.title;
@@ -29,7 +31,7 @@ export function FinancialTable({ data }: FinancialTableProps) {
 
       <div className="table-main overflow-x-auto border border-neutral-500">
         <table className="w-full border-collapse">
-          <caption className="sr-only">Financial Data Table</caption>
+          <caption className="sr-only">{t('financial_title')}</caption>
 
           <thead className="bg-[#2474A5] text-white">
             <tr className="border-b border-neutral-500">

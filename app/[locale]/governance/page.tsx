@@ -12,6 +12,7 @@ import { Whistleblowing } from "@/components/features/Governance/Whistleblowing"
 import { informationService } from "@/services/Global/informationService";
 import { governanceService } from "@/services/Governance/GovernanceService";
 import { GovernancePageProps } from "@/types/Governances/Governance";
+import { getTranslations } from "next-intl/server";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -24,6 +25,7 @@ const aboutLinks = [
 export default async function Page({
   params: { locale },
 }: GovernancePageProps) {
+  const t = await getTranslations('Investor.Governance')
   const [
     governanceData,
     corporateFiles,
@@ -115,8 +117,8 @@ export default async function Page({
         <Policy data={governance_policy} />
         <Whistleblowing data={governance_whistleblowing} />
         <Information
-          eyebrow="QUICK LINKS"
-          title="Need to access detailed information?"
+          eyebrow={t('eye_information')}
+          title={t('title_information')}
           backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
           links={quickLinksData}
         />

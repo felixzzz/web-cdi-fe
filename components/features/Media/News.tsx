@@ -16,6 +16,7 @@ import {
   ArticleItem,
   PressReleaseItem,
 } from "@/types/Media/Media";
+import { useTranslations } from "next-intl";
 
 interface NewsProps {
   mediaData: NewsApiResponse;
@@ -26,6 +27,7 @@ const ITEMS_PER_PAGE = 6;
 const FILE_STORAGE_URL = "https://chandradaya-investasi.com/file-storage/";
 
 export function News({ mediaData, pressReleaseData }: NewsProps) {
+  const t = useTranslations("Media");
   const [activeTab, setActiveTab] = useState("news");
   const [activeCategory, setActiveCategory] = useState("Semua");
   const [currentPage, setCurrentPage] = useState(1);
@@ -108,7 +110,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
               : "border-b-neutral-6"
           )}
         >
-          News
+          {t("News")}
         </button>
         <button
           onClick={() => handleTabClick("press-release")}
@@ -119,7 +121,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
               : "border-b-neutral-6"
           )}
         >
-          Press Release
+          {t("press_release")}
         </button>
       </nav>
 
@@ -192,6 +194,8 @@ function ArticleCard({
   date: string;
   title: string;
 }) {
+  const t = useTranslations("Media");
+
   return (
     <Link
       href={href}
@@ -214,7 +218,7 @@ function ArticleCard({
             {title}
           </h3>
           <div className="text-[#2474A5] flex items-center gap-2 cursor-pointer mt-auto">
-            Baca artikel selengkapnya <ChevronRight className="text-2xl" />
+            {t("read_article_more")} <ChevronRight className="text-2xl" />
           </div>
         </div>
       </article>
@@ -223,6 +227,8 @@ function ArticleCard({
 }
 
 function PressReleaseCard({ item }: { item: PressReleaseItem }) {
+  const t = useTranslations("Media");
+
   const viewUrl = `${FILE_STORAGE_URL}${item.file_en.path}`;
   const downloadUrlEn = `${FILE_STORAGE_URL}${item.file_en.path}`;
   const downloadUrlId = `${FILE_STORAGE_URL}${item.file_id.path}`;
@@ -235,9 +241,7 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
     "https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg";
 
   return (
-    <li
-       className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 md:gap-y-0"
-    >
+    <li className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 md:gap-y-0">
       <div className="w-full max-w-3xl">
         <h3 className="text-neutral-13 mb-2 text-lg font-medium line-clamp-2">
           {item.name_id}
@@ -274,8 +278,8 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
               alt="View icon"
               className="inline-block"
             />
-            View
           </Link>
+          {t("download_view")}
           <Link
             href={downloadUrlEn}
             className="flex items-center gap-2 text-blue-base font-medium"
@@ -290,7 +294,7 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
               alt="Download icon"
               className="inline-block"
             />
-            Download-EN
+            {t("download_en")}
           </Link>
           <Link
             href={downloadUrlId}
@@ -306,7 +310,7 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
               alt="Download icon"
               className="inline-block"
             />
-            Download-ID
+            {t("download_id")}
           </Link>
         </div>
       </div>
@@ -334,7 +338,7 @@ function Pagination({
       className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col md:flex-row"
     >
       <p className="text-neutral-900 text-sm max-lg:hidden">
-        {startItem}-{endItem} dari {totalItems} items
+        {startItem}-{endItem} for {totalItems} items
       </p>
       <ul className="flex items-center justify-center gap-2">
         <li>
@@ -357,7 +361,7 @@ function Pagination({
             <ChevronLeft size={16} />
           </button>
         </li>
-        <li className="font-medium px-2">{`Halaman ${currentPage} dari ${totalPages}`}</li>
+        <li className="font-medium px-2">{`Page ${currentPage} for ${totalPages}`}</li>
         <li>
           <button
             onClick={() => onPageChange((p) => Math.min(totalPages, p + 1))}
@@ -380,7 +384,7 @@ function Pagination({
         </li>
       </ul>
       <div className="text-neutral-900 text-sm lg:hidden">
-        {startItem}-{endItem} dari {totalItems} items
+        {startItem}-{endItem} for {totalItems} items
       </div>
     </nav>
   );

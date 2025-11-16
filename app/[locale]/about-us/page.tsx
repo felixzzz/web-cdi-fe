@@ -13,6 +13,7 @@ import { convertHtmlToReact } from "@/lib/htmlUtils";
 import { Information } from "@/components/features/Homepage/Information";
 import { informationService } from "@/services/Global/informationService";
 import { AboutPageProps } from "@/types/AboutUs/About";
+import { getTranslations } from "next-intl/server";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -26,6 +27,8 @@ const stripHtml = (html: string | null) =>
   html ? html.replace(/<[^>]+>/g, "") : "";
 
 export default async function Page({ params: { locale } }: AboutPageProps) {
+  const t = await getTranslations("AboutUs");
+
   const [aboutData, quickLinksData, historyData, milstoneData, profileData] =
     await Promise.all([
       aboutService.getAboutPageData(locale),
@@ -53,11 +56,13 @@ export default async function Page({ params: { locale } }: AboutPageProps) {
   const visionData = {
     statement: stripHtml(about_us_vision.content),
     imageUrl: about_us_vision.file_url,
+    title: "Our Vision"
   };
-
+  
   const missionData = {
     statement: stripHtml(about_us_mission.content),
     imageUrl: about_us_mission.file_url,
+    title: "Our Mission"
   };
 
   return (
@@ -117,8 +122,8 @@ export default async function Page({ params: { locale } }: AboutPageProps) {
           data={profileData}
         />
         <Information
-          eyebrow="QUICK LINKS"
-          title="Need to access detailed information?"
+          eyebrow={t('eye_information')}
+          title={t('title_information')}
           backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
           links={quickLinksData}
         />

@@ -21,6 +21,7 @@ import {
 import {
   publicationService,
 } from "@/services/Investor/PublicationServices";
+import { useTranslations } from "next-intl";
 
 // --- Helper types and functions ---
 interface TransformedItem {
@@ -88,6 +89,7 @@ interface PublicationsProps {
 }
 
 export function Publications({ locale, initialData, initialTab }: PublicationsProps) {
+  const t = useTranslations('Investor.Publication')
   const [activeTab, setActiveTab] = useState<PublicationTab>(initialTab);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -267,7 +269,7 @@ export function Publications({ locale, initialData, initialTab }: PublicationsPr
                             alt="See all icon"
                             className="inline-block"
                           />{" "}
-                          View
+                          {t('download_view')}
                         </Link>
                         <a
                           href={item.downloadUrl}
@@ -281,8 +283,8 @@ export function Publications({ locale, initialData, initialTab }: PublicationsPr
                             height={20}
                             alt="Download icon"
                             className="inline-block"
-                          />{" "}
-                          Download
+                            />{" "}
+                            {t('download_download')}
                         </a>
                       </div>
                     </div>
@@ -290,7 +292,7 @@ export function Publications({ locale, initialData, initialTab }: PublicationsPr
                 ))
               ) : (
                 <p className="text-center text-neutral-8 py-16">
-                  No publications found matching your search.
+                  {t('help')}
                 </p>
               )}
             </section>

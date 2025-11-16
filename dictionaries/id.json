@@ -1,0 +1,29 @@
+{
+  "Report": {
+    "dawnload_title": "Unduh Semua",
+    "see_title": "Lihat Semua",
+    "description": "Dokumen tersedia dalam bahasa Inggris dan Bahasa Indonesia. Ubah bahasa situs web untuk melihatnya dalam bahasa lain."
+  },
+  "Homepage": {
+    "more": "Pelajari Lebih Lanjut",
+    "about": "Tentang Kami",
+    "eye_report": "DOKUMEN TERBARU",
+    "title_report": "Laporan Keuangan",
+    "eye_information": "TAUTAN CEPAT",
+    "title_information": "Butuh akses informasi mendetail?",
+    "journey_career": "Bergabung Bersama Kami",
+    "journey_awards": "Semua Penghargaan"
+  },
+  "AboutUs": {
+    "company_profile_view": "Lihat",
+    "company_profile_download": "Unduh",
+    "eye_information": "TAUTAN CEPAT",
+    "title_information": "Butuh akses informasi mendetail?"
+  },
+  "Management": {
+    "company_profile_view": "Lihat",
+    "company_profile_download": "Unduh",
+    "eye_information": "TAUTAN CEPAT",
+    "title_information": "Butuh akses informasi mendetail?"
+  }
+}

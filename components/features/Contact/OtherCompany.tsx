@@ -6,12 +6,14 @@ import {
   OtherCompanyAddressesApiResponse,
   LocalizedContactAddress,
 } from "@/types/Contact/Contact";
+import { useTranslations } from "next-intl";
 
 interface OtherCompanyProps {
   companyAddressData: OtherCompanyAddressesApiResponse;
 }
 
 export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
+  const t = useTranslations('Contact')
   return (
     <section
       aria-labelledby="other-addresses-heading"
@@ -22,7 +24,7 @@ export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
           id="other-addresses-heading"
           className="text-neutral-13 text-2xl md:text-[38px] md:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-6 mb-8"
         >
-          Other Company Addresses:
+          {t('other_company')}
         </h2>
 
         <ol className="flex flex-col gap-10">

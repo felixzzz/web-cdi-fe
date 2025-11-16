@@ -9,6 +9,7 @@ import {
   CalendarEventItem,
   PaginationMeta,
 } from "@/types/Investor/Report";
+import { useTranslations } from "next-intl";
 
 interface Report {
   id: number;
@@ -59,6 +60,7 @@ interface FinancialCalendarProps {
 }
 
 export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
+  const t = useTranslations('Investor.Report')
   const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
     flattenData(initialData)
   );
@@ -153,14 +155,13 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
         id="calendar-heading"
         className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-3"
       >
-        Financial Calendar
+        {t('calendar_title')}
       </h2>
 
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
         <span>
-          Documents are available in both English and Bahasa Indonesia. Change
-          the website language to view them in another language.
+          {t('calendar_subtitle')}
         </span>
       </div>
 
@@ -209,7 +210,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-[#2474A5]"
-            placeholder="Search anything..."
+            placeholder={t('search')}
           />
         </div>
       </div>
@@ -259,7 +260,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                     alt="See all icon"
                     className="inline-block"
                   />{" "}
-                  View
+                  {t('download_view')}
                 </a>
                 <a
                   href={report.downloadUrl}
@@ -274,14 +275,14 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                     alt="Download icon"
                     className="inline-block"
                   />{" "}
-                  Download
+                  {t('download_download')}
                 </a>
               </div>
             </article>
           ))
         ) : (
           <p className="text-center text-neutral-8 py-10">
-            No reports found matching your criteria.
+            {t('not_found')}
           </p>
         )}
       </section>
@@ -294,7 +295,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
               disabled={pagination.current_page === 1 || isLoading}
               className="px-4 py-2 border rounded disabled:opacity-50"
             >
-              Previous
+              {t('previous')}
             </button>
             <span className="px-4 py-2">
               Page {pagination.current_page} of {pagination.last_page}
@@ -306,7 +307,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
               }
               className="px-4 py-2 border rounded disabled:opacity-50"
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

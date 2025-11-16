@@ -7,6 +7,8 @@ export interface ReportItemProps {
   size: string;
   viewUrl: string;
   downloadUrl: string;
+  tagView: string;
+  tagDawnload: string;
 }
 
 export const ReportItem: React.FC<ReportItemProps> = ({
@@ -15,6 +17,8 @@ export const ReportItem: React.FC<ReportItemProps> = ({
   size,
   viewUrl,
   downloadUrl,
+  tagView,
+  tagDawnload,
 }) => {
   return (
     <li className="py-8 border-b border-b-neutral-5 flex justify-between flex-col gap-y-2 lg:gap-y-0">
@@ -52,7 +56,7 @@ export const ReportItem: React.FC<ReportItemProps> = ({
               alt="See all icon"
               className="inline-block"
             />
-            View
+            {tagView}
           </Link>
           <Link
             href={downloadUrl}
@@ -67,7 +71,7 @@ export const ReportItem: React.FC<ReportItemProps> = ({
               alt="Download icon"
               className="inline-block"
             />
-            Download
+            {tagDawnload}
           </Link>
         </div>
       </div>

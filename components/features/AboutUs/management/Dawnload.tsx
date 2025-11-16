@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { DownloadItem } from "@/types/AboutUs/Management";
+import { useTranslations } from "next-intl";
 
 interface DownloadsProps {
   id?: string;
@@ -16,6 +17,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
   subtitle,
   items,
 }) => {
+  const t = useTranslations("Management")
   return (
     <section
       id={id}
@@ -39,7 +41,6 @@ export const Downloads: React.FC<DownloadsProps> = ({
           />
         </div>
 
-        {/* Loop over the items array */}
         {items.map((item) => (
           <article
             key={item.title}
@@ -78,7 +79,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
                   alt="View icon"
                   className="inline-block"
                 />
-                View
+                {t('download_view')}
               </Link>
               <Link
                 href={item.downloadUrl}
@@ -93,7 +94,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
                   alt="Download icon"
                   className="inline-block"
                 />
-                Download
+                {t('download_download')}
               </Link>
             </div>
           </article>

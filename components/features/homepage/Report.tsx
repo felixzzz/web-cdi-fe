@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ReportItem, ReportItemProps } from "./ReportItem";
 import { Languages, MoveRight } from "lucide-react";
 import { ApiReportItem } from "@/types/Homepage/home";
+import { useTranslations } from "next-intl";
 
 interface ReportSectionProps {
   eyebrow: string;
@@ -19,6 +20,7 @@ export const Report: React.FC<ReportSectionProps> = ({
   seeAllUrl,
   reports,
 }) => {
+  const t = useTranslations("Report")
   return (
     <section
       id="home_report"
@@ -45,7 +47,7 @@ export const Report: React.FC<ReportSectionProps> = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              Download All
+              {t('dawnload_title')}
               <Image
                 src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download.svg"
                 width={16}
@@ -57,8 +59,8 @@ export const Report: React.FC<ReportSectionProps> = ({
             <Link
               href={seeAllUrl}
               className="px-6 py-2 rounded-full whitespace-nowrap border border-[#2474A5] flex items-center gap-2 text-[#2474A5]"
-            >
-              See All
+              >
+              {t('see_title')}
               <MoveRight className="font-light" size={16} />
             </Link>
           </div>
@@ -67,8 +69,7 @@ export const Report: React.FC<ReportSectionProps> = ({
         <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
           <Languages size={16} />
           <span>
-            Documents are available in both English and Bahasa Indonesia. Change
-            the website language to view them in another language.
+              {t('description')}
           </span>
         </div>
 
@@ -78,6 +79,8 @@ export const Report: React.FC<ReportSectionProps> = ({
               title: report.name,
               date: report.date,
               size: report.file.size,
+              tagView:"lihat",
+              tagDawnload:"Dawnload",
               viewUrl: `https://chandradaya-investasi.com/file/preview/default/${report.type}/${report.ulid}/${report.name_slug}`,
               downloadUrl: `https://chandradaya-investasi.com/file/download/default/${report.type}/${report.ulid}/`,
             };

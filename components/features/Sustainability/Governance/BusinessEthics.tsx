@@ -2,12 +2,14 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { ApiDataItem } from "@/types/Sustainabilitys/Governance";
+import { useTranslations } from "next-intl";
 
 interface BusinessEthicsProps {
   data: ApiDataItem;
 }
 
 export function BusinessEthics({ data }: BusinessEthicsProps) {
+  const t = useTranslations('Sustainability.Governance')
   if (!data) {
     return null;
   }
@@ -87,7 +89,7 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
                     alt="See all icon"
                     className="inline-block"
                   />
-                  View
+                {t('download_view')}
                 </Link>
                 <a
                   href={ctaDownloadUrl}
@@ -102,7 +104,7 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
                     alt="See all icon"
                     className="inline-block"
                   />{" "}
-                  Download
+                  {t('download_download')}
                 </a>
               </div>
             </div>

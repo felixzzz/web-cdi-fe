@@ -15,10 +15,13 @@ import { informationService } from "@/services/Global/informationService";
 import { homeService } from "@/services/Homepage/homeService";
 import { HomePageProps } from "@/types/Homepage/home";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-// import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 
 export default async function Page({ params: { locale } }: HomePageProps) {
+
+  const t = await getTranslations("Homepage");
+
   const [homeData, reportData, quickLinksData, articleData] = await Promise.all(
     [
       homeService.getHomePageData(locale),
@@ -70,12 +73,12 @@ export default async function Page({ params: { locale } }: HomePageProps) {
   const linksData: JourneyLink[] = [
     {
       href: "https.careers.capcx.com/",
-      text: "Join with Us",
+      text: t('journey_career'),
       external: true,
     },
     {
       href: "/about-us/awards",
-      text: "All Awards",
+      text: t('journey_awards'),
       external: false,
     },
   ];
@@ -88,14 +91,14 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         title={home_banner.title}
         subtitle={home_banner.content}
         linkHref="/about-us"
-        linkText="Learn More"
+        linkText={t('more')}
         linkIcon={<ArrowRight size={14} />}
       />
       <AboutUs
         backgroundImageUrl={home_about_section.file_url}
         title={home_about_section.title}
         linkHref="/about-us"
-        linkText="About Us"
+        linkText={t('about')}
         linkIcon={<ArrowUpRight size={14} />}
       >
         <div
@@ -133,16 +136,16 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         />
       </Journey>
       <Report
-        eyebrow="LATEST DOCUMENTS"
-        title="Financial Reports"
+        eyebrow={t('eye_report')}
+        title={t('title_report')}
         downloadAllUrl="https://..."
         seeAllUrl="/investor/financial-information"
         reports={reportData}
       />
       <Article articles={articleData} />
       <Information
-        eyebrow="QUICK LINKS"
-        title="Need to access detailed information?"
+        eyebrow={t('eye_information')}
+        title={t('title_information')}
         backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
         links={quickLinksData}
       />

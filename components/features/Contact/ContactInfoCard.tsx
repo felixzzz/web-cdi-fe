@@ -10,6 +10,7 @@ interface ContactInfoCardProps {
   address: string;
   phone: string;
   email: string;
+  hastag: string;
 }
 
 export function ContactInfoCard({
@@ -20,6 +21,7 @@ export function ContactInfoCard({
   address,
   phone,
   email,
+  hastag,
 }: ContactInfoCardProps) {
   return (
     <div className="relative lg:max-h-[675px] lg:max-w-[456px] h-full rounded-xl flex flex-col p-6 justify-between max-lg:min-h-[456px] overflow-hidden">
@@ -31,20 +33,17 @@ export function ContactInfoCard({
         className="z-0"
         priority
       />
-      {/* #YourGrowthPartner */}
       <div className="relative z-10">
         <p className="mb-0 text-[22px] font-medium text-white">
-          #YourGrowthPartner
+         {hastag}
         </p>
       </div>
 
-      {/* Kotak Info Putih */}
       <div className="relative z-10 rounded-xl border border-neutral-400 p-4 bg-white">
         <div className="mb-1 flex flex-col gap-2">
           <h3 className="text-[22px] text-[#47C1EA] font-medium">
             {companyName}
           </h3>
-          {/* --- SUBTITLE YANG HILANG KINI DITAMBAHKAN --- */}
           <p className="text-base text-neutral-800 font-medium">
             {companySubtitle}
           </p>

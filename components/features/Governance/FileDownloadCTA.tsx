@@ -1,4 +1,5 @@
 // components/YourFolder/FileDownloadCTA.tsx
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
 
@@ -15,6 +16,7 @@ export function FileDownloadCTA({
   viewUrl,
   downloadUrl,
 }: FileDownloadCTAProps) {
+  const t = useTranslations('Investor.Governance')
   return (
     <div
       className="p-6 flex flex-col md:flex-row md:items-center md:justify-between w-full
@@ -54,7 +56,7 @@ export function FileDownloadCTA({
             height={20}
             alt="View icon"
           />{" "}
-          View
+          {t('download_view')}
         </a>
         <a
           href={downloadUrl}
@@ -67,8 +69,8 @@ export function FileDownloadCTA({
             width={20}
             height={20}
             alt="Download icon"
-          />{" "}
-          Download
+            />{" "}
+            {t('download_download')}
         </a>
       </div>
     </div>

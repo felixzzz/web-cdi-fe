@@ -8,8 +8,13 @@ import { SubNavbar } from "@/components/features/AboutUs/management/SubNavbar";
 import { TeamMember } from "@/components/features/AboutUs/management/TeamMemberCard";
 import { Information } from "@/components/features/Homepage/Information";
 import { managementService } from "@/services/AboutUs/ManagementService";
-import { DownloadItem, ManagementPageProps, TableManagementSection } from "@/types/AboutUs/Management";
+import {
+  DownloadItem,
+  ManagementPageProps,
+  TableManagementSection,
+} from "@/types/AboutUs/Management";
 import { informationService } from "@/services/Global/informationService";
+import { getTranslations } from "next-intl/server";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -19,14 +24,19 @@ const aboutLinks = [
   { text: "Company Profile", href: "/about-us/company-profile" },
 ];
 
-export default async function Page({ params: { locale } }: ManagementPageProps) {
-  const [managementData, quickLinksData, BodData, BocData, GuideData] = await Promise.all([
-    managementService.getManagementPageData(locale),
-    informationService.getHomeQuickLinks(locale),
-    managementService.getManagementBodData(locale),
-    managementService.getManagementBocData(locale),
-    managementService.getManagementGuideData(locale),
-  ]);
+export default async function Page({
+  params: { locale },
+}: ManagementPageProps) {
+  const t = await getTranslations("Management");
+
+  const [managementData, quickLinksData, BodData, BocData, GuideData] =
+    await Promise.all([
+      managementService.getManagementPageData(locale),
+      informationService.getHomeQuickLinks(locale),
+      managementService.getManagementBodData(locale),
+      managementService.getManagementBocData(locale),
+      managementService.getManagementGuideData(locale),
+    ]);
 
   const {
     about_us_management_banner,
@@ -42,7 +52,7 @@ export default async function Page({ params: { locale } }: ManagementPageProps) 
 
   const IMAGE_BASE_URL = "https://chandradaya-investasi.com/file-storage/";
   const FILE_PREVIEW_BASE_URL =
-    "https://chandradaya-investasi.com/file/preview/"; 
+    "https://chandradaya-investasi.com/file/preview/";
   const FILE_DOWNLOAD_BASE_URL =
     "https://chandradaya-investasi.com/file/download/";
 
@@ -60,12 +70,12 @@ export default async function Page({ params: { locale } }: ManagementPageProps) 
     href: `/about-us/management/team/${member.ulid}`,
   }));
 
-  const guidelineItems: DownloadItem[] = GuideData.map((guide) => ({ 
-    title: guide.name, 
+  const guidelineItems: DownloadItem[] = GuideData.map((guide) => ({
+    title: guide.name,
     size: guide.file?.size || "N/A",
-    viewUrl: `${FILE_PREVIEW_BASE_URL}${guide.file?.path || ""}`, 
-    downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${guide.file?.path || ""}`, 
-    format: guide.file?.format || "pdf", 
+    viewUrl: `${FILE_PREVIEW_BASE_URL}${guide.file?.path || ""}`,
+    downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${guide.file?.path || ""}`,
+    format: guide.file?.format || "pdf",
   }));
 
   return (
@@ -87,7 +97,7 @@ export default async function Page({ params: { locale } }: ManagementPageProps) 
           }
         >
           <div
-          className="prose prose-invert prose-base text-neutral-300"
+            className="prose prose-invert prose-base text-neutral-300"
             // className="text-[12px] leading-[24px] font-normal text-white py-1"
             dangerouslySetInnerHTML={{
               __html: about_us_management_overview.content || "",
@@ -110,15 +120,15 @@ export default async function Page({ params: { locale } }: ManagementPageProps) 
           tableData={tableData.content_table_trans}
           showTable={about_us_corporate_structure_table_show.content === "show"}
         />
-       <Downloads
+        <Downloads
           id="company-profile"
-          title="Curious to learn more about Chandra Daya Investasi?"
-          subtitle="Gain deeper insights into our story, growth, and latest achievements by downloading our company profile"
+          title={t('download_title')}
+          subtitle={t('download_subtitle')}
           items={guidelineItems}
         />
         <Information
-          eyebrow="QUICK LINKS"
-          title="Need to access detailed information?"
+          eyebrow={t("eye_information")}
+          title={t("title_information")}
           backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
           links={quickLinksData}
         />

@@ -26,6 +26,9 @@ import {
   ContactUsFormValues,
 } from "@/schemas/contactUsSchema";
 import { ContactInfoCard } from "./ContactInfoCard";
+import { useTranslations } from "next-intl";
+import { CompanyLocationResponse } from "@/types/global/footer";
+import { ContactSectionData } from "@/types/Contact/Contact";
 
 const countries = [
   { id: 102, name: "Indonesia" },
@@ -36,7 +39,13 @@ const countries = [
 ];
 const topics = [{ id: 2, name: "Pilihan" }];
 
-export function HeroForm() {
+interface HeroFormProps {
+  contactData: CompanyLocationResponse;
+  pageData: ContactSectionData;
+}
+
+export function HeroForm({ contactData, pageData }: HeroFormProps) {
+  const t = useTranslations("Contact");
   const form = useForm<ContactUsFormValues>({
     resolver: zodResolver(contactUsSchema),
     defaultValues: {
@@ -55,21 +64,22 @@ export function HeroForm() {
 
   return (
     <div className="bg-gray-100 py-20">
-      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 pt-[5%]">
         <div className="grid md:grid-cols-3 gap-16">
           <ContactInfoCard
-            imageSrc="https://chandradaya-investasi.com/file-storage/YnBrNUxBOEdFaU9WTjJmc0tydThZRjJOUkxvOVlsb09UQXJkQUcveDJQZCtZZVBKYmovTlU2VWE2ckt5MmpidXhKc1d4aGpsd3FkRWpOd3dhZGxHTXc9PQ.webp"
+            imageSrc={pageData.file_url}
             imageAlt="CDI Group Team"
-            companyName="PT Chandra Daya Investasi Tbk"
-            companySubtitle="A member of Chandra Asri Group"
-            address="Wisma Barito Pacific Tower A, Lantai 5 Jl. Let. Jend. S. Parman Kav. 62 – 63, Jakarta Barat 11410, Indonesia"
-            phone="(+62-21) 530 7950"
-            email="(+62-21) 530 8930"
+            hastag={pageData.title}
+            companyName={contactData.name}
+            companySubtitle={contactData.sub_title}
+            address={contactData.localized_main.address}
+            phone={contactData.localized_main.phone}
+            email={contactData.localized_main.fax}
           />
 
           <div className="md:col-span-2">
             <p className="text-gray-900 font-medium text-2xl md:text-[38px] mb-8">
-              Thank you for your interest in CDI Group
+              {pageData.title}
             </p>
 
             <Form {...form}>
@@ -84,12 +94,13 @@ export function HeroForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                          First Name <span className="text-red-600">*</span>
+                          {t("firstname")}{" "}
+                          <span className="text-red-600">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Input Your First Name"
-                            className="input-custom" 
+                            placeholder={t("firstname_placeholder")}
+                            className="input-custom"
                             {...field}
                           />
                         </FormControl>
@@ -103,11 +114,13 @@ export function HeroForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                          Last Name <span className="text-red-600">*</span>
+                          {t("lastname")}{" "}
+                          <span className="text-red-600">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Input Your Last Name"
+                            // placeholder=""
+                            placeholder={t("lastname")}
                             className="input-custom"
                             {...field}
                           />
@@ -130,7 +143,8 @@ export function HeroForm() {
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="Input Your Email"
+                            // placeholder=""
+                            placeholder={t("email_placeholder")}
                             className="input-custom"
                             {...field}
                           />
@@ -145,7 +159,7 @@ export function HeroForm() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                          Country <span className="text-red-600">*</span>
+                          {t("county")} <span className="text-red-600">*</span>
                         </FormLabel>
                         <Select
                           onValueChange={field.onChange}
@@ -153,7 +167,10 @@ export function HeroForm() {
                         >
                           <FormControl>
                             <SelectTrigger className="input-custom">
-                              <SelectValue placeholder="Select Your Country" />
+                              <SelectValue
+                                placeholder={t("county_placeholder")}
+                                // placeholder=""
+                              />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
@@ -179,7 +196,7 @@ export function HeroForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                        Topic <span className="text-red-600">*</span>
+                        {t("topic")} <span className="text-red-600">*</span>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
@@ -187,15 +204,15 @@ export function HeroForm() {
                       >
                         <FormControl>
                           <SelectTrigger className="input-custom">
-                            <SelectValue placeholder="Select Topic" />
+                            <SelectValue
+                              placeholder={t("topic_placeholder")}
+                              //  placeholder=""
+                            />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
                           {topics.map((topic) => (
-                            <SelectItem
-                              key={topic.id}
-                              value={String(topic.id)}
-                            >
+                            <SelectItem key={topic.id} value={String(topic.id)}>
                               {topic.name}
                             </SelectItem>
                           ))}
@@ -212,11 +229,12 @@ export function HeroForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                        Add your questions <span className="text-red-600">*</span>
+                        {t("question")} <span className="text-red-600">*</span>
                       </FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Write your comment or additional question here"
+                          placeholder={t("question_placeholder")}
+                          // placeholder=""
                           className="input-custom !h-auto"
                           rows={8}
                           {...field}
@@ -230,9 +248,9 @@ export function HeroForm() {
                 <Button
                   type="submit"
                   className="bg-[#47C1EA] hover:bg-[#3ab0d8] px-6 py-2 rounded-full font-medium w-fit text-white cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed"
-                  disabled={form.formState.isSubmitting} 
+                  disabled={form.formState.isSubmitting}
                 >
-                  Submit
+                  {t("Submit")}
                 </Button>
               </form>
             </Form>

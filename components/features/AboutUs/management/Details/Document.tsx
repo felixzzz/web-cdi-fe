@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { DownloadItem } from "@/types/AboutUs/Management";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface DocumentDownloadProps {
   title?: string;
@@ -12,6 +13,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
   title = "Document",
   items,
 }) => {
+  const t = useTranslations("Management");
   if (!items || items.length === 0) {
     return null;
   }
@@ -67,7 +69,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
                   alt="View icon"
                   className="inline-block"
                 />
-                View
+                {t("download_view")}
               </Link>
               <Link
                 href={item.downloadUrl}
@@ -82,7 +84,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
                   alt="Download icon"
                   className="inline-block"
                 />
-                Download
+                {t("download_download")}
               </Link>
             </div>
           </article>

@@ -1,4 +1,5 @@
 import { informationService } from "@/services/Global/informationService";
+import { getTranslations } from "next-intl/server";
 
 interface PageProps {
   params: {
@@ -7,6 +8,7 @@ interface PageProps {
 }
 
 export default async function Page({ params: { locale } }: PageProps) {
+  const t = await getTranslations('Regulation')
   const data = await informationService.getCredentialData(locale);
 
   const termsData = data.terms_and_conditions;
@@ -15,7 +17,8 @@ export default async function Page({ params: { locale } }: PageProps) {
     return (
       <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 py-[25%] md:py-[8%]">
         <h1 className="text-neutral-13 font-medium text-2xl lg:text-[28px] mb-5">
-          Content not available.
+                    {t('title_not_found')}
+
         </h1>
       </section>
     );

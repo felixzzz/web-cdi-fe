@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { GovernanceSection } from "@/types/Governances/Governance";
+import { useTranslations } from "next-intl";
 
 interface PolicyProps {
   data: GovernanceSection;
@@ -10,6 +11,7 @@ interface PolicyProps {
 const LINK_URL = "https://chandradaya-investasi.com/governance/policy";
 
 export function Policy({ data }: PolicyProps) {
+  const t = useTranslations('Investor.Governance')
   const TITLE = data.title || "Policy";
   const CONTENT_HTML = data.content || "";
 
@@ -39,7 +41,7 @@ export function Policy({ data }: PolicyProps) {
               rel="noopener noreferrer"
               className="px-6 py-2 rounded-full border border-white flex items-center gap-2 w-fit mt-8"
             >
-              See All
+              {t('see_title')}
               <ArrowUpRight size={16} />
             </Link>
           </div>

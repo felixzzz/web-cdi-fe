@@ -5,13 +5,16 @@ import { ContactPageProps } from "@/types/Contact/Contact";
 // import { useTranslations } from "next-intl";
 
 export default async function Page({params: {locale}}: ContactPageProps) {
-  // const t = useTranslations("homepage");
-
-  const companyAddressData = await companyAddressService.getCompanyAddressPageData(locale);
+  const [getContactPageData, companyAddressData, getContactData] = await Promise.all([
+    companyAddressService.getContactPageData(locale),
+    companyAddressService.getCompanyAddressPageData(locale),
+    companyAddressService.getContactData(locale)
+  ])
 
   return (
     <main>
-      <HeroForm />
+      <HeroForm contactData={getContactData} 
+        pageData={getContactPageData}/>
       <OtherCompany companyAddressData={companyAddressData} />
     </main>
   );

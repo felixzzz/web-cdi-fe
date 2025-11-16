@@ -15,6 +15,7 @@ import {
   MembershipItem,
 } from "@/types/AboutUs/Awards";
 import { Pagination } from "./Pagination";
+import { useTranslations } from "next-intl";
 
 const mapAwardToCard = (item: AwardItem): Award => ({
   year: item.year,
@@ -60,6 +61,7 @@ export const Awards: React.FC<AwardsProps> = ({
   initialCertificationResponse,
   initialMembershipResponse,
 }) => {
+  const t = useTranslations('Awards')
   const [activeTab, setActiveTab] = useState<TabName>("Awards");
   const [selectedYear, setSelectedYear] = useState("All Year");
   const [modalImageUrl, setModalImageUrl] = useState<string | null>(null);
@@ -296,7 +298,7 @@ export const Awards: React.FC<AwardsProps> = ({
             </>
           ) : (
             <p className="text-white text-center text-lg min-h-[400px]">
-              No items found for the selected criteria.
+              {t('not_found')}
             </p>
           )}
         </div>

@@ -43,10 +43,12 @@ const DecorativeCorners: React.FC = () => {
 interface VisionMissionSectionProps {
   title: string;
   visionData: {
+    title: string;
     statement: string;
     imageUrl: string;
   };
   missionData: {
+    title: string;
     statement: string;
     imageUrl: string;
   };
@@ -91,7 +93,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
 
             <hr className="w-full border-white my-6" />
 
-            <p className="text-base font-medium">Our Vision</p>
+            <p className="text-base font-medium">{title}</p>
           </div>
 
           <div
@@ -113,7 +115,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
 
             <hr className="w-full border-white my-6" />
 
-            <p className="text-base font-medium">Our Mission</p>
+            <p className="text-base font-medium">{title}</p>
           </div>
         </div>
       </div>
