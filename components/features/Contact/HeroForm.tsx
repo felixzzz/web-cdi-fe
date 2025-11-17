@@ -159,7 +159,7 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                          {t("county")} <span className="text-red-600">*</span>
+                          {t("country")} <span className="text-red-600">*</span>
                         </FormLabel>
                         <Select
                           onValueChange={field.onChange}
@@ -168,7 +168,7 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                           <FormControl>
                             <SelectTrigger className="input-custom">
                               <SelectValue
-                                placeholder={t("county_placeholder")}
+                                placeholder={t("country_placeholder")}
                                 // placeholder=""
                               />
                             </SelectTrigger>
