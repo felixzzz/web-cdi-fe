@@ -11,7 +11,7 @@
     "title_report": "Laporan Keuangan",
     "eye_information": "TAUTAN CEPAT",
     "title_information": "Butuh akses informasi mendetail?",
-    "journey_career": "Bergabung Bersama Kami",
+    "journey_career": "Bergabunglah Bersama Kami",
     "journey_awards": "Semua Penghargaan"
   },
   "AboutUs": {
@@ -21,9 +21,92 @@
     "title_information": "Butuh akses informasi mendetail?"
   },
   "Management": {
-    "company_profile_view": "Lihat",
-    "company_profile_download": "Unduh",
+    "download_title": "Ingin tahu lebih banyak tentang Chandra Daya Investasi?",
+    "download_subtitle": "Dapatkan wawasan lebih mendalam tentang kisah, pertumbuhan, dan pencapaian terbaru kami dengan mengunduh profil perusahaan kami",
+    "download_view": "Lihat",
+    "download_download": "Unduh"
+  },
+  "Awards": {
+    "not_found": "Tidak ada item yang ditemukan untuk kriteria yang dipilih.",
     "eye_information": "TAUTAN CEPAT",
     "title_information": "Butuh akses informasi mendetail?"
+  },
+  "OurBusiness": {
+    "Energy": {
+      "help": "Silakan pilih tab."
+    },
+    "Water": {
+      "help": "Silakan pilih tab."
+    }
+  },
+  "Investor": {
+    "Financial": {
+      "not_found": "Tidak ada laporan yang ditemukan sesuai kriteria Anda.",
+      "download_view": "Lihat",
+      "download_download": "Unduh",
+      "search": "Cari apa saja...",
+      "title": "Kalender Keuangan",
+      "subtitle": "Dokumen tersedia dalam bahasa Inggris dan Bahasa Indonesia."
+    },
+    "Publication": {
+      "not_found": "Tidak ada laporan yang ditemukan sesuai kriteria Anda.",
+      "download_view": "Lihat",
+      "download_download": "Unduh",
+      "search": "Cari apa saja..."
+    },
+    "Report": {
+      "financial_title": "Tabel Data Keuangan",
+      "institution_title": "Lembaga & Profesional Pendukung",
+      "calendar_title": "Kalender Keuangan",
+      "calendar_subtitle": "Dokumen tersedia dalam bahasa Inggris dan Bahasa Indonesia. Ubah bahasa situs web untuk melihatnya dalam bahasa lain.",
+      "search": "Cari apa saja...",
+      "download_view": "Lihat",
+      "download_download": "Unduh",
+      "not_found": "Tidak ada laporan yang ditemukan sesuai kriteria Anda.",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya"
+    },
+    "Governance": {
+      "download_view": "Lihat",
+      "download_download": "Unduh",
+      "see_title": "Lihat Semua",
+      "cta_whistle": "Sampaikan Kekhawatiran Anda",
+      "eye_information": "TAUTAN CEPAT",
+      "title_information": "Butuh akses informasi mendetail?"
+    },
+    "Sustainability": {
+      "Governance": {
+        "download_view": "Lihat",
+        "download_download": "Unduh"
+      }
+    }
+  },
+  "Media": {
+    "Read_More": "Baca Selengkapnya",
+    "download_id": "Unduh-ID",
+    "download_en": "Unduh-EN",
+    "download_view": "Lihat",
+    "read_article_more": "Baca Artikel Selengkapnya",
+    "press_release": "Siaran Pers",
+    "News": "Berita"
+  },
+  "Contact": {
+    "Submit": "Kirim",
+    "question": "Tambahkan pertanyaan Anda",
+    "question_placeholder": "Tulis komentar atau pertanyaan tambahan Anda di sini",
+    "topic": "Topik",
+    "topic_placeholder": "Pilih Topik",
+    "country": "Negara",
+    "country_placeholder": "Pilih Negara Anda",
+    "email_placeholder": "Masukkan Email Anda",
+    "lastname": "Nama Belakang",
+    "lastname_placeholder": "Masukkan Nama Belakang Anda",
+    "firstname": "Nama Depan",
+    "firstname_placeholder": "Masukkan Nama Depan Anda",
+    "subtitle": "Terima kasih atas minat Anda pada CDI Group",
+    "other_company": "Alamat Perusahaan Lain:"
+  },
+  "Regulation": {
+    "title_not_found": "Konten tidak tersedia."
   }
 }

@@ -78,9 +78,9 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
           />
 
           <div className="md:col-span-2">
-            <p className="text-gray-900 font-medium text-2xl md:text-[38px] mb-8">
+            <h1 className="text-gray-900 font-medium text-2xl md:text-[38px] mb-8">
               {pageData.title}
-            </p>
+            </h1>
 
             <Form {...form}>
               <form

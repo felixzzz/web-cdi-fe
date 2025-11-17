@@ -84,9 +84,9 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
                     {slide.category}
                   </span>
                   <span className="text-sm text-neutral-10">{slide.date}</span>
-                  <h3 className="text-[22px] font-medium line-clamp-3 mt-4 text-neutral-13">
+                  <h1 className="text-[22px] font-medium line-clamp-3 mt-4 text-neutral-13">
                     {slide.title}
-                  </h3>
+                  </h1>
                   <p
                     className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3"
                     dangerouslySetInnerHTML={{ __html: slide.description }}
