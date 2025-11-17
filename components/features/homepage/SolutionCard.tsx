@@ -6,6 +6,7 @@ interface SolutionCardProps {
   description: string;
   imageUrl: string;
   linkHref: string;
+  linkText: string;
 }
 
 export const SolutionCard: React.FC<SolutionCardProps> = ({
@@ -13,6 +14,7 @@ export const SolutionCard: React.FC<SolutionCardProps> = ({
   description,
   imageUrl,
   linkHref,
+  linkText,
 }) => {
   return (
     <div
@@ -25,10 +27,10 @@ export const SolutionCard: React.FC<SolutionCardProps> = ({
                    transition-opacity duration-300 ease-out"
       >
         <div className="absolute inset-0 flex flex-col justify-between px-5 lg:px-10 pb-5 lg:pb-10 pt-[35%] text-white z-10">
-          <h2 className="text-2xl lg:text-[32px] xl:text-[52px] xl:leading-[60px] font-medium text-shadow-1">
+          <h2 className="text-2xl md:text-[40px] md:leading-[40px] xl:text-[52px] xl:leading-[60px] font-medium text-shadow-1">
             {title}
           </h2>
-          <div className="content !font-normal text-shadow-1 !text-white">
+          <div className="content !font-normal text-justify text-shadow-1 !text-neutral-300">
             <p>{description}</p>
           </div>
         </div>
@@ -41,9 +43,9 @@ export const SolutionCard: React.FC<SolutionCardProps> = ({
       >
         <Link
           href={linkHref}
-          className="bg-white/16 text-white px-6 py-2 border border-white rounded-full whitespace-nowrap gap-3 flex items-center w-fit mt-10"
+          className="bg-white/20 text-white px-6 py-2 border border-white rounded-full whitespace-nowrap gap-3 flex items-center w-fit mt-10"
         >
-          Learn More
+          {linkText}
           <ArrowUpRight size={14} />
         </Link>
       </div>

@@ -5,19 +5,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { clsx } from "clsx";
 import {
-  ArrowRight,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-  Download,
 } from "lucide-react";
 import {
   NewsApiResponse,
   PressReleaseApiResponse,
   ArticleItem,
   PressReleaseItem,
-} from "@/types/Media/Media"; 
+} from "@/types/Media/Media";
+import { useTranslations } from "next-intl";
 
 interface NewsProps {
   mediaData: NewsApiResponse;
@@ -25,8 +24,10 @@ interface NewsProps {
 }
 
 const ITEMS_PER_PAGE = 6;
+const FILE_STORAGE_URL = "https://chandradaya-investasi.com/file-storage/";
 
 export function News({ mediaData, pressReleaseData }: NewsProps) {
+  const t = useTranslations("Media");
   const [activeTab, setActiveTab] = useState("news");
   const [activeCategory, setActiveCategory] = useState("Semua");
   const [currentPage, setCurrentPage] = useState(1);
@@ -80,10 +81,8 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
       };
     }, [currentPage, pressReleaseData.items]);
 
-  const totalPages =
-    activeTab === "news" ? totalNewsPages : totalPressPages;
-  const totalItems =
-    activeTab === "news" ? totalNewsItems : totalPressItems;
+  const totalPages = activeTab === "news" ? totalNewsPages : totalPressPages;
+  const totalItems = activeTab === "news" ? totalNewsItems : totalPressItems;
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -99,30 +98,30 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
   return (
     <section
       id="content-media-section"
-      className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] py-20 bg-white"
+      className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 py-20 bg-white"
     >
       <nav className="grid grid-cols-2">
         <button
           onClick={() => handleTabClick("news")}
           className={clsx(
-            "border-b-2 text-neutral-13 text-lg text-center p-4 hover:border-b-blue-base hover:border-b-4 hover:font-medium transition",
+            "border-b-2 text-neutral-13 text-lg text-center p-4 hover:border-b-[#2474A5] hover:border-b-4 hover:font-medium transition",
             activeTab === "news"
-              ? "border-b-4 !border-b-blue-base font-medium"
+              ? "border-b-4 !border-b-[#2474A5] font-medium"
               : "border-b-neutral-6"
           )}
         >
-          News
+          {t("News")}
         </button>
         <button
           onClick={() => handleTabClick("press-release")}
           className={clsx(
-            "border-b-2 text-neutral-13 text-lg text-center p-4 hover:border-b-blue-base hover:border-b-4 hover:font-medium transition",
+            "border-b-2 text-neutral-13 text-lg text-center p-4 hover:border-b-[#2474A5] hover:border-b-4 hover:font-medium transition",
             activeTab === "press-release"
-              ? "border-b-4 !border-b-blue-base font-medium"
+              ? "border-b-4 !border-b-[#2474A5] font-medium"
               : "border-b-neutral-6"
           )}
         >
-          Press Release
+          {t("press_release")}
         </button>
       </nav>
 
@@ -132,8 +131,8 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
             key={category}
             onClick={() => handleCategoryClick(category)}
             className={clsx(
-              "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-blue-base border border-blue-base hover:bg-blue-base hover:text-white transition",
-              activeCategory === category && "bg-blue-base text-white"
+              "text-xs md:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition",
+              activeCategory === category && "bg-[#2474A5] text-white"
             )}
             style={{
               display:
@@ -148,14 +147,14 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
       </nav>
 
       {activeTab === "news" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {paginatedArticles.map((article: ArticleItem) => (
             <ArticleCard
               key={article.id}
-              href={`/media/news/${article.slug}`} 
+              href={`/media/news/${article.slug}`}
               imageUrl={article.image}
               category={article.article_category.name_id}
-              date={article.date} 
+              date={article.date}
               title={article.title_id}
             />
           ))}
@@ -163,11 +162,11 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
       )}
 
       {activeTab === "press-release" && (
-        <div className="flex flex-col gap-4">
+        <ul className="flex flex-col">
           {paginatedPressReleases.map((press: PressReleaseItem) => (
             <PressReleaseCard key={press.id} item={press} />
           ))}
-        </div>
+        </ul>
       )}
 
       {totalPages > 1 && (
@@ -195,6 +194,8 @@ function ArticleCard({
   date: string;
   title: string;
 }) {
+  const t = useTranslations("Media");
+
   return (
     <Link
       href={href}
@@ -203,17 +204,12 @@ function ArticleCard({
       <article className="flex flex-col text-neutral-13 w-full">
         <div className="w-full aspect-square overflow-hidden">
           <div className="relative w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110">
-            <Image
-              src={imageUrl}
-              alt={title}
-              layout="fill"
-              objectFit="cover"
-            />
+            <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
           </div>
         </div>
         <div className="p-6 flex flex-col grow">
           <div className="flex items-center gap-4">
-            <span className="bg-neutral-5 px-3 py-1 text-sm rounded-full">
+            <span className="bg-neutral-300 px-3 py-1 text-sm rounded-full">
               {category}
             </span>
             <span className="text-sm text-neutral-10">{date}</span>
@@ -221,8 +217,8 @@ function ArticleCard({
           <h3 className="text-[22px] font-medium mt-4 mb-7 line-clamp-3 grow">
             {title}
           </h3>
-          <div className="text-blue-base flex items-center gap-2 cursor-pointer mt-auto">
-            Baca artikel selengkapnya <ArrowRight className="text-2xl" />
+          <div className="text-[#2474A5] flex items-center gap-2 cursor-pointer mt-auto">
+            {t("read_article_more")} <ChevronRight className="text-2xl" />
           </div>
         </div>
       </article>
@@ -231,26 +227,94 @@ function ArticleCard({
 }
 
 function PressReleaseCard({ item }: { item: PressReleaseItem }) {
-  const downloadUrl = `https://chandradaya-investasi.com/file-storage/${item.file_id.path}`;
+  const t = useTranslations("Media");
+
+  const viewUrl = `${FILE_STORAGE_URL}${item.file_en.path}`;
+  const downloadUrlEn = `${FILE_STORAGE_URL}${item.file_en.path}`;
+  const downloadUrlId = `${FILE_STORAGE_URL}${item.file_id.path}`;
+
+  const pdfIcon =
+    "https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg";
+  const viewIcon =
+    "https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg";
+  const downloadIcon =
+    "https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg";
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-6 bg-white rounded-xl shadow-article border border-neutral-5 w-full">
-      <div className="flex-1">
-        <span className="text-sm text-neutral-10">{item.date}</span>
-        <h3 className="text-[22px] font-medium mt-2 text-neutral-13 line-clamp-2">
+    <li className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 md:gap-y-0">
+      <div className="w-full max-w-3xl">
+        <h3 className="text-neutral-13 mb-2 text-lg font-medium line-clamp-2">
           {item.name_id}
         </h3>
       </div>
-      <a
-        href={downloadUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex-shrink-0 text-xs lg:text-base cursor-pointer px-6 py-3 rounded-full flex items-center gap-2 text-white bg-blue-base border border-blue-base hover:bg-blue-dark transition"
-      >
-        <Download size={18} />
-        Download ({item.file_id.size})
-      </a>
-    </div>
+
+      <div className="flex flex-col md:flex-row justify-between w-full">
+        <div className="flex items-center text-base text-neutral-8 gap-3">
+          <div className="flex items-baseline gap-3">
+            <span>{item.date}</span>
+            <span>.</span>
+            <span>{item.file_en.size}</span>
+            <span>.</span>
+          </div>
+          <Image
+            src={pdfIcon}
+            width={28}
+            height={20}
+            alt="PDF icon"
+            className="inline-block"
+          />
+        </div>
+        <div className="flex flex-row items-center gap-4 sm:gap-8 w-full md:w-fit">
+          <Link
+            href={viewUrl}
+            className="flex items-center gap-2 text-blue-base font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={viewIcon}
+              width={24}
+              height={24}
+              alt="View icon"
+              className="inline-block"
+            />
+          </Link>
+          {t("download_view")}
+          <Link
+            href={downloadUrlEn}
+            className="flex items-center gap-2 text-blue-base font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+          >
+            <Image
+              src={downloadIcon}
+              width={24}
+              height={24}
+              alt="Download icon"
+              className="inline-block"
+            />
+            {t("download_en")}
+          </Link>
+          <Link
+            href={downloadUrlId}
+            className="flex items-center gap-2 text-blue-base font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+          >
+            <Image
+              src={downloadIcon}
+              width={24}
+              height={24}
+              alt="Download icon"
+              className="inline-block"
+            />
+            {t("download_id")}
+          </Link>
+        </div>
+      </div>
+    </li>
   );
 }
 
@@ -271,10 +335,10 @@ function Pagination({
   return (
     <nav
       aria-label="Pagination"
-      className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col lg:flex-row"
+      className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col md:flex-row"
     >
-      <p className="text-neutral-10 text-sm max-lg:hidden">
-        {startItem}-{endItem} dari {totalItems} items
+      <p className="text-neutral-900 text-sm max-lg:hidden">
+        {startItem}-{endItem} for {totalItems} items
       </p>
       <ul className="flex items-center justify-center gap-2">
         <li>
@@ -297,7 +361,7 @@ function Pagination({
             <ChevronLeft size={16} />
           </button>
         </li>
-        <li className="font-medium px-2">{`Halaman ${currentPage} dari ${totalPages}`}</li>
+        <li className="font-medium px-2">{`Page ${currentPage} for ${totalPages}`}</li>
         <li>
           <button
             onClick={() => onPageChange((p) => Math.min(totalPages, p + 1))}
@@ -319,8 +383,8 @@ function Pagination({
           </button>
         </li>
       </ul>
-      <div className="text-neutral-10 text-sm lg:hidden">
-        {startItem}-{endItem} dari {totalItems} items
+      <div className="text-neutral-900 text-sm lg:hidden">
+        {startItem}-{endItem} for {totalItems} items
       </div>
     </nav>
   );

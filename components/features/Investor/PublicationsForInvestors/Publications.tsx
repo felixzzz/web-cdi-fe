@@ -1,64 +1,57 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { clsx } from "clsx";
 import {
   Search,
-  FileText,
-  Eye,
-  Download,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  Loader2, // Added loader
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  PublicationApiResponse,
+  PublicationItem,
+  PaginationMeta,
+  PublicationTab,
+} from "@/types/Investor/Publication";
+import {
+  publicationService,
+} from "@/services/Investor/PublicationServices";
+import { useTranslations } from "next-intl";
 
-const publicationsData = {
-  prospectus: [
-    {
-      id: "prospectus-1",
-      title: "Prospectus CDIA",
-      date: "2025-07-02",
-      displayDate: "02 July 2025",
-      size: "3.95 MB",
-      viewUrl: "#",
-      downloadUrl: "#",
-    },
-  ],
-  gms: [
-    {
-      id: "gms-1",
-      title: "GMS Announcement Q2 2025",
-      date: "2025-06-15",
-      displayDate: "15 June 2025",
-      size: "1.2 MB",
-      viewUrl: "#",
-      downloadUrl: "#",
-    },
-  ],
-  disclosure: [
-    {
-      id: "disclosure-1",
-      title: "Public Disclosure May 2025",
-      date: "2025-05-30",
-      displayDate: "30 May 2025",
-      size: "0.8 MB",
-      viewUrl: "#",
-      downloadUrl: "#",
-    },
-  ],
-  earnings: [
-    {
-      id: "earnings-1",
-      title: "Q1 2025 Earnings Update",
-      date: "2025-04-28",
-      displayDate: "28 April 2025",
-      size: "2.5 MB",
-      viewUrl: "#",
-      downloadUrl: "#",
-    },
-  ],
-};
+// --- Helper types and functions ---
+interface TransformedItem {
+  id: string; // Use ulid or id
+  title: string;
+  date: string; // datetime for sorting
+  displayDate: string; // date for display
+  size: string;
+  viewUrl: string;
+  downloadUrl: string;
+}
+
+// Base URLs for file links (you may need to adjust the path)
+const FILE_PREVIEW_BASE_URL =
+  "https://chandradaya-investasi.com/file/preview/default/investor-publication/";
+const FILE_DOWNLOAD_BASE_URL =
+  "https://chandradaya-investasi.com/file/download/default/investor-publication/";
+
+// Transform API item to component item
+const transformItem = (item: PublicationItem): TransformedItem => ({
+  id: item.ulid,
+  title: item.name,
+  date: item.datetime,
+  displayDate: item.date,
+  size: item.file.size,
+  // Note: The slug logic might differ per tab; check API response
+  viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
+  downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
+});
+// --- End Helpers ---
 
 const navLinks: NavLink[] = [
   {
@@ -83,61 +76,120 @@ const navLinks: NavLink[] = [
   },
 ];
 
-type PublicationTab = keyof typeof publicationsData;
-
 type NavLink = {
   id: PublicationTab;
   title: string;
   href: string;
 };
 
-const ITEMS_PER_PAGE = 5;
+interface PublicationsProps {
+  locale: string,
+  initialData: PublicationApiResponse;
+  initialTab: PublicationTab;
+}
 
-export function Publications() {
-  const [activeTab, setActiveTab] = useState<PublicationTab>("prospectus");
+export function Publications({ locale, initialData, initialTab }: PublicationsProps) {
+  const t = useTranslations('Investor.Publication')
+  const [activeTab, setActiveTab] = useState<PublicationTab>(initialTab);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // State for the raw API items and pagination meta
+  const [items, setItems] = useState<PublicationItem[]>(initialData.items);
+  const [pagination, setPagination] = useState<PaginationMeta>(
+    initialData.meta
+  );
+
+  // --- Data Fetching Effect ---
+  useEffect(() => {
+    // Skip fetch for initial render (data is already passed)
+    if (currentPage === 1 && activeTab === initialTab) {
+      setItems(initialData.items);
+      setPagination(initialData.meta);
+      return;
+    }
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const data = await publicationService.getPublicationTabData(
+          locale,
+          activeTab,
+          currentPage
+        );
+        setItems(data.items);
+        setPagination(data.meta);
+      } catch (error) {
+        console.error("Failed to fetch publication data:", error);
+        setItems([]); // Clear items on error
+        // Reset pagination to a default state
+        setPagination({
+          total: 0,
+          per_page: 15,
+          current_page: 1,
+          last_page: 1,
+          from: 0,
+          to: 0,
+          range: "0-0 of 0 items",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [activeTab, currentPage, initialTab, initialData]);
+
+  // --- Client-side Search & Transformation ---
   const { paginatedItems, totalPages, totalItems } = useMemo(() => {
-    const currentItems = publicationsData[activeTab] || [];
+    const transformed = items.map(transformItem);
 
-    const filtered = currentItems.filter((item) =>
+    // Client-side search filters the results from the current page
+    const filtered = transformed.filter((item) =>
       item.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const total = filtered.length;
-    const pages = Math.ceil(total / ITEMS_PER_PAGE);
-    const paginated = filtered.slice(
-      (currentPage - 1) * ITEMS_PER_PAGE,
-      currentPage * ITEMS_PER_PAGE
-    );
-
-    return { paginatedItems: paginated, totalPages: pages, totalItems: total };
-  }, [activeTab, searchQuery, currentPage]);
+    return {
+      paginatedItems: filtered,
+      totalPages: pagination.last_page,
+      totalItems: pagination.total,
+    };
+  }, [items, searchQuery, pagination]);
 
   const activeLink = navLinks.find((link) => link.id === activeTab);
 
+  // --- Event Handlers ---
+  const handleTabClick = (tab: PublicationTab) => {
+    setActiveTab(tab);
+    setCurrentPage(1); // Reset page
+    setSearchQuery(""); // Reset search
+  };
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages || isLoading) return;
+    setCurrentPage(page);
+    setSearchQuery(""); // Reset search on page change
+    window.scrollTo(0, 0); // Scroll to top
+  };
+
   return (
     <div className="py-20">
-      <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           <nav
             aria-label="Publications categories"
-            className="flex lg:flex-col lg:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap"
+            className="flex md:flex-col md:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap"
           >
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => {
-                  setActiveTab(link.id);
-                  setCurrentPage(1);
-                  setSearchQuery("");
-                }}
+                onClick={() => handleTabClick(link.id)} // Use new handler
                 className={clsx(
-                  "border-b-2 border-b-neutral-4 text-lg text-center p-4 transition lg:w-full lg:text-start",
+                  "border-b-[1px] border-b-neutral-100 border-t-[1px] border-t-neutral-100 text-lg text-center p-4 transition md:w-full md:text-start",
                   activeTab === link.id
-                    ? "text-neutral-13 font-medium" // Gaya aktif
-                    : "text-neutral-8 font-normal hover:text-neutral-13" // Gaya inaktif
+                    ? "text-neutral-13 font-medium border-l-4 !border-l-[#2474A5]"
+                    : "text-neutral-8 font-normal hover:text-neutral-13"
                 )}
               >
                 {link.title}
@@ -145,14 +197,14 @@ export function Publications() {
             ))}
           </nav>
 
-          <div className="lg:col-span-4">
-            <div className="grid lg:grid-cols-2 gap-4 pb-10 border-b border-b-neutral-5">
+          <div className="md:col-span-4">
+            <div className="grid md:grid-cols-2 gap-4 pb-10 border-b border-b-neutral-5">
               <div>
-                <h2 className="text-2xl lg:text-[28px] font-medium text-neutral-13">
+                <h2 className="text-2xl md:text-[28px] font-medium text-neutral-13">
                   {activeLink?.title}
                 </h2>
               </div>
-              <div className="relative w-full lg:w-[264px] lg:ms-auto">
+              <div className="relative w-full md:w-[264px] md:ms-auto">
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-7">
                   <Search size={16} />
                 </div>
@@ -161,7 +213,7 @@ export function Publications() {
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
-                    setCurrentPage(1);
+                    // No page reset needed, search is client-side
                   }}
                   className="w-full rounded-full border border-neutral-7 pl-10 pr-4 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-blue-base"
                   placeholder="Search anything..."
@@ -169,50 +221,78 @@ export function Publications() {
               </div>
             </div>
 
-            <section aria-live="polite">
-              {paginatedItems.length > 0 ? (
+            <section aria-live="polite" className="min-h-[300px]">
+              {isLoading ? (
+                <div className="flex justify-center items-center h-full min-h-[300px]">
+                  <Loader2 className="animate-spin text-[#2474A5]" size={48} />
+                </div>
+              ) : paginatedItems.length > 0 ? (
                 paginatedItems.map((item) => (
                   <article
                     key={item.id}
-                    className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0"
+                    className="py-8 border-b border-b-neutral-5 flex items-center justify-start flex-col gap-y-4 md:gap-y-0"
                   >
-                    <div>
-                      <h3 className="text-neutral-13 mb-2 text-lg font-medium">
+                    <div className="flex w-full">
+                      <h4 className="text-neutral-13 mb-2 text-lg font-medium">
                         {item.title}
-                      </h3>
-                      <div className="flex items-center text-base text-neutral-8 gap-3">
+                      </h4>
+                    </div>
+                    <div className="flex flex-col md:flex-row justify-start md:justify-between w-full">
+                      <div className="flex items-center justify-start text-base text-neutral-8 gap-3 w-full">
                         <p className="flex items-baseline gap-3">
-                          <time dateTime={item.date}>{item.displayDate}</time>
+                          <time dateTime={item.date}>
+                            {item.displayDate}
+                          </time>
                           <span>.</span>
                           <span>{item.size}</span>
                           <span>.</span>
                         </p>
-                        <FileText size={16} aria-label="PDF Document" />
+                        <Image
+                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                          width={30}
+                          height={24}
+                          alt="See all icon"
+                          className="inline-block"
+                        />
                       </div>
-                    </div>
-                    <div className="flex lg:items-center gap-8 w-full lg:w-fit">
-                      <a
-                        href={item.viewUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-neutral-10 font-medium hover:text-neutral-13"
-                      >
-                        <Eye size={16} /> View
-                      </a>
-                      <a
-                        href={item.downloadUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-neutral-10 font-medium hover:text-neutral-13"
-                      >
-                        <Download size={16} /> Download
-                      </a>
+                      <div className="flex items-center justify-start md:justify-end gap-8 w-full">
+                        <Link
+                          href={item.viewUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-blue-base font-medium"
+                        >
+                          <Image
+                            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                            width={20}
+                            height={20}
+                            alt="See all icon"
+                            className="inline-block"
+                          />{" "}
+                          {t('download_view')}
+                        </Link>
+                        <a
+                          href={item.downloadUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-blue-base font-medium"
+                        >
+                          <Image
+                            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                            width={20}
+                            height={20}
+                            alt="Download icon"
+                            className="inline-block"
+                            />{" "}
+                            {t('download_download')}
+                        </a>
+                      </div>
                     </div>
                   </article>
                 ))
               ) : (
                 <p className="text-center text-neutral-8 py-16">
-                  No publications found.
+                  {t('help')}
                 </p>
               )}
             </section>
@@ -220,19 +300,18 @@ export function Publications() {
             {totalPages > 1 && (
               <nav
                 aria-label="Pagination"
-                className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col lg:flex-row"
+                className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col md:flex-row"
               >
                 <p className="text-neutral-10 text-sm max-lg:hidden">
-                  {`${(currentPage - 1) * ITEMS_PER_PAGE + 1}-${Math.min(
-                    currentPage * ITEMS_PER_PAGE,
-                    totalItems
-                  )} of ${totalItems} items`}
+                  {`${pagination.from || 0}-${
+                    pagination.to || 0
+                  } of ${totalItems} items`}
                 </p>
                 <ul className="flex items-center justify-center gap-2">
                   <li>
                     <button
-                      onClick={() => setCurrentPage(1)}
-                      disabled={currentPage === 1}
+                      onClick={() => handlePageChange(1)}
+                      disabled={currentPage === 1 || isLoading}
                       className="pagination-btn"
                       aria-label="First page"
                     >
@@ -241,8 +320,8 @@ export function Publications() {
                   </li>
                   <li>
                     <button
-                      onClick={() => setCurrentPage((p) => p - 1)}
-                      disabled={currentPage === 1}
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1 || isLoading}
                       className="pagination-btn"
                       aria-label="Previous page"
                     >
@@ -252,8 +331,8 @@ export function Publications() {
                   <li className="font-medium px-2">{`Page ${currentPage} of ${totalPages}`}</li>
                   <li>
                     <button
-                      onClick={() => setCurrentPage((p) => p + 1)}
-                      disabled={currentPage === totalPages}
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages || isLoading}
                       className="pagination-btn"
                       aria-label="Next page"
                     >
@@ -262,8 +341,8 @@ export function Publications() {
                   </li>
                   <li>
                     <button
-                      onClick={() => setCurrentPage(totalPages)}
-                      disabled={currentPage === totalPages}
+                      onClick={() => handlePageChange(totalPages)}
+                      disabled={currentPage === totalPages || isLoading}
                       className="pagination-btn"
                       aria-label="Last page"
                     >
@@ -272,10 +351,9 @@ export function Publications() {
                   </li>
                 </ul>
                 <div className="text-neutral-10 text-sm lg:hidden">
-                  {`${(currentPage - 1) * ITEMS_PER_PAGE + 1}-${Math.min(
-                    currentPage * ITEMS_PER_PAGE,
-                    totalItems
-                  )} of ${totalItems} items`}
+                  {`${pagination.from || 0}-${
+                    pagination.to || 0
+                  } of ${totalItems} items`}
                 </div>
               </nav>
             )}

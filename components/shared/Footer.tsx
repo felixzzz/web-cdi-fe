@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { CompanyLocationResponse } from "@/types/global/footer"; 
 
 interface NavLink {
   href: string;
@@ -13,11 +14,7 @@ interface FooterProps {
   logoAlt: string;
   contactHref: string;
   contactText: string;
-  companyName: string;
-  companySubtitle: string;
-  address: string;
-  phone: string;
-  fax: string;
+  companyData: CompanyLocationResponse;
   mainNavLinks: NavLink[];
   legalNavLinks: NavLink[];
   copyrightText: string;
@@ -29,22 +26,20 @@ export const Footer: React.FC<FooterProps> = ({
   logoAlt,
   contactHref,
   contactText,
-  companyName,
-  companySubtitle,
-  address,
-  phone,
-  fax,
+  companyData,
   mainNavLinks,
   legalNavLinks,
   copyrightText,
 }) => {
+  const { name, sub_title, localized_main } = companyData;
+
   return (
     <footer
       className="py-12 bg-[#091A24] text-white bg-contain bg-no-repeat bg-center"
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       role="contentinfo"
     >
-      <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <div className="flex items-center justify-between mb-10">
           <div>
             <Link href="/">
@@ -70,19 +65,21 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="flex justify-between flex-col lg:flex-row pb-12 mb-12 border-b border-b-neutral-8 gap-y-10 lg:gap-y-0">
           <address className="flex flex-col gap-6 max-w-sm not-italic">
             <div>
-              <h2 className="font-medium text-[22px]">{companyName}</h2>
-              <p className="text-base font-regular text-neutral-6">
-                {companySubtitle}
+              <h2 className="font-medium text-[22px]">{name}</h2>
+              <p className="text-base font-regular text-neutral-400">
+                {sub_title}
               </p>
             </div>
-            <p className="text-[15px] text-neutral-6">{address}</p>
+            <p className="text-[15px] text-neutral-400">
+              {localized_main.address}
+            </p>
             <div className="flex items-center gap-2">
-              <span className="text-neutral-6">Phone</span>
-              <span>{phone}</span>
+              <span className="text-neutral-400">Phone</span>
+              <span>{localized_main.phone}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-neutral-6">Fax</span>
-              <span>{fax}</span>
+              <span className="text-neutral-400">Fax</span>
+              <span>{localized_main.fax}</span>
             </div>
           </address>
 
@@ -105,7 +102,6 @@ export const Footer: React.FC<FooterProps> = ({
           </p>
 
           <div className="flex gap-4 items-center justify-center row-start-3 lg:row-start-1">
-            {/* TODO: Render Social Links di sini */}
           </div>
 
           <nav
@@ -117,7 +113,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-xs text-neutral-3 whitespace-nowrap"
+                    className="text-xs text-neutral-3 whitespace-nowLrap"
                   >
                     {link.text}
                   </Link>

@@ -1,53 +1,85 @@
-import { AboutUs } from "@/components/features/homepage/AboutUs";
+import { AboutUs } from "@/components/features/Homepage/AboutUs";
+import { Article } from "@/components/features/Homepage/Article";
 // import { Article } from "@/components/features/homepage/Article";
-import { Discover } from "@/components/features/homepage/Discover";
-import { Hero } from "@/components/features/homepage/Hero";
-import {
-  Information,
-  QuickLink,
-} from "@/components/features/homepage/Information";
+import { Discover } from "@/components/features/Homepage/Discover";
+import { Hero } from "@/components/features/Homepage/Hero";
+import { Information } from "@/components/features/Homepage/Information";
 import {
   Journey,
   JourneyLink,
   JourneyStat,
-} from "@/components/features/homepage/Journey";
-import { Report } from "@/components/features/homepage/Report";
-import { ReportItemProps } from "@/components/features/homepage/ReportItem";
-import { Solution } from "@/components/features/homepage/Solution";
+} from "@/components/features/Homepage/Journey";
+import { Report } from "@/components/features/Homepage/Report";
+import { Solution } from "@/components/features/Homepage/Solution";
+import { informationService } from "@/services/Global/informationService";
 import { homeService } from "@/services/Homepage/homeService";
+import { HomePageProps } from "@/types/Homepage/home";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-// import { useTranslations } from "next-intl";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-const quickLinksData: QuickLink[] = [
-  { href: "/about-us", text: "Who We Are" },
-  { href: "/about-us/management", text: "Management & Structure" },
-  { href: "/investor/financial-information", text: "Financial Information" },
-  { href: "/investor/report", text: "Report" },
-  { href: "/governance/policy", text: "Code of Conduct" },
-];
+const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+const title = "Chandra Daya Investasi";
+const baseUrl = "https://chandradaya-investasi.com";
 
-const reportsData: ReportItemProps[] = [
-  {
-    title: "Audited Financial Report - 30 Jun 2025",
-    date: "15 September 2025",
-    size: "2.1 MB",
-    viewUrl: "https://...",
-    downloadUrl: "https://...",
+export const metadata: Metadata = {
+  title: title,
+  description: description,
+  keywords: ['Chandra Daya Investasi', 'CDI', 'CDIA', 'PT Chandra Daya Investasi Tbk', 'CDI Group'],
+  
+  metadataBase: new URL(baseUrl),
+
+  viewport: {
+    width: 'device-width',
+    initialScale: 1.0,
   },
-  {
-    title: "Audited Report 2024",
-    date: "14 April 2025",
-    size: "3.59 MB",
-    viewUrl: "https://...",
-    downloadUrl: "https://...",
+  robots: {
+    index: true,
+    follow: true,
   },
-];
+  alternates: {
+    canonical: '/',
+  },
+  icons: {
+    shortcut: '/assets/frontend/favicon.png',
+  },
 
-export default async function Page() {
-  const homeData = await homeService.getHomePageData();
-  // const t = useTranslations("homepage");
+  openGraph: {
+    title: title,
+    description: description,
+    url: '/',
+    type: 'website',
+    siteName: title,
+  },
 
-  // console.log(homeData);
+  twitter: {
+    card: 'summary_large_image',
+    title: title,
+    description: description,
+  },
+
+  other: {
+    'application-url': 'https://chandradaya-investasi.com',
+    'preview-url': 'https://chandradaya-investasi.com/file-storage',
+    'download-file': 'https://chandradaya-investasi.com/file-download',
+    'add-file-preview': 'https://chandradaya-investasi.com/file/preview',
+    'add-file-download': 'https://chandradaya-investasi.com/file/download',
+  }
+};
+
+
+export default async function Page({ params: { locale } }: HomePageProps) {
+
+  const t = await getTranslations("Homepage");
+
+  const [homeData, reportData, quickLinksData, articleData] = await Promise.all(
+    [
+      homeService.getHomePageData(locale),
+      homeService.getHomeReportData(locale),
+      informationService.getHomeQuickLinks(locale), 
+      homeService.getHomeArticle(locale),
+    ]
+  );
 
   const {
     home_banner,
@@ -71,7 +103,7 @@ export default async function Page() {
   } = homeData;
 
   const stripHtml = (html: string | null) =>
-  html ? html.replace(/<[^>]+>/g, "") : "";
+    html ? html.replace(/<[^>]+>/g, "") : "";
 
   const statsData: JourneyStat[] = [
     {
@@ -89,17 +121,17 @@ export default async function Page() {
   ];
 
   const linksData: JourneyLink[] = [
-  {
-    href: "https.careers.capcx.com/",
-    text: "Join with Us",
-    external: true,
-  },
-  {
-    href: "/about-us/awards",
-    text: "All Awards",
-    external: false,
-  },
-];
+    {
+      href: "https.careers.capcx.com/",
+      text: t('journey_career'),
+      external: true,
+    },
+    {
+      href: "/about-us/awards",
+      text: t('journey_awards'),
+      external: false,
+    },
+  ];
 
   return (
     <main>
@@ -109,14 +141,14 @@ export default async function Page() {
         title={home_banner.title}
         subtitle={home_banner.content}
         linkHref="/about-us"
-        linkText="Learn More"
+        linkText={t('more')}
         linkIcon={<ArrowRight size={14} />}
       />
       <AboutUs
         backgroundImageUrl={home_about_section.file_url}
         title={home_about_section.title}
         linkHref="/about-us"
-        linkText="About Us"
+        linkText={t('about')}
         linkIcon={<ArrowUpRight size={14} />}
       >
         <div
@@ -146,23 +178,24 @@ export default async function Page() {
         links={linksData}
       >
         <div
-          className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
+          className="prose prose-invert prose-base text-neutral-300"
+          // className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
           dangerouslySetInnerHTML={{
             __html: home_journey_content.content || "",
           }}
         />
       </Journey>
       <Report
-        eyebrow="LATEST DOCUMENTS"
-        title="Financial Reports"
+        eyebrow={t('eye_report')}
+        title={t('title_report')}
         downloadAllUrl="https://..."
         seeAllUrl="/investor/financial-information"
-        reports={reportsData}
+        reports={reportData}
       />
-      {/* <Article /> */}
+      <Article articles={articleData} />
       <Information
-        eyebrow="QUICK LINKS"
-        title="Need to access detailed information?"
+        eyebrow={t('eye_information')}
+        title={t('title_information')}
         backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
         links={quickLinksData}
       />

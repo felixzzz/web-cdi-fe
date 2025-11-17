@@ -10,18 +10,18 @@ export function EnvironmentalResponsibility({ data }: EnvResponsibilityProps) {
     <div className="py-20 bg-[#091A24]">
       <section
         aria-labelledby="env-responsibility-heading"
-        className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]"
+        className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
           <h2
             id="env-responsibility-heading"
-            className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium text-[#47C1EA] max-w-[580px]"
+            className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-medium text-[#47C1EA] max-w-[580px]"
           >
             {data.title || "Environmental Responsibility"}
           </h2>
 
           <div
-            className="content !text-neutral-50 text-base"
+          className="max-w-full prose prose-invert prose-base text-justify"
             dangerouslySetInnerHTML={{ __html: data.content || "" }}
           >
           </div>

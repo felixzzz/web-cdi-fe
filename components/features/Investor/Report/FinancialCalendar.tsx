@@ -1,70 +1,167 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { clsx } from "clsx";
-import { Languages, Search, FileText, Eye, Download } from "lucide-react";
+import { Languages, Search, Loader2 } from "lucide-react";
+import Image from "next/image";
+import {
+  CalendarApiResponse,
+  CalendarEventItem,
+  PaginationMeta,
+} from "@/types/Investor/Report";
+import { useTranslations } from "next-intl";
 
-const allReportsData = [
-  {
-    id: 1,
-    title: "Audited Financial Report - 30 Jun 2025",
-    date: "15 September 2025",
-    size: "2.1 MB",
-    type: "Financial Report",
-    year: 2025,
-    viewUrl:
-      "https://chandradaya-investasi.com/file/preview/default/report/01k56e7f91xf14e4yx40emaaax/Audited_Financial_Report_30_Jun_2025",
-    downloadUrl:
-      "https://chandradaya-investasi.com/file/download/default/report/01k56e7f91xf14e4yx40emaaax/Audited_Financial_Report_30_Jun_2025",
-  },
-  {
-    id: 2,
-    title: "Audited Report 2024",
-    date: "14 April 2025",
-    size: "3.59 MB",
-    type: "Annual Report",
-    year: 2024,
-    viewUrl:
-      "https://chandradaya-investasi.com/file/preview/default/report/01js16gw15g0kvyev54ybab55t/Audited_Report_2024",
-    downloadUrl:
-      "https://chandradaya-investasi.com/file/download/default/report/01js16gw15g0kvyev54ybab55t/Audited_Report_2024",
-  },
-];
+interface Report {
+  id: number;
+  title: string;
+  date: string;
+  size: string;
+  type: string;
+  year: number;
+  viewUrl: string;
+  downloadUrl: string;
+}
 
-const yearFilters = ["All Year", 2025, 2024];
-const typeFilters = ["All Type", "Annual Report", "Financial Report"];
+const formatReportType = (type: string): string => {
+  return type
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
 
-export function FinancialCalendar() {
+const unformatReportType = (type: string): string => {
+  if (type === "All Type") return "";
+  return type.toLowerCase().replace(" ", "_");
+};
+
+const FILE_PREVIEW_BASE_URL =
+  "https://chandradaya-investasi.com/file/preview/default/report/";
+const FILE_DOWNLOAD_BASE_URL =
+  "https://chandradaya-investasi.com/file/download/default/report/";
+
+const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
+  return data.items.flatMap((yearGroup) => yearGroup.items);
+};
+
+const transformItem = (item: CalendarEventItem): Report => ({
+  id: item.id,
+  title: item.name,
+  date: item.date,
+  size: item.file.size,
+  type: formatReportType(item.type),
+  year: item.year,
+  viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
+  downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
+});
+
+
+interface FinancialCalendarProps {
+  initialData: CalendarApiResponse;
+}
+
+export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
+  const t = useTranslations('Investor.Report')
+  const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
+    flattenData(initialData)
+  );
+  const [pagination, setPagination] = useState<PaginationMeta>(
+    initialData.meta
+  );
+  const [currentPage, setCurrentPage] = useState(1);
   const [activeYear, setActiveYear] = useState<string | number>("All Year");
   const [activeType, setActiveType] = useState<string>("All Type");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const filteredReports = allReportsData.filter((report) => {
-    const yearMatch = activeYear === "All Year" || report.year === activeYear;
-    const typeMatch = activeType === "All Type" || report.type === activeType;
-    const searchMatch = report.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    return yearMatch && typeMatch && searchMatch;
-  });
+  const allItemsForFilters = useMemo(
+    () => flattenData(initialData),
+    [initialData]
+  );
+  const yearFilters = useMemo(() => {
+    const years = Array.from(new Set(allItemsForFilters.map((r) => r.year)));
+    return ["All Year", ...years.sort((a, b) => b - a)];
+  }, [allItemsForFilters]);
+
+  const typeFilters = useMemo(() => {
+    const types = Array.from(
+      new Set(allItemsForFilters.map((r) => formatReportType(r.type)))
+    );
+    return ["All Type", ...types.sort()];
+  }, [allItemsForFilters]);
+
+  useEffect(() => {
+    if (
+      currentPage === 1 &&
+      activeYear === "All Year" &&
+      activeType === "All Type"
+    ) {
+      setReportItems(flattenData(initialData));
+      setPagination(initialData.meta);
+      return;
+    }
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      const apiType = unformatReportType(activeType);
+      const apiYear = activeYear === "All Year" ? "" : activeYear;
+
+      try {
+        const res = await fetch(
+          `https://chandradaya-investasi.com/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch data");
+        const data: CalendarApiResponse = await res.json();
+
+        setReportItems(flattenData(data));
+        setPagination(data.meta);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, activeYear, activeType, initialData]);
+
+  const displayedReports = useMemo(() => {
+    return reportItems.map(transformItem).filter((report) => {
+      return report.title.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+  }, [reportItems, searchQuery]);
+
+  const handleYearClick = (year: string | number) => {
+    setActiveYear(year);
+    setCurrentPage(1); 
+  };
+
+  const handleTypeClick = (type: string) => {
+    setActiveType(type);
+    setCurrentPage(1); 
+  };
+
+  const handlePageChange = (page: number) => {
+    if (page === currentPage || isLoading) return;
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <section
       aria-labelledby="calendar-heading"
-      className="container mx-auto py-20 px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]"
+      className="container mx-auto py-20 px-4 md:px-8 lg:px-20 2xl:px-44"
     >
       <h2
         id="calendar-heading"
-        className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-3"
+        className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-3"
       >
-        Financial Calendar
+        {t('calendar_title')}
       </h2>
 
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
         <span>
-          Documents are available in both English and Bahasa Indonesia. Change
-          the website language to view them in another language.
+          {t('calendar_subtitle')}
         </span>
       </div>
 
@@ -75,10 +172,10 @@ export function FinancialCalendar() {
         {yearFilters.map((year) => (
           <button
             key={year}
-            onClick={() => setActiveYear(year)}
+            onClick={() => handleYearClick(year)}
             className={clsx(
-              "text-base font-normal text-neutral-8 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
-              activeYear === year && "!text-blue-base !border-b-blue-base"
+              "text-base font-normal text-neutral-900 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
+              activeYear === year && "!text-[#2474A5] !border-b-[#2474A5]"
             )}
           >
             {year}
@@ -86,7 +183,7 @@ export function FinancialCalendar() {
         ))}
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-4 my-10">
+      <div className="grid md:grid-cols-2 gap-4 my-10">
         <nav
           aria-label="Filter by report type"
           className="flex items-center gap-2 flex-wrap"
@@ -94,17 +191,17 @@ export function FinancialCalendar() {
           {typeFilters.map((type) => (
             <button
               key={type}
-              onClick={() => setActiveType(type)}
+              onClick={() => handleTypeClick(type)}
               className={clsx(
-                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-blue-base hover:bg-blue-base  transition",
-                activeType === type && "bg-blue-base "
+                "text-xs md:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5]  transition",
+                activeType === type && "bg-[#2474A5] text-gray-100"
               )}
             >
               {type}
             </button>
           ))}
         </nav>
-        <div className="relative w-full lg:w-[264px] lg:ms-auto">
+        <div className="relative w-full md:w-[264px] md:ms-auto">
           <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-7">
             <Search size={16} />
           </div>
@@ -112,18 +209,22 @@ export function FinancialCalendar() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-blue-base"
-            placeholder="Search anything..."
+            className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-[#2474A5]"
+            placeholder={t('search')}
           />
         </div>
       </div>
 
-      <section aria-label="Financial reports list">
-        {filteredReports.length > 0 ? (
-          filteredReports.map((report) => (
+      <section aria-label="Financial reports list" className="min-h-[300px]">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full min-h-[300px]">
+            <Loader2 className="animate-spin text-[#2474A5]" size={48} />
+          </div>
+        ) : displayedReports.length > 0 ? (
+          displayedReports.map((report) => (
             <article
               key={report.id}
-              className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0"
+              className="py-8 border-b border-b-neutral-5 flex md:items-center justify-between flex-col md:flex-row gap-y-4 md:gap-y-0"
             >
               <div>
                 <h3 className="text-neutral-13 mb-2 text-lg font-medium">
@@ -136,35 +237,81 @@ export function FinancialCalendar() {
                     <span>{report.size}</span>
                     <span>.</span>
                   </p>
-                  <FileText size={16} aria-label="PDF Document" />
+                  <Image
+                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                    width={28}
+                    height={20}
+                    alt="See all icon"
+                    className="inline-block"
+                  />
                 </div>
               </div>
-              <div className="flex lg:items-center gap-8 w-full lg:w-fit">
+              <div className="flex md:items-center gap-8 w-full md:w-fit">
                 <a
                   href={report.viewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-blue-base font-medium"
+                  className="flex items-center gap-2 text-[#2474A5] font-medium"
                 >
-                  <Eye size={16} /> View
+                  <Image
+                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                    width={20}
+                    height={20}
+                    alt="See all icon"
+                    className="inline-block"
+                  />{" "}
+                  {t('download_view')}
                 </a>
                 <a
                   href={report.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-blue-base font-medium"
+                  className="flex items-center gap-2 text-[#2474A5] font-medium"
                 >
-                  <Download size={16} /> Download
+                  <Image
+                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                    width={20}
+                    height={20}
+                    alt="Download icon"
+                    className="inline-block"
+                  />{" "}
+                  {t('download_download')}
                 </a>
               </div>
             </article>
           ))
         ) : (
           <p className="text-center text-neutral-8 py-10">
-            No reports found matching your criteria.
+            {t('not_found')}
           </p>
         )}
       </section>
+
+      {pagination.last_page > 1 && (
+        <div className="mt-16">
+          <div className="flex justify-center gap-2">
+            <button
+              onClick={() => handlePageChange(pagination.current_page - 1)}
+              disabled={pagination.current_page === 1 || isLoading}
+              className="px-4 py-2 border rounded disabled:opacity-50"
+            >
+              {t('previous')}
+            </button>
+            <span className="px-4 py-2">
+              Page {pagination.current_page} of {pagination.last_page}
+            </span>
+            <button
+              onClick={() => handlePageChange(pagination.current_page + 1)}
+              disabled={
+                pagination.current_page === pagination.last_page || isLoading
+              }
+              className="px-4 py-2 border rounded disabled:opacity-50"
+            >
+              {t('next')}
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

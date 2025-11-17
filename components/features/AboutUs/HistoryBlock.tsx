@@ -1,5 +1,3 @@
-// HistoryBlock.tsx
-
 import React from "react";
 
 interface HistoryBlockProps {
@@ -7,7 +5,6 @@ interface HistoryBlockProps {
   eyebrow: string;
   title: string;
   children: React.ReactNode;
-  // HAPUS 'gradientType' dari sini
 }
 
 export const HistoryBlock: React.FC<HistoryBlockProps> = ({
@@ -15,9 +12,7 @@ export const HistoryBlock: React.FC<HistoryBlockProps> = ({
   eyebrow,
   title,
   children,
-  // HAPUS 'gradientType' dari sini
 }) => {
-  // HAPUS logika 'gradientClass'
 
   return (
     <div
@@ -27,6 +22,10 @@ export const HistoryBlock: React.FC<HistoryBlockProps> = ({
       <div
         className="overlay-history absolute inset-0 z-0"
         aria-hidden="true"
+        style={{
+          background:
+            "linear-gradient(#091a24, #091a24cc 10%, #00000080, #091a24cc 90%, #091a24)",
+        }}
       />
 
       <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
@@ -35,7 +34,8 @@ export const HistoryBlock: React.FC<HistoryBlockProps> = ({
           <h2 className="text-shadow-2 font-medium text-2xl lg:text-[38px] lg:leading-[44px] max-w-2xl mb-8">
             {title}
           </h2>
-          <div className="content !text-neutral-5">{children}</div>
+          {/* <div className="max-w-2xl prose prose-invert prose-base">{children}</div> */}
+          <div className="max-w-6xl prose prose-invert prose-base">{children}</div>
         </div>
       </section>
     </div>

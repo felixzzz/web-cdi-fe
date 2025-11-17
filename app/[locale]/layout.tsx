@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 
 import { Footer } from "@/components/shared/Footer";
 import { Navbar } from "@/components/shared/Navbar";
+import { informationService } from "@/services/Global/informationService";
 
 const mainNavLinksData = [
   { href: "/about-us", text: "Who We Are" },
@@ -34,6 +35,8 @@ export default async function LocaleLayout({ children, params }: Props) {
     notFound();
   }
 
+  const footerData = await informationService.getFooterData(locale);
+
   return (
     <NextIntlClientProvider>
       <Navbar />
@@ -44,11 +47,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         logoAlt="Chandra Daya Investasi Logo"
         contactHref="/contact-us"
         contactText="Contact Us"
-        companyName="PT Chandra Daya Investasi Tbk"
-        companySubtitle="A member of Chandra Asri Group"
-        address="Wisma Barito Pacific Tower A, Lantai 5 Jl. Let. Jend. S. Parman Kav. 62 - 63, Jakarta Barat 11410, Indonesia"
-        phone="(+62-21) 530 7950"
-        fax="(+62-21) 530 8930"
+        companyData={footerData}
         mainNavLinks={mainNavLinksData}
         legalNavLinks={legalNavLinksData}
         copyrightText="@2025 Chandra Daya Investasi"

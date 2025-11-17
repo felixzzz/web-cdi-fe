@@ -14,13 +14,13 @@ export const Stakeholder: React.FC<StakeholderSectionProps> = ({
 }) => {
   return (
     <section
-      className="pb-20 bg-[#091A24] bg-no-repeat bg-contain"
+      className="pb-20 bg-[#091A24] bg-no-repeat bg-cover"
       style={{
         backgroundImage: `url(${backgroundImageUrl})`,
         backgroundPositionY: "48px",
       }}
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <ManagementTeam
           id="board-of-directors"
           title="Board of Directors"

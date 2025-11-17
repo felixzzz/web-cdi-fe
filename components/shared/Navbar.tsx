@@ -174,7 +174,7 @@ export function Navbar() {
       <header
         id="nav-header"
         className={clsx(
-          "w-full py-4 flex items-center left-0 right-0 transition-all duration-300",
+          "w-full py-7 flex items-center left-0 right-0 transition-all duration-300",
           !isScrolled
             // ? "bg-transparent text-white"
             ? " text-white bg-gradient-to-b from-black/60 to-transparent"
@@ -183,7 +183,7 @@ export function Navbar() {
             : "backdrop-blur-3xl bg-[#091A24]/10 text-white"
         )}
       >
-        <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] flex justify-between items-center">
+        <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 flex justify-between items-center">
           <Link href="/" className="flex-shrink-0">
             <Image
               src="https://chandradaya-investasi.com/assets/frontend/logo_cdi_white.svg"

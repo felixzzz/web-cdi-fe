@@ -1,9 +1,9 @@
-"use client"; 
+"use client";
 
-import Link from 'next/link';
-import React, { useRef } from 'react';
-import { gsap } from 'gsap';
-import { useGSAP } from '@gsap/react';
+import Link from "next/link";
+import React from "react";
+import Image from "next/image";
+import { ChevronRight } from "lucide-react";
 
 export interface ArticleCardProps {
   href: string;
@@ -13,10 +13,6 @@ export interface ArticleCardProps {
   title: string;
 }
 
-const ReadArticleIcon = () => (
-  <i className="isax icon-arrow-right-3 text-2xl"></i>
-);
-
 export const ArticleCard: React.FC<ArticleCardProps> = ({
   href,
   imageUrl,
@@ -24,72 +20,36 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   date,
   title,
 }) => {
-  const cardRef = useRef<HTMLAnchorElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const backdropRef = useRef<HTMLDivElement>(null);
-  const tl = useRef<gsap.core.Timeline>();
-
-  useGSAP(() => {
-    gsap.set(backdropRef.current, { opacity: 0 });
-    gsap.set(imageRef.current, { scale: 1 });
-
-    tl.current = gsap.timeline({ paused: true })
-      .to(imageRef.current, { 
-        scale: 1.1, 
-        duration: 0.4, 
-        ease: 'power2.inOut' 
-      })
-      .to(backdropRef.current, { 
-        opacity: 1, 
-        duration: 0.4, 
-        ease: 'power2.inOut' 
-      }, '<'); 
-
-  }, { scope: cardRef });
-
-  const onEnter = () => {
-    tl.current?.play();
-  };
-
-  const onLeave = () => {
-    tl.current?.reverse();
-  };
 
   return (
     <Link
       href={href}
-      ref={cardRef} 
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      className="flex flex-col bg-white rounded-xl shadow-article border border-neutral-5 overflow-hidden h-full text-neutral-13 cursor-pointer w-full"
+      className="group flex flex-col bg-white rounded-xl border border-gray-200 overflow-hidden h-full text-gray-800 shadow-sm hover:shadow-lg transition-shadow duration-300"
     >
-      <div className="w-full aspect-square overflow-hidden">
-        <div
-          ref={imageRef} 
-          className="w-full aspect-square bg-cover bg-center"
-          style={{ backgroundImage: `url(${imageUrl})` }}
+      <div className="w-full aspect-square overflow-hidden relative">
+        <Image
+          src={imageUrl}
+          alt={title}
+          layout="fill"
+          objectFit="cover"
+          className="transition-transform duration-400 ease-in-out group-hover:scale-110"
         />
       </div>
-      
-      <div
-        ref={backdropRef}
-        className="absolute inset-0 bg-black/60 z-10" 
-      />
 
-      <div className="p-6 flex flex-col grow relative z-20">
-        <div className="flex items-center gap-4">
-          <span className="bg-neutral-5 px-3 py-1 text-sm rounded-full">
+      <div className="p-6 flex flex-col grow">
+        <div className="flex items-center gap-4 mb-4">
+          <span className="bg-gray-300 px-3 py-1 text-sm rounded-full text-neutral-900 font-medium">
             {category}
           </span>
-          <span className="text-sm text-neutral-10">{date}</span>
+          <span className="text-sm text-gray-500">{date}</span>
         </div>
-        
-        <h3 className="text-[22px] font-medium mt-4 mb-7 line-clamp-3">
+
+        <h3 className="text-3xl font-medium mb-4 line-clamp-3 flex-grow">
           {title}
         </h3>
-        
-        <div className="text-blue-base flex items-center gap-2 cursor-pointer mt-auto">
-          Read full article <ReadArticleIcon />
+
+        <div className="text-[#2474A5] flex items-center gap-2 mt-auto text-md font-medium">
+          Read full article <ChevronRight size={20} />
         </div>
       </div>
     </Link>

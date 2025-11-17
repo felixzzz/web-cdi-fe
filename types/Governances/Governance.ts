@@ -1,3 +1,9 @@
+export interface GovernancePageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface GovernanceSection {
   id: number;
   ulid: string;
@@ -39,3 +45,57 @@ export interface InvestorGovernanceApiResponse {
   governance_she_regulation_show: GovernanceSection;
   governance_policy_show: GovernanceSection;
 }
+
+interface FileInformation {
+  path: string;
+  size: string;
+  format: string;
+}
+
+interface ApiFileDataItem {
+  id: number;
+  ulid: string;
+  unique_key: string;
+  type: string;
+  name_en: string;
+  name_id: string;
+  file_en: FileInformation;
+  file_id: FileInformation;
+  created_at: string; 
+  updated_at: string; 
+  sort: number;
+  show_on_governance: number; 
+  file: FileInformation;
+  name: string;
+}
+
+export type ApiFileResponse = ApiFileDataItem[];
+
+interface FileInformation {
+  path: string;
+  size: string;
+  format: string;
+}
+
+interface ApiDataItem {
+  id: number;
+  ulid: string;
+  tab_title_en: string;
+  tab_title_id: string;
+  title_en: string;
+  title_id: string;
+  content_en: string;
+  content_id: string;
+  image: string;
+  file: FileInformation;
+  file_name: string;
+  sort: number;
+  is_show: number;
+  created_at: string;
+  updated_at: string;
+  tab_title: string;
+  title: string;
+  content: string;
+}
+
+export type ApiTabsResponse = ApiDataItem[];

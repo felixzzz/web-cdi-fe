@@ -1,3 +1,9 @@
+export interface AboutPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface AboutUsSection {
   id: number;
   ulid: string;
@@ -29,3 +35,62 @@ export interface AboutUsWhoWeAreApiResponse {
   about_us_company_profile: AboutUsSection;
   about_us_youtube: AboutUsSection;
 }
+
+
+interface HistoryItem {
+  id: number;
+  ulid: string;
+  image: string;
+  tagline_en: string;
+  tagline_id: string;
+  title_en: string;
+  title_id: string;
+  content_en: string;
+  content_id: string;
+  created_at: string;
+  updated_at: string;
+  sort: number;
+  title: string;
+  tagline: string;
+  content: string;
+}
+
+export type HistoryApiResponse = HistoryItem[];
+
+interface MilestoneItem {
+  id: number;
+  ulid: string;
+  year: string;
+  content_en: string;
+  content_id: string;
+  created_at: string;
+  updated_at: string;
+  content: string;
+}
+
+export type MilestoneApiResponse = MilestoneItem[];
+
+interface FileDetails {
+  path: string;
+  size: string;
+  format: string;
+}
+
+interface CompanyProfileItem {
+  id: number;
+  ulid: string;
+  unique_key: string;
+  type: string;
+  name_en: string;
+  name_id: string;
+  file_en: FileDetails;
+  file_id: FileDetails;
+  created_at: string;
+  updated_at: string;
+  sort: number;
+  show_on_governance: number;
+  file: FileDetails;
+  name: string;
+}
+
+export type CompanyProfileResponse = CompanyProfileItem[];

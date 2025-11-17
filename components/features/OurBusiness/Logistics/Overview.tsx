@@ -8,15 +8,14 @@ interface OverviewProps {
   linkTitle: string | null;
 }
 
-export function Overview({
-  title,
-  description,
-  imageUrl,
-}: OverviewProps) {
+export function Overview({ title, description, imageUrl }: OverviewProps) {
+  const gradientStyle =
+    "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
+
   return (
     <section className="py-28 text-white bg-[#091A24] relative overflow-hidden">
       <Image
-        src={imageUrl} 
+        src={imageUrl}
         alt={title || "Overview"}
         layout="fill"
         objectFit="cover"
@@ -24,25 +23,27 @@ export function Overview({
         priority
       />
 
-      <div className="absolute inset-0 overlay-business z-[1]"></div>
+      <div
+        className="absolute inset-0 overlay-business z-[1]"
+        style={{ backgroundImage: gradientStyle }}
+      ></div>
 
       <section
         aria-labelledby="overview-heading"
-        className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[2]"
+        className="container px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[2] mx-auto"
       >
-        <div className="lg:max-w-[45%] ms-auto">
+        <div className="md:max-w-[45%] ms-auto">
           <h2
             id="overview-heading"
-            className="text-2xl lg:text-[28px] font-medium mb-6 text-[#47C1EA]"
+            className="text-2xl md:text-[28px] font-medium mb-6 text-[#47C1EA]"
           >
             {title}
           </h2>
 
           <div
-            className="content !text-neutral-5"
+            className="max-w-2xl prose prose-invert prose-base text-justify"
             dangerouslySetInnerHTML={{ __html: description || "" }}
           ></div>
-
         </div>
       </section>
     </section>

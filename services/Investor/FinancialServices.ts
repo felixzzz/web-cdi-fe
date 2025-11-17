@@ -1,13 +1,16 @@
-import { InvestorFinancialApiResponse } from "@/types/Investor/Financial";
+import { CalendarApiResponse, InvestorFinancialApiResponse } from "@/types/Investor/Financial";
 
 const API_URL = "https://chandradaya-investasi.com/api/utility/investor";
+const API_URL_CALENDAR =
+  "https://chandradaya-investasi.com/api/investor/calendar/list";
 
-export async function getFinancialPageData(): Promise<InvestorFinancialApiResponse> {
+export async function getFinancialPageData(locale: string): Promise<InvestorFinancialApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,
@@ -26,6 +29,38 @@ export async function getFinancialPageData(): Promise<InvestorFinancialApiRespon
   }
 }
 
+export async function getFinancialCalendarData(
+  locale: string,
+  page: number = 1,
+  type: string = "",
+  year: string | number = "",
+): Promise<CalendarApiResponse> {
+  try {
+    const params = new URLSearchParams();
+    params.append("page", page.toString());
+    if (type) {
+      params.append("type", type);
+    }
+    if (year) {
+      params.append("year", year.toString());
+    }
+
+    const res = await fetch(`${API_URL_CALENDAR}?${params.toString()}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json", lang: locale },
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) {
+      throw new Error(`Failed to fetch financial data: ${res.statusText}`);
+    }
+    return res.json();
+  } catch (error) {
+    console.error("Error in getFinancialCalendarData:", error);
+    throw new Error("Could not fetch financial calendar data.");
+  }
+}
+
 export const financialService = {
   getFinancialPageData,
+  getFinancialCalendarData, 
 };

@@ -53,12 +53,12 @@ export const Discover: React.FC<DiscoverSectionProps> = ({
       aria-labelledby="discover-title"
     >
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
-        <h1
+        <h2
           id="discover-title"
           className="mb-10 text-2xl lg:text-[38px] lg:leading-[44px] font-medium max-w-2xl mx-auto text-center"
         >
           {home_discover_title.title}
-        </h1>
+        </h2>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4">

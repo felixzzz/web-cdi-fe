@@ -1,3 +1,9 @@
+export interface SustainabilityPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface SustainabilitySection {
   id: number;
   ulid: string;

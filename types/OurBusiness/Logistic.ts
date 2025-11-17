@@ -1,3 +1,9 @@
+export interface LogisticPageProps {
+  params: {
+    locale: "en" | "id";
+  };
+}
+
 export interface TabContent {
   id: number;
   ulid: string;

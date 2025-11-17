@@ -5,7 +5,16 @@ import { Milestone } from "@/components/features/AboutUs/Milestone";
 import { VisionMission } from "@/components/features/AboutUs/Mision&Vision";
 import { SubNavbar } from "@/components/features/AboutUs/SubNavbar";
 import { Overview } from "@/components/features/AboutUs/Overview";
-import { aboutService, extractYouTubeId } from "@/services/AboutUs/AboutService";
+import {
+  aboutService,
+  extractYouTubeId,
+} from "@/services/AboutUs/AboutService";
+import { convertHtmlToReact } from "@/lib/htmlUtils";
+import { Information } from "@/components/features/Homepage/Information";
+import { informationService } from "@/services/Global/informationService";
+import { AboutPageProps } from "@/types/AboutUs/About";
+import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -15,33 +24,69 @@ const aboutLinks = [
   { text: "Company Profile", href: "/about-us/company-profile" },
 ];
 
-const milestoneData = [
-  {
-    year: "2023",
-    achievements: [
-      "CDI Group was established as an investment holding company...",
-      "An investment of US$194 million from Electric Generating Public Company Limited...",
-      "Acquired 70% of PT Krakatau Chandra Energi (KCE)...",
-      "Expanded energy sector acquisitions...",
-    ],
-  },
-  {
-    year: "2024",
-    achievements: [
-      "Commenced solar panel business outside Cilegon",
-      "Commenced Port and Storage business",
-      "Started the operation of a desalination plant...",
-      "Established PT Chandra Shipping International (CSI)...",
-      "Established PT Chandra Cold Chain (CCC)...",
-    ],
-  },
-];
-
 const stripHtml = (html: string | null) =>
   html ? html.replace(/<[^>]+>/g, "") : "";
 
-export default async function Page() {
-  const aboutData = await aboutService.getAboutPageData();
+const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+
+const baseUrl = "https://chandradaya-investasi.com";
+
+export const metadata: Metadata = {
+  title: "Management and Organization Structure | Chandra Daya Investasi", 
+  description: description,
+  keywords: ['Chandra Daya Investasi', 'CDI', 'CDIA', 'PT Chandra Daya Investasi Tbk', 'CDI Group'],
+  
+  metadataBase: new URL(baseUrl),
+
+  viewport: {
+    width: 'device-width',
+    initialScale: 1.0,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: '/contact-us',
+  },
+  icons: {
+    shortcut: '/assets/frontend/favicon.png',
+  },
+
+  openGraph: {
+    title: "Chandra Daya Investasi",
+    description: description,
+    url: '/contact-us',
+    type: 'website',
+    siteName: 'Chandra Daya Investasi',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: "Chandra Daya Investasi",
+    description: description,
+  },
+
+  other: {
+    'application-url': 'https://chandradaya-investasi.com',
+    'preview-url': 'https://chandradaya-investasi.com/file-storage',
+    'download-file': 'https://chandradaya-investasi.com/file-download',
+    'add-file-preview': 'https://chandradaya-investasi.com/file/preview',
+    'add-file-download': 'https://chandradaya-investasi.com/file/download',
+  }
+};
+
+export default async function Page({ params: { locale } }: AboutPageProps) {
+  const t = await getTranslations("AboutUs");
+
+  const [aboutData, quickLinksData, historyData, milstoneData, profileData] =
+    await Promise.all([
+      aboutService.getAboutPageData(locale),
+      informationService.getHomeQuickLinks(locale),
+      aboutService.getHistoryData(locale),
+      aboutService.getMilstoneData(locale),
+      aboutService.getProfileData(locale),
+    ]);
 
   const {
     about_us_banner,
@@ -61,14 +106,14 @@ export default async function Page() {
   const visionData = {
     statement: stripHtml(about_us_vision.content),
     imageUrl: about_us_vision.file_url,
+    title: "Our Vision"
   };
-
+  
   const missionData = {
     statement: stripHtml(about_us_mission.content),
     imageUrl: about_us_mission.file_url,
+    title: "Our Mission"
   };
-
-  // console.log(aboutData);
 
   return (
     <>
@@ -95,19 +140,16 @@ export default async function Page() {
           youtubeVideoId={youtubeId}
           videoTitle="Company Profile Video - CDI Group"
         >
-          <div
-          className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
-            dangerouslySetInnerHTML={{
-              __html: about_us_company_overview.content || "",
-            }}
-          />
+          <div className="prose prose-invert prose-base text-neutral-300">
+            {convertHtmlToReact(about_us_company_overview.content)}
+          </div>
         </Overview>
         <VisionMission
           title={about_us_vision_mission_tagline.title || "Vision & Mission"}
           visionData={visionData}
           missionData={missionData}
         />
-        <History />
+        <History data={historyData} />
         <Milestone
           title={about_us_milestone.title || "From Then to Now"}
           subtitle={
@@ -115,7 +157,7 @@ export default async function Page() {
             "Explore PT Chandra Daya Investasi Tbk key milestones over the years."
           }
           backgroundImageUrl={about_us_milestone.file_url}
-          data={milestoneData} 
+          data={milstoneData}
         />
         <CompanyProfile
           id="company-profile"
@@ -127,10 +169,13 @@ export default async function Page() {
             stripHtml(about_us_company_profile.content) ||
             "Gain deeper insights into our story, growth, and latest achievements by downloading our company profile"
           }
-          itemTitle="Company Profile CDI Group"
-          itemSize="2.01 MB"
-          itemViewUrl="https://chandradaya-investasi.com/file/preview/default/company_profile/Company_Profile_1018/"
-          itemDownloadUrl="https://chandradaya-investasi.com/file/download/default/company_profile/Company_Profile_1018/"
+          data={profileData}
+        />
+        <Information
+          eyebrow={t('eye_information')}
+          title={t('title_information')}
+          backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
+          links={quickLinksData}
         />
       </div>
     </>

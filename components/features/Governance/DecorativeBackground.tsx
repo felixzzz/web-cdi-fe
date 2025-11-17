@@ -1,15 +1,18 @@
 import Image from "next/image";
 import React from "react";
+import { GovernanceSection } from "@/types/Governances/Governance";
 
-const BACKGROUND_IMAGE_URL =
-  "https://chandradaya-investasi.com/file-storage/UTR6TEcrd2lmTWRmalFqYi9GL2FkSUYzSDNSTHRZeVErcHhUVU5TVFNoSmlkeS9jaGVqdlBHWTlnVTRIODBlT2pOeVQzODNnOTg1V2pkSmZpUXhycmc9PQ.webp";
-const TITLE = "Risk Management";
-const CONTENT_HTML = `
-  <p>CDI Group acknowledges risks as part of its business operations. The company has established a detailed and structured risk management framework as a foundation to refer to when facing risks, ensuring they are mitigated for smooth business operations. These measures enable CDI Group to identify risk levels and the right strategies to address them.</p>
-  <p><br></p>
-`;
+interface RiskManagementProps {
+  data: GovernanceSection;
+}
 
-export function RiskManagement() {
+export function RiskManagement({ data }: RiskManagementProps) {
+  const activeGradient = "linear-gradient(#051119, #091a24)";
+
+  const BACKGROUND_IMAGE_URL = data.file_url;
+  const TITLE = data.title || "Risk Management";
+  const CONTENT_HTML = data.content || "";
+
   return (
     <section
       id="risk-management"
@@ -18,25 +21,30 @@ export function RiskManagement() {
     >
       <Image
         src={BACKGROUND_IMAGE_URL}
-        alt="Abstract background pattern for risk management section"
+        alt={TITLE || "Abstract background pattern"}
         layout="fill"
         objectFit="contain"
         objectPosition="right"
-        className="z-0"
+        className="z-[1]"
         priority
       />
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-8">
+      <div
+        className="absolute inset-0 overlay-business z-0"
+        style={{ backgroundImage: activeGradient }}
+      ></div>
+
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-8">
           <div>
             <h2
               id="risk-management-heading"
-              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
+              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
             >
               {TITLE}
             </h2>
             <div
-              className="content"
+              className="max-w-full prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
           </div>

@@ -2,12 +2,13 @@ import { WaterApiResponse } from "@/types/OurBusiness/Water";
 
 const API_URL = "https://chandradaya-investasi.com/api/business/detail/water";
 
-export async function getWaterPageData(): Promise<WaterApiResponse> {
+export async function getWaterPageData(locale: string): Promise<WaterApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale
       },
       next: {
         revalidate: 3600,

@@ -6,8 +6,16 @@ import { People } from "@/components/features/AboutUs/management/People";
 import { Stakeholder } from "@/components/features/AboutUs/management/Stakeholder";
 import { SubNavbar } from "@/components/features/AboutUs/management/SubNavbar";
 import { TeamMember } from "@/components/features/AboutUs/management/TeamMemberCard";
+import { Information } from "@/components/features/Homepage/Information";
 import { managementService } from "@/services/AboutUs/ManagementService";
-import { TableManagementSection } from "@/types/AboutUs/Management";
+import {
+  DownloadItem,
+  ManagementPageProps,
+  TableManagementSection,
+} from "@/types/AboutUs/Management";
+import { informationService } from "@/services/Global/informationService";
+import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -17,44 +25,68 @@ const aboutLinks = [
   { text: "Company Profile", href: "/about-us/company-profile" },
 ];
 
-const directorsData: TeamMember[] = [
-  {
-    name: "Fransiskus Ruly Aryawan",
-    role: "President Director",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/Z2MvK2ZtalhtNklaVkJZZGNxMEtQaVF1eUc0V2ZoTnNFcG9jYWIwZ2h2ZDBLQ2c3WWEvZ2hQVHJYenp4VEhWR1hsYnJBVUg5aXlKZEJWbC9BWmc3emc9PQ.webp",
-    href: "/about-us/management/team/01jq8vg1w70e49n2b2xrx4fxmz",
-  },
-  {
-    name: "Jonathan Kandinata",
-    role: "Director",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/dEQ1dXNXcXZ4YzNaaDQyUTBRaEcyRzFzMnJRNEhsM1dGSUpIZ25vODI3MkhSWW9WeVAvWVo4dDNhc1YwRUYvR0VlTExQSWNFTDNCQXNMVDV0dnBiYnc9PQ.webp",
-    href: "/about-us/management/team/01jq8vg1wmaywxk4hmsmtmmhvx",
-  },
-];
+const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
-const commissionersData: TeamMember[] = [
-  {
-    name: "Erry Riyana Hardjapamekas",
-    role: "President Commissioner",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/N3dzb2k2Y3NKR01lZm5MaHgyWVVoTUxDNS81bzcyME9oREtIb1FBL0M0VStaNkhkMGlxcGtyVUVwMVNYSlNtSDE4MkpEZDdaL2dQRDdBb3dCYzlYOFE9PQ.webp",
-    href: "/about-us/management/team/01jq8vg1xcn4q5rwddt6m9tcgw",
-  },
-  {
-    name: "Erwin Ciputra",
-    role: "Commissioner",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/UTVSdzlTV2JpdWJjM2JMYnRzWU1mTzdvdnpOTk0zZGg4TGtjZ0hSQ2Nid1pCWFU2SjZkaW1KTk90YWF2T01JdGJ1L2RHcVlPeTdlYXlBT2ZKRDZTWWc9PQ.webp",
-    href: "/about-us/management/team/01jq8vg1xxj48mrc0a40hk4s63",
-  },
-];
+const baseUrl = "https://chandradaya-investasi.com";
 
-export default async function Page() {
-  const managementData = await managementService.getManagementPageData();
+export const metadata: Metadata = {
+  title: "Management and Organization Structure | Chandra Daya Investasi", 
+  description: description,
+  keywords: ['Chandra Daya Investasi', 'CDI', 'CDIA', 'PT Chandra Daya Investasi Tbk', 'CDI Group'],
+  
+  metadataBase: new URL(baseUrl),
 
-  // console.log(managementData);
+  viewport: {
+    width: 'device-width',
+    initialScale: 1.0,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: '/contact-us',
+  },
+  icons: {
+    shortcut: '/assets/frontend/favicon.png',
+  },
+
+  openGraph: {
+    title: "Chandra Daya Investasi",
+    description: description,
+    url: '/contact-us',
+    type: 'website',
+    siteName: 'Chandra Daya Investasi',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: "Chandra Daya Investasi", 
+    description: description,
+  },
+
+  other: {
+    'application-url': 'https://chandradaya-investasi.com',
+    'preview-url': 'https://chandradaya-investasi.com/file-storage',
+    'download-file': 'https://chandradaya-investasi.com/file-download',
+    'add-file-preview': 'https://chandradaya-investasi.com/file/preview',
+    'add-file-download': 'https://chandradaya-investasi.com/file/download',
+  }
+};
+
+export default async function Page({
+  params: { locale },
+}: ManagementPageProps) {
+  const t = await getTranslations("Management");
+
+  const [managementData, quickLinksData, BodData, BocData, GuideData] =
+    await Promise.all([
+      managementService.getManagementPageData(locale),
+      informationService.getHomeQuickLinks(locale),
+      managementService.getManagementBodData(locale),
+      managementService.getManagementBocData(locale),
+      managementService.getManagementGuideData(locale),
+    ]);
 
   const {
     about_us_management_banner,
@@ -67,6 +99,34 @@ export default async function Page() {
 
   const tableData =
     about_us_corporate_structure_table as TableManagementSection;
+
+  const IMAGE_BASE_URL = "https://chandradaya-investasi.com/file-storage/";
+  const FILE_PREVIEW_BASE_URL =
+    "https://chandradaya-investasi.com/file/preview/";
+  const FILE_DOWNLOAD_BASE_URL =
+    "https://chandradaya-investasi.com/file/download/";
+
+  const transformedBodData: TeamMember[] = BodData.map((member) => ({
+    name: member.name,
+    role: member.position,
+    imageUrl: `${IMAGE_BASE_URL}${member.image}`,
+    href: `/about-us/management/team/${member.ulid}`,
+  }));
+
+  const transformedBocData: TeamMember[] = BocData.map((member) => ({
+    name: member.name,
+    role: member.position,
+    imageUrl: `${IMAGE_BASE_URL}${member.image}`,
+    href: `/about-us/management/team/${member.ulid}`,
+  }));
+
+  const guidelineItems: DownloadItem[] = GuideData.map((guide) => ({
+    title: guide.name,
+    size: guide.file?.size || "N/A",
+    viewUrl: `${FILE_PREVIEW_BASE_URL}${guide.file?.path || ""}`,
+    downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${guide.file?.path || ""}`,
+    format: guide.file?.format || "pdf",
+  }));
 
   return (
     <>
@@ -87,7 +147,8 @@ export default async function Page() {
           }
         >
           <div
-            className="text-[12px] leading-[24px] font-normal text-white py-1"
+            className="prose prose-invert prose-base text-neutral-300"
+            // className="text-[12px] leading-[24px] font-normal text-white py-1"
             dangerouslySetInnerHTML={{
               __html: about_us_management_overview.content || "",
             }}
@@ -95,12 +156,12 @@ export default async function Page() {
         </People>
         <Stakeholder
           backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/about/world_map.webp"
-          directors={directorsData}
-          commissioners={commissionersData}
+          directors={transformedBodData}
+          commissioners={transformedBocData}
         />
         <OrganizationStructure
           chartImageUrl={about_us_organization_structure.file_url}
-          chartImageAlt="Organization Structure Chart" 
+          chartImageAlt="Organization Structure Chart"
         />
         <CorporateStructure
           chartImageUrl={about_us_corporate_structure.file_url}
@@ -111,12 +172,15 @@ export default async function Page() {
         />
         <Downloads
           id="company-profile"
-          title="Curious to learn more about Chandra Daya Investasi?"
-          subtitle="Gain deeper insights into our story, growth, and latest achievements by downloading our company profile"
-          itemTitle="Company Profile CDI Group"
-          itemSize="2.01 MB"
-          itemViewUrl="https://chandradaya-investasi.com/file/preview/default/company_profile/Company_Profile_1018/"
-          itemDownloadUrl="https://chandradaya-investasi.com/file/download/default/company_profile/Company_Profile_1018/"
+          title={t('download_title')}
+          subtitle={t('download_subtitle')}
+          items={guidelineItems}
+        />
+        <Information
+          eyebrow={t("eye_information")}
+          title={t("title_information")}
+          backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
+          links={quickLinksData}
         />
       </div>
     </>

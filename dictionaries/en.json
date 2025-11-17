@@ -1,0 +1,112 @@
+{
+  "Report": {
+    "dawnload_title": "Dawnload All",
+    "see_title": "See All",
+    "description": "Documents are available in both English and Bahasa Indonesia. Change the website language to view them in another language."
+  },
+  "Homepage": {
+    "more": "Learn More",
+    "about": "About Us",
+    "eye_report": "LATEST DOCUMENTS",
+    "title_report": "Financial Reports",
+    "eye_information": "QUICK LINKS",
+    "title_information": "Need to access detailed information?",
+    "journey_career": "Join With Us",
+    "journey_awards": "All Awards"
+  },
+  "AboutUs": {
+    "company_profile_view": "View",
+    "company_profile_download": "Download",
+    "eye_information": "QUICK LINKS",
+    "title_information": "Need to access detailed information?"
+  },
+  "Management": {
+    "download_title": "Curious to learn more about Chandra Daya Investasi?",
+    "download_subtitle": "Gain deeper insights into our story, growth, and latest achievements by downloading our company profile",
+    "download_view": "View",
+    "download_download": "Download"
+  },
+  "Awards": {
+    "not_found": "No items found for the selected criteria.",
+    "eye_information": "QUICK LINKS",
+    "title_information": "Need to access detailed information?"
+  },
+  "OurBusiness": {
+    "Energy": {
+      "help": "Please select a tab."
+    },
+    "Water": {
+      "help": "Please select a tab."
+    }
+  },
+  "Investor": {
+    "Financial": {
+      "not_found": "No reports found matching your criteria.",
+      "download_view": "View",
+      "download_download": "Download",
+      "search": "Search anything...",
+      "title": "Financial Calendar",
+      "subtitle": "Documents are available in both English and Bahasa Indonesia."
+    },
+    "Publication": {
+      "not_found": "No reports found matching your criteria.",
+      "download_view": "View",
+      "download_download": "Download",
+      "search": "Search anything..."
+    },
+    "Report": {
+      "financial_title": "Financial Data Table",
+      "institution_title": "Supporting Institutions & Professionals",
+      "calendar_title": "Financial Calendar",
+      "calendar_subtitle": "Documents are available in both English and Bahasa Indonesia. Change the website language to view them in another language.",
+      "search": "Search anything...",
+      "download_view": "View",
+      "download_download": "Download",
+      "not_found": "No reports found matching your criteria.",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "Governance": {
+      "download_view": "View",
+      "download_download": "Download",
+      "see_title": "See All",
+      "cta_whistle": "Submit Your Concerns",
+      "eye_information": "QUICK LINKS",
+      "title_information": "Need to access detailed information?"
+    },
+    "Sustainability": {
+      "Governance": {
+        "download_view": "View",
+      "download_download": "Download"
+      }
+    }
+  },
+  "Media": {
+    "Read_More": "Read More",
+    "download_id": "Download-ID",
+    "download_en": "Download-EN",
+    "download_view": "View",
+    "read_article_more": "Read Article More",
+    "press_release": "Press Release",
+    "News": "News"
+  },
+  "Contact": {
+    "Submit": "Submit",
+    "question": "Add your questions",
+    "question_placeholder": "Write your comment or additional question here",
+    "topic": "Topic",
+    "topic_placeholder": "Select Topic",
+    "country": "country",
+    "country_placeholder": "Select Your Country",
+    "email_placeholder": "Input Your Email",
+    "lastname": "Last Name",
+    "lastname_placeholder": "Input Your Last Name",
+    "firstname": "First Name",
+    "firstname_placeholder": "Input Your First Name",
+    "subtitle": "Thank you for your interest in CDI Group",
+    "other_company": "Other Company Addresses:"
+  },
+  "Regulation": {
+    "title_not_found": "Content not available."
+  }
+}

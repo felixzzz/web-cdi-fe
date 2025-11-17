@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const DecorativeCorners: React.FC = () => {
-  const size = 30;
+  const size = 10;
   return (
     <>
       <Image
@@ -43,10 +43,12 @@ const DecorativeCorners: React.FC = () => {
 interface VisionMissionSectionProps {
   title: string;
   visionData: {
+    title: string;
     statement: string;
     imageUrl: string;
   };
   missionData: {
+    title: string;
     statement: string;
     imageUrl: string;
   };
@@ -89,9 +91,9 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
               {visionData.statement}
             </p>
 
-            <hr className="w-full border-white/30 my-6" />
+            <hr className="w-full border-white my-6" />
 
-            <p className="text-base font-medium">Our Vision</p>
+            <p className="text-base font-medium">{title}</p>
           </div>
 
           <div
@@ -111,9 +113,9 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
               {missionData.statement}
             </p>
 
-            <hr className="w-full border-white/30 my-6" />
+            <hr className="w-full border-white my-6" />
 
-            <p className="text-base font-medium">Our Mission</p>
+            <p className="text-base font-medium">{title}</p>
           </div>
         </div>
       </div>

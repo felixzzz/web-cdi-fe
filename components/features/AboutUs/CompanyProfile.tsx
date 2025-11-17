@@ -1,32 +1,32 @@
 import React from "react";
-import { Eye, Download, FileText } from "lucide-react"; // Mengganti <img>
+import Image from "next/image";
+import { CompanyProfileResponse } from "@/types/AboutUs/About";
+import { useTranslations } from "next-intl";
 
 interface CompanyProfileProps {
   id?: string;
   title: string;
   subtitle: string;
-  itemTitle: string;
-  itemSize: string;
-  itemViewUrl: string;
-  itemDownloadUrl: string;
+  data: CompanyProfileResponse;
 }
 
 export const CompanyProfile: React.FC<CompanyProfileProps> = ({
   id,
   title,
   subtitle,
-  itemTitle,
-  itemSize,
-  itemViewUrl,
-  itemDownloadUrl,
+  data,
 }) => {
+  const baseUrl = "https://chandradaya-investasi.com";
+
+  const t = useTranslations("AboutUs");
+
   return (
     <section
       id={id}
       className="py-28 bg-neutral-3"
       aria-labelledby="company-profile-title"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <h2
           id="company-profile-title"
           className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-4 text-center"
@@ -37,42 +37,73 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
           <p className="ql-align-center">{subtitle}</p>
         </div>
 
-        <article className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-2 lg:gap-y-0">
-          <div>
-            <h3 className="text-neutral-13 mb-2 text-lg font-medium">
-              {itemTitle}
-            </h3>
-            <div className="flex items-center text-base text-neutral-8 gap-3">
-              <div className="flex items-baseline gap-3">
-                <span>{itemSize}</span>
-                <span>.</span>
-              </div>
-              <FileText size={16} />
-            </div>
-          </div>
+        {data &&
+          data.length > 0 &&
+          data.map((item) => {
+            const itemViewUrl = `${baseUrl}/file/preview/default/${item.type}/${item.unique_key}/`;
+            const itemDownloadUrl = `${baseUrl}/file/download/default/${item.type}/${item.unique_key}/`;
 
-          {/* Tombol Aksi Item */}
-          <div className="flex lg:items-center gap-8 w-full lg:w-fit">
-            <a
-              href={itemViewUrl}
-              className="flex items-center gap-2 text-blue-base font-medium"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Eye size={16} />
-              View
-            </a>
-            <a
-              href={itemDownloadUrl}
-              className="flex items-center gap-2 text-blue-base font-medium"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Download size={16} />
-              Download
-            </a>
-          </div>
-        </article>
+            return (
+              <article
+                key={item.ulid}
+                className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-2 lg:gap-y-0"
+              >
+                <div>
+                  <h3 className="text-neutral-13 mb-2 text-lg font-medium">
+                    {item.name}
+                  </h3>
+                  <div className="flex items-center text-base text-neutral-8 gap-3">
+                    <div className="flex items-baseline gap-3">
+                      <span>{item.file.size}</span>
+                      <span>.</span>
+                    </div>
+                    {item.file.format === "pdf" && (
+                      <Image
+                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                        width={28}
+                        height={20}
+                        alt="PDF icon"
+                        className="inline-block"
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex lg:items-center gap-8 w-full lg:w-fit">
+                  <a
+                    href={itemViewUrl}
+                    className="flex items-center gap-2 text-blue-base font-medium"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                      width={20}
+                      height={20}
+                      alt="View icon"
+                      className="inline-block"
+                    />
+                    {t("company_profile_view")}
+                  </a>
+                  <a
+                    href={itemDownloadUrl}
+                    className="flex items-center gap-2 text-blue-base font-medium"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                      width={20}
+                      height={20}
+                      alt="Download icon"
+                      className="inline-block"
+                    />
+                    {t("company_profile_download")}
+                  </a>
+                </div>
+              </article>
+            );
+          })}
       </div>
     </section>
   );

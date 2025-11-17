@@ -6,32 +6,38 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { ApiLatestNewsResponse } from "@/types/Media/Media";
+import { useTranslations } from "next-intl";
 
 const BACKGROUND_IMAGE_URL =
   "https://chandradaya-investasi.com/file-storage/N0YzSzZULzNFMm4yTWhCaWVhVXNTYXgrWXd3S1VZbzR5NDVMQXR1SThBV2pkaFlqYy9PNmVKckpkYWF0WW5QZCtCV09tc3NiUlozaXhzWjlaNW5FT1E9PQ.webp";
 
-const sliderData = [
-  {
-    id: 1,
-    title:
-      "CDI Group Perluas Portofolio PLTS Menjadi 11 MWp pada November 2025",
-    imageUrl:
-      "https://chandradaya-investasi.com/file-storage/SGJlVFhrK3dxUHJOY1htSDFZNnY5WWE5YjZWQUVTVngyQUxzTzA2WERWUW44SUUwdk9WOUxvMjFVSXc5SFozQ2Q0anIvZDVlbnNJb2pXQXlKZXo4elE9PQ.webp",
-    category: "Perusahaan",
-    date: "07-10-2025",
-    description:
-      "PT Chandra Daya Investasi Tbk (CDI Group), melalui anak usahanya di bidang energi,&nbsp;PT Krakatau Chandra Energi (KCE), terus memperkuat bisnis energi terbarukan dengan menambah kapasitas&nbsp;4,7 MWp&nbsp;dari Pe...",
-    linkUrl:
-      "https://chandradaya-investasi.com/media/news/cdi-group-expands-solar-power-portfolio-to-11-mwp-by-november-2025",
-  },
-];
+interface HeroNewsProps {
+  latestNewsData: ApiLatestNewsResponse;
+}
 
-export function HeroNews() {
+export function HeroNews({ latestNewsData }: HeroNewsProps) {
+  const t = useTranslations('Media')
+  const sliderData = latestNewsData.map((item) => ({
+    id: item.data.id,
+    title: item.data.title,
+    imageUrl: item.data.image,
+    category: item.data.category_name,
+    date: item.data.date,
+    description: item.data.short_content,
+    linkUrl: item.data.route,
+  }));
+
+  const heroTitle =
+    latestNewsData.length > 0
+      ? latestNewsData[0].title
+      : '<span class="text-[#47C1EA]">Berita</span> Terbaru';
+
   return (
     <section
       aria-labelledby="latest-news-heading"
-      className="py-28 lg:py-40 relative overflow-hidden"
+      className="py-28 md:py-40 relative overflow-hidden"
     >
       <Image
         src={BACKGROUND_IMAGE_URL}
@@ -42,13 +48,12 @@ export function HeroNews() {
         priority
       />
 
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-10">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-10">
         <h2
           id="latest-news-heading"
-          className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium text-white mb-9"
-        >
-          <span className="text-blue-lighter">Berita</span> Terbaru
-        </h2>
+          className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-semibold text-white mb-9"
+          dangerouslySetInnerHTML={{ __html: heroTitle }}
+        ></h2>
 
         <Swiper
           modules={[Navigation, Pagination]}
@@ -65,8 +70,8 @@ export function HeroNews() {
         >
           {sliderData.map((slide) => (
             <SwiperSlide key={slide.id}>
-              <article className="grid lg:grid-cols-2 gap-4">
-                <div className="relative aspect-video lg:aspect-auto lg:h-[380px] w-full rounded-xl overflow-hidden">
+              <article className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="relative aspect-video md:aspect-auto md:h-[380px] w-full rounded-xl overflow-hidden">
                   <Image
                     src={slide.imageUrl}
                     alt={slide.title}
@@ -75,24 +80,23 @@ export function HeroNews() {
                   />
                 </div>
                 <div className="p-6 rounded-xl bg-[#E6F0FA] border border-neutral-5 backdrop-blur-2xl">
-                  <span className="bg-blue-base text-white px-3 py-1 text-sm rounded-full me-4">
+                  <span className="bg-[#2474A5] text-white px-3 py-1 text-sm rounded-full me-4">
                     {slide.category}
                   </span>
                   <span className="text-sm text-neutral-10">{slide.date}</span>
-                  {/* <h3> sudah benar secara semantik */}
-                  <h3 className="text-[22px] font-medium line-clamp-3 mt-4 text-neutral-13">
+                  <h1 className="text-[22px] font-medium line-clamp-3 mt-4 text-neutral-13">
                     {slide.title}
-                  </h3>
+                  </h1>
                   <p
-                    className="text-sm mt-2 mb-6 line-clamp-2 text-neutral-10"
+                    className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3"
                     dangerouslySetInnerHTML={{ __html: slide.description }}
                   ></p>
                   <Link
                     href={slide.linkUrl}
-                    className="text-blue-base flex items-center gap-2"
+                    className="text-[#2474A5] flex items-center text-[12px] gap-2"
                   >
-                    Baca selengkapnya
-                    <ArrowRight className="text-2xl" />
+                    {t('Media')}
+                    <ChevronRight className="text-2xl" />
                   </Link>
                 </div>
               </article>
@@ -100,7 +104,7 @@ export function HeroNews() {
           ))}
         </Swiper>
 
-        <nav aria-label="Navigasi Berita" className="grid grid-cols-2 mt-6">
+        {/* <nav aria-label="Navigasi Berita" className="grid grid-cols-2 mt-6">
           <div className="flex">
             <div className="custom-pagination-media flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"></div>
           </div>
@@ -118,7 +122,7 @@ export function HeroNews() {
               <ArrowRight size={24} />
             </button>
           </div>
-        </nav>
+        </nav> */}
       </div>
     </section>
   );

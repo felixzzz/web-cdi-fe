@@ -1,13 +1,17 @@
-import { AboutUsWhoWeAreApiResponse } from "@/types/AboutUs/About";
+import { AboutUsWhoWeAreApiResponse, CompanyProfileResponse, HistoryApiResponse, MilestoneApiResponse } from "@/types/AboutUs/About";
 
 const API_URL = "https://chandradaya-investasi.com/api/utility/about-us/who-we-are";
+const API_URL_HISTORY = "https://chandradaya-investasi.com/api/utility/our-histories";
+const API_URL_MILSTONE = "https://chandradaya-investasi.com/api/utility/milestones";
+const API_URL_PROFILE = "https://chandradaya-investasi.com/api/utility/additional-file/company-profile";
 
-export async function getAboutPageData(): Promise<AboutUsWhoWeAreApiResponse> {
+export async function getAboutPageData(locale: string): Promise<AboutUsWhoWeAreApiResponse> {
   try {
     const res = await fetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        lang: locale,
       },
       next: {
         revalidate: 3600,
@@ -26,8 +30,86 @@ export async function getAboutPageData(): Promise<AboutUsWhoWeAreApiResponse> {
   }
 }
 
+export async function getHistoryData(locale: string): Promise<HistoryApiResponse> {
+  try {
+    const res = await fetch(API_URL_HISTORY, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        lang: locale,
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch home data: ${res.statusText}`);
+    }
+
+    const data: HistoryApiResponse = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getAboutPageData:", error);
+    throw new Error("Could not fetch homepage data.");
+  }
+}
+
+export async function getMilstoneData(locale: string): Promise<MilestoneApiResponse> {
+  try {
+    const res = await fetch(API_URL_MILSTONE, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        lang: locale,
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch home data: ${res.statusText}`);
+    }
+
+    const data: MilestoneApiResponse = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getAboutPageData:", error);
+    throw new Error("Could not fetch homepage data.");
+  }
+}
+
+export async function getProfileData(locale: string): Promise<CompanyProfileResponse> {
+  try {
+    const res = await fetch(API_URL_PROFILE, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        lang: locale,
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch home data: ${res.statusText}`);
+    }
+
+    const data: CompanyProfileResponse = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getAboutPageData:", error);
+    throw new Error("Could not fetch homepage data.");
+  }
+}
+
 export const aboutService = {
   getAboutPageData,
+  getHistoryData,
+  getMilstoneData,
+  getProfileData
 };
 
 
