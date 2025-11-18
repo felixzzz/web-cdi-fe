@@ -9,6 +9,7 @@ import { routing } from "@/i18n/routing";
 import { Footer } from "@/components/shared/Footer";
 import { Navbar } from "@/components/shared/Navbar";
 import { informationService } from "@/services/Global/informationService";
+import { NavbarThemeProvider } from "@/context/NavbarThemeContext";
 
 const mainNavLinksData = [
   { href: "/about-us", text: "Who We Are" },
@@ -38,6 +39,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const footerData = await informationService.getFooterData(locale);
 
   return (
+    <NavbarThemeProvider>
     <NextIntlClientProvider>
       <Navbar />
       {children}
@@ -53,5 +55,6 @@ export default async function LocaleLayout({ children, params }: Props) {
         copyrightText="@2025 Chandra Daya Investasi"
       />
     </NextIntlClientProvider>
+    </NavbarThemeProvider>
   );
 }

@@ -1,5 +1,6 @@
 import { FinancialCalendar } from "@/components/features/Investor/FinancialInformation/FinancialCalendar";
 import { Hero } from "@/components/features/Investor/FinancialInformation/Hero";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { financialService } from "@/services/Investor/FinancialServices";
 import { FinancialPageProps } from "@/types/Investor/Financial";
 import { Metadata } from "next";
@@ -67,6 +68,7 @@ export default async function Page({ params: { locale } }: FinancialPageProps) {
 
   return (
     <main>
+                  <NavbarThemeTrigger theme="dark" />
       <Hero
         imageSrc={investor_financial_banner.file_url}
         title={
@@ -75,6 +77,8 @@ export default async function Page({ params: { locale } }: FinancialPageProps) {
         }
         iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
       />
+                  <NavbarThemeTrigger theme="light" />
+      
       <FinancialCalendar initialData={initialCalendarData} />
     </main>
   );

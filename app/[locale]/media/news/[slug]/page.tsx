@@ -1,5 +1,6 @@
 import { NewsDetail } from "@/components/features/Media/Details/Detail";
 import { RelatedPosts } from "@/components/features/Media/Details/RelatedPosts";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { mediaService } from "@/services/Media/MediaService";
 import { notFound } from "next/navigation";
 
@@ -33,7 +34,8 @@ export default async function Page({ params }: PageProps) {
   );
 
   return (
-    <>
+    <main>
+                                    <NavbarThemeTrigger theme="light" />
       <NewsDetail
         breadcrumbs={breadcrumbs}
         articleTitle={title}
@@ -42,11 +44,12 @@ export default async function Page({ params }: PageProps) {
         featureImageUrl={article.image}
         articleContent={content}
       />
+                              <NavbarThemeTrigger theme="light" />
       <RelatedPosts
         allArticles={mediaData.items}
         currentArticle={article}
         locale={params.locale}
       />
-    </>
+    </main>
   );
 }

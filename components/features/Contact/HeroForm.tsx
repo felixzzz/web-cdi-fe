@@ -29,6 +29,7 @@ import { ContactInfoCard } from "./ContactInfoCard";
 import { useTranslations } from "next-intl";
 import { CompanyLocationResponse } from "@/types/global/footer";
 import { ContactSectionData } from "@/types/Contact/Contact";
+import { useState } from "react";
 
 const countries = [
   { id: 102, name: "Indonesia" },
@@ -46,24 +47,64 @@ interface HeroFormProps {
 
 export function HeroForm({ contactData, pageData }: HeroFormProps) {
   const t = useTranslations("Contact");
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">(
+    "idle"
+  );
+  const [submitMessage, setSubmitMessage] = useState("");
+
   const form = useForm<ContactUsFormValues>({
     resolver: zodResolver(contactUsSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
-      country: "",
-      topic: "",
-      questions: "",
+      country_id: "",
+      topic_id: "",
+      message: "",
     },
   });
 
-  function onSubmit(values: ContactUsFormValues) {
-    alert(JSON.stringify(values, null, 2));
+  async function onSubmit(values: ContactUsFormValues) {
+    setSubmitStatus("idle");
+    setSubmitMessage("");
+
+    console.log(values)
+
+    try {
+      const response = await fetch("https://cdi-be.cmlabs.dev/api/contact-us/store", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      console.log(JSON.stringify(values))
+      console.log(response)
+
+      if (!response.ok) {
+        // const errorData = await response
+        //   .json()
+        //   .catch(() => ({ message: t("submit_error_message") }));
+        // throw new Error(errorData.message || t("submit_error_message"));
+      }
+
+      setSubmitStatus("success");
+      // setSubmitMessage(t("submit_success_message"));
+      form.reset();
+    } catch (error) {
+      console.error("Failed to submit form:", error);
+      setSubmitStatus("error");
+      if (error instanceof Error) {
+        setSubmitMessage(error.message);
+      } else {
+        // setSubmitMessage(t("submit_error_message"));
+      }
+    }
   }
 
   return (
-    <div className="bg-gray-100 py-20">
+    <div data-navbar-theme="dark" className="bg-gray-100 py-20">
       <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 pt-[5%]">
         <div className="grid md:grid-cols-3 gap-16">
           <ContactInfoCard
@@ -90,16 +131,16 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <FormField
                     control={form.control}
-                    name="firstName"
+                    name="first_name"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                          {t("firstname")}{" "}
+                          {t("first_name")}{" "}
                           <span className="text-red-600">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder={t("firstname_placeholder")}
+                            placeholder={t("first_name_placeholder")}
                             className="input-custom"
                             {...field}
                           />
@@ -110,17 +151,16 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                   />
                   <FormField
                     control={form.control}
-                    name="lastName"
+                    name="last_name"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                          {t("lastname")}{" "}
+                          {t("last_name")}{" "}
                           <span className="text-red-600">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
-                            // placeholder=""
-                            placeholder={t("lastname")}
+                            placeholder={t("last_name")}
                             className="input-custom"
                             {...field}
                           />
@@ -143,7 +183,6 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                         <FormControl>
                           <Input
                             type="email"
-                            // placeholder=""
                             placeholder={t("email_placeholder")}
                             className="input-custom"
                             {...field}
@@ -155,11 +194,11 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                   />
                   <FormField
                     control={form.control}
-                    name="country"
+                    name="country_id"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                          {t("country")} <span className="text-red-600">*</span>
+                          {t("country_id")} <span className="text-red-600">*</span>
                         </FormLabel>
                         <Select
                           onValueChange={field.onChange}
@@ -168,8 +207,7 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                           <FormControl>
                             <SelectTrigger className="input-custom">
                               <SelectValue
-                                placeholder={t("country_placeholder")}
-                                // placeholder=""
+                                placeholder={t("country_id_placeholder")}
                               />
                             </SelectTrigger>
                           </FormControl>
@@ -192,11 +230,11 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
 
                 <FormField
                   control={form.control}
-                  name="topic"
+                  name="topic_id"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                        {t("topic")} <span className="text-red-600">*</span>
+                        {t("topic_id")} <span className="text-red-600">*</span>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
@@ -205,8 +243,7 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                         <FormControl>
                           <SelectTrigger className="input-custom">
                             <SelectValue
-                              placeholder={t("topic_placeholder")}
-                              //  placeholder=""
+                              placeholder={t("topic_id_placeholder")}
                             />
                           </SelectTrigger>
                         </FormControl>
@@ -225,16 +262,15 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
 
                 <FormField
                   control={form.control}
-                  name="questions"
+                  name="message"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                        {t("question")} <span className="text-red-600">*</span>
+                        {t("message")} <span className="text-red-600">*</span>
                       </FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder={t("question_placeholder")}
-                          // placeholder=""
+                          placeholder={t("message_placeholder")}
                           className="input-custom !h-auto"
                           rows={8}
                           {...field}
@@ -248,10 +284,26 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                 <Button
                   type="submit"
                   className="bg-[#47C1EA] hover:bg-[#3ab0d8] px-6 py-2 rounded-full font-medium w-fit text-white cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed"
-                  disabled={form.formState.isSubmitting}
+                  disabled={form.formState.isSubmitting} 
                 >
-                  {t("Submit")}
+                  {form.formState.isSubmitting
+                    ? t("Submit") 
+                    : t("Submit")}
                 </Button>
+
+                {submitMessage && (
+                  <p
+                    className={
+                      submitStatus === "success"
+                        ? "text-green-600"
+                        : submitStatus === "error"
+                        ? "text-red-600"
+                        : "text-gray-900"
+                    }
+                  >
+                    {submitMessage}
+                  </p>
+                )}
               </form>
             </Form>
           </div>

@@ -15,7 +15,7 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
       aria-labelledby="financial-banner-heading"
       className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 mt-28 mb-16"
     >
-      <div className="p-6 rounded-3xl w-full bg-blue-base relative overflow-hidden">
+      <div data-navbar-theme="dark" className="p-6 rounded-3xl w-full bg-blue-base relative overflow-hidden">
         <Image
           src={backgroundImageUrl}
           alt={title || "Financial Banner"} 

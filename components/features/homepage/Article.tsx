@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ArticleCarousel } from "./ArticleCarousel";
 import { ApiArticle } from "@/types/Homepage/home";
+import { ArticleCarousel } from "./ArticleCarousel";
 
 interface ArticleProps {
   articles: ApiArticle[];
@@ -24,11 +24,10 @@ export const Article: React.FC<ArticleProps> = ({ articles }) => {
 
   return (
     <section
-      data-navbar-theme="light"
       className="py-20 bg-white"
       aria-labelledby="article-section-title"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <div data-navbar-theme="dark" className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
           <div>
             <p className="text-neutral-500 text-base mb-4">LATEST ARTICLE</p>

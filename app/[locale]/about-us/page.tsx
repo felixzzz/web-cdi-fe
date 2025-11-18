@@ -10,11 +10,12 @@ import {
   extractYouTubeId,
 } from "@/services/AboutUs/AboutService";
 import { convertHtmlToReact } from "@/lib/htmlUtils";
-import { Information } from "@/components/features/Homepage/Information";
+import { Information } from "@/components/features/homepage/Information";
 import { informationService } from "@/services/Global/informationService";
 import { AboutPageProps } from "@/types/AboutUs/About";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 
 const aboutLinks = [
   { text: "Company Overview", href: "/about-us" },
@@ -118,6 +119,7 @@ export default async function Page({ params: { locale } }: AboutPageProps) {
   return (
     <>
       <div>
+              <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={about_us_banner.file_url}
           title={about_us_banner.title || "About Chandra Daya Investasi"}

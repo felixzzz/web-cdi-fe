@@ -18,6 +18,7 @@ export const SupportingInstitutions = ({
   const t = useTranslations('Investor.Report')
   return (
     <section
+    data-navbar-theme="dark"
       aria-labelledby="institutions-heading"
       className="bg-[#F6F6F6] py-20"
     >

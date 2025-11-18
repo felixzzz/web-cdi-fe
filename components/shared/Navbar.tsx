@@ -1,69 +1,16 @@
+// /components/Navbar.tsx (Kode LengKAP dengan Solusi Baru)
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { clsx } from "clsx";
-import { ChevronDown, Menu, X, Globe } from "lucide-react";
-
-const navLinks = [
-  { id: "home", label: "Home", href: "/" },
-  {
-    id: "about",
-    label: "About Us",
-    children: [
-      { label: "Who We Are", href: "/about-us" },
-      { label: "Management", href: "/about-us/management" },
-      { label: "Awards & Certification", href: "/about-us/awards" },
-    ],
-  },
-  {
-    id: "business",
-    label: "Our Business",
-    children: [
-      { label: "What We Do", href: "/our-business" },
-      { label: "Energy", href: "/our-business/energy" },
-      { label: "Water", href: "/our-business/water" },
-      { label: "Ports & Storage", href: "/our-business/ports-and-storage" },
-      { label: "Logistic", href: "/our-business/logistics" },
-    ],
-  },
-  {
-    id: "investor",
-    label: "Investor",
-    children: [
-      { label: "Report", href: "/investor/report" },
-      {
-        label: "Financial Information",
-        href: "/investor/financial-information",
-      },
-      { label: "Shares Information", href: "/investor/shares-information" },
-      {
-        label: "Publications for Investors",
-        href: "/investor/publications-for-investors",
-      },
-    ],
-  },
-  { id: "governance", label: "Governance", href: "/governance" },
-  {
-    id: "sustainability",
-    label: "Sustainability",
-    children: [
-      { label: "Overview", href: "/sustainability" },
-      { label: "Environment", href: "/sustainability/environment" },
-      { label: "Social", href: "/sustainability/social" },
-      { label: "Governance", href: "/sustainability/governance" },
-    ],
-  },
-  { id: "media", label: "Media", href: "/media/news" },
-  {
-    id: "career",
-    label: "Career",
-    href: "https://careers.capcx.com/",
-    external: true,
-  },
-  { id: "contact", label: "Contact Us", href: "/contact-us" },
-];
+import { ChevronDown, Menu, X } from "lucide-react";
+// import { usePathname, useRouter } from "next-intl/client";
+import { useLocale, useTranslations } from "next-intl";
+import { useNavbarTheme } from "@/context/NavbarThemeContext";
+import { usePathname, useRouter } from "@/i18n/routing";
+// import { usePathname, useRouter } from "next-intl/navigation";
 
 const languages = [
   {
@@ -79,8 +26,71 @@ const languages = [
 ];
 
 export function Navbar() {
+  const t = useTranslations("Navbar");
+
+  const navLinks = [
+    { id: "home", label: t("home"), href: "/" },
+    {
+      id: "about",
+      label: t("about_us"),
+      children: [
+        { label: t("who_we_are"), href: "/about-us" },
+        { label: t("management"), href: "/about-us/management" },
+        { label: t("awards_certification"), href: "/about-us/awards" },
+      ],
+    },
+    {
+      id: "business",
+      label: t("our_business"),
+      children: [
+        { label: t("what_we_do"), href: "/our-business" },
+        { label: t("energy"), href: "/our-business/energy" },
+        { label: t("water"), href: "/our-business/water" },
+        { label: t("ports_storage"), href: "/our-business/ports-and-storage" },
+        { label: t("logistics"), href: "/our-business/logistics" },
+      ],
+    },
+    {
+      id: "investor",
+      label: t("investor"),
+      children: [
+        { label: t("report"), href: "/investor/report" },
+        {
+          label: t("financial_information"),
+          href: "/investor/financial-information",
+        },
+        {
+          label: t("shares_information"),
+          href: "/investor/shares-information",
+        },
+        {
+          label: t("publications_for_investors"),
+          href: "/investor/publications-for-investors",
+        },
+      ],
+    },
+    { id: "governance", label: t("governance"), href: "/governance" },
+    {
+      id: "sustainability",
+      label: t("sustainability"),
+      children: [
+        { label: t("overview"), href: "/sustainability" },
+        { label: t("environment"), href: "/sustainability/environment" },
+        { label: t("social"), href: "/sustainability/social" },
+        // Menggunakan key unik untuk child 'Governance' agar tidak bentrok
+        { label: t("governance_child"), href: "/sustainability/governance" },
+      ],
+    },
+    { id: "media", label: t("media"), href: "/media/news" },
+    {
+      id: "career",
+      label: t("career"),
+      href: "https://careers.capcx.com/",
+      external: true,
+    },
+    { id: "contact", label: t("contact_us"), href: "/contact-us" },
+  ];
   const [isScrolled, setIsScrolled] = useState(false);
-  const [navbarStyle, setNavbarStyle] = useState("white");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDesktopDropdown, setOpenDesktopDropdown] = useState<string | null>(
     null
@@ -90,66 +100,23 @@ export function Navbar() {
     null
   );
   const headerRef = useRef<HTMLElement>(null);
+  const desktopDropdownTimer = useRef<NodeJS.Timeout | null>(null);
+  const langDropdownTimer = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    let currentTheme = "white";
+  const pathname = usePathname();
+  const isAboutPage = pathname.startsWith("/about-us");
+  const isGovernance = pathname.startsWith("/governance");
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      let topIntersectingEntry: IntersectionObserverEntry | null = null;
+  const { theme } = useNavbarTheme();
+  const locale = useLocale();
+  const currentLanguage =
+    languages.find((lang) => lang.code === locale) || languages[0];
+  const onSelectLocale = (newLocale: string) => {
+    router.replace(pathname, { locale: newLocale });
+    setIsLangDropdownOpen(false);
+  };
 
-      for (const entry of entries) {
-        if (entry.isIntersecting && entry.boundingClientRect.top <= 88) {
-          if (
-            !topIntersectingEntry ||
-            entry.boundingClientRect.top >
-              topIntersectingEntry.boundingClientRect.top
-          ) {
-            topIntersectingEntry = entry;
-          }
-        }
-      }
-
-      const topEntry = topIntersectingEntry;
-      if (topEntry) {
-        const theme = (topEntry.target as Element).getAttribute(
-          "data-navbar-theme"
-        );
-        currentTheme = theme === "light" ? "light" : "dark";
-      } else {
-        const anyIntersectingBelow = entries.find(
-          (e) => e.isIntersecting && e.boundingClientRect.top > 88
-        );
-        if (!anyIntersectingBelow) {
-          currentTheme = "dark";
-        }
-      }
-      setNavbarStyle(currentTheme);
-    };
-
-    const observerOptions = {
-      root: null,
-      rootMargin: `0px 0px -${window.innerHeight - 89}px 0px`,
-      threshold: 0,
-    };
-
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
-
-    const sections = document.querySelectorAll(
-      "main > section, main > div[data-navbar-theme]"
-    );
-    if (sections.length > 0) {
-      sections.forEach((section) => observer.observe(section));
-    } else {
-      setNavbarStyle("white");
-    }
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
-  }, []);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -170,16 +137,22 @@ export function Navbar() {
   };
 
   return (
-    <section ref={headerRef} className="top-0 w-full fixed z-50">
+    <section
+      ref={headerRef}
+      className={clsx(
+        "top-0 w-full z-50 bg-transparent",
+        isAboutPage || isGovernance ? "absolute" : "fixed"
+      )}
+    >
       <header
         id="nav-header"
         className={clsx(
           "w-full py-7 flex items-center left-0 right-0 transition-all duration-300",
-          !isScrolled
-            // ? "bg-transparent text-white"
+
+          theme === "light"
+            ? "bg-white text-neutral-900 shadow-md"
+            : !isScrolled
             ? " text-white bg-gradient-to-b from-black/60 to-transparent"
-            : navbarStyle === "light"
-            ? "bg-white/80 backdrop-blur-lg text-neutral-900 shadow-md"
             : "backdrop-blur-3xl bg-[#091A24]/10 text-white"
         )}
       >
@@ -191,8 +164,8 @@ export function Navbar() {
               width={160}
               height={48}
               className={clsx(
-                "h-10 xl:h-12",
-                isScrolled && navbarStyle === "dark" ? "block" : "hidden"
+                "h-10 xl:h-12 w-auto",
+                theme === "light" ? "hidden" : "block"
               )}
               priority
             />
@@ -202,8 +175,8 @@ export function Navbar() {
               width={160}
               height={48}
               className={clsx(
-                "h-10 xl:h-12",
-                isScrolled && navbarStyle === "dark" ? "hidden" : "block"
+                "h-10 xl:h-12 w-auto",
+                theme === "light" ? "block" : "hidden"
               )}
               priority
             />
@@ -215,8 +188,17 @@ export function Navbar() {
                 <div
                   key={link.id}
                   className="relative"
-                  onMouseEnter={() => setOpenDesktopDropdown(link.id)}
-                  onMouseLeave={() => setOpenDesktopDropdown(null)}
+                  onMouseEnter={() => {
+                    if (desktopDropdownTimer.current) {
+                      clearTimeout(desktopDropdownTimer.current);
+                    }
+                    setOpenDesktopDropdown(link.id);
+                  }}
+                  onMouseLeave={() => {
+                    desktopDropdownTimer.current = setTimeout(() => {
+                      setOpenDesktopDropdown(null);
+                    }, 200);
+                  }}
                 >
                   <button className="nav-item hover-underline-middle cursor-pointer flex items-center gap-1 text-sm xl:text-base">
                     <span>{link.label}</span>
@@ -229,7 +211,19 @@ export function Navbar() {
                     />
                   </button>
                   {openDesktopDropdown === link.id && (
-                    <div className="absolute top-8 left-1/2 -translate-x-1/2 w-max z-10 pt-2">
+                    <div
+                      className="absolute top-16 left-1/2 -translate-x-1/2 w-max z-10 pt-2"
+                      onMouseEnter={() => {
+                        if (desktopDropdownTimer.current) {
+                          clearTimeout(desktopDropdownTimer.current);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        desktopDropdownTimer.current = setTimeout(() => {
+                          setOpenDesktopDropdown(null);
+                        }, 200);
+                      }}
+                    >
                       <Image
                         src="https://chandradaya-investasi.com/assets/frontend/icons/polygon.svg"
                         alt="Dropdown arrow"
@@ -276,15 +270,42 @@ export function Navbar() {
 
           <div className="flex items-center gap-4">
             <div
-              className="relative cursor-pointer hidden md:flex items-center gap-1"
-              onMouseEnter={() => setIsLangDropdownOpen(true)}
-              onMouseLeave={() => setIsLangDropdownOpen(false)}
+              className="relative cursor-pointer hidden lg:flex items-center gap-1"
+              onMouseEnter={() => {
+                if (langDropdownTimer.current) {
+                  clearTimeout(langDropdownTimer.current);
+                }
+                setIsLangDropdownOpen(true);
+              }}
+              onMouseLeave={() => {
+                langDropdownTimer.current = setTimeout(() => {
+                  setIsLangDropdownOpen(false);
+                }, 200);
+              }}
             >
-              <Globe size={18} />
-              <span>EN</span>
+              <Image
+                src={currentLanguage.flag}
+                alt={currentLanguage.label}
+                width={18}
+                height={18}
+                className="rounded-full border border-neutral-13"
+              />
+              <span className="uppercase">{currentLanguage.code}</span>
               <ChevronDown size={16} />
               {isLangDropdownOpen && (
-                <div className="absolute top-[40px] lg:top-[60px] left-1/2 -translate-x-1/2 w-max z-10 pt-2">
+                <div
+                  className="absolute top-16 left-1/2 -translate-x-1/2 w-max z-10 pt-2"
+                  onMouseEnter={() => {
+                    if (langDropdownTimer.current) {
+                      clearTimeout(langDropdownTimer.current);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    langDropdownTimer.current = setTimeout(() => {
+                      setIsLangDropdownOpen(false);
+                    }, 200);
+                  }}
+                >
                   <Image
                     src="https://chandradaya-investasi.com/assets/frontend/icons/polygon.svg"
                     alt="Dropdown arrow"
@@ -297,9 +318,60 @@ export function Navbar() {
                       <button
                         key={lang.code}
                         className="text-neutral-900 flex items-center gap-2 cursor-pointer text-sm hover:text-blue-base"
-                        onClick={() => {
-                          setIsLangDropdownOpen(false);
-                        }}
+                        onClick={() => onSelectLocale(lang.code)}
+                      >
+                        <Image
+                          src={lang.flag}
+                          alt={`${lang.label} flag`}
+                          width={18}
+                          height={18}
+                          className="rounded-full border border-neutral-13"
+                        />
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="relative lg:hidden">
+              <button
+                className="flex items-center gap-1"
+                onClick={() => setIsLangDropdownOpen((prev) => !prev)}
+                aria-label="Change language"
+              >
+                <Image
+                  src={currentLanguage.flag}
+                  alt={currentLanguage.label}
+                  width={18}
+                  height={18}
+                  className="rounded-full border border-neutral-13"
+                />
+                <span className="uppercase">{currentLanguage.code}</span>
+                <ChevronDown
+                  size={16}
+                  className={clsx(
+                    "transition-transform",
+                    isLangDropdownOpen && "rotate-180"
+                  )}
+                />
+              </button>
+              {isLangDropdownOpen && (
+                <div className="absolute top-8 right-0 w-max z-10 pt-2">
+                  <Image
+                    src="https://chandradaya-investasi.com/assets/frontend/icons/polygon.svg"
+                    alt="Dropdown arrow"
+                    width={16}
+                    height={16}
+                    className="ml-auto mr-2 -mb-[6px] w-4 h-auto block"
+                  />
+                  <div className="p-4 rounded-xl bg-white flex flex-col gap-4 whitespace-nowrap shadow-lg border border-neutral-200">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        className="text-neutral-900 flex items-center gap-2 cursor-pointer text-sm hover:text-blue-base"
+                        onClick={() => onSelectLocale(lang.code)}
                       >
                         <Image
                           src={lang.flag}
@@ -329,19 +401,17 @@ export function Navbar() {
 
       <div
         className={clsx(
-          "fixed lg:hidden top-0 left-0 bottom-0 right-0 z-[100] transition-opacity duration-300 ease-out",
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          "fixed lg:hidden top-0 left-0 bottom-0 right-0 z-[100]",
+          isMobileMenuOpen ? "visible" : "invisible"
         )}
       >
         <div
-          className="absolute inset-0 bg-black/50"
-          onClick={() => setIsMobileMenuOpen(false)}
-        ></div>
-
-        <div
           className={clsx(
-            "absolute top-0 right-0 bottom-0 w-[80%] max-w-sm bg-white text-neutral-900 transition-transform duration-300 ease-out",
-            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            "absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-white text-neutral-900",
+            "transition-all duration-500 ease-in-out",
+            isMobileMenuOpen
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-full opacity-0"
           )}
         >
           <div className="py-5 h-full flex flex-col">
@@ -351,7 +421,7 @@ export function Navbar() {
                 alt="CDI Logo"
                 width={140}
                 height={42}
-                className="h-10"
+                className="h-10 w-auto"
               />
               <button
                 onClick={() => setIsMobileMenuOpen(false)}

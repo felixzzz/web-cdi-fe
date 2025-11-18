@@ -37,7 +37,7 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
   return (
     <section
       aria-labelledby="latest-news-heading"
-      className="py-28 md:py-40 relative overflow-hidden"
+      className="py-[5%] lg:py-[8%] relative overflow-hidden"
     >
       <Image
         src={BACKGROUND_IMAGE_URL}
@@ -71,7 +71,7 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
           {sliderData.map((slide) => (
             <SwiperSlide key={slide.id}>
               <article className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="relative aspect-video md:aspect-auto md:h-[380px] w-full rounded-xl overflow-hidden">
+                <div className="relative aspect-video md:h-[380px] w-full rounded-xl overflow-hidden">
                   <Image
                     src={slide.imageUrl}
                     alt={slide.title}

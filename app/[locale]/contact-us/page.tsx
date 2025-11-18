@@ -1,5 +1,6 @@
 import { HeroForm } from "@/components/features/Contact/HeroForm";
 import { OtherCompany } from "@/components/features/Contact/OtherCompany";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { companyAddressService } from "@/services/Contact/ContactService";
 import { ContactPageProps } from "@/types/Contact/Contact";
 import { Metadata } from "next";
@@ -64,8 +65,10 @@ export default async function Page({params: {locale}}: ContactPageProps) {
 
   return (
     <main>
+      <NavbarThemeTrigger theme="light" />
       <HeroForm contactData={getContactData} 
         pageData={getContactPageData}/>
+        <NavbarThemeTrigger theme="light" />
       <OtherCompany companyAddressData={companyAddressData} />
     </main>
   );

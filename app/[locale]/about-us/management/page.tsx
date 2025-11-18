@@ -6,7 +6,7 @@ import { People } from "@/components/features/AboutUs/management/People";
 import { Stakeholder } from "@/components/features/AboutUs/management/Stakeholder";
 import { SubNavbar } from "@/components/features/AboutUs/management/SubNavbar";
 import { TeamMember } from "@/components/features/AboutUs/management/TeamMemberCard";
-import { Information } from "@/components/features/Homepage/Information";
+import { Information } from "@/components/features/homepage/Information";
 import { managementService } from "@/services/AboutUs/ManagementService";
 import {
   DownloadItem,
@@ -16,13 +16,14 @@ import {
 import { informationService } from "@/services/Global/informationService";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 
 const aboutLinks = [
-  { text: "Company Overview", href: "/about-us" },
-  { text: "Vision & Mission", href: "/about-us/vision-mission" },
-  { text: "Our History", href: "/about-us/history" },
-  { text: "Milestone", href: "/about-us/milestone" },
-  { text: "Company Profile", href: "/about-us/company-profile" },
+  { text: "Board of Directors", href: "/about-us" },
+  { text: "Board of Commissioners", href: "/about-us/vision-mission" },
+  { text: "Organization Structure", href: "/about-us/history" },
+  { text: "Corporate Structure", href: "/about-us/milestone" },
+  { text: "Guidelines of Work", href: "/about-us/company-profile" },
 ];
 
 const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
@@ -129,8 +130,8 @@ export default async function Page({
   }));
 
   return (
-    <>
-      <div>
+    <main>
+              <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={about_us_management_banner.file_url}
           title={
@@ -182,7 +183,6 @@ export default async function Page({
           backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
           links={quickLinksData}
         />
-      </div>
-    </>
+    </main>
   );
 }

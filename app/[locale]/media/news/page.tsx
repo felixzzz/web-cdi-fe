@@ -1,5 +1,6 @@
 import { HeroNews } from "@/components/features/Media/Hero";
 import { News } from "@/components/features/Media/News";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import {
   mediaService,
   pressReleaseService,
@@ -64,11 +65,11 @@ export default async function Page({params: {locale}}: NewsPageProps) {
     pressReleaseService.getLatestNewsData(locale),
   ]);
   return (
-    <>
-      <div>
+    <main>
+                              <NavbarThemeTrigger theme="dark" />
         <HeroNews latestNewsData={latestNewsData} />
+                              <NavbarThemeTrigger theme="light" />
         <News mediaData={mediaData} pressReleaseData={pressReleaseData} />
-      </div>
-    </>
+    </main>
   );
 }

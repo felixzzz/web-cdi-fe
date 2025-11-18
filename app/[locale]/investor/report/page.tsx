@@ -3,6 +3,7 @@ import { FinancialCalendar } from "@/components/features/Investor/Report/Financi
 import { FinancialTable } from "@/components/features/Investor/Report/FinancialTable";
 import { Hero } from "@/components/features/Investor/Report/Hero";
 import { SupportingInstitutions } from "@/components/features/Investor/Report/Institutions";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { reportService } from "@/services/Investor/ReportServices";
 import { ReportPageProps } from "@/types/Investor/Report";
 import { Metadata } from "next";
@@ -74,12 +75,15 @@ export default async function Page({ params: { locale } }: ReportPageProps) {
 
   return (
     <main>
+                  <NavbarThemeTrigger theme="dark" />
+
       <Hero
         imageSrc={investor_report_banner.file_url}
         title={investor_report_banner.title || "Investor Report"}
         subtitle={investor_report_banner.content}
         iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
       />
+            <NavbarThemeTrigger theme="light" />
       <FinancialBanner data={investor_report_overview} />
       <FinancialTable data={investor_report_table} />
       <SupportingInstitutions data={institutions} />
