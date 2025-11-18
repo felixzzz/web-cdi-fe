@@ -54,13 +54,12 @@ const transformItem = (item: CalendarEventItem): Report => ({
   downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
 });
 
-
 interface FinancialCalendarProps {
   initialData: CalendarApiResponse;
 }
 
 export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
-  const t = useTranslations('Investor.Report')
+  const t = useTranslations("Investor.Report");
   const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
     flattenData(initialData)
   );
@@ -132,12 +131,12 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
 
   const handleYearClick = (year: string | number) => {
     setActiveYear(year);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   const handleTypeClick = (type: string) => {
     setActiveType(type);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   const handlePageChange = (page: number) => {
@@ -148,21 +147,20 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
 
   return (
     <section
-      aria-labelledby="calendar-heading"
-      className="container mx-auto py-20 px-4 md:px-8 lg:px-20 2xl:px-44"
+    className="container mx-auto py-20 px-4 md:px-8 lg:px-20 2xl:px-44"
+    data-navbar-theme="dark"
+    aria-labelledby="calendar-heading"
     >
       <h2
         id="calendar-heading"
         className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-3"
       >
-        {t('calendar_title')}
+        {t("calendar_title")}
       </h2>
 
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
-        <span>
-          {t('calendar_subtitle')}
-        </span>
+        <span>{t("calendar_subtitle")}</span>
       </div>
 
       <nav
@@ -210,7 +208,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-[#2474A5]"
-            placeholder={t('search')}
+            placeholder={t("search")}
           />
         </div>
       </div>
@@ -260,7 +258,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                     alt="See all icon"
                     className="inline-block"
                   />{" "}
-                  {t('download_view')}
+                  {t("download_view")}
                 </a>
                 <a
                   href={report.downloadUrl}
@@ -275,15 +273,13 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                     alt="Download icon"
                     className="inline-block"
                   />{" "}
-                  {t('download_download')}
+                  {t("download_download")}
                 </a>
               </div>
             </article>
           ))
         ) : (
-          <p className="text-center text-neutral-8 py-10">
-            {t('not_found')}
-          </p>
+          <p className="text-center text-neutral-8 py-10">{t("not_found")}</p>
         )}
       </section>
 
@@ -295,7 +291,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
               disabled={pagination.current_page === 1 || isLoading}
               className="px-4 py-2 border rounded disabled:opacity-50"
             >
-              {t('previous')}
+              {t("previous")}
             </button>
             <span className="px-4 py-2">
               Page {pagination.current_page} of {pagination.last_page}
@@ -307,7 +303,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
               }
               className="px-4 py-2 border rounded disabled:opacity-50"
             >
-              {t('next')}
+              {t("next")}
             </button>
           </div>
         </div>

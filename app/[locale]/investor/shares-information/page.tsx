@@ -1,5 +1,6 @@
 import { Hero } from "@/components/features/Investor/SharesInformation/Hero";
 import { StocksInformation } from "@/components/features/Investor/SharesInformation/Stoks";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { sharesService } from "@/services/Investor/SharesServices";
 import { SharesPageProps, TableInvestorSection } from "@/types/Investor/Shares";
 import { Metadata } from "next";
@@ -72,12 +73,14 @@ export default async function Page({ params: { locale } }: SharesPageProps) {
 
   return (
     <main>
+                        <NavbarThemeTrigger theme="dark" />
       <Hero
         imageSrc={investor_share_banner.file_url}
         title={investor_share_banner.title || "Stocks and Bonds"}
         subtitle={investor_share_banner.content}
         iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
       />
+                  <NavbarThemeTrigger theme="light" />
       <StocksInformation
         tabOneTitle={investor_share_tab_one.title}
         tabTwoTitle={investor_share_tab_two.title}

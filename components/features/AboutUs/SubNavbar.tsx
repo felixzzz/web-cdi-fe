@@ -19,7 +19,7 @@ export const SubNavbar: React.FC<SubNavProps> = ({ links }) => {
   return (
     <nav 
       className="bg-[#091A24] sticky top-0 z-10 py-4" 
-      aria-label="Secondary" 
+      aria-label="Secondary"
     >
       <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <ul className="gap-10 flex items-center overflow-x-auto overflow-y-hidden">

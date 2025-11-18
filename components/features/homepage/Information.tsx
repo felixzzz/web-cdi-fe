@@ -19,11 +19,10 @@ export const Information: React.FC<InformationSectionProps> = ({
   return (
     <section
       className="py-20 bg-neutral-3 bg-contain lg:bg-cover bg-no-repeat bg-bottom"
-      data-navbar-theme="light"
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       aria-labelledby="quick-links-title"
     >
-      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+      <div data-navbar-theme="dark" className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div>
             <p className="text-neutral-7 text-base mb-4">{eyebrow}</p>

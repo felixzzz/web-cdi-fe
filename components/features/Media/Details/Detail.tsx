@@ -70,7 +70,7 @@ export const NewsDetail = ({
   articleContent,
 }: NewsDetailProps) => {
   return (
-    <div className="py-20">
+    <div className="py-[5%] lg:py-[8%]">
       <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <div className="flex gap-1 text-neutral-10 items-center">
           {breadcrumbs.map((item) => (
@@ -103,7 +103,7 @@ export const NewsDetail = ({
         </h1>
 
         <div
-          className="max-w-full prose prose-invert prose-base text-justify text-neutral-900"
+          className="max-w-full prose prose-base text-justify text-neutral-900"
           dangerouslySetInnerHTML={{ __html: articleContent }}
         ></div>
 

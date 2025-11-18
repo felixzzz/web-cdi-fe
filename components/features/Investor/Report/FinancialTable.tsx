@@ -17,6 +17,7 @@ export function FinancialTable({ data }: FinancialTableProps) {
 
   return (
     <section
+    // data-navbar-theme="dark"
       aria-labelledby="financial-data-heading"
       className="container mx-auto py-[1rem] px-4 md:px-8 lg:px-20 2xl:px-44"
     >
@@ -29,7 +30,9 @@ export function FinancialTable({ data }: FinancialTableProps) {
         </p>
       )}
 
-      <div className="table-main overflow-x-auto border border-neutral-500">
+      <div
+      data-navbar-theme="dark"
+      className="table-main overflow-x-auto border border-neutral-500">
         <table className="w-full border-collapse">
           <caption className="sr-only">{t('financial_title')}</caption>
 

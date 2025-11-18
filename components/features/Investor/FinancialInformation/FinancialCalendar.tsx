@@ -168,6 +168,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
 
   return (
     <section
+    data-navbar-theme="dark"
       id="content-media-section"
       aria-labelledby="calendar-heading"
       className="container mx-auto py-20 px-4 md:px-8 lg:px-20 2xl:px-44"

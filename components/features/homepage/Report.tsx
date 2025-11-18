@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ReportItem, ReportItemProps } from "./ReportItem";
 import { Languages, MoveRight } from "lucide-react";
 import { ApiReportItem } from "@/types/Homepage/home";
 import { useTranslations } from "next-intl";
+import { ReportItem, ReportItemProps } from "./ReportItem";
 
 interface ReportSectionProps {
   eyebrow: string;
@@ -24,11 +24,10 @@ export const Report: React.FC<ReportSectionProps> = ({
   return (
     <section
       id="home_report"
-      data-navbar-theme="light"
       className="py-20 bg-[#F6F6F6]"
       aria-labelledby="report-section-title"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <div data-navbar-theme="dark" className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
           <div>
             <p className="text-neutral-500 text-base mb-4">{eyebrow}</p>

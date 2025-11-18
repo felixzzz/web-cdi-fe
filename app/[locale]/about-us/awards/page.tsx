@@ -1,6 +1,6 @@
 import { Awards } from "@/components/features/AboutUs/awards/Awards";
 import { Hero } from "@/components/features/AboutUs/awards/Hero";
-import { Information } from "@/components/features/Homepage/Information";
+import { Information } from "@/components/features/homepage/Information";
 import { awardsService } from "@/services/AboutUs/AwardsService";
 import { informationService } from "@/services/Global/informationService";
 import { AwardsPageProps } from "@/types/AboutUs/Awards";

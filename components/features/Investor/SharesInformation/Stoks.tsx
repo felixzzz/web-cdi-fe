@@ -14,7 +14,9 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
   const tableData = data.content_table_trans?.tableData || [];
 
   return (
-    <div>
+    <div
+    data-navbar-theme="dark"
+    >
       <h2 className="mb-10 text-2xl md:text-[28px] font-medium text-neutral-13">
         {data.title || "Top 10 Shareholders"}
       </h2>

@@ -16,11 +16,13 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 const aboutLinks = [
-  { text: "Company Overview", href: "/about-us" },
-  { text: "Vision & Mission", href: "/about-us/vision-mission" },
-  { text: "Our History", href: "/about-us/history" },
-  { text: "Milestone", href: "/about-us/milestone" },
-  { text: "Company Profile", href: "/about-us/company-profile" },
+  { text: "Corporate Secretary", href: "/about-us" },
+  { text: "Internal Audit Unit", href: "/about-us/vision-mission" },
+  { text: "Committee", href: "/about-us/history" },
+  { text: "Risk Management", href: "/about-us/milestone" },
+  { text: "Code of Conduct", href: "/about-us/company-profile" },
+  { text: "Policy", href: "/about-us/company-profile" },
+  { text: "Whistleblowing", href: "/about-us/company-profile" },
 ];
 
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { DiscoverCard } from "./DiscoverCard";
 import { HomePageSection } from "@/types/Homepage/home";
+import { DiscoverCard } from "./DiscoverCard";
 
 const stripHtml = (html: string | null) =>
   html ? html.replace(/<[^>]+>/g, "") : "";

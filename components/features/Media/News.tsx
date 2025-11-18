@@ -97,6 +97,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
 
   return (
     <section
+    data-navbar-theme="light"
       id="content-media-section"
       className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 py-20 bg-white"
     >
