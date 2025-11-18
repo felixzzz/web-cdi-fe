@@ -1,6 +1,7 @@
 import { BusinessPillars } from "@/components/features/OurBusiness/ports-and-storage/BusinessPillars";
 import { Hero } from "@/components/features/OurBusiness/ports-and-storage/Hero";
 import { Overview } from "@/components/features/OurBusiness/ports-and-storage/Overview";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { portStorageService } from "@/services/OurBusiness/PortsStorageService";
 import { PortStoragePageProps } from "@/types/OurBusiness/Ports&Storage";
 import { Metadata } from "next";
@@ -69,8 +70,8 @@ export default async function Page({ params: { locale } }: PortStoragePageProps)
     link_title_en,
   } = portStorageData;
   return (
-    <>
-      <div>
+      <main>
+                    <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={banner_image}
           title={banner_title}
@@ -85,7 +86,6 @@ export default async function Page({ params: { locale } }: PortStoragePageProps)
         />
         {/* <BusinessPillars /> */}
         <BusinessPillars title={heading_tab_title} tab={tabs[0]} />
-      </div>
-    </>
+      </main>
   );
 }

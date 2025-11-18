@@ -1,5 +1,6 @@
 import { Business } from "@/components/features/OurBusiness/Business";
 import { Hero } from "@/components/features/OurBusiness/Hero";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { businessService } from "@/services/OurBusiness/BussinesService";
 import { BussinesPageProps } from "@/types/OurBusiness/Bussines";
 import { Metadata } from "next";
@@ -66,8 +67,8 @@ export default async function Page({ params: { locale } }: BussinesPageProps) {
   const { our_business_banner, our_business_overview } = businessData;
 
   return (
-    <>
-      <div>
+      <main>
+                    <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={our_business_banner.file_url}
           title={our_business_banner.title || "About Chandra Daya Investasi"}
@@ -75,7 +76,6 @@ export default async function Page({ params: { locale } }: BussinesPageProps) {
           iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
         />
         <Business items={overviewData} overview={our_business_overview} />
-      </div>
-    </>
+      </main>
   );
 }

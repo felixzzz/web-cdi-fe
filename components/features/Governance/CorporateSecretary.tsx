@@ -36,9 +36,9 @@ export function CorporateSecretary({
                 objectFit="cover"
               />
             </div>
-            <h3 className="mb-3 font-medium text-lg md:text-[22px]">
+            <p className="mb-3 font-medium text-lg md:text-[22px]">
               {personData.title}
-            </h3>
+            </p>
             <p className="prose prose-invert prose-base content text-sm md:text-base !font-light !text-white">
               {personData.content}
             </p>

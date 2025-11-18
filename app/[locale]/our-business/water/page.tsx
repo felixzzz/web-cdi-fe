@@ -1,6 +1,7 @@
 import { BusinessPillars } from "@/components/features/OurBusiness/Water/BusinessPillars";
 import { Hero } from "@/components/features/OurBusiness/Water/Hero";
 import { Overview } from "@/components/features/OurBusiness/Water/Overview";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { waterService } from "@/services/OurBusiness/WaterService";
 import { WaterPageProps } from "@/types/OurBusiness/Water";
 import { Metadata } from "next";
@@ -58,8 +59,8 @@ export default async function Page({ params: { locale } }: WaterPageProps) {
   const waterData = await waterService.getWaterPageData(locale);
 
   return (
-    <>
-      <div>
+      <main>
+                    <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={waterData.banner_image}
           title={waterData.banner_title}
@@ -76,7 +77,6 @@ export default async function Page({ params: { locale } }: WaterPageProps) {
         title={waterData.heading_tab_title}
           tabs={waterData.tabs}
         />
-      </div>
-    </>
+      </main>
   );
 }

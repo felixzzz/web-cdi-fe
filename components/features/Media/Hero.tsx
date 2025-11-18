@@ -49,11 +49,11 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
       />
 
       <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-10">
-        <h2
+        <h1
           id="latest-news-heading"
           className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-semibold text-white mb-9"
           dangerouslySetInnerHTML={{ __html: heroTitle }}
-        ></h2>
+        ></h1>
 
         <Swiper
           modules={[Navigation, Pagination]}
@@ -84,9 +84,9 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
                     {slide.category}
                   </span>
                   <span className="text-sm text-neutral-10">{slide.date}</span>
-                  <h1 className="text-[22px] font-medium line-clamp-3 mt-4 text-neutral-13">
+                  <h2 className="text-[22px] font-medium line-clamp-3 mt-4 text-neutral-13">
                     {slide.title}
-                  </h1>
+                  </h2>
                   <p
                     className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3"
                     dangerouslySetInnerHTML={{ __html: slide.description }}

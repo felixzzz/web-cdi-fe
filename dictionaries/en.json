@@ -77,7 +77,7 @@
     "Sustainability": {
       "Governance": {
         "download_view": "View",
-      "download_download": "Download"
+        "download_download": "Download"
       }
     }
   },
@@ -88,7 +88,8 @@
     "download_view": "View",
     "read_article_more": "Read Article More",
     "press_release": "Press Release",
-    "News": "News"
+    "News": "News",
+    "Media": "News"
   },
   "Contact": {
     "message": "Add your questions",

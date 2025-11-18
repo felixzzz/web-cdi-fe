@@ -6,6 +6,7 @@ import { GrievanceMechanism } from "@/components/features/Sustainability/Governa
 import { Hero } from "@/components/features/Sustainability/Governance/Hero";
 import { Ciso } from "@/components/features/Sustainability/Governance/SecuritySlider";
 import { SustainableProcurement } from "@/components/features/Sustainability/Governance/SustainableProcurement";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { governanceService } from "@/services/Sustainability/GovernanceServices";
 import { GovernancePageProps } from "@/types/Sustainabilitys/Governance";
 import { Metadata } from "next";
@@ -92,8 +93,8 @@ export default async function Page({params: {locale}}: GovernancePageProps) {
   );
 
   return (
-    <>
-      <div>
+    <main>
+                  <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={sustainability_governance_banner.file_url}
           title={
@@ -111,7 +112,6 @@ export default async function Page({params: {locale}}: GovernancePageProps) {
         <Ciso data={cisoData!} />
         {/* <SecuritySlider /> */}
         <GovernancePerformance data={governancePerfData!} />
-      </div>
-    </>
+    </main>
   );
 }

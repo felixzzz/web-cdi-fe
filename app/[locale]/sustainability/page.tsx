@@ -1,5 +1,6 @@
 import { Hero } from "@/components/features/Sustainability/Hero";
 import { Overview } from "@/components/features/Sustainability/Overview";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { sustainabilityService } from "@/services/Sustainability/FinancialServices";
 import { SustainabilityPageProps } from "@/types/Sustainabilitys/Sustainability";
 import { Metadata } from "next";
@@ -66,6 +67,7 @@ const {
   return (
     <>
       <div>
+              <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={sustainability_overview_banner.file_url}
           title={

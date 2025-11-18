@@ -1,6 +1,7 @@
 import { BusinessPillars } from "@/components/features/OurBusiness/Logistics/BusinessPillars";
 import { Hero } from "@/components/features/OurBusiness/Logistics/Hero";
 import { Overview } from "@/components/features/OurBusiness/Logistics/Overview";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { logisticService } from "@/services/OurBusiness/LogisticService";
 import { LogisticPageProps } from "@/types/OurBusiness/Logistic";
 import { Metadata } from "next";
@@ -69,8 +70,8 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
   } = logisticData;
 
   return (
-    <>
-      <div>
+      <main>
+                    <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={banner_image}
           title={banner_title}
@@ -84,7 +85,6 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
           linkTitle={link_title_en}
         />
         <BusinessPillars tabs={tabs} />
-      </div>
-    </>
+      </main>
   );
 }

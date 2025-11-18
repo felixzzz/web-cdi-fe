@@ -1,6 +1,7 @@
 import { BusinessPillars } from "@/components/features/OurBusiness/Energy/BusinessPillars";
 import { Hero } from "@/components/features/OurBusiness/Energy/Hero";
 import { Overview } from "@/components/features/OurBusiness/Energy/Overview";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { energyService } from "@/services/OurBusiness/EnergyService";
 import { EnergyApiResponse, EnergyPageProps } from "@/types/OurBusiness/Energy";
 import { Metadata } from "next";
@@ -58,8 +59,8 @@ export default async function Page({ params: { locale } }: EnergyPageProps) {
   const energyData: EnergyApiResponse = await energyService.getEnergyPageData(locale);
 
   return (
-    <>
-      <div>
+      <main>
+                    <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={energyData.banner_image}
           title={energyData.banner_title}
@@ -77,7 +78,6 @@ export default async function Page({ params: { locale } }: EnergyPageProps) {
           title={energyData.heading_tab_title}
           tabs={energyData.tabs}
         />
-      </div>
-    </>
+      </main>
   );
 }

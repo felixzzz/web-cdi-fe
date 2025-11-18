@@ -9,6 +9,7 @@ import { InternalAudit } from "@/components/features/Governance/InternalAudit";
 import { Policy } from "@/components/features/Governance/Policy";
 import { SubNavbar } from "@/components/features/Governance/SubNavbar";
 import { Whistleblowing } from "@/components/features/Governance/Whistleblowing";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { informationService } from "@/services/Global/informationService";
 import { governanceService } from "@/services/Governance/GovernanceService";
 import { GovernancePageProps } from "@/types/Governances/Governance";
@@ -144,8 +145,8 @@ export default async function Page({
   const allTabs = [auditCommitteeTab, ...otherTabs];
 
   return (
-    <>
-      <div>
+      <main>
+                    <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={governance_banner.file_url}
           title={governance_banner.title || "About Chandra Daya Investasi"}
@@ -175,7 +176,6 @@ export default async function Page({
           backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
           links={quickLinksData}
         />
-      </div>
-    </>
+      </main>
   );
 }

@@ -3,6 +3,7 @@ import { Hero } from "@/components/features/Sustainability/Environment/Hero";
 import { EnvironmentalResponsibility } from "@/components/features/Sustainability/Environment/Overview";
 import { SustainabilityFacts } from "@/components/features/Sustainability/Environment/SustainabilityFacts";
 import { WasteManagement } from "@/components/features/Sustainability/Environment/WasteManagement";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { environmentService } from "@/services/Sustainability/EnvironmentServices";
 import { EnvironmentPageProps } from "@/types/Sustainabilitys/Environment";
 import { Metadata } from "next";
@@ -79,8 +80,8 @@ export default async function Page({params: {locale}}: EnvironmentPageProps) {
   );
 
   return (
-    <>
-      <div>
+    <main>
+            <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={sustainability_environment_banner.file_url}
           title={
@@ -94,7 +95,6 @@ export default async function Page({params: {locale}}: EnvironmentPageProps) {
         <EnergyEmission data={energyData!} />
         <SustainabilityFacts data={factsData!} />
         <WasteManagement data={wasteData!} />
-      </div>
-    </>
+    </main>
   );
 }

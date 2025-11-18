@@ -41,9 +41,9 @@ export function ContactInfoCard({
 
       <div className="relative z-10 rounded-xl border border-neutral-400 p-4 bg-white">
         <div className="mb-1 flex flex-col gap-2">
-          <h3 className="text-[22px] text-[#47C1EA] font-medium">
+          <span className="text-[22px] text-[#47C1EA] font-medium">
             {companyName}
-          </h3>
+          </span>
           <p className="text-base text-neutral-800 font-medium">
             {companySubtitle}
           </p>

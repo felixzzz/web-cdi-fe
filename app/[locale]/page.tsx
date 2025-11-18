@@ -141,6 +141,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
 
   return (
     <main>
+      <NavbarThemeTrigger theme="dark" />
       <Hero
         videoSrc={home_banner.video_url}
         preTitle={home_banner_tagline.title}
@@ -150,7 +151,6 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         linkText={t("more")}
         linkIcon={<ArrowRight size={14} />}
       />
-      <NavbarThemeTrigger theme="dark" />
       <AboutUs
         backgroundImageUrl={home_about_section.file_url}
         title={home_about_section.title}

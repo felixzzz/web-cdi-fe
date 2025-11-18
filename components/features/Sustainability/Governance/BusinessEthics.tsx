@@ -9,7 +9,7 @@ interface BusinessEthicsProps {
 }
 
 export function BusinessEthics({ data }: BusinessEthicsProps) {
-  const t = useTranslations('Sustainability.Governance')
+  const t = useTranslations('Investor.Sustainability.Governance')
   if (!data) {
     return null;
   }

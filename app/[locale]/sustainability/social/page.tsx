@@ -2,6 +2,7 @@ import { EmpoweringCommunities } from "@/components/features/Sustainability/Soci
 import { HealthAndSafety } from "@/components/features/Sustainability/Social/HealthAndSafety";
 import { Hero } from "@/components/features/Sustainability/Social/Hero";
 import { HumanRights } from "@/components/features/Sustainability/Social/HumanRights";
+import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { socialService } from "@/services/Sustainability/SocialServices";
 import { SocialPageProps } from "@/types/Sustainabilitys/Social";
 import { Metadata } from "next";
@@ -79,8 +80,8 @@ const empoweringData = {
   );
 
   return (
-    <>
-      <div>
+    <main>
+            <NavbarThemeTrigger theme="dark" />
         <Hero
           imageSrc={sustainability_social_banner.file_url}
           title={
@@ -93,7 +94,6 @@ const empoweringData = {
         <EmpoweringCommunities data={empoweringData} />
         <HealthAndSafety data={healthData!} />
         <HumanRights data={humanRightsData!} />
-      </div>
-    </>
+    </main>
   );
 }

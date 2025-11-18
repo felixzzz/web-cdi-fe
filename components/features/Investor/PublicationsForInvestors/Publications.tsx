@@ -235,9 +235,9 @@ export function Publications({ locale, initialData, initialTab }: PublicationsPr
                     className="py-8 border-b border-b-neutral-5 flex items-center justify-start flex-col gap-y-4 md:gap-y-0"
                   >
                     <div className="flex w-full">
-                      <h4 className="text-neutral-13 mb-2 text-lg font-medium">
+                      <h3 className="text-neutral-13 mb-2 text-lg font-medium">
                         {item.title}
-                      </h4>
+                      </h3>
                     </div>
                     <div className="flex flex-col md:flex-row justify-start md:justify-between w-full">
                       <div className="flex items-center justify-start text-base text-neutral-8 gap-3 w-full">
