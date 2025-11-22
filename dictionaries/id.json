@@ -18,13 +18,27 @@
     "company_profile_view": "Lihat",
     "company_profile_download": "Unduh",
     "eye_information": "TAUTAN CEPAT",
-    "title_information": "Butuh akses informasi terperinci?"
+    "title_information": "Butuh akses informasi terperinci?",
+    "vision": "Visi Kita",
+    "mission": "Misi Kita",
+    "About_Us": "Gambaran Umum Perusahaan",
+    "Vision_Mission": "Visi & Misi",
+    "Our_History": "Sejarah Kita",
+    "Milestone": "Tonggak Sejarah",
+    "Company_Profile": "Profil Perusahaan"
   },
   "Management": {
-    "download_title": "Ingin tahu lebih banyak tentang Chandra Daya Investasi?",
-    "download_subtitle": "Dapatkan wawasan lebih dalam tentang kisah, pertumbuhan, dan pencapaian terbaru kami dengan mengunduh profil perusahaan kami",
+    "download_title": "Tata Kelola Perusahaan yang Baik",
+    "download_subtitle": "Menelaah Pedoman Kerja Direksi dan Dewan Komisaris.",
     "download_view": "Lihat",
-    "download_download": "Unduh"
+    "download_download": "Unduh",
+    "eye_information": "TAUTAN CEPAT",
+    "title_information": "Butuh akses informasi terperinci?",
+    "Board_of_Directors": "Dewan Direksi",
+    "Board_of_Commissioners": "Dewan Komisaris",
+    "Organization_Structure": "Struktur Organisasi",
+    "Corporate_Structure": "Struktur Perusahaan",
+    "Guidelines_of_Work": "Pedoman Kerja"
   },
   "Awards": {
     "not_found": "Tidak ada item yang ditemukan untuk kriteria yang dipilih.",
@@ -52,7 +66,8 @@
       "not_found": "Tidak ada laporan yang ditemukan sesuai kriteria Anda.",
       "download_view": "Lihat",
       "download_download": "Unduh",
-      "search": "Cari apa saja..."
+      "search": "Cari apa saja...",
+      "help": "Silakan pilih tab."
     },
     "Report": {
       "financial_title": "Tabel Data Keuangan",
@@ -72,7 +87,14 @@
       "see_title": "Lihat Semua",
       "cta_whistle": "Sampaikan Kekhawatiran Anda",
       "eye_information": "TAUTAN CEPAT",
-      "title_information": "Butuh akses informasi terperinci?"
+      "title_information": "Butuh akses informasi terperinci?",
+      "Corporate_Secretary": "Sekretaris Perusahaan",
+      "Internal_Audit_Unit": "Unit Audit Internal",
+      "Committee": "Komite",
+      "Risk_Management": "Manajemen Risiko",
+      "Code_of_Conduct": "Kode Etik",
+      "Policy": "Kebijakan",
+      "Whistleblowing": "Pelaporan Pelanggaran"
     },
     "Sustainability": {
       "Governance": {
@@ -88,7 +110,9 @@
     "download_view": "LiTAMPILKANihat",
     "read_article_more": "Baca Artikel Selengkapnya",
     "press_release": "Siaran Pers",
-    "News": "Berita"
+    "News": "Berita",
+    "Media": "Berita",
+    "share": "Bagikan postingan ini"
   },
   "Contact": {
     "message": "Ajukan pertanyaan Anda",
@@ -137,5 +161,15 @@
     "media": "Media",
     "career": "Karier",
     "contact_us": "Hubungi Kami"
+  },
+  "Layout": {
+    "who_we_are": "Tentang Kami",
+    "our_business": "Bisnis Kami",
+    "sustainability": "Keberlanjutan",
+    "investor": "Investor",
+    "terms": "Syarat & Ketentuan",
+    "privacy": "Kebijakan Privasi",
+    "cookies": "Persetujuan Cookie",
+    "disclaimer": "Sanggahan"
   }
 }

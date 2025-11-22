@@ -17,30 +17,29 @@ import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 
-const aboutLinks = [
-  { text: "Company Overview", href: "/about-us" },
-  { text: "Vision & Mission", href: "/about-us/vision-mission" },
-  { text: "Our History", href: "/about-us/history" },
-  { text: "Milestone", href: "/about-us/milestone" },
-  { text: "Company Profile", href: "/about-us/company-profile" },
-];
-
 const stripHtml = (html: string | null) =>
   html ? html.replace(/<[^>]+>/g, "") : "";
 
-const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+const description =
+  "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
-const baseUrl = "https://chandradaya-investasi.com";
+const baseUrl = "https://cdi-be.cmlabs.dev";
 
 export const metadata: Metadata = {
-  title: "Management and Organization Structure | Chandra Daya Investasi", 
+  title: "Management and Organization Structure | Chandra Daya Investasi",
   description: description,
-  keywords: ['Chandra Daya Investasi', 'CDI', 'CDIA', 'PT Chandra Daya Investasi Tbk', 'CDI Group'],
-  
+  keywords: [
+    "Chandra Daya Investasi",
+    "CDI",
+    "CDIA",
+    "PT Chandra Daya Investasi Tbk",
+    "CDI Group",
+  ],
+
   metadataBase: new URL(baseUrl),
 
   viewport: {
-    width: 'device-width',
+    width: "device-width",
     initialScale: 1.0,
   },
   robots: {
@@ -48,33 +47,33 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: '/contact-us',
+    canonical: "/contact-us",
   },
   icons: {
-    shortcut: '/assets/frontend/favicon.png',
+    shortcut: "/assets/frontend/favicon.png",
   },
 
   openGraph: {
     title: "Chandra Daya Investasi",
     description: description,
-    url: '/contact-us',
-    type: 'website',
-    siteName: 'Chandra Daya Investasi',
+    url: "/contact-us",
+    type: "website",
+    siteName: "Chandra Daya Investasi",
   },
 
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: "Chandra Daya Investasi",
     description: description,
   },
 
   other: {
-    'application-url': 'https://chandradaya-investasi.com',
-    'preview-url': 'https://chandradaya-investasi.com/file-storage',
-    'download-file': 'https://chandradaya-investasi.com/file-download',
-    'add-file-preview': 'https://chandradaya-investasi.com/file/preview',
-    'add-file-download': 'https://chandradaya-investasi.com/file/download',
-  }
+    "application-url": "https://cdi-be.cmlabs.dev",
+    "preview-url": "https://cdi-be.cmlabs.dev/file-storage",
+    "download-file": "https://cdi-be.cmlabs.dev/file-download",
+    "add-file-preview": "https://cdi-be.cmlabs.dev/file/preview",
+    "add-file-download": "https://cdi-be.cmlabs.dev/file/download",
+  },
 };
 
 export default async function Page({ params: { locale } }: AboutPageProps) {
@@ -107,79 +106,94 @@ export default async function Page({ params: { locale } }: AboutPageProps) {
   const visionData = {
     statement: stripHtml(about_us_vision.content),
     imageUrl: about_us_vision.file_url,
-    title: "Our Vision"
+    title: "Our Vision",
   };
-  
+
   const missionData = {
     statement: stripHtml(about_us_mission.content),
     imageUrl: about_us_mission.file_url,
-    title: "Our Mission"
+    title: "Our Mission",
   };
 
+  const SECTION_IDS = {
+    ABOUT_US: "about-us",
+    VISION_MISSION: "vision-mission",
+    HISTORY: "history",
+    MILESTONE: "milestone",
+    COMP_PROFILE: "company-profile",
+  };
+
+  const aboutLinks = [
+    { text: t("About_Us"), targetId: SECTION_IDS.ABOUT_US },
+    { text: t("Vision_Mission"), targetId: SECTION_IDS.VISION_MISSION },
+    { text: t("Our_History"), targetId: SECTION_IDS.HISTORY },
+    { text: t("Milestone"), targetId: SECTION_IDS.MILESTONE },
+    { text: t("Company_Profile"), targetId: SECTION_IDS.COMP_PROFILE },
+  ];
+
   return (
-    <>
-      <div>
-              <NavbarThemeTrigger theme="dark" />
-        <Hero
-          imageSrc={about_us_banner.file_url}
-          title={about_us_banner.title || "About Chandra Daya Investasi"}
-          subtitle={about_us_banner.content}
-          iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
-        />
-        <SubNavbar links={aboutLinks} />
-        <Overview
-          id="company-overview"
-          bgImageUrl={about_us_company_overview_background.file_url}
-          logoSrc="https://chandradaya-investasi.com/assets/frontend/logo_cdi_footer_new.svg"
-          logoAlt="Chandra Asri Group Logo"
-          logoWidth={200}
-          logoHeight={80}
-          eyebrowText={about_us_company_overview_tagline.title || ""}
-          mainImageUrl={about_us_company_overview.file_url}
-          mainImageAlt="Company Overview"
-          mainImageWidth={800}
-          mainImageHeight={600}
-          youtubeVideoId={youtubeId}
-          videoTitle="Company Profile Video - CDI Group"
-        >
-          <div className="prose prose-invert prose-base text-neutral-300">
-            {convertHtmlToReact(about_us_company_overview.content)}
-          </div>
-        </Overview>
-        <VisionMission
-          title={about_us_vision_mission_tagline.title || "Vision & Mission"}
-          visionData={visionData}
-          missionData={missionData}
-        />
-        <History data={historyData} />
-        <Milestone
-          title={about_us_milestone.title || "From Then to Now"}
-          subtitle={
-            stripHtml(about_us_milestone.content) ||
-            "Explore PT Chandra Daya Investasi Tbk key milestones over the years."
-          }
-          backgroundImageUrl={about_us_milestone.file_url}
-          data={milstoneData}
-        />
-        <CompanyProfile
-          id="company-profile"
-          title={
-            about_us_company_profile.title ||
-            "Curious to learn more about Chandra Daya Investasi?"
-          }
-          subtitle={
-            stripHtml(about_us_company_profile.content) ||
-            "Gain deeper insights into our story, growth, and latest achievements by downloading our company profile"
-          }
-          data={profileData}
-        />
-        <Information
-          eyebrow={t('eye_information')}
-          title={t('title_information')}
-          backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
-          links={quickLinksData}
-        />
-      </div>
-    </>
+    <main>
+      <NavbarThemeTrigger theme="dark" />
+      <Hero
+        imageSrc={about_us_banner.file_url}
+        title={about_us_banner.title || "About Chandra Daya Investasi"}
+        subtitle={about_us_banner.content}
+        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+      />
+      <SubNavbar links={aboutLinks} />
+      <Overview
+        id="about-us"
+        bgImageUrl={about_us_company_overview_background.file_url}
+        logoSrc="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_footer_new.svg"
+        logoAlt="Chandra Asri Group Logo"
+        logoWidth={200}
+        logoHeight={80}
+        eyebrowText={about_us_company_overview_tagline.title || ""}
+        mainImageUrl={about_us_company_overview.file_url}
+        mainImageAlt="Company Overview"
+        mainImageWidth={800}
+        mainImageHeight={600}
+        youtubeVideoId={youtubeId}
+        videoTitle="Company Profile Video - CDI Group"
+      >
+        <div className="prose prose-invert prose-base text-neutral-300">
+          {convertHtmlToReact(about_us_company_overview.content)}
+        </div>
+      </Overview>
+      <VisionMission
+        id="vision-mission"
+        title={about_us_vision_mission_tagline.title || "Vision & Mission"}
+        visionData={visionData}
+        missionData={missionData}
+      />
+      <History data={historyData} />
+      <Milestone
+        title={about_us_milestone.title || "From Then to Now"}
+        subtitle={
+          stripHtml(about_us_milestone.content) ||
+          "Explore PT Chandra Daya Investasi Tbk key milestones over the years."
+        }
+        backgroundImageUrl={about_us_milestone.file_url}
+        data={milstoneData}
+      />
+      <CompanyProfile
+        id="company-profile"
+        title={
+          about_us_company_profile.title ||
+          "Curious to learn more about Chandra Daya Investasi?"
+        }
+        subtitle={
+          stripHtml(about_us_company_profile.content) ||
+          "Gain deeper insights into our story, growth, and latest achievements by downloading our company profile"
+        }
+        data={profileData}
+      />
+      <Information
+        eyebrow={t("eye_information")}
+        title={t("title_information")}
+        backgroundImageUrl="https://cdi-be.cmlabs.dev/assets/frontend/images/homepage/quick_links.webp"
+        links={quickLinksData}
+      />
+    </main>
   );
 }

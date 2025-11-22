@@ -22,7 +22,7 @@ import { getTranslations } from "next-intl/server";
 const description =
   "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 const title = "Chandra Daya Investasi";
-const baseUrl = "https://chandradaya-investasi.com";
+const baseUrl = "https://cdi-be.cmlabs.dev";
 
 export const metadata: Metadata = {
   title: title,
@@ -67,11 +67,11 @@ export const metadata: Metadata = {
   },
 
   other: {
-    "application-url": "https://chandradaya-investasi.com",
-    "preview-url": "https://chandradaya-investasi.com/file-storage",
-    "download-file": "https://chandradaya-investasi.com/file-download",
-    "add-file-preview": "https://chandradaya-investasi.com/file/preview",
-    "add-file-download": "https://chandradaya-investasi.com/file/download",
+    "application-url": "https://cdi-be.cmlabs.dev",
+    "preview-url": "https://cdi-be.cmlabs.dev/file-storage",
+    "download-file": "https://cdi-be.cmlabs.dev/file-download",
+    "add-file-preview": "https://cdi-be.cmlabs.dev/file/preview",
+    "add-file-download": "https://cdi-be.cmlabs.dev/file/download",
   },
 };
 
@@ -141,8 +141,9 @@ export default async function Page({ params: { locale } }: HomePageProps) {
 
   return (
     <main>
+      <NavbarThemeTrigger theme="dark" />
       <Hero
-        videoSrc={home_banner.video_url}
+        videoSrc={home_banner.file_url}
         preTitle={home_banner_tagline.title}
         title={home_banner.title}
         subtitle={home_banner.content}
@@ -150,7 +151,6 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         linkText={t("more")}
         linkIcon={<ArrowRight size={14} />}
       />
-      <NavbarThemeTrigger theme="dark" />
       <AboutUs
         backgroundImageUrl={home_about_section.file_url}
         title={home_about_section.title}
@@ -159,7 +159,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         linkIcon={<ArrowUpRight size={14} />}
       >
         <div
-          className="text-[12px] leading-[24px] font-normal text-white space-y-6"
+          className="text-[14px] leading-[24px] font-normal text-white space-y-6"
           dangerouslySetInnerHTML={{ __html: home_about_section.content || "" }}
         />
       </AboutUs>
@@ -207,7 +207,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
       <Information
         eyebrow={t("eye_information")}
         title={t("title_information")}
-        backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/homepage/quick_links.webp"
+        backgroundImageUrl="https://cdi-be.cmlabs.dev/assets/frontend/images/homepage/quick_links.webp"
         links={quickLinksData}
       />
     </main>

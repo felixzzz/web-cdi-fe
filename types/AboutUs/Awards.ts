@@ -133,7 +133,7 @@ export interface MembershipItem {
   content: string;
   short_content: string;
   awarder: string;
-  thumbnail: string;
+  image: string;
   category: Category;
 }
 

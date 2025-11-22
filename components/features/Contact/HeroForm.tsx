@@ -24,32 +24,32 @@ import {
 import {
   contactUsSchema,
   ContactUsFormValues,
+  DropdownItem,
 } from "@/schemas/contactUsSchema";
 import { ContactInfoCard } from "./ContactInfoCard";
 import { useTranslations } from "next-intl";
 import { CompanyLocationResponse } from "@/types/global/footer";
 import { ContactSectionData } from "@/types/Contact/Contact";
 import { useState } from "react";
-
-const countries = [
-  { id: 102, name: "Indonesia" },
-  { id: 133, name: "Malaysia" },
-  { id: 196, name: "Singapore" },
-  { id: 215, name: "Thailand" },
-  { id: 236, name: "Viet Nam" },
-];
-const topics = [{ id: 2, name: "Pilihan" }];
+import { toast } from "sonner";
 
 interface HeroFormProps {
   contactData: CompanyLocationResponse;
   pageData: ContactSectionData;
+  countries: DropdownItem[];
+  topics: DropdownItem[];
 }
 
-export function HeroForm({ contactData, pageData }: HeroFormProps) {
+export function HeroForm({
+  contactData,
+  pageData,
+  countries,
+  topics,
+}: HeroFormProps) {
   const t = useTranslations("Contact");
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">(
-    "idle"
-  );
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
   const [submitMessage, setSubmitMessage] = useState("");
 
   const form = useForm<ContactUsFormValues>({
@@ -68,10 +68,8 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
     setSubmitStatus("idle");
     setSubmitMessage("");
 
-    console.log(values)
-
     try {
-      const response = await fetch("https://cdi-be.cmlabs.dev/api/contact-us/store", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_POST}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,27 +77,23 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
         body: JSON.stringify(values),
       });
 
-      console.log(JSON.stringify(values))
-      console.log(response)
-
       if (!response.ok) {
-        // const errorData = await response
-        //   .json()
-        //   .catch(() => ({ message: t("submit_error_message") }));
-        // throw new Error(errorData.message || t("submit_error_message"));
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(
+          errorData.message ||
+            t("submit_error_message") ||
+            "Failed to send message"
+        );
       }
 
-      setSubmitStatus("success");
-      // setSubmitMessage(t("submit_success_message"));
+      toast.success(
+        t("submit_success_message") || "Message sent successfully!",
+        {}
+      );
+
       form.reset();
     } catch (error) {
-      console.error("Failed to submit form:", error);
-      setSubmitStatus("error");
-      if (error instanceof Error) {
-        setSubmitMessage(error.message);
-      } else {
-        // setSubmitMessage(t("submit_error_message"));
-      }
+      toast.error(error instanceof Error ? error.message : "Please try again later.", {});
     }
   }
 
@@ -198,7 +192,8 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                          {t("country_id")} <span className="text-red-600">*</span>
+                          {t("country_id")}{" "}
+                          <span className="text-red-600">*</span>
                         </FormLabel>
                         <Select
                           onValueChange={field.onChange}
@@ -212,7 +207,7 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {countries.map((country) => (
+                            {countries?.map((country) => (
                               <SelectItem
                                 key={country.id}
                                 value={String(country.id)}
@@ -248,7 +243,7 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {topics.map((topic) => (
+                          {topics?.map((topic) => (
                             <SelectItem key={topic.id} value={String(topic.id)}>
                               {topic.name}
                             </SelectItem>
@@ -284,11 +279,9 @@ export function HeroForm({ contactData, pageData }: HeroFormProps) {
                 <Button
                   type="submit"
                   className="bg-[#47C1EA] hover:bg-[#3ab0d8] px-6 py-2 rounded-full font-medium w-fit text-white cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed"
-                  disabled={form.formState.isSubmitting} 
+                  disabled={form.formState.isSubmitting}
                 >
-                  {form.formState.isSubmitting
-                    ? t("Submit") 
-                    : t("Submit")}
+                  {form.formState.isSubmitting ? t("Submit") : t("Submit")}
                 </Button>
 
                 {submitMessage && (

@@ -9,7 +9,7 @@ import { Metadata } from "next";
 
 const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
-const baseUrl = "https://chandradaya-investasi.com";
+const baseUrl = "https://cdi-be.cmlabs.dev";
 
 export const metadata: Metadata = {
   title: "Investor Shares Information | Chandra Daya Investasi", 
@@ -48,11 +48,11 @@ export const metadata: Metadata = {
   },
 
   other: {
-    'application-url': 'https://chandradaya-investasi.com',
-    'preview-url': 'https://chandradaya-investasi.com/file-storage',
-    'download-file': 'https://chandradaya-investasi.com/file-download',
-    'add-file-preview': 'https://chandradaya-investasi.com/file/preview',
-    'add-file-download': 'https://chandradaya-investasi.com/file/download',
+    'application-url': 'https://cdi-be.cmlabs.dev',
+    'preview-url': 'https://cdi-be.cmlabs.dev/file-storage',
+    'download-file': 'https://cdi-be.cmlabs.dev/file-download',
+    'add-file-preview': 'https://cdi-be.cmlabs.dev/file/preview',
+    'add-file-download': 'https://cdi-be.cmlabs.dev/file/download',
   }
 };
 
@@ -78,7 +78,7 @@ export default async function Page({ params: { locale } }: SharesPageProps) {
         imageSrc={investor_share_banner.file_url}
         title={investor_share_banner.title || "Stocks and Bonds"}
         subtitle={investor_share_banner.content}
-        iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
       />
                   <NavbarThemeTrigger theme="light" />
       <StocksInformation

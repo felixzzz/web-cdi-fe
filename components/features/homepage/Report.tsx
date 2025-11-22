@@ -48,7 +48,7 @@ export const Report: React.FC<ReportSectionProps> = ({
             >
               {t('dawnload_title')}
               <Image
-                src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download.svg"
+                src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download.svg"
                 width={16}
                 height={16}
                 alt="Download icon"
@@ -80,8 +80,8 @@ export const Report: React.FC<ReportSectionProps> = ({
               size: report.file.size,
               tagView:"lihat",
               tagDawnload:"Dawnload",
-              viewUrl: `https://chandradaya-investasi.com/file/preview/default/${report.type}/${report.ulid}/${report.name_slug}`,
-              downloadUrl: `https://chandradaya-investasi.com/file/download/default/${report.type}/${report.ulid}/`,
+              viewUrl: `https://cdi-be.cmlabs.dev/file/preview/default/${report.type}/${report.ulid}/${report.name_slug}`,
+              downloadUrl: `https://cdi-be.cmlabs.dev/file/download/default/${report.type}/${report.ulid}/`,
             };
 
             return <ReportItem key={report.id} {...transformedProps} />;

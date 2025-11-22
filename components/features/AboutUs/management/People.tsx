@@ -9,6 +9,7 @@ export const People: React.FC<PeopleSectionProps> = ({
 }) => {
   return (
     <section
+    id="board-of-directors"
       className="pt-20 pb-16 bg-[#091A24]"
       aria-labelledby="people-section-title"
     >

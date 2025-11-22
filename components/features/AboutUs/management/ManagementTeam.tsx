@@ -21,7 +21,7 @@ export const ManagementTeam: React.FC<ManagementTeamProps> = ({
         {title}
       </h2>
 
-      <ul className="flex gap-8 text-white justify-center flex-wrap">
+      <ul className="flex gap-4 text-white justify-center flex-wrap">
         {members.map((member) => (
           <TeamMemberCard key={member.name} {...member} />
         ))}

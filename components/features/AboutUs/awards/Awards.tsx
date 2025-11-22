@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import * as Select from "@radix-ui/react-select";
 import { Award, AwardCard } from "./AwardCard";
+import { DetailModal } from "./DetailModal";
 import { ImageModal } from "./ImageModal";
 import { clsx } from "clsx";
 import { ChevronDown, Loader2 } from "lucide-react";
@@ -19,32 +20,37 @@ import { useTranslations } from "next-intl";
 
 const mapAwardToCard = (item: AwardItem): Award => ({
   year: item.year,
+  date: item.year,
   title: item.name,
   description: item.content,
   awarder: item.awarder,
   imageUrl: item.image,
+  category: "Award",
 });
 
 const mapCertificationToCard = (item: CertificationItem): Award => ({
   year: item.date ? new Date(item.date).getFullYear().toString() : "N/A",
+  date: item.date,
   title: item.name,
   description: item.content,
   awarder: item.awarder,
   imageUrl: item.thumbnail,
+  category: "Certification",
 });
 
 const mapMembershipToCard = (item: MembershipItem): Award => ({
   year: item.date ? new Date(item.date).getFullYear().toString() : "N/A",
+  date: item.date,
   title: item.name,
   description: item.content,
   awarder: item.awarder,
-  imageUrl: item.thumbnail,
+  imageUrl: item.image,
+  category: "Membership",
 });
 
 type TabName = "Awards" | "Certification" | "Membership";
-
 const TABS: TabName[] = ["Awards", "Certification", "Membership"];
-const BASE_API_URL = "https://chandradaya-investasi.com/api";
+const BASE_API_URL = "https://cdi-be.cmlabs.dev/api";
 
 interface AwardsProps {
   title: string | null;
@@ -61,10 +67,13 @@ export const Awards: React.FC<AwardsProps> = ({
   initialCertificationResponse,
   initialMembershipResponse,
 }) => {
-  const t = useTranslations('Awards')
+  const t = useTranslations("Awards");
   const [activeTab, setActiveTab] = useState<TabName>("Awards");
   const [selectedYear, setSelectedYear] = useState("All Year");
+
+  const [selectedAward, setSelectedAward] = useState<Award | null>(null);
   const [modalImageUrl, setModalImageUrl] = useState<string | null>(null);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [awardsData, setAwardsData] = useState(initialAwardsResponse.items);
@@ -87,7 +96,10 @@ export const Awards: React.FC<AwardsProps> = ({
       ...initialMembershipResponse.items.map(mapMembershipToCard),
     ];
     const yearsSet = new Set(allItems.map((item) => item.year));
-    return ["All Year", ...Array.from(yearsSet).sort((a, b) => b.localeCompare(a))];
+    return [
+      "All Year",
+      ...Array.from(yearsSet).sort((a, b) => b.localeCompare(a)),
+    ];
   }, [
     initialAwardsResponse,
     initialCertificationResponse,
@@ -96,7 +108,6 @@ export const Awards: React.FC<AwardsProps> = ({
 
   const filteredData = useMemo(() => {
     let transformedData: Award[] = [];
-
     switch (activeTab) {
       case "Awards":
         transformedData = awardsData.map(mapAwardToCard);
@@ -108,41 +119,13 @@ export const Awards: React.FC<AwardsProps> = ({
         transformedData = membershipData.map(mapMembershipToCard);
         break;
     }
-
     return transformedData.filter((item) => {
       return selectedYear === "All Year" || item.year === selectedYear;
     });
   }, [selectedYear, activeTab, awardsData, certificationData, membershipData]);
 
-  // const filteredData = useMemo(() => {
-  //   let rawData: any[] = [];
-  //   let mapper: (item: any) => Award;
-
-  //   switch (activeTab) {
-  //     case "Awards":
-  //       rawData = awardsData;
-  //       mapper = mapAwardToCard;
-  //       break;
-  //     case "Certification":
-  //       rawData = certificationData;
-  //       mapper = mapCertificationToCard;
-  //       break;
-  //     case "Membership":
-  //       rawData = membershipData;
-  //       mapper = mapMembershipToCard;
-  //       break;
-  //   }
-
-  //   const transformedData = rawData.map(mapper);
-
-  //   return transformedData.filter((item) => {
-  //     return selectedYear === "All Year" || item.year === selectedYear;
-  //   });
-  // }, [selectedYear, activeTab, awardsData, certificationData, membershipData]);
-
   const handlePageChange = async (page: number) => {
     if (page === currentPage) return;
-
     setIsLoading(true);
     setCurrentPage(page);
 
@@ -164,20 +147,14 @@ export const Awards: React.FC<AwardsProps> = ({
       if (!res.ok) throw new Error("Failed to fetch new page");
       const data = await res.json();
 
-      if (activeTab === "Awards") {
-        setAwardsData(data.items);
-      } else if (activeTab === "Certification") {
-        setCertificationData(data.items);
-      } else if (activeTab === "Membership") {
-        setMembershipData(data.items);
-      }
+      if (activeTab === "Awards") setAwardsData(data.items);
+      else if (activeTab === "Certification") setCertificationData(data.items);
+      else if (activeTab === "Membership") setMembershipData(data.items);
       setPaginationMeta(data.meta);
     } catch (error) {
       console.error("Error fetching paginated data:", error);
-      setCurrentPage(paginationMeta.current_page);
     } finally {
       setIsLoading(false);
-      setSelectedYear("All Year");
     }
   };
 
@@ -185,7 +162,6 @@ export const Awards: React.FC<AwardsProps> = ({
     setActiveTab(tab);
     setCurrentPage(1);
     setSelectedYear("All Year");
-
     switch (tab) {
       case "Awards":
         setPaginationMeta(initialAwardsResponse.meta);
@@ -206,27 +182,26 @@ export const Awards: React.FC<AwardsProps> = ({
     <section className="py-20 bg-[#091A24]" aria-labelledby="awards-title">
       <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
-          <h2 id="awards-title" className="text-awards text-7xl">
+          <h2
+            id="awards-title"
+            className="text-awards text-4xl md:text-6xl lg:text-7xl font-medium text-white"
+          >
             {title || "Recognized for our commitment"}
           </h2>
           <div
-          className="prose prose-invert prose-base text-neutral-100"
-            // className="content !text-neutral-4 text-[12px] leading-[24px] text-justify font-normal text-white py-1"
+            className="prose prose-invert prose-base text-neutral-100 max-w-none"
             dangerouslySetInnerHTML={{ __html: description || "" }}
           />
         </div>
 
-        <nav
-          className="border-b-2 border-b-neutral-6 mb-8"
-          aria-label="Content categories"
-        >
-          <ul className="flex items-center gap-2">
+        <nav className="border-b-2 border-b-neutral-700 mb-8">
+          <ul className="flex items-center gap-2 overflow-x-auto">
             {TABS.map((tab) => (
-              <li key={tab}>
+              <li key={tab} className="flex-shrink-0">
                 <button
                   onClick={() => handleTabClick(tab)}
                   className={clsx(
-                    "px-6 py-3 text-base lg:text-lg font-medium transition-colors duration-200",
+                    "px-6 py-3 text-base lg:text-lg font-medium transition-all duration-300",
                     activeTab === tab
                       ? "bg-gradient-to-b from-[#E3C16B] to-[#B38B2F] text-[#091A24] rounded-t-lg"
                       : "text-neutral-200 hover:text-white"
@@ -241,10 +216,7 @@ export const Awards: React.FC<AwardsProps> = ({
 
         <div className="mb-8">
           <Select.Root value={selectedYear} onValueChange={setSelectedYear}>
-            <Select.Trigger
-              className="flex items-center justify-between gap-2 w-[150px] rounded-full border border-neutral-6 px-5 py-2 text-base text-white hover:border-white transition-colors duration-200"
-              aria-label="Filter by year"
-            >
+            <Select.Trigger className="flex items-center justify-between gap-2 w-[150px] rounded-full border border-neutral-600 px-5 py-2 text-base text-white hover:border-white transition-colors duration-200 bg-transparent">
               <Select.Value />
               <Select.Icon>
                 <ChevronDown size={18} />
@@ -254,14 +226,14 @@ export const Awards: React.FC<AwardsProps> = ({
               <Select.Content
                 position="popper"
                 sideOffset={5}
-                className="bg-[#0E2A3C] border border-neutral-6 rounded-lg p-1 z-50 w-[var(--radix-select-trigger-width)]"
+                className="bg-[#0E2A3C] border border-neutral-600 rounded-lg p-1 z-50 min-w-[150px]"
               >
                 <Select.Viewport>
                   {YEARS.map((year) => (
                     <Select.Item
                       key={year}
                       value={year}
-                      className="px-4 py-1.5 text-white rounded data-[highlighted]:bg-neutral-700 outline-none cursor-pointer"
+                      className="px-4 py-1.5 text-white rounded hover:bg-neutral-700 outline-none cursor-pointer"
                     >
                       <Select.ItemText>{year}</Select.ItemText>
                     </Select.Item>
@@ -279,30 +251,43 @@ export const Awards: React.FC<AwardsProps> = ({
             </div>
           ) : filteredData.length > 0 ? (
             <>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-7 gap-y-16 text-white">
-                {filteredData.map((award) => (
-                  <li key={award.title + award.year}>
-                    <AwardCard award={award} onImageClick={setModalImageUrl} />
+              <ul className="grid grid-cols-1 xl:grid-cols-2 gap-x-10 gap-y-10 text-white">
+                {filteredData.map((award, index) => (
+                  <li key={`${award.title}-${award.year}-${index}`}>
+                    <AwardCard
+                      award={award}
+                      onReadMore={(selected) => setSelectedAward(selected)}
+                      onImageClick={(url) => setModalImageUrl(url)}
+                    />
                   </li>
                 ))}
               </ul>
-              {paginationMeta.last_page > 1 && (
+              {paginationMeta.last_page > 0 && (
                 <div className="mt-16">
                   <Pagination
                     currentPage={currentPage}
                     totalPages={paginationMeta.last_page}
+                    totalItems={paginationMeta.total}
                     onPageChange={handlePageChange}
                   />
                 </div>
               )}
             </>
           ) : (
-            <p className="text-white text-center text-lg min-h-[400px]">
-              {t('not_found')}
+            <p className="text-white text-center text-lg min-h-[400px] flex items-center justify-center">
+              {t("not_found")}
             </p>
           )}
         </div>
       </div>
+
+      {selectedAward && (
+        <DetailModal
+          award={selectedAward}
+          onClose={() => setSelectedAward(null)}
+          onImageClick={(url) => setModalImageUrl(url)}
+        />
+      )}
 
       {modalImageUrl && (
         <ImageModal

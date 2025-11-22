@@ -9,15 +9,15 @@ interface BusinessEthicsProps {
 }
 
 export function BusinessEthics({ data }: BusinessEthicsProps) {
-  const t = useTranslations('Sustainability.Governance')
+  const t = useTranslations('Investor.Sustainability.Governance')
   if (!data) {
     return null;
   }
   const { title, content, image, file_information_en, ulid } = data;
   const fileInfo = file_information_en;
 
-  const ctaViewUrl = `https://chandradaya-investasi.com/file/preview/default/sustainability-content/${ulid}/${fileInfo?.title}`;
-  const ctaDownloadUrl = `https://chandradaya-investasi.com/file/download/default/sustainability-content/${ulid}/${fileInfo?.title}`;
+  const ctaViewUrl = `https://cdi-be.cmlabs.dev/file/preview/default/sustainability-content/${ulid}/${fileInfo?.title}`;
+  const ctaDownloadUrl = `https://cdi-be.cmlabs.dev/file/download/default/sustainability-content/${ulid}/${fileInfo?.title}`;
   return (
     <section
       aria-labelledby="business-ethics-heading"
@@ -67,7 +67,7 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
                     <span>.</span>
                   </div>
                   <Image
-                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf_white.svg"
+                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf_white.svg"
                     width={28}
                     height={20}
                     alt="See all icon"
@@ -83,7 +83,7 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye_white.svg"
+                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye_white.svg"
                     width={28}
                     height={20}
                     alt="See all icon"
@@ -98,7 +98,7 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file_white.svg"
+                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file_white.svg"
                     width={28}
                     height={20}
                     alt="See all icon"

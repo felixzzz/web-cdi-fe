@@ -35,7 +35,7 @@ export function HumanRights({ data }: HumanRightsProps) {
             {/* {fileInfo && (
               <div className="mt-8">
                 <Link
-                  href={`https://chandradaya-investasi.com/file-storage/${fileInfo.path}`}
+                  href={`https://cdi-be.cmlabs.dev/file-storage/${fileInfo.path}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-md bg-blue-sky px-6 py-3 font-medium text-blue-dark transition-all hover:bg-blue-sky/90"

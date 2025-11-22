@@ -38,7 +38,8 @@ export const Hero: React.FC<HeroProps> = ({
               {title}
             </h1>
             <div
-            className="max-w-full prose prose-invert prose-base text-justify"
+            className="max-w-2xl prose prose-invert prose-base"
+            // className="max-w-full prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
           </div>

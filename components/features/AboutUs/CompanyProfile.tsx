@@ -16,7 +16,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
   subtitle,
   data,
 }) => {
-  const baseUrl = "https://chandradaya-investasi.com";
+  const baseUrl = "https://cdi-be.cmlabs.dev";
 
   const t = useTranslations("AboutUs");
 
@@ -59,7 +59,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                     </div>
                     {item.file.format === "pdf" && (
                       <Image
-                        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg"
                         width={28}
                         height={20}
                         alt="PDF icon"
@@ -77,7 +77,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                     rel="noopener noreferrer"
                   >
                     <Image
-                      src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                      src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg"
                       width={20}
                       height={20}
                       alt="View icon"
@@ -92,7 +92,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                     rel="noopener noreferrer"
                   >
                     <Image
-                      src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                      src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg"
                       width={20}
                       height={20}
                       alt="Download icon"

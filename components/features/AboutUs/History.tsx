@@ -16,7 +16,7 @@ interface HistoryProps {
 
 export const History: React.FC<HistoryProps> = ({ data }) => {
   return (
-    <section id="our-history">
+    <section id="history">
       {data && data.length > 0 && data.map((item) => (
         <HistoryBlock
           key={item.ulid || item.id}

@@ -5,11 +5,10 @@ import {
 } from "@/types/AboutUs/Management";
 
 const API_URL =
-  "https://chandradaya-investasi.com/api/utility/about-us/management";
-const API_URL_BOD = "https://chandradaya-investasi.com/api/utility/teams/bod";
-const API_URL_BOC = "https://chandradaya-investasi.com/api/utility/teams/boc";
-const API_URL_GUIDE =
-  "https://chandradaya-investasi.com/api/utility/additional-file/guideline";
+  `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/about-us/management`;
+const API_URL_BOD = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/teams/bod`;
+const API_URL_BOC = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/teams/boc`;
+const API_URL_GUIDE = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/additional-file/guideline`;
 
 export async function getManagementPageData(
   locale: string

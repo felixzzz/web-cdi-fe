@@ -49,9 +49,9 @@ const unformatReportType = (type: string): string => {
 };
 
 const FILE_PREVIEW_BASE_URL =
-  "https://chandradaya-investasi.com/file/preview/default/report/";
+  "https://cdi-be.cmlabs.dev/file/preview/default/report/";
 const FILE_DOWNLOAD_BASE_URL =
-  "https://chandradaya-investasi.com/file/download/default/report/";
+  "https://cdi-be.cmlabs.dev/file/download/default/report/";
 
 // Flattens the API's year-grouped items into a single array
 const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
@@ -122,7 +122,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
 
       try {
         const res = await fetch(
-          `https://chandradaya-investasi.com/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`
+          `https://cdi-be.cmlabs.dev/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`
         );
         if (!res.ok) throw new Error("Failed to fetch data");
         const data: CalendarApiResponse = await res.json();
@@ -275,7 +275,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                           <span>.</span>
                         </p>
                         <Image
-                          src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+                          src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg"
                           width={30}
                           height={24}
                           alt="See all icon"
@@ -290,7 +290,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
-                            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+                            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg"
                             width={20}
                             height={20}
                             alt="See all icon"
@@ -305,7 +305,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
-                            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+                            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg"
                             width={20}
                             height={20}
                             alt="Download icon"

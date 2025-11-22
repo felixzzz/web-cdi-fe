@@ -16,12 +16,12 @@ const languages = [
   {
     code: "en",
     label: "English",
-    flag: "https://chandradaya-investasi.com/assets/frontend/icons/flag_en.svg",
+    flag: "https://cdi-be.cmlabs.dev/assets/frontend/icons/flag_en.svg",
   },
   {
     code: "id",
     label: "Indonesia",
-    flag: "https://chandradaya-investasi.com/assets/frontend/icons/flag_id.svg",
+    flag: "https://cdi-be.cmlabs.dev/assets/frontend/icons/flag_id.svg",
   },
 ];
 
@@ -104,8 +104,11 @@ export function Navbar() {
   const langDropdownTimer = useRef<NodeJS.Timeout | null>(null);
 
   const pathname = usePathname();
-  const isAboutPage = pathname.startsWith("/about-us");
-  const isGovernance = pathname.startsWith("/governance");
+  const isAboutPage = pathname === "/about-us";
+  const isManagementPage = pathname === "/about-us/management";
+  const isGovernance = pathname === "/governance";
+  const isSpecialTransparentPage =
+    isAboutPage || isManagementPage || isGovernance;
 
   const { theme } = useNavbarTheme();
   const locale = useLocale();
@@ -141,7 +144,7 @@ export function Navbar() {
       ref={headerRef}
       className={clsx(
         "top-0 w-full z-50 bg-transparent",
-        isAboutPage || isGovernance ? "absolute" : "fixed"
+        isSpecialTransparentPage ? "absolute" : "fixed"
       )}
     >
       <header
@@ -149,17 +152,20 @@ export function Navbar() {
         className={clsx(
           "w-full py-7 flex items-center left-0 right-0 transition-all duration-300",
 
-          theme === "light"
+          isSpecialTransparentPage
+            ? "text-white bg-gradient-to-b from-black/60 to-transparent"
+            : 
+            theme === "light"
             ? "bg-white text-neutral-900 shadow-md"
             : !isScrolled
-            ? " text-white bg-gradient-to-b from-black/60 to-transparent"
+            ? "text-white bg-gradient-to-b from-black/60 to-transparent"
             : "backdrop-blur-3xl bg-[#091A24]/10 text-white"
         )}
       >
         <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 flex justify-between items-center">
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="https://chandradaya-investasi.com/assets/frontend/logo_cdi_white.svg"
+              src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_white.svg"
               alt="CDI Logo White"
               width={160}
               height={48}
@@ -170,7 +176,7 @@ export function Navbar() {
               priority
             />
             <Image
-              src="https://chandradaya-investasi.com/assets/frontend/logo_cdi_colored.svg"
+              src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_colored.svg"
               alt="CDI Logo Colored"
               width={160}
               height={48}
@@ -225,7 +231,7 @@ export function Navbar() {
                       }}
                     >
                       <Image
-                        src="https://chandradaya-investasi.com/assets/frontend/icons/polygon.svg"
+                        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/polygon.svg"
                         alt="Dropdown arrow"
                         width={16}
                         height={16}
@@ -307,7 +313,7 @@ export function Navbar() {
                   }}
                 >
                   <Image
-                    src="https://chandradaya-investasi.com/assets/frontend/icons/polygon.svg"
+                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/polygon.svg"
                     alt="Dropdown arrow"
                     width={16}
                     height={16}
@@ -360,7 +366,7 @@ export function Navbar() {
               {isLangDropdownOpen && (
                 <div className="absolute top-8 right-0 w-max z-10 pt-2">
                   <Image
-                    src="https://chandradaya-investasi.com/assets/frontend/icons/polygon.svg"
+                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/polygon.svg"
                     alt="Dropdown arrow"
                     width={16}
                     height={16}
@@ -417,7 +423,7 @@ export function Navbar() {
           <div className="py-5 h-full flex flex-col">
             <div className="flex justify-between items-center px-4 md:px-6 mb-6">
               <Image
-                src="https://chandradaya-investasi.com/assets/frontend/logo_cdi_colored.svg"
+                src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_colored.svg"
                 alt="CDI Logo"
                 width={140}
                 height={42}

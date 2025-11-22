@@ -5,12 +5,12 @@ import {
   MembershipApiResponse,
 } from "@/types/AboutUs/Awards";
 
-const API_URL = "https://chandradaya-investasi.com/api/utility/about-us/award";
-const API_URL_AWARDS = "https://chandradaya-investasi.com/api/awards/list";
+const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/about-us/award`;
+const API_URL_AWARDS = `${process.env.NEXT_PUBLIC_HOSTNAME}/awards/list`;
 const API_URL_CERTIFICATION =
-  "https://chandradaya-investasi.com/api/certificates/list?tab=certification";
+  `${process.env.NEXT_PUBLIC_HOSTNAME}/certificates/list?tab=certification`;
 const API_URL_MEMBERSHIP =
-  "https://chandradaya-investasi.com/api/memberships/list?tab=membership";
+  `${process.env.NEXT_PUBLIC_HOSTNAME}/memberships/list?tab=membership`;
 
 export async function getAwardsPageData(
   locale: string
@@ -92,6 +92,7 @@ export async function getMembershipTabPageData(
       headers: { "Content-Type": "application/json", lang: locale },
       next: { revalidate: 3600 },
     });
+
     if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
     return res.json();
   } catch (error) {

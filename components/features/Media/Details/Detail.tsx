@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type BreadcrumbItem = {
   href: string;
@@ -21,25 +22,25 @@ const shareIcons = [
     name: "Copy",
     hrefBase: "#",
     iconSrc:
-      "https://chandradaya-investasi.com/assets/frontend/icons/ic_share_copy_rounded.svg",
+      "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_share_copy_rounded.svg",
   },
   {
     name: "LinkedIn",
     hrefBase: "https://www.linkedin.com/shareArticle?mini=true&url=",
     iconSrc:
-      "https://chandradaya-investasi.com/assets/frontend/icons/ic_share_linkedin_rounded.svg",
+      "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_share_linkedin_rounded.svg",
   },
   {
     name: "X/Twitter",
     hrefBase: "https://x.com/intent/tweet?url=",
     iconSrc:
-      "https://chandradaya-investasi.com/assets/frontend/icons/ic_share_x_rounded.svg",
+      "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_share_x_rounded.svg",
   },
   {
     name: "Facebook",
     hrefBase: "https://www.facebook.com/sharer/sharer.php?u=",
     iconSrc:
-      "https://chandradaya-investasi.com/assets/frontend/icons/ic_share_fb_rounded.svg",
+      "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_share_fb_rounded.svg",
   },
 ];
 
@@ -69,6 +70,7 @@ export const NewsDetail = ({
   featureImageUrl,
   articleContent,
 }: NewsDetailProps) => {
+  const t = useTranslations("Media");
   return (
     <div className="py-[5%] lg:py-[8%]">
       <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
@@ -109,7 +111,7 @@ export const NewsDetail = ({
 
         <div className="mt-16 flex-col text-center">
           <p className="font-medium text-neutral-13 md:text-lg mb-4">
-            Bagikan postingan ini
+            {t('share')}
           </p>
           <div className="flex items-center gap-2 justify-center">
             <ShareButtons shareUrl={shareUrl} />

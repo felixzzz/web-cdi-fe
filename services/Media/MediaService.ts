@@ -1,8 +1,8 @@
-import { ApiLatestNewsResponse, NewsApiResponse, PressReleaseApiResponse } from "@/types/Media/Media";
-
-const API_URL_MEDIA = "https://chandradaya-investasi.com/api/article/list/news?";
-const API_URL_RELEASE = "https://chandradaya-investasi.com/api/press-releases/list";
-const API_URL_MEDIA_LATEST = "https://chandradaya-investasi.com/api/article/latest-media";
+import { ApiLatestNewsResponse, HeroNewsSection, NewsApiResponse, PressReleaseApiResponse } from "@/types/Media/Media";
+const API_URL_MEDIA = `${process.env.NEXT_PUBLIC_HOSTNAME}/article/list/news?`;
+const API_URL_HERO_MEDIA = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/additional-page/media_main`;
+const API_URL_RELEASE = `${process.env.NEXT_PUBLIC_HOSTNAME}/press-releases/list`;
+const API_URL_MEDIA_LATEST = `${process.env.NEXT_PUBLIC_HOSTNAME}/article/latest-media`;
 
 export async function getMediaPageData(locale: string): Promise<NewsApiResponse> {
   try {
@@ -29,8 +29,34 @@ export async function getMediaPageData(locale: string): Promise<NewsApiResponse>
   }
 }
 
+export async function getHeroPageData(locale: string): Promise<HeroNewsSection> {
+  try {
+    const res = await fetch(API_URL_HERO_MEDIA, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        lang: locale
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch home data: ${res.statusText}`);
+    }
+
+    const data: HeroNewsSection = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getHomePageData:", error);
+    throw new Error("Could not fetch homepage data.");
+  }
+}
+
 export const mediaService = {
   getMediaPageData,
+  getHeroPageData
 };
 
 

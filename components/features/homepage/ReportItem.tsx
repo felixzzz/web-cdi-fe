@@ -35,7 +35,7 @@ export const ReportItem: React.FC<ReportItemProps> = ({
             <span>.</span>
           </div>
           <Image
-            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg"
+            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg"
             width={28}
             height={20}
             alt="See all icon"
@@ -50,7 +50,7 @@ export const ReportItem: React.FC<ReportItemProps> = ({
             rel="noopener noreferrer"
           >
             <Image
-              src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg"
+              src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg"
               width={24}
               height={24}
               alt="See all icon"
@@ -65,7 +65,7 @@ export const ReportItem: React.FC<ReportItemProps> = ({
             rel="noopener noreferrer"
           >
             <Image
-              src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg"
+              src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg"
               width={24}
               height={24}
               alt="Download icon"

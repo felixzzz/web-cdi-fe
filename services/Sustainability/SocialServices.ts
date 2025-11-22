@@ -1,8 +1,8 @@
 import { ApiContentResponse, SustainabilitySocialApiResponse, SustainabilitySocialTab } from "@/types/Sustainabilitys/Social";
 
-const API_URL_MAIN = "https://chandradaya-investasi.com/api/utility/sustainability/social";
-const API_URL_TAB = "https://chandradaya-investasi.com/api/sustainability/tab-contents/social";
-const API_URL_CONTENT = "https://chandradaya-investasi.com/api/sustainability/contents/social";
+const API_URL_MAIN = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/sustainability/social`;
+const API_URL_TAB = `${process.env.NEXT_PUBLIC_HOSTNAME}/sustainability/tab-contents/social`;
+const API_URL_CONTENT = `${process.env.NEXT_PUBLIC_HOSTNAME}/sustainability/contents/social`;
 
 export async function getSocialPageData(locale: string): Promise<SustainabilitySocialApiResponse> {
   try {

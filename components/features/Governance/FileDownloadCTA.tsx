@@ -33,7 +33,7 @@ export function FileDownloadCTA({
           <span className="text-sm">{fileSize}</span>
           <span className="text-sm">.</span>
           <Image
-            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf_white.svg"
+            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf_white.svg"
             width={16}
             height={16}
             alt="PDF icon"
@@ -51,7 +51,7 @@ export function FileDownloadCTA({
           rel="noopener noreferrer"
         >
           <Image
-            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_eye_white.svg"
+            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye_white.svg"
             width={20}
             height={20}
             alt="View icon"
@@ -65,7 +65,7 @@ export function FileDownloadCTA({
           rel="noopener noreferrer"
         >
           <Image
-            src="https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file_white.svg"
+            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file_white.svg"
             width={20}
             height={20}
             alt="Download icon"

@@ -7,17 +7,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
 import { ChevronRight } from "lucide-react";
-import { ApiLatestNewsResponse } from "@/types/Media/Media";
+import { ApiLatestNewsResponse, HeroNewsSection } from "@/types/Media/Media";
 import { useTranslations } from "next-intl";
 
-const BACKGROUND_IMAGE_URL =
-  "https://chandradaya-investasi.com/file-storage/N0YzSzZULzNFMm4yTWhCaWVhVXNTYXgrWXd3S1VZbzR5NDVMQXR1SThBV2pkaFlqYy9PNmVKckpkYWF0WW5QZCtCV09tc3NiUlozaXhzWjlaNW5FT1E9PQ.webp";
-
 interface HeroNewsProps {
+  media: HeroNewsSection;
   latestNewsData: ApiLatestNewsResponse;
 }
 
-export function HeroNews({ latestNewsData }: HeroNewsProps) {
+export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
   const t = useTranslations('Media')
   const sliderData = latestNewsData.map((item) => ({
     id: item.data.id,
@@ -40,7 +38,7 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
       className="py-[5%] lg:py-[8%] relative overflow-hidden"
     >
       <Image
-        src={BACKGROUND_IMAGE_URL}
+        src={media.file_url}
         alt="Latar belakang abstrak berita terbaru"
         layout="fill"
         objectFit="cover"
@@ -49,11 +47,11 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
       />
 
       <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-10">
-        <h2
+        <h1
           id="latest-news-heading"
           className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-semibold text-white mb-9"
           dangerouslySetInnerHTML={{ __html: heroTitle }}
-        ></h2>
+        ></h1>
 
         <Swiper
           modules={[Navigation, Pagination]}
@@ -84,9 +82,9 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
                     {slide.category}
                   </span>
                   <span className="text-sm text-neutral-10">{slide.date}</span>
-                  <h1 className="text-[22px] font-medium line-clamp-3 mt-4 text-neutral-13">
+                  <h2 className="text-[22px] font-medium line-clamp-3 mt-4 text-neutral-13">
                     {slide.title}
-                  </h1>
+                  </h2>
                   <p
                     className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3"
                     dangerouslySetInnerHTML={{ __html: slide.description }}

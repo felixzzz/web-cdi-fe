@@ -27,7 +27,7 @@ export const TabButton: React.FC<TabButtonProps> = ({
         "text-white text-base",
         "font-medium",
         "transition-colors duration-200",
-        "flex-1",
+        // "flex-1",
         "whitespace-nowrap",
         "bg-transparent"
       )}

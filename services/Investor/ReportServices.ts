@@ -1,8 +1,8 @@
 import { ApiInstitutionResponse, CalendarApiResponse, InvestorReportApiResponse } from "@/types/Investor/Report";
 
-const API_URL = "https://chandradaya-investasi.com/api/utility/investor";
-const API_URL_FINANCIAL = "https://chandradaya-investasi.com/api/investor/calendar/list";
-const API_URL_INSTITUTION = "https://chandradaya-investasi.com/api/institutions/list";
+const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/investor`;
+const API_URL_FINANCIAL = `${process.env.NEXT_PUBLIC_HOSTNAME}/investor/calendar/list`;
+const API_URL_INSTITUTION = `${process.env.NEXT_PUBLIC_HOSTNAME}/institutions/list`;
 
 export async function getReportPageData(locale: string): Promise<InvestorReportApiResponse> {
   try {

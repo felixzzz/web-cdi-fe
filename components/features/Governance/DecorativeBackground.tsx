@@ -17,7 +17,7 @@ export function RiskManagement({ data }: RiskManagementProps) {
     <section
       id="risk-management"
       aria-labelledby="risk-management-heading"
-      className="bg-[#091A24] py-20 text-white relative overflow-hidden"
+      className="bg-[#091A24] py-20 text-white relative overflow-hidden scroll-mt-10"
     >
       <Image
         src={BACKGROUND_IMAGE_URL}

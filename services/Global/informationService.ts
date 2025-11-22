@@ -2,9 +2,9 @@ import { CompanyLocationResponse } from "@/types/global/footer";
 import { ApiCredentialResponse } from "@/types/global/information";
 import { QuickLinksApiResponse } from "@/types/Homepage/home";
 
-const API_URL_LINKS = "https://chandradaya-investasi.com/api/utility/quick-link/home";
-const API_URL_FOOTER = "https://chandradaya-investasi.com/api/utility/main-office";
-const API_URL_CREDENTIAL = "https://chandradaya-investasi.com/api/utility/social-media";
+const API_URL_LINKS = "https://cdi-be.cmlabs.dev/api/utility/quick-link/home";
+const API_URL_FOOTER = "https://cdi-be.cmlabs.dev/api/utility/main-office";
+const API_URL_CREDENTIAL = "https://cdi-be.cmlabs.dev/api/utility/social-media";
 
 export async function getHomeQuickLinks(locale: string): Promise<QuickLinksApiResponse> {
   try {

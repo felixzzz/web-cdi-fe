@@ -18,13 +18,27 @@
     "company_profile_view": "View",
     "company_profile_download": "Download",
     "eye_information": "QUICK LINKS",
-    "title_information": "Need to access detailed information?"
+    "title_information": "Need to access detailed information?",
+    "vision": "Our Vision",
+    "mission": "Our Mission",
+    "About_Us": "Company Overview",
+    "Vision_Mission": "Vision & Mission",
+    "Our_History": "Our History",
+    "Milestone": "Milestone",
+    "Company_Profile": "Company Profile"
   },
   "Management": {
-    "download_title": "Curious to learn more about Chandra Daya Investasi?",
-    "download_subtitle": "Gain deeper insights into our story, growth, and latest achievements by downloading our company profile",
+    "download_title": "Good Corporate Governance",
+    "download_subtitle": "Review the Guidelines of Work for the Board of Directors and Board of Commissioners.",
     "download_view": "View",
-    "download_download": "Download"
+    "download_download": "Download",
+    "eye_information": "QUICK LINKS",
+    "title_information": "Need to access detailed information?",
+    "Board_of_Directors": "Board of Directors",
+    "Board_of_Commissioners": "Board of Commissioners",
+    "Organization_Structure": "Organization Structure",
+    "Corporate_Structure": "Corporate Structure",
+    "Guidelines_of_Work": "Guidelines of Work"
   },
   "Awards": {
     "not_found": "No items found for the selected criteria.",
@@ -52,7 +66,8 @@
       "not_found": "No reports found matching your criteria.",
       "download_view": "View",
       "download_download": "Download",
-      "search": "Search anything..."
+      "search": "Search anything...",
+      "help": "Please select a tab."
     },
     "Report": {
       "financial_title": "Financial Data Table",
@@ -72,12 +87,19 @@
       "see_title": "See All",
       "cta_whistle": "Submit Your Concerns",
       "eye_information": "QUICK LINKS",
-      "title_information": "Need to access detailed information?"
+      "title_information": "Need to access detailed information?",
+      "Corporate_Secretary": "Corporate Secretary",
+      "Internal_Audit_Unit": "Internal Audit Unit",
+      "Committee": "Committee",
+      "Risk_Management": "Risk Management",
+      "Code_of_Conduct": "Code of Conduct",
+      "Policy": "Policy",
+      "Whistleblowing": "Whistleblowing"
     },
     "Sustainability": {
       "Governance": {
         "download_view": "View",
-      "download_download": "Download"
+        "download_download": "Download"
       }
     }
   },
@@ -88,7 +110,9 @@
     "download_view": "View",
     "read_article_more": "Read Article More",
     "press_release": "Press Release",
-    "News": "News"
+    "News": "News",
+    "Media": "News",
+    "share": "Share this article"
   },
   "Contact": {
     "message": "Add your questions",
@@ -137,5 +161,15 @@
     "media": "Media",
     "career": "Career",
     "contact_us": "Contact Us"
+  },
+  "Layout": {
+      "who_we_are": "Who We Are",
+      "our_business": "Our Business",
+      "sustainability": "Sustainability",
+      "investor": "Investor",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookies Consent",
+      "disclaimer": "Disclaimer"
   }
 }
