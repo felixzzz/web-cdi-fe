@@ -92,6 +92,7 @@ export async function getMembershipTabPageData(
       headers: { "Content-Type": "application/json", lang: locale },
       next: { revalidate: 3600 },
     });
+
     if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
     return res.json();
   } catch (error) {
