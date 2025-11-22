@@ -9,7 +9,7 @@ import { Metadata } from "next";
 
 const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
-const baseUrl = "https://chandradaya-investasi.com";
+const baseUrl = "https://cdi-be.cmlabs.dev";
 
 export const metadata: Metadata = {
   title: "Contact Us | Chandra Daya Investasi", 
@@ -48,26 +48,31 @@ export const metadata: Metadata = {
   },
 
   other: {
-    'application-url': 'https://chandradaya-investasi.com',
-    'preview-url': 'https://chandradaya-investasi.com/file-storage',
-    'download-file': 'https://chandradaya-investasi.com/file-download',
-    'add-file-preview': 'https://chandradaya-investasi.com/file/preview',
-    'add-file-download': 'https://chandradaya-investasi.com/file/download',
+    'application-url': 'https://cdi-be.cmlabs.dev',
+    'preview-url': 'https://cdi-be.cmlabs.dev/file-storage',
+    'download-file': 'https://cdi-be.cmlabs.dev/file-download',
+    'add-file-preview': 'https://cdi-be.cmlabs.dev/file/preview',
+    'add-file-download': 'https://cdi-be.cmlabs.dev/file/download',
   }
 };
 
 export default async function Page({params: {locale}}: ContactPageProps) {
-  const [getContactPageData, companyAddressData, getContactData] = await Promise.all([
+  const [getContactPageData, companyAddressData, getContactData, getCountriesData, getOptionData] = await Promise.all([
     companyAddressService.getContactPageData(locale),
     companyAddressService.getCompanyAddressPageData(locale),
-    companyAddressService.getContactData(locale)
+    companyAddressService.getContactData(locale),
+    companyAddressService.getCountriesData(locale),
+    companyAddressService.getOptionData(locale),
   ])
 
   return (
     <main>
       <NavbarThemeTrigger theme="light" />
       <HeroForm contactData={getContactData} 
-        pageData={getContactPageData}/>
+        pageData={getContactPageData}
+        countries={getCountriesData} 
+        topics={getOptionData}
+        />
         <NavbarThemeTrigger theme="light" />
       <OtherCompany companyAddressData={companyAddressData} />
     </main>

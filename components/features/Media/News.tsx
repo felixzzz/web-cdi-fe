@@ -24,7 +24,7 @@ interface NewsProps {
 }
 
 const ITEMS_PER_PAGE = 6;
-const FILE_STORAGE_URL = "https://chandradaya-investasi.com/file-storage/";
+const FILE_STORAGE_URL = "https://cdi-be.cmlabs.dev/file-storage/";
 
 export function News({ mediaData, pressReleaseData }: NewsProps) {
   const t = useTranslations("Media");
@@ -97,7 +97,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
 
   return (
     <section
-    data-navbar-theme="light"
+      data-navbar-theme="light"
       id="content-media-section"
       className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 py-20 bg-white"
     >
@@ -235,11 +235,11 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
   const downloadUrlId = `${FILE_STORAGE_URL}${item.file_id.path}`;
 
   const pdfIcon =
-    "https://chandradaya-investasi.com/assets/frontend/icons/ic_filepdf.svg";
+    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg";
   const viewIcon =
-    "https://chandradaya-investasi.com/assets/frontend/icons/ic_eye.svg";
+    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg";
   const downloadIcon =
-    "https://chandradaya-investasi.com/assets/frontend/icons/ic_download_file.svg";
+    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg";
 
   return (
     <li className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 md:gap-y-0">
@@ -279,8 +279,8 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
               alt="View icon"
               className="inline-block"
             />
-          </Link>
           {t("download_view")}
+          </Link>
           <Link
             href={downloadUrlEn}
             className="flex items-center gap-2 text-blue-base font-medium"
@@ -328,65 +328,138 @@ function Pagination({
   currentPage: number;
   totalPages: number;
   totalItems: number;
-  onPageChange: (page: number | ((prev: number) => number)) => void;
+  onPageChange: (page: number) => void;
 }) {
+  const [jumpPage, setJumpPage] = useState<string>("");
+
   const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
   const endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems);
 
+  const handleJumpPage = () => {
+    const pageNumber = parseInt(jumpPage);
+    if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
+      onPageChange(pageNumber);
+      setJumpPage(""); 
+    }
+  };
+
+  const btnBaseClass =
+    "text-[12px] rounded-md flex items-center justify-center min-w-[32px] h-[32px] border transition-all duration-200";
+
+  const btnActive = "bg-[#2474A5] text-white border-[#2474A5]";
+
+  const btnDefault =
+    "text-neutral-13 border-neutral-4 bg-white hover:bg-[#2474A5] hover:text-white hover:border-[#2474A5]";
+
+  const btnDisabled =
+    "!cursor-not-allowed text-neutral-4 border-neutral-4 bg-transparent";
+
   return (
-    <nav
-      aria-label="Pagination"
-      className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col md:flex-row"
-    >
-      <p className="text-neutral-900 text-sm max-lg:hidden">
-        {startItem}-{endItem} for {totalItems} items
+    <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row">
+      <p className="text-neutral-10 text-sm max-md:hidden">
+        {startItem}-{endItem} of {totalItems} items
       </p>
+
       <ul className="flex items-center justify-center gap-2">
         <li>
           <button
+            type="button"
             onClick={() => onPageChange(1)}
             disabled={currentPage === 1}
-            className="pagination-btn"
+            className={clsx(
+              btnBaseClass,
+              currentPage === 1 ? btnDisabled : btnDefault
+            )}
             aria-label="First page"
           >
             <ChevronsLeft size={16} />
           </button>
         </li>
+
         <li>
           <button
-            onClick={() => onPageChange((p) => Math.max(1, p - 1))}
+            type="button"
+            onClick={() => onPageChange(Math.max(1, currentPage - 1))}
             disabled={currentPage === 1}
-            className="pagination-btn"
+            className={clsx(
+              btnBaseClass,
+              currentPage === 1 ? btnDisabled : btnDefault
+            )}
             aria-label="Previous page"
           >
             <ChevronLeft size={16} />
           </button>
         </li>
-        <li className="font-medium px-2">{`Page ${currentPage} for ${totalPages}`}</li>
+
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <li key={page}>
+            <button
+              type="button"
+              onClick={() => onPageChange(page)}
+              className={clsx(
+                btnBaseClass,
+                currentPage === page ? btnActive : btnDefault
+              )}
+            >
+              {page}
+            </button>
+          </li>
+        ))}
+
         <li>
           <button
-            onClick={() => onPageChange((p) => Math.min(totalPages, p + 1))}
+            type="button"
+            onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
             disabled={currentPage === totalPages}
-            className="pagination-btn"
+            className={clsx(
+              btnBaseClass,
+              currentPage === totalPages ? btnDisabled : btnDefault
+            )}
             aria-label="Next page"
           >
             <ChevronRight size={16} />
           </button>
         </li>
+
         <li>
           <button
+            type="button"
             onClick={() => onPageChange(totalPages)}
             disabled={currentPage === totalPages}
-            className="pagination-btn"
+            className={clsx(
+              btnBaseClass,
+              currentPage === totalPages ? btnDisabled : btnDefault
+            )}
             aria-label="Last page"
           >
             <ChevronsRight size={16} />
           </button>
         </li>
       </ul>
-      <div className="text-neutral-900 text-sm lg:hidden">
-        {startItem}-{endItem} for {totalItems} items
+
+      <div className="flex items-center gap-4 justify-center md:justify-between w-full md:w-auto">
+        <p className="text-neutral-10 text-sm md:hidden">
+          {startItem}-{endItem} of {totalItems} items
+        </p>
+
+        <div className="flex items-center gap-4">
+          <p className="text-neutral-10 text-sm whitespace-nowrap">Jump Page</p>
+          <input
+            type="number"
+            min="1"
+            max={totalPages}
+            value={jumpPage}
+            onChange={(e) => setJumpPage(e.target.value)}
+            className="outline-none border border-neutral-5 w-10 h-7 rounded-sm text-center text-sm focus:border-[#2474A5]"
+          />
+          <button
+            onClick={handleJumpPage}
+            className="text-[#2474A5] text-xs font-bold cursor-pointer hover:underline"
+          >
+            Go
+          </button>
+        </div>
       </div>
-    </nav>
+    </section>
   );
 }

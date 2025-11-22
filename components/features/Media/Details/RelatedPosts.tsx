@@ -39,7 +39,7 @@ export const RelatedPosts = ({
               {titleText}
             </p>
           </div>
-          <div className="flex items-center gap-4 justify-start md:justify-center max-lg:mt-4">
+          <div className="flex items-center gap-4 justify-start md:justify-center max-lg:mt-4 text-[#2474A5]">
             <Link
               className="py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-blue-base"
               href={`/${locale}/media/news`}

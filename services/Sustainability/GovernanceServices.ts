@@ -3,10 +3,8 @@ import {
   SustainabilityGovernanceApiResponse,
 } from "@/types/Sustainabilitys/Governance";
 
-const API_URL_MAIN =
-  "https://chandradaya-investasi.com/api/utility/sustainability/governance";
-const API_URL_CONTENT =
-  "https://chandradaya-investasi.com/api/sustainability/contents/governance";
+const API_URL_MAIN = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/sustainability/governance`;
+const API_URL_CONTENT = `${process.env.NEXT_PUBLIC_HOSTNAME}/sustainability/contents/governance`;
 
 export async function getGovernancePageData(locale: string): Promise<SustainabilityGovernanceApiResponse> {
   try {

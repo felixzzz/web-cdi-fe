@@ -44,7 +44,7 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
                   {milestone.year}
                 </h3>
                 <Image
-                  src="https://chandradaya-investasi.com/assets/frontend/icons/ic_timeline.svg"
+                  src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_timeline.svg"
                   alt=""
                   aria-hidden="true"
                   width={40}

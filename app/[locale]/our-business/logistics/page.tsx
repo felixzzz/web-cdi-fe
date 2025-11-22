@@ -4,11 +4,13 @@ import { Overview } from "@/components/features/OurBusiness/Logistics/Overview";
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { logisticService } from "@/services/OurBusiness/LogisticService";
 import { LogisticPageProps } from "@/types/OurBusiness/Logistic";
+import { MoveRightIcon } from "lucide-react";
 import { Metadata } from "next";
+import Link from "next/link";
 
 const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
-const baseUrl = "https://chandradaya-investasi.com";
+const baseUrl = "https://cdi-be.cmlabs.dev";
 
 export const metadata: Metadata = {
   title: "Logistic | Chandra Daya Investasi", 
@@ -47,11 +49,11 @@ export const metadata: Metadata = {
   },
 
   other: {
-    'application-url': 'https://chandradaya-investasi.com',
-    'preview-url': 'https://chandradaya-investasi.com/file-storage',
-    'download-file': 'https://chandradaya-investasi.com/file-download',
-    'add-file-preview': 'https://chandradaya-investasi.com/file/preview',
-    'add-file-download': 'https://chandradaya-investasi.com/file/download',
+    'application-url': 'https://cdi-be.cmlabs.dev',
+    'preview-url': 'https://cdi-be.cmlabs.dev/file-storage',
+    'download-file': 'https://cdi-be.cmlabs.dev/file-download',
+    'add-file-preview': 'https://cdi-be.cmlabs.dev/file/preview',
+    'add-file-download': 'https://cdi-be.cmlabs.dev/file/download',
   }
 };
 
@@ -67,6 +69,7 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
     tabs,
     link_url,
     link_title_en,
+    link_title_id
   } = logisticData;
 
   return (
@@ -75,7 +78,7 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
         <Hero
           imageSrc={banner_image}
           title={banner_title}
-          iconSrc="https://chandradaya-investasi.com/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+          iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
         />
         <Overview
           title={overview_title}
@@ -85,6 +88,19 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
           linkTitle={link_title_en}
         />
         <BusinessPillars tabs={tabs} />
+        <div className="w-full flex justify-center mx-auto bg-[#091A24] py-14">
+        <Link
+          href={link_url}
+          className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
+        >
+          <span className="text-xl">
+            {locale === "en" ? link_title_en : link_title_id}
+          </span>
+          <span>
+            <MoveRightIcon size={18} className="font-thin" />
+          </span>
+        </Link>
+      </div>
       </main>
   );
 }

@@ -55,7 +55,7 @@ export function ContactInfoCard({
           <div className="flex items-center gap-x-4 gap-y-2 text-neutral-800 flex-wrap">
             <div className="flex items-center text-xs gap-2">
               <Image
-                src="https://chandradaya-investasi.com/assets/frontend/icons/ic_phone.svg"
+                src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_phone.svg"
                 alt="Phone"
                 width={14}
                 height={14}
@@ -64,7 +64,7 @@ export function ContactInfoCard({
             </div>
             <div className="flex items-center text-xs gap-2">
               <Image
-                src="https://chandradaya-investasi.com/assets/frontend/icons/ic_printer.svg"
+                src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_printer.svg"
                 alt="Fax"
                 width={14}
                 height={14}

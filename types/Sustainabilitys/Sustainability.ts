@@ -23,6 +23,28 @@ export interface SustainabilitySection {
   content_table_trans: unknown | null;
 }
 
+export interface MaterialityListItem {
+  list_en: string[];
+  list_id: string[];
+  points: string[];
+}
+
+export interface MaterialityItem extends MaterialityListItem {
+  id: number;
+  ulid: string;
+  key: string;
+  rotate: number;
+  title_en: string;
+  title_id: string;
+  description_en: string;
+  description_id: string;
+  sort: number;
+  created_at: string;
+  updated_at: string;
+  title: string;
+  description: string;
+}
+
 export interface InvestorSustainabilityApiResponse {
   sustainability_overview_banner: SustainabilitySection;
   sustainability_overview_content: SustainabilitySection;
@@ -32,3 +54,5 @@ export interface InvestorSustainabilityApiResponse {
   sustainability_overview_rating: SustainabilitySection;
   sustainability_overview_rating_show: SustainabilitySection;
 }
+
+export type MaterialityResponse = MaterialityItem[];

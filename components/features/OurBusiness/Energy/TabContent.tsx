@@ -25,6 +25,8 @@ function ContentBlock({
 }: ContentBlockProps) {
   const alignmentClass = align === "right" ? "ms-auto" : "me-auto";
 
+  console.log("image url ", imageUrl)
+
   return (
     <section className="py-28 text-white bg-[#091A24] relative overflow-hidden">
       <Image

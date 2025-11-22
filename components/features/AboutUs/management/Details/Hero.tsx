@@ -11,7 +11,7 @@ type BocDetailHeroProps = {
 };
 
 const HERO_BACKGROUND_IMAGE =
-  "https://chandradaya-investasi.com/assets/frontend/images/about/team_background_hero.webp";
+  "https://cdi-be.cmlabs.dev/assets/frontend/images/about/team_background_hero.webp";
 
 export const DetailHero = ({
   name,

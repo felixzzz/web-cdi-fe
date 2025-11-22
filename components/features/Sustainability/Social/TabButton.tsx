@@ -28,7 +28,6 @@ export const TabButton: React.FC<TabButtonProps> = ({
         "font-medium",
         "transition-colors duration-200",
         "flex-1",
-        "whitespace-nowrap",
         "bg-transparent"
       )}
       onClick={onClick}

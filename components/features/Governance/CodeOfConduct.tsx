@@ -10,14 +10,14 @@ interface CodeOfConductProps {
   filesData: ApiFileResponse;
 }
 
-const BASE_URL = "https://chandradaya-investasi.com";
+const BASE_URL = "https://cdi-be.cmlabs.dev";
 
 export function CodeOfConduct({ data, filesData }: CodeOfConductProps) {
   return (
     <section
       id="code-of-conduct"
       aria-labelledby="code-of-conduct-heading"
-      className="py-20 bg-[#091A24] text-white"
+      className="py-20 bg-[#091A24] text-white scroll-mt-10"
     >
       <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8">

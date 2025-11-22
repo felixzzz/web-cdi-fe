@@ -10,20 +10,9 @@ import { Footer } from "@/components/shared/Footer";
 import { Navbar } from "@/components/shared/Navbar";
 import { informationService } from "@/services/Global/informationService";
 import { NavbarThemeProvider } from "@/context/NavbarThemeContext";
-
-const mainNavLinksData = [
-  { href: "/about-us", text: "Who We Are" },
-  { href: "/our-business", text: "Our Business" },
-  { href: "/sustainability", text: "Sustainability" },
-  { href: "/investor/report", text: "Investor" },
-];
-
-const legalNavLinksData = [
-  { href: "/terms-and-conditions", text: "Terms & Conditions" },
-  { href: "/privacy-policy", text: "Privacy Policy" },
-  { href: "/cookies-notice", text: "Cookies Consent" },
-  { href: "/disclaimer", text: "Disclaimer" },
-];
+// import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   children: React.ReactNode;
@@ -31,6 +20,7 @@ type Props = {
 };
 
 export default async function LocaleLayout({ children, params }: Props) {
+  const t = await getTranslations("Layout");
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -38,14 +28,29 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   const footerData = await informationService.getFooterData(locale);
 
+  const mainNavLinksData = [
+    { href: "/about-us", text: t("who_we_are") },
+    { href: "/our-business", text: t("our_business") },
+    { href: "/sustainability", text: t("sustainability") },
+    { href: "/investor/report", text: t("investor") },
+  ];
+
+  const legalNavLinksData = [
+    { href: "/terms-and-conditions", text: t("terms") },
+    { href: "/privacy-policy", text: t("privacy") },
+    { href: "/cookies-notice", text: t("cookies") },
+    { href: "/disclaimer", text: t("disclaimer") },
+  ];
+
   return (
     <NavbarThemeProvider>
     <NextIntlClientProvider>
       <Navbar />
       {children}
+      <Toaster />
       <Footer
-        backgroundImageUrl="https://chandradaya-investasi.com/assets/frontend/images/footer.webp"
-        logoSrc="https://chandradaya-investasi.com/assets/frontend/logo_cdi_footer_new.svg"
+        backgroundImageUrl="https://cdi-be.cmlabs.dev/assets/frontend/images/footer.webp"
+        logoSrc="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_footer_new.svg"
         logoAlt="Chandra Daya Investasi Logo"
         contactHref="/contact-us"
         contactText="Contact Us"

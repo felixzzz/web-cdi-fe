@@ -137,13 +137,14 @@ export function StocksInformation({
       setActiveTab("dividend");
     }
   }, [showShareholders, showDividend]);
+
   return (
     <div className="py-20">
       <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           <nav className="flex md:flex-col md:items-start w-full ">
             <Link
-              href="https://chandradaya-investasi.com/investor/shares-information?tab=stocks"
+              href="https://cdi-be.cmlabs.dev/investor/shares-information?tab=stocks"
               className="text-neutral-13 text-lg p-4 md:w-full md:text-start font-medium border-l-4 border-l-[#2474A5] border-t-2 border-t-neutral-100 border-b-2 border-b-neutral-100"
             >
               Stocks

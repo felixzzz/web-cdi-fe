@@ -1,6 +1,6 @@
 import { WaterApiResponse } from "@/types/OurBusiness/Water";
 
-const API_URL = "https://chandradaya-investasi.com/api/business/detail/water";
+const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/business/detail/water`;
 
 export async function getWaterPageData(locale: string): Promise<WaterApiResponse> {
   try {

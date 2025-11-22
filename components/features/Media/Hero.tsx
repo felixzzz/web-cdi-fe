@@ -7,17 +7,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
 import { ChevronRight } from "lucide-react";
-import { ApiLatestNewsResponse } from "@/types/Media/Media";
+import { ApiLatestNewsResponse, HeroNewsSection } from "@/types/Media/Media";
 import { useTranslations } from "next-intl";
 
-const BACKGROUND_IMAGE_URL =
-  "https://chandradaya-investasi.com/file-storage/N0YzSzZULzNFMm4yTWhCaWVhVXNTYXgrWXd3S1VZbzR5NDVMQXR1SThBV2pkaFlqYy9PNmVKckpkYWF0WW5QZCtCV09tc3NiUlozaXhzWjlaNW5FT1E9PQ.webp";
-
 interface HeroNewsProps {
+  media: HeroNewsSection;
   latestNewsData: ApiLatestNewsResponse;
 }
 
-export function HeroNews({ latestNewsData }: HeroNewsProps) {
+export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
   const t = useTranslations('Media')
   const sliderData = latestNewsData.map((item) => ({
     id: item.data.id,
@@ -40,7 +38,7 @@ export function HeroNews({ latestNewsData }: HeroNewsProps) {
       className="py-[5%] lg:py-[8%] relative overflow-hidden"
     >
       <Image
-        src={BACKGROUND_IMAGE_URL}
+        src={media.file_url}
         alt="Latar belakang abstrak berita terbaru"
         layout="fill"
         objectFit="cover"

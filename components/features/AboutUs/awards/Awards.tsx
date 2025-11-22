@@ -44,7 +44,7 @@ const mapMembershipToCard = (item: MembershipItem): Award => ({
 type TabName = "Awards" | "Certification" | "Membership";
 
 const TABS: TabName[] = ["Awards", "Certification", "Membership"];
-const BASE_API_URL = "https://chandradaya-investasi.com/api";
+const BASE_API_URL = "https://cdi-be.cmlabs.dev/api";
 
 interface AwardsProps {
   title: string | null;

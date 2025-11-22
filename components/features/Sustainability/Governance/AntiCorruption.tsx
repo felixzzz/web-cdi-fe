@@ -61,7 +61,7 @@ export function AntiCorruption({ data }: AntiCorruptionProps) {
               {keyPoints.map((point) => (
                 <li key={point.title} className="flex items-start gap-2">
                   <Image
-                    src="https://chandradaya-investasi.com/assets/frontend/icons/ic_bold_duotone_check_circle.svg"
+                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_bold_duotone_check_circle.svg"
                     width={26}
                     height={26}
                     alt="check"

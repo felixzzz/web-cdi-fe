@@ -2,7 +2,7 @@ import { managementService } from "@/services/AboutUs/ManagementService";
 import { mediaService } from "@/services/Media/MediaService";
 import { MetadataRoute } from "next";
 
-const baseUrl = "https://chandradaya-investasi.com";
+const baseUrl = "https://cdi-be.cmlabs.dev";
 
 const locales = ["en", "id"];
 

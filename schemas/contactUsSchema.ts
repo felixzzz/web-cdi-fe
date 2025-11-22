@@ -6,6 +6,7 @@ export const contactUsSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   country_id: z.string().min(1, { message: "Please select a country" }),
   topic_id: z.string().min(1, { message: "Please select a topic" }),
+  // topic_id: z.string(),
   message: z
     .string()
     .min(10, { message: "Please add your questions (at least 10 characters)" })
@@ -13,3 +14,22 @@ export const contactUsSchema = z.object({
 });
 
 export type ContactUsFormValues = z.infer<typeof contactUsSchema>;
+
+export interface Country {
+  id: number;
+  name: string;
+}
+
+export type CountryList = Country[];
+
+export interface Option {
+  id: number;
+  name: string;
+}
+
+export type OptionList = Option[];
+
+export interface DropdownItem {
+  id: number;
+  name: string;
+}

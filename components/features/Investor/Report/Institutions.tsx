@@ -4,9 +4,9 @@ import { ApiInstitutionResponse } from "@/types/Investor/Report";
 import { useTranslations } from "next-intl";
 
 const phoneIconUrl =
-  "https://chandradaya-investasi.com/assets/frontend/icons/ic_phone.svg";
+  "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_phone.svg";
 const faxIconUrl =
-  "https://chandradaya-investasi.com/assets/frontend/icons/ic_printer.svg";
+  "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_printer.svg";
 
 interface SupportingInstitutionsProps {
   data: ApiInstitutionResponse;

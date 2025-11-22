@@ -2,6 +2,7 @@ import { NewsDetail } from "@/components/features/Media/Details/Detail";
 import { RelatedPosts } from "@/components/features/Media/Details/RelatedPosts";
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { mediaService } from "@/services/Media/MediaService";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 export type PageProps = {
@@ -12,6 +13,7 @@ export type PageProps = {
 };
 
 export default async function Page({ params }: PageProps) {
+  const t = await getTranslations("Media");
   const mediaData = await mediaService.getMediaPageData(params.locale);
 
   const article = mediaData.items.find((item) => item.slug === params.slug);
@@ -26,16 +28,16 @@ export default async function Page({ params }: PageProps) {
 
   const breadcrumbs = [
     { href: `/${params.locale}`, label: "Home" },
-    { href: `/${params.locale}/media/news`, label: "Berita" },
+    { href: `/${params.locale}/media/news`, label: t('News') },
   ];
 
   const shareUrl = encodeURIComponent(
-    `https://chandradaya-investasi.com/${params.locale}/media/news/${params.slug}`
+    `https://cdi-be.cmlabs.dev/${params.locale}/media/news/${params.slug}`
   );
 
   return (
     <main>
-                                    <NavbarThemeTrigger theme="light" />
+      <NavbarThemeTrigger theme="light" />
       <NewsDetail
         breadcrumbs={breadcrumbs}
         articleTitle={title}
@@ -44,7 +46,7 @@ export default async function Page({ params }: PageProps) {
         featureImageUrl={article.image}
         articleContent={content}
       />
-                              <NavbarThemeTrigger theme="light" />
+      <NavbarThemeTrigger theme="light" />
       <RelatedPosts
         allArticles={mediaData.items}
         currentArticle={article}

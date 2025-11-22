@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 const DecorativeCorners: React.FC = () => {
@@ -5,7 +6,7 @@ const DecorativeCorners: React.FC = () => {
   return (
     <>
       <Image
-        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_tagline_top_right.svg"
+        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_tagline_top_right.svg"
         alt=""
         aria-hidden="true"
         width={size}
@@ -13,7 +14,7 @@ const DecorativeCorners: React.FC = () => {
         className="absolute top-0 right-0"
       />
       <Image
-        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_tagline_top_left.svg"
+        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_tagline_top_left.svg"
         alt=""
         aria-hidden="true"
         width={size}
@@ -21,7 +22,7 @@ const DecorativeCorners: React.FC = () => {
         className="absolute top-0 left-0"
       />
       <Image
-        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_tagline_bottom_left.svg"
+        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_tagline_bottom_left.svg"
         alt=""
         aria-hidden="true"
         width={size}
@@ -29,7 +30,7 @@ const DecorativeCorners: React.FC = () => {
         className="absolute bottom-0 left-0"
       />
       <Image
-        src="https://chandradaya-investasi.com/assets/frontend/icons/ic_tagline_bottom_right.svg"
+        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_tagline_bottom_right.svg"
         alt=""
         aria-hidden="true"
         width={size}
@@ -41,6 +42,7 @@ const DecorativeCorners: React.FC = () => {
 };
 
 interface VisionMissionSectionProps {
+  id: string;
   title: string;
   visionData: {
     title: string;
@@ -55,12 +57,16 @@ interface VisionMissionSectionProps {
 }
 
 export const VisionMission: React.FC<VisionMissionSectionProps> = ({
+  id,
   title,
   visionData,
   missionData,
 }) => {
+  const t = useTranslations('AboutUs')
   return (
     <section
+          id={id}
+
       className="py-28 bg-[#091A24] text-white bg-cover relative"
       aria-labelledby="vision-mission-title"
     >
@@ -93,7 +99,8 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
 
             <hr className="w-full border-white my-6" />
 
-            <p className="text-base font-medium">{title}</p>
+            {/* <p className="text-base font-medium">{title}</p> */}
+            <p className="text-base font-medium">{t('vision')}</p>
           </div>
 
           <div
@@ -115,7 +122,8 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
 
             <hr className="w-full border-white my-6" />
 
-            <p className="text-base font-medium">{title}</p>
+            {/* <p className="text-base font-medium">{title}</p> */}
+            <p className="text-base font-medium">{t('mission')}</p>
           </div>
         </div>
       </div>
