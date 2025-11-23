@@ -25,7 +25,9 @@
     "Vision_Mission": "Vision & Mission",
     "Our_History": "Our History",
     "Milestone": "Milestone",
-    "Company_Profile": "Company Profile"
+    "Company_Profile": "Company Profile",
+    "button_back": "Back",
+    "Read_More":"Read More"
   },
   "Management": {
     "download_title": "Good Corporate Governance",

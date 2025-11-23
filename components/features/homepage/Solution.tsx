@@ -1,9 +1,7 @@
 import React from "react";
 import { HomePageSection } from "@/types/Homepage/home";
 import { SolutionCard } from "./SolutionCard";
-
-const stripHtml = (html: string | null) =>
-  html ? html.replace(/<[^>]+>/g, "") : "";
+import { stripHtml } from "@/lib/localization";
 
 interface BusinessSolutionsProps {
   home_infrastructure_title: HomePageSection;

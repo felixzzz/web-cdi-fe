@@ -62,12 +62,11 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
   visionData,
   missionData,
 }) => {
-  const t = useTranslations('AboutUs')
+  const t = useTranslations("AboutUs");
   return (
     <section
-          id={id}
-
-      className="py-28 bg-[#091A24] text-white bg-cover relative"
+      id={id}
+      className="bg-[#091A24] text-white bg-cover relative"
       aria-labelledby="vision-mission-title"
     >
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
@@ -90,7 +89,6 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
               width={160}
               height={160}
               className="mb-8"
-              
             />
 
             <p className="text-3xl font-medium leading-relaxed min-h-[200px]">
@@ -100,7 +98,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
             <hr className="w-full border-white my-6" />
 
             {/* <p className="text-base font-medium">{title}</p> */}
-            <p className="text-base font-medium">{t('vision')}</p>
+            <p className="text-base font-medium">{t("vision")}</p>
           </div>
 
           <div
@@ -113,7 +111,6 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
               width={160}
               height={160}
               className="mb-8"
-
             />
 
             <p className="text-3xl font-medium min-h-[200px]">
@@ -123,7 +120,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
             <hr className="w-full border-white my-6" />
 
             {/* <p className="text-base font-medium">{title}</p> */}
-            <p className="text-base font-medium">{t('mission')}</p>
+            <p className="text-base font-medium">{t("mission")}</p>
           </div>
         </div>
       </div>

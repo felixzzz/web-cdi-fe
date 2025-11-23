@@ -43,9 +43,9 @@ export const Pagination: React.FC<PaginationProps> = ({
   const btnActive = "bg-[#2474A5] text-white border-[#2474A5]";
 
   const btnDefault =
-    "text-neutral-13 border-neutral-200 hover:bg-[#2474A5] text-white hover:border-[#2474A5]";
+    "text-neutral-13 border-neutral-700 hover:bg-[#2474A5] text-white hover:border-[#2474A5]";
 
-  const btnDisabled = "!cursor-not-allowed text-neutral-4 border-neutral-4";
+  const btnDisabled = "!cursor-not-allowed text-neutral-4 border-gray-800";
 
   return (
     <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row">

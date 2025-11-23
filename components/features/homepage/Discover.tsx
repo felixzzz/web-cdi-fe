@@ -1,9 +1,7 @@
 import React from "react";
 import { HomePageSection } from "@/types/Homepage/home";
 import { DiscoverCard } from "./DiscoverCard";
-
-const stripHtml = (html: string | null) =>
-  html ? html.replace(/<[^>]+>/g, "") : "";
+import { stripHtml } from "@/lib/localization";
 
 interface DiscoverSectionProps {
   home_discover_title: HomePageSection;

@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface HeroProps {
   imageSrc: string;
@@ -14,6 +16,14 @@ export const Hero: React.FC<HeroProps> = ({
   subtitle,
   iconSrc,
 }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div
       className="relative overflow-hidden aspect-[4/3] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end bg-cover"
@@ -38,8 +48,8 @@ export const Hero: React.FC<HeroProps> = ({
               {title}
             </h1>
             <div
-            className="max-w-2xl prose prose-invert prose-base"
-            // className="max-w-full prose prose-invert prose-base text-justify"
+              className="max-w-2xl prose prose-invert prose-base text-[11px] md:text-[12px] text-white"
+              // className="max-w-full prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
           </div>
@@ -49,8 +59,8 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
             </div>
             <Image
-              width={46}
-              height={46}
+              width={42}
+              height={42}
               alt="icon"
               className="bg-cover"
               src={iconSrc}

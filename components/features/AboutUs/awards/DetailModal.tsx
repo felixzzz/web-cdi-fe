@@ -34,7 +34,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({
         onClick={onClose}
       />
 
-      <div className="rounded-2xl bg-[#091A24] relative z-[1000] w-[50%] md:w-2xl lg:w-4xl xl:w-5xl max-h-[80vh] flex flex-col text-white shadow-2xl">
+      <div className="rounded-2xl bg-[#091A24] relative z-[1000] w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl max-h-[80vh] flex flex-col text-white shadow-2xl">
         <div className="px-10 py-5 flex items-center justify-between border-b border-white/16 bg-[#091A24] rounded-t-2xl sticky top-0 z-10">
           <p className="font-medium text-[22px]">Detail Certification</p>
           <button

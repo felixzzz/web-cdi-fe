@@ -24,7 +24,7 @@ export function Business({ overview, items }: BusinessProps) {
         Our Business Sectors
       </h2>
 
-      <div className="flex w-full flex-col md:flex-row md:aspect-video">
+      <div className="flex w-full flex-row md:aspect-video">
         {cardData.map((card) => (
           <BusinessCard
             key={card.title}

@@ -1,4 +1,3 @@
-// components/features/ContactUs/HeroForm.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -30,7 +29,7 @@ import { ContactInfoCard } from "./ContactInfoCard";
 import { useTranslations } from "next-intl";
 import { CompanyLocationResponse } from "@/types/global/footer";
 import { ContactSectionData } from "@/types/Contact/Contact";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 interface HeroFormProps {
@@ -97,6 +96,14 @@ export function HeroForm({
     }
   }
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event('finishProgressBar'));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div data-navbar-theme="dark" className="bg-gray-100 py-20">
       <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 pt-[5%]">
@@ -113,7 +120,7 @@ export function HeroForm({
           />
 
           <div className="md:col-span-2">
-            <h1 className="text-gray-900 font-medium text-2xl md:text-[38px] mb-8">
+            <h1 className="text-gray-900 font-medium text-2xl md:leading-snug md:text-[38px] mb-8">
               {pageData.title}
             </h1>
 

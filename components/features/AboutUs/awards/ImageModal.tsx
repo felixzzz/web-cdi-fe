@@ -30,7 +30,7 @@ export const ImageModal: React.FC<ImageModalProps> = ({
         onClick={onClose}
       />
 
-      <div className="rounded-2xl bg-[#091A24] relative z-[1001] w-[50%] md:w-2xl lg:w-4xl xl:w-5xl max-h-[90vh] flex flex-col text-white border border-white/10">
+      <div className="rounded-2xl bg-[#091A24] relative z-[1001] w-fit md:w-2xl lg:w-4xl xl:w-5xl max-h-[90vh] flex flex-col text-white border border-white/10">
         <div className="px-10 py-5 flex items-center justify-between border-b border-white/16 bg-[#091A24] rounded-t-2xl">
           <p className="font-medium text-[22px]">Photo</p>
           <button onClick={onClose} aria-label="Close modal">

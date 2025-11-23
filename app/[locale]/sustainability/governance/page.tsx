@@ -11,57 +11,98 @@ import { governanceService } from "@/services/Sustainability/GovernanceServices"
 import { GovernancePageProps } from "@/types/Sustainabilitys/Governance";
 import { Metadata } from "next";
 
+export async function generateMetadata({
+  params: { locale },
+}: GovernancePageProps): Promise<Metadata> {
+  const aboutData = await governanceService.getGovernancePageData(locale);
+  const { sustainability_governance_banner } = aboutData;
 
-const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+  const pagePath = "/sustainability/governance";
 
-const baseUrl = "https://cdi-be.cmlabs.dev";
+  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
 
-export const metadata: Metadata = {
-  title: "Sustainability Governance | Chandra Daya Investasi", 
-  description: description,
-  keywords: ['Chandra Daya Investasi', 'CDI', 'CDIA', 'PT Chandra Daya Investasi Tbk', 'CDI Group'],
-  
-  metadataBase: new URL(baseUrl),
+  const title = "Chandra Daya Investasi";
 
-  viewport: {
-    width: 'device-width',
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: '/sustainability/governance', 
-  },
-  icons: {
-    shortcut: '/assets/frontend/favicon.png',
-  },
+  const description =
+    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
-  openGraph: {
-    title: "Chandra Daya Investasi", 
+  return {
+    title: title,
     description: description,
-    url: '/sustainability/governance',
-    type: 'website',
-    siteName: 'Chandra Daya Investasi',
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  twitter: {
-    card: 'summary_large_image',
-    title: "Chandra Daya Investasi",
-    description: description,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
-  other: {
-    'application-url': 'https://cdi-be.cmlabs.dev',
-    'preview-url': 'https://cdi-be.cmlabs.dev/file-storage',
-    'download-file': 'https://cdi-be.cmlabs.dev/file-download',
-    'add-file-preview': 'https://cdi-be.cmlabs.dev/file/preview',
-    'add-file-download': 'https://cdi-be.cmlabs.dev/file/download',
-  }
-};
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
 
-export default async function Page({params: {locale}}: GovernancePageProps) {
+    alternates: {
+      canonical: currentPath,
+      languages: {
+        "en-US": "/sustainability/governance",
+        "id-ID": "/id/sustainability/governance",
+      },
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: currentPath,
+      siteName: "Chandra Daya Investasi",
+      locale: locale,
+      type: "website",
+      images: [
+        {
+          url:
+            sustainability_governance_banner.file_url ||
+            "/assets/frontend/favicon.png",
+          width: 1200,
+          height: 630,
+          alt: sustainability_governance_banner.title || "CDI Banner",
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [
+        sustainability_governance_banner.file_url ||
+          "/assets/frontend/favicon.png",
+      ],
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
+
+export default async function Page({
+  params: { locale },
+}: GovernancePageProps) {
   const [governanceData, contentData] = await Promise.all([
     governanceService.getGovernancePageData(locale),
     governanceService.getGovernanceContentData(locale),
@@ -86,7 +127,8 @@ export default async function Page({params: {locale}}: GovernancePageProps) {
   );
   const cisoData = contentData.find(
     (item) =>
-      item.name === "Three fundamental components of information security management"
+      item.name ===
+      "Three fundamental components of information security management"
   );
   const governancePerfData = contentData.find(
     (item) => item.name === "Governance Performance"
@@ -94,24 +136,24 @@ export default async function Page({params: {locale}}: GovernancePageProps) {
 
   return (
     <main>
-                  <NavbarThemeTrigger theme="dark" />
-        <Hero
-          imageSrc={sustainability_governance_banner.file_url}
-          title={
-            sustainability_governance_banner.title ||
-            "Financial Information for Investors"
-          }
-          subtitle={sustainability_governance_banner.content || ""}
-          iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
-        />
-        <BusinessEthics data={businessEthicsData!} />
-        <AntiCorruption data={antiCorruptionData!} />
-        <GrievanceMechanism data={grievanceData!} />
-        <SustainableProcurement data={procurementData!} />
-        <CyberSecurity data={cyberSecurityData!} />
-        <Ciso data={cisoData!} />
-        {/* <SecuritySlider /> */}
-        <GovernancePerformance data={governancePerfData!} />
+      <NavbarThemeTrigger theme="dark" />
+      <Hero
+        imageSrc={sustainability_governance_banner.file_url}
+        title={
+          sustainability_governance_banner.title ||
+          "Financial Information for Investors"
+        }
+        subtitle={sustainability_governance_banner.content || ""}
+        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+      />
+      <BusinessEthics data={businessEthicsData!} />
+      <AntiCorruption data={antiCorruptionData!} />
+      <GrievanceMechanism data={grievanceData!} />
+      <SustainableProcurement data={procurementData!} />
+      <CyberSecurity data={cyberSecurityData!} />
+      <Ciso data={cisoData!} />
+      {/* <SecuritySlider /> */}
+      <GovernancePerformance data={governancePerfData!} />
     </main>
   );
 }

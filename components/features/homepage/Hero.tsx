@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 export interface HeroProps {
   videoSrc: string;
@@ -20,6 +22,15 @@ export const Hero = ({
   linkText,
   linkIcon,
 }: HeroProps) => {
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <header className="relative overflow-hidden aspect-square lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end">
       <div
@@ -50,7 +61,7 @@ export const Hero = ({
         aria-labelledby="home_banner_title"
       >
         <div className="text-white grid lg:flex-col gap-2 items-end">
-          <div className="mb-6 lg:mb-0">
+          <div className="mb-2 lg:mb-0">
             <p className="max-w-md text-xs md:text-lg font-light !text-neutral-300 uppercase">
               {preTitle}
             </p>
@@ -68,7 +79,7 @@ export const Hero = ({
               className="max-w-lg w-full text-xs md:text-lg !text-neutral-4"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
-            <div className="flex items-center justify-end gap-2 w-full">
+            <div className="flex items-center justify-start md:justify-end gap-2 w-full">
               <div className="h-[2px] w-3/5 bg-[#BFBFBF] hidden md:block relative overflow-hidden">
                 <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
               </div>

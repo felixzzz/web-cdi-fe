@@ -15,64 +15,97 @@ export type PageProps = {
 };
 
 const FILE_PREVIEW_BASE_URL = "https://cdi-be.cmlabs.dev/file/preview/";
-const FILE_DOWNLOAD_BASE_URL =
-  "https://cdi-be.cmlabs.dev/file/download/";
+const FILE_DOWNLOAD_BASE_URL = "https://cdi-be.cmlabs.dev/file/download/";
 
-const description =
-  "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const [BodData, BocData] = await Promise.all([
+    managementService.getManagementBodData(params.locale),
+    managementService.getManagementBocData(params.locale),
+  ]);
 
-const baseUrl = "https://cdi-be.cmlabs.dev";
+  const member = [...BodData, ...BocData].find(
+    (item) => item.ulid === params.ulid
+  );
 
-export const metadata: Metadata = {
-  title: "Management and Organization Structure | Chandra Daya Investasi",
-  description: description,
-  keywords: [
-    "Chandra Daya Investasi",
-    "CDI",
-    "CDIA",
-    "PT Chandra Daya Investasi Tbk",
-    "CDI Group",
-  ],
+  const pagePath = `/about-us/management/team/${params.ulid}`;
 
-  metadataBase: new URL(baseUrl),
+  const currentPath =
+    params.locale === "en" ? pagePath : `/${params.locale}${pagePath}`;
 
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "/contact-us",
-  },
-  icons: {
-    shortcut: "/assets/frontend/favicon.png",
-  },
+  const title = "Chandra Daya Investasi";
+  const description =
+    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
-  openGraph: {
-    title: "Chandra Daya Investasi",
+  return {
+    title: title,
     description: description,
-    url: "/contact-us",
-    type: "website",
-    siteName: "Chandra Daya Investasi",
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Chandra Daya Investasi",
-    description: description,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
-  other: {
-    "application-url": "https://cdi-be.cmlabs.dev",
-    "preview-url": "https://cdi-be.cmlabs.dev/file-storage",
-    "download-file": "https://cdi-be.cmlabs.dev/file-download",
-    "add-file-preview": "https://cdi-be.cmlabs.dev/file/preview",
-    "add-file-download": "https://cdi-be.cmlabs.dev/file/download",
-  },
-};
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: currentPath,
+      languages: {
+        "en-US": pagePath,
+        "id-ID": `/id${pagePath}`,
+      },
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: currentPath,
+      siteName: "Chandra Daya Investasi",
+      locale: params.locale,
+      type: "website",
+      images: [
+        {
+          url: member?.image_hero || "/assets/frontend/favicon.png",
+          width: 1200,
+          height: 630,
+          alt: member?.name || "CDI Banner",
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [member?.image_hero || "/assets/frontend/favicon.png"],
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
 
 export default async function page({ params }: PageProps) {
   const [BodData, BocData] = await Promise.all([
@@ -104,7 +137,7 @@ export default async function page({ params }: PageProps) {
 
   return (
     <main>
-            <NavbarThemeTrigger theme="light" />
+      <NavbarThemeTrigger theme="light" />
       <DetailHero
         name={member.name}
         title={member.position}

@@ -8,61 +8,90 @@ import { AwardsPageProps } from "@/types/AboutUs/Awards";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-const description =
-  "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+export async function generateMetadata({
+  params: { locale },
+}: AwardsPageProps): Promise<Metadata> {
+  const aboutData = await awardsService.getAwardsPageData(locale);
 
-const baseUrl = "https://cdi-be.cmlabs.dev";
+  const { about_us_award_banner } = aboutData;
 
-export const metadata: Metadata = {
-  title: "Awards & Certification | Chandra Daya Investasi",
-  description: description,
-  keywords: [
-    "Chandra Daya Investasi",
-    "CDI",
-    "CDIA",
-    "PT Chandra Daya Investasi Tbk",
-    "CDI Group",
-  ],
+  const pagePath = "/about-us/awards";
 
-  metadataBase: new URL(baseUrl),
+  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
 
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "/about-us/awards",
-  },
-  icons: {
-    shortcut: "/assets/frontend/favicon.png",
-  },
+  const title = "Chandra Daya Investasi"; 
 
-  openGraph: {
-    title: "Chandra Daya Investasi",
+  const description =
+    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+
+  return {
+    title: title,
     description: description,
-    url: "/about-us/awards",
-    type: "website",
-    siteName: "Chandra Daya Investasi",
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Chandra Daya Investasi",
-    description: description,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
-  other: {
-    "application-url": "https://cdi-be.cmlabs.dev",
-    "preview-url": "https://cdi-be.cmlabs.dev/file-storage",
-    "download-file": "https://cdi-be.cmlabs.dev/file-download",
-    "add-file-preview": "https://cdi-be.cmlabs.dev/file/preview",
-    "add-file-download": "https://cdi-be.cmlabs.dev/file/download",
-  },
-};
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: currentPath,
+      languages: {
+        "en-US": "/about-us/awards",
+        "id-ID": "/id/about-us/awards",
+      },
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: currentPath,
+      siteName: "Chandra Daya Investasi",
+      locale: locale,
+      type: "website",
+      images: [
+        {
+          url: about_us_award_banner?.file_url || "/assets/frontend/favicon.png",
+          width: 1200,
+          height: 630,
+          alt: about_us_award_banner?.title || "CDI Banner",
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [about_us_award_banner?.file_url || "/assets/frontend/favicon.png"],
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
 
 export default async function Page({ params: { locale } }: AwardsPageProps) {
   const t = await getTranslations("Awards");

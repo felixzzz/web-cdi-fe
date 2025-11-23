@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useRef, useLayoutEffect } from "react";
-import { gsap } from "gsap"; // 1. Impor GSAP
+import { gsap } from "gsap";
 import { ArticleCard } from "./ArticleCard";
 import { ApiArticle } from "@/types/Homepage/home";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface ArticleCarouselProps {
   articles: ApiArticle[];
@@ -16,12 +17,20 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
   const [slidesToShow, setSlidesToShow] = useState(4);
 
   const carouselViewportRef = useRef<HTMLDivElement>(null);
-  const slidesContainerRef = useRef<HTMLDivElement>(null); 
+  const slidesContainerRef = useRef<HTMLDivElement>(null);
+
+  const maxIndex =
+    articles.length > slidesToShow ? articles.length - slidesToShow : 0;
 
   const goToSlide = (index: number) => {
     if (!slidesContainerRef.current) return;
 
-    const targetSlide = slidesContainerRef.current.children[index] as HTMLElement;
+    const safeIndex = Math.max(0, Math.min(index, maxIndex));
+
+    const targetSlide = slidesContainerRef.current.children[
+      safeIndex
+    ] as HTMLElement;
+
     if (!targetSlide) return;
 
     const targetX = -targetSlide.offsetLeft;
@@ -32,7 +41,19 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
       ease: "power3.inOut",
     });
 
-    setActiveIndex(index);
+    setActiveIndex(safeIndex);
+  };
+
+  const handlePrev = () => {
+    if (activeIndex > 0) {
+      goToSlide(activeIndex - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (activeIndex < maxIndex) {
+      goToSlide(activeIndex + 1);
+    }
   };
 
   useLayoutEffect(() => {
@@ -46,32 +67,36 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
       setSlidesToShow(newSlidesToShow);
     };
 
-    checkWidth(); 
-    window.addEventListener("resize", checkWidth); 
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useLayoutEffect(() => {
-    goToSlide(0);
+    if (activeIndex > articles.length - slidesToShow) {
+        goToSlide(0);
+    } else {
+        goToSlide(activeIndex);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articles, slidesToShow]);
-
-  const numDots =
-    articles.length > slidesToShow ? articles.length - slidesToShow + 1 : 1;
 
   if (!articles || articles.length === 0) {
     return null;
   }
 
+  const numDots = maxIndex + 1;
+
   return (
     <div>
       <div className="overflow-hidden" ref={carouselViewportRef}>
-        <div className="flex relative" ref={slidesContainerRef}>
+        <div className="flex gap-10 relative" ref={slidesContainerRef}>
           {articles.map((article) => (
             <div
               key={article.id}
               style={{ flex: `0 0 ${100 / slidesToShow}%` }}
-              className="p-3 !h-auto"
+              className="!h-auto"
             >
               <ArticleCard
                 href={article.route || "/media/news"}
@@ -85,20 +110,51 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
         </div>
       </div>
 
-      {numDots > 1 && (
-        <div className="flex justify-start items-center gap-2 mt-6">
-          {Array.from({ length: numDots }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              className={`custom-dot-button ${
-                activeIndex === index ? "active" : ""
-              }`}
-            />
-          ))}
+      <div className="flex justify-between items-center mt-6">
+        <div className="flex justify-start items-center gap-2">
+          {numDots > 1 &&
+            Array.from({ length: numDots }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`custom-dot-button ${
+                  activeIndex === index ? "active" : ""
+                }`}
+              />
+            ))}
         </div>
-      )}
+
+        <div className="flex items-center gap-4">
+          <button
+            onClick={handlePrev}
+            disabled={activeIndex === 0}
+            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-colors duration-200
+              ${
+                activeIndex === 0
+                  ? "border-gray-300 text-gray-300 cursor-not-allowed"
+                  : "border-neutral-800 text-neutral-800 hover:bg-neutral-800 hover:text-white cursor-pointer"
+              }
+            `}
+          >
+            <ArrowLeft size={24} />
+          </button>
+
+          <button
+            onClick={handleNext}
+            disabled={activeIndex === maxIndex}
+            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-colors duration-200
+              ${
+                activeIndex === maxIndex
+                  ? "border-gray-300 text-gray-300 cursor-not-allowed"
+                  : "border-neutral-800 text-neutral-800 hover:bg-neutral-800 hover:text-white cursor-pointer"
+              }
+            `}
+          >
+            <ArrowRight size={24} />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

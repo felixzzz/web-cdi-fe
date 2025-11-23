@@ -13,6 +13,7 @@ import { NavbarThemeProvider } from "@/context/NavbarThemeContext";
 // import { Toaster } from "@/components/ui/toaster";
 import { Toaster } from "@/components/ui/sonner";
 import { getTranslations } from "next-intl/server";
+import { ProgressBar } from "@/components/shared/ProgressBar";
 
 type Props = {
   children: React.ReactNode;
@@ -46,6 +47,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <NavbarThemeProvider>
     <NextIntlClientProvider>
       <Navbar />
+      <ProgressBar />
       {children}
       <Toaster />
       <Footer

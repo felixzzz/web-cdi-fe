@@ -7,70 +7,100 @@ import { socialService } from "@/services/Sustainability/SocialServices";
 import { SocialPageProps } from "@/types/Sustainabilitys/Social";
 import { Metadata } from "next";
 
-const description =
-  "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+export async function generateMetadata({
+  params: { locale },
+}: SocialPageProps): Promise<Metadata> {
+  const aboutData = await socialService.getSocialPageData(locale);
+  const { sustainability_social_banner } = aboutData;
 
-const baseUrl = "https://cdi-be.cmlabs.dev";
+  const pagePath = "/sustainability/social";
 
-export const metadata: Metadata = {
-  title: "Sustainability Social | Chandra Daya Investasi",
-  description: description,
-  keywords: [
-    "Chandra Daya Investasi",
-    "CDI",
-    "CDIA",
-    "PT Chandra Daya Investasi Tbk",
-    "CDI Group",
-  ],
+  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
 
-  metadataBase: new URL(baseUrl),
+  const title = "Chandra Daya Investasi";
 
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "/sustainability/social",
-  },
-  icons: {
-    shortcut: "/assets/frontend/favicon.png",
-  },
+  const description =
+    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
-  openGraph: {
-    title: "Chandra Daya Investasi",
+  return {
+    title: title,
     description: description,
-    url: "/sustainability/social",
-    type: "website",
-    siteName: "Chandra Daya Investasi",
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Chandra Daya Investasi",
-    description: description,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
-  other: {
-    "application-url": "https://cdi-be.cmlabs.dev",
-    "preview-url": "https://cdi-be.cmlabs.dev/file-storage",
-    "download-file": "https://cdi-be.cmlabs.dev/file-download",
-    "add-file-preview": "https://cdi-be.cmlabs.dev/file/preview",
-    "add-file-download": "https://cdi-be.cmlabs.dev/file/download",
-  },
-};
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: currentPath,
+      languages: {
+        "en-US": "/sustainability/social",
+        "id-ID": "/id/sustainability/social",
+      },
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: currentPath,
+      siteName: "Chandra Daya Investasi",
+      locale: locale,
+      type: "website",
+      images: [
+        {
+          url:
+            sustainability_social_banner.file_url ||
+            "/assets/frontend/favicon.png",
+          width: 1200,
+          height: 630,
+          alt: sustainability_social_banner.title || "CDI Banner",
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [
+        sustainability_social_banner.file_url || "/assets/frontend/favicon.png",
+      ],
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
 
 export default async function Page({ params: { locale } }: SocialPageProps) {
-  const [sosialData, tabsData, contentData] = await Promise.all(
-    [
-      socialService.getSocialPageData(locale),
-      socialService.getSocialTabData(locale),
-      socialService.getSocialContentData(locale),
-    ]
-  );
+  const [sosialData, tabsData, contentData] = await Promise.all([
+    socialService.getSocialPageData(locale),
+    socialService.getSocialTabData(locale),
+    socialService.getSocialContentData(locale),
+  ]);
 
   const { sustainability_social_banner, sustainability_social_overview } =
     sosialData;

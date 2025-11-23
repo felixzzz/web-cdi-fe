@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 type BreadcrumbItem = {
   href: string;
@@ -71,9 +74,17 @@ export const NewsDetail = ({
   articleContent,
 }: NewsDetailProps) => {
   const t = useTranslations("Media");
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="py-[5%] lg:py-[8%]">
-      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 py-36 md:py-0">
         <div className="flex gap-1 text-neutral-10 items-center">
           {breadcrumbs.map((item) => (
             <div key={item.href} className="flex items-center gap-1">
@@ -111,7 +122,7 @@ export const NewsDetail = ({
 
         <div className="mt-16 flex-col text-center">
           <p className="font-medium text-neutral-13 md:text-lg mb-4">
-            {t('share')}
+            {t("share")}
           </p>
           <div className="flex items-center gap-2 justify-center">
             <ShareButtons shareUrl={shareUrl} />

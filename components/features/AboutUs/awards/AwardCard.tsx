@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowRight, ImageIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export interface Award {
   year: string;
@@ -16,13 +17,16 @@ interface AwardCardProps {
   award: Award;
   onReadMore: (award: Award) => void;
   onImageClick: (imageUrl: string) => void;
+  showReadMore?: boolean;
 }
 
 export const AwardCard: React.FC<AwardCardProps> = ({
   award,
   onReadMore,
   onImageClick,
+  showReadMore= false,
 }) => {
+  const t = useTranslations('AboutUs');
   const formatDate = (dateString?: string) => {
     if (!dateString) return award.year;
     try {
@@ -74,13 +78,15 @@ export const AwardCard: React.FC<AwardCardProps> = ({
           dangerouslySetInnerHTML={{ __html: award.description }}
         />
 
-        <button 
-          onClick={() => onReadMore(award)}
-          className="text-[#47C1EA] flex items-center gap-2 cursor-pointer hover:text-[#3ab0d8] transition-colors w-fit"
-        >
-          Read more 
-          <ArrowRight size={24} />
-        </button>
+        {showReadMore && (
+          <button 
+            onClick={() => onReadMore(award)}
+            className="text-[#47C1EA] flex items-center gap-2 cursor-pointer hover:text-[#3ab0d8] transition-colors w-fit"
+          >
+            {t('Read_More')}
+            <ArrowRight size={24} />
+          </button>
+        )}
       </div>
     </article>
   );

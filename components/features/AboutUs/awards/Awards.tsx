@@ -256,6 +256,7 @@ export const Awards: React.FC<AwardsProps> = ({
                   <li key={`${award.title}-${award.year}-${index}`}>
                     <AwardCard
                       award={award}
+                      showReadMore={activeTab === "Certification"}
                       onReadMore={(selected) => setSelectedAward(selected)}
                       onImageClick={(url) => setModalImageUrl(url)}
                     />

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -12,8 +13,10 @@
   }
 
   .hover-underline-middle::after {
-    @apply content-[''] absolute bottom-0 left-0 w-full h-[1.5px];
-    @apply bg-current;
+    @apply content-[''] absolute bottom-0 left-0 w-full h-[2px];
+    
+    background-color: var(--nav-hover-color, #47C1EA);
+    
     @apply scale-x-0 origin-center;
     @apply transition-transform duration-300 ease-out;
   }

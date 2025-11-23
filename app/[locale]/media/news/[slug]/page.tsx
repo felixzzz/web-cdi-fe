@@ -1,6 +1,7 @@
 import { NewsDetail } from "@/components/features/Media/Details/Detail";
 import { RelatedPosts } from "@/components/features/Media/Details/RelatedPosts";
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
+import { stripHtml } from "@/lib/localization";
 import { mediaService } from "@/services/Media/MediaService";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -13,61 +14,97 @@ export type PageProps = {
   };
 };
 
-const description =
-  "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const mediaData = await mediaService.getMediaPageData(params.locale);
+  
+  const article = mediaData.items.find((item) => item.slug === params.slug);
 
-const baseUrl = "https://cdi-be.cmlabs.dev";
+  if (!article) {
+    return {
+      title: "News Not Found | Chandra Daya Investasi",
+    };
+  }
 
-export const metadata: Metadata = {
-  title: "Management and Organization Structure | Chandra Daya Investasi",
-  description: description,
-  keywords: [
-    "Chandra Daya Investasi",
-    "CDI",
-    "CDIA",
-    "PT Chandra Daya Investasi Tbk",
-    "CDI Group",
-  ],
+  const articleTitle = params.locale === "id" ? article.title_id : article.title_en;
+  const rawContent = params.locale === "id" ? article.content_id : article.content_en;
+  
+  const title = `Chandra Daya Investasi | ${articleTitle}`;
+  const description = stripHtml(rawContent);
+  const imageUrl = article.image || "/assets/frontend/favicon.png";
 
-  metadataBase: new URL(baseUrl),
+  const pagePath = `/media/news/${params.slug}`;
+  const currentPath = params.locale === "en" ? pagePath : `/${params.locale}${pagePath}`;
 
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "/contact-us",
-  },
-  icons: {
-    shortcut: "/assets/frontend/favicon.png",
-  },
-
-  openGraph: {
-    title: "Chandra Daya Investasi",
+  return {
+    title: title,
     description: description,
-    url: "/contact-us",
-    type: "website",
-    siteName: "Chandra Daya Investasi",
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Chandra Daya Investasi",
-    description: description,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
-  other: {
-    "application-url": "https://cdi-be.cmlabs.dev",
-    "preview-url": "https://cdi-be.cmlabs.dev/file-storage",
-    "download-file": "https://cdi-be.cmlabs.dev/file-download",
-    "add-file-preview": "https://cdi-be.cmlabs.dev/file/preview",
-    "add-file-download": "https://cdi-be.cmlabs.dev/file/download",
-  },
-};
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: currentPath,
+      languages: {
+        "en-US": pagePath,
+        "id-ID": `/id${pagePath}`,
+      },
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: currentPath,
+      siteName: "Chandra Daya Investasi",
+      locale: params.locale,
+      type: "website",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: articleTitle,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [imageUrl],
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
 
 export default async function Page({ params }: PageProps) {
   const t = await getTranslations("Media");

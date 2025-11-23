@@ -159,7 +159,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         linkIcon={<ArrowUpRight size={14} />}
       >
         <div
-          className="text-[14px] leading-[24px] font-normal text-white space-y-6"
+          className="text-[12px] md:text-[14px] leading-[24px] font-normal text-white space-y-6"
           dangerouslySetInnerHTML={{ __html: home_about_section.content || "" }}
         />
       </AboutUs>
