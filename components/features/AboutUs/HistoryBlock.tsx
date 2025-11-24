@@ -28,7 +28,7 @@ export const HistoryBlock: React.FC<HistoryBlockProps> = ({
         }}
       />
 
-      <section className="container mx-auto px-[1rem] md:px-[2rem] md:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
+      <section className="container mx-auto px-[1rem] md:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
         <div className="max-w-[880px] mx-auto">
           <p className="text-neutral-4 mb-4">{eyebrow}</p>
           <h2 className="text-shadow-2 font-medium text-2xl md:text-[38px] md:leading-[44px] max-w-2xl mb-8">
