@@ -14,6 +14,7 @@ import { NavbarThemeProvider } from "@/context/NavbarThemeContext";
 import { Toaster } from "@/components/ui/sonner";
 import { getTranslations } from "next-intl/server";
 import { ProgressBar } from "@/components/shared/ProgressBar";
+import { CookieConsent } from "@/components/shared/CookieConsent";
 
 type Props = {
   children: React.ReactNode;
@@ -48,6 +49,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <NextIntlClientProvider>
       <Navbar />
       <ProgressBar />
+      <CookieConsent />
       {children}
       <Toaster />
       <Footer

@@ -77,9 +77,8 @@ export function BusinessCard({
               <ul className="mt-8 flex flex-wrap gap-2">
                 {tags.map((tag) => (
                   <li key={tag}>
-                    {/* Update Link href to use the route */}
                     <Link
-                      href={route} // Use the business's main route
+                      href={route} 
                       className="flex cursor-pointer items-center gap-2 rounded-full border border-white px-[15px] py-[6px] text-sm transition-colors hover:bg-white/20"
                     >
                       {tag}

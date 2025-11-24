@@ -167,7 +167,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
               imageUrl={article.image}
               category={article.article_category.name_id}
               date={article.date}
-              title={article.title_id}
+              title={article.title}
             />
           ))}
         </div>

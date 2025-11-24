@@ -43,7 +43,7 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
   return (
     <section
       aria-labelledby="latest-news-heading"
-      className="py-[6%] lg:py-[8%] relative overflow-hidden aspect-[4/9] sm:aspect-[4/8] md:aspect-[4/4] lg:aspect-[4/3] w-full bg-cover"
+      className="py-[6%] lg:py-[8%] relative overflow-hidden w-full bg-cover"
     >
       <Image
         src={media.file_url}
