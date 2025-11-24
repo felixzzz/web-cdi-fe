@@ -49,8 +49,8 @@ export const Overview: React.FC<OverviewSectionProps> = ({
       />
 
       <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-[1]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          <div className="lg:col-span-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+          <div className="md:col-span-6">
             <Image
               src={logoSrc}
               alt={logoAlt}
@@ -69,13 +69,13 @@ export const Overview: React.FC<OverviewSectionProps> = ({
             <div className="content text-justify">{children}</div>
           </div>
 
-          <div className="lg:col-span-6">
+          <div className="md:col-span-6">
             <Image
               src={mainImageUrl}
               alt={mainImageAlt}
               width={mainImageWidth}
               height={mainImageHeight}
-              className="w-full lg:w-[80%] rounded-xl ms-auto"
+              className="w-full md:w-[80%] rounded-xl ms-auto"
             />
           </div>
         </div>

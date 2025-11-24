@@ -197,7 +197,7 @@ export function Navbar() {
           </Link>
 
           <nav
-            className="hidden lg:flex items-center gap-2 md:gap-4 font-normal text-base whitespace-nowrap"
+            className="hidden md:flex items-center gap-2 md:gap-4 font-normal text-base whitespace-nowrap"
             style={{ "--nav-hover-color": hoverColor } as React.CSSProperties}
           >
             {navLinks.map((link) =>
@@ -296,7 +296,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-4">
             <div
-              className="relative cursor-pointer hidden lg:flex items-center gap-1"
+              className="relative cursor-pointer hidden md:flex items-center gap-1"
               onMouseEnter={() => {
                 if (langDropdownTimer.current) {
                   clearTimeout(langDropdownTimer.current);
@@ -361,7 +361,7 @@ export function Navbar() {
               )}
             </div>
 
-            <div className="relative lg:hidden">
+            <div className="relative md:hidden">
               <button
                 className="flex items-center gap-1"
                 onClick={() => setIsLangDropdownOpen((prev) => !prev)}
@@ -415,7 +415,7 @@ export function Navbar() {
             </div>
 
             <button
-              className="lg:hidden text-2xl"
+              className="md:hidden text-2xl"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open mobile menu"
             >

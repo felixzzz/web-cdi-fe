@@ -19,11 +19,11 @@ const CisoCard: React.FC<CisoCardProps> = ({ number, title, description }) => (
         "linear-gradient(#0f2e42b8, #0f2e4200 30%, #0f2e4200 55.5%, #0f2e42b8 82.83%)",
     }}
   >
-    <div className="flex flex-col md:flex-row md:items-center mb-4 md:mb-6">
+    <div className="flex flex-row items-center mb-4 md:mb-6">
       <span className="text-[48px] leading-none text-neutral-500 font-normal mr-4 mb-2 md:mb-0">
         {number}
       </span>
-      <h3 className="text-white text-base md:text-2xl lg:text-4xl font-semibold">
+      <h3 className="text-white text-xl md:text-2xl font-semibold">
         {title}
       </h3>
     </div>
@@ -101,7 +101,7 @@ export const Ciso: React.FC<CisoSectionProps> = ({ data }) => {
   return (
     <section className="py-20 bg-[#091A24] text-white">
       <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
-        <div className="flex flex-col items-center justify-between mb-12">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-12">
           <h2 className="text-3xl md:text-4xl font-semibold">{TITLE}</h2>
 
           {!isGrid && (

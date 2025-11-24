@@ -110,7 +110,7 @@ export function HeroForm({
   return (
     <div data-navbar-theme="dark" className="bg-gray-100 py-20">
       <section className="container mx-auto px-4 lg:px-10 2xl:px-32 pt-[5%]">
-        <div className="grid grid-cols-1 lg:grid-cols-3 p-2 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 p-2 md:gap-16">
           <ContactInfoCard
             imageSrc={pageData.file_url}
             imageAlt="CDI Group Team"

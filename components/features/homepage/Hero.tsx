@@ -61,7 +61,7 @@ export const Hero = ({
         aria-labelledby="home_banner_title"
       >
         <div className="text-white grid lg:flex-col gap-2 items-end">
-          <div className="mb-2 lg:mb-0">
+          <div className="mb-2 lg:mb-0 max-w-xl">
             <p className="max-w-md text-xs md:text-lg font-light !text-neutral-300 uppercase">
               {preTitle}
             </p>
@@ -76,7 +76,7 @@ export const Hero = ({
 
           <div className="flex flex-col gap-4 md:flex-row items-center lg:justify-between">
             <div
-              className="max-w-lg w-full text-xs md:text-lg !text-neutral-4"
+              className="max-w-md w-full text-xs md:text-lg !text-neutral-4"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
             <div className="flex items-center justify-start md:justify-end gap-2 w-full">

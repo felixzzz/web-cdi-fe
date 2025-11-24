@@ -46,7 +46,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
             return (
               <article
                 key={item.ulid}
-                className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-2 lg:gap-y-0"
+                className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col md:flex-row gap-y-2 md:gap-y-0"
               >
                 <div>
                   <h3 className="text-neutral-13 mb-2 text-lg font-medium">
@@ -69,7 +69,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                   </div>
                 </div>
 
-                <div className="flex lg:items-center gap-8 w-full lg:w-fit">
+                <div className="flex lg:items-center gap-8 w-full md:w-fit">
                   <a
                     href={itemViewUrl}
                     className="flex items-center gap-2 text-blue-base font-medium"

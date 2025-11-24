@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { clsx } from "clsx";
@@ -9,6 +9,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  ImageOff,
   Search,
   SlidersHorizontal,
 } from "lucide-react";
@@ -25,7 +26,7 @@ interface NewsProps {
   pressReleaseData: PressReleaseApiResponse;
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 15;
 const FILE_STORAGE_URL = "https://cdi-be.cmlabs.dev/file-storage/";
 
 export function News({ mediaData, pressReleaseData }: NewsProps) {
@@ -70,7 +71,6 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
     useMemo(() => {
       let filtered = pressReleaseData.items;
 
-      // Filter logic based on Search Query
       if (searchQuery) {
         const lowerQuery = searchQuery.toLowerCase();
         filtered = filtered.filter((item) =>
@@ -78,7 +78,6 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
         );
       }
 
-      // FIX: Use 'filtered' instead of creating 'allPressReleases' from scratch
       const total = filtered.length;
       const pages = Math.ceil(total / ITEMS_PER_PAGE);
       const paginated = filtered.slice(
@@ -174,24 +173,26 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
         </div>
       )}
 
-      <div className="mt-10 mb-8 flex items-center justify-between flex-col lg:flex-row gap-4">
-        <button className="text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition">
-          Filter <SlidersHorizontal size={18} />
-        </button>
-        <div className="w-full lg:w-[264px] rounded-full border border-neutral-300 px-4 py-2 flex items-center gap-2">
-          <Search className="text-neutral-400" size={20} />
-          <input
-            type="text"
-            className="w-full placeholder:text-neutral-400 text-sm outline-none text-neutral-800"
-            placeholder="Search anything..."
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setCurrentPage(1); // Reset to page 1 on search
-            }}
-          />
+      {activeTab === "press-release" && (
+        <div className="mt-10 mb-8 flex items-center justify-between flex-col md:flex-row gap-4">
+          <button className="text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition">
+            Filter <SlidersHorizontal size={18} />
+          </button>
+          <div className="w-full md:w-[264px] rounded-full border border-neutral-300 px-4 py-2 flex items-center gap-2">
+            <Search className="text-neutral-400" size={20} />
+            <input
+              type="text"
+              className="w-full placeholder:text-neutral-400 text-sm outline-none text-neutral-800"
+              placeholder="Search anything..."
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       {activeTab === "press-release" && (
         <ul className="flex flex-col">
@@ -228,6 +229,12 @@ function ArticleCard({
 }) {
   const t = useTranslations("Media");
 
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [imageUrl]);
+
   return (
     <Link
       href={href}
@@ -236,7 +243,20 @@ function ArticleCard({
       <article className="flex flex-col text-neutral-13 w-full">
         <div className="w-full aspect-square overflow-hidden">
           <div className="relative w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110">
-            <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
+            {!imageUrl || hasError ? (
+              <div className="w-full h-full flex flex-col items-center justify-center text-neutral-400 gap-2">
+                <ImageOff size={48} strokeWidth={1.5} />
+              </div>
+            ) : (
+              <Image 
+                src={imageUrl} 
+                alt={title} 
+                layout="fill" 
+                objectFit="cover"
+                onError={() => setHasError(true)} 
+              />
+            )}
+            {/* <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" /> */}
           </div>
         </div>
         <div className="p-6 flex flex-col grow">
