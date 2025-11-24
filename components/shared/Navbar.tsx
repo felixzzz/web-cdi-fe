@@ -170,7 +170,7 @@ export function Navbar() {
             : "backdrop-blur-3xl bg-[#091A24]/10 text-white"
         )}
       >
-        <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 flex justify-between items-center">
+        <div className="container mx-auto px-4 lg:px-10 2xl:px-32 flex justify-between items-center">
           <Link href="/" className="flex-shrink-0" onClick={handleLinkClick}>
             <Image
               src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_white.svg"
@@ -197,7 +197,7 @@ export function Navbar() {
           </Link>
 
           <nav
-            className="hidden lg:flex items-center gap-4 xl:gap-6 font-normal text-base"
+            className="hidden lg:flex items-center gap-2 md:gap-4 font-normal text-base whitespace-nowrap"
             style={{ "--nav-hover-color": hoverColor } as React.CSSProperties}
           >
             {navLinks.map((link) =>
@@ -217,7 +217,7 @@ export function Navbar() {
                     }, 200);
                   }}
                 >
-                  <button className="nav-item hover-underline-middle cursor-pointer flex items-center gap-1 text-sm xl:text-base">
+                  <button className="nav-item hover-underline-middle cursor-pointer flex items-center gap-1 text-xs xl:text-base whitespace-nowrap">
                     <span>{link.label}</span>
                     <ChevronDown
                       size={16}
@@ -277,7 +277,7 @@ export function Navbar() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="nav-item hover-underline-middle text-sm xl:text-base"
+                  className="nav-item hover-underline-middle text-xs xl:text-base whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
@@ -285,7 +285,7 @@ export function Navbar() {
                 <Link
                   key={link.id}
                   href={link.href}
-                  className="nav-item hover-underline-middle text-sm xl:text-base"
+                  className="nav-item hover-underline-middle text-xs xl:text-base whitespace-nowrap"
                   onClick={handleLinkClick}
                 >
                   {link.label}
@@ -463,7 +463,7 @@ export function Navbar() {
                 link.children ? (
                   <div key={link.id} className="w-full">
                     <button
-                      className="flex items-center justify-between w-full py-2"
+                      className="flex items-center justify-between w-full py-2 whitespace-nowrap"
                       onClick={() => toggleMobileDropdown(link.id)}
                     >
                       <span>{link.label}</span>
@@ -476,12 +476,12 @@ export function Navbar() {
                       />
                     </button>
                     {openMobileDropdown === link.id && (
-                      <div className="pl-4 pt-2 pb-1 flex flex-col gap-2 bg-blue-lighter/10 rounded">
+                      <div className="pl-4 pt-2 pb-1 flex flex-col gap-2 bg-[#47c1ea]/50 rounded">
                         {link.children.map((child) => (
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="block py-1 text-sm text-neutral-10 hover:text-blue-base"
+                            className="block py-1 text-sm text-neutral-10 hover:text-blue-base whitespace-nowrap"
                             onClick={handleMobileLinkClick}
                           >
                             {child.label}
@@ -496,7 +496,7 @@ export function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block py-2"
+                    className="block py-2 whitespace-nowrap"
                     onClick={handleMobileLinkClick}
                   >
                     {link.label}
@@ -505,7 +505,7 @@ export function Navbar() {
                   <Link
                     key={link.id}
                     href={link.href}
-                    className="block py-2"
+                    className="block py-2 whitespace-nowrap"
                     onClick={handleMobileLinkClick}
                   >
                     {link.label}

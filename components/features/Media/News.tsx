@@ -9,6 +9,8 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  Search,
+  SlidersHorizontal,
 } from "lucide-react";
 import {
   NewsApiResponse,
@@ -31,6 +33,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
   const [activeTab, setActiveTab] = useState("news");
   const [activeCategory, setActiveCategory] = useState("Semua");
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const newsCategories = useMemo(() => {
     const allNewsCategories = mediaData.items.map(
@@ -65,11 +68,20 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
 
   const { paginatedPressReleases, totalPressPages, totalPressItems } =
     useMemo(() => {
-      const allPressReleases = pressReleaseData.items;
+      let filtered = pressReleaseData.items;
 
-      const total = allPressReleases.length;
+      // Filter logic based on Search Query
+      if (searchQuery) {
+        const lowerQuery = searchQuery.toLowerCase();
+        filtered = filtered.filter((item) =>
+          item.name_id.toLowerCase().includes(lowerQuery)
+        );
+      }
+
+      // FIX: Use 'filtered' instead of creating 'allPressReleases' from scratch
+      const total = filtered.length;
       const pages = Math.ceil(total / ITEMS_PER_PAGE);
-      const paginated = allPressReleases.slice(
+      const paginated = filtered.slice(
         (currentPage - 1) * ITEMS_PER_PAGE,
         currentPage * ITEMS_PER_PAGE
       );
@@ -79,7 +91,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
         totalPressPages: pages,
         totalPressItems: total,
       };
-    }, [currentPage, pressReleaseData.items]);
+    }, [currentPage, pressReleaseData.items, searchQuery]);
 
   const totalPages = activeTab === "news" ? totalNewsPages : totalPressPages;
   const totalItems = activeTab === "news" ? totalNewsItems : totalPressItems;
@@ -162,6 +174,25 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
         </div>
       )}
 
+      <div className="mt-10 mb-8 flex items-center justify-between flex-col lg:flex-row gap-4">
+        <button className="text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition">
+          Filter <SlidersHorizontal size={18} />
+        </button>
+        <div className="w-full lg:w-[264px] rounded-full border border-neutral-300 px-4 py-2 flex items-center gap-2">
+          <Search className="text-neutral-400" size={20} />
+          <input
+            type="text"
+            className="w-full placeholder:text-neutral-400 text-sm outline-none text-neutral-800"
+            placeholder="Search anything..."
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1); // Reset to page 1 on search
+            }}
+          />
+        </div>
+      </div>
+
       {activeTab === "press-release" && (
         <ul className="flex flex-col">
           {paginatedPressReleases.map((press: PressReleaseItem) => (
@@ -236,8 +267,7 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
 
   const pdfIcon =
     "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg";
-  const viewIcon =
-    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg";
+  const viewIcon = "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg";
   const downloadIcon =
     "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg";
 
@@ -279,7 +309,7 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
               alt="View icon"
               className="inline-block"
             />
-          {t("download_view")}
+            {t("download_view")}
           </Link>
           <Link
             href={downloadUrlEn}
@@ -339,7 +369,7 @@ function Pagination({
     const pageNumber = parseInt(jumpPage);
     if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
       onPageChange(pageNumber);
-      setJumpPage(""); 
+      setJumpPage("");
     }
   };
 
