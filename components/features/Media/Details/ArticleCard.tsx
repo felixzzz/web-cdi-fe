@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ImageOff } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface ArticleCardProps {
   href: string;
@@ -22,6 +25,12 @@ export const ArticleCard = ({
   const readMoreText =
     locale === "id" ? "Baca artikel selengkapnya" : "Read full article";
 
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [imageUrl]);
+
   return (
     <Link
       href={href}
@@ -30,7 +39,20 @@ export const ArticleCard = ({
       <article className="flex flex-col text-neutral-13 w-full">
         <div className="w-full aspect-square overflow-hidden">
           <div className="relative w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110">
-            <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
+            {!imageUrl || hasError ? (
+              <div className="w-full h-full flex flex-col items-center justify-center text-neutral-400 gap-2">
+                <ImageOff size={48} strokeWidth={1.5} />
+              </div>
+            ) : (
+              <Image
+                src={imageUrl}
+                alt={title}
+                layout="fill"
+                objectFit="cover"
+                onError={() => setHasError(true)}
+              />
+            )}
+            {/* <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" /> */}
           </div>
         </div>
         <div className="p-6 flex flex-col grow">

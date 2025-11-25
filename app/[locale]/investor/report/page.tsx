@@ -9,54 +9,92 @@ import { ReportPageProps } from "@/types/Investor/Report";
 import { Metadata } from "next";
 // import { useTranslations } from "next-intl";
 
-const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+export async function generateMetadata({
+  params: { locale },
+}: ReportPageProps): Promise<Metadata> {
+  const aboutData = await reportService.getReportPageData(locale);
+  const { investor_report_banner } = aboutData;
 
-const baseUrl = "https://cdi-be.cmlabs.dev";
+  const pagePath = "/investor/report";
 
-export const metadata: Metadata = {
-  title: "Investor Report | Chandra Daya Investasi", 
-  description: description,
-  keywords: ['Chandra Daya Investasi', 'CDI', 'CDIA', 'PT Chandra Daya Investasi Tbk', 'CDI Group'],
-  
-  metadataBase: new URL(baseUrl),
+  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
 
-  viewport: {
-    width: 'device-width',
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: '/investor/report', 
-  },
-  icons: {
-    shortcut: '/assets/frontend/favicon.png',
-  },
+  const title = "Chandra Daya Investasi";
 
-  openGraph: {
-    title: "Chandra Daya Investasi", 
+  const description =
+    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+
+  return {
+    title: title,
     description: description,
-    url: '/investor/report',
-    type: 'website',
-    siteName: 'Chandra Daya Investasi',
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  twitter: {
-    card: 'summary_large_image',
-    title: "Chandra Daya Investasi",
-    description: description,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
-  other: {
-    'application-url': 'https://cdi-be.cmlabs.dev',
-    'preview-url': 'https://cdi-be.cmlabs.dev/file-storage',
-    'download-file': 'https://cdi-be.cmlabs.dev/file-download',
-    'add-file-preview': 'https://cdi-be.cmlabs.dev/file/preview',
-    'add-file-download': 'https://cdi-be.cmlabs.dev/file/download',
-  }
-};
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: currentPath,
+      languages: {
+        "en-US": "/investor/report",
+        "id-ID": "/id/investor/report",
+      },
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: currentPath,
+      siteName: "Chandra Daya Investasi",
+      locale: locale,
+      type: "website",
+      images: [
+        {
+          url:
+            investor_report_banner.file_url || "/assets/frontend/favicon.png",
+          width: 1200,
+          height: 630,
+          alt: investor_report_banner.title || "CDI Banner",
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [
+        investor_report_banner.file_url || "/assets/frontend/favicon.png",
+      ],
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
 
 export default async function Page({ params: { locale } }: ReportPageProps) {
   // const t = useTranslations("homepage");
@@ -75,7 +113,7 @@ export default async function Page({ params: { locale } }: ReportPageProps) {
 
   return (
     <main>
-                  <NavbarThemeTrigger theme="dark" />
+      <NavbarThemeTrigger theme="dark" />
 
       <Hero
         imageSrc={investor_report_banner.file_url}
@@ -83,7 +121,7 @@ export default async function Page({ params: { locale } }: ReportPageProps) {
         subtitle={investor_report_banner.content}
         iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
       />
-            <NavbarThemeTrigger theme="light" />
+      <NavbarThemeTrigger theme="light" />
       <FinancialBanner data={investor_report_overview} />
       <FinancialTable data={investor_report_table} />
       <SupportingInstitutions data={institutions} />

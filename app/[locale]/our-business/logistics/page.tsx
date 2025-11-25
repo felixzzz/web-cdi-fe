@@ -8,54 +8,89 @@ import { MoveRightIcon } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 
-const description = "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+export async function generateMetadata({
+  params: { locale },
+}: LogisticPageProps): Promise<Metadata> {
+  const logisticData = await logisticService.getLogisticPageData(locale);
+  const { banner_image, banner_title } = logisticData;
 
-const baseUrl = "https://cdi-be.cmlabs.dev";
+  const pagePath = "/our-business/logistics";
 
-export const metadata: Metadata = {
-  title: "Logistic | Chandra Daya Investasi", 
-  description: description,
-  keywords: ['Chandra Daya Investasi', 'CDI', 'CDIA', 'PT Chandra Daya Investasi Tbk', 'CDI Group'],
-  
-  metadataBase: new URL(baseUrl),
+  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
 
-  viewport: {
-    width: 'device-width',
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: '/our-business/logistics',
-  },
-  icons: {
-    shortcut: '/assets/frontend/favicon.png',
-  },
+  const title = "Chandra Daya Investasi";
 
-  openGraph: {
-    title: "Chandra Daya Investasi", 
+  const description =
+    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+
+  return {
+    title: title,
     description: description,
-    url: '/our-business/logistics', 
-    type: 'website',
-    siteName: 'Chandra Daya Investasi',
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  twitter: {
-    card: 'summary_large_image',
-    title: "Chandra Daya Investasi",
-    description: description,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
-  other: {
-    'application-url': 'https://cdi-be.cmlabs.dev',
-    'preview-url': 'https://cdi-be.cmlabs.dev/file-storage',
-    'download-file': 'https://cdi-be.cmlabs.dev/file-download',
-    'add-file-preview': 'https://cdi-be.cmlabs.dev/file/preview',
-    'add-file-download': 'https://cdi-be.cmlabs.dev/file/download',
-  }
-};
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: currentPath,
+      languages: {
+        "en-US": "/our-business/logistics",
+        "id-ID": "/id/our-business/logistics",
+      },
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: currentPath,
+      siteName: "Chandra Daya Investasi",
+      locale: locale,
+      type: "website",
+      images: [
+        {
+          url: banner_image || "/assets/frontend/favicon.png",
+          width: 1200,
+          height: 630,
+          alt: banner_title || "CDI Banner",
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [banner_image || "/assets/frontend/favicon.png"],
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
 
 export default async function Page({ params: { locale } }: LogisticPageProps) {
   const logisticData = await logisticService.getLogisticPageData(locale);
@@ -69,31 +104,31 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
     tabs,
     link_url,
     link_title_en,
-    link_title_id
+    link_title_id,
   } = logisticData;
 
   return (
-      <main>
-                    <NavbarThemeTrigger theme="dark" />
-        <Hero
-          imageSrc={banner_image}
-          title={banner_title}
-          iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
-        />
-        <Overview
-          title={overview_title}
-          description={overview_description}
-          imageUrl={overview_image}
-          linkUrl={link_url}
-          linkTitle={link_title_en}
-        />
-        <BusinessPillars tabs={tabs} />
-        <div className="w-full flex justify-center mx-auto bg-[#091A24] py-14">
+    <main>
+      <NavbarThemeTrigger theme="dark" />
+      <Hero
+        imageSrc={banner_image}
+        title={banner_title}
+        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+      />
+      <Overview
+        title={overview_title}
+        description={overview_description}
+        imageUrl={overview_image}
+        linkUrl={link_url}
+        linkTitle={link_title_en}
+      />
+      <BusinessPillars tabs={tabs} />
+      <div className="w-full flex justify-center mx-auto bg-[#091A24] py-14">
         <Link
           href={link_url}
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
-          <span className="text-xl">
+          <span className="text-sm md:text-xl">
             {locale === "en" ? link_title_en : link_title_id}
           </span>
           <span>
@@ -101,6 +136,6 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
           </span>
         </Link>
       </div>
-      </main>
+    </main>
   );
 }

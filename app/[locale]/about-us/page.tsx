@@ -16,65 +16,92 @@ import { AboutPageProps } from "@/types/AboutUs/About";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
+import { stripHtml } from "@/lib/localization";
 
-const stripHtml = (html: string | null) =>
-  html ? html.replace(/<[^>]+>/g, "") : "";
+export async function generateMetadata({
+  params: { locale },
+}: AboutPageProps): Promise<Metadata> {
+  const aboutData = await aboutService.getAboutPageData(locale);
 
-const description =
-  "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+  const { about_us_banner } = aboutData;
+  const pagePath = "/about-us";
 
-const baseUrl = "https://cdi-be.cmlabs.dev";
+  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
 
-export const metadata: Metadata = {
-  title: "Management and Organization Structure | Chandra Daya Investasi",
-  description: description,
-  keywords: [
-    "Chandra Daya Investasi",
-    "CDI",
-    "CDIA",
-    "PT Chandra Daya Investasi Tbk",
-    "CDI Group",
-  ],
+  const title =
+    "Management and Organization Structure | Chandra Daya Investasi";
+  const description =
+    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO.";
 
-  metadataBase: new URL(baseUrl),
-
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "/contact-us",
-  },
-  icons: {
-    shortcut: "/assets/frontend/favicon.png",
-  },
-
-  openGraph: {
-    title: "Chandra Daya Investasi",
+  return {
+    title: title,
     description: description,
-    url: "/contact-us",
-    type: "website",
-    siteName: "Chandra Daya Investasi",
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Chandra Daya Investasi",
-    description: description,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+      "Infrastructure Investment Indonesia",
+    ],
 
-  other: {
-    "application-url": "https://cdi-be.cmlabs.dev",
-    "preview-url": "https://cdi-be.cmlabs.dev/file-storage",
-    "download-file": "https://cdi-be.cmlabs.dev/file-download",
-    "add-file-preview": "https://cdi-be.cmlabs.dev/file/preview",
-    "add-file-download": "https://cdi-be.cmlabs.dev/file/download",
-  },
-};
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: currentPath,
+      languages: {
+        "en-US": "/about-us",
+        "id-ID": "/id/about-us",
+      },
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: currentPath,
+      siteName: "Chandra Daya Investasi",
+      locale: locale,
+      type: "website",
+      images: [
+        {
+          url: about_us_banner?.file_url || "/assets/frontend/favicon.png",
+          width: 1200,
+          height: 630,
+          alt: about_us_banner?.title || "CDI Banner",
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [about_us_banner?.file_url || "/assets/frontend/favicon.png"],
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
 
 export default async function Page({ params: { locale } }: AboutPageProps) {
   const t = await getTranslations("AboutUs");

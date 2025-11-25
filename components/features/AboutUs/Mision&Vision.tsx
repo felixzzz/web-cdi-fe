@@ -62,24 +62,23 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
   visionData,
   missionData,
 }) => {
-  const t = useTranslations('AboutUs')
+  const t = useTranslations("AboutUs");
   return (
     <section
-          id={id}
-
-      className="py-28 bg-[#091A24] text-white bg-cover relative"
+      id={id}
+      className="bg-[#091A24] text-white bg-cover relative"
       aria-labelledby="vision-mission-title"
     >
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] relative z-[1]">
         <h2
           id="vision-mission-title"
-          className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-16 text-center relative w-fit py-3 px-12 mx-auto"
+          className="font-medium text-2xl md:text-[38px] md:leading-[44px] mb-16 text-center relative w-fit py-3 px-12 mx-auto"
         >
           <DecorativeCorners />
           {title}
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
           <div
             className="rounded-xl p-8 pt-12 flex flex-col items-center text-center"
             style={{ backgroundImage: "linear-gradient(#00253b, #0b5581)" }}
@@ -90,7 +89,6 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
               width={160}
               height={160}
               className="mb-8"
-              
             />
 
             <p className="text-3xl font-medium leading-relaxed min-h-[200px]">
@@ -100,7 +98,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
             <hr className="w-full border-white my-6" />
 
             {/* <p className="text-base font-medium">{title}</p> */}
-            <p className="text-base font-medium">{t('vision')}</p>
+            <p className="text-base font-medium">{t("vision")}</p>
           </div>
 
           <div
@@ -113,7 +111,6 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
               width={160}
               height={160}
               className="mb-8"
-
             />
 
             <p className="text-3xl font-medium min-h-[200px]">
@@ -123,7 +120,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
             <hr className="w-full border-white my-6" />
 
             {/* <p className="text-base font-medium">{title}</p> */}
-            <p className="text-base font-medium">{t('mission')}</p>
+            <p className="text-base font-medium">{t("mission")}</p>
           </div>
         </div>
       </div>

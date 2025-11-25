@@ -25,3 +25,20 @@ export interface PageProps {
 
 export const stripHtml = (html: string | null) =>
     html ? html.replace(/<[^>]+>/g, "") : "";
+
+
+export const formatExternalUrl = (url: string) => {
+  if (!url) return "#";
+
+  // Jika data spesifiknya aneh seperti "https.careers..." (typo dari API/Data)
+  if (url.startsWith("https.") && !url.startsWith("https://")) {
+    return url.replace("https.", "https://");
+  }
+
+  // Jika tidak ada protocol sama sekali (misal: "careers.capcx.com")
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    return `https://${url}`;
+  }
+
+  return url;
+};

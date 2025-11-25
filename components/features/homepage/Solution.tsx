@@ -1,9 +1,7 @@
 import React from "react";
 import { HomePageSection } from "@/types/Homepage/home";
 import { SolutionCard } from "./SolutionCard";
-
-const stripHtml = (html: string | null) =>
-  html ? html.replace(/<[^>]+>/g, "") : "";
+import { stripHtml } from "@/lib/localization";
 
 interface BusinessSolutionsProps {
   home_infrastructure_title: HomePageSection;
@@ -55,7 +53,7 @@ export const Solution: React.FC<BusinessSolutionsProps> = ({
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         <h2
           id="solutions-title"
-          className="mb-11 lg:mb-20 text-2xl lg:text-[38px] lg:leading-[44px] font-medium max-w-2xl mx-auto text-center"
+          className="mb-11 lg:mb-20 text-2xl md:text-[38px] md:leading-[44px] font-medium max-w-2xl mx-auto text-center"
         >
           {home_infrastructure_title.title}
         </h2>

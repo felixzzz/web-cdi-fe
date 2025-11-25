@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowRight, ImageIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import clsx from "clsx";
 
 export interface Award {
   year: string;
@@ -16,13 +18,18 @@ interface AwardCardProps {
   award: Award;
   onReadMore: (award: Award) => void;
   onImageClick: (imageUrl: string) => void;
+  showReadMore?: boolean;
+  showAwards?: boolean;
 }
 
 export const AwardCard: React.FC<AwardCardProps> = ({
   award,
   onReadMore,
   onImageClick,
+  showReadMore = false,
+  showAwards = false,
 }) => {
+  const t = useTranslations("AboutUs");
   const formatDate = (dateString?: string) => {
     if (!dateString) return award.year;
     try {
@@ -37,10 +44,10 @@ export const AwardCard: React.FC<AwardCardProps> = ({
   };
 
   return (
-    <article className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+    <article className="grid grid-cols-1 md:grid-cols-2 gap-5">
       <div>
-        <div 
-          className="w-full cursor-pointer group" 
+        <div
+          className="w-full cursor-pointer group"
           onClick={() => {
             if (award.imageUrl) onImageClick(award.imageUrl);
           }}
@@ -66,21 +73,41 @@ export const AwardCard: React.FC<AwardCardProps> = ({
         <p className="text-sm text-neutral-400 mb-1">
           {formatDate(award.date)}
         </p>
-        
+
         <h3 className="text-2xl font-medium text-white mb-4">{award.title}</h3>
-        
+
         <div
-          className="text-sm mb-4 line-clamp-5 text-neutral-400 content"
+          className={clsx(
+            "text-sm mb-4 text-neutral-400 content",
+            showAwards ? "line-clamp-5 " : ""
+          )}
           dangerouslySetInnerHTML={{ __html: award.description }}
         />
 
-        <button 
-          onClick={() => onReadMore(award)}
-          className="text-[#47C1EA] flex items-center gap-2 cursor-pointer hover:text-[#3ab0d8] transition-colors w-fit"
-        >
-          Read more 
-          <ArrowRight size={24} />
-        </button>
+        {showAwards && (
+          <div>
+            <h3 className="text-md font-medium text-white">
+              {t('Awarded')}
+            </h3>
+            <div
+              className={clsx(
+                "text-sm mb-4 text-neutral-400 content",
+                showAwards ? "line-clamp-5 " : ""
+              )}
+              dangerouslySetInnerHTML={{ __html: award.awarder }}
+            />
+          </div>
+        )}
+
+        {showReadMore && (
+          <button
+            onClick={() => onReadMore(award)}
+            className="text-[#47C1EA] flex items-center gap-2 cursor-pointer hover:text-[#3ab0d8] transition-colors w-fit"
+          >
+            {t("Read_More")}
+            <ArrowRight size={24} />
+          </button>
+        )}
       </div>
     </article>
   );

@@ -1,4 +1,3 @@
-// components/features/ContactUs/HeroForm.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -30,7 +29,7 @@ import { ContactInfoCard } from "./ContactInfoCard";
 import { useTranslations } from "next-intl";
 import { CompanyLocationResponse } from "@/types/global/footer";
 import { ContactSectionData } from "@/types/Contact/Contact";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 interface HeroFormProps {
@@ -93,14 +92,25 @@ export function HeroForm({
 
       form.reset();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Please try again later.", {});
+      toast.error(
+        error instanceof Error ? error.message : "Please try again later.",
+        {}
+      );
     }
   }
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div data-navbar-theme="dark" className="bg-gray-100 py-20">
-      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 pt-[5%]">
-        <div className="grid md:grid-cols-3 gap-16">
+      <section className="container mx-auto px-4 lg:px-10 2xl:px-32 pt-[5%]">
+        <div className="grid grid-cols-1 md:grid-cols-3 p-2 md:gap-16">
           <ContactInfoCard
             imageSrc={pageData.file_url}
             imageAlt="CDI Group Team"
@@ -112,8 +122,8 @@ export function HeroForm({
             email={contactData.localized_main.fax}
           />
 
-          <div className="md:col-span-2">
-            <h1 className="text-gray-900 font-medium text-2xl md:text-[38px] mb-8">
+          <div className="pt-10 md:col-span-2">
+            <h1 className="text-gray-900 font-medium text-2xl md:leading-snug md:text-[38px] mb-8">
               {pageData.title}
             </h1>
 

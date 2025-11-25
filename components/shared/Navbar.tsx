@@ -1,4 +1,3 @@
-// /components/Navbar.tsx (Kode LengKAP dengan Solusi Baru)
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -6,11 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { clsx } from "clsx";
 import { ChevronDown, Menu, X } from "lucide-react";
-// import { usePathname, useRouter } from "next-intl/client";
 import { useLocale, useTranslations } from "next-intl";
 import { useNavbarTheme } from "@/context/NavbarThemeContext";
 import { usePathname, useRouter } from "@/i18n/routing";
-// import { usePathname, useRouter } from "next-intl/navigation";
 
 const languages = [
   {
@@ -24,6 +21,10 @@ const languages = [
     flag: "https://cdi-be.cmlabs.dev/assets/frontend/icons/flag_id.svg",
   },
 ];
+
+const handleLinkClick = () => {
+  window.dispatchEvent(new Event("startProgressBar"));
+};
 
 export function Navbar() {
   const t = useTranslations("Navbar");
@@ -77,7 +78,6 @@ export function Navbar() {
         { label: t("overview"), href: "/sustainability" },
         { label: t("environment"), href: "/sustainability/environment" },
         { label: t("social"), href: "/sustainability/social" },
-        // Menggunakan key unik untuk child 'Governance' agar tidak bentrok
         { label: t("governance_child"), href: "/sustainability/governance" },
       ],
     },
@@ -114,12 +114,14 @@ export function Navbar() {
   const locale = useLocale();
   const currentLanguage =
     languages.find((lang) => lang.code === locale) || languages[0];
+
+  const router = useRouter();
+
   const onSelectLocale = (newLocale: string) => {
+    handleLinkClick();
     router.replace(pathname, { locale: newLocale });
     setIsLangDropdownOpen(false);
   };
-
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -137,7 +139,14 @@ export function Navbar() {
   const handleMobileLinkClick = () => {
     setIsMobileMenuOpen(false);
     setOpenMobileDropdown(null);
+    handleLinkClick();
   };
+
+  const hoverColor = isSpecialTransparentPage
+    ? "#47C1EA"
+    : theme === "light"
+    ? "#2474a5"
+    : "#47C1EA";
 
   return (
     <section
@@ -154,16 +163,15 @@ export function Navbar() {
 
           isSpecialTransparentPage
             ? "text-white bg-gradient-to-b from-black/60 to-transparent"
-            : 
-            theme === "light"
+            : theme === "light"
             ? "bg-white text-neutral-900 shadow-md"
             : !isScrolled
             ? "text-white bg-gradient-to-b from-black/60 to-transparent"
             : "backdrop-blur-3xl bg-[#091A24]/10 text-white"
         )}
       >
-        <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 flex justify-between items-center">
-          <Link href="/" className="flex-shrink-0">
+        <div className="container mx-auto px-4 lg:px-10 2xl:px-32 flex justify-between items-center">
+          <Link href="/" className="flex-shrink-0" onClick={handleLinkClick}>
             <Image
               src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_white.svg"
               alt="CDI Logo White"
@@ -188,7 +196,10 @@ export function Navbar() {
             />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-6 font-normal text-base">
+          <nav
+            className="hidden md:flex items-center gap-2 md:gap-4 font-normal text-base whitespace-nowrap"
+            style={{ "--nav-hover-color": hoverColor } as React.CSSProperties}
+          >
             {navLinks.map((link) =>
               link.children ? (
                 <div
@@ -206,7 +217,7 @@ export function Navbar() {
                     }, 200);
                   }}
                 >
-                  <button className="nav-item hover-underline-middle cursor-pointer flex items-center gap-1 text-sm xl:text-base">
+                  <button className="nav-item hover-underline-middle cursor-pointer flex items-center gap-1 text-xs xl:text-base whitespace-nowrap">
                     <span>{link.label}</span>
                     <ChevronDown
                       size={16}
@@ -229,6 +240,11 @@ export function Navbar() {
                           setOpenDesktopDropdown(null);
                         }, 200);
                       }}
+                      style={
+                        {
+                          "--nav-hover-color": "#2474a5",
+                        } as React.CSSProperties
+                      }
                     >
                       <Image
                         src="https://cdi-be.cmlabs.dev/assets/frontend/icons/polygon.svg"
@@ -242,8 +258,11 @@ export function Navbar() {
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="text-neutral-900 hover-underline-middle nav-item hover:text-[#2474a5] justify-start text-sm"
-                            onClick={() => setOpenDesktopDropdown(null)}
+                            className="text-neutral-900 hover-underline-middle nav-item justify-start text-sm"
+                            onClick={() => {
+                              setOpenDesktopDropdown(null);
+                              handleLinkClick();
+                            }}
                           >
                             {child.label}
                           </Link>
@@ -258,7 +277,7 @@ export function Navbar() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="nav-item hover-underline-middle text-sm xl:text-base"
+                  className="nav-item hover-underline-middle text-xs xl:text-base whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
@@ -266,7 +285,8 @@ export function Navbar() {
                 <Link
                   key={link.id}
                   href={link.href}
-                  className="nav-item hover-underline-middle text-sm xl:text-base"
+                  className="nav-item hover-underline-middle text-xs xl:text-base whitespace-nowrap"
+                  onClick={handleLinkClick}
                 >
                   {link.label}
                 </Link>
@@ -276,7 +296,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-4">
             <div
-              className="relative cursor-pointer hidden lg:flex items-center gap-1"
+              className="relative cursor-pointer hidden md:flex items-center gap-1"
               onMouseEnter={() => {
                 if (langDropdownTimer.current) {
                   clearTimeout(langDropdownTimer.current);
@@ -341,7 +361,7 @@ export function Navbar() {
               )}
             </div>
 
-            <div className="relative lg:hidden">
+            <div className="relative md:hidden">
               <button
                 className="flex items-center gap-1"
                 onClick={() => setIsLangDropdownOpen((prev) => !prev)}
@@ -395,7 +415,7 @@ export function Navbar() {
             </div>
 
             <button
-              className="lg:hidden text-2xl"
+              className="md:hidden text-2xl"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open mobile menu"
             >
@@ -443,7 +463,7 @@ export function Navbar() {
                 link.children ? (
                   <div key={link.id} className="w-full">
                     <button
-                      className="flex items-center justify-between w-full py-2"
+                      className="flex items-center justify-between w-full py-2 whitespace-nowrap"
                       onClick={() => toggleMobileDropdown(link.id)}
                     >
                       <span>{link.label}</span>
@@ -456,12 +476,12 @@ export function Navbar() {
                       />
                     </button>
                     {openMobileDropdown === link.id && (
-                      <div className="pl-4 pt-2 pb-1 flex flex-col gap-2 bg-blue-lighter/10 rounded">
+                      <div className="pl-4 pt-2 pb-1 flex flex-col gap-2 bg-[#47c1ea]/50 rounded">
                         {link.children.map((child) => (
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="block py-1 text-sm text-neutral-10 hover:text-blue-base"
+                            className="block py-1 text-sm text-neutral-10 hover:text-blue-base whitespace-nowrap"
                             onClick={handleMobileLinkClick}
                           >
                             {child.label}
@@ -476,7 +496,7 @@ export function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block py-2"
+                    className="block py-2 whitespace-nowrap"
                     onClick={handleMobileLinkClick}
                   >
                     {link.label}
@@ -485,7 +505,7 @@ export function Navbar() {
                   <Link
                     key={link.id}
                     href={link.href}
-                    className="block py-2"
+                    className="block py-2 whitespace-nowrap"
                     onClick={handleMobileLinkClick}
                   >
                     {link.label}

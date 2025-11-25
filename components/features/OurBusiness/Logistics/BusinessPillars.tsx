@@ -90,7 +90,7 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
   return (
     <div className="bg-[#091A24]">
       <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 pt-8">
-        <div className="flex border-b border-[#BFBFBF]/20">
+        <div className="flex flex-col md:flex-row border-b border-[#BFBFBF]/20">
           {tabs.map((tab) => (
             <TabButton
               key={tab.id}

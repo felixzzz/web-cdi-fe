@@ -1,9 +1,7 @@
 import React from "react";
 import { HomePageSection } from "@/types/Homepage/home";
 import { DiscoverCard } from "./DiscoverCard";
-
-const stripHtml = (html: string | null) =>
-  html ? html.replace(/<[^>]+>/g, "") : "";
+import { stripHtml } from "@/lib/localization";
 
 interface DiscoverSectionProps {
   home_discover_title: HomePageSection;
@@ -55,7 +53,7 @@ export const Discover: React.FC<DiscoverSectionProps> = ({
       <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
         <h2
           id="discover-title"
-          className="mb-10 text-2xl lg:text-[38px] lg:leading-[44px] font-medium max-w-2xl mx-auto text-center"
+          className="mb-10 text-2xl md:text-[38px] md:leading-[44px] font-medium max-w-2xl mx-auto text-center"
         >
           {home_discover_title.title}
         </h2>

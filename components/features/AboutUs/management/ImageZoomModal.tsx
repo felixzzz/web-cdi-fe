@@ -72,12 +72,12 @@ export const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
       aria-labelledby="modal-title"
     >
       <div className="w-full bg-white py-3 px-4 flex justify-between items-center h-[10vh]">
-        <h2 id="modal-title" className="text-[28px] font-medium">
+        <h2 id="modal-title" className="text-[20px] md:text-[28px] font-medium truncate pr-4">
           {title}
         </h2>
         <button
           onClick={onClose}
-          className="text-neutral-13 text-[24px] cursor-pointer"
+          className="text-neutral-13 cursor-pointer flex-shrink-0"
           aria-label="Close modal"
         >
           <X size={30} />
@@ -86,7 +86,7 @@ export const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
 
       <div
         ref={containerRef}
-        className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden bg-white cursor-grab"
+        className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden bg-white cursor-grab p-4"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
@@ -98,31 +98,30 @@ export const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
           alt={imageAlt}
           width={1000}
           height={1000}
-          className="select-none h-auto"
+          className="select-none max-w-full max-h-full object-contain pointer-events-none"
           style={{
             transform: `translate(${pos.x}px, ${pos.y}px) scale(${zoom})`,
             transition: dragging ? "none" : "transform 0.2s",
-            width: "auto",
-            maxWidth: "none",
           }}
           draggable={false}
         />
       </div>
 
+      {/* Footer Controls */}
       <div className="bg-white py-3 px-6 flex items-center gap-4 h-[10vh] w-full">
         <div className="flex items-center gap-4 mx-auto">
           <button
             onClick={handleZoomOut}
-            className="border border-neutral-5 rounded-lg w-11 h-11 flex items-center justify-center text-blue-base cursor-pointer text-[38px] font-extralight"
+            className="border border-neutral-5 rounded-lg w-11 h-11 flex items-center justify-center text-blue-base cursor-pointer hover:bg-neutral-50"
           >
             <Minus size={24} />
           </button>
-          <span className="text-lg font-light text-neutral-10 w-16 text-center">
+          <span className="text-lg font-light text-neutral-10 w-16 text-center select-none">
             {Math.round(zoom * 100)}%
           </span>
           <button
             onClick={handleZoomIn}
-            className="border border-neutral-5 rounded-lg w-11 h-11 flex items-center justify-center text-blue-base cursor-pointer text-[38px] font-extralight"
+            className="border border-neutral-5 rounded-lg w-11 h-11 flex items-center justify-center text-blue-base cursor-pointer hover:bg-neutral-50"
           >
             <Plus size={24} />
           </button>

@@ -9,18 +9,16 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-  Loader2, // Import loader icon
+  Loader2,
 } from "lucide-react";
 import Image from "next/image";
 import {
   CalendarApiResponse,
   CalendarEventItem,
   PaginationMeta,
-} from "@/types/Investor/Financial"; // Corrected import path
+} from "@/types/Investor/Financial";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-
-// --- Helper Types & Functions ---
 
 interface Report {
   id: number;
@@ -34,7 +32,6 @@ interface Report {
   downloadUrl: string;
 }
 
-// Formats "financial_report" to "Financial Report"
 const formatReportType = (type: string): string => {
   return type
     .split("_")
@@ -42,7 +39,6 @@ const formatReportType = (type: string): string => {
     .join(" ");
 };
 
-// Converts "Financial Report" back to "financial_report"
 const unformatReportType = (type: string): string => {
   if (type === "All Type") return "";
   return type.toLowerCase().replace(" ", "_");
@@ -53,17 +49,15 @@ const FILE_PREVIEW_BASE_URL =
 const FILE_DOWNLOAD_BASE_URL =
   "https://cdi-be.cmlabs.dev/file/download/default/report/";
 
-// Flattens the API's year-grouped items into a single array
 const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
   return data.items.flatMap((yearGroup) => yearGroup.items);
 };
 
-// Transforms a single API item into the 'Report' shape
 const transformItem = (item: CalendarEventItem): Report => ({
   id: item.id,
   title: item.name,
-  date: item.datetime, // Use datetime for sorting
-  displayDate: item.date, // Use date for display
+  date: item.datetime,
+  displayDate: item.date,
   size: item.file.size,
   type: formatReportType(item.type),
   year: item.year,
@@ -78,8 +72,7 @@ interface FinancialCalendarProps {
 }
 
 export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
-  const t = useTranslations('Investor.Financial')
-  // State for raw API items, pagination, filters, and loading
+  const t = useTranslations("Investor.Financial");
   const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
     flattenData(initialData)
   );
@@ -92,19 +85,14 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
-  // --- Dynamic Year Filters ---
   const yearFilters = useMemo(() => {
-    // Use the first page of data to build the initial year list
     const years = Array.from(
       new Set(flattenData(initialData).map((r) => r.year))
     );
     return ["All Year", ...years.sort((a, b) => b - a)];
   }, [initialData]);
 
-  // --- Data Fetching Effect ---
-  // Runs when page, year, or type changes
   useEffect(() => {
-    // Don't refetch on the initial render
     if (
       currentPage === 1 &&
       activeYear === "All Year" &&
@@ -139,8 +127,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
     fetchData();
   }, [currentPage, activeYear, activeType, initialData]);
 
-  // --- Client-side Search & Grouping (Memoized) ---
-  const { paginatedAndGroupedReports, totalItems } = useMemo(() => {
+  const paginatedAndGroupedReports = useMemo(() => {
     const transformed = reportItems.map(transformItem);
 
     const filtered = transformed.filter((report) =>
@@ -156,11 +143,8 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
       return acc;
     }, {} as Record<number, Report[]>);
 
-    return {
-      paginatedAndGroupedReports: grouped,
-      totalItems: pagination.total,
-    };
-  }, [reportItems, searchQuery, pagination.total]);
+    return grouped;
+  }, [reportItems, searchQuery]);
 
   const reportKeys = Object.keys(paginatedAndGroupedReports).sort(
     (a, b) => Number(b) - Number(a)
@@ -168,7 +152,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
 
   return (
     <section
-    data-navbar-theme="dark"
+      data-navbar-theme="dark"
       id="content-media-section"
       aria-labelledby="calendar-heading"
       className="container mx-auto py-20 px-4 md:px-8 lg:px-20 2xl:px-44"
@@ -177,13 +161,11 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
         id="calendar-heading"
         className="text-neutral-800 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-3"
       >
-        {t('title')}
+        {t("title")}
       </h2>
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
-        <span>
-        {t('subtitle')}
-        </span>
+        <span>{t("subtitle")}</span>
       </div>
       <nav
         aria-label="Filter by year"
@@ -237,12 +219,12 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
               setSearchQuery(e.target.value);
             }}
             className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-blue-base"
-            placeholder={t('search')}
+            placeholder={t("search")}
           />
         </div>
       </div>
 
-      <section aria-label="Financial reports list" className="min-h-[400px]">
+      <section aria-label="Financial reports list">
         {isLoading ? (
           <div className="flex justify-center items-center h-full min-h-[400px]">
             <Loader2 className="animate-spin text-[#2474A5]" size={48} />
@@ -296,7 +278,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                             alt="See all icon"
                             className="inline-block"
                           />{" "}
-                          {t('download_view')}
+                          {t("download_view")}
                         </Link>
                         <a
                           href={report.downloadUrl}
@@ -311,7 +293,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                             alt="Download icon"
                             className="inline-block"
                           />{" "}
-                          {t('download_download')}
+                          {t("download_download")}
                         </a>
                       </div>
                     </div>
@@ -321,66 +303,168 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
             </div>
           ))
         ) : (
-          <p className="text-center text-neutral-8 py-20">
-            {t('not_found')}
-          </p>
+          <p className="text-center text-neutral-8 py-20">{t("not_found")}</p>
         )}
       </section>
 
-      {pagination.last_page > 1 && (
-        <nav
-          aria-label="Pagination"
-          className="mt-5 py-10 flex w-full justify-between items-center gap-4 flex-col md:flex-row"
-        >
-          <p className="text-neutral-10 text-sm max-lg:hidden">
-            {`${pagination.from}-${pagination.to} of ${totalItems} items`}
-          </p>
-          <ul className="flex items-center justify-center gap-2">
-            <li>
-              <button
-                onClick={() => setCurrentPage(1)}
-                disabled={currentPage === 1 || isLoading}
-                className="pagination-btn"
-              >
-                <ChevronsLeft size={16} />
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                disabled={currentPage === 1 || isLoading}
-                className="pagination-btn"
-              >
-                <ChevronLeft size={16} />
-              </button>
-            </li>
-            <li className="font-medium">{`Page ${currentPage} of ${pagination.last_page}`}</li>
-            <li>
-              <button
-                onClick={() =>
-                  setCurrentPage((p) => Math.min(pagination.last_page, p + 1))
-                }
-                disabled={currentPage === pagination.last_page || isLoading}
-                className="pagination-btn"
-              >
-                <ChevronRight size={16} />
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => setCurrentPage(pagination.last_page)}
-                disabled={currentPage === pagination.last_page || isLoading}
-                className="pagination-btn"
-              >
-                <ChevronsRight size={16} />
-              </button>
-            </li>
-          </ul>
-          <p className="text-neutral-10 text-sm lg:hidden">
-            {`${pagination.from}-${pagination.to} of ${totalItems} items`}
-          </p>
-        </nav>
+      {pagination.last_page > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={pagination.last_page}
+          totalItems={pagination.total}
+          itemsPerPage={pagination.per_page || 10}
+          onPageChange={setCurrentPage}
+        />
       )}
+    </section>
+  );
+}
+
+function Pagination({
+  currentPage,
+  totalPages,
+  totalItems,
+  itemsPerPage,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+}) {
+  const [jumpPage, setJumpPage] = useState<string>("");
+
+  const startItem = (currentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
+  const handleJumpPage = () => {
+    const pageNumber = parseInt(jumpPage);
+    if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
+      onPageChange(pageNumber);
+      setJumpPage("");
+    }
+  };
+
+  const btnBaseClass =
+    "text-[12px] rounded-md flex items-center justify-center min-w-[32px] h-[32px] border transition-all duration-200";
+
+  const btnActive = "bg-[#2474A5] text-white border-[#2474A5]";
+
+  const btnDefault =
+    "text-neutral-13 border-neutral-4 bg-white hover:bg-[#2474A5] hover:text-white hover:border-[#2474A5]";
+
+  const btnDisabled =
+    "!cursor-not-allowed text-neutral-4 border-neutral-4 bg-transparent";
+
+  return (
+    <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row">
+      <p className="text-neutral-10 text-sm max-md:hidden">
+        {startItem}-{endItem} of {totalItems} items
+      </p>
+
+      <ul className="flex items-center justify-center gap-2">
+        <li>
+          <button
+            type="button"
+            onClick={() => onPageChange(1)}
+            disabled={currentPage === 1}
+            className={clsx(
+              btnBaseClass,
+              currentPage === 1 ? btnDisabled : btnDefault
+            )}
+            aria-label="First page"
+          >
+            <ChevronsLeft size={16} />
+          </button>
+        </li>
+
+        <li>
+          <button
+            type="button"
+            onClick={() => onPageChange(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            className={clsx(
+              btnBaseClass,
+              currentPage === 1 ? btnDisabled : btnDefault
+            )}
+            aria-label="Previous page"
+          >
+            <ChevronLeft size={16} />
+          </button>
+        </li>
+
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <li key={page}>
+            <button
+              type="button"
+              onClick={() => onPageChange(page)}
+              className={clsx(
+                btnBaseClass,
+                currentPage === page ? btnActive : btnDefault
+              )}
+            >
+              {page}
+            </button>
+          </li>
+        ))}
+
+        <li>
+          <button
+            type="button"
+            onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
+            disabled={currentPage === totalPages}
+            className={clsx(
+              btnBaseClass,
+              currentPage === totalPages ? btnDisabled : btnDefault
+            )}
+            aria-label="Next page"
+          >
+            <ChevronRight size={16} />
+          </button>
+        </li>
+
+        <li>
+          <button
+            type="button"
+            onClick={() => onPageChange(totalPages)}
+            disabled={currentPage === totalPages}
+            className={clsx(
+              btnBaseClass,
+              currentPage === totalPages ? btnDisabled : btnDefault
+            )}
+            aria-label="Last page"
+          >
+            <ChevronsRight size={16} />
+          </button>
+        </li>
+      </ul>
+
+      <div className="flex items-center gap-4 justify-center md:justify-between w-full md:w-auto">
+        <p className="text-neutral-10 text-sm md:hidden">
+          {startItem}-{endItem} of {totalItems} items
+        </p>
+
+        <div className="flex items-center gap-4">
+          <p className="text-neutral-10 text-sm whitespace-nowrap">
+            Jump Page
+          </p>
+          <input
+            type="number"
+            min="1"
+            max={totalPages}
+            value={jumpPage}
+            onChange={(e) => setJumpPage(e.target.value)}
+            className="outline-none border border-neutral-5 w-10 h-7 rounded-sm text-center text-sm focus:border-[#2474A5]"
+          />
+          <button
+            onClick={handleJumpPage}
+            className="text-[#2474A5] text-xs font-bold cursor-pointer hover:underline"
+          >
+            Go
+          </button>
+        </div>
+      </div>
     </section>
   );
 }

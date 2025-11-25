@@ -24,7 +24,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   return (
     <Link
       href={href}
-      className="group flex flex-col bg-white rounded-xl border border-gray-200 overflow-hidden h-full text-gray-800 shadow-sm hover:shadow-lg transition-shadow duration-300"
+      className="group flex flex-col bg-white rounded-xl border border-gray-200 overflow-hidden h-full text-gray-800 duration-300"
     >
       <div className="w-full aspect-square overflow-hidden relative">
         <Image

@@ -1,3 +1,4 @@
+import { formatExternalUrl } from "@/lib/localization";
 import Link from "next/link";
 
 export interface JourneyStat {
@@ -53,7 +54,7 @@ export const Journey: React.FC<JourneySectionProps> = ({
               key={stat.value}
               className="border-l-2 border-l-[#47C1EA] px-6 py-4 lg:py-0"
             >
-              <p className="text-shadow-1 font-medium text-4xl md:text-[62px] xl:text-[80px] mb-2 leading-[88.8889px]">
+              <p className="text-shadow-1 font-medium text-4xl md:text-[62px] xl:text-[80px] md:mb-2 leading-loose md:leading-[88.8889px]">
                 {stat.value}
               </p>
               <div className="content !font-light text-shadow-1 !text-white leading-[18px]">
@@ -68,7 +69,7 @@ export const Journey: React.FC<JourneySectionProps> = ({
             link.external ? (
               <Link
                 key={link.text}
-                href={link.href}
+                href={formatExternalUrl(link.href)}
                 className="px-6 py-2 rounded-full whitespace-nowrap border border-white"
                 target="_blank"
                 rel="noopener noreferrer"

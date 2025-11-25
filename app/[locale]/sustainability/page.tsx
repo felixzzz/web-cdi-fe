@@ -6,61 +6,96 @@ import { sustainabilityService } from "@/services/Sustainability/FinancialServic
 import { SustainabilityPageProps } from "@/types/Sustainabilitys/Sustainability";
 import { Metadata } from "next";
 
-const description =
-  "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+export async function generateMetadata({
+  params: { locale },
+}: SustainabilityPageProps): Promise<Metadata> {
+  const aboutData = await sustainabilityService.getSustainabilityPageData(
+    locale
+  );
+  const { sustainability_overview_banner } = aboutData;
 
-const baseUrl = "https://cdi-be.cmlabs.dev";
+  const pagePath = "/sustainability";
 
-export const metadata: Metadata = {
-  title: "Sustainability Overview | Chandra Daya Investasi",
-  description: description,
-  keywords: [
-    "Chandra Daya Investasi",
-    "CDI",
-    "CDIA",
-    "PT Chandra Daya Investasi Tbk",
-    "CDI Group",
-  ],
+  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
 
-  metadataBase: new URL(baseUrl),
+  const title = "Chandra Daya Investasi";
 
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "/sustainability",
-  },
-  icons: {
-    shortcut: "/assets/frontend/favicon.png",
-  },
+  const description =
+    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
-  openGraph: {
-    title: "Chandra Daya Investasi",
+  return {
+    title: title,
     description: description,
-    url: "/sustainability",
-    type: "website",
-    siteName: "Chandra Daya Investasi",
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Chandra Daya Investasi",
-    description: description,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
-  other: {
-    "application-url": "https://cdi-be.cmlabs.dev",
-    "preview-url": "https://cdi-be.cmlabs.dev/file-storage",
-    "download-file": "https://cdi-be.cmlabs.dev/file-download",
-    "add-file-preview": "https://cdi-be.cmlabs.dev/file/preview",
-    "add-file-download": "https://cdi-be.cmlabs.dev/file/download",
-  },
-};
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+
+    alternates: {
+      canonical: currentPath,
+      languages: {
+        "en-US": "/sustainability",
+        "id-ID": "/id/sustainability",
+      },
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: currentPath,
+      siteName: "Chandra Daya Investasi",
+      locale: locale,
+      type: "website",
+      images: [
+        {
+          url:
+            sustainability_overview_banner.file_url ||
+            "/assets/frontend/favicon.png",
+          width: 1200,
+          height: 630,
+          alt: sustainability_overview_banner.title || "CDI Banner",
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [
+        sustainability_overview_banner.file_url ||
+          "/assets/frontend/favicon.png",
+      ],
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
 
 export default async function Page({
   params: { locale },
@@ -84,8 +119,6 @@ export default async function Page({
   //     sustainability_overview_content.file_url ||
   //     "https://cdi-be.cmlabs.dev/file-download/...",
   // };
-
-  console.log('sustainability_overview_content ', sustainability_overview_content);
 
   return (
     <main>

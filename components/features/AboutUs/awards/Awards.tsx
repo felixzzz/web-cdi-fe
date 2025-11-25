@@ -251,11 +251,13 @@ export const Awards: React.FC<AwardsProps> = ({
             </div>
           ) : filteredData.length > 0 ? (
             <>
-              <ul className="grid grid-cols-1 xl:grid-cols-2 gap-x-10 gap-y-10 text-white">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 text-white">
                 {filteredData.map((award, index) => (
                   <li key={`${award.title}-${award.year}-${index}`}>
                     <AwardCard
                       award={award}
+                      showReadMore={activeTab === "Certification"}
+                      showAwards={activeTab === "Awards"}
                       onReadMore={(selected) => setSelectedAward(selected)}
                       onImageClick={(url) => setModalImageUrl(url)}
                     />

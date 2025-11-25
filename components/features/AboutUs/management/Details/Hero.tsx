@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
+import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 type BocDetailHeroProps = {
   name: string;
@@ -18,11 +22,19 @@ export const DetailHero = ({
   title,
   imageUrl,
   backLinkHref,
-  backLinkLabel = "Kembali",
 }: BocDetailHeroProps) => {
+  const t = useTranslations("AboutUs");
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div
-      className="relative overflow-hidden aspect-[4/3] lg:aspect-[16/7] w-full flex items-center bg-cover flex-col"
+      className="relative overflow-hidden aspect-[4/3] md:aspect-[4/2] lg:aspect-[16/7] w-full flex items-center bg-cover flex-col my-24"
       style={{ backgroundImage: `url("${HERO_BACKGROUND_IMAGE}")` }}
     >
       <div className="flex items-center bg-cover flex-col relative z-[1] h-full w-full aspect-[4/3] md:aspect-[16/7] py-[5%] md:py-[8%]">
@@ -31,7 +43,7 @@ export const DetailHero = ({
             href={backLinkHref}
             className="flex gap-2 items-center text-white"
           >
-            <ArrowLeft size={24} /> {backLinkLabel}
+            <ArrowLeft size={24} /> {t("button_back")}
           </Link>
         </section>
 

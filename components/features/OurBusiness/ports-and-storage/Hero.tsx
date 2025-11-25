@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface HeroProps {
   imageSrc: string;
@@ -12,6 +14,14 @@ export const Hero: React.FC<HeroProps> = ({
   title,
   iconSrc,
 }) => {
+  useEffect(() => {
+          const timer = setTimeout(() => {
+            window.dispatchEvent(new Event("finishProgressBar"));
+          }, 100);
+      
+          return () => clearTimeout(timer);
+        }, []);
+
   return (
     <div
       className="relative overflow-hidden aspect-[4/3] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end bg-cover"

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,7 +16,7 @@ interface HeroNewsProps {
 }
 
 export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
-  const t = useTranslations('Media')
+  const t = useTranslations("Media");
   const sliderData = latestNewsData.map((item) => ({
     id: item.data.id,
     title: item.data.title,
@@ -32,10 +32,18 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
       ? latestNewsData[0].title
       : '<span class="text-[#47C1EA]">Berita</span> Terbaru';
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section
       aria-labelledby="latest-news-heading"
-      className="py-[5%] lg:py-[8%] relative overflow-hidden"
+      className="py-[6%] lg:py-[8%] relative overflow-hidden w-full bg-cover"
     >
       <Image
         src={media.file_url}
@@ -46,7 +54,7 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
         priority
       />
 
-      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-10">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-10 py-20">
         <h1
           id="latest-news-heading"
           className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-semibold text-white mb-9"
@@ -93,7 +101,7 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
                     href={slide.linkUrl}
                     className="text-[#2474A5] flex items-center text-[12px] gap-2"
                   >
-                    {t('Media')}
+                    {t("Media")}
                     <ChevronRight className="text-2xl" />
                   </Link>
                 </div>

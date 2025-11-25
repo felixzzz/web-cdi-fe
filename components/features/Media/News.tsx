@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { clsx } from "clsx";
@@ -9,6 +9,9 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  ImageOff,
+  Search,
+  SlidersHorizontal,
 } from "lucide-react";
 import {
   NewsApiResponse,
@@ -23,7 +26,7 @@ interface NewsProps {
   pressReleaseData: PressReleaseApiResponse;
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 15;
 const FILE_STORAGE_URL = "https://cdi-be.cmlabs.dev/file-storage/";
 
 export function News({ mediaData, pressReleaseData }: NewsProps) {
@@ -31,6 +34,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
   const [activeTab, setActiveTab] = useState("news");
   const [activeCategory, setActiveCategory] = useState("Semua");
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const newsCategories = useMemo(() => {
     const allNewsCategories = mediaData.items.map(
@@ -65,11 +69,18 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
 
   const { paginatedPressReleases, totalPressPages, totalPressItems } =
     useMemo(() => {
-      const allPressReleases = pressReleaseData.items;
+      let filtered = pressReleaseData.items;
 
-      const total = allPressReleases.length;
+      if (searchQuery) {
+        const lowerQuery = searchQuery.toLowerCase();
+        filtered = filtered.filter((item) =>
+          item.name_id.toLowerCase().includes(lowerQuery)
+        );
+      }
+
+      const total = filtered.length;
       const pages = Math.ceil(total / ITEMS_PER_PAGE);
-      const paginated = allPressReleases.slice(
+      const paginated = filtered.slice(
         (currentPage - 1) * ITEMS_PER_PAGE,
         currentPage * ITEMS_PER_PAGE
       );
@@ -79,7 +90,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
         totalPressPages: pages,
         totalPressItems: total,
       };
-    }, [currentPage, pressReleaseData.items]);
+    }, [currentPage, pressReleaseData.items, searchQuery]);
 
   const totalPages = activeTab === "news" ? totalNewsPages : totalPressPages;
   const totalItems = activeTab === "news" ? totalNewsItems : totalPressItems;
@@ -156,9 +167,30 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
               imageUrl={article.image}
               category={article.article_category.name_id}
               date={article.date}
-              title={article.title_id}
+              title={article.title}
             />
           ))}
+        </div>
+      )}
+
+      {activeTab === "press-release" && (
+        <div className="mt-10 mb-8 flex items-center justify-between flex-col md:flex-row gap-4">
+          <button className="text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition">
+            Filter <SlidersHorizontal size={18} />
+          </button>
+          <div className="w-full md:w-[264px] rounded-full border border-neutral-300 px-4 py-2 flex items-center gap-2">
+            <Search className="text-neutral-400" size={20} />
+            <input
+              type="text"
+              className="w-full placeholder:text-neutral-400 text-sm outline-none text-neutral-800"
+              placeholder="Search anything..."
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
+            />
+          </div>
         </div>
       )}
 
@@ -197,6 +229,12 @@ function ArticleCard({
 }) {
   const t = useTranslations("Media");
 
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [imageUrl]);
+
   return (
     <Link
       href={href}
@@ -205,7 +243,20 @@ function ArticleCard({
       <article className="flex flex-col text-neutral-13 w-full">
         <div className="w-full aspect-square overflow-hidden">
           <div className="relative w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110">
-            <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
+            {!imageUrl || hasError ? (
+              <div className="w-full h-full flex flex-col items-center justify-center text-neutral-400 gap-2">
+                <ImageOff size={48} strokeWidth={1.5} />
+              </div>
+            ) : (
+              <Image 
+                src={imageUrl} 
+                alt={title} 
+                layout="fill" 
+                objectFit="cover"
+                onError={() => setHasError(true)} 
+              />
+            )}
+            {/* <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" /> */}
           </div>
         </div>
         <div className="p-6 flex flex-col grow">
@@ -236,8 +287,7 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
 
   const pdfIcon =
     "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg";
-  const viewIcon =
-    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg";
+  const viewIcon = "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg";
   const downloadIcon =
     "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg";
 
@@ -279,7 +329,7 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
               alt="View icon"
               className="inline-block"
             />
-          {t("download_view")}
+            {t("download_view")}
           </Link>
           <Link
             href={downloadUrlEn}
@@ -339,7 +389,7 @@ function Pagination({
     const pageNumber = parseInt(jumpPage);
     if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
       onPageChange(pageNumber);
-      setJumpPage(""); 
+      setJumpPage("");
     }
   };
 

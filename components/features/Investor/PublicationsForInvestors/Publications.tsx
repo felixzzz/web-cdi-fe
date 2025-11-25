@@ -374,7 +374,7 @@ export function Publications({
               </div>
             </div>
 
-            <section aria-live="polite" className="min-h-[300px]">
+            <section aria-live="polite" >
               {isLoading ? (
                 <div className="flex justify-center items-center h-full min-h-[300px]">
                   <Loader2 className="animate-spin text-[#2474A5]" size={48} />
