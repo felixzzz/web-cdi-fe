@@ -1,8 +1,8 @@
 import { ApiInstitutionResponse, CalendarApiResponse, InvestorReportApiResponse } from "@/types/Investor/Report";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/investor`;
-const API_URL_FINANCIAL = `${process.env.NEXT_PUBLIC_HOSTNAME}/investor/calendar/list`;
-const API_URL_INSTITUTION = `${process.env.NEXT_PUBLIC_HOSTNAME}/institutions/list`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
+const API_URL_FINANCIAL = `${process.env.NEXT_PUBLIC_BASE_URL}/investor/calendar/list`;
+const API_URL_INSTITUTION = `${process.env.NEXT_PUBLIC_BASE_URL}/institutions/list`;
 
 export async function getReportPageData(locale: string): Promise<InvestorReportApiResponse> {
   try {

@@ -1,7 +1,7 @@
 import { InvestorPublicationApiResponse, PublicationApiResponse, PublicationTab } from "@/types/Investor/Publication";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/investor`;
-const API_BASE_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/investor`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
+const API_BASE_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/investor`;
 
 export async function getPublicationPageData(locale: string): Promise<InvestorPublicationApiResponse> {
   try {

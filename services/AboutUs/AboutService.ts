@@ -1,9 +1,9 @@
 import { AboutUsWhoWeAreApiResponse, CompanyProfileResponse, HistoryApiResponse, MilestoneApiResponse } from "@/types/AboutUs/About";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/about-us/who-we-are`;
-const API_URL_HISTORY = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/our-histories`;
-const API_URL_MILSTONE = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/milestones`;
-const API_URL_PROFILE = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/additional-file/company-profile`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/about-us/who-we-are`;
+const API_URL_HISTORY = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/our-histories`;
+const API_URL_MILSTONE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/milestones`;
+const API_URL_PROFILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/company-profile`;
 
 export async function getAboutPageData(locale: string): Promise<AboutUsWhoWeAreApiResponse> {
   try {

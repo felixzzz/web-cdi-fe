@@ -1,7 +1,7 @@
 import { ApiContentResponse, SustainabilityEnvironmentApiResponse } from "@/types/Sustainabilitys/Environment";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/sustainability/environment`;
-const API_URL_CONTENT = `${process.env.NEXT_PUBLIC_HOSTNAME}/sustainability/contents/environment`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/sustainability/environment`;
+const API_URL_CONTENT = `${process.env.NEXT_PUBLIC_BASE_URL}/sustainability/contents/environment`;
 
 export async function getEnviromentPageData(locale: string): Promise<SustainabilityEnvironmentApiResponse> {
   try {

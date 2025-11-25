@@ -1,8 +1,8 @@
 import { ApiLatestNewsResponse, HeroNewsSection, NewsApiResponse, PressReleaseApiResponse } from "@/types/Media/Media";
-const API_URL_MEDIA = `${process.env.NEXT_PUBLIC_HOSTNAME}/article/list/news?`;
-const API_URL_HERO_MEDIA = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/additional-page/media_main`;
-const API_URL_RELEASE = `${process.env.NEXT_PUBLIC_HOSTNAME}/press-releases/list`;
-const API_URL_MEDIA_LATEST = `${process.env.NEXT_PUBLIC_HOSTNAME}/article/latest-media`;
+const API_URL_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/news?`;
+const API_URL_HERO_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-page/media_main`;
+const API_URL_RELEASE = `${process.env.NEXT_PUBLIC_BASE_URL}/press-releases/list`;
+const API_URL_MEDIA_LATEST = `${process.env.NEXT_PUBLIC_BASE_URL}/article/latest-media`;
 
 export async function getMediaPageData(locale: string): Promise<NewsApiResponse> {
   try {
