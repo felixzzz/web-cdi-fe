@@ -1,9 +1,9 @@
 import { ApiArticleResponse, HomePageApiResponse, ReportApiResponse } from "@/types/Homepage/home";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/home`;
-const API_URL_REPORT = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/latest-reports`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/home`;
+const API_URL_REPORT = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/latest-reports`;
 // wconst API_URL_LINKS = "https://cdi-be.cmlabs.dev/api/utility/quick-link/home";
-const API_URL_ARTICLE = `${process.env.NEXT_PUBLIC_HOSTNAME}/article/latest?category_id=all`
+const API_URL_ARTICLE = `${process.env.NEXT_PUBLIC_BASE_URL}/article/latest?category_id=all`
 
 export async function getHomePageData(locale: string): Promise<HomePageApiResponse> {
   try {

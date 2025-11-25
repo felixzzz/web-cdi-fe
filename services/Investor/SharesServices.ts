@@ -1,6 +1,6 @@
 import { InvestorSharesApiResponse } from "@/types/Investor/Shares";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/investor`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
 
 export async function getSharesPageData(locale: string): Promise<InvestorSharesApiResponse> {
   try {

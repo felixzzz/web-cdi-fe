@@ -1,7 +1,7 @@
 import { CalendarApiResponse, InvestorFinancialApiResponse } from "@/types/Investor/Financial";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/investor`;
-const API_URL_CALENDAR = `${process.env.NEXT_PUBLIC_HOSTNAME}/investor/calendar/list`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
+const API_URL_CALENDAR = `${process.env.NEXT_PUBLIC_BASE_URL}/investor/calendar/list`;
 
 export async function getFinancialPageData(locale: string): Promise<InvestorFinancialApiResponse> {
   try {

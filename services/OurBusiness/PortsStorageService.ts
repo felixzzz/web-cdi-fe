@@ -1,6 +1,6 @@
 import { PortsAndStorageApiResponse } from "@/types/OurBusiness/Ports&Storage";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/business/detail/port_storage`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/business/detail/port_storage`;
 
 export async function getPortStoragePageData(locale: string): Promise<PortsAndStorageApiResponse> {
   try {

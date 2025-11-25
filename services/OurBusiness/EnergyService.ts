@@ -1,6 +1,6 @@
 import { EnergyApiResponse } from "@/types/OurBusiness/Energy";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/business/detail/energy`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/business/detail/energy`;
 
 export async function getEnergyPageData(locale: string): Promise<EnergyApiResponse> {
   try {

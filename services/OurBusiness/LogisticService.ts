@@ -1,6 +1,6 @@
 import { LogisticsApiResponse } from "@/types/OurBusiness/Logistic";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/business/detail/logistic`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/business/detail/logistic`;
 
 export async function getLogisticPageData(locale: string): Promise<LogisticsApiResponse> {
   try {

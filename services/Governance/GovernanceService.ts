@@ -1,11 +1,11 @@
 import { ApiFileResponse, ApiTabsResponse, InvestorGovernanceApiResponse } from "@/types/Governances/Governance";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/governance`;
-const API_URL_CORPORATE_FILE = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/additional-file/corporate_secretary`;
-const API_URL_INTERNAL_FILE = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/additional-file/internal_audit`;
-const API_URL_COMITE_FILE = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/additional-file/audit_committe`;
-const API_URL_PRODUCT_FILE = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/additional-file/code_of_conduct`;
-const API_URL_TAB_GOVERNANCE_FILE = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/governance-committes`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/governance`;
+const API_URL_CORPORATE_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/corporate_secretary`;
+const API_URL_INTERNAL_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/internal_audit`;
+const API_URL_COMITE_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/audit_committe`;
+const API_URL_PRODUCT_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/code_of_conduct`;
+const API_URL_TAB_GOVERNANCE_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/governance-committes`;
 
 export async function getGovernancePageData(locale: string): Promise<InvestorGovernanceApiResponse> {
   try {

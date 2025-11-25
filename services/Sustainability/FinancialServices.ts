@@ -1,7 +1,7 @@
 import { InvestorSustainabilityApiResponse, MaterialityResponse } from "@/types/Sustainabilitys/Sustainability";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/sustainability/overview`;
-const API_URL_FRAMEWORK = `${process.env.NEXT_PUBLIC_HOSTNAME}/sustainability/responsibles`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/sustainability/overview`;
+const API_URL_FRAMEWORK = `${process.env.NEXT_PUBLIC_BASE_URL}/sustainability/responsibles`;
 
 export async function getSustainabilityPageData(locale: string): Promise<InvestorSustainabilityApiResponse> {
   try {

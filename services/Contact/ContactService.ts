@@ -2,11 +2,11 @@ import { CountryList, OptionList } from "@/schemas/contactUsSchema";
 import { ContactSectionData, OtherCompanyAddressesApiResponse } from "@/types/Contact/Contact";
 import { CompanyLocationResponse } from "@/types/global/footer";
 
-const API_URL_FOOTER = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/main-office`;
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/other-offices`;
-const API_CONTACT_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/additional-page/contact_us_main`;
-const API_COUNTRIES = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/countries`;
-const API_OPTION = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/contact-us-topics`;
+const API_URL_FOOTER = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/main-office`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/other-offices`;
+const API_CONTACT_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-page/contact_us_main`;
+const API_COUNTRIES = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/countries`;
+const API_OPTION = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/contact-us-topics`;
 export async function getCompanyAddressPageData(locale: string): Promise<OtherCompanyAddressesApiResponse> {
   try {
     const res = await fetch(API_URL, {

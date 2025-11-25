@@ -1,7 +1,7 @@
 import { BusinessItem, OurBusinessApiResponse } from "@/types/OurBusiness/Bussines";
 
-const API_URL = `${process.env.NEXT_PUBLIC_HOSTNAME}/utility/our-business`;
-const API_URL_OVERVIEW = `${process.env.NEXT_PUBLIC_HOSTNAME}/business/overview-list`;
+const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/our-business`;
+const API_URL_OVERVIEW = `${process.env.NEXT_PUBLIC_BASE_URL}/business/overview-list`;
 
 export async function getBusinessPageData(locale: string): Promise<OurBusinessApiResponse> {
   try {
