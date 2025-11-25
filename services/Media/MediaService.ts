@@ -7,7 +7,7 @@ const API_URL_MEDIA_LATEST = `${process.env.NEXT_PUBLIC_HOSTNAME}/article/latest
 export async function getMediaPageData(locale: string): Promise<NewsApiResponse> {
   try {
     const res = await fetch(API_URL_MEDIA, {
-      method: "GET",
+      method: "GET", 
       headers: {
         "Content-Type": "application/json",
         lang: locale
