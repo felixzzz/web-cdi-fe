@@ -39,7 +39,7 @@ export function Business({ overview, items }: BusinessProps) {
 
       {overview.content && (
         <div className="bg-[#091A24] text-white pt-10 pb-20">
-          <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+          <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
             <div
               className="text-[12px] leading-[24px] font-normal text-white space-y-6"
               dangerouslySetInnerHTML={{ __html: overview.content }}

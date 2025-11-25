@@ -17,12 +17,12 @@ export const Hero: React.FC<HeroProps> = ({
   iconSrc,
 }) => {
   useEffect(() => {
-          const timer = setTimeout(() => {
-            window.dispatchEvent(new Event("finishProgressBar"));
-          }, 100);
-      
-          return () => clearTimeout(timer);
-        }, []);
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div
@@ -39,9 +39,9 @@ export const Hero: React.FC<HeroProps> = ({
       />
       <div className="overlay-banner h-full w-full absolute left-0 right-0 top-0 bottom-0" />
 
-      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+      <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
         <div className="text-white grid md:grid-cols-2 gap-2 relative z-[1] items-end">
-          <div>
+          <div className="pb-8">
             <h1
               className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-medium max-w-2xl py-4"
               id="home_banner_title"
@@ -49,7 +49,7 @@ export const Hero: React.FC<HeroProps> = ({
               {title}
             </h1>
             <div
-            className="text-[12px] leading-[24px] font-normal text-white space-y-6 max-w-2xl"
+              className="text-[12px] leading-[24px] font-normal text-white space-y-6 max-w-2xl text-justify"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
           </div>
@@ -59,12 +59,12 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
             </div>
             <Image
-                          width={46}
-                          height={46}
-                          alt="icon"
-                          className="bg-cover"
-                          src={iconSrc}
-                        />
+              width={46}
+              height={46}
+              alt="icon"
+              className="bg-cover"
+              src={iconSrc}
+            />
           </div>
         </div>
       </section>

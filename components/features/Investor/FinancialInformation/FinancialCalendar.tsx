@@ -155,7 +155,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
       data-navbar-theme="dark"
       id="content-media-section"
       aria-labelledby="calendar-heading"
-      className="container mx-auto py-20 px-4 md:px-8 lg:px-20 2xl:px-44"
+      className="container mx-auto py-20 px-4 lg:px-24 xl:px-8 2xl:px-44"
     >
       <h2
         id="calendar-heading"

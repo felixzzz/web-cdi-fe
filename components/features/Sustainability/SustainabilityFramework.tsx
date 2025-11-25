@@ -43,7 +43,7 @@ export const SustainabilityFramework: React.FC<FrameworkProps> = ({
 
   return (
     <div className="text-white bg-[#091A24] py-20">
-      <section className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
         <h2 className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] pt-20 mb-4">
           {policyTitle || "Our Sustainability Policy and Framework"}
         </h2>

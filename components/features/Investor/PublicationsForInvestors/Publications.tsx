@@ -330,7 +330,7 @@ export function Publications({
 
   return (
     <div data-navbar-theme="dark" className="py-20">
-      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+      <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           <nav
             aria-label="Publications categories"
@@ -641,7 +641,7 @@ export function Publications({
 
 //   return (
 //     <div data-navbar-theme="dark" className="py-20">
-//       <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+//       <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
 //         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
 //           <nav
 //             aria-label="Publications categories"
