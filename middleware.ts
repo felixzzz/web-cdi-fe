@@ -4,14 +4,14 @@ import createMiddleware from "next-intl/middleware";
 // export default createMiddleware(routing);
 
 export const locales = ['en', 'id'];
-export const defaultLocale = 'en';
+export const defaultLocale = 'id';
 
 export default createMiddleware({
   locales: locales,
   defaultLocale: defaultLocale,
 
-  localePrefix: 'never'
-  // localePrefix: 'as-needed' 
+  // localePrefix: 'never'
+  localePrefix: 'as-needed' 
 });
 
 export const config = {
