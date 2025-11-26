@@ -180,7 +180,7 @@ export const Awards: React.FC<AwardsProps> = ({
 
   return (
     <section className="py-20 bg-[#091A24]" aria-labelledby="awards-title">
-      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
           <h2
             id="awards-title"
@@ -189,7 +189,7 @@ export const Awards: React.FC<AwardsProps> = ({
             {title || "Recognized for our commitment"}
           </h2>
           <div
-            className="prose prose-invert prose-base text-neutral-100 max-w-none"
+            className="prose prose-invert prose-base text-neutral-100 max-w-none text-justify"
             dangerouslySetInnerHTML={{ __html: description || "" }}
           />
         </div>

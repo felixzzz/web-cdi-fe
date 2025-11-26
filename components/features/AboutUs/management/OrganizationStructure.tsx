@@ -31,14 +31,14 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
           ${isOpen ? "!bg-[#2474A5] !text-white" : ""}
         `}
       >
-        <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+        <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex items-center justify-between py-8 cursor-pointer w-full"
             aria-expanded={isOpen}
             aria-controls="org-structure-content"
           >
-            <span>{TITLE}</span>
+            <span className="font-medium">{TITLE}</span>
             <ChevronDown
               size={36}
               className={`transition-transform duration-200 ${
@@ -59,7 +59,7 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="py-20 overflow-hidden"
           >
-            <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44">
+            <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
               <h3 className="text-2xl md:text-[28px] font-medium text-[#2474A5] mb-6">
                 {TITLE}
               </h3>

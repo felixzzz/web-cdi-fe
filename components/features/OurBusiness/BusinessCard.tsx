@@ -6,13 +6,14 @@ import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export interface BusinessCardProps {
   title: string;
   imageUrl: string;
   descriptionHtml: string;
   tags: string[];
-  route: string; // Add route prop
+  route: string;
 }
 
 export function BusinessCard({
@@ -20,7 +21,7 @@ export function BusinessCard({
   imageUrl,
   descriptionHtml,
   tags,
-  route, // Destructure route
+  route,
 }: BusinessCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -40,6 +41,11 @@ export function BusinessCard({
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
+      
+      <Link
+                      href={route}
+      >
+
       <Image
         src={imageUrl}
         alt={title}
@@ -48,11 +54,10 @@ export function BusinessCard({
         className="z-0"
         priority
       />
-
-      <div className="overlay-card-2 absolute inset-0 z-[1] bg-black/50"></div>
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/40 via-black/30 to-transparent" />
 
       <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 pb-5 text-white md:p-10 md:pb-10">
-        <h3 className="font-medium text-2xl md:text-[32px] 2xl:text-[40px] 3xl:text-[52px] 3xl:leading-[60px] mb-5">
+        <h3 className="font-medium text-2xl md:text-[32px] 2xl:text-[44px] 3xl:text-[58px] leading-normal 3xl:leading-[60px]">
           {title}
         </h3>
 
@@ -70,20 +75,19 @@ export function BusinessCard({
               className="overflow-hidden"
             >
               <div
-                className="text-[12px] leading-[24px] font-light text-white space-y-6"
+                className="text-[12px] leading-[24px] font-light text-white space-y-6 drop-shadow-md"
                 dangerouslySetInnerHTML={{ __html: descriptionHtml }}
               />
 
               <ul className="mt-8 flex flex-wrap gap-2">
                 {tags.map((tag) => (
                   <li key={tag}>
-                    <Link
-                      href={route} 
-                      className="flex cursor-pointer items-center gap-2 rounded-full border border-white px-[15px] py-[6px] text-sm transition-colors hover:bg-white/20"
+                    <Button
+                      className="flex cursor-pointer items-center gap-2 rounded-full border border-white px-[15px] py-[6px] text-sm transition-colors hover:bg-white/20 bg-transparent"
                     >
                       {tag}
                       <ArrowRight size={16} />
-                    </Link>
+                    </Button>
                   </li>
                 ))}
               </ul>
@@ -91,6 +95,7 @@ export function BusinessCard({
           )}
         </AnimatePresence>
       </div>
+      </Link>
     </motion.article>
   );
 }

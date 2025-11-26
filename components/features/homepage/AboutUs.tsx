@@ -24,12 +24,12 @@ export const AboutUs: React.FC<AboutUsSectionProps> = ({
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       aria-labelledby="about-us-title"
     >
-      {/* <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem] grid md:grid-cols-2 gap-10 relative"> */}
-      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 flex flex-col md:flex-row gap-10 relative">
-        <div className="flex flex-col">
+      {/* <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 grid md:grid-cols-2 gap-10 relative"> */}
+      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 flex flex-col md:flex-row gap-10 relative">
+        <div className="flex flex-col flex-1">
           <h2
             id="about-us-title"
-            className="font-medium text-[#47C1EA] text-2xl md:text-[28px] lg:text-[52px] md:leading-[27.7778px] lg:leading-[57.7778px]"
+            className="font-medium text-[#47C1EA] text-2xl md:text-[30px] lg:text-[52px] md:leading-[27.7778px] lg:leading-[57.7778px] w-full"
           >
             {title}
           </h2>
@@ -43,7 +43,7 @@ export const AboutUs: React.FC<AboutUsSectionProps> = ({
           </Link>
         </div>
 
-        <div className="w-full max-w-5xl content text-justify !text-neutral-4">{children}</div>
+        <div className="w-full flex-1 max-w-5xl content text-justify !text-neutral-4">{children}</div>
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ export const BocBiography = ({ biographyHtml }: BocBiographyProps) => {
   }
 
   return (
-    <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 my-16">
+    <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 my-16">
       <div
         className="max-w-full prose prose-invert prose-base text-justify text-neutral-900"
         dangerouslySetInnerHTML={{ __html: biographyHtml }}

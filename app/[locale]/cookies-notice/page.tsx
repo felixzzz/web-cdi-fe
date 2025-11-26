@@ -75,7 +75,7 @@ export default async function Page({ params: { locale } }: PageProps) {
     return (
       <main>
         <NavbarThemeTrigger theme="light" />
-        <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 py-[25%] md:py-[8%]">
+       <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 py-40">
           <h1 className="text-neutral-13 font-medium text-2xl lg:text-[28px] mb-5">
             {t("title_not_found")}
           </h1>
@@ -87,8 +87,8 @@ export default async function Page({ params: { locale } }: PageProps) {
   return (
     <main>
       <NavbarThemeTrigger theme="light" />
-      <section className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 py-[25%] md:py-[8%]">
-        <h1 className="text-neutral-900 font-medium text-2xl lg:text-[28px] mb-5">
+       <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 py-40">
+        <h1 className="text-neutral-900 font-medium text-2xl md:text-4xl mb-5">
           {termsData.title}
         </h1>
         <div

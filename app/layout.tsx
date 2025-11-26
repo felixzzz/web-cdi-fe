@@ -4,15 +4,9 @@ import "./globals.css";
 const jakartaSans = localFont({
   src: [
     {
-      path: "./fonts/PlusJakartaSans.ttf",
-      weight: "400",
+      path: "./fonts/PlusJakartaSans-VariableFont_wght.ttf",
       style: "normal",
-    },
-    {
-      path: "./fonts/PlusJakartaSans-Italic.ttf",
-      weight: "400",
-      style: "italic",
-    },
+    }
   ],
   variable: "--font-jakarta-sans",
   display: "swap",

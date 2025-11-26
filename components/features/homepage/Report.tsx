@@ -27,7 +27,7 @@ export const Report: React.FC<ReportSectionProps> = ({
       className="py-20 bg-[#F6F6F6]"
       aria-labelledby="report-section-title"
     >
-      <div data-navbar-theme="dark" className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <div data-navbar-theme="dark" className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
         <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
           <div>
             <p className="text-neutral-500 text-base mb-4">{eyebrow}</p>
@@ -80,8 +80,8 @@ export const Report: React.FC<ReportSectionProps> = ({
               size: report.file.size,
               tagView:"lihat",
               tagDawnload:"Dawnload",
-              viewUrl: `https://cdi-be.cmlabs.dev/file/preview/default/${report.type}/${report.ulid}/${report.name_slug}`,
-              downloadUrl: `https://cdi-be.cmlabs.dev/file/download/default/${report.type}/${report.ulid}/`,
+              viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/report/${report.ulid}/${report.name_slug}`,
+              downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/report/${report.ulid}/`,
             };
 
             return <ReportItem key={report.id} {...transformedProps} />;

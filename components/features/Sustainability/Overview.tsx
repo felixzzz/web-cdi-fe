@@ -31,7 +31,7 @@ export function Overview({ data }: OverviewProps) {
         style={{ backgroundImage: gradientStyle }}
       ></div>
 
-      <div className="container mx-auto px-4 md:px-8 lg:px-20 2xl:px-44 relative z-20">
+      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-20">
         <div className="md:max-w-[45%] ms-auto">
           <h2
             id="overview-heading"

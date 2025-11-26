@@ -170,7 +170,7 @@ export function Navbar() {
             : "backdrop-blur-3xl bg-[#091A24]/10 text-white"
         )}
       >
-        <div className="container mx-auto px-4 lg:px-10 2xl:px-32 flex justify-between items-center">
+        <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 flex justify-between items-center">
           <Link href="/" className="flex-shrink-0" onClick={handleLinkClick}>
             <Image
               src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_white.svg"
@@ -217,7 +217,7 @@ export function Navbar() {
                     }, 200);
                   }}
                 >
-                  <button className="nav-item hover-underline-middle cursor-pointer flex items-center gap-1 text-xs xl:text-base whitespace-nowrap">
+                  <button className="nav-item hover-underline-middle cursor-pointer flex items-center gap-1 text-sm md:text-xs xl:text-base whitespace-nowrap">
                     <span>{link.label}</span>
                     <ChevronDown
                       size={16}
@@ -277,7 +277,7 @@ export function Navbar() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="nav-item hover-underline-middle text-xs xl:text-base whitespace-nowrap"
+                  className="nav-item hover-underline-middle text-sm md:text-xs xl:text-base whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
@@ -285,7 +285,7 @@ export function Navbar() {
                 <Link
                   key={link.id}
                   href={link.href}
-                  className="nav-item hover-underline-middle text-xs xl:text-base whitespace-nowrap"
+                  className="nav-item hover-underline-middle text-sm md:text-xs xl:text-base whitespace-nowrap"
                   onClick={handleLinkClick}
                 >
                   {link.label}

@@ -50,7 +50,7 @@ export const Discover: React.FC<DiscoverSectionProps> = ({
       className="pt-12 pb-12 lg:pt-20 lg:pb-28 bg-[#091A24] text-white"
       aria-labelledby="discover-title"
     >
-      <div className="container mx-auto px-[1rem] md:px-[2rem] lg:px-[1rem] xl:px-[3rem] 2xl:px-[6rem]">
+      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
         <h2
           id="discover-title"
           className="mb-10 text-2xl md:text-[38px] md:leading-[44px] font-medium max-w-2xl mx-auto text-center"
