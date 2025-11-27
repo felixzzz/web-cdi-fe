@@ -26,7 +26,6 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
     if (!slidesContainerRef.current) return;
 
     const safeIndex = Math.max(0, Math.min(index, maxIndex));
-
     const targetSlide = slidesContainerRef.current.children[
       safeIndex
     ] as HTMLElement;
@@ -58,12 +57,19 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
 
   useLayoutEffect(() => {
     const checkWidth = () => {
+      const width = window.innerWidth;
       let newSlidesToShow = 4;
-      if (window.innerWidth < 768) {
+
+      if (width < 768) {
         newSlidesToShow = 1;
-      } else if (window.innerWidth < 1024) {
+      } else if (width < 1024) {
         newSlidesToShow = 2;
+      } else if (width < 1580) {
+        newSlidesToShow = 3;
+      } else {
+        newSlidesToShow = 3;
       }
+
       setSlidesToShow(newSlidesToShow);
     };
 
@@ -74,13 +80,13 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
   }, []);
 
   useLayoutEffect(() => {
-    if (activeIndex > articles.length - slidesToShow) {
-        goToSlide(0);
+    if (activeIndex > maxIndex) {
+      goToSlide(maxIndex);
     } else {
-        goToSlide(activeIndex);
+      goToSlide(activeIndex);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [articles, slidesToShow]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slidesToShow, articles.length]);
 
   if (!articles || articles.length === 0) {
     return null;
@@ -91,12 +97,12 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
   return (
     <div>
       <div className="overflow-hidden" ref={carouselViewportRef}>
-        <div className="flex gap-10 relative" ref={slidesContainerRef}>
+        <div className="flex -mx-3 relative" ref={slidesContainerRef}>
           {articles.map((article) => (
             <div
               key={article.id}
               style={{ flex: `0 0 ${100 / slidesToShow}%` }}
-              className="!h-auto"
+              className="px-3 h-full"
             >
               <ArticleCard
                 href={article.route || "/media/news"}
@@ -118,8 +124,10 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
                 key={index}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to slide ${index + 1}`}
-                className={`custom-dot-button ${
-                  activeIndex === index ? "active" : ""
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  activeIndex === index
+                    ? "bg-[#2474A5] w-8"
+                    : "bg-gray-300 hover:bg-gray-400"
                 }`}
               />
             ))}

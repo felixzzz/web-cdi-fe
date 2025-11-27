@@ -30,7 +30,7 @@ export const SolutionCard: React.FC<SolutionCardProps> = ({
           <h2 className="text-2xl md:text-[40px] md:leading-[40px] xl:text-[52px] xl:leading-[60px] font-medium text-shadow-1">
             {title}
           </h2>
-          <div className="content !font-normal text-justify text-shadow-1 !text-neutral-300">
+          <div className="content !font-normal text-justify text-shadow-1 !text-neutral-200 mb-1 text-sm md:text-base">
             <p>{description}</p>
           </div>
         </div>

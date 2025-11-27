@@ -26,7 +26,7 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <div
-      className="relative overflow-hidden aspect-[4/3] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end bg-cover"
+      className="relative overflow-hidden aspect-[4/4] md:aspect-[4/3] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end bg-cover"
       style={{ backgroundImage: `url("${imageSrc}")` }}
     >
       <div
@@ -42,13 +42,13 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="text-white grid md:grid-cols-2 gap-2 relative z-[1] items-end">
           <div>
             <h1
-              className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-medium max-w-2xl mb-6"
+              className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-medium max-w-2xl mb-1 md:mb-6"
               id="home_banner_title"
             >
               {title}
             </h1>
             <div
-             className="max-w-2xl prose prose-invert prose-base"
+             className="max-w-2xl prose prose-invert prose-base text-sm md:text-[12px] leading-snug md:leading-24px text-neutral-100 text-justify"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
           </div>
