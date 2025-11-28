@@ -37,7 +37,7 @@ export const Hero: React.FC<HeroProps> = ({
         }}
       />
 
-      <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+      <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
         <div className="text-white grid lg:grid-cols-2 gap-2 relative z-[1] items-end">
           <div>
             <h1

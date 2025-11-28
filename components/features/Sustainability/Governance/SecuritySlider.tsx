@@ -100,7 +100,7 @@ export const Ciso: React.FC<CisoSectionProps> = ({ data }) => {
 
   return (
     <section className="py-20 bg-[#091A24] text-white">
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
         <div className="flex flex-col md:flex-row items-center justify-between mb-12">
           <h2 className="text-3xl md:text-4xl font-semibold">{TITLE}</h2>
 

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -14,9 +13,9 @@
 
   .hover-underline-middle::after {
     @apply content-[''] absolute bottom-0 left-0 w-full h-[2px];
-    
-    background-color: var(--nav-hover-color, #47C1EA);
-    
+
+    background-color: var(--nav-hover-color, #47c1ea);
+
     @apply scale-x-0 origin-center;
     @apply transition-transform duration-300 ease-out;
   }
@@ -139,5 +138,20 @@
 }
 
 .custom-dot-button.active {
-  background-color: #2474A5;
+  background-color: #2474a5;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
 }

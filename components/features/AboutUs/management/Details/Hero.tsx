@@ -38,7 +38,7 @@ export const DetailHero = ({
       style={{ backgroundImage: `url("${HERO_BACKGROUND_IMAGE}")` }}
     >
       <div className="flex items-center bg-cover flex-col relative z-[1] h-full w-full aspect-[4/3] md:aspect-[16/7] py-[5%] md:py-[8%]">
-        <section className="container w-full mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+        <section className="container w-full mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
           <Link
             href={backLinkHref}
             className="flex gap-2 items-center text-white"
@@ -47,7 +47,7 @@ export const DetailHero = ({
           </Link>
         </section>
 
-        <section className="container w-full mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 my-auto">
+        <section className="container w-full mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 my-auto">
           <div className="text-white grid md:grid-cols-2 gap-2 items-center">
             <div>
               <h1
@@ -67,7 +67,8 @@ export const DetailHero = ({
                 alt={name}
                 width={500}
                 height={800}
-                className="absolute bottom-0 h-[80%] w-auto"
+                // className="absolute bottom-0 h-[80%] w-auto"
+                className="absolute bottom-0 right-10 translate-x-4 md:translate-x-0 md:right-10 lg:right-20 h-[55%] md:h-[90%] w-auto object-contain z-0"
               />
             </div>
           </div>

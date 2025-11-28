@@ -109,13 +109,13 @@ export const DetailModal: React.FC<DetailModalProps> = ({
               <p className="text-2xl font-medium text-white">{award.title}</p>
 
               <div
-                className="content primary !text-sm text-neutral-300 leading-relaxed"
+                className="content primary !text-sm text-neutral-300 leading-relaxed text-[12px] md:text-[12px] text-justify"
                 dangerouslySetInnerHTML={{ __html: award.description }}
               />
 
               <div className="mt-2">
                 <p className="text-sm font-medium mb-1 text-white">Awarder</p>
-                <p className="font-light text-neutral-400 text-sm">
+                <p className="font-light text-neutral-300 text-sm">
                   {award.awarder}
                 </p>
               </div>
@@ -124,7 +124,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({
                 <p className="text-sm font-medium mb-1 text-white">
                   Categories
                 </p>
-                <p className="font-light text-neutral-400 text-sm">
+                <p className="font-light text-neutral-300 text-sm">
                   {award.category || "New"}
                 </p>
               </div>

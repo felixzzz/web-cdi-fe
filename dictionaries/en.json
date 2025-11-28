@@ -27,7 +27,7 @@
     "Milestone": "Milestone",
     "Company_Profile": "Company Profile",
     "button_back": "Back",
-    "Read_More":"Read More",
+    "Read_More": "Read More",
     "Awarded": "Awarder"
   },
   "Management": {
@@ -97,7 +97,33 @@
       "Risk_Management": "Risk Management",
       "Code_of_Conduct": "Code of Conduct",
       "Policy": "Policy",
-      "Whistleblowing": "Whistleblowing"
+      "Whistleblowing": "Whistleblowing",
+      "WhistleblowingPage": {
+        "Whistleblowing": "Whistleblowing",
+        "message": "Add your questions",
+        "message_placeholder": "Write your comment or additional question here",
+        "topic_id": "Topic",
+        "topic_id_placeholder": "Select Topic",
+        "country_id": "country",
+        "country_id_placeholder": "Select Your Country",
+        "email_placeholder": "Input Your Email",
+        "last_name": "Last Name",
+        "last_name_placeholder": "Input Your Last Name",
+        "first_name": "First Name",
+        "first_name_placeholder": "Input Your First Name",
+        "subtitle": "Thank you for your interest in CDI Group",
+        "other_company": "Other Company Addresses:",
+        "Submit": "Submit",
+        "submit_success_message": "Your message has been sent successfully! We will get back to you soon.",
+        "submit_error_message": "An error occurred. Please try again later."
+      },
+      "PolicyPage": {
+        "Policy": "Policy",
+        "download_view": "View",
+        "download_id": "Download-ID",
+        "download_en": "Download-EN",
+        "help": "Please select a tab."
+      }
     },
     "Sustainability": {
       "Governance": {
@@ -166,13 +192,13 @@
     "contact_us": "Contact Us"
   },
   "Layout": {
-      "who_we_are": "Who We Are",
-      "our_business": "Our Business",
-      "sustainability": "Sustainability",
-      "investor": "Investor",
-      "terms": "Terms & Conditions",
-      "privacy": "Privacy Policy",
-      "cookies": "Cookies Consent",
-      "disclaimer": "Disclaimer"
+    "who_we_are": "Who We Are",
+    "our_business": "Our Business",
+    "sustainability": "Sustainability",
+    "investor": "Investor",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookies Consent",
+    "disclaimer": "Disclaimer"
   }
 }

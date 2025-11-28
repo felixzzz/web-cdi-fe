@@ -125,6 +125,7 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
       <BusinessPillars tabs={tabs} />
       <div className="w-full flex justify-center mx-auto bg-[#091A24] py-14">
         <Link
+        target="_blank"
           href={link_url}
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >

@@ -4,7 +4,6 @@ export interface ContactPageProps {
   };
 }
 
-
 export interface ContactAddress {
   location_name_en: string | null;
   location_name_id: string | null;

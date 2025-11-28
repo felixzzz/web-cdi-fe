@@ -155,7 +155,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
       data-navbar-theme="dark"
       id="content-media-section"
       aria-labelledby="calendar-heading"
-      className="container mx-auto py-20 px-4 lg:px-24 xl:px-8 2xl:px-44"
+      className="container mx-auto py-20 px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48"
     >
       <h2
         id="calendar-heading"
@@ -165,7 +165,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
       </h2>
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
-        <span>{t("subtitle")}</span>
+        <span className="text-[10px] md:text-[12px] leading-normal md:leading-[24px] text-justify">{t("subtitle")}</span>
       </div>
       <nav
         aria-label="Filter by year"

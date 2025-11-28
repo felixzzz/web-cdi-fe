@@ -26,7 +26,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
       className="py-28 bg-neutral-3"
       aria-labelledby="company-profile-title"
     >
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
         <h2
           id="company-profile-title"
           className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-4 text-center"

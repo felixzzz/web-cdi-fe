@@ -27,7 +27,7 @@
     "Milestone": "Tonggak Sejarah",
     "Company_Profile": "Profil Perusahaan",
     "button_back": "Kembali",
-    "Read_More":"Baca Selengkapnya",
+    "Read_More": "Baca Selengkapnya",
     "Awarded": "Pemberi Penghargaan"
   },
   "Management": {
@@ -97,7 +97,33 @@
       "Risk_Management": "Manajemen Risiko",
       "Code_of_Conduct": "Kode Etik",
       "Policy": "Kebijakan",
-      "Whistleblowing": "Pelaporan Pelanggaran"
+      "Whistleblowing": "Pelaporan Pelanggaran",
+      "WhistleblowingPage": {
+        "Whistleblowing": "Pelaporan Pelanggaran",
+        "message": "Ajukan pertanyaan Anda",
+        "message_placeholder": "Tulis komentar atau pertanyaan tambahan Anda di sini",
+        "topic_id": "Topik",
+        "topic_id_placeholder": "Pilih Topik",
+        "country_id": "Negara",
+        "country_id_placeholder": "Pilih Negara Anda",
+        "email_placeholder": "Masukkan Email Anda",
+        "last_name": "Nama Belakang",
+        "last_name_placeholder": "Masukkan Nama Belakang Anda",
+        "first_name": "Nama Depan",
+        "first_name_placeholder": "Masukkan Nama Depan Anda",
+        "subtitle": "Terima kasih atas ketertarikan Anda pada CDI Group",
+        "other_company": "Alamat Perusahaan Lainnya:",
+        "Submit": "Kirim",
+        "submit_success_message": "Pesan Anda telah berhasil terkirim! Kami akan segera menghubungi Anda kembali.",
+        "submit_error_message": "Terjadi kesalahan. Silakan coba lagi nanti."
+      },
+      "PolicyPage": {
+        "Policy": "Kebijakan",
+        "download_id": "Unduh-ID",
+        "download_en": "Unduh-EN",
+        "download_view": "Lihat",
+        "help": "Silakan pilih tab."
+      }
     },
     "Sustainability": {
       "Governance": {
@@ -110,7 +136,7 @@
     "Read_More": "Baca Selengkapnya",
     "download_id": "Unduh-ID",
     "download_en": "Unduh-EN",
-    "download_view": "LiTAMPILKANihat",
+    "download_view": "Lihat",
     "read_article_more": "Baca Artikel Selengkapnya",
     "press_release": "Siaran Pers",
     "News": "Berita",

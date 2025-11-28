@@ -31,7 +31,7 @@ export function EmpoweringCommunities({ data }: EmpoweringCommunitiesProps) {
   return (
     <article aria-labelledby="empowering-heading">
       <div className="py-20 bg-[#091A24]">
-        <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+        <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
             <h2
               id="empowering-heading"
@@ -40,7 +40,7 @@ export function EmpoweringCommunities({ data }: EmpoweringCommunitiesProps) {
               {data.title || "Empowering Communities"}
             </h2>
             <div
-              className="prose prose-invert prose-base text-neutral-50 text-justify"
+              className="prose prose-invert prose-base text-neutral-50 text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
               dangerouslySetInnerHTML={{ __html: data.content || "" }}
             ></div>
           </div>
@@ -48,7 +48,7 @@ export function EmpoweringCommunities({ data }: EmpoweringCommunitiesProps) {
       </div>
 
       <div className="bg-[#091A24] text-white">
-        <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+        <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
           <nav
             role="tablist"
             aria-label="Community Initiatives"
@@ -115,7 +115,7 @@ function TabPanelContent({ tab, isActive }: TabPanelProps) {
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-20">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-20">
         <div className="md:max-w-[45%] ms-auto">
           <h3 className="text-2xl md:text-[28px] font-medium mb-6 text-blue-lighter">
             {content.title}

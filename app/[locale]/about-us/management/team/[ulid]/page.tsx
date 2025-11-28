@@ -14,9 +14,6 @@ export type PageProps = {
   };
 };
 
-const FILE_PREVIEW_BASE_URL = "https://cdi-be.cmlabs.dev/file/preview/";
-const FILE_DOWNLOAD_BASE_URL = "https://cdi-be.cmlabs.dev/file/download/";
-
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -130,8 +127,8 @@ export default async function page({ params }: PageProps) {
       title: `CV - ${member.name}`,
       size: member.cv_file.size,
       format: member.cv_file.format,
-      viewUrl: `${FILE_PREVIEW_BASE_URL}${member.cv_file.path}`,
-      downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${member.cv_file.path}`,
+      viewUrl: `${process.env.NEXT_PUBLIC_URL}/file-storage/${member.cv_file.path}`,
+      downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file-download/${member.cv_file.path}`,
     });
   }
 
