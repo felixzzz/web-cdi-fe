@@ -34,7 +34,7 @@ export function Overview({
 
       <section
         aria-labelledby="overview-heading"
-        className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-[2]"
+        className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2]"
       >
         <div className="md:max-w-[45%] ms-auto">
           <h2
@@ -45,7 +45,7 @@ export function Overview({
           </h2>
 
           <div
-          className="max-w-2xl prose prose-invert prose-base text-justify"
+          className="max-w-2xl prose prose-invert prose-base text-[10px] md:text-[12px] md:leading-[24px] text-justify"
             // className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
             dangerouslySetInnerHTML={{
               __html: description || "",

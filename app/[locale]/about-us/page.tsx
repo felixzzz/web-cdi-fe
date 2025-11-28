@@ -183,7 +183,7 @@ export default async function Page({ params: { locale } }: AboutPageProps) {
         youtubeVideoId={youtubeId}
         videoTitle="Company Profile Video - CDI Group"
       >
-        <div className="prose prose-invert prose-base text-neutral-300 text-[12px] leading-[24px]">
+        <div className="prose prose-invert prose-base text-neutral-300 text-[11px] md:text-[12px] leading-normal md:leading-[24px]">
           {convertHtmlToReact(about_us_company_overview.content)}
         </div>
       </Overview>

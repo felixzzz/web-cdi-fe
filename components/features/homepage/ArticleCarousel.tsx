@@ -62,12 +62,12 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
 
       if (width < 768) {
         newSlidesToShow = 1;
-      } else if (width < 1024) {
+      } else if (width <= 820) {
         newSlidesToShow = 2;
-      } else if (width < 1580) {
-        newSlidesToShow = 3;
+      } else if (width <= 1440) {
+        newSlidesToShow = 4;
       } else {
-        newSlidesToShow = 3;
+        newSlidesToShow = 4;
       }
 
       setSlidesToShow(newSlidesToShow);
@@ -105,7 +105,7 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
               className="px-3 h-full"
             >
               <ArticleCard
-                href={article.route || "/media/news"}
+                href={`/media/news/${article.slug}` || "/media/news"}
                 imageUrl={article.image}
                 category={article.category_name}
                 date={article.date}

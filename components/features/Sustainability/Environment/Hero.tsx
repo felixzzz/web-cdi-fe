@@ -38,7 +38,7 @@ export const Hero: React.FC<HeroProps> = ({
       />
       <div className="overlay-banner h-full w-full absolute left-0 right-0 top-0 bottom-0" />
 
-      <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+      <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
         <div className="text-white grid md:grid-cols-2 gap-2 relative z-[1] items-end">
           <div>
             <h1
@@ -48,7 +48,7 @@ export const Hero: React.FC<HeroProps> = ({
               {title}
             </h1>
             <div
-              className="max-w-2xl prose prose-invert prose-base text-[11px] md:text-[12px] text-white"
+              className="max-w-2xl prose prose-invert prose-base text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-white"
               // className="max-w-full prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />

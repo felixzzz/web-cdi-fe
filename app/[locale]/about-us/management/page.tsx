@@ -135,29 +135,25 @@ export default async function Page({
   const tableData =
     about_us_corporate_structure_table as TableManagementSection;
 
-  const IMAGE_BASE_URL = "https://cdi-be.cmlabs.dev/file-storage/";
-  const FILE_PREVIEW_BASE_URL = "https://cdi-be.cmlabs.dev/file/preview/";
-  const FILE_DOWNLOAD_BASE_URL = "https://cdi-be.cmlabs.dev/file/download/";
-
   const transformedBodData: TeamMember[] = BodData.map((member) => ({
     name: member.name,
     role: member.position,
-    imageUrl: `${IMAGE_BASE_URL}${member.image}`,
+    imageUrl: `${process.env.NEXT_PUBLIC_URL}/file-storage/${member.image}`,
     href: `/about-us/management/team/${member.ulid}`,
   }));
 
   const transformedBocData: TeamMember[] = BocData.map((member) => ({
     name: member.name,
     role: member.position,
-    imageUrl: `${IMAGE_BASE_URL}${member.image}`,
+    imageUrl: `${process.env.NEXT_PUBLIC_URL}/file-storage/${member.image}`,
     href: `/about-us/management/team/${member.ulid}`,
   }));
 
   const guidelineItems: DownloadItem[] = GuideData.map((guide) => ({
     title: guide.name,
     size: guide.file?.size || "N/A",
-    viewUrl: `${FILE_PREVIEW_BASE_URL}${guide.file?.path || ""}`,
-    downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${guide.file?.path || ""}`,
+    viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${guide.type}/${guide.unique_key}`,
+    downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/${guide.type}/${guide.unique_key}`,
     format: guide.file?.format || "pdf",
   }));
 
@@ -195,7 +191,7 @@ export default async function Page({
         }
       >
         <div
-          className="prose prose-invert prose-base text-neutral-300 text-[12px] leading-[24px] text-justify"
+          className="prose prose-invert prose-base text-neutral-200 text-[12px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
           // className="text-[12px] leading-[24px] font-normal text-white py-1"
           dangerouslySetInnerHTML={{
             __html: about_us_management_overview.content || "",

@@ -32,7 +32,7 @@ export const Hero = ({
   }, []);
 
   return (
-    <header className="relative overflow-hidden aspect-square lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end">
+    <header className="relative overflow-hidden aspect-square md:aspect-[4/2] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end">
       <div
         className="overlay-history absolute inset-0 z-[1]"
         aria-hidden="true"
@@ -51,13 +51,14 @@ export const Hero = ({
       />
 
       {/* <section
-         className="max-w-7xl container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-[1]"
+         className="max-w-7xl container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[1]"
          aria-labelledby="home_banner_title"
        ></section> */}
 
       <div className="overlay-banner h-full w-full absolute left-0 right-0 top-0 bottom-0" />
       <section
-        className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-[2]"
+        // className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2]"
+        className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2]"
         aria-labelledby="home_banner_title"
       >
         <div className="text-white grid lg:flex-col gap-0 md:gap-2 items-end">
@@ -67,7 +68,7 @@ export const Hero = ({
             </p>
 
             <h1
-              className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium lg:mb-6 max-w-2xl"
+              className="text-2xl leading-6 md:text-[52px] md:leading-[58px] font-medium md:mb-6 w-full md:max-w-lg lg:max-w-2xl"
               id="home_banner_title"
             >
               {title}

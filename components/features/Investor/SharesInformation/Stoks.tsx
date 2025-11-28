@@ -22,7 +22,7 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
       </h2>
       {data.content && (
         <div
-        className="prose prose-invert prose-base text-justify text-neutral-500 w-full"
+        className="prose prose-invert prose-base text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-500 w-full"
           dangerouslySetInnerHTML={{ __html: data.content }}
         />
       )}
@@ -82,7 +82,7 @@ const DividendContent: React.FC<DividendContentProps> = ({ data }) => {
   return (
     <div>
       <div
-      className="prose prose-invert prose-base text-justify text-neutral-500 max-w-full"
+      className="prose prose-invert prose-base text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-500 max-w-full"
         dangerouslySetInnerHTML={{ __html: data.content || "" }}
       ></div>
     </div>
@@ -140,7 +140,7 @@ export function StocksInformation({
 
   return (
     <div className="py-20">
-      <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+      <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           <nav className="flex md:flex-col md:items-start w-full border-b-2 md:border-none border-b-neutral-100">
             <Link

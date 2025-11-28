@@ -54,7 +54,7 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
         priority
       />
 
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-10 py-20">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-10 py-20">
         <h1
           id="latest-news-heading"
           className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-semibold text-white mb-9"
@@ -90,11 +90,11 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
                     {slide.category}
                   </span>
                   <span className="text-sm text-neutral-10">{slide.date}</span>
-                  <h2 className="text-[22px] font-medium line-clamp-3 mt-4 text-neutral-13">
+                  <h2 className="text-[22px] font-medium mt-4 text-neutral-13 line-clamp-2">
                     {slide.title}
                   </h2>
                   <p
-                    className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3"
+                    className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3 text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
                     dangerouslySetInnerHTML={{ __html: slide.description }}
                   ></p>
                   <Link

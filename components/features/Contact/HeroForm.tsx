@@ -63,12 +63,14 @@ export function HeroForm({
     },
   });
 
+  const { isValid, isSubmitting } = form.formState;
+
   async function onSubmit(values: ContactUsFormValues) {
     setSubmitStatus("idle");
     setSubmitMessage("");
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_POST}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_POST_CONTACT}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +111,7 @@ export function HeroForm({
 
   return (
     <div data-navbar-theme="dark" className="bg-gray-100 py-20">
-      <section className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 pt-[5%]">
+      <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 pt-[5%]">
         <div className="grid grid-cols-1 md:grid-cols-3 p-2 md:gap-16">
           <ContactInfoCard
             imageSrc={pageData.file_url}
@@ -122,7 +124,7 @@ export function HeroForm({
             email={contactData.localized_main.fax}
           />
 
-          <div className="pt-10 md:col-span-2">
+          <div className="pt-10 md:pt-0 md:col-span-2">
             <h1 className="text-gray-900 font-medium text-2xl md:leading-snug md:text-[38px] mb-8">
               {pageData.title}
             </h1>
@@ -132,7 +134,7 @@ export function HeroForm({
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="flex flex-col gap-8"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-2 gap-8">
                   <FormField
                     control={form.control}
                     name="first_name"
@@ -175,7 +177,7 @@ export function HeroForm({
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-2 gap-8">
                   <FormField
                     control={form.control}
                     name="email"
@@ -288,8 +290,8 @@ export function HeroForm({
 
                 <Button
                   type="submit"
-                  className="bg-[#47C1EA] hover:bg-[#3ab0d8] px-6 py-2 rounded-full font-medium w-fit text-white cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed"
-                  disabled={form.formState.isSubmitting}
+                  className="bg-[#47C1EA] hover:bg-[#3ab0d8] px-6 py-2 rounded-full font-medium w-fit text-white cursor-pointer disabled:bg-neutral-700 disabled:text-neutral-200 disabled:cursor-not-allowed"
+                  disabled={!isValid || isSubmitting}
                 >
                   {form.formState.isSubmitting ? t("Submit") : t("Submit")}
                 </Button>

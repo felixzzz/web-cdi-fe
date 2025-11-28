@@ -21,28 +21,34 @@ interface CommitteeTabPanelProps {
   tab: CommitteeTabData;
 }
 
-export const CommitteeTabPanel: React.FC<CommitteeTabPanelProps> = ({ tab }) => {
+export const CommitteeTabPanel: React.FC<CommitteeTabPanelProps> = ({
+  tab,
+}) => {
   const sanitizedContent = useMemo(() => {
     if (!tab.contentHtml) return "";
-    return tab.contentHtml.replace(/\s\s+/g, " ").trim();
+
+    return tab.contentHtml
+      .replace(/&nbsp;/g, " ")
+      .replace(/\u00A0/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
   }, [tab.contentHtml]);
 
   return (
     <div className="py-8">
       <h3 className="font-medium text-[22px] mb-3">{tab.title}</h3>
-      
+
       <div
         className={`
           content 
           prose prose-invert prose-base 
-          text-left       /* CHANGED: 'text-justify' to 'text-left' to fix spacing gaps */
           w-full max-w-full     
           break-words         
           prose-img:w-full   
           prose-img:h-auto
           prose-p:text-wrap   
-          text-[12px]
-          leading-[24px]
+          text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify
+          text-neutral-300
         `}
         dangerouslySetInnerHTML={{ __html: sanitizedContent }}
       />

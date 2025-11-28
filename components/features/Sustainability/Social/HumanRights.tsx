@@ -17,7 +17,7 @@ export function HumanRights({ data }: HumanRightsProps) {
       aria-labelledby="human-rights-heading"
       className="py-28 text-white bg-[#051119] !bg-blue-dark-black relative"
     >
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-[1]">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[1]">
         <div className="flex flex-col gap-8 lg:max-w-[100%] me-auto">
           <div>
             <h2
@@ -28,7 +28,7 @@ export function HumanRights({ data }: HumanRightsProps) {
             </h2>
 
             <div
-              className="prose prose-invert prose-base max-w-full text-justify"
+              className="prose prose-invert prose-base max-w-full text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-300"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             ></div>
 

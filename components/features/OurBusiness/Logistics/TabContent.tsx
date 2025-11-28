@@ -40,7 +40,7 @@ function ContentBlock({
         style={useCustomGradient ? { backgroundImage: customGradient } : {}}
       ></div>
 
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-[2]">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2]">
         <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
           {title && (
             <h3 className="text-2xl lg:text-[28px] font-medium mb-6 text-[#47C1EA]">
@@ -69,7 +69,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
     <div className="bg-[#091A24] text-white">
       {(tab.sub_title || tab.description) && (
         <div className="py-16 bg-[#091A24]">
-          <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+          <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
             {tab.sub_title && (
               <h2 className="text-3xl lg:text-[38px] lg:leading-[44px] font-medium text-white mb-6">
                 {tab.sub_title}

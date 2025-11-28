@@ -11,7 +11,7 @@ export interface TeamMember {
 
 export const TeamMemberCard: React.FC<TeamMember> = ({ name, role, imageUrl, href }) => {
   return (
-    <li className="w-full max-w-xs">
+    <li className="w-full max-w-md md:max-w-sm">
       <Link
         href={href}
         className="flex flex-col items-center text-center group transition-all duration-300"
@@ -21,7 +21,7 @@ export const TeamMemberCard: React.FC<TeamMember> = ({ name, role, imageUrl, hre
           alt={name}
           width={200}
           height={200}
-          className="aspect-square w-[200px] h-[200px] overflow-hidden rounded-full object-cover shadow-article mb-5 border-2 border-transparent outline-2 outline-offset-4 outline-transparent group-hover:outline-[#47C1EA] hover:border-[#47C1EA] transition-all"
+          className="aspect-square w-[300px] h-[300px] overflow-hidden rounded-full object-cover shadow-article mb-5 border-2 border-transparent outline-2 outline-offset-4 outline-transparent group-hover:outline-[#47C1EA] hover:border-[#47C1EA] transition-all"
         />
         <h3 className="text-lg font-medium group-hover:text-[#47C1EA]">
           {name}

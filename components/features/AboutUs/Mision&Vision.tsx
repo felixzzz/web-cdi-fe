@@ -69,7 +69,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
       className="bg-[#091A24] text-white bg-cover relative"
       aria-labelledby="vision-mission-title"
     >
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-[1]">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[1]">
         <h2
           id="vision-mission-title"
           className="font-medium text-2xl md:text-[38px] md:leading-[44px] mb-16 text-center relative w-fit py-3 px-12 mx-auto"

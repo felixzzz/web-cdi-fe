@@ -134,8 +134,6 @@ export default async function Page({
     governance_whistleblowing,
   } = governanceData;
 
-  const BASE_URL = "https://cdi-be.cmlabs.dev";
-
   const auditCommitteeTab: CommitteeTabData = {
     id: governance_audit_committe.key,
     label: governance_audit_committe.title || "Audit Committee",
@@ -145,8 +143,8 @@ export default async function Page({
       id: file.id,
       title: file.name,
       fileSize: file.file.size,
-      viewUrl: `${BASE_URL}/file/preview/default/${file.type}/${file.unique_key}/${file.name}`,
-      downloadUrl: `${BASE_URL}/file/download/default/${file.type}/${file.unique_key}/`,
+      viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${file.type}/${file.unique_key}/${file.name}`,
+      downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/${file.type}/${file.unique_key}/`,
     })),
   };
 
@@ -160,8 +158,8 @@ export default async function Page({
         id: tab.id,
         title: tab.file_name,
         fileSize: tab.file.size,
-        viewUrl: `${BASE_URL}/file/preview/default/committe/${tab.file_name}/`,
-        downloadUrl: `${BASE_URL}/file/download/default/committe/${tab.file_name}/`,
+        viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/committe/${tab.file_name}/`,
+        downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/committe/${tab.file_name}/`,
       },
     ],
   }));

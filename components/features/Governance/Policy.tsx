@@ -8,12 +8,13 @@ interface PolicyProps {
   data: GovernanceSection;
 }
 
-const LINK_URL = "https://cdi-be.cmlabs.dev/governance/policy";
 
 export function Policy({ data }: PolicyProps) {
   const t = useTranslations('Investor.Governance')
   const TITLE = data.title || "Policy";
   const CONTENT_HTML = data.content || "";
+  const LINK_URL = `${process.env.NEXT_PUBLIC_URL_LP}/governance/policy`;
+
 
   return (
     <section
@@ -21,7 +22,7 @@ export function Policy({ data }: PolicyProps) {
       aria-labelledby="policy-heading"
       className="bg-[#051119] py-20 text-white scroll-mt-10"
     >
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8">
           <div className="md:col-span-3">
             <h2
@@ -31,13 +32,12 @@ export function Policy({ data }: PolicyProps) {
               {TITLE}
             </h2>
             <div
-              className="max-w-full prose prose-invert prose-base text-justify"
+              className="max-w-full prose prose-invert prose-base text-[10px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
 
             <Link
               href={LINK_URL}
-              target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2 rounded-full border border-white flex items-center gap-2 w-fit mt-8"
             >

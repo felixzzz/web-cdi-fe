@@ -59,13 +59,13 @@ function AssetBlock({
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 relative z-[2]">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2]">
         <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
           <h4 className="text-2xl lg:text-[28px] font-medium mb-6 text-[#47C1EA]">
             {title}
           </h4>
           <div
-            className="prose prose-invert prose-base max-w-none text-justify"
+            className="prose prose-invert prose-base max-w-none text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>
@@ -89,7 +89,7 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
 
   return (
     <div className="bg-[#091A24]">
-      <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 pt-8">
+      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 pt-8">
         <div className="flex flex-col md:flex-row border-b border-[#BFBFBF]/20">
           {tabs.map((tab) => (
             <TabButton
@@ -112,7 +112,7 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
             aria-labelledby={`company-heading-${activeTab.id}`}
             className="py-16 bg-[#091A24]"
           >
-            <div className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44">
+            <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
               <h3
                 id={`company-heading-${activeTab.id}`}
                 className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-6 text-white"
@@ -120,7 +120,7 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
                 {activeTab.sub_title}
               </h3>
               <div
-                className="prose prose-invert prose-base max-w-none text-justify"
+                className="prose prose-invert prose-base max-w-none text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
                 dangerouslySetInnerHTML={{
                   __html: activeTab.description || "",
                 }}

@@ -110,7 +110,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
     <section
       data-navbar-theme="light"
       id="content-media-section"
-      className="container mx-auto px-4 lg:px-24 xl:px-8 2xl:px-44 py-20 bg-white"
+      className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 py-20 bg-white"
     >
       <nav className="grid grid-cols-2">
         <button
@@ -256,7 +256,6 @@ function ArticleCard({
                 onError={() => setHasError(true)} 
               />
             )}
-            {/* <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" /> */}
           </div>
         </div>
         <div className="p-6 flex flex-col grow">
