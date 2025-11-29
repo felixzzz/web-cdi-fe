@@ -39,7 +39,7 @@ export const Hero: React.FC<HeroProps> = ({
       />
       <div className="overlay-banner h-full w-full absolute left-0 right-0 top-0 bottom-0" />
 
-      <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
+      <section className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
         <div className="text-white grid md:grid-cols-2 gap-2 relative z-[1] items-end">
           <div className="pb-8">
             <h1

@@ -13,7 +13,7 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
   return (
     <section
       aria-labelledby="financial-banner-heading"
-      className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 mt-28 mb-16"
+      className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 mt-28 mb-16"
     >
       <div data-navbar-theme="dark" className="p-6 rounded-3xl w-full bg-blue-base relative overflow-hidden">
         <Image

@@ -24,24 +24,28 @@ export const Discover: React.FC<DiscoverSectionProps> = ({
       description: stripHtml(home_discover_sustainability.content),
       imageUrl: home_discover_sustainability.file_url,
       linkHref: "/sustainability",
+      target: "_self",
     },
     {
       title: home_discover_our_business.title,
       description: stripHtml(home_discover_our_business.content),
       imageUrl: home_discover_our_business.file_url,
       linkHref: "/our-business",
+      target: "_self",
     },
     {
       title: home_discover_investor.title,
       description: stripHtml(home_discover_investor.content),
       imageUrl: home_discover_investor.file_url,
-      linkHref: "/investors",
+      linkHref: "/investor/report",
+      target: "_self",
     },
     {
       title: home_discover_career.title,
       description: stripHtml(home_discover_career.content),
       imageUrl: home_discover_career.file_url,
-      linkHref: "/careers",
+      linkHref: "https://careers.capcx.com/",
+      target: "_blank",
     },
   ];
 
@@ -50,7 +54,7 @@ export const Discover: React.FC<DiscoverSectionProps> = ({
       className="pt-12 pb-12 lg:pt-20 lg:pb-28 bg-[#091A24] text-white"
       aria-labelledby="discover-title"
     >
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
         <h2
           id="discover-title"
           className="mb-10 text-2xl md:text-[38px] md:leading-[44px] font-medium max-w-2xl mx-auto text-center"
@@ -67,6 +71,7 @@ export const Discover: React.FC<DiscoverSectionProps> = ({
             description={item.description || ""}
             imageUrl={item.imageUrl}
             linkHref={item.linkHref}
+            target={item.target}
           />
         ))}
       </div>

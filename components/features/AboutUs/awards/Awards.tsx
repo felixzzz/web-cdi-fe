@@ -180,7 +180,7 @@ export const Awards: React.FC<AwardsProps> = ({
 
   return (
     <section className="py-20 bg-[#091A24]" aria-labelledby="awards-title">
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
           <h2
             id="awards-title"

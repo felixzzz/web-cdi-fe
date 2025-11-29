@@ -41,7 +41,7 @@ function ContentBlock({
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2]">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 relative z-[2]">
         <div className={clsx("md:max-w-[45%]", alignmentClass)}>
           {tagline && <p className="text-neutral-200 mb-4">{tagline}</p>}
 
@@ -71,7 +71,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
       {/* BLOK INTRO (HTML Tipe 1) */}
       {(tab.sub_title || tab.description) && (
         <div className="py-16 bg-[#091A24]">
-          <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
+          <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
             {tab.sub_title && (
               <h2 className="text-3xl md:text-[38px] md:leading-[44px] font-medium text-white mb-6">
                 {tab.sub_title}
@@ -92,7 +92,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
           <React.Fragment key={content.id}>
             {content.heading && (
               <div className="py-10 bg-[#091A24]">
-                <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
+                <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
                   <h3 className="font-medium text-2xl md:text-[28px] mb-4 text-white text-start">
                     {content.heading}
                   </h3>

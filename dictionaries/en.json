@@ -200,5 +200,12 @@
     "privacy": "Privacy Policy",
     "cookies": "Cookies Consent",
     "disclaimer": "Disclaimer"
+  },
+  "Cookies": {
+    "title": "This Site Uses Cookies",
+    "description": "By clicking “Accept”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.",
+    "more_info_text": "View our <privacy_policy>Privacy Policy</privacy_policy> and <cookies_notice>Cookies Notice</cookies_notice> for more information.",
+    "decline": "Decline",
+    "accept": "Accept"
   }
 }

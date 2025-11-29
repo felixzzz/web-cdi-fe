@@ -54,7 +54,7 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
         priority
       />
 
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-10 py-20">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 relative z-10 py-20 md:py-0">
         <h1
           id="latest-news-heading"
           className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-semibold text-white mb-9"

@@ -16,7 +16,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
   const keyAssetsTitle = tab?.contents[0]?.heading || "Key Assets";
   return (
     <article aria-labelledby="pillars-heading-ports" className="bg-[#091A24] text-white">
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
         <h2 id="pillars-heading-ports" className="font-medium text-2xl md:text-[38px] md:leading-[44px] text-center pt-20">
           {title || "Business Pillars"}
         </h2>
@@ -28,7 +28,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
             aria-labelledby={`company-heading-${tab.id}`}
             className="py-16 bg-blue-dark"
           >
-            <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 grid grid-cols-1 md:grid-cols-3 gap-20 max-lg:gap-y-10">
+            <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 grid grid-cols-1 md:grid-cols-3 gap-20 max-lg:gap-y-10">
               <div className="relative w-full aspect-square">
                 <Image
                   src={tab.image} 
@@ -60,7 +60,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
             className="bg-blue-dark"
           >
             <div className="py-10">
-              <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
+              <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
                 <h4
                   id="key-assets-heading"
                   className="font-medium text-2xl md:text-[28px] mb-4 text-white text-center"
@@ -118,7 +118,7 @@ function AssetBlock({
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2]">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 relative z-[2]">
         <div className={clsx("md:max-w-[45%]", alignmentClass)}>
           <h5 className="text-2xl md:text-[28px] font-medium mb-6 text-blue-lighter">
             {title}

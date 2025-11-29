@@ -34,7 +34,7 @@ export function GrievanceMechanism({ data }: GrievanceMechanismProps) {
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-20">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 relative z-20">
         <div
           className={`md:max-w-[45%] ${
             data.align === "right" ? "ms-auto" : "me-auto"

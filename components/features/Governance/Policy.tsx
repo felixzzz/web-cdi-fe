@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -13,8 +15,12 @@ export function Policy({ data }: PolicyProps) {
   const t = useTranslations('Investor.Governance')
   const TITLE = data.title || "Policy";
   const CONTENT_HTML = data.content || "";
-  const LINK_URL = `${process.env.NEXT_PUBLIC_URL_LP}/governance/policy`;
+  const LINK_URL = `/governance/policy`;
+  // const LINK_URL = `${process.env.NEXT_PUBLIC_URL_LP}/governance/policy`;
 
+  const handleLinkClick = () => {
+    window.dispatchEvent(new Event("startProgressBar"));
+  };
 
   return (
     <section
@@ -22,7 +28,7 @@ export function Policy({ data }: PolicyProps) {
       aria-labelledby="policy-heading"
       className="bg-[#051119] py-20 text-white scroll-mt-10"
     >
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8">
           <div className="md:col-span-3">
             <h2
@@ -37,6 +43,7 @@ export function Policy({ data }: PolicyProps) {
             />
 
             <Link
+              onClick={handleLinkClick}
               href={LINK_URL}
               rel="noopener noreferrer"
               className="px-6 py-2 rounded-full border border-white flex items-center gap-2 w-fit mt-8"
