@@ -27,7 +27,7 @@ export const Report: React.FC<ReportSectionProps> = ({
       className="py-20 bg-[#F6F6F6]"
       aria-labelledby="report-section-title"
     >
-      <div data-navbar-theme="dark" className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
+      <div data-navbar-theme="dark" className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
         <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
           <div>
             <p className="text-neutral-500 text-base mb-4">{eyebrow}</p>

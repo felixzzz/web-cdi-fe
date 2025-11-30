@@ -1,3 +1,5 @@
+// app/[locale]/(sitemaps)/news.xml/route.ts
+
 import { NextRequest } from "next/server";
 import { mediaService } from "@/services/Media/MediaService";
 
@@ -14,9 +16,9 @@ export async function GET(
   const { locale } = params;
   const baseUrl = process.env.NEXT_PUBLIC_URL;
 
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>
+let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/style.xsl"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
-
+  
   try {
     const mediaData = await mediaService.getMediaPageData(locale);
     

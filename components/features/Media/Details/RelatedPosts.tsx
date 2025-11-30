@@ -31,7 +31,7 @@ export const RelatedPosts = ({
 
   return (
     <div className="pb-28 pt-12 bg-white">
-      <section className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
+      <section className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
         <p className="capitalize text-neutral-7 mb-4">News</p>
         <div className="flex md:items-center justify-between mb-10 flex-col md:flex-row">
           <div>

@@ -170,7 +170,7 @@ export function Navbar() {
             : "backdrop-blur-3xl bg-[#091A24]/10 text-white"
         )}
       >
-        <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 flex gap-3 justify-between items-center">
+        <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 flex gap-3 justify-between items-center">
           <Link href="/" className="flex-shrink-0" onClick={handleLinkClick}>
             <Image
               src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_white.svg"

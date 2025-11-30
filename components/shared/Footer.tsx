@@ -39,7 +39,7 @@ export const Footer: React.FC<FooterProps> = ({
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       role="contentinfo"
     >
-      <section className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
+      <section className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
         <div className="flex items-center justify-between mb-10">
           <div>
             <Link href="/">

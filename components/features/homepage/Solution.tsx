@@ -50,7 +50,7 @@ export const Solution: React.FC<BusinessSolutionsProps> = ({
       className="relative pt-11 lg:pt-20 bg-[#091A24] text-white"
       aria-labelledby="solutions-title"
     >
-      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
         <h2
           id="solutions-title"
           className="mb-11 lg:mb-20 text-2xl md:text-[38px] md:leading-[44px] font-medium max-w-2xl mx-auto text-center"

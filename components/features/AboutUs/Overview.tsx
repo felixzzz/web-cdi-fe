@@ -48,7 +48,7 @@ export const Overview: React.FC<OverviewSectionProps> = ({
         aria-hidden="true"
       />
 
-      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 relative z-[1]">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-[1]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
           <div className="md:col-span-6">
             <Image
@@ -84,7 +84,7 @@ export const Overview: React.FC<OverviewSectionProps> = ({
         className="bg-blue-dark relative py-12 lg:py-20"
         aria-label={videoTitle} 
       >
-        <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
+        <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
           <figure className="aspect-video w-full">
             <iframe
               className="w-full h-full rounded-xl"

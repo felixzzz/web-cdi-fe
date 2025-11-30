@@ -21,7 +21,7 @@ export function AntiCorruption({ data }: AntiCorruptionProps) {
       className="text-white bg-[#091A24]"
     >
       <div className="py-20">
-        <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 relative z-[1]">
+        <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-[1]">
           <div className="mb-16 grid grid-cols-1 gap-4 md:grid-cols-2 items-center">
             <h2
               id="anti-corruption-heading"
@@ -51,7 +51,7 @@ export function AntiCorruption({ data }: AntiCorruptionProps) {
           style={{ backgroundImage: customGradient }}
         ></div>
 
-        <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44 relative z-20">
+        <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-20">
           <div
             className={`md:max-w-[35%] ${
               data.align === "right" ? "ms-auto" : "me-auto"

@@ -1,3 +1,5 @@
+// app/[locale]/(sitemaps)/pages.xml/route.ts
+
 import { NextRequest } from "next/server";
 
 export async function GET(
@@ -18,6 +20,8 @@ export async function GET(
     { path: "/our-business/ports-and-storage", priority: 0.7 },
     { path: "/our-business/water", priority: 0.7 },
     { path: "/governance", priority: 0.7 },
+    { path: "/governance/policy", priority: 0.7 },
+    { path: "/governance/whistleblowing", priority: 0.7 },
     { path: "/sustainability", priority: 0.8 },
     { path: "/sustainability/environment", priority: 0.6 },
     { path: "/sustainability/governance", priority: 0.6 },
@@ -34,7 +38,7 @@ export async function GET(
     { path: "/terms-and-conditions", priority: 0.5 },
   ];
 
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>
+  let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/style.xsl"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
   staticPages.forEach((page) => {

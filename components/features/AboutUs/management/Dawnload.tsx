@@ -24,7 +24,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
       className="py-28 bg-neutral-3"
       aria-labelledby={`${id || "downloads"}-title`}
     >
-      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-44 2xl:px-44">
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
         <h2
           id={`${id || "downloads"}-title`}
           className="font-medium text-2xl md:text-[38px] md:leading-[44px] mb-4 text-center"
