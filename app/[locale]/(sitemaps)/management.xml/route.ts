@@ -13,7 +13,7 @@ export async function GET(
   { params }: { params: { locale: string } }
 ): Promise<Response> {
   const { locale } = params;
-  const baseUrl = process.env.NEXT_PUBLIC_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP;
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/style.xsl"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
