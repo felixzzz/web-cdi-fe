@@ -1,7 +1,7 @@
 // app/sitemap.xml/route.ts
 
 export async function GET(): Promise<Response> {
-  let baseUrl = process.env.NEXT_PUBLIC_URL ?? "";
+  let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "";
   if (baseUrl.endsWith("/")) {
     baseUrl = baseUrl.slice(0, -1);
   }
