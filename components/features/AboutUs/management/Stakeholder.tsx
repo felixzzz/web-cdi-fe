@@ -21,7 +21,7 @@ export const Stakeholder: React.FC<StakeholderSectionProps> = ({
         backgroundPositionY: "48px",
       }}
     >
-      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
+      <div className="container mx-auto  ">
         <ManagementTeam
           id="board-of-directors"
           title="Board of Directors"

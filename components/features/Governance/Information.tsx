@@ -23,7 +23,7 @@ export const Information: React.FC<InformationSectionProps> = ({
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       aria-labelledby="quick-links-title"
     >
-      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
+      <div className="container mx-auto  ">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div>
             <p className="text-neutral-7 text-base mb-4">{eyebrow}</p>

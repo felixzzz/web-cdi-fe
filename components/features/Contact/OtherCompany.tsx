@@ -19,7 +19,7 @@ export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
       aria-labelledby="other-addresses-heading"
       className="bg-[#F6F6F6] py-20"
     >
-      <div data-navbar-theme="dark" className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
+      <div data-navbar-theme="dark" className="container mx-auto  ">
         <h2
           id="other-addresses-heading"
           className="text-neutral-13 text-2xl md:text-[38px] md:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-6 mb-8"
