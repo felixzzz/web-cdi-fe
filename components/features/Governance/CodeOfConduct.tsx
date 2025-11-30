@@ -19,7 +19,7 @@ export function CodeOfConduct({ data, filesData }: CodeOfConductProps) {
       aria-labelledby="code-of-conduct-heading"
       className="py-20 bg-[#091A24] text-white scroll-mt-10"
     >
-      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
+      <div className="container mx-auto  ">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8">
           <div className="md:col-span-4">
             <h2

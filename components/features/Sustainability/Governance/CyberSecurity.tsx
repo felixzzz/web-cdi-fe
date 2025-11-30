@@ -28,7 +28,7 @@ export function CyberSecurity({ data }: CyberSecurityProps) {
 
       <div className="absolute inset-0 overlay-business-darkest z-10"></div>
 
-      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-20">
+      <div className="container mx-auto   relative z-20">
         <div className="mb-16 grid grid-cols-1 gap-4 md:grid-cols-2">
           <h2
             id="cyber-security-heading"

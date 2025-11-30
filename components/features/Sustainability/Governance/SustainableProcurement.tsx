@@ -15,7 +15,7 @@ export function SustainableProcurement({ data }: SustainableProcurementProps) {
       aria-labelledby="procurement-heading"
       className="py-28 text-white bg-[#051119] !bg-blue-dark-black relative"
     >
-      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-[1]">
+      <div className="container mx-auto   relative z-[1]">
         <div className="mb-16 grid grid-cols-1 gap-4 md:grid-cols-2 items-center">
           <h2
             id="procurement-heading"

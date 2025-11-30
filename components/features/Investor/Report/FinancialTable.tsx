@@ -19,7 +19,7 @@ export function FinancialTable({ data }: FinancialTableProps) {
     <section
     // data-navbar-theme="dark"
       aria-labelledby="financial-data-heading"
-      className="container mx-auto py-[1rem] px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44"
+      className="container mx-auto py-[1rem]  "
     >
       {note && (
         <p

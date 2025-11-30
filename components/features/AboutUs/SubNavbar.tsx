@@ -67,7 +67,7 @@ export const SubNavbar: React.FC<SubNavProps> = ({ links }) => {
 
   return (
     <nav className="bg-[#091A24] sticky top-0 z-20" aria-label="Secondary">
-      <section className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
+      <section className="container mx-auto  ">
         <ul className="gap-10 flex items-center overflow-x-auto custom-scrollbar overflow-y-hidden">
           {links.map((link) => {
             const isActive = activeId === link.targetId;

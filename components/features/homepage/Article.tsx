@@ -27,7 +27,7 @@ export const Article: React.FC<ArticleProps> = ({ articles }) => {
       className="py-20 bg-white"
       aria-labelledby="article-section-title"
     >
-      <div data-navbar-theme="dark" className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
+      <div data-navbar-theme="dark" className="container mx-auto  ">
         <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
           <div>
             <p className="text-neutral-500 text-base mb-4">LATEST ARTICLE</p>
