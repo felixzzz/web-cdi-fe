@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: { locale: string } }
 ): Promise<Response> {
   const { locale } = params;
-  const baseUrl = process.env.NEXT_PUBLIC_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP;
 
   const staticPages = [
     { path: "/", priority: 1.0 },
