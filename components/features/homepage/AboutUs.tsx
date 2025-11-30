@@ -24,8 +24,8 @@ export const AboutUs: React.FC<AboutUsSectionProps> = ({
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       aria-labelledby="about-us-title"
     >
-      {/* <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 grid md:grid-cols-2 gap-10 relative"> */}
-      <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 flex flex-col md:flex-row gap-10 relative">
+      {/* <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 grid md:grid-cols-2 gap-10 relative"> */}
+      <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 flex flex-col md:flex-row gap-10 relative">
         <div className="flex flex-col flex-1">
           <h2
             id="about-us-title"

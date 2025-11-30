@@ -215,8 +215,16 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
     router.push(`${pathname}?${params.toString()}`);
   };
 
+  useEffect(() => {
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new Event("finishProgressBar"));
+      }, 100);
+  
+      return () => clearTimeout(timer);
+    }, []);
+
   return (
-    <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 py-[5%] lg:py-[8%]">
+    <section className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 py-[5%] lg:py-[8%]">
       <div className="flex gap-1 text-neutral-10 items-center text-sm md:text-base">
         <Link className="text-blue-base hover:underline" href="/governance">
           Governance

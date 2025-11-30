@@ -30,7 +30,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
 
       <section
         aria-labelledby="overview-heading"
-        className="container px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2] mx-auto"
+        className="container px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-[2] mx-auto"
       >
         <div className="md:max-w-[45%] ms-auto">
           <h2

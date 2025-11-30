@@ -200,5 +200,14 @@
     "privacy": "Kebijakan Privasi",
     "cookies": "Persetujuan Cookie",
     "disclaimer": "Sanggahan"
+  },
+  "Cookies": {
+    "title": "Situs Ini Menggunakan Cookie",
+    "description": "Dengan mengklik “Terima”, Anda menyetujui penyimpanan cookie di perangkat Anda untuk meningkatkan navigasi situs, menganalisis penggunaan situs, dan membantu upaya pemasaran kami.",
+ 
+    "more_info_text": "Lihat <privacy_policy>Kebijakan Privasi</privacy_policy> dan <cookies_notice>Pemberitahuan Cookie</cookies_notice> kami untuk informasi lebih lanjut.",
+    "decline": "Tolak",
+    "accept": "Terima"
   }
+  
 }

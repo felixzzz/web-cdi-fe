@@ -22,7 +22,6 @@ export const Hero = ({
   linkText,
   linkIcon,
 }: HeroProps) => {
-
   useEffect(() => {
     const timer = setTimeout(() => {
       window.dispatchEvent(new Event("finishProgressBar"));
@@ -51,14 +50,14 @@ export const Hero = ({
       />
 
       {/* <section
-         className="max-w-7xl container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[1]"
+         className="max-w-7xl container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-[1]"
          aria-labelledby="home_banner_title"
        ></section> */}
 
       <div className="overlay-banner h-full w-full absolute left-0 right-0 top-0 bottom-0" />
       <section
-        // className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2]"
-        className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[2]"
+        // className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-[2]"
+        className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-[2]"
         aria-labelledby="home_banner_title"
       >
         <div className="text-white grid lg:flex-col gap-0 md:gap-2 items-end">

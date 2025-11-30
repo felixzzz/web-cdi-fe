@@ -20,7 +20,7 @@ export function Committee({ tabs }: CommitteeProps) {
 
   return (
     <div className="py-20 bg-[#051119] text-white scroll-mt-10" id="committee">
-      <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48">
+      <section className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44">
         <div className="flex items-center gap-6 border-b-2 border-b-neutral-700">
           {tabs.map((tab) => (
             <TabButton

@@ -84,7 +84,7 @@ export const NewsDetail = ({
 
   return (
     <div className="py-[5%] lg:py-[8%]">
-      <section className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 py-36 lg:py-0">
+      <section className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 py-36 lg:py-0">
         <div className="flex gap-1 text-neutral-10 items-center">
           {breadcrumbs.map((item) => (
             <div key={item.href} className="flex items-center gap-1">

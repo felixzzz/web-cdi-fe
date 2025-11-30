@@ -21,7 +21,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
   return (
     <section
       aria-labelledby="document-download-title"
-      className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 my-16"
+      className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 my-16"
     >
       <h2
         id="document-download-title"

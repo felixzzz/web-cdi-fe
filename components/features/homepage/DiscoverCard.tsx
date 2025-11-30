@@ -7,6 +7,7 @@ interface DiscoverCardProps {
   description: string;
   imageUrl: string;
   linkHref: string;
+  target: string;
 }
 
 export const DiscoverCard: React.FC<DiscoverCardProps> = ({
@@ -14,9 +15,11 @@ export const DiscoverCard: React.FC<DiscoverCardProps> = ({
   description,
   imageUrl,
   linkHref,
+  target,
 }) => {
   return (
     <Link
+      target={target}
       href={linkHref}
       className="relative block aspect-[9/16] bg-cover bg-no-repeat text-white group"
       style={{ backgroundImage: `url(${imageUrl})` }}
@@ -27,7 +30,9 @@ export const DiscoverCard: React.FC<DiscoverCardProps> = ({
                    transition-opacity duration-300 ease-out"
       >
         <div className="absolute inset-0 flex flex-col gap-4 p-5 lg:p-8 text-white z-10">
-          <h2 className="text-xl md:text-[23px] lg:text-[32px] font-medium">{title}</h2>
+          <h2 className="text-xl md:text-[23px] lg:text-[32px] font-medium">
+            {title}
+          </h2>
           <div className="content text-justify text-shadow-1 !text-neutral-300">
             <p>{description}</p>
           </div>

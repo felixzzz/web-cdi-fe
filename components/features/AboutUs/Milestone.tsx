@@ -65,7 +65,7 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
       >
         <div className="absolute inset-0 overlay-business" aria-hidden="true" />
 
-        <div className="container mx-auto px-4 md:px-10 lg:px-20 xl:px-44 2xl:px-48 relative z-[1]">
+        <div className="container mx-auto px-4 md:px-4 lg:px-20 xl:px-8 2xl:px-44 relative z-[1]">
           <div className="flex items-center justify-between mb-16 gap-6">
             <div>
               <h2 className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-2">
