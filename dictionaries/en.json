@@ -201,7 +201,8 @@
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy",
     "cookies": "Cookies Consent",
-    "disclaimer": "Disclaimer"
+    "disclaimer": "Disclaimer",
+    "contact_us": "Contact Us"
   },
   "Cookies": {
     "title": "This Site Uses Cookies",
@@ -209,5 +210,11 @@
     "more_info_text": "View our <privacy_policy>Privacy Policy</privacy_policy> and <cookies_notice>Cookies Notice</cookies_notice> for more information.",
     "decline": "Decline",
     "accept": "Accept"
+  },
+  "Footer": {
+    "WhoWeAre": "Who We Are",
+    "OurBusiness": "Our Business",
+    "Sustainability": "Sustainability",
+    "Investor": "Investor"
   }
 }

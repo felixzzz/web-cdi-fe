@@ -57,7 +57,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         logoSrc="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_footer_new.svg"
         logoAlt="Chandra Daya Investasi Logo"
         contactHref="/contact-us"
-        contactText="Contact Us"
+        contactText={t("contact_us")}
         companyData={footerData}
         mainNavLinks={mainNavLinksData}
         legalNavLinks={legalNavLinksData}

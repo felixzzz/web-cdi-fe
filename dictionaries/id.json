@@ -194,14 +194,15 @@
     "contact_us": "Hubungi Kami"
   },
   "Layout": {
-    "who_we_are": "Tentang Kami",
+    "who_we_are": "Siapa Kami",
     "our_business": "Bisnis Kami",
     "sustainability": "Keberlanjutan",
     "investor": "Investor",
     "terms": "Syarat & Ketentuan",
     "privacy": "Kebijakan Privasi",
     "cookies": "Persetujuan Cookie",
-    "disclaimer": "Sanggahan"
+    "disclaimer": "Pernyataan Penyangkalan",
+    "contact_us": "Hubungi Kami"
   },
   "Cookies": {
     "title": "Situs Ini Menggunakan Cookie",
@@ -210,6 +211,11 @@
     "more_info_text": "Lihat <privacy_policy>Kebijakan Privasi</privacy_policy> dan <cookies_notice>Pemberitahuan Cookie</cookies_notice> kami untuk informasi lebih lanjut.",
     "decline": "Tolak",
     "accept": "Terima"
+  },
+  "Footer": {
+    "WhoWeAre": "Siapa Kami",
+    "OurBusiness": "Bisnis Kami",
+    "Sustainability": "Keberlanjutan",
+    "Investor": "Investor"
   }
-  
 }
