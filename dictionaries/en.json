@@ -1,6 +1,8 @@
 {
   "Report": {
     "dawnload_title": "Download All",
+    "download_download": "Download",
+    "download_view": "View",
     "see_title": "See All",
     "description": "Documents are available in both English and Bahasa Indonesia. Change the website language to view them in another language."
   },
