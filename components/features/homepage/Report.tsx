@@ -78,8 +78,8 @@ export const Report: React.FC<ReportSectionProps> = ({
               title: report.name,
               date: report.date,
               size: report.file.size,
-              tagView:"lihat",
-              tagDawnload:"Dawnload",
+              tagView: t('download_view'),
+              tagDawnload: t('download_download'),
               viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/report/${report.ulid}/${report.name_slug}`,
               downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/report/${report.ulid}/`,
             };
