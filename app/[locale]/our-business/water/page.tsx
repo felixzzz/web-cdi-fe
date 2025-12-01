@@ -53,7 +53,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/our-business/water",
+        "en-US": "/en/our-business/water",
         "id-ID": "/id/our-business/water",
       },
     },
@@ -101,7 +101,7 @@ export default async function Page({ params: { locale } }: WaterPageProps) {
       <Hero
         imageSrc={waterData.banner_image}
         title={waterData.banner_title}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <Overview
         title={waterData.overview_title}

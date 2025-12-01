@@ -45,9 +45,9 @@ const unformatReportType = (type: string): string => {
 };
 
 const FILE_PREVIEW_BASE_URL =
-  "https://cdi-be.cmlabs.dev/file/preview/default/report/";
+  `${process.env.NEXT_PUBLIC_URL}/file/preview/default/report/`;
 const FILE_DOWNLOAD_BASE_URL =
-  "https://cdi-be.cmlabs.dev/file/download/default/report/";
+  `${process.env.NEXT_PUBLIC_URL}/file/download/default/report/`;
 
 const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
   return data.items.flatMap((yearGroup) => yearGroup.items);
@@ -110,7 +110,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
 
       try {
         const res = await fetch(
-          `https://cdi-be.cmlabs.dev/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`
+          `${process.env.NEXT_PUBLIC_URL}/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`
         );
         if (!res.ok) throw new Error("Failed to fetch data");
         const data: CalendarApiResponse = await res.json();
@@ -257,7 +257,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                           <span>.</span>
                         </p>
                         <Image
-                          src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg"
+                          src="/assets/icons/ic_filepdf.svg"
                           width={30}
                           height={24}
                           alt="See all icon"
@@ -272,7 +272,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
-                            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg"
+                            src="/assets/icons/ic_eye.svg"
                             width={20}
                             height={20}
                             alt="See all icon"
@@ -287,7 +287,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
-                            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg"
+                            src="/assets/icons/ic_download_file.svg"
                             width={20}
                             height={20}
                             alt="Download icon"

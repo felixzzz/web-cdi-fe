@@ -65,7 +65,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": pagePath,
+        "en-US": `/en${pagePath}`,
         "id-ID": `/id${pagePath}`,
       },
     },
@@ -138,7 +138,7 @@ export default async function page({ params }: PageProps) {
       <DetailHero
         name={member.name}
         title={member.position}
-        imageUrl={`https://cdi-be.cmlabs.dev/file-storage/${member.image_hero}`}
+        imageUrl={`${process.env.NEXT_PUBLIC_URL}/file-storage/${member.image_hero}`}
         backLinkHref={`/${params.locale}/about-us/management`}
       />
       <BocBiography biographyHtml={description} />

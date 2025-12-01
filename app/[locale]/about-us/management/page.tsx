@@ -66,7 +66,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/about-us/management",
+        "en-US": "/en/about-us/management",
         "id-ID": "/id/about-us/management",
       },
     },
@@ -182,7 +182,7 @@ export default async function Page({
           about_us_management_banner.title || "About Chandra Daya Investasi"
         }
         subtitle={about_us_management_banner.content}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <SubNavbar links={aboutLinks} />
       <People
@@ -199,7 +199,7 @@ export default async function Page({
         />
       </People>
       <Stakeholder
-        backgroundImageUrl="https://cdi-be.cmlabs.dev/assets/frontend/images/about/world_map.webp"
+        backgroundImageUrl={`${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/about/world_map.webp`}
         directors={transformedBodData}
         commissioners={transformedBocData}
       />
@@ -223,7 +223,7 @@ export default async function Page({
       <Information
         eyebrow={t("eye_information")}
         title={t("title_information")}
-        backgroundImageUrl="https://cdi-be.cmlabs.dev/assets/frontend/images/homepage/quick_links.webp"
+        backgroundImageUrl={`${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/homepage/quick_links.webp`}
         links={quickLinksData}
       />
     </main>

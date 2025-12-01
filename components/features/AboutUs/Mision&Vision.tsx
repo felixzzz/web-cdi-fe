@@ -6,7 +6,7 @@ const DecorativeCorners: React.FC = () => {
   return (
     <>
       <Image
-        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_tagline_top_right.svg"
+        src="/assets/icons/ic_tagline_top_right.svg"
         alt=""
         aria-hidden="true"
         width={size}
@@ -14,7 +14,7 @@ const DecorativeCorners: React.FC = () => {
         className="absolute top-0 right-0"
       />
       <Image
-        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_tagline_top_left.svg"
+        src="/assets/icons/ic_tagline_top_left.svg"
         alt=""
         aria-hidden="true"
         width={size}
@@ -22,7 +22,7 @@ const DecorativeCorners: React.FC = () => {
         className="absolute top-0 left-0"
       />
       <Image
-        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_tagline_bottom_left.svg"
+        src="/assets/icons/ic_tagline_bottom_left.svg"
         alt=""
         aria-hidden="true"
         width={size}
@@ -30,7 +30,7 @@ const DecorativeCorners: React.FC = () => {
         className="absolute bottom-0 left-0"
       />
       <Image
-        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_tagline_bottom_right.svg"
+        src="/assets/icons/ic_tagline_bottom_right.svg"
         alt=""
         aria-hidden="true"
         width={size}

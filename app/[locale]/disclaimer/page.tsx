@@ -8,61 +8,67 @@ interface PageProps {
   };
 }
 
-const description =
-  "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
-const title = "Chandra Daya Investasi";
-const baseUrl = "https://cdi-lp.cmlabs.dev/disclaimer";
+export async function generateMetadata({
+  params: { locale },
+}: PageProps): Promise<Metadata> {
+  const pagePath = "/disclaimer";
 
-export const metadata: Metadata = {
-  title: title,
-  description: description,
-  keywords: [
-    "Chandra Daya Investasi",
-    "CDI",
-    "CDIA",
-    "PT Chandra Daya Investasi Tbk",
-    "CDI Group",
-  ],
+  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
 
-  metadataBase: new URL(baseUrl),
-
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "/",
-  },
-  icons: {
-    shortcut: "/assets/frontend/favicon.png",
-  },
-
-  openGraph: {
+  const description =
+    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
+  const title = "Chandra Daya Investasi";
+  return {
     title: title,
     description: description,
-    url: "/",
-    type: "website",
-    siteName: title,
-  },
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
-  twitter: {
-    card: "summary_large_image",
-    title: title,
-    description: description,
-  },
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
-  other: {
-    "application-url": "https://cdi-be.cmlabs.dev",
-    "preview-url": "https://cdi-be.cmlabs.dev/file-storage",
-    "download-file": "https://cdi-be.cmlabs.dev/file-download",
-    "add-file-preview": "https://cdi-be.cmlabs.dev/file/preview",
-    "add-file-download": "https://cdi-be.cmlabs.dev/file/download",
-  },
-};
+    viewport: {
+      width: "device-width",
+      initialScale: 1.0,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: currentPath,
+    },
+    icons: {
+      shortcut: "/assets/frontend/favicon.png",
+    },
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: "/",
+      type: "website",
+      siteName: title,
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+    },
+
+    other: {
+      "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
+      "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
+      "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
+      "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+    },
+  };
+}
 
 export default async function Page({ params: { locale } }: PageProps) {
   const data = await informationService.getCredentialData(locale);
@@ -73,7 +79,7 @@ export default async function Page({ params: { locale } }: PageProps) {
     return (
       <main>
         <NavbarThemeTrigger theme="light" />
-       <section className="container mx-auto   py-40">
+        <section className="container mx-auto   py-40">
           <h1 className="text-neutral-13 font-medium text-2xl lg:text-[28px] mb-5">
             Content not available.
           </h1>
@@ -85,7 +91,7 @@ export default async function Page({ params: { locale } }: PageProps) {
   return (
     <main>
       <NavbarThemeTrigger theme="light" />
-       <section className="container mx-auto   py-40">
+      <section className="container mx-auto   py-40">
         <h1 className="text-neutral-900 font-medium text-2xl md:text-4xl mb-5">
           {termsData.title}
         </h1>

@@ -25,25 +25,25 @@ const shareIcons = [
     name: "Copy",
     hrefBase: "#",
     iconSrc:
-      "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_share_copy_rounded.svg",
+      "/assets/icons/ic_share_copy_rounded.svg",
   },
   {
     name: "LinkedIn",
     hrefBase: "https://www.linkedin.com/shareArticle?mini=true&url=",
     iconSrc:
-      "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_share_linkedin_rounded.svg",
+      "/assets/icons/ic_share_linkedin_rounded.svg",
   },
   {
     name: "X/Twitter",
     hrefBase: "https://x.com/intent/tweet?url=",
     iconSrc:
-      "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_share_x_rounded.svg",
+      "/assets/icons/ic_share_x_rounded.svg",
   },
   {
     name: "Facebook",
     hrefBase: "https://www.facebook.com/sharer/sharer.php?u=",
     iconSrc:
-      "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_share_fb_rounded.svg",
+      "/assets/icons/ic_share_fb_rounded.svg",
   },
 ];
 

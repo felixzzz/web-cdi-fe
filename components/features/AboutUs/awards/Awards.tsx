@@ -50,7 +50,7 @@ const mapMembershipToCard = (item: MembershipItem): Award => ({
 
 type TabName = "Awards" | "Certification" | "Membership";
 const TABS: TabName[] = ["Awards", "Certification", "Membership"];
-const BASE_API_URL = "https://cdi-be.cmlabs.dev/api";
+// const BASE_API_URL = "https://cdi-be.cmlabs.dev/api";
 
 interface AwardsProps {
   title: string | null;
@@ -132,13 +132,13 @@ export const Awards: React.FC<AwardsProps> = ({
     let url = "";
     switch (activeTab) {
       case "Awards":
-        url = `${BASE_API_URL}/awards/list?tab=awards&page=${page}`;
+        url = `${process.env.NEXT_PUBLIC_BASE_URL}/awards/list?tab=awards&page=${page}`;
         break;
       case "Certification":
-        url = `${BASE_API_URL}/certificates/list?tab=certification&page=${page}`;
+        url = `${process.env.NEXT_PUBLIC_BASE_URL}/certificates/list?tab=certification&page=${page}`;
         break;
       case "Membership":
-        url = `${BASE_API_URL}/memberships/list?tab=membership&page=${page}`;
+        url = `${process.env.NEXT_PUBLIC_BASE_URL}/memberships/list?tab=membership&page=${page}`;
         break;
     }
 

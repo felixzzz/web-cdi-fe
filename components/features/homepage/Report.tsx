@@ -48,7 +48,7 @@ export const Report: React.FC<ReportSectionProps> = ({
             >
               {t('dawnload_title')}
               <Image
-                src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download.svg"
+                src="/assets/icons/ic_download.svg"
                 width={16}
                 height={16}
                 alt="Download icon"

@@ -52,7 +52,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/investor/shares-information",
+        "en-US": "/en/investor/shares-information",
         "id-ID": "/id/investor/shares-information",
       },
     },
@@ -113,7 +113,7 @@ export default async function Page({ params: { locale } }: SharesPageProps) {
         imageSrc={investor_share_banner.file_url}
         title={investor_share_banner.title || "Stocks and Bonds"}
         subtitle={investor_share_banner.content}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <NavbarThemeTrigger theme="light" />
       <StocksInformation

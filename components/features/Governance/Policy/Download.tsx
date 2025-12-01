@@ -288,16 +288,16 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                     locale === "id" ? item.name_id : item.name_en;
 
                   // Construct dynamic links based on API data
-                  const viewLink = `https://cdi-be.cmlabs.dev/file/preview/${item.type}/${item.unique_key}/${item.name_en}`;
-                  const downloadEnLink = `https://cdi-be.cmlabs.dev/file/download/en/${item.type}/${item.unique_key}/`;
-                  const downloadIdLink = `https://cdi-be.cmlabs.dev/file/download/id/${item.type}/${item.unique_key}/`;
+                  const viewLink = `${process.env.NEXT_PUBLIC_URL}/file/preview/${item.type}/${item.unique_key}/${item.name_en}`;
+                  const downloadEnLink = `${process.env.NEXT_PUBLIC_URL}/file/download/en/${item.type}/${item.unique_key}/`;
+                  const downloadIdLink = `${process.env.NEXT_PUBLIC_URL}/file/download/id/${item.type}/${item.unique_key}/`;
 
                   const pdfIcon =
-                    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg";
+                    "/assets/icons/ic_filepdf.svg";
                   const viewIcon =
-                    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg";
+                    "/assets/icons/ic_eye.svg";
                   const downloadIcon =
-                    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg";
+                    "/assets/icons/ic_download_file.svg";
 
                   return (
                     <div

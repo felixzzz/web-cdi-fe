@@ -67,7 +67,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": pagePath,
+        "en-US": `/en${pagePath}`,
         "id-ID": `/id${pagePath}`,
       },
     },
@@ -126,7 +126,7 @@ export default async function Page({ params }: PageProps) {
   ];
 
   const shareUrl = encodeURIComponent(
-    `https://cdi-be.cmlabs.dev/${params.locale}/media/news/${params.slug}`
+    `${process.env.NEXT_PUBLIC_URL}/${params.locale}/media/news/${params.slug}`
   );
 
   return (

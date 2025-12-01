@@ -33,9 +33,9 @@ interface TransformedItem {
 }
 
 const FILE_PREVIEW_BASE_URL =
-  "https://cdi-be.cmlabs.dev/file/preview/default/investor-publication/";
+  `${process.env.NEXT_PUBLIC_URL}/file/preview/default/investor-publication/`;
 const FILE_DOWNLOAD_BASE_URL =
-  "https://cdi-be.cmlabs.dev/file/download/default/investor-publication/";
+  `${process.env.NEXT_PUBLIC_URL}/file/download/default/investor-publication/`;
 
 const transformItem = (item: PublicationItem): TransformedItem => ({
   id: item.ulid,
@@ -47,7 +47,6 @@ const transformItem = (item: PublicationItem): TransformedItem => ({
   downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
 });
 
-// --- Pagination Component ---
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -399,7 +398,7 @@ export function Publications({
                           <span>.</span>
                         </p>
                         <Image
-                          src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg"
+                          src="/assets/icons/ic_filepdf.svg"
                           width={30}
                           height={24}
                           alt="See all icon"
@@ -414,7 +413,7 @@ export function Publications({
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
-                            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg"
+                            src="/assets/icons/ic_eye.svg"
                             width={20}
                             height={20}
                             alt="See all icon"
@@ -429,7 +428,7 @@ export function Publications({
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
-                            src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg"
+                            src="/assets/icons/ic_download_file.svg"
                             width={20}
                             height={20}
                             alt="Download icon"

@@ -52,7 +52,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/contact-us",
+        "en-US": "/en/contact-us",
         "id-ID": "/id/contact-us",
       },
     },

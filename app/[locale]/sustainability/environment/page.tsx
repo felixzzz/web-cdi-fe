@@ -53,7 +53,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/sustainability/environment",
+        "en-US": "/en/sustainability/environment",
         "id-ID": "/id/sustainability/environment",
       },
     },
@@ -130,7 +130,7 @@ export default async function Page({
           "Financial Information for Investors"
         }
         subtitle={sustainability_environment_banner.content}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <EnvironmentalResponsibility data={sustainability_environment_overview} />
       <EnergyEmission data={energyData!} />

@@ -7,10 +7,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { MaterialityItem, MaterialityResponse } from "@/types/Sustainabilitys/Sustainability";
 
-const ARROW_ICON_URL = "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_arrow_roulette.svg";
-const WHEEL_IMAGE_URL = "https://cdi-be.cmlabs.dev/assets/frontend/images/sustainability/spin_roulette.webp";
-const DOWNLOAD_ICON_URL = "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_white.svg";
-const CHECK_ICON_URL = "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_bold_duotone_check_circle.svg";
+const ARROW_ICON_URL = `${process.env.NEXT_PUBLIC_URL}/assets/icons/ic_arrow_roulette.svg`;
+const WHEEL_IMAGE_URL = `${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/sustainability/spin_roulette.webp`;
+const DOWNLOAD_ICON_URL = `${process.env.NEXT_PUBLIC_URL}/assets/frontend/icons/ic_download_white.svg`;
+const CHECK_ICON_URL = `${process.env.NEXT_PUBLIC_URL}/assets/frontend/icons/ic_bold_duotone_check_circle.svg`;
 
 interface FrameworkProps {
     data: MaterialityResponse;

@@ -52,7 +52,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/our-business",
+        "en-US": "/en/our-business",
         "id-ID": "/id/our-business",
       },
     },
@@ -106,7 +106,7 @@ export default async function Page({ params: { locale } }: BussinesPageProps) {
         imageSrc={our_business_banner.file_url}
         title={our_business_banner.title || "About Chandra Daya Investasi"}
         subtitle={stripHtml(our_business_banner.content)}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <Business items={overviewData} overview={our_business_overview} />
     </main>

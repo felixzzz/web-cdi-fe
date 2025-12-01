@@ -54,7 +54,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/investor/report",
+        "en-US": "/en/investor/report",
         "id-ID": "/id/investor/report",
       },
     },
@@ -119,7 +119,7 @@ export default async function Page({ params: { locale } }: ReportPageProps) {
         imageSrc={investor_report_banner.file_url}
         title={investor_report_banner.title || "Investor Report"}
         subtitle={investor_report_banner.content}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <NavbarThemeTrigger theme="light" />
       <FinancialBanner data={investor_report_overview} />

@@ -16,8 +16,8 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
   const { title, content, image, file_information_en, ulid } = data;
   const fileInfo = file_information_en;
 
-  const ctaViewUrl = `https://cdi-be.cmlabs.dev/file/preview/default/sustainability-content/${ulid}/${fileInfo?.title}`;
-  const ctaDownloadUrl = `https://cdi-be.cmlabs.dev/file/download/default/sustainability-content/${ulid}/${fileInfo?.title}`;
+  const ctaViewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/default/sustainability-content/${ulid}/${fileInfo?.title}`;
+  const ctaDownloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/default/sustainability-content/${ulid}/${fileInfo?.title}`;
   return (
     <section
       aria-labelledby="business-ethics-heading"
@@ -67,7 +67,7 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
                     <span>.</span>
                   </div>
                   <Image
-                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf_white.svg"
+                    src="/assets/icons/ic_filepdf_white.svg"
                     width={28}
                     height={20}
                     alt="See all icon"
@@ -83,7 +83,7 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye_white.svg"
+                    src="/assets/icons/ic_eye_white.svg"
                     width={28}
                     height={20}
                     alt="See all icon"
@@ -98,7 +98,7 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file_white.svg"
+                    src="/assets/icons/ic_download_file_white.svg"
                     width={28}
                     height={20}
                     alt="See all icon"
