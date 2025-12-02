@@ -160,7 +160,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
 
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
-        <span className="text-base md:text-md leading-normal md:leading-[24px] text-justify">{t("calendar_subtitle")}</span>
+        <span className="text-sm md:text-base leading-normal md:leading-[24px] text-justify">{t("calendar_subtitle")}</span>
       </div>
 
       <nav

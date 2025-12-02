@@ -27,7 +27,7 @@ export function CodeOfConduct({ data, filesData }: CodeOfConductProps) {
               {data.title}
             </h2>
             <div
-              className="max-w-full prose prose-invert prose-base text-base md:text-md leading-normal md:leading-[24px] text-justify"
+              className="max-w-full prose prose-invert prose-base text-sm md:text-base leading-normal md:leading-[24px] text-justify"
               dangerouslySetInnerHTML={{ __html: data.content || "" }}
             />
           </div>

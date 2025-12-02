@@ -1,7 +1,4 @@
-import {
-  BusinessItem,
-  BusinessSection,
-} from "@/types/OurBusiness/Bussines";
+import { BusinessItem, BusinessSection } from "@/types/OurBusiness/Bussines";
 import { BusinessCard, BusinessCardProps } from "./BusinessCard";
 
 interface BusinessProps {
@@ -14,8 +11,12 @@ export function Business({ overview, items }: BusinessProps) {
     title: item.title,
     imageUrl: item.image,
     descriptionHtml: item.description,
-    tags: item.tabs.map((tab) => tab.title), 
-    route: `our-business/${item.title_en.toLowerCase().replace(/\blogistic\b/g, "logistics").replace(/&/g, "and").replace(/\s+/g, "-")}`,
+    tags: item.tabs.map((tab) => tab.title),
+    route: `our-business/${item.title_en
+      .toLowerCase()
+      .replace(/\blogistic\b/g, "logistics")
+      .replace(/&/g, "and")
+      .replace(/\s+/g, "-")}`,
   }));
 
   return (
@@ -24,7 +25,7 @@ export function Business({ overview, items }: BusinessProps) {
         Our Business Sectors
       </h2>
 
-      <div className="flex w-full flex-row md:aspect-video">
+      <div className="grid grid-cols-2 md:flex md:flex-row w-full md:aspect-video">
         {cardData.map((card) => (
           <BusinessCard
             key={card.title}
@@ -32,7 +33,7 @@ export function Business({ overview, items }: BusinessProps) {
             imageUrl={card.imageUrl}
             descriptionHtml={card.descriptionHtml}
             tags={card.tags}
-            route={card.route} 
+            route={card.route}
           />
         ))}
       </div>
@@ -41,7 +42,7 @@ export function Business({ overview, items }: BusinessProps) {
         <div className="bg-[#091A24] text-white pt-10 pb-20">
           <div className="container mx-auto  ">
             <div
-              className="font-normal text-neutral-300 space-y-6 text-base md:text-md md:leading-[24px] text-justify"
+              className="font-normal text-neutral-300 space-y-6 text-sm md:text-base leading-snug md:leading-loose text-justify"
               dangerouslySetInnerHTML={{ __html: overview.content }}
             />
           </div>

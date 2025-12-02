@@ -120,7 +120,7 @@ export default async function Page({ params: { locale } }: WaterPageProps) {
           href={waterData.link_url}
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
-          <span className="text-sm md:text-md">
+          <span className="text-sm md:text-base">
             {locale === "en"
               ? waterData.link_title_en
               : waterData.link_title_id}
