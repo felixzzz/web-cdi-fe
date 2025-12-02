@@ -93,7 +93,7 @@ export function FinancialTable({ data }: FinancialTableProps) {
                         className={`py-4 px-6 text-neutral-900 ${
                           cellIndex === 0
                             ? "text-left font-normal"
-                            : "text-right border-l border-neutral-400"
+                            : "text-left border-l border-neutral-400"
                         }`}
                       >
                         {cell.text}
