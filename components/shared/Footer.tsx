@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = ({
 
   return (
     <footer
-      className="py-12 bg-[#091A24] text-white bg-contain bg-no-repeat bg-center"
+      className="font-sans py-12 bg-[#091A24] text-white bg-contain bg-no-repeat bg-center"
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       role="contentinfo"
     >
@@ -62,7 +62,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
 
-        <div className="flex justify-between flex-col lg:flex-row pb-12 mb-12 border-b border-b-neutral-8 gap-y-10 lg:gap-y-0">
+        <div className="flex justify-between flex-col lg:flex-row pb-12 mb-12 border-b border-b-neutral-600 gap-y-10 lg:gap-y-0">
           <address className="flex flex-col gap-6 max-w-sm not-italic">
             <div>
               <h2 className="font-medium text-[22px]">{name}</h2>
@@ -113,7 +113,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-xs text-neutral-3 whitespace-nowLrap"
+                    className="text-xs text-nowrap text-neutral-3 whitespace-nowrap"
                   >
                     {link.text}
                   </Link>
