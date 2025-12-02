@@ -51,7 +51,7 @@ function ContentBlock({
             </h3>
           )}
           <div
-            className="prose prose-invert prose-base max-w-none text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
+            className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-relaxed md:leading-loose text-justify"
             dangerouslySetInnerHTML={{ __html: contentHtml || "" }}
           />
         </div>
@@ -79,7 +79,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
             )}
             {tab.description && (
               <div
-                className="prose prose-invert prose-base max-w-none text-base md:text-md leading-tight md:leading-[24px] text-justify"
+                className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-relaxed md:leading-loose text-justify"
                 dangerouslySetInnerHTML={{ __html: tab.description }}
               />
             )}

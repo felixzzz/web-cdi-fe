@@ -49,7 +49,7 @@ export const Hero: React.FC<HeroProps> = ({
               {title}
             </h1>
             <div
-              className="text-md md:text-[12px] leading-snug md:leading-[24px] font-normal text-white space-y-6 max-w-2xl text-justify"
+              className="text-sm md:text-base leading-relaxed md:leading-loose text-justify font-normal text-white space-y-6 max-w-2xl"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
           </div>

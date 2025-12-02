@@ -21,7 +21,7 @@ export function EnvironmentalResponsibility({ data }: EnvResponsibilityProps) {
           </h2>
 
           <div
-          className="max-w-full prose prose-invert prose-base text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-200"
+          className="max-w-full prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-justify text-neutral-200"
             dangerouslySetInnerHTML={{ __html: data.content || "" }}
           >
           </div>

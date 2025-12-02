@@ -191,7 +191,7 @@ export default async function Page({
         }
       >
         <div
-          className="prose prose-invert prose-base text-neutral-200 text-[12px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
+          className="prose prose-invert prose-base text-neutral-200 text-sm md:text-base leading-relaxed md:leading-loose text-justify"
           // className="text-[12px] leading-[24px] font-normal text-white py-1"
           dangerouslySetInnerHTML={{
             __html: about_us_management_overview.content || "",
