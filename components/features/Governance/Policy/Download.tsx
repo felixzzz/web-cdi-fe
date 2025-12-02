@@ -227,7 +227,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
     <section className="container mx-auto   py-[5%] lg:py-[8%]">
       <div className="flex gap-1 text-neutral-10 items-center text-sm md:text-base">
         <Link className="text-blue-base hover:underline" href="/governance">
-          Governance
+          {t('Governance')}
         </Link>
         <ChevronRight className="text-lg w-4 h-4" />
         <span className="font-medium">{t('Policy')}</span>
@@ -257,7 +257,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
             <div className="grid lg:grid-cols-2 gap-2 pb-10 border-b border-b-neutral-5">
               <div>
                 <p className="text-2xl lg:text-[28px] font-medium text-neutral-13">
-                  Policy
+                  {t('Policy')}
                 </p>
               </div>
               <div>

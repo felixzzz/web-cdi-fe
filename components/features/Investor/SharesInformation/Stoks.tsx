@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { clsx } from "clsx";
 import { TableInvestorSection } from "@/types/Investor/Shares";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface ShareholdersContentProps {
   data: TableInvestorSection;
@@ -113,6 +114,7 @@ export function StocksInformation({
   showShareholders,
   showDividend,
 }: StocksInformationProps) {
+  const t = useTranslations("StoksInformation");
   const [activeTab, setActiveTab] = useState<TabId>("shareholders");
 
   const tabsData: TabDataItem[] = [];
@@ -147,7 +149,7 @@ export function StocksInformation({
               href={`${process.env.NEXT_PUBLIC_URL}/investor/shares-information?tab=stocks`}
               className="text-neutral-13 text-lg p-4 md:w-full md:text-start font-medium md:border-l-4 border-l-neutral-100 md:border-l-[#2474A5] md:border-t-2 md:border-t-neutral-100 border-b-4 md:border-b-2 border-b-[#2474A5] md:border-b-neutral-100"
             >
-              Stocks
+              {t('title')}
             </Link>
           </nav>
 

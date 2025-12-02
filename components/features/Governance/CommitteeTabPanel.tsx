@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { FileDownloadCTA } from "./FileDownloadCTA";
 
 type FileInfo = {
-  id: number;
+  id: string | number;
   title: string;
   fileSize: string;
   viewUrl: string;
@@ -33,6 +33,9 @@ export const CommitteeTabPanel: React.FC<CommitteeTabPanelProps> = ({
       .replace(/\s+/g, " ")
       .trim();
   }, [tab.contentHtml]);
+
+  console.log('files download')
+  console.log(tab['files'])
 
   return (
     <div className="py-8">

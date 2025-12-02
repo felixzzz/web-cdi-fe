@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { ImageIcon, X } from "lucide-react";
 import { Award } from "./AwardCard";
+import { useTranslations } from "next-intl";
 
 interface DetailModalProps {
   award: Award;
@@ -16,12 +17,25 @@ export const DetailModal: React.FC<DetailModalProps> = ({
   onClose,
   onImageClick,
 }) => {
+  const t = useTranslations("AboutUs");
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "unset";
     };
   }, []);
+    const formatDate = (dateString?: string) => {
+      if (!dateString) return award.year;
+      try {
+        return new Date(dateString).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+      } catch {
+        return dateString;
+      }
+    };
 
   return (
     <div
@@ -36,7 +50,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({
 
       <div className="rounded-2xl bg-[#091A24] relative z-[1000] w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl max-h-[80vh] flex flex-col text-white shadow-2xl">
         <div className="px-10 py-5 flex items-center justify-between border-b border-white/16 bg-[#091A24] rounded-t-2xl sticky top-0 z-10">
-          <p className="font-medium text-[22px]">Detail Certification</p>
+          <p className="font-medium text-[22px]">{t('title_modal')}</p>
           <button
             onClick={onClose}
             aria-label="Close modal"
@@ -104,7 +118,9 @@ export const DetailModal: React.FC<DetailModalProps> = ({
             </div>
 
             <div className="lg:col-span-2 flex flex-col gap-4">
-              <p className="text-sm text-neutral-400">{award.year}</p>
+              <p className="text-sm text-neutral-400">
+          {formatDate(award.date)}
+              </p>
 
               <p className="text-2xl font-medium text-white">{award.title}</p>
 
@@ -114,7 +130,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({
               />
 
               <div className="mt-2">
-                <p className="text-sm font-medium mb-1 text-white">Awarder</p>
+                <p className="text-sm font-medium mb-1 text-white">{t('Awarded')}</p>
                 <p className="font-light text-neutral-300 text-sm">
                   {award.awarder}
                 </p>
@@ -122,7 +138,7 @@ export const DetailModal: React.FC<DetailModalProps> = ({
 
               <div>
                 <p className="text-sm font-medium mb-1 text-white">
-                  Categories
+                  {t('Categories')}
                 </p>
                 <p className="font-light text-neutral-300 text-sm">
                   {award.category || "New"}

@@ -189,7 +189,7 @@ export const Awards: React.FC<AwardsProps> = ({
             {title || "Recognized for our commitment"}
           </h2>
           <div
-            className="prose prose-invert prose-base text-neutral-100 max-w-none text-[10px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
+            className="prose prose-invert prose-base text-neutral-100 max-w-none text-base md:text-md leading-normal md:leading-[24px] text-justify"
             dangerouslySetInnerHTML={{ __html: description || "" }}
           />
         </div>

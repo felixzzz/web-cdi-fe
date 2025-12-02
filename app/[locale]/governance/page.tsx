@@ -158,11 +158,13 @@ export default async function Page({
         id: tab.id,
         title: tab.file_name,
         fileSize: tab.file.size,
-        viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/committe/${tab.file_name}/`,
-        downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/committe/${tab.file_name}/`,
+        viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/committee/${tab.file_name}/`,
+        downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/committee/${tab.file_name}/`,
       },
     ],
   }));
+
+  console.log(otherTabs)
 
   const SECTION_IDS = {
     CORP_SEC: "corporate-secretary",

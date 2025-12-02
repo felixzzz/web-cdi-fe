@@ -1,6 +1,7 @@
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { informationService } from "@/services/Global/informationService";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 interface PageProps {
   params: {
@@ -71,6 +72,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params: { locale } }: PageProps) {
+  const t = await getTranslations("Regulation");
   const data = await informationService.getCredentialData(locale);
 
   const termsData = data.disclaimer;
@@ -81,7 +83,7 @@ export default async function Page({ params: { locale } }: PageProps) {
         <NavbarThemeTrigger theme="light" />
         <section className="container mx-auto   py-40">
           <h1 className="text-neutral-13 font-medium text-2xl lg:text-[28px] mb-5">
-            Content not available.
+            {t("title_not_found")}
           </h1>
         </section>
       </main>

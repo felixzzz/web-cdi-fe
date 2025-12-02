@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export interface ArticleCardProps {
   href: string;
@@ -20,6 +21,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   date,
   title,
 }) => {
+  const t = useTranslations('Media')
 
   return (
     <Link
@@ -49,7 +51,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
         </h3>
 
         <div className="text-[#2474A5] flex items-center gap-2 mt-auto text-md font-medium">
-          Read full article <ChevronRight size={20} />
+          {t('read_full')} <ChevronRight size={20} />
         </div>
       </div>
     </Link>

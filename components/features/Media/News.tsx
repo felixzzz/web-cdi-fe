@@ -27,7 +27,8 @@ interface NewsProps {
 }
 
 const ITEMS_PER_PAGE = 15;
-const FILE_STORAGE_URL = `${process.env.NEXT_PUBLIC_URL}/file-storage/`;
+const FILE_PREVIEW_URL = `${process.env.NEXT_PUBLIC_URL}/file-storage/`;
+const FILE_DOWNLOAD_URL = `${process.env.NEXT_PUBLIC_URL}/file-download/`;
 
 export function News({ mediaData, pressReleaseData }: NewsProps) {
   const t = useTranslations("Media");
@@ -280,9 +281,9 @@ function ArticleCard({
 function PressReleaseCard({ item }: { item: PressReleaseItem }) {
   const t = useTranslations("Media");
 
-  const viewUrl = `${FILE_STORAGE_URL}${item.file_en.path}`;
-  const downloadUrlEn = `${FILE_STORAGE_URL}${item.file_en.path}`;
-  const downloadUrlId = `${FILE_STORAGE_URL}${item.file_id.path}`;
+  const viewUrl = `${FILE_PREVIEW_URL}${item.file_en.path}`;
+  const downloadUrlEn = `${FILE_DOWNLOAD_URL}${item.file_en.path}`;
+  const downloadUrlId = `${FILE_DOWNLOAD_URL}${item.file_id.path}`;
 
   const pdfIcon =
     "/assets/icons/ic_filepdf.svg";

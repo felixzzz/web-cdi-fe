@@ -159,7 +159,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         linkIcon={<ArrowUpRight size={14} />}
       >
         <div
-          className="text-[10px] md:text-[12px] leading-tight md:leading-[24px] font-normal text-white space-y-6"
+          className="text-base md:text-md leading-tight md:leading-[24px] font-normal text-white space-y-6"
           dangerouslySetInnerHTML={{ __html: home_about_section.content || "" }}
         />
       </AboutUs>
@@ -188,7 +188,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         links={linksData}
       >
         <div
-          className="prose prose-invert prose-base text-[10px] md:text-[12px] leading-tight md:leading-[24px] text-neutral-300 text-justify"
+          className="prose prose-invert prose-base text-base md:text-md leading-tight md:leading-[24px] text-neutral-300 text-justify"
           // className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
           dangerouslySetInnerHTML={{
             __html: home_journey_content.content || "",

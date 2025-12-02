@@ -44,7 +44,7 @@ export function RiskManagement({ data }: RiskManagementProps) {
               {TITLE}
             </h2>
             <div
-              className="max-w-full prose prose-invert prose-base text-[10px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-300"
+              className="max-w-full prose prose-invert prose-base text-base md:text-md leading-normal md:leading-[24px] text-justify text-neutral-300"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
           </div>
