@@ -52,7 +52,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/sustainability/social",
+        "en-US": "/en/sustainability/social",
         "id-ID": "/id/sustainability/social",
       },
     },
@@ -127,7 +127,7 @@ export default async function Page({ params: { locale } }: SocialPageProps) {
           "Financial Information for Investors"
         }
         subtitle={sustainability_social_banner.content}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <EmpoweringCommunities data={empoweringData} />
       <HealthAndSafety data={healthData!} />

@@ -16,7 +16,6 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
   subtitle,
   data,
 }) => {
-  const baseUrl = "https://cdi-be.cmlabs.dev";
 
   const t = useTranslations("AboutUs");
 
@@ -40,8 +39,8 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
         {data &&
           data.length > 0 &&
           data.map((item) => {
-            const itemViewUrl = `${baseUrl}/file/preview/default/${item.type}/${item.unique_key}/`;
-            const itemDownloadUrl = `${baseUrl}/file/download/default/${item.type}/${item.unique_key}/`;
+            const itemViewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${item.type}/${item.unique_key}/`;
+            const itemDownloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/default/${item.type}/${item.unique_key}/`;
 
             return (
               <article
@@ -59,7 +58,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                     </div>
                     {item.file.format === "pdf" && (
                       <Image
-                        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg"
+                        src="/assets/icons/ic_filepdf.svg"
                         width={28}
                         height={20}
                         alt="PDF icon"
@@ -77,7 +76,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                     rel="noopener noreferrer"
                   >
                     <Image
-                      src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg"
+                      src="/assets/icons/ic_eye.svg"
                       width={20}
                       height={20}
                       alt="View icon"
@@ -92,7 +91,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                     rel="noopener noreferrer"
                   >
                     <Image
-                      src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg"
+                      src="/assets/icons/ic_download_file.svg"
                       width={20}
                       height={20}
                       alt="Download icon"

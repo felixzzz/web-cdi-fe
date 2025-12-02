@@ -64,7 +64,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/about-us",
+        "en-US": "/en/about-us",
         "id-ID": "/id/about-us",
       },
     },
@@ -165,13 +165,13 @@ export default async function Page({ params: { locale } }: AboutPageProps) {
         imageSrc={about_us_banner.file_url}
         title={about_us_banner.title || "About Chandra Daya Investasi"}
         subtitle={about_us_banner.content}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <SubNavbar links={aboutLinks} />
       <Overview
         id="about-us"
         bgImageUrl={about_us_company_overview_background.file_url}
-        logoSrc="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_footer_new.svg"
+        logoSrc="/assets/icons/logo_cdi_footer_new.svg"
         logoAlt="Chandra Asri Group Logo"
         logoWidth={200}
         logoHeight={80}
@@ -218,7 +218,7 @@ export default async function Page({ params: { locale } }: AboutPageProps) {
       <Information
         eyebrow={t("eye_information")}
         title={t("title_information")}
-        backgroundImageUrl="https://cdi-be.cmlabs.dev/assets/frontend/images/homepage/quick_links.webp"
+        backgroundImageUrl={`${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/homepage/quick_links.webp`}
         links={quickLinksData}
       />
     </main>

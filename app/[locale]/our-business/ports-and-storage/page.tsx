@@ -55,7 +55,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/our-business/ports-and-storage",
+        "en-US": "/en/our-business/ports-and-storage",
         "id-ID": "/id/our-business/ports-and-storage",
       },
     },
@@ -119,7 +119,7 @@ export default async function Page({
       <Hero
         imageSrc={banner_image}
         title={banner_title}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <Overview
         title={overview_title}
@@ -136,7 +136,7 @@ export default async function Page({
           href={link_url}
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
-          <span className="text-sm md:text-xl">
+          <span className="text-sm md:text-md">
             {locale === "en" ? link_title_en : link_title_id}
           </span>
           <span>

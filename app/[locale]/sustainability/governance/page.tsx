@@ -56,7 +56,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/sustainability/governance",
+        "en-US": "/en/sustainability/governance",
         "id-ID": "/id/sustainability/governance",
       },
     },
@@ -144,7 +144,7 @@ export default async function Page({
           "Financial Information for Investors"
         }
         subtitle={sustainability_governance_banner.content || ""}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <BusinessEthics data={businessEthicsData!} />
       <AntiCorruption data={antiCorruptionData!} />

@@ -118,7 +118,7 @@ export function HeroForm({
       <section className="container mx-auto   pt-[5%]">
         <div className="flex gap-1 text-neutral-10 items-center text-sm md:text-base">
           <Link className="text-[#2474A5] hover:underline" href="/governance">
-            Governance
+            {t("Governance")}
           </Link>
           <ChevronRight className="text-lg w-4 h-4" />
           <span className="font-medium">{t("Whistleblowing")}</span>
@@ -141,7 +141,7 @@ export function HeroForm({
             </h1>
 
             <div
-              className="max-w-full prose prose-invert prose-base text-neutral-800 mb-8 text-[10px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-justify"
+              className="max-w-full prose prose-invert prose-base text-neutral-800 mb-8 text-base md:text-md leading-normal md:leading-[24px] text-justify"
               dangerouslySetInnerHTML={{
                 __html: governance_whistleblowing.content || "",
               }}

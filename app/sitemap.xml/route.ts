@@ -1,5 +1,3 @@
-// app/sitemap.xml/route.ts
-
 export async function GET(): Promise<Response> {
   let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "";
   if (baseUrl.endsWith("/")) {
@@ -7,16 +5,21 @@ export async function GET(): Promise<Response> {
   }
 
   const locales = ["en", "id"];
-  
+
   const sitemapTypes = [
-    '/pages',      
-    '/news',       
-    '/management'  
+    "/pages",
+    "/about-us",
+    "/management",
+    "/our-business",
+    "/investor",
+    "/governance",
+    "/sustainability",
+    "/media",
   ];
 
   // cSpell:disable-next-line
   let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/style.xsl"?>
-    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+  <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
   locales.forEach((locale) => {
     sitemapTypes.forEach((type) => {

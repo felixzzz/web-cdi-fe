@@ -53,11 +53,11 @@ export default async function LocaleLayout({ children, params }: Props) {
       {children}
       <Toaster />
       <Footer
-        backgroundImageUrl="https://cdi-be.cmlabs.dev/assets/frontend/images/footer.webp"
-        logoSrc="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_footer_new.svg"
+        backgroundImageUrl="/assets/images/footer.webp"
+        logoSrc="/assets/icons/logo_cdi_footer_new.svg"
         logoAlt="Chandra Daya Investasi Logo"
         contactHref="/contact-us"
-        contactText="Contact Us"
+        contactText={t("contact_us")}
         companyData={footerData}
         mainNavLinks={mainNavLinksData}
         legalNavLinks={legalNavLinksData}

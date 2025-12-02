@@ -27,7 +27,8 @@ interface NewsProps {
 }
 
 const ITEMS_PER_PAGE = 15;
-const FILE_STORAGE_URL = "https://cdi-be.cmlabs.dev/file-storage/";
+const FILE_PREVIEW_URL = `${process.env.NEXT_PUBLIC_URL}/file-storage/`;
+const FILE_DOWNLOAD_URL = `${process.env.NEXT_PUBLIC_URL}/file-download/`;
 
 export function News({ mediaData, pressReleaseData }: NewsProps) {
   const t = useTranslations("Media");
@@ -280,15 +281,15 @@ function ArticleCard({
 function PressReleaseCard({ item }: { item: PressReleaseItem }) {
   const t = useTranslations("Media");
 
-  const viewUrl = `${FILE_STORAGE_URL}${item.file_en.path}`;
-  const downloadUrlEn = `${FILE_STORAGE_URL}${item.file_en.path}`;
-  const downloadUrlId = `${FILE_STORAGE_URL}${item.file_id.path}`;
+  const viewUrl = `${FILE_PREVIEW_URL}${item.file_en.path}`;
+  const downloadUrlEn = `${FILE_DOWNLOAD_URL}${item.file_en.path}`;
+  const downloadUrlId = `${FILE_DOWNLOAD_URL}${item.file_id.path}`;
 
   const pdfIcon =
-    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg";
-  const viewIcon = "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg";
+    "/assets/icons/ic_filepdf.svg";
+  const viewIcon = "/assets/icons/ic_eye.svg";
   const downloadIcon =
-    "https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg";
+    "/assets/icons/ic_download_file.svg";
 
   return (
     <li className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 md:gap-y-0">

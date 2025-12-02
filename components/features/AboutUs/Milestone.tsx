@@ -141,7 +141,7 @@ const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] 
       {milestone.year}
     </h3>
     <Image
-      src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_timeline.svg"
+      src="/assets/icons/ic_timeline.svg"
       alt=""
       aria-hidden="true"
       width={40}

@@ -42,10 +42,10 @@ export function FinancialTable({ data }: FinancialTableProps) {
                 <th
                   scope="col"
                   key={header.text}
-                  className={`font-medium py-4 px-6 ${
-                    header.text.toLowerCase() === "explanation"
+                  className={`font-medium py-4 px-6 border-l border-neutral-300 ${
+                    header.text.toLowerCase() === "explanation" || "Penjelasan"
                       ? "text-left"
-                      : "text-right border-l border-neutral-300"
+                      : "text-right"
                   }`}
                 >
                   {header.text}

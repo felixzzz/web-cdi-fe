@@ -54,7 +54,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/about-us/awards",
+        "en-US": "/en/about-us/awards",
         "id-ID": "/id/about-us/awards",
       },
     },
@@ -118,7 +118,7 @@ export default async function Page({ params: { locale } }: AwardsPageProps) {
         imageSrc={about_us_award_banner.file_url}
         title={about_us_award_banner.title || "About Chandra Daya Investasi"}
         subtitle={about_us_award_banner.content}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <Awards
         title={about_us_award_overview.title}
@@ -130,7 +130,7 @@ export default async function Page({ params: { locale } }: AwardsPageProps) {
       <Information
         eyebrow={t("eye_information")}
         title={t("title_information")}
-        backgroundImageUrl="https://cdi-be.cmlabs.dev/assets/frontend/images/homepage/quick_links.webp"
+        backgroundImageUrl={`${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/homepage/quick_links.webp`}
         links={quickLinksData}
       />
     </main>

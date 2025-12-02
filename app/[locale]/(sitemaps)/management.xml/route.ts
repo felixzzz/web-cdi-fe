@@ -26,7 +26,6 @@ export async function GET(
     
     const allMembers = [...(bodList || []), ...(bocList || [])];
 
-    // 2. Apply the interface here instead of ': any'
     allMembers.forEach((member: TeamMember) => {
       xml += `
       <url>

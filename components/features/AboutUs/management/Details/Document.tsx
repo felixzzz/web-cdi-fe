@@ -46,7 +46,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
                   <span>.</span>
                 </div>
                 <Image
-                  src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_filepdf.svg"
+                  src="/assets/icons/ic_filepdf.svg"
                   width={28}
                   height={20}
                   alt={`${item.format} file icon`}
@@ -63,7 +63,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
                 rel="noopener noreferrer"
               >
                 <Image
-                  src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_eye.svg"
+                  src="/assets/icons/ic_eye.svg"
                   width={20}
                   height={20}
                   alt="View icon"
@@ -78,7 +78,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
                 rel="noopener noreferrer"
               >
                 <Image
-                  src="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_download_file.svg"
+                  src="/assets/icons/ic_download_file.svg"
                   width={20}
                   height={20}
                   alt="Download icon"

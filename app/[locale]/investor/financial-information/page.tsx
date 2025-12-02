@@ -51,7 +51,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/investor/financial-information",
+        "en-US": "/en/investor/financial-information",
         "id-ID": "/id/investor/financial-information",
       },
     },
@@ -113,7 +113,7 @@ export default async function Page({ params: { locale } }: FinancialPageProps) {
           investor_financial_banner.title ||
           "Financial Information for Investors"
         }
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <NavbarThemeTrigger theme="light" />
 

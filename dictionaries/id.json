@@ -6,6 +6,9 @@
     "see_title": "Lihat Semua",
     "description": "Dokumen tersedia dalam Bahasa Inggris dan Bahasa Indonesia. Ubah bahasa situs web untuk melihatnya dalam bahasa lain."
   },
+  "StoksInformation": {
+    "title": "Saham"
+  },
   "Homepage": {
     "more": "Pelajari Lebih Lanjut",
     "about": "Tentang Kami",
@@ -30,7 +33,9 @@
     "Company_Profile": "Profil Perusahaan",
     "button_back": "Kembali",
     "Read_More": "Baca Selengkapnya",
-    "Awarded": "Pemberi Penghargaan"
+    "Awarded": "Pemberi Penghargaan",
+    "Categories": "Kategori",
+    "title_modal": "Detail Certification"
   },
   "Management": {
     "download_title": "Tata Kelola Perusahaan yang Baik",
@@ -101,6 +106,7 @@
       "Policy": "Kebijakan",
       "Whistleblowing": "Pelaporan Pelanggaran",
       "WhistleblowingPage": {
+        "Governance": "Tata Kelola",
         "Whistleblowing": "Pelaporan Pelanggaran",
         "message": "Ajukan pertanyaan Anda",
         "message_placeholder": "Tulis komentar atau pertanyaan tambahan Anda di sini",
@@ -124,7 +130,8 @@
         "download_id": "Unduh-ID",
         "download_en": "Unduh-EN",
         "download_view": "Lihat",
-        "help": "Silakan pilih tab."
+        "help": "Silakan pilih tab.",
+        "Governance": "Tata Kelola"
       }
     },
     "Sustainability": {
@@ -143,7 +150,11 @@
     "press_release": "Siaran Pers",
     "News": "Berita",
     "Media": "Berita",
-    "share": "Bagikan postingan ini"
+    "share": "Bagikan postingan ini",
+    "latest_articles": "ARTIKEL TERBARU",
+    "description": "Temukan informasi terbaru dari industri energi",
+    "see_title": "Lihat Semua",
+    "read_full": "Baca artikel lengkap"
   },
   "Contact": {
     "message": "Ajukan pertanyaan Anda",
@@ -194,14 +205,15 @@
     "contact_us": "Hubungi Kami"
   },
   "Layout": {
-    "who_we_are": "Tentang Kami",
+    "who_we_are": "Siapa Kami",
     "our_business": "Bisnis Kami",
     "sustainability": "Keberlanjutan",
     "investor": "Investor",
     "terms": "Syarat & Ketentuan",
     "privacy": "Kebijakan Privasi",
     "cookies": "Persetujuan Cookie",
-    "disclaimer": "Sanggahan"
+    "disclaimer": "Pernyataan Penyangkalan",
+    "contact_us": "Hubungi Kami"
   },
   "Cookies": {
     "title": "Situs Ini Menggunakan Cookie",
@@ -210,6 +222,11 @@
     "more_info_text": "Lihat <privacy_policy>Kebijakan Privasi</privacy_policy> dan <cookies_notice>Pemberitahuan Cookie</cookies_notice> kami untuk informasi lebih lanjut.",
     "decline": "Tolak",
     "accept": "Terima"
+  },
+  "Footer": {
+    "WhoWeAre": "Siapa Kami",
+    "OurBusiness": "Bisnis Kami",
+    "Sustainability": "Keberlanjutan",
+    "Investor": "Investor"
   }
-  
 }

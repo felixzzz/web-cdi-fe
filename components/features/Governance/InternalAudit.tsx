@@ -11,8 +11,6 @@ interface InternalAuditProps {
   filesData: ApiFileResponse;
 }
 
-const BASE_URL = "https://cdi-be.cmlabs.dev";
-
 export function InternalAudit({ data, filesData }: InternalAuditProps) {
   return (
     <section
@@ -48,8 +46,8 @@ export function InternalAudit({ data, filesData }: InternalAuditProps) {
         </div>
 
         {filesData.map((file) => {
-          const viewUrl = `${BASE_URL}/file/preview/default/${file.type}/${file.unique_key}/${file.name}`;
-          const downloadUrl = `${BASE_URL}/file/download/default/${file.type}/${file.unique_key}/`;
+          const viewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${file.type}/${file.unique_key}/${file.name}`;
+          const downloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/default/${file.type}/${file.unique_key}/`;
 
           return (
             <FileDownloadCTA

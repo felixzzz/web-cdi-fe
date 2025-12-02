@@ -79,7 +79,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
             )}
             {tab.description && (
               <div
-                className="prose prose-invert prose-base max-w-none text-[10px] md:text-[12px] leading-tight md:leading-[24px] text-justify"
+                className="prose prose-invert prose-base max-w-none text-base md:text-md leading-tight md:leading-[24px] text-justify"
                 dangerouslySetInnerHTML={{ __html: tab.description }}
               />
             )}

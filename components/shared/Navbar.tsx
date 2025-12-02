@@ -13,12 +13,12 @@ const languages = [
   {
     code: "en",
     label: "English",
-    flag: "https://cdi-be.cmlabs.dev/assets/frontend/icons/flag_en.svg",
+    flag: "/assets/icons/flag_en.svg",
   },
   {
     code: "id",
     label: "Indonesia",
-    flag: "https://cdi-be.cmlabs.dev/assets/frontend/icons/flag_id.svg",
+    flag: "/assets/icons/flag_id.svg",
   },
 ];
 
@@ -173,7 +173,7 @@ export function Navbar() {
         <div className="container mx-auto   flex gap-3 justify-between items-center">
           <Link href="/" className="flex-shrink-0" onClick={handleLinkClick}>
             <Image
-              src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_white.svg"
+              src="/assets/icons/logo_cdi_white.svg"
               alt="CDI Logo White"
               width={160}
               height={48}
@@ -184,7 +184,7 @@ export function Navbar() {
               priority
             />
             <Image
-              src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_colored.svg"
+              src="/assets/icons/logo_cdi_colored.svg"
               alt="CDI Logo Colored"
               width={160}
               height={48}
@@ -247,7 +247,7 @@ export function Navbar() {
                       }
                     >
                       <Image
-                        src="https://cdi-be.cmlabs.dev/assets/frontend/icons/polygon.svg"
+                        src="/assets/icons/polygon.svg"
                         alt="Dropdown arrow"
                         width={16}
                         height={16}
@@ -333,7 +333,7 @@ export function Navbar() {
                   }}
                 >
                   <Image
-                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/polygon.svg"
+                    src="/assets/icons/polygon.svg"
                     alt="Dropdown arrow"
                     width={16}
                     height={16}
@@ -386,7 +386,7 @@ export function Navbar() {
               {isLangDropdownOpen && (
                 <div className="absolute top-8 right-0 w-max z-10 pt-2">
                   <Image
-                    src="https://cdi-be.cmlabs.dev/assets/frontend/icons/polygon.svg"
+                    src="/assets/icons/polygon.svg"
                     alt="Dropdown arrow"
                     width={16}
                     height={16}
@@ -443,7 +443,7 @@ export function Navbar() {
           <div className="py-5 h-full flex flex-col">
             <div className="flex justify-between items-center px-4 md:px-6 mb-6">
               <Image
-                src="https://cdi-be.cmlabs.dev/assets/frontend/logo_cdi_colored.svg"
+              src="/assets/icons/logo_cdi_colored.svg"
                 alt="CDI Logo"
                 width={140}
                 height={42}

@@ -6,6 +6,9 @@
     "see_title": "See All",
     "description": "Documents are available in both English and Bahasa Indonesia. Change the website language to view them in another language."
   },
+  "StoksInformation": {
+    "title": "Stocks"
+  },
   "Homepage": {
     "more": "Learn More",
     "about": "About Us",
@@ -30,7 +33,9 @@
     "Company_Profile": "Company Profile",
     "button_back": "Back",
     "Read_More": "Read More",
-    "Awarded": "Awarder"
+    "Awarded": "Awarder",
+    "Categories": "Categories",
+    "title_modal": "Detail Certification"
   },
   "Management": {
     "download_title": "Good Corporate Governance",
@@ -101,6 +106,7 @@
       "Policy": "Policy",
       "Whistleblowing": "Whistleblowing",
       "WhistleblowingPage": {
+        "Governance": "Governance",
         "Whistleblowing": "Whistleblowing",
         "message": "Add your questions",
         "message_placeholder": "Write your comment or additional question here",
@@ -124,7 +130,8 @@
         "download_view": "View",
         "download_id": "Download-ID",
         "download_en": "Download-EN",
-        "help": "Please select a tab."
+        "help": "Please select a tab.",
+        "Governance": "Governance"
       }
     },
     "Sustainability": {
@@ -143,7 +150,11 @@
     "press_release": "Press Release",
     "News": "News",
     "Media": "News",
-    "share": "Share this article"
+    "share": "Share this article",
+    "latest_articles": "LATEST ARTICLES",
+    "description": "Discover the latest from the energy industry",
+    "see_title": "See All",
+    "read_full": "Read full article"
   },
   "Contact": {
     "message": "Add your questions",
@@ -201,7 +212,8 @@
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy",
     "cookies": "Cookies Consent",
-    "disclaimer": "Disclaimer"
+    "disclaimer": "Disclaimer",
+    "contact_us": "Contact Us"
   },
   "Cookies": {
     "title": "This Site Uses Cookies",
@@ -209,5 +221,11 @@
     "more_info_text": "View our <privacy_policy>Privacy Policy</privacy_policy> and <cookies_notice>Cookies Notice</cookies_notice> for more information.",
     "decline": "Decline",
     "accept": "Accept"
+  },
+  "Footer": {
+    "WhoWeAre": "Who We Are",
+    "OurBusiness": "Our Business",
+    "Sustainability": "Sustainability",
+    "Investor": "Investor"
   }
 }

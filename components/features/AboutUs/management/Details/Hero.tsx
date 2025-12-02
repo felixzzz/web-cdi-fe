@@ -15,7 +15,7 @@ type BocDetailHeroProps = {
 };
 
 const HERO_BACKGROUND_IMAGE =
-  "https://cdi-be.cmlabs.dev/assets/frontend/images/about/team_background_hero.webp";
+  `${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/about/team_background_hero.webp`;
 
 export const DetailHero = ({
   name,
@@ -68,7 +68,7 @@ export const DetailHero = ({
                 width={500}
                 height={800}
                 // className="absolute bottom-0 h-[80%] w-auto"
-                className="absolute bottom-0 right-10 translate-x-4 md:translate-x-0 md:right-10 lg:right-20 h-[55%] md:h-[90%] w-auto object-contain z-0"
+                className="absolute bottom-0 right-10 translate-x-4 md:translate-x-0 md:right-10 lg:right-96 h-[55%] md:h-[80%] w-auto object-contain z-0"
               />
             </div>
           </div>

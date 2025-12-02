@@ -53,7 +53,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/our-business/logistics",
+        "en-US": "/en/our-business/logistics",
         "id-ID": "/id/our-business/logistics",
       },
     },
@@ -113,7 +113,7 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
       <Hero
         imageSrc={banner_image}
         title={banner_title}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <Overview
         title={overview_title}

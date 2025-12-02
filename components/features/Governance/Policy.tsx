@@ -38,7 +38,7 @@ export function Policy({ data }: PolicyProps) {
               {TITLE}
             </h2>
             <div
-              className="max-w-full prose prose-invert prose-base text-[10px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
+              className="max-w-full prose prose-invert prose-base text-base md:text-md leading-normal md:leading-[24px] text-justify"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
 

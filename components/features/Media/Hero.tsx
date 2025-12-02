@@ -24,7 +24,7 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
     category: item.data.category_name,
     date: item.data.date,
     description: item.data.short_content,
-    linkUrl: item.data.route,
+    linkUrl: `${process.env.NEXT_PUBLIC_URL_LP}/media/news/${item.data.slug}`,
   }));
 
   const heroTitle =

@@ -158,11 +158,13 @@ export default async function Page({
         id: tab.id,
         title: tab.file_name,
         fileSize: tab.file.size,
-        viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/committe/${tab.file_name}/`,
-        downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/committe/${tab.file_name}/`,
+        viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/committee/${tab.file_name}/`,
+        downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/committee/${tab.file_name}/`,
       },
     ],
   }));
+
+  console.log(otherTabs)
 
   const SECTION_IDS = {
     CORP_SEC: "corporate-secretary",
@@ -191,7 +193,7 @@ export default async function Page({
       <Hero
         imageSrc={governance_banner.file_url}
         title={governance_banner.title || "About Chandra Daya Investasi"}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
       <SubNavbar links={aboutLinks} />
       <CorporateSecretary
@@ -214,7 +216,7 @@ export default async function Page({
       <Information
         eyebrow={t("eye_information")}
         title={t("title_information")}
-        backgroundImageUrl="https://cdi-be.cmlabs.dev/assets/frontend/images/homepage/quick_links.webp"
+        backgroundImageUrl={`${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/homepage/quick_links.webp`}
         links={quickLinksData}
       />
     </main>

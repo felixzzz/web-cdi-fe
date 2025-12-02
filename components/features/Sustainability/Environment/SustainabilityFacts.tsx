@@ -26,7 +26,7 @@ export function SustainabilityFacts({ data }: SustainabilityFactsProps) {
               </div>
               <div className="flex flex-col gap-4">
                 <div
-                  className="max-w-2xl prose prose-invert prose-base text-[10px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-300"
+                  className="max-w-2xl prose prose-invert prose-base text-base md:text-md leading-normal md:leading-[24px] text-justify text-neutral-300"
                   dangerouslySetInnerHTML={{ __html: item.description }}
                 ></div>
               </div>

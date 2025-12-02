@@ -5,12 +5,14 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ApiArticle } from "@/types/Homepage/home";
 import { ArticleCarousel } from "./ArticleCarousel";
+import { useTranslations } from "next-intl";
 
 interface ArticleProps {
   articles: ApiArticle[];
 }
 
 export const Article: React.FC<ArticleProps> = ({ articles }) => {
+  const t = useTranslations("Media");
   const dynamicCategories = [
     "All",
     ...Array.from(new Set(articles.map((article) => article.category_name))),
@@ -23,19 +25,18 @@ export const Article: React.FC<ArticleProps> = ({ articles }) => {
   );
 
   return (
-    <section
-      className="py-20 bg-white"
-      aria-labelledby="article-section-title"
-    >
+    <section className="py-20 bg-white" aria-labelledby="article-section-title">
       <div data-navbar-theme="dark" className="container mx-auto  ">
         <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
           <div>
-            <p className="text-neutral-500 text-base mb-4">LATEST ARTICLE</p>
+            <p className="text-neutral-500 text-base mb-4">
+              {t("latest_articles")}
+            </p>
             <h2
               id="article-section-title"
               className="text-neutral-900 font-medium text-4xl lg:text-[28px] mb-0 max-w-sm"
             >
-              Discover the latest from the energy industry
+              {t("description")}
             </h2>
           </div>
           <div className="flex items-center gap-4 justify-start lg:justify-center mt-4 lg:mt-0">
@@ -43,7 +44,7 @@ export const Article: React.FC<ArticleProps> = ({ articles }) => {
               href="/media/news"
               className="py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] font-medium"
             >
-              See All <ArrowRight size={16} />
+              {t("see_title")} <ArrowRight size={16} />
             </Link>
           </div>
         </div>

@@ -55,7 +55,7 @@ export async function generateMetadata({
     alternates: {
       canonical: currentPath,
       languages: {
-        "en-US": "/our-business/energy",
+        "en-US": "/en/our-business/energy",
         "id-ID": "/id/our-business/energy",
       },
     },
@@ -105,7 +105,7 @@ export default async function Page({ params: { locale } }: EnergyPageProps) {
       <Hero
         imageSrc={energyData.banner_image}
         title={energyData.banner_title}
-        iconSrc="https://cdi-be.cmlabs.dev/assets/frontend/icons/ic_hero_circle_arrow_down.svg"
+        iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
 
       <Overview
