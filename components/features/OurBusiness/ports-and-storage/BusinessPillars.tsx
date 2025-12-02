@@ -46,7 +46,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
                   {tab.title} 
                 </h3>
                 <div
-                className="prose prose-invert prose-base max-w-none text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
+                className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-snug md:leading-loose text-justify"
                   dangerouslySetInnerHTML={{
                     __html: tab.description || "", 
                   }}
@@ -124,7 +124,7 @@ function AssetBlock({
             {title}
           </h5>
           <div
-          className="prose prose-invert prose-base max-w-none text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
+          className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-snug md:leading-loose text-justify"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>

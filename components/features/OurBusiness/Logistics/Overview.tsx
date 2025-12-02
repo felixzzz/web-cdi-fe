@@ -41,7 +41,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
           </h2>
 
           <div
-            className="max-w-2xl prose prose-invert prose-base text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
+            className="max-w-2xl prose prose-invert prose-base text-sm md:text-base text-white leading-snug md:leading-loose text-justify"
             dangerouslySetInnerHTML={{ __html: description || "" }}
           ></div>
         </div>

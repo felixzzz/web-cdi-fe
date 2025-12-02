@@ -28,7 +28,7 @@ export function HumanRights({ data }: HumanRightsProps) {
             </h2>
 
             <div
-              className="prose prose-invert prose-base max-w-full text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-300"
+              className="prose prose-invert prose-base max-w-full text-sm md:text-base leading-snug md:leading-loose text-justify text-neutral-300"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             ></div>
 

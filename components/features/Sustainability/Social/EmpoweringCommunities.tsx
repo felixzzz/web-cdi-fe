@@ -40,7 +40,7 @@ export function EmpoweringCommunities({ data }: EmpoweringCommunitiesProps) {
               {data.title || "Empowering Communities"}
             </h2>
             <div
-              className="prose prose-invert prose-base text-neutral-50 text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
+              className="prose prose-invert prose-base text-sm md:text-base text-white leading-snug md:leading-loose text-justify"
               dangerouslySetInnerHTML={{ __html: data.content || "" }}
             ></div>
           </div>

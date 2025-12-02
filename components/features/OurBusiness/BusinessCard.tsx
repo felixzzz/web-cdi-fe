@@ -54,7 +54,7 @@ export function BusinessCard({
         className="z-0"
         priority
       />
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/40 via-black/30 to-transparent" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
       <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 pb-5 text-white md:p-10 md:pb-10">
         <h3 className="font-medium text-2xl md:text-[32px] 2xl:text-[44px] 3xl:text-[58px] leading-normal 3xl:leading-[60px]">
@@ -75,7 +75,7 @@ export function BusinessCard({
               className="overflow-hidden"
             >
               <div
-                className="text-[12px] leading-[24px] font-light text-white space-y-6 drop-shadow-md"
+                className="text-sm md:text-base text-white leading-relaxed md:leading-loose text-justify font-light space-y-6 drop-shadow-md"
                 dangerouslySetInnerHTML={{ __html: descriptionHtml }}
               />
 

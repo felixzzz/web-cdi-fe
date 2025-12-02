@@ -28,7 +28,7 @@ export function InternalAudit({ data, filesData }: InternalAuditProps) {
               {data.title}
             </h2>
             <div
-              className="max-w-full prose prose-invert prose-base text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-300"
+              className="max-w-full prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-justify text-neutral-300"
               dangerouslySetInnerHTML={{ __html: data.content || "" }}
             />
           </div>
