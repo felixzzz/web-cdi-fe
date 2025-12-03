@@ -184,7 +184,7 @@ export const Awards: React.FC<AwardsProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
           <h2
             id="awards-title"
-            className="text-awards text-4xl md:text-6xl lg:text-7xl font-medium text-white"
+            className="text-awards text-4xl md:text-6xl font-medium text-white"
           >
             {title || "Recognized for our commitment"}
           </h2>

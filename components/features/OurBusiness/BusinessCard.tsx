@@ -72,11 +72,11 @@ export function BusinessCard({
                 className="overflow-hidden"
               >
                 <div
-                  className="text-xs md:text-base text-white leading-relaxed md:leading-loose text-justify font-light space-y-6 drop-shadow-md line-clamp-3 md:line-clamp-5"
+                  className="text-xs text-white leading-relaxed md:leading-loose text-justify font-light space-y-6 drop-shadow-md line-clamp-3 md:line-clamp-none"
                   dangerouslySetInnerHTML={{ __html: descriptionHtml }}
                 />
 
-                <ul className="mt-8 flex flex-wrap gap-2">
+                <ul className="mt-4 flex flex-wrap gap-2">
                   {tags.map((tag) => (
                     <li key={tag}>
                       <Button className="flex cursor-pointer items-center gap-2 rounded-full border border-white p-2 md:px-[15px] md:py-[6px] text-xs md:text-sm transition-colors hover:bg-white/20 bg-transparent">
