@@ -116,7 +116,7 @@ export const NewsDetail = ({
         </h1>
 
         <div
-          className="max-w-full prose prose-base text-justify text-neutral-900 text-[11px] md:text-[12px] leading-normal md:leading-[24px]"
+          className="max-w-full prose prose-base text-justify text-neutral-900 text-[14px] leading-normal md:leading-[24px]"
           dangerouslySetInnerHTML={{ __html: articleContent }}
         ></div>
 

@@ -74,14 +74,21 @@
       "download_download": "Unduh",
       "search": "Cari apa saja...",
       "title": "Kalender Keuangan",
-      "subtitle": "Dokumen tersedia dalam Bahasa Inggris dan Bahasa Indonesia."
+      "subtitle": "Dokumen tersedia dalam Bahasa Inggris dan Bahasa Indonesia.",
+      "All Type": "Semua Jenis", 
+      "Annual Report": "Laporan Tahunan", 
+      "Financial Report": "Laporan Keuangan"
     },
     "Publication": {
       "not_found": "Tidak ada laporan yang ditemukan sesuai kriteria Anda.",
       "download_view": "Lihat",
       "download_download": "Unduh",
       "search": "Cari apa saja...",
-      "help": "Silakan pilih tab."
+      "help": "Silakan pilih tab.",
+      "Prospectus": "Prospektus",
+      "General Meeting of Shareholders": "Rapat Umum Pemegang Saham",
+      "Public Announcement": "Pengumuman Publik",
+      "Earnings Update": "Info Terkini Kinerja"
     },
     "Report": {
       "financial_title": "Tabel Data Keuangan",
@@ -158,7 +165,9 @@
     "latest_articles": "ARTIKEL TERBARU",
     "description": "Temukan informasi terbaru dari industri energi",
     "see_title": "Lihat Semua",
-    "read_full": "Baca artikel lengkap"
+    "read_full": "Baca artikel lengkap",
+    "title_not_found": "Konten tidak tersedia.",
+    "search": "Cari apa saja..."
   },
   "Contact": {
     "message": "Ajukan pertanyaan Anda",
@@ -237,5 +246,8 @@
     "go": "Buka",
     "items": "item",
     "of": "dari"
+  },
+  "metadata": {
+    "description": "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik."
   }
 }

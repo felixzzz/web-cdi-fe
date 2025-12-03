@@ -28,7 +28,7 @@ const CisoCard: React.FC<CisoCardProps> = ({ number, title, description }) => (
       </h3>
     </div>
     <div
-      className="max-w-3xl prose prose-invert prose-base"
+      className="max-w-3xl prose prose-invert prose-base break-words"
       dangerouslySetInnerHTML={{ __html: description }}
     ></div>
   </div>

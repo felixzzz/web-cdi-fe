@@ -5,6 +5,7 @@ import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { managementService } from "@/services/AboutUs/ManagementService";
 import { DownloadItem } from "@/types/AboutUs/Management";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 export type PageProps = {
@@ -17,6 +18,7 @@ export type PageProps = {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
+  const t = await getTranslations("metadata");
   const [BodData, BocData] = await Promise.all([
     managementService.getManagementBodData(params.locale),
     managementService.getManagementBocData(params.locale),
@@ -32,12 +34,10 @@ export async function generateMetadata({
     params.locale === "en" ? pagePath : `/${params.locale}${pagePath}`;
 
   const title = "Chandra Daya Investasi";
-  const description =
-    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
 
   return {
     title: title,
-    description: description,
+    description: t("description"),
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
     keywords: [
@@ -72,7 +72,7 @@ export async function generateMetadata({
 
     openGraph: {
       title: title,
-      description: description,
+      description: t("description"),
       url: currentPath,
       siteName: "Chandra Daya Investasi",
       locale: params.locale,
@@ -90,7 +90,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: title,
-      description: description,
+      description: t("description"),
       images: [member?.image_hero || "/assets/frontend/favicon.png"],
     },
 

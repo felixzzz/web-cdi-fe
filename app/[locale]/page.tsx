@@ -19,61 +19,60 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-const description =
-  "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
-const title = "Chandra Daya Investasi";
-
-export const metadata: Metadata = {
-  title: title,
-  description: description,
-  keywords: [
-    "Chandra Daya Investasi",
-    "CDI",
-    "CDIA",
-    "PT Chandra Daya Investasi Tbk",
-    "CDI Group",
-  ],
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('metadata')
+  const title = "Chandra Daya Investasi";
+  return {
+    title: title,
+    description: t('description'),
+    keywords: [
+      "Chandra Daya Investasi",
+      "CDI",
+      "CDIA",
+      "PT Chandra Daya Investasi Tbk",
+      "CDI Group",
+    ],
 
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
-  
 
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "/",
-  },
-  icons: {
-    shortcut: "/assets/frontend/favicon.png",
-  },
+    viewport: {
+      width: "device-width",
+      initialScale: 1.0,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: "/",
+    },
+    icons: {
+      shortcut: "/assets/frontend/favicon.png",
+    },
 
-  openGraph: {
-    title: title,
-    description: description,
-    url: "/",
-    type: "website",
-    siteName: title,
-  },
+    openGraph: {
+      title: title,
+      description: t('description'),
+      url: "/",
+      type: "website",
+      siteName: title,
+    },
 
-  twitter: {
-    card: "summary_large_image",
-    title: title,
-    description: description,
-  },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: t('description'),
+    },
 
-  other: {
+    other: {
       "application-url": `${process.env.NEXT_PUBLIC_BASE_URL}`,
       "preview-url": `${process.env.NEXT_PUBLIC_BASE_URL}/file-storage`,
       "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
       "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
       "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
     },
-};
+  };
+}
 
 export default async function Page({ params: { locale } }: HomePageProps) {
   const t = await getTranslations("Homepage");

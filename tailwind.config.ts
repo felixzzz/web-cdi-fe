@@ -12,7 +12,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-jakarta-sans)", "sans-serif"],
+        sans: ["var(--font-plus-jakarta-sans)", "sans-serif"],
       },
       colors: {
         "blue-lighter": "#47C1EA", 

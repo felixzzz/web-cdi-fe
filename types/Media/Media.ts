@@ -83,6 +83,17 @@ export interface ArticleItem {
   article_category: ArticleCategory;
 }
 
+export interface IReportType {
+  id: number;
+  ulid: string;
+  name_en: string;
+  name_id: string;
+  is_sustainability: number;
+  created_at: string;
+  updated_at: string;
+  name: string;
+}
+
 export interface NewsApiResponse {
   links: PaginationLink[];
   meta: PaginationMeta;
