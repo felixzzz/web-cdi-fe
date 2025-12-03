@@ -54,7 +54,7 @@ export function BusinessCard({
         <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
         <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 pb-5 text-white md:p-10 md:pb-10">
-          <h3 className="font-medium text-2xl lg:text-[28px] 2xl:text-[44px] 3xl:text-[58px] leading-normal 3xl:leading-[60px]">
+          <h3 className="font-medium text-xl lg:text-[28px] 2xl:text-[44px] 3xl:text-[58px] leading-normal 3xl:leading-[60px]">
             {title}
           </h3>
 
