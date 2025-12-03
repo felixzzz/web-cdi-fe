@@ -54,7 +54,7 @@ export function BusinessCard({
         <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
         <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 pb-5 text-white md:p-10 md:pb-10">
-          <h3 className="font-medium text-2xl md:text-[32px] 2xl:text-[44px] 3xl:text-[58px] leading-normal 3xl:leading-[60px]">
+          <h3 className="font-medium text-2xl lg:text-[28px] 2xl:text-[44px] 3xl:text-[58px] leading-normal 3xl:leading-[60px]">
             {title}
           </h3>
 
@@ -72,14 +72,14 @@ export function BusinessCard({
                 className="overflow-hidden"
               >
                 <div
-                  className="text-xs text-white leading-relaxed md:leading-loose text-justify font-light space-y-6 drop-shadow-md line-clamp-3 md:line-clamp-none"
+                  className="text-xs md:text-base text-white leading-relaxed md:leading-loose text-justify font-light space-y-6 drop-shadow-md line-clamp-3 lg:line-clamp-none"
                   dangerouslySetInnerHTML={{ __html: descriptionHtml }}
                 />
 
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {tags.map((tag) => (
                     <li key={tag}>
-                      <Button className="flex cursor-pointer items-center gap-2 rounded-full border border-white p-2 md:px-[15px] md:py-[6px] text-xs md:text-sm transition-colors hover:bg-white/20 bg-transparent">
+                      <Button className="flex cursor-pointer items-center gap-2 rounded-full border border-white p-2 md:px-[15px] md:py-[6px] text-[10px] md:text-sm transition-colors hover:bg-white/20 bg-transparent text-wrap">
                         {tag}
                         <ArrowRight size={16} />
                       </Button>
