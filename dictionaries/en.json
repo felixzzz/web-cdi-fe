@@ -53,7 +53,10 @@
   "Awards": {
     "not_found": "No items found for the selected criteria.",
     "eye_information": "QUICK LINKS",
-    "title_information": "Need to access detailed information?"
+    "title_information": "Need to access detailed information?",
+    "Awards": "Awards",
+    "Certification": "Certification",
+    "Membership": "Membership"
   },
   "OurBusiness": {
     "Energy": {
@@ -61,7 +64,8 @@
     },
     "Water": {
       "help": "Please select a tab."
-    }
+    },
+    "learn_more": "Learn More"
   },
   "Investor": {
     "Financial": {
@@ -227,5 +231,11 @@
     "OurBusiness": "Our Business",
     "Sustainability": "Sustainability",
     "Investor": "Investor"
+  },
+  "pagination": {
+    "jumpToPage": "Jump Page",
+    "go": "Go",
+    "items": "items",
+    "of": "of"
   }
 }

@@ -6,6 +6,7 @@ import { portStorageService } from "@/services/OurBusiness/PortsStorageService";
 import { PortStoragePageProps } from "@/types/OurBusiness/Ports&Storage";
 import { MoveRightIcon } from "lucide-react";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -97,6 +98,7 @@ export async function generateMetadata({
 export default async function Page({
   params: { locale },
 }: PortStoragePageProps) {
+  const t = await getTranslations('OurBusiness')
   const portStorageData = await portStorageService.getPortStoragePageData(
     locale
   );
@@ -111,7 +113,6 @@ export default async function Page({
     tabs,
     link_url,
     link_title_en,
-    link_title_id,
   } = portStorageData;
   return (
     <main>
@@ -137,7 +138,7 @@ export default async function Page({
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
           <span className="text-sm md:text-base">
-            {locale === "en" ? link_title_en : link_title_id}
+            {t('learn_more')}
           </span>
           <span>
             <MoveRightIcon size={18} className="font-thin" />

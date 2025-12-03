@@ -6,6 +6,7 @@ import { logisticService } from "@/services/OurBusiness/LogisticService";
 import { LogisticPageProps } from "@/types/OurBusiness/Logistic";
 import { MoveRightIcon } from "lucide-react";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -93,6 +94,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params: { locale } }: LogisticPageProps) {
+  const t = await getTranslations('OurBusiness')
   const logisticData = await logisticService.getLogisticPageData(locale);
 
   const {
@@ -104,7 +106,6 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
     tabs,
     link_url,
     link_title_en,
-    link_title_id,
   } = logisticData;
 
   return (
@@ -130,7 +131,7 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
           <span className="text-sm md:text-base">
-            {locale === "en" ? link_title_en : link_title_id}
+            {t('learn_more')}
           </span>
           <span>
             <MoveRightIcon size={14} className="font-thin" />

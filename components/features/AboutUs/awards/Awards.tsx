@@ -50,7 +50,6 @@ const mapMembershipToCard = (item: MembershipItem): Award => ({
 
 type TabName = "Awards" | "Certification" | "Membership";
 const TABS: TabName[] = ["Awards", "Certification", "Membership"];
-// const BASE_API_URL = "https://cdi-be.cmlabs.dev/api";
 
 interface AwardsProps {
   title: string | null;
@@ -207,7 +206,7 @@ export const Awards: React.FC<AwardsProps> = ({
                       : "text-neutral-200 hover:text-white"
                   )}
                 >
-                  {tab}
+                  {t(tab)}
                 </button>
               </li>
             ))}

@@ -24,11 +24,11 @@
     "company_profile_download": "Unduh",
     "eye_information": "TAUTAN CEPAT",
     "title_information": "Butuh akses informasi terperinci?",
-    "vision": "Visi Kita",
-    "mission": "Misi Kita",
+    "vision": "Visi Kami",
+    "mission": "Misi Kami",
     "About_Us": "Gambaran Umum Perusahaan",
     "Vision_Mission": "Visi & Misi",
-    "Our_History": "Sejarah Kita",
+    "Our_History": "Sejarah Kami",
     "Milestone": "Tonggak Sejarah",
     "Company_Profile": "Profil Perusahaan",
     "button_back": "Kembali",
@@ -53,7 +53,10 @@
   "Awards": {
     "not_found": "Tidak ada item yang ditemukan untuk kriteria yang dipilih.",
     "eye_information": "TAUTAN CEPAT",
-    "title_information": "Butuh akses informasi terperinci?"
+    "title_information": "Butuh akses informasi terperinci?",
+    "Awards": "Penghargaan",
+    "Certification": "Sertifikasi",
+    "Membership": "Keanggotaan"
   },
   "OurBusiness": {
     "Energy": {
@@ -61,7 +64,8 @@
     },
     "Water": {
       "help": "Silakan pilih tab."
-    }
+    },
+    "learn_more": "Pelajari Lebih Lanjut"
   },
   "Investor": {
     "Financial": {
@@ -187,7 +191,7 @@
     "what_we_do": "Apa Yang Kami Lakukan",
     "energy": "Energi",
     "water": "Air",
-    "ports_storage": "Pelabuhan & Penyimpanan",
+    "ports_storage": "Kepelabuhan & Penyimpanan",
     "logistics": "Logistik",
     "investor": "Investor",
     "report": "Laporan",
@@ -218,7 +222,6 @@
   "Cookies": {
     "title": "Situs Ini Menggunakan Cookie",
     "description": "Dengan mengklik “Terima”, Anda menyetujui penyimpanan cookie di perangkat Anda untuk meningkatkan navigasi situs, menganalisis penggunaan situs, dan membantu upaya pemasaran kami.",
- 
     "more_info_text": "Lihat <privacy_policy>Kebijakan Privasi</privacy_policy> dan <cookies_notice>Pemberitahuan Cookie</cookies_notice> kami untuk informasi lebih lanjut.",
     "decline": "Tolak",
     "accept": "Terima"
@@ -228,5 +231,11 @@
     "OurBusiness": "Bisnis Kami",
     "Sustainability": "Keberlanjutan",
     "Investor": "Investor"
+  },
+  "pagination": {
+    "jumpToPage": "Lompat ke Halaman",
+    "go": "Buka",
+    "items": "item",
+    "of": "dari"
   }
 }

@@ -78,7 +78,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
           {title}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
           <div
             className="rounded-xl p-8 pt-12 flex flex-col items-center text-center"
             style={{ backgroundImage: "linear-gradient(#00253b, #0b5581)" }}
@@ -86,12 +86,12 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
             <Image
               src={visionData.imageUrl}
               alt="Our Vision graphic"
-              width={160}
-              height={160}
+              width={200}
+              height={200}
               className="mb-8"
             />
 
-            <p className="text-3xl font-medium leading-relaxed min-h-[200px]">
+            <p className="text-2xl w-full px-0 md:px-6 text-center font-medium min-h-[200px] mx-auto tracking-tight hyphens-none flex justify-center">
               {visionData.statement}
             </p>
 
@@ -108,12 +108,13 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
             <Image
               src={missionData.imageUrl}
               alt="Our Mission graphic"
-              width={160}
-              height={160}
+              width={200}
+              height={200}
               className="mb-8"
             />
 
-            <p className="text-3xl font-medium min-h-[200px]">
+
+            <p className="text-2xl w-full px-6 text-center md:text-justify md:[text-align-last:center] font-medium min-h-[200px] mx-auto tracking-tight hyphens-none">
               {missionData.statement}
             </p>
 

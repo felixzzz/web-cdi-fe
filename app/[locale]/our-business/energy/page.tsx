@@ -6,6 +6,7 @@ import { energyService } from "@/services/OurBusiness/EnergyService";
 import { EnergyApiResponse, EnergyPageProps } from "@/types/OurBusiness/Energy";
 import { MoveRightIcon } from "lucide-react";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -95,6 +96,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params: { locale } }: EnergyPageProps) {
+  const t = await getTranslations('OurBusiness')
   const energyData: EnergyApiResponse = await energyService.getEnergyPageData(
     locale
   );
@@ -126,9 +128,7 @@ export default async function Page({ params: { locale } }: EnergyPageProps) {
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
           <span className="text-sm md:text-base">
-            {locale === "en"
-              ? energyData.link_title_en
-              : energyData.link_title_id}
+            {t('learn_more')}
           </span>
           <span>
             <MoveRightIcon size={14} className="font-thin" />

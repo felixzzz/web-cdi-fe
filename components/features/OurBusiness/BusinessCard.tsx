@@ -72,7 +72,7 @@ export function BusinessCard({
                 className="overflow-hidden"
               >
                 <div
-                  className="text-xs md:text-base text-white leading-relaxed md:leading-loose text-justify font-light space-y-6 drop-shadow-md line-clamp-3 lg:line-clamp-none"
+                  className="text-xs text-white leading-relaxed md:leading-loose text-justify font-light space-y-6 drop-shadow-md line-clamp-3 lg:line-clamp-none"
                   dangerouslySetInnerHTML={{ __html: descriptionHtml }}
                 />
 

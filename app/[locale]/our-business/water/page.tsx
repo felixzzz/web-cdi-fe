@@ -6,6 +6,7 @@ import { waterService } from "@/services/OurBusiness/WaterService";
 import { WaterPageProps } from "@/types/OurBusiness/Water";
 import { MoveRightIcon } from "lucide-react";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -93,6 +94,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params: { locale } }: WaterPageProps) {
+  const t = await getTranslations('OurBusiness')
   const waterData = await waterService.getWaterPageData(locale);
 
   return (
@@ -121,9 +123,7 @@ export default async function Page({ params: { locale } }: WaterPageProps) {
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
           <span className="text-sm md:text-base">
-            {locale === "en"
-              ? waterData.link_title_en
-              : waterData.link_title_id}
+            {t('learn_more')}
           </span>
           <span>
             <MoveRightIcon size={14} className="font-thin" />
