@@ -45,8 +45,7 @@ export function Overview({
           </h2>
 
           <div
-          className="max-w-2xl prose prose-invert prose-base text-base md:text-md leading-tight md:leading-[24px] text-justify"
-          // className="text-[12px] leading-[24px] font-normal text-white space-y-6"
+          className="max-w-2xl prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-justify"
             dangerouslySetInnerHTML={{
               __html: description || "",
             }}

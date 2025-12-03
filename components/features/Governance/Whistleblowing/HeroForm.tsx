@@ -141,7 +141,7 @@ export function HeroForm({
             </h1>
 
             <div
-              className="max-w-full prose prose-invert prose-base text-neutral-800 mb-8 text-base md:text-md leading-normal md:leading-[24px] text-justify"
+              className="max-w-full prose prose-invert prose-base text-neutral-800 mb-8 text-sm md:text-base leading-normal md:leading-[24px] text-justify"
               dangerouslySetInnerHTML={{
                 __html: governance_whistleblowing.content || "",
               }}

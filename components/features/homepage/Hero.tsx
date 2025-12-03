@@ -76,7 +76,7 @@ export const Hero = ({
 
           <div className="flex flex-col gap-4 md:flex-row items-center lg:justify-between">
             <div
-              className="md:max-w-md w-full text-base md:text-md !text-neutral-200"
+              className="md:max-w-md w-full text-sm md:text-base !text-neutral-200"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
             <div className="flex items-center justify-start md:justify-end gap-2 w-full">

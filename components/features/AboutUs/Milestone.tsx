@@ -155,7 +155,7 @@ const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] 
       }}
     >
       <div
-        className="prose prose-invert prose-base max-w-none text-neutral-200 text-[9px] md:text-[12px] leading-normal md:leading-[24px]"
+        className="prose prose-invert prose-base max-w-none text-neutral-200 text-sm md:text-base leading-snug md:leading-loose text-justify"
         dangerouslySetInnerHTML={{ __html: milestone.content || "" }}
       />
     </div>

@@ -129,7 +129,7 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
           href={link_url}
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
-          <span className="text-sm md:text-md">
+          <span className="text-sm md:text-base">
             {locale === "en" ? link_title_en : link_title_id}
           </span>
           <span>

@@ -35,66 +35,61 @@ export function BusinessCard({
         damping: 40,
       }}
       className={clsx(
-        "relative cursor-pointer overflow-hidden",
-        "h-64 md:h-auto"
+        "relative cursor-pointer overflow-hidden group",
+        "aspect-[9/16]", 
+        "md:aspect-auto md:h-full"
       )}
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
-      
-      <Link
-                      href={route}
-      >
+      <Link href={route}>
+        <Image
+          src={imageUrl}
+          alt={title}
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
+          priority
+        />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-      <Image
-        src={imageUrl}
-        alt={title}
-        layout="fill"
-        objectFit="cover"
-        className="z-0"
-        priority
-      />
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+        <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 pb-5 text-white md:p-10 md:pb-10">
+          <h3 className="font-medium text-2xl md:text-[32px] 2xl:text-[44px] 3xl:text-[58px] leading-normal 3xl:leading-[60px]">
+            {title}
+          </h3>
 
-      <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 pb-5 text-white md:p-10 md:pb-10">
-        <h3 className="font-medium text-2xl md:text-[32px] 2xl:text-[44px] 3xl:text-[58px] leading-normal 3xl:leading-[60px]">
-          {title}
-        </h3>
+          <AnimatePresence>
+            {isExpanded && (
+              <motion.div
+                initial={{ opacity: 0, maxHeight: 0 }}
+                animate={{ opacity: 1, maxHeight: "500px" }}
+                exit={{ opacity: 0, maxHeight: 0 }}
+                transition={{
+                  duration: 0.6,
+                  ease: "easeInOut",
+                  delay: 0.1,
+                }}
+                className="overflow-hidden"
+              >
+                <div
+                  className="text-xs md:text-base text-white leading-relaxed md:leading-loose text-justify font-light space-y-6 drop-shadow-md line-clamp-3 md:line-clamp-5"
+                  dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+                />
 
-        <AnimatePresence>
-          {isExpanded && (
-            <motion.div
-              initial={{ opacity: 0, maxHeight: 0 }}
-              animate={{ opacity: 1, maxHeight: "500px" }}
-              exit={{ opacity: 0, maxHeight: 0 }}
-              transition={{
-                duration: 0.6,
-                ease: "easeInOut",
-                delay: 0.1,
-              }}
-              className="overflow-hidden"
-            >
-              <div
-                className="text-sm md:text-base text-white leading-relaxed md:leading-loose text-justify font-light space-y-6 drop-shadow-md"
-                dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-              />
-
-              <ul className="mt-8 flex flex-wrap gap-2">
-                {tags.map((tag) => (
-                  <li key={tag}>
-                    <Button
-                      className="flex cursor-pointer items-center gap-2 rounded-full border border-white px-[15px] py-[6px] text-sm transition-colors hover:bg-white/20 bg-transparent"
-                    >
-                      {tag}
-                      <ArrowRight size={16} />
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+                <ul className="mt-8 flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <li key={tag}>
+                      <Button className="flex cursor-pointer items-center gap-2 rounded-full border border-white p-2 md:px-[15px] md:py-[6px] text-xs md:text-sm transition-colors hover:bg-white/20 bg-transparent">
+                        {tag}
+                        <ArrowRight size={16} />
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </Link>
     </motion.article>
   );

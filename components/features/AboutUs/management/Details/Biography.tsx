@@ -10,7 +10,7 @@ export const BocBiography = ({ biographyHtml }: BocBiographyProps) => {
   return (
     <section className="container mx-auto   my-16">
       <div
-        className="max-w-full prose prose-invert prose-base text-base md:text-md leading-normal md:leading-[24px] text-justify text-neutral-900"
+        className="max-w-full prose prose-invert prose-base text-sm md:text-base leading-normal md:leading-[24px] text-justify text-neutral-900"
         dangerouslySetInnerHTML={{ __html: biographyHtml }}
       />
     </section>
