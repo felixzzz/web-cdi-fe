@@ -210,7 +210,7 @@ export default async function Page({
         chartImageAlt={"Corporate Structure Chart"}
         tableTitle={tableData.title}
         tableData={tableData.content_table_trans}
-        showTable={about_us_corporate_structure_table_show.content === "show"}
+        showTable={about_us_corporate_structure_table_show.content_en === "show"}
       />
       <Downloads
         id="guidelines-of-work"

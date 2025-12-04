@@ -75,8 +75,8 @@
       "search": "Search anything...",
       "title": "Financial Calendar",
       "subtitle": "Documents are available in both English and Bahasa Indonesia.",
-      "All Type": "All Type", 
-      "Annual Report": "Annual Report", 
+      "All Type": "All Type",
+      "Annual Report": "Annual Report",
       "Financial Report": "Financial Report"
     },
     "Publication": {
@@ -100,7 +100,11 @@
       "download_download": "Download",
       "not_found": "No reports found matching your criteria.",
       "previous": "Previous",
-      "next": "Next"
+      "next": "Next",
+      "All Type": "All Type",
+      "Financial Report": "Financial Report",
+      "Annual Report": "Annual Report",
+      "All Year": "All Year"
     },
     "Governance": {
       "download_view": "View",
@@ -142,7 +146,8 @@
         "download_id": "Download-ID",
         "download_en": "Download-EN",
         "help": "Please select a tab.",
-        "Governance": "Governance"
+        "Governance": "Governance",
+        "search": "Search anything..."
       }
     },
     "Sustainability": {

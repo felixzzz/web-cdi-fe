@@ -88,7 +88,8 @@
       "Prospectus": "Prospektus",
       "General Meeting of Shareholders": "Rapat Umum Pemegang Saham",
       "Public Announcement": "Pengumuman Publik",
-      "Earnings Update": "Info Terkini Kinerja"
+      "Earnings Update": "Info Terkini Kinerja",
+      "not_found_title": "Not Found"
     },
     "Report": {
       "financial_title": "Tabel Data Keuangan",
@@ -100,7 +101,10 @@
       "download_download": "Unduh",
       "not_found": "Tidak ada laporan yang ditemukan sesuai kriteria Anda.",
       "previous": "Sebelumnya",
-      "next": "Berikutnya"
+      "next": "Berikutnya",
+      "All Type": "Semua Jenis",
+      "Financial Report": "Laporan Keuangan",
+      "Annual Report": "Laporan Tahunan"
     },
     "Governance": {
       "download_view": "Lihat",
@@ -142,7 +146,8 @@
         "download_en": "Unduh-EN",
         "download_view": "Lihat",
         "help": "Silakan pilih tab.",
-        "Governance": "Tata Kelola"
+        "Governance": "Tata Kelola",
+        "search": "Cari apa saja..."
       }
     },
     "Sustainability": {

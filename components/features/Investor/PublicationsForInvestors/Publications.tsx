@@ -356,7 +356,7 @@ export function Publications({
             <div className="grid md:grid-cols-2 gap-4 pb-10 border-b border-b-neutral-5 items-center">
               <div>
                 <h2 className="text-2xl md:text-[28px] font-medium text-neutral-13">
-                  {activeLink?.title}
+                  {t(activeLink?.title || 'not_found_title')}
                 </h2>
               </div>
 
@@ -369,7 +369,7 @@ export function Publications({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full h-10 rounded-full border border-neutral-7 pl-10 pr-4 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-blue-base transition-all"
-                  placeholder="Search anything..."
+                  placeholder={t('search')}
                 />
               </div>
             </div>
