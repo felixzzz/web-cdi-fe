@@ -78,8 +78,8 @@ export const AwardCard: React.FC<AwardCardProps> = ({
 
         <div
           className={clsx(
-            "mb-4 text-neutral-400 content leading-normal md:leading-[24px] text-justify line-clamp-5",
-            showAwards ? "line-clamp-5 text-sm md:text-[14px]" : "text-sm md:text-base"
+            "mb-4 text-neutral-400 content leading-normal md:leading-[24px] text-justify",
+            showAwards ? "text-sm md:text-[14px]" : "text-sm md:text-base line-clamp-5"
           )}
           dangerouslySetInnerHTML={{ __html: award.description }}
         />
@@ -92,7 +92,7 @@ export const AwardCard: React.FC<AwardCardProps> = ({
             <div
               className={clsx(
                 "mb-4 text-neutral-400 content  leading-normal md:leading-[24px] text-justify",
-                showAwards ? "line-clamp-5 text-sm md:text-[14px]" : "text-sm md:text-base"
+                showAwards ? "text-sm md:text-[14px]" : "text-sm md:text-base"
               )}
               dangerouslySetInnerHTML={{ __html: award.awarder }}
             />
