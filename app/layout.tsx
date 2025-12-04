@@ -8,7 +8,7 @@ const jakartaSans = localFont({
       style: "normal",
     }
   ],
-  variable: "--font-jakarta-sans",
+  variable: "--font-plus-jakarta-sans",
   display: "swap",
 });
 

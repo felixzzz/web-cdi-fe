@@ -18,41 +18,57 @@ import {
   PressReleaseApiResponse,
   ArticleItem,
   PressReleaseItem,
+  IReportType,
 } from "@/types/Media/Media";
 import { useTranslations } from "next-intl";
 
 interface NewsProps {
   mediaData: NewsApiResponse;
   pressReleaseData: PressReleaseApiResponse;
+  categoryData: IReportType[];
+  locale: string;
 }
 
 const ITEMS_PER_PAGE = 15;
 const FILE_PREVIEW_URL = `${process.env.NEXT_PUBLIC_URL}/file-storage/`;
 const FILE_DOWNLOAD_URL = `${process.env.NEXT_PUBLIC_URL}/file-download/`;
 
-export function News({ mediaData, pressReleaseData }: NewsProps) {
+export function News({
+  mediaData,
+  pressReleaseData,
+  categoryData,
+  locale,
+}: NewsProps) {
   const t = useTranslations("Media");
   const [activeTab, setActiveTab] = useState("news");
   const [activeCategory, setActiveCategory] = useState("Semua");
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const defaultCategoryLabel = locale === "id" ? "Semua" : "All";
+
   const newsCategories = useMemo(() => {
-    const allNewsCategories = mediaData.items.map(
-      (item) => item.article_category.name_id
-    );
-    return ["Semua", ...Array.from(new Set(allNewsCategories))];
-  }, [mediaData]);
+    const categoryNames = categoryData.map((cat) => {
+      return locale === "id" ? cat.name_id : cat.name_en;
+    });
+
+    return [defaultCategoryLabel, ...categoryNames];
+  }, [categoryData, locale, defaultCategoryLabel]);
 
   const categories = activeTab === "news" ? newsCategories : ["Semua"];
 
   const { paginatedArticles, totalNewsPages, totalNewsItems } = useMemo(() => {
     const filteredByCategory =
-      activeCategory === "Semua"
+      activeCategory === defaultCategoryLabel
         ? mediaData.items
-        : mediaData.items.filter(
-            (item) => item.article_category.name_id === activeCategory
-          );
+        : mediaData.items.filter((item) => {
+            const itemCategoryName =
+              locale === "id"
+                ? item.article_category.name_id
+                : item.article_category.name_en;
+
+            return itemCategoryName === activeCategory;
+          });
 
     const total = filteredByCategory.length;
     const pages = Math.ceil(total / ITEMS_PER_PAGE);
@@ -66,7 +82,13 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
       totalNewsPages: pages,
       totalNewsItems: total,
     };
-  }, [activeCategory, currentPage, mediaData.items]);
+  }, [
+    activeCategory,
+    currentPage,
+    mediaData.items,
+    locale,
+    defaultCategoryLabel,
+  ]);
 
   const { paginatedPressReleases, totalPressPages, totalPressItems } =
     useMemo(() => {
@@ -98,7 +120,7 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
-    setActiveCategory("Semua");
+    setActiveCategory(defaultCategoryLabel);
     setCurrentPage(1);
   };
 
@@ -161,49 +183,73 @@ export function News({ mediaData, pressReleaseData }: NewsProps) {
 
       {activeTab === "news" && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {paginatedArticles.map((article: ArticleItem) => (
-            <ArticleCard
-              key={article.id}
-              href={`/media/news/${article.slug}`}
-              imageUrl={article.image}
-              category={article.article_category.name_id}
-              date={article.date}
-              title={article.title}
-            />
-          ))}
+          {paginatedArticles.length > 0 ? (
+            paginatedArticles.map((article: ArticleItem) => (
+              <ArticleCard
+                key={article.id}
+                href={`/media/news/${article.slug}`}
+                imageUrl={article.image}
+                category={locale === "id" ? article.article_category.name_id : article.article_category.name_en}
+                date={article.date}
+                title={article.title}
+              />
+            ))
+          ) : (
+            <div className="col-span-full py-20 flex justify-center items-center">
+              <p className="text-neutral-500 text-lg font-medium">
+                {t('title_not_found')}
+              </p>
+            </div>
+          )}
         </div>
       )}
 
       {activeTab === "press-release" && (
-        <div className="mt-10 mb-8 flex items-center justify-between flex-col md:flex-row gap-4">
-          <button className="text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition">
-            Filter <SlidersHorizontal size={18} />
-          </button>
-          <div className="w-full md:w-[264px] rounded-full border border-neutral-300 px-4 py-2 flex items-center gap-2">
-            <Search className="text-neutral-400" size={20} />
-            <input
-              type="text"
-              className="w-full placeholder:text-neutral-400 text-sm outline-none text-neutral-800"
-              placeholder="Search anything..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentPage(1);
-              }}
-            />
+        <>
+          <div className="mt-10 mb-8 flex items-center justify-between flex-col md:flex-row gap-4">
+            <button className="text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition">
+              Filter <SlidersHorizontal size={18} />
+            </button>
+            <div className="w-full md:w-[264px] rounded-full border border-neutral-300 px-4 py-2 flex items-center gap-2">
+              <Search className="text-neutral-400" size={20} />
+              <input
+                type="text"
+                className="w-full placeholder:text-neutral-400 text-sm outline-none text-neutral-800"
+                placeholder={t('search')}
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setCurrentPage(1);
+                }}
+              />
+            </div>
           </div>
-        </div>
+
+          {paginatedPressReleases.length > 0 ? (
+            <ul className="flex flex-col">
+              {paginatedPressReleases.map((press: PressReleaseItem) => (
+                <PressReleaseCard key={press.id} item={press} locale={locale} />
+              ))}
+            </ul>
+          ) : (
+            <div className="py-20 flex justify-center items-center border-b border-neutral-5">
+              <p className="text-neutral-500 text-lg font-medium">
+                {t('title_not_found')}
+              </p>
+            </div>
+          )}
+        </>
       )}
 
       {activeTab === "press-release" && (
         <ul className="flex flex-col">
           {paginatedPressReleases.map((press: PressReleaseItem) => (
-            <PressReleaseCard key={press.id} item={press} />
+            <PressReleaseCard key={press.id} item={press} locale={locale} />
           ))}
         </ul>
       )}
 
-      {totalPages > 1 && (
+      {totalPages > 0 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -249,12 +295,12 @@ function ArticleCard({
                 <ImageOff size={48} strokeWidth={1.5} />
               </div>
             ) : (
-              <Image 
-                src={imageUrl} 
-                alt={title} 
-                layout="fill" 
+              <Image
+                src={imageUrl}
+                alt={title}
+                layout="fill"
                 objectFit="cover"
-                onError={() => setHasError(true)} 
+                onError={() => setHasError(true)}
               />
             )}
           </div>
@@ -278,18 +324,17 @@ function ArticleCard({
   );
 }
 
-function PressReleaseCard({ item }: { item: PressReleaseItem }) {
+function PressReleaseCard({ item, locale }: { item: PressReleaseItem, locale: string }) {
   const t = useTranslations("Media");
 
-  const viewUrl = `${FILE_PREVIEW_URL}${item.file_en.path}`;
+  const viewUrl_id = `${FILE_PREVIEW_URL}${item.file_id.path}`;
+  const viewUrl_en = `${FILE_PREVIEW_URL}${item.file_en.path}`;
   const downloadUrlEn = `${FILE_DOWNLOAD_URL}${item.file_en.path}`;
   const downloadUrlId = `${FILE_DOWNLOAD_URL}${item.file_id.path}`;
 
-  const pdfIcon =
-    "/assets/icons/ic_filepdf.svg";
+  const pdfIcon = "/assets/icons/ic_filepdf.svg";
   const viewIcon = "/assets/icons/ic_eye.svg";
-  const downloadIcon =
-    "/assets/icons/ic_download_file.svg";
+  const downloadIcon = "/assets/icons/ic_download_file.svg";
 
   return (
     <li className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 md:gap-y-0">
@@ -317,7 +362,7 @@ function PressReleaseCard({ item }: { item: PressReleaseItem }) {
         </div>
         <div className="flex flex-row items-center gap-4 sm:gap-8 w-full md:w-fit">
           <Link
-            href={viewUrl}
+            href={locale == "id" ? viewUrl_id : viewUrl_en}
             className="flex items-center gap-2 text-blue-base font-medium"
             target="_blank"
             rel="noopener noreferrer"
@@ -380,6 +425,7 @@ function Pagination({
   totalItems: number;
   onPageChange: (page: number) => void;
 }) {
+  const t = useTranslations('pagination')
   const [jumpPage, setJumpPage] = useState<string>("");
 
   const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
@@ -407,7 +453,7 @@ function Pagination({
   return (
     <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row">
       <p className="text-neutral-10 text-sm max-md:hidden">
-        {startItem}-{endItem} of {totalItems} items
+        {startItem}-{endItem} {t('of')} {totalItems} {t('items')}
       </p>
 
       <ul className="flex items-center justify-center gap-2">
@@ -489,11 +535,11 @@ function Pagination({
 
       <div className="flex items-center gap-4 justify-center md:justify-between w-full md:w-auto">
         <p className="text-neutral-10 text-sm md:hidden">
-          {startItem}-{endItem} of {totalItems} items
+          {startItem}-{endItem} {t('of')} {totalItems} {t('items')}
         </p>
 
         <div className="flex items-center gap-4">
-          <p className="text-neutral-10 text-sm whitespace-nowrap">Jump Page</p>
+          <p className="text-neutral-10 text-sm whitespace-nowrap">{t('jumpToPage')}</p>
           <input
             type="number"
             min="1"
@@ -506,7 +552,7 @@ function Pagination({
             onClick={handleJumpPage}
             className="text-[#2474A5] text-xs font-bold cursor-pointer hover:underline"
           >
-            Go
+            {t('go')}
           </button>
         </div>
       </div>

@@ -6,11 +6,14 @@ import { waterService } from "@/services/OurBusiness/WaterService";
 import { WaterPageProps } from "@/types/OurBusiness/Water";
 import { MoveRightIcon } from "lucide-react";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 export async function generateMetadata({
   params: { locale },
 }: WaterPageProps): Promise<Metadata> {
+  const t = await getTranslations("metadata");
+
   const waterData = await waterService.getWaterPageData(locale);
   const { banner_image, banner_title } = waterData;
 
@@ -20,12 +23,9 @@ export async function generateMetadata({
 
   const title = "Chandra Daya Investasi";
 
-  const description =
-    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
-
   return {
     title: title,
-    description: description,
+    description: t('description'),
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
     keywords: [
@@ -60,7 +60,7 @@ export async function generateMetadata({
 
     openGraph: {
       title: title,
-      description: description,
+      description: t('description'),
       url: currentPath,
       siteName: "Chandra Daya Investasi",
       locale: locale,
@@ -78,7 +78,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: title,
-      description: description,
+      description: t('description'),
       images: [banner_image || "/assets/frontend/favicon.png"],
     },
 
@@ -93,6 +93,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params: { locale } }: WaterPageProps) {
+  const t = await getTranslations('OurBusiness')
   const waterData = await waterService.getWaterPageData(locale);
 
   return (
@@ -121,9 +122,7 @@ export default async function Page({ params: { locale } }: WaterPageProps) {
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
           <span className="text-sm md:text-base">
-            {locale === "en"
-              ? waterData.link_title_en
-              : waterData.link_title_id}
+            {t('learn_more')}
           </span>
           <span>
             <MoveRightIcon size={14} className="font-thin" />

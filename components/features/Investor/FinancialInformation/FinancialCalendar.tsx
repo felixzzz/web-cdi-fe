@@ -204,7 +204,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                 activeType === type && "bg-[#2474A5] text-white"
               )}
             >
-              {type}
+              {t(type)}
             </button>
           ))}
         </nav>
@@ -333,6 +333,7 @@ function Pagination({
   itemsPerPage: number;
   onPageChange: (page: number) => void;
 }) {
+  const t = useTranslations('pagination')
   const [jumpPage, setJumpPage] = useState<string>("");
 
   const startItem = (currentPage - 1) * itemsPerPage + 1;
@@ -360,7 +361,7 @@ function Pagination({
   return (
     <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row">
       <p className="text-neutral-10 text-sm max-md:hidden">
-        {startItem}-{endItem} of {totalItems} items
+        {startItem}-{endItem} {t('of')} {totalItems} {t('items')}
       </p>
 
       <ul className="flex items-center justify-center gap-2">
@@ -442,12 +443,12 @@ function Pagination({
 
       <div className="flex items-center gap-4 justify-center md:justify-between w-full md:w-auto">
         <p className="text-neutral-10 text-sm md:hidden">
-          {startItem}-{endItem} of {totalItems} items
+          {startItem}-{endItem} {t('of')} {totalItems} {t('items')}
         </p>
 
         <div className="flex items-center gap-4">
           <p className="text-neutral-10 text-sm whitespace-nowrap">
-            Jump Page
+            {t('jumpToPage')}
           </p>
           <input
             type="number"
@@ -461,7 +462,7 @@ function Pagination({
             onClick={handleJumpPage}
             className="text-[#2474A5] text-xs font-bold cursor-pointer hover:underline"
           >
-            Go
+            {t('go')}
           </button>
         </div>
       </div>

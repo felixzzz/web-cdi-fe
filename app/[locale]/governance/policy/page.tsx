@@ -3,6 +3,7 @@ import { DownloadsPolicy } from "@/components/features/Governance/Policy/Downloa
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { policyService } from "@/services/Governance/PolicyService";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 export interface PolicyPageProps {
   params: {
@@ -14,16 +15,16 @@ export interface PolicyPageProps {
 export async function generateMetadata({
   params: { locale },
 }: PolicyPageProps): Promise<Metadata> {
+    const t = await getTranslations('metadata')
+
   const pagePath = "/governance/policy";
 
   const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
 
-  const description =
-    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
   const title = "Chandra Daya Investasi";
   return {
     title: title,
-    description: description,
+    description: t('description'),
     keywords: [
       "Chandra Daya Investasi",
       "CDI",
@@ -55,7 +56,7 @@ export async function generateMetadata({
 
     openGraph: {
       title: title,
-      description: description,
+      description: t('description'),
       url: "/",
       type: "website",
       siteName: title,
@@ -64,7 +65,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: title,
-      description: description,
+      description: t('description'),
     },
 
     other: {

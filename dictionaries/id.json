@@ -24,11 +24,11 @@
     "company_profile_download": "Unduh",
     "eye_information": "TAUTAN CEPAT",
     "title_information": "Butuh akses informasi terperinci?",
-    "vision": "Visi Kita",
-    "mission": "Misi Kita",
+    "vision": "Visi Kami",
+    "mission": "Misi Kami",
     "About_Us": "Gambaran Umum Perusahaan",
     "Vision_Mission": "Visi & Misi",
-    "Our_History": "Sejarah Kita",
+    "Our_History": "Sejarah Kami",
     "Milestone": "Tonggak Sejarah",
     "Company_Profile": "Profil Perusahaan",
     "button_back": "Kembali",
@@ -53,7 +53,10 @@
   "Awards": {
     "not_found": "Tidak ada item yang ditemukan untuk kriteria yang dipilih.",
     "eye_information": "TAUTAN CEPAT",
-    "title_information": "Butuh akses informasi terperinci?"
+    "title_information": "Butuh akses informasi terperinci?",
+    "Awards": "Penghargaan",
+    "Certification": "Sertifikasi",
+    "Membership": "Keanggotaan"
   },
   "OurBusiness": {
     "Energy": {
@@ -61,7 +64,8 @@
     },
     "Water": {
       "help": "Silakan pilih tab."
-    }
+    },
+    "learn_more": "Pelajari Lebih Lanjut"
   },
   "Investor": {
     "Financial": {
@@ -70,14 +74,22 @@
       "download_download": "Unduh",
       "search": "Cari apa saja...",
       "title": "Kalender Keuangan",
-      "subtitle": "Dokumen tersedia dalam Bahasa Inggris dan Bahasa Indonesia."
+      "subtitle": "Dokumen tersedia dalam Bahasa Inggris dan Bahasa Indonesia.",
+      "All Type": "Semua Jenis", 
+      "Annual Report": "Laporan Tahunan", 
+      "Financial Report": "Laporan Keuangan"
     },
     "Publication": {
       "not_found": "Tidak ada laporan yang ditemukan sesuai kriteria Anda.",
       "download_view": "Lihat",
       "download_download": "Unduh",
       "search": "Cari apa saja...",
-      "help": "Silakan pilih tab."
+      "help": "Silakan pilih tab.",
+      "Prospectus": "Prospektus",
+      "General Meeting of Shareholders": "Rapat Umum Pemegang Saham",
+      "Public Announcement": "Pengumuman Publik",
+      "Earnings Update": "Info Terkini Kinerja",
+      "not_found_title": "Not Found"
     },
     "Report": {
       "financial_title": "Tabel Data Keuangan",
@@ -89,7 +101,10 @@
       "download_download": "Unduh",
       "not_found": "Tidak ada laporan yang ditemukan sesuai kriteria Anda.",
       "previous": "Sebelumnya",
-      "next": "Berikutnya"
+      "next": "Berikutnya",
+      "All Type": "Semua Jenis",
+      "Financial Report": "Laporan Keuangan",
+      "Annual Report": "Laporan Tahunan"
     },
     "Governance": {
       "download_view": "Lihat",
@@ -131,7 +146,8 @@
         "download_en": "Unduh-EN",
         "download_view": "Lihat",
         "help": "Silakan pilih tab.",
-        "Governance": "Tata Kelola"
+        "Governance": "Tata Kelola",
+        "search": "Cari apa saja..."
       }
     },
     "Sustainability": {
@@ -154,7 +170,9 @@
     "latest_articles": "ARTIKEL TERBARU",
     "description": "Temukan informasi terbaru dari industri energi",
     "see_title": "Lihat Semua",
-    "read_full": "Baca artikel lengkap"
+    "read_full": "Baca artikel lengkap",
+    "title_not_found": "Konten tidak tersedia.",
+    "search": "Cari apa saja..."
   },
   "Contact": {
     "message": "Ajukan pertanyaan Anda",
@@ -187,7 +205,7 @@
     "what_we_do": "Apa Yang Kami Lakukan",
     "energy": "Energi",
     "water": "Air",
-    "ports_storage": "Pelabuhan & Penyimpanan",
+    "ports_storage": "Kepelabuhan & Penyimpanan",
     "logistics": "Logistik",
     "investor": "Investor",
     "report": "Laporan",
@@ -218,7 +236,6 @@
   "Cookies": {
     "title": "Situs Ini Menggunakan Cookie",
     "description": "Dengan mengklik “Terima”, Anda menyetujui penyimpanan cookie di perangkat Anda untuk meningkatkan navigasi situs, menganalisis penggunaan situs, dan membantu upaya pemasaran kami.",
- 
     "more_info_text": "Lihat <privacy_policy>Kebijakan Privasi</privacy_policy> dan <cookies_notice>Pemberitahuan Cookie</cookies_notice> kami untuk informasi lebih lanjut.",
     "decline": "Tolak",
     "accept": "Terima"
@@ -228,5 +245,14 @@
     "OurBusiness": "Bisnis Kami",
     "Sustainability": "Keberlanjutan",
     "Investor": "Investor"
+  },
+  "pagination": {
+    "jumpToPage": "Lompat ke Halaman",
+    "go": "Buka",
+    "items": "item",
+    "of": "dari"
+  },
+  "metadata": {
+    "description": "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik."
   }
 }

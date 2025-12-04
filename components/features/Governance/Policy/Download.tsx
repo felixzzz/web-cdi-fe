@@ -40,6 +40,7 @@ function Pagination({
   to,
   onPageChange,
 }: PaginationProps) {
+  const t = useTranslations('pagination')
   const [jumpPage, setJumpPage] = useState<string>("");
 
   useEffect(() => {
@@ -66,7 +67,7 @@ function Pagination({
   return (
     <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row">
       <p className="text-neutral-10 text-sm max-md:hidden">
-        {from}-{to} of {totalItems} items
+        {from}-{to} {t('of')} {totalItems} {t('items')}
       </p>
 
       <ul className="flex items-center justify-center gap-2">
@@ -163,11 +164,11 @@ function Pagination({
 
       <div className="flex items-center gap-4 justify-center md:justify-between w-full md:w-auto">
         <p className="text-neutral-10 text-sm md:hidden">
-          {from}-{to} of {totalItems} items
+          {from}-{to} {t('of')} {totalItems} {t('items')}
         </p>
 
         <div className="flex items-center gap-4">
-          <p className="text-neutral-10 text-sm whitespace-nowrap">Jump Page</p>
+          <p className="text-neutral-10 text-sm whitespace-nowrap">{t('jumpToPage')}</p>
           <input
             type="number"
             min="1"
@@ -180,7 +181,7 @@ function Pagination({
             onClick={handleJumpPage}
             className="text-[#2474A5] text-xs font-bold cursor-pointer hover:underline"
           >
-            Go
+            {t('go')}
           </button>
         </div>
       </div>
@@ -248,7 +249,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                     : "text-neutral-8 font-normal border-t-neutral-100 hover:text-neutral-13 md:border-b-[1px] md:border-b-neutral-100"
                 )}
               >
-                {link.title}
+                {t(link.title)}
               </button>
             ))}
           </nav>
@@ -268,7 +269,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full placeholder:text-neutral-7 text-sm outline-none text-neutral-13 bg-transparent"
-                    placeholder="Search anything..."
+                    placeholder={t('search')}
                   />
                 </div>
               </div>

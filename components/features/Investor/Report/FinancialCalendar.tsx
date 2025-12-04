@@ -195,7 +195,7 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
                 activeType === type && "bg-[#2474A5] text-gray-100"
               )}
             >
-              {type}
+              {t(type)}
             </button>
           ))}
         </nav>

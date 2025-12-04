@@ -1,8 +1,34 @@
-import { ApiLatestNewsResponse, HeroNewsSection, NewsApiResponse, PressReleaseApiResponse } from "@/types/Media/Media";
+import { ApiLatestNewsResponse, HeroNewsSection, IReportType, NewsApiResponse, PressReleaseApiResponse } from "@/types/Media/Media";
 const API_URL_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/news?`;
 const API_URL_HERO_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-page/media_main`;
 const API_URL_RELEASE = `${process.env.NEXT_PUBLIC_BASE_URL}/press-releases/list`;
 const API_URL_MEDIA_LATEST = `${process.env.NEXT_PUBLIC_BASE_URL}/article/latest-media`;
+const API_URL_CATEGORY = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/categories`;
+
+export async function getCategoryData(locale: string): Promise<IReportType[]> {
+  try {
+    const res = await fetch(API_URL_CATEGORY, {
+      method: "GET", 
+      headers: {
+        "Content-Type": "application/json",
+        lang: locale
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch home data: ${res.statusText}`);
+    }
+
+    const data: IReportType[] = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getHomePageData:", error);
+    throw new Error("Could not fetch homepage data.");
+  }
+}
 
 export async function getMediaPageData(locale: string): Promise<NewsApiResponse> {
   try {
@@ -113,4 +139,5 @@ export async function getLatestNewsData(locale: string): Promise<ApiLatestNewsRe
 export const pressReleaseService = {
   getPressReleasePageData,
   getLatestNewsData,
+  getCategoryData,
 };

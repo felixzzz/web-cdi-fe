@@ -53,7 +53,10 @@
   "Awards": {
     "not_found": "No items found for the selected criteria.",
     "eye_information": "QUICK LINKS",
-    "title_information": "Need to access detailed information?"
+    "title_information": "Need to access detailed information?",
+    "Awards": "Awards",
+    "Certification": "Certification",
+    "Membership": "Membership"
   },
   "OurBusiness": {
     "Energy": {
@@ -61,7 +64,8 @@
     },
     "Water": {
       "help": "Please select a tab."
-    }
+    },
+    "learn_more": "Learn More"
   },
   "Investor": {
     "Financial": {
@@ -70,14 +74,21 @@
       "download_download": "Download",
       "search": "Search anything...",
       "title": "Financial Calendar",
-      "subtitle": "Documents are available in both English and Bahasa Indonesia."
+      "subtitle": "Documents are available in both English and Bahasa Indonesia.",
+      "All Type": "All Type",
+      "Annual Report": "Annual Report",
+      "Financial Report": "Financial Report"
     },
     "Publication": {
       "not_found": "No reports found matching your criteria.",
       "download_view": "View",
       "download_download": "Download",
       "search": "Search anything...",
-      "help": "Please select a tab."
+      "help": "Please select a tab.",
+      "Prospectus": "Prospectus",
+      "General Meeting of Shareholders": "General Meeting of Shareholders",
+      "Public Announcement": "Public Announcement",
+      "Earnings Update": "Earnings Update"
     },
     "Report": {
       "financial_title": "Financial Data Table",
@@ -89,7 +100,11 @@
       "download_download": "Download",
       "not_found": "No reports found matching your criteria.",
       "previous": "Previous",
-      "next": "Next"
+      "next": "Next",
+      "All Type": "All Type",
+      "Financial Report": "Financial Report",
+      "Annual Report": "Annual Report",
+      "All Year": "All Year"
     },
     "Governance": {
       "download_view": "View",
@@ -131,7 +146,8 @@
         "download_id": "Download-ID",
         "download_en": "Download-EN",
         "help": "Please select a tab.",
-        "Governance": "Governance"
+        "Governance": "Governance",
+        "search": "Search anything..."
       }
     },
     "Sustainability": {
@@ -154,7 +170,9 @@
     "latest_articles": "LATEST ARTICLES",
     "description": "Discover the latest from the energy industry",
     "see_title": "See All",
-    "read_full": "Read full article"
+    "read_full": "Read full article",
+    "title_not_found": "Content not available.",
+    "search": "Search anything..."
   },
   "Contact": {
     "message": "Add your questions",
@@ -227,5 +245,14 @@
     "OurBusiness": "Our Business",
     "Sustainability": "Sustainability",
     "Investor": "Investor"
+  },
+  "pagination": {
+    "jumpToPage": "Jump Page",
+    "go": "Go",
+    "items": "items",
+    "of": "of"
+  },
+  "metadata": {
+    "description": "PT Chandra Daya Investasi Tbk (CDI Group) is an infrastructure investment arm of Chandra Asri Group, a leading chemical and energy solutions provider in Southeast Asia, and EGCO, a holding company focused on power business investments in Thailand. CDI Group's diverse operations encompass water supply and treatment, energy, port & storage, and logistics."
   }
 }

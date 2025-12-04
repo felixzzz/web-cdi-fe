@@ -4,11 +4,14 @@ import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { publicationService } from "@/services/Investor/PublicationServices";
 import { PublicationPageProps } from "@/types/Investor/Publication";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 // import { useTranslations } from "next-intl";
 
 export async function generateMetadata({
   params: { locale },
 }: PublicationPageProps): Promise<Metadata> {
+  const t = await getTranslations("metadata");
+
   const publicationData = await publicationService.getPublicationPageData(
     locale
   );
@@ -20,12 +23,9 @@ export async function generateMetadata({
 
   const title = "Chandra Daya Investasi";
 
-  const description =
-    "PT Chandra Daya Investasi Tbk (CDI Group) merupakan bagian dari investasi infrastruktur Chandra Asri Group, penyedia bahan kimia energi dan solusi infrastruktur terkemuka di Asia Tenggara dan ECGO, perusahaan induk yang berfokus pada investasi bisnis ketenagalistrikan di Thailand. Beragam operasi CDI Group mencakup termasuk penyediaan dan pengolahan air, energi, kepelabuhanan & penyimpanan, dan logistik.";
-
   return {
     title: title,
-    description: description,
+    description: t('description'),
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
 
     keywords: [
@@ -60,7 +60,7 @@ export async function generateMetadata({
 
     openGraph: {
       title: title,
-      description: description,
+      description: t('description'),
       url: currentPath,
       siteName: "Chandra Daya Investasi",
       locale: locale,
@@ -78,7 +78,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: title,
-      description: description,
+      description: t('description'),
       images: [investor_publication_banner.file_url || "/assets/frontend/favicon.png"],
     },
 
