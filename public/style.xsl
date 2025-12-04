@@ -89,7 +89,7 @@
       <body style="grid-template-columns: 1fr 1fr; display: grid;">
         <div id="content">
           <h1 class="text-2xl mb-3">XML Sitemap</h1>
-          <h2 class="text-2xl mb-3">chandra_shipping_international</h2>
+          <h2 class="text-2xl mb-3">chandra_daya_investasi</h2>
 
           <xsl:if test="count(sitemap:sitemapindex/sitemap:sitemap) &gt; 0">
             <p class="expl">

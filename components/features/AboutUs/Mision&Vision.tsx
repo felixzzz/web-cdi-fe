@@ -91,7 +91,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
               className="mb-8"
             />
 
-            <p className="text-3xl w-full px-0 md:px-6 text-center font-medium min-h-[200px] mx-auto tracking-tight hyphens-none flex justify-center">
+            <p className="text-2xl w-full px-0 md:px-6 text-center font-medium min-h-[200px] mx-auto tracking-tight hyphens-none flex justify-center">
               {visionData.statement}
             </p>
 
@@ -114,7 +114,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
             />
 
 
-            <p className="text-3xl w-full px-6 text-center md:[text-align-last:center] font-medium min-h-[200px] mx-auto tracking-tight hyphens-none">
+            <p className="text-2xl w-full px-6 text-center md:[text-align-last:center] font-medium min-h-[200px] mx-auto tracking-tight hyphens-none">
               {missionData.statement}
             </p>
 
