@@ -34,7 +34,7 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
           </h2>
 
           <div
-          className="prose prose-invert prose-base text-sm md:text-base text-neutral-200 leading-snug md:leading-loose text-justify w-full max-w-[864px]"
+          className="prose prose-invert prose-base text-sm md:text-base text-neutral-200 leading-snug md:leading-loose text-justify w-full max-w-[864px] "
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}
           ></div>
         </div>
