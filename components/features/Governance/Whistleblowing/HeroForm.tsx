@@ -184,7 +184,7 @@ export function HeroForm({
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder={t("last_name")}
+                            placeholder={t("last_name_placeholder")}
                             className="input-custom"
                             {...field}
                           />
