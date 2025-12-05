@@ -78,7 +78,8 @@ export const AwardCard: React.FC<AwardCardProps> = ({
 
         <div
           className={clsx(
-            "mb-4 text-neutral-400 content leading-normal md:leading-[24px] text-justify",
+            // "mb-4 text-neutral-400 content leading-normal md:leading-[24px] text-justify",
+            "mb-4 text-neutral-400 content leading-normal md:leading-[24px] text-justify break-words w-full max-w-full",
             showAwards ? "text-sm md:text-[14px]" : "text-sm md:text-base line-clamp-5"
           )}
           dangerouslySetInnerHTML={{ __html: award.description }}
