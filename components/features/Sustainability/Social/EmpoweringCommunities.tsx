@@ -52,7 +52,7 @@ export function EmpoweringCommunities({ data }: EmpoweringCommunitiesProps) {
           <nav
             role="tablist"
             aria-label="Community Initiatives"
-            className="flex items-stretch border-b-2 border-b-neutral-700/50 max-md:flex-col"
+            className="flex items-stretch border-b-2 border-b-neutral-400 max-md:flex-col"
           >
             {tabs.map((tab) => (
               <TabButton
