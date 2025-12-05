@@ -130,6 +130,7 @@ export default async function Page({
     governance_policy,
     governance_audit_committe,
     governance_whistleblowing,
+    governance_whistleblowing_id,
   } = governanceData;
 
   const auditCommitteeTab: CommitteeTabData = {
@@ -208,7 +209,7 @@ export default async function Page({
         data={governance_code_of_conduct}
       />
       <Policy data={governance_policy} />
-      <Whistleblowing data={governance_whistleblowing} />
+      <Whistleblowing data={governance_whistleblowing} image={governance_whistleblowing_id.file_url} locale={locale} />
       <Information
         eyebrow={t("eye_information")}
         title={t("title_information")}

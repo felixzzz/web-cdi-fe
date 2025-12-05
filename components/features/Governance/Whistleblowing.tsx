@@ -9,14 +9,16 @@ import { useTranslations } from "next-intl";
 
 interface WhistleblowingProps {
   data: GovernanceSection;
+  image: string;
+  locale: string;
 }
 
-export function Whistleblowing({ data }: WhistleblowingProps) {
+export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
   const t = useTranslations("Investor.Governance");
   // Use data from props.
   const TITLE = data.title || "Whistleblowing";
   const CONTENT_HTML = data.content || "";
-  const IMAGE_URL = data.file_url;
+  const IMAGE_URL = locale == "id" ? image : data.file_url;
   const IMAGE_ALT = data.title || "Whistleblowing concept illustration";
   const LINK_URL = `/governance/whistleblowing`;
   // const LINK_URL = `${process.env.NEXT_PUBLIC_URL_LP}/governance/whistleblowing`;
