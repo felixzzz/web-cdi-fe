@@ -123,7 +123,7 @@
       "WhistleblowingPage": {
         "Governance": "Tata Kelola",
         "Whistleblowing": "Pengungkapan Pelanggaran",
-        "message": "Ajukan pertanyaan Anda",
+        "message": "Tambahkan pertanyaan Anda",
         "message_placeholder": "Tulis komentar atau pertanyaan tambahan Anda di sini",
         "topic_id": "Topik",
         "topic_id_placeholder": "Pilih Topik",
@@ -175,7 +175,7 @@
     "search": "Cari apa saja..."
   },
   "Contact": {
-    "message": "Ajukan pertanyaan Anda",
+    "message": "Tambahkan pertanyaan Anda",
     "message_placeholder": "Tulis komentar atau pertanyaan tambahan Anda di sini",
     "topic_id": "Topik",
     "topic_id_placeholder": "Pilih Topik",

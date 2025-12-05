@@ -110,7 +110,7 @@ export function HeroForm({
   }, []);
 
   return (
-    <div data-navbar-theme="dark" className="bg-gray-100 py-20">
+    <div data-navbar-theme="dark" className="bg-gray-100 py-24">
       <section className="container mx-auto   pt-[5%]">
         <div className="grid grid-cols-1 md:grid-cols-3 md:gap-16">
           <ContactInfoCard
@@ -147,7 +147,7 @@ export function HeroForm({
                         <FormControl>
                           <Input
                             placeholder={t("first_name_placeholder")}
-                            className="input-custom bg-gray-100"
+                            className="input-custom bg-gray-100 placeholder:text-base"
                             {...field}
                           />
                         </FormControl>
@@ -167,7 +167,7 @@ export function HeroForm({
                         <FormControl>
                           <Input
                             placeholder={t("last_name_placeholder")}
-                            className="input-custom bg-gray-100"
+                            className="input-custom bg-gray-100 placeholder:text-base"
                             {...field}
                           />
                         </FormControl>
@@ -190,7 +190,7 @@ export function HeroForm({
                           <Input
                             type="email"
                             placeholder={t("email_placeholder")}
-                            className="input-custom bg-gray-100"
+                            className="input-custom bg-gray-100 placeholder:text-base"
                             {...field}
                           />
                         </FormControl>
@@ -212,7 +212,7 @@ export function HeroForm({
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger className="input-custom bg-gray-100">
+                            <SelectTrigger className="input-custom bg-gray-100 text-base !text-black">
                               <SelectValue
                                 placeholder={t("country_id_placeholder")}
                               />
@@ -221,6 +221,7 @@ export function HeroForm({
                           <SelectContent>
                             {countries?.map((country) => (
                               <SelectItem
+                                className="text-base"
                                 key={country.id}
                                 value={String(country.id)}
                               >
@@ -248,7 +249,7 @@ export function HeroForm({
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="input-custom bg-gray-100">
+                          <SelectTrigger className="input-custom bg-gray-100 text-base !text-black">
                             <SelectValue
                               placeholder={t("topic_id_placeholder")}
                             />
@@ -256,7 +257,11 @@ export function HeroForm({
                         </FormControl>
                         <SelectContent>
                           {topics?.map((topic) => (
-                            <SelectItem key={topic.id} value={String(topic.id)}>
+                            <SelectItem
+                              className="text-base"
+                              key={topic.id}
+                              value={String(topic.id)}
+                            >
                               {topic.name}
                             </SelectItem>
                           ))}
@@ -278,7 +283,7 @@ export function HeroForm({
                       <FormControl>
                         <Textarea
                           placeholder={t("message_placeholder")}
-                          className="input-custom !h-auto"
+                          className="input-custom !h-auto bg-gray-100 placeholder:text-base"
                           rows={8}
                           {...field}
                         />

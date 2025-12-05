@@ -83,7 +83,7 @@ export default async function Page({ params: { locale } }: PageProps) {
       <main>
         <NavbarThemeTrigger theme="light" />
         <section className="container mx-auto   py-40">
-          <h1 className="text-neutral-13 font-medium text-2xl lg:text-[28px] mb-5">
+          <h1 className="text-neutral-13 font-medium text-2xl lg:text-[28px] mb-6">
             {t("title_not_found")}
           </h1>
         </section>
@@ -99,7 +99,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           {termsData.title}
         </h1>
         <div
-          className="prose prose-base text-neutral-900 text-[12px] leading-[24px] w-full max-w-full"
+          className="prose prose-base text-neutral-900 text-sm md:text-base leading-normal md:leading-loose w-full max-w-full"
           dangerouslySetInnerHTML={{ __html: termsData.content || "" }}
         />
       </section>
