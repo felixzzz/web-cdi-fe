@@ -66,7 +66,7 @@ export const Overview: React.FC<OverviewSectionProps> = ({
               {eyebrowText}
             </h2>
 
-            <div className="content text-justify">{children}</div>
+            <div className="content text-justify break-words w-full max-w-full">{children}</div>
           </div>
 
           <div className="md:col-span-6">
@@ -75,7 +75,7 @@ export const Overview: React.FC<OverviewSectionProps> = ({
               alt={mainImageAlt}
               width={mainImageWidth}
               height={mainImageHeight}
-              className="w-full md:w-[80%] rounded-xl ms-auto"
+              className="w-full lg:w-[80%] rounded-xl ms-auto"
             />
           </div>
         </div>
