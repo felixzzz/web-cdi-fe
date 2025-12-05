@@ -199,7 +199,7 @@ export function Navbar() {
           </Link>
 
           <nav
-            className="hidden lg:flex items-center gap-2 md:gap-4 font-normal text-base whitespace-nowrap"
+            className="hidden lg:flex items-center gap-4 xl:gap-6 font-normal text-base whitespace-nowrap"
             style={{ "--nav-hover-color": hoverColor } as React.CSSProperties}
           >
             {navLinks.map((link) =>
@@ -219,7 +219,7 @@ export function Navbar() {
                     }, 200);
                   }}
                 >
-                  <button className="nav-item hover-underline-middle cursor-pointer flex items-center gap-1 text-sm md:text-xs xl:text-base whitespace-nowrap">
+                  <button className="nav-item hover-underline-middle cursor-pointer flex items-center gap-1 text-sm xl:text-base whitespace-nowrap">
                     <span>{link.label}</span>
                     <ChevronDown
                       size={16}
@@ -260,7 +260,7 @@ export function Navbar() {
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="text-neutral-900 hover-underline-middle nav-item justify-start text-sm"
+                            className="text-neutral-900 hover-underline-middle nav-item justify-start text-sm xl:text-base"
                             onClick={() => {
                               setOpenDesktopDropdown(null);
                               handleLinkClick();
@@ -279,7 +279,7 @@ export function Navbar() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="nav-item hover-underline-middle text-sm md:text-xs xl:text-base whitespace-nowrap"
+                  className="nav-item hover-underline-middle text-sm xl:text-base whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
@@ -287,7 +287,7 @@ export function Navbar() {
                 <Link
                   key={link.id}
                   href={link.href}
-                  className="nav-item hover-underline-middle text-sm md:text-xs xl:text-base whitespace-nowrap"
+                  className="nav-item hover-underline-middle text-sm xl:text-base whitespace-nowrap"
                   onClick={handleLinkClick}
                 >
                   {link.label}

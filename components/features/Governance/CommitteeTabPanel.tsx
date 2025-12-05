@@ -34,9 +34,6 @@ export const CommitteeTabPanel: React.FC<CommitteeTabPanelProps> = ({
       .trim();
   }, [tab.contentHtml]);
 
-  console.log('files download')
-  console.log(tab['files'])
-
   return (
     <div className="py-8">
       <h3 className="font-medium text-[22px] mb-3">{tab.title}</h3>

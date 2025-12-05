@@ -112,7 +112,7 @@ export function HeroForm({
   return (
     <div data-navbar-theme="dark" className="bg-gray-100 py-20">
       <section className="container mx-auto   pt-[5%]">
-        <div className="grid grid-cols-1 md:grid-cols-3 p-2 md:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-16">
           <ContactInfoCard
             imageSrc={pageData.file_url}
             imageAlt="CDI Group Team"
@@ -147,7 +147,7 @@ export function HeroForm({
                         <FormControl>
                           <Input
                             placeholder={t("first_name_placeholder")}
-                            className="input-custom"
+                            className="input-custom bg-gray-100"
                             {...field}
                           />
                         </FormControl>
@@ -166,8 +166,8 @@ export function HeroForm({
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder={t("last_name")}
-                            className="input-custom"
+                            placeholder={t("last_name_placeholder")}
+                            className="input-custom bg-gray-100"
                             {...field}
                           />
                         </FormControl>
@@ -190,7 +190,7 @@ export function HeroForm({
                           <Input
                             type="email"
                             placeholder={t("email_placeholder")}
-                            className="input-custom"
+                            className="input-custom bg-gray-100"
                             {...field}
                           />
                         </FormControl>
@@ -212,7 +212,7 @@ export function HeroForm({
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger className="input-custom">
+                            <SelectTrigger className="input-custom bg-gray-100">
                               <SelectValue
                                 placeholder={t("country_id_placeholder")}
                               />
@@ -248,7 +248,7 @@ export function HeroForm({
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="input-custom">
+                          <SelectTrigger className="input-custom bg-gray-100">
                             <SelectValue
                               placeholder={t("topic_id_placeholder")}
                             />

@@ -97,7 +97,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-3 lg:grid-rows-1 items-center text-center lg:text-left">
-          <p className="text-xs text-neutral-3 lg:col-start-1 lg:row-start-1">
+          <p className="text-sm text-neutral-3 lg:col-start-1 lg:row-start-1">
             {copyrightText}
           </p>
 
@@ -113,7 +113,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-xs text-nowrap text-neutral-3 whitespace-nowrap"
+                    className="text-sm text-nowrap text-neutral-3 whitespace-nowrap"
                   >
                     {link.text}
                   </Link>

@@ -162,8 +162,6 @@ export default async function Page({
     ],
   }));
 
-  console.log(otherTabs)
-
   const SECTION_IDS = {
     CORP_SEC: "corporate-secretary",
     INTERNAL_AUDIT: "internal-audit",

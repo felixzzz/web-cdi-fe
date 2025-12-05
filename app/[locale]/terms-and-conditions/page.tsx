@@ -95,11 +95,11 @@ export default async function Page({ params: { locale } }: PageProps) {
       <NavbarThemeTrigger theme="light" />
 
       <section className="container mx-auto   py-40">
-        <h1 className="text-neutral-900 font-medium text-2xl md:text-4xl mb-5">
+        <h1 className="text-neutral-900 font-medium text-2xl md:text-4xl mb-6">
           {termsData.title}
         </h1>
         <div
-          className="prose prose-base text-neutral-900 text-[12px] leading-[24px] w-full max-w-full"
+          className="prose prose-base text-neutral-900 text-sm md:text-base leading-normal md:leading-loose w-full max-w-full"
           dangerouslySetInnerHTML={{ __html: termsData.content || "" }}
         />
       </section>
