@@ -113,7 +113,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-nowrap text-neutral-3 whitespace-nowrap"
+                    className="text-sm text-neutral-3 "
                   >
                     {link.text}
                   </Link>

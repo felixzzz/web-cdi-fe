@@ -24,7 +24,7 @@ export function ContactInfoCard({
   hastag,
 }: ContactInfoCardProps) {
   return (
-    <div className="relative lg:max-h-[675px] lg:max-w-[456px] h-full rounded-xl flex flex-col p-6 justify-between max-lg:min-h-[456px] overflow-hidden">
+    <div className="relative lg:max-h-[675px] lg:max-w-[456px] h-full bg-cover rounded-xl flex flex-col p-6 justify-between bg-center overflow-hidden rounded-xl">
       <Image
         src={imageSrc}
         alt={imageAlt}
