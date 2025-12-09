@@ -33,13 +33,13 @@ export const RelatedPosts = ({
     <div className="pb-28 pt-12 bg-white">
       <section className="container mx-auto  ">
         <p className="capitalize text-neutral-7 mb-4">News</p>
-        <div className="flex md:items-center justify-between mb-10 flex-col md:flex-row">
+        <div className="flex lg:items-center justify-between mb-10 flex-col lg:flex-row">
           <div>
-            <p className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px]">
+            <p className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px]">
               {titleText}
             </p>
           </div>
-          <div className="flex items-center gap-4 justify-start md:justify-center max-lg:mt-4 text-[#2474A5]">
+          <div className="flex items-center gap-4 justify-start lg:justify-center max-lg:mt-4 text-[#2474A5]">
             <Link
               className="py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-blue-base"
               href={`/${locale}/media/news`}
@@ -48,7 +48,7 @@ export const RelatedPosts = ({
             </Link>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {relatedArticles.map((article) => (
             <ArticleCard
               key={article.id}

@@ -32,15 +32,15 @@ export function EmpoweringCommunities({ data }: EmpoweringCommunitiesProps) {
     <article aria-labelledby="empowering-heading">
       <div className="py-20 bg-[#091A24]">
         <section className="container mx-auto  ">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
             <h2
               id="empowering-heading"
-              className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-medium text-[#47C1EA] max-w-[580px]"
+              className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium text-[#47C1EA] max-w-[580px]"
             >
               {data.title || "Empowering Communities"}
             </h2>
             <div
-              className="prose prose-invert prose-base text-sm md:text-base text-white leading-snug md:leading-loose text-justify"
+              className="prose prose-invert prose-base text-sm lg:text-base text-white leading-snug lg:leading-loose text-justify"
               dangerouslySetInnerHTML={{ __html: data.content || "" }}
             ></div>
           </div>
@@ -52,7 +52,7 @@ export function EmpoweringCommunities({ data }: EmpoweringCommunitiesProps) {
           <nav
             role="tablist"
             aria-label="Community Initiatives"
-            className="flex items-stretch border-b-2 border-b-neutral-400 max-md:flex-col"
+            className="flex items-stretch border-b-2 border-b-neutral-400 max-lg:flex-col"
           >
             {tabs.map((tab) => (
               <TabButton
@@ -116,8 +116,8 @@ function TabPanelContent({ tab, isActive }: TabPanelProps) {
       ></div>
 
       <div className="container mx-auto   relative z-20">
-        <div className="md:max-w-[45%] ms-auto">
-          <h3 className="text-2xl md:text-[28px] font-medium mb-6 text-blue-lighter">
+        <div className="lg:max-w-[45%] ms-auto">
+          <h3 className="text-2xl lg:text-[28px] font-medium mb-6 text-blue-lighter">
             {content.title}
           </h3>
           <div

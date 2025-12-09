@@ -110,7 +110,7 @@ export function FinancialTable({ data }: FinancialTableProps) {
 
       {footnotes && (
         <div
-        className="prose prose-invert prose-base text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify font-extralight text-gray-900 py-1 space-y-2 mt-6"
+        className="prose prose-invert prose-base text-[14px] lg:text-[12px] leading-normal lg:leading-[24px] text-justify font-extralight text-gray-900 py-1 space-y-2 mt-6"
           // className="text-[12px] leading-[24px] font-extralight text-gray-600 py-1 space-y-2 mt-6"
           dangerouslySetInnerHTML={{ __html: footnotes }}
         ></div>

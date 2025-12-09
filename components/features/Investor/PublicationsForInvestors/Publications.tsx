@@ -70,7 +70,7 @@ function Pagination({
     "!cursor-not-allowed text-neutral-4 border-neutral-4 bg-transparent";
 
   return (
-    <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row ">
+    <section className="mt-5 py-10 flex w-full justify-center lg:justify-between items-center gap-4 flex-col lg:flex-row ">
       <p className="text-neutral-10 text-sm max-md:hidden">
         {startItem}-{endItem} {t("of")} {totalItems} {t("items")}
       </p>
@@ -170,8 +170,8 @@ function Pagination({
         </li>
       </ul>
 
-      <div className="flex items-center gap-4 justify-center md:justify-between w-full md:w-auto">
-        <p className="text-neutral-10 text-sm md:hidden">
+      <div className="flex items-center gap-4 justify-center lg:justify-between w-full lg:w-auto">
+        <p className="text-neutral-10 text-sm lg:hidden">
           {startItem}-{endItem} {t("of")} {totalItems} {t("items")}
         </p>
 
@@ -331,20 +331,20 @@ export function Publications({
   return (
     <div data-navbar-theme="dark" className="py-20">
       <section className="container mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           <nav
             aria-label="Publications categories"
-            className="flex md:flex-col md:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap"
+            className="flex lg:flex-col lg:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap"
           >
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => handleTabClick(link.id)}
                 className={clsx(
-                  "text-lg text-center p-4 transition md:w-full md:text-start border-t-[1px]",
+                  "text-lg text-center p-4 transition lg:w-full lg:text-start border-t-[1px]",
                   activeTab === link.id
-                    ? "text-neutral-13 font-medium border-t-transparent border-b-4 border-b-[#2474A5] md:border-t-0 md:border-b-0 md:border-l-4 md:border-l-[#2474A5]"
-                    : "text-neutral-8 font-normal border-t-neutral-100 hover:text-neutral-13 md:border-b-[1px] md:border-b-neutral-100"
+                    ? "text-neutral-13 font-medium border-t-transparent border-b-4 border-b-[#2474A5] lg:border-t-0 lg:border-b-0 lg:border-l-4 lg:border-l-[#2474A5]"
+                    : "text-neutral-8 font-normal border-t-neutral-100 hover:text-neutral-13 lg:border-b-[1px] lg:border-b-neutral-100"
                 )}
               >
                 {t(link.title)}
@@ -352,15 +352,15 @@ export function Publications({
             ))}
           </nav>
 
-          <div className="md:col-span-4">
-            <div className="grid md:grid-cols-2 gap-4 pb-10 border-b border-b-neutral-5 items-center">
+          <div className="lg:col-span-4">
+            <div className="grid lg:grid-cols-2 gap-4 pb-10 border-b border-b-neutral-5 items-center">
               <div>
-                <h2 className="text-2xl md:text-[28px] font-medium text-neutral-13">
+                <h2 className="text-2xl lg:text-[28px] font-medium text-neutral-13">
                   {t(activeLink?.title || "not_found_title")}
                 </h2>
               </div>
 
-              <div className="relative w-full md:w-[264px] md:ms-auto">
+              <div className="relative w-full lg:w-[264px] lg:ms-auto">
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-7 pointer-events-none z-10">
                   <Search size={16} />
                 </div>
@@ -383,14 +383,14 @@ export function Publications({
                 paginatedItems.map((item) => (
                   <article
                     key={item.id}
-                    className="py-8 border-b border-b-neutral-5 flex items-center justify-start flex-col gap-y-4 md:gap-y-0"
+                    className="py-8 border-b border-b-neutral-5 flex items-center justify-start flex-col gap-y-4 lg:gap-y-0"
                   >
                     <div className="flex w-full">
                       <h3 className="text-neutral-13 mb-2 text-lg font-medium">
                         {item.title}
                       </h3>
                     </div>
-                    <div className="flex flex-col md:flex-row justify-start md:justify-between w-full">
+                    <div className="flex flex-col lg:flex-row justify-start lg:justify-between w-full">
                       <div className="flex items-center justify-start text-base text-neutral-8 gap-3 w-full">
                         <p className="flex items-baseline gap-3">
                           <time dateTime={item.date}>{item.displayDate}</time>
@@ -406,7 +406,7 @@ export function Publications({
                           className="inline-block"
                         />
                       </div>
-                      <div className="flex items-center justify-start md:justify-end gap-8 w-full">
+                      <div className="flex items-center justify-start lg:justify-end gap-8 w-full">
                         <Link
                           href={`${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/report/${item.id}/${item.title}`}
                           target="_blank"

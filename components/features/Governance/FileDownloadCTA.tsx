@@ -19,7 +19,7 @@ export function FileDownloadCTA({
   const t = useTranslations('Investor.Governance')
   return (
     <div
-      className="p-6 flex flex-col md:flex-row md:items-center md:justify-between w-full
+      className="p-6 flex flex-col lg:flex-row lg:items-center lg:justify-between w-full
       border 
       bg-[linear-gradient(#d6f5ff29,#091a2429)] 
       rounded-lg"
@@ -27,7 +27,7 @@ export function FileDownloadCTA({
         borderColor: "color-mix(in oklab, #676869 40%, transparent)",
       }}
     >
-      <div className="flex flex-col gap-2 mb-4 md:mb-0">
+      <div className="flex flex-col gap-2 mb-4 lg:mb-0">
         <h3 className="text-2xl font-medium">{title}</h3>
         <div className="flex items-center text-base text-white gap-2">
           <span className="text-sm">{fileSize}</span>

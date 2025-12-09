@@ -158,13 +158,13 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
     >
       <h2
         id="calendar-heading"
-        className="text-neutral-800 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-3"
+        className="text-neutral-800 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-3"
       >
         {t("title")}
       </h2>
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
-        <span className="text-sm md:text-base leading-normal md:leading-[24px] text-justify">
+        <span className="text-sm lg:text-base leading-normal lg:leading-[24px] text-justify">
           {t("subtitle")}
         </span>
       </div>
@@ -209,7 +209,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
             </button>
           ))}
         </nav>
-        <div className="relative w-full md:w-[264px] md:ms-auto">
+        <div className="relative w-full lg:w-[264px] lg:ms-auto">
           <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-7">
             <Search size={16} />
           </div>
@@ -232,22 +232,22 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
           </div>
         ) : reportKeys.length > 0 ? (
           reportKeys.map((year) => (
-            <div key={year} className="flex md:gap-6 flex-col md:flex-row mt-5">
-              <h3 className="text-[#2474A5] font-medium text-[48px] w-full md:w-auto">
+            <div key={year} className="flex lg:gap-6 flex-col lg:flex-row mt-5">
+              <h3 className="text-[#2474A5] font-medium text-[48px] w-full lg:w-auto">
                 {year}
               </h3>
               <div className="w-full">
                 {paginatedAndGroupedReports[Number(year)].map((report) => (
                   <article
                     key={report.id}
-                    className="py-8 border-b border-b-neutral-5 flex items-center justify-start flex-col gap-y-4 md:gap-y-0"
+                    className="py-8 border-b border-b-neutral-5 flex items-center justify-start flex-col gap-y-4 lg:gap-y-0"
                   >
                     <div className="flex w-full">
                       <h4 className="text-neutral-13 mb-2 text-lg font-medium">
                         {report.title}
                       </h4>
                     </div>
-                    <div className="flex flex-col md:flex-row justify-start md:justify-between w-full">
+                    <div className="flex flex-col lg:flex-row justify-start lg:justify-between w-full">
                       <div className="flex items-center justify-start text-base text-neutral-8 gap-3 w-full">
                         <p className="flex items-baseline gap-3">
                           <time dateTime={report.date}>
@@ -265,7 +265,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
                           className="inline-block"
                         />
                       </div>
-                      <div className="flex items-center justify-start md:justify-end gap-8 w-full">
+                      <div className="flex items-center justify-start lg:justify-end gap-8 w-full">
                         <Link
                           href={report.viewUrl}
                           target="_blank"
@@ -360,7 +360,7 @@ function Pagination({
     "!cursor-not-allowed text-neutral-4 border-neutral-4 bg-transparent";
 
   return (
-    <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row">
+    <section className="mt-5 py-10 flex w-full justify-center lg:justify-between items-center gap-4 flex-col lg:flex-row">
       <p className="text-neutral-10 text-sm max-md:hidden">
         {startItem}-{endItem} {t("of")} {totalItems} {t("items")}
       </p>
@@ -442,8 +442,8 @@ function Pagination({
         </li>
       </ul>
 
-      <div className="flex items-center gap-4 justify-center md:justify-between w-full md:w-auto">
-        <p className="text-neutral-10 text-sm md:hidden">
+      <div className="flex items-center gap-4 justify-center lg:justify-between w-full lg:w-auto">
+        <p className="text-neutral-10 text-sm lg:hidden">
           {startItem}-{endItem} {t("of")} {totalItems} {t("items")}
         </p>
 

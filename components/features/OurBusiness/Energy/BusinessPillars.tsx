@@ -55,7 +55,7 @@ export const BusinessPillars: React.FC<BusinessPillarsProps> = ({ title, tabs })
         >
           {title || "Business Pillars"}
         </h2>
-        <div className="flex flex-col sm:flex-row border-b border-gray-700 pt-20">
+        <div className="flex flex-col lg:flex-row border-b border-gray-700 pt-20">
           {tabs.map((tab) => (
             <TabButton
               key={tab.id}

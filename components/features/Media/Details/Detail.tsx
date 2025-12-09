@@ -111,17 +111,17 @@ export const NewsDetail = ({
           priority
         />
 
-        <h1 className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-6">
+        <h1 className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-6">
           {articleTitle}
         </h1>
 
         <div
-          className="max-w-full prose prose-base text-justify text-neutral-900 text-[14px] leading-normal md:leading-[24px]"
+          className="max-w-full content text-justify text-neutral-900 text-[14px] leading-normal lg:leading-[24px]"
           dangerouslySetInnerHTML={{ __html: articleContent }}
         ></div>
 
         <div className="mt-16 flex-col text-center">
-          <p className="font-medium text-neutral-13 md:text-lg mb-4">
+          <p className="font-medium text-neutral-13 lg:text-lg mb-4">
             {t("share")}
           </p>
           <div className="flex items-center gap-2 justify-center">

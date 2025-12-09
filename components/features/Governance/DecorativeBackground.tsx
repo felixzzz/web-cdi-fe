@@ -35,16 +35,16 @@ export function RiskManagement({ data }: RiskManagementProps) {
       ></div>
 
       <div className="container mx-auto   relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-8">
           <div>
             <h2
               id="risk-management-heading"
-              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
+              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
             >
               {TITLE}
             </h2>
-            <div
-              className="max-w-full prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-justify text-neutral-300"
+            <span
+              className="max-w-full prose prose-invert prose-base text-sm lg:text-base leading-snug md:leading-loose text-justify text-neutral-300"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
           </div>

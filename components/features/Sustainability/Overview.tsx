@@ -32,16 +32,16 @@ export function Overview({ data }: OverviewProps) {
       ></div>
 
       <div className="container mx-auto   relative z-20">
-        <div className="md:max-w-[45%] ms-auto">
+        <div className="lg:max-w-[45%] ms-auto">
           <h2
             id="overview-heading"
-            className="text-2xl md:text-[28px] font-medium mb-6 text-blue-lighter"
+            className="text-2xl lg:text-[28px] font-medium mb-6 text-blue-lighter"
           >
             {title}
           </h2>
 
           <div
-          className="max-w-full prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-justify"
+          className="max-w-full prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
             dangerouslySetInnerHTML={{ __html: content }}
           ></div>
         </div>

@@ -116,7 +116,7 @@ export function HeroForm({
   return (
     <div data-navbar-theme="dark" className="bg-neutral-2 py-20 lg:py-12">
       <section className="container mx-auto   pt-[5%]">
-        <div className="flex gap-1 text-neutral-10 items-center text-sm md:text-base">
+        <div className="flex gap-1 text-neutral-10 items-center text-sm lg:text-base">
           <Link className="text-[#2474A5] hover:underline" href="/governance">
             {t("Governance")}
           </Link>
@@ -135,8 +135,8 @@ export function HeroForm({
             email={contactData.localized_main.fax}
           />
 
-          <div className="pt-10 md:pt-0 md:col-span-2">
-            <h1 className="text-gray-900 font-medium text-2xl md:leading-snug md:text-[38px] mb-4">
+          <div className="pt-10 lg:pt-0 lg:col-span-2">
+            <h1 className="text-gray-900 font-medium text-2xl lg:leading-snug lg:text-[38px] mb-4">
               {governance_whistleblowing.title}
             </h1>
 

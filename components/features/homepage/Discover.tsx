@@ -57,13 +57,13 @@ export const Discover: React.FC<DiscoverSectionProps> = ({
       <div className="container mx-auto  ">
         <h2
           id="discover-title"
-          className="mb-10 text-2xl md:text-[38px] md:leading-[44px] font-medium max-w-2xl mx-auto text-center"
+          className="mb-10 text-2xl lg:text-[38px] lg:leading-[44px] font-medium max-w-2xl mx-auto text-center"
         >
           {home_discover_title.title}
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4">
         {discoverData.map((item) => (
           <DiscoverCard
             key={item.title}

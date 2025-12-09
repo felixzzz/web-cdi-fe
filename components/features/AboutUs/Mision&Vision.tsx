@@ -72,13 +72,13 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
       <div className="container mx-auto   relative z-[1]">
         <h2
           id="vision-mission-title"
-          className="font-medium text-2xl md:text-[38px] md:leading-[44px] mb-16 text-center relative w-fit py-3 px-12 mx-auto"
+          className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-16 text-center relative w-fit py-3 px-12 mx-auto"
         >
           <DecorativeCorners />
           {title}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
           <div
             className="rounded-xl p-8 pt-12 flex flex-col items-center text-center"
             style={{ backgroundImage: "linear-gradient(#00253b, #0b5581)" }}

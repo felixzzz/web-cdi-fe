@@ -65,7 +65,7 @@ function Pagination({
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row">
+    <section className="mt-5 py-10 flex w-full justify-center lg:justify-between items-center gap-4 flex-col lg:flex-row">
       <p className="text-neutral-10 text-sm max-md:hidden">
         {from}-{to} {t('of')} {totalItems} {t('items')}
       </p>
@@ -162,8 +162,8 @@ function Pagination({
         </li>
       </ul>
 
-      <div className="flex items-center gap-4 justify-center md:justify-between w-full md:w-auto">
-        <p className="text-neutral-10 text-sm md:hidden">
+      <div className="flex items-center gap-4 justify-center lg:justify-between w-full lg:w-auto">
+        <p className="text-neutral-10 text-sm lg:hidden">
           {from}-{to} {t('of')} {totalItems} {t('items')}
         </p>
 
@@ -225,9 +225,9 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
     }, []);
 
   return (
-    <section className="container mx-auto   py-[5%] lg:py-[8%]">
-      <div className="flex gap-1 text-neutral-10 items-center text-sm md:text-base">
-        <Link className="text-blue-base hover:underline" href="/governance">
+    <section className="container mx-auto py-36">
+      <div className="flex gap-1 text-neutral-10 items-center text-sm lg:text-base">
+        <Link className="text-[#2474A5] hover:underline" href="/governance">
           {t('Governance')}
         </Link>
         <ChevronRight className="text-lg w-4 h-4" />
@@ -235,18 +235,18 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
       </div>
 
       <div className="mt-8">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           <nav
-            className="flex md:flex-col md:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap"
+            className="flex lg:flex-col lg:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap"
           >
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 className={clsx(
-                  "text-lg text-center p-4 transition md:w-full md:text-start",
+                  "text-lg text-center p-4 transition lg:w-full lg:text-start",
                   activeTab === link.id
-                    ? "text-neutral-13 font-medium md:border-b-2 border-b-2 md:border-b-neutral-100 border-b-[#2474A5]  md:border-l-4 md:border-l-[#2474A5]"
-                    : "text-neutral-8 font-normal border-t-neutral-100 hover:text-neutral-13 md:border-b-[1px] md:border-b-neutral-100"
+                    ? "text-neutral-13 font-medium lg:border-b-2 border-b-2 lg:border-b-neutral-100 border-b-[#2474A5]  lg:border-l-4 lg:border-l-[#2474A5]"
+                    : "text-neutral-8 font-normal border-t-neutral-100 hover:text-neutral-13 lg:border-b-[1px] lg:border-b-neutral-100"
                 )}
               >
                 {t(link.title)}
@@ -254,7 +254,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
             ))}
           </nav>
 
-          <div className="md:col-span-4">
+          <div className="lg:col-span-4">
             <div className="grid lg:grid-cols-2 gap-2 pb-10 border-b border-b-neutral-5">
               <div>
                 <p className="text-2xl lg:text-[28px] font-medium text-neutral-13">
@@ -309,7 +309,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                         <p className="text-neutral-13 mb-2 text-lg font-medium">
                           {displayName}
                         </p>
-                        <div className="flex flex-col md:flex-row justify-between w-full">
+                        <div className="flex flex-col lg:flex-row justify-between w-full">
                           <div className="flex items-center text-base text-neutral-8 gap-3">
                             <div className="flex items-baseline gap-3">
                               <time dateTime={item.date}>{item.date}</time>
@@ -328,7 +328,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                         </div>
                       </div>
 
-                      <div className="flex flex-row items-center gap-4 sm:gap-8 w-full md:w-fit mt-4 lg:mt-0">
+                      <div className="flex flex-row items-center gap-4 sm:gap-8 w-full lg:w-fit mt-4 lg:mt-0">
                         <Link
                           href={viewLink}
                           target="_blank"

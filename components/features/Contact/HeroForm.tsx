@@ -124,8 +124,8 @@ export function HeroForm({
             email={contactData.localized_main.fax}
           />
 
-          <div className="pt-10 md:pt-0 md:col-span-2">
-            <h1 className="text-gray-900 font-medium text-2xl md:leading-snug text-xl lg:text-[38px] mb-8 mt-10 lg:mt-0">
+          <div className="pt-10 lg:pt-0 lg:col-span-2">
+            <h1 className="text-gray-900 font-medium text-2xl lg:leading-snug text-[24px] lg:text-[38px] mb-8 mt-10 lg:mt-0">
               {pageData.title}
             </h1>
 

@@ -28,13 +28,13 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
         <div className="relative z-10 flex flex-col w-full items-center text-center gap-6">
           <h2
             id="financial-banner-heading"
-            className="font-medium text-2xl md:text-[38px] md:leading-[44px] text-white max-w-[680px]"
+            className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] text-white max-w-[600px] lg:max-w-[680px]"
           >
             {title}
           </h2>
 
           <div
-          className="prose prose-invert prose-base text-sm md:text-base text-neutral-200 leading-snug md:leading-loose text-justify w-full max-w-[864px] "
+          className="prose prose-invert prose-base text-sm lg:text-base text-neutral-200 leading-snug lg:leading-loose text-justify w-full max-w-[864px] "
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}
           ></div>
         </div>

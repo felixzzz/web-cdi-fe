@@ -145,7 +145,7 @@ export default async function Page({
         subtitle={sustainability_governance_banner.content || ""}
         iconSrc="/assets/icons/ic_hero_circle_arrow_down.svg"
       />
-      <BusinessEthics data={businessEthicsData!} />
+      <BusinessEthics data={businessEthicsData!} locale={locale} />
       <AntiCorruption data={antiCorruptionData!} />
       <GrievanceMechanism data={grievanceData!} />
       <SustainableProcurement data={procurementData!} />

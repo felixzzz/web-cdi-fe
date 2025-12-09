@@ -152,14 +152,14 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
     >
       <h2
         id="calendar-heading"
-        className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-3"
+        className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-3"
       >
         {t("calendar_title")}
       </h2>
 
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
-        <span className="text-sm md:text-base leading-normal md:leading-[24px] text-justify">
+        <span className="text-sm lg:text-base leading-normal lg:leading-[24px] text-justify">
           {t("calendar_subtitle")}
         </span>
       </div>
@@ -182,7 +182,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
         ))}
       </nav>
 
-      <div className="grid md:grid-cols-2 gap-4 my-10">
+      <div className="grid lg:grid-cols-2 gap-4 my-10">
         <nav
           aria-label="Filter by report type"
           className="flex items-center gap-2 flex-wrap"
@@ -192,7 +192,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
               key={type}
               onClick={() => handleTypeClick(type)}
               className={clsx(
-                "text-xs md:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5]  transition",
+                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5]  transition",
                 activeType === type && "bg-[#2474A5] text-gray-100"
               )}
             >
@@ -200,7 +200,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
             </button>
           ))}
         </nav>
-        <div className="relative w-full md:w-[264px] md:ms-auto">
+        <div className="relative w-full lg:w-[264px] lg:ms-auto">
           <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-7">
             <Search size={16} />
           </div>
@@ -223,7 +223,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
           displayedReports.map((report) => (
             <article
               key={report.id}
-              className="py-8 border-b border-b-neutral-5 flex md:items-center justify-between flex-col md:flex-row gap-y-4 md:gap-y-0"
+              className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0"
             >
               <div>
                 <h3 className="text-neutral-13 mb-2 text-lg font-medium">
@@ -245,7 +245,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
                   />
                 </div>
               </div>
-              <div className="flex md:items-center gap-8 w-full md:w-fit">
+              <div className="flex lg:items-center gap-8 w-full lg:w-fit">
                 <a
                   href={report.viewUrl}
                   target="_blank"

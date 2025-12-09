@@ -41,20 +41,20 @@ export const Journey: React.FC<JourneySectionProps> = ({
         <div className="mb-20 max-w-lg">
           <h2
             id="journey-title"
-            className="font-medium text-2xl md:text-[38px] md:leading-[44px] mb-6"
+            className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-6"
           >
             {title}
           </h2>
           <div className="content text-neutral-5">{children}</div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 mb-20">
           {stats.map((stat) => (
             <div
               key={stat.value}
               className="border-l-2 border-l-[#47C1EA] px-6 py-4 lg:py-0"
             >
-              <p className="text-shadow-1 font-medium text-4xl md:text-[62px] xl:text-[80px] md:mb-2 leading-loose md:leading-[88.8889px]">
+              <p className="text-shadow-1 font-medium text-4xl md:text-[62px] xl:text-[80px] lg:mb-2 leading-loose md:leading-[88.8889px]">
                 {stat.value}
               </p>
               <div className="content !font-light text-shadow-1 !text-white leading-[18px]">

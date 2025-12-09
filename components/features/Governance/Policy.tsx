@@ -29,16 +29,16 @@ export function Policy({ data }: PolicyProps) {
       className="bg-[#051119] py-20 text-white scroll-mt-10"
     >
       <div className="container mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8">
-          <div className="md:col-span-3">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8">
+          <div className="lg:col-span-3">
             <h2
               id="policy-heading"
-              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
+              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
             >
               {TITLE}
             </h2>
-            <div
-              className="max-w-full prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-justify"
+            <span
+              className="max-w-full prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             />
 
@@ -52,7 +52,7 @@ export function Policy({ data }: PolicyProps) {
               <ArrowUpRight size={16} />
             </Link>
           </div>
-          <div className="md:col-span-2"></div>
+          <div className="lg:col-span-2"></div>
         </div>
       </div>
     </section>

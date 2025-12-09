@@ -44,7 +44,7 @@ export const AwardCard: React.FC<AwardCardProps> = ({
   };
 
   return (
-    <article className="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <article className="grid grid-cols-1 lg:grid-cols-2 gap-5">
       <div>
         <div
           className="w-full cursor-pointer group"
@@ -79,8 +79,8 @@ export const AwardCard: React.FC<AwardCardProps> = ({
         <div
           className={clsx(
             // "mb-4 text-neutral-400 content leading-normal md:leading-[24px] text-justify",
-            "mb-4 text-neutral-400 content leading-normal md:leading-[24px] text-justify break-words w-full max-w-full",
-            showAwards ? "text-sm md:text-[14px]" : "text-sm md:text-base line-clamp-5"
+            "mb-4 text-neutral-400 content leading-normal lg:leading-[24px] text-justify break-words w-full max-w-full",
+            showAwards ? "text-sm lg:text-[14px]" : "text-sm lg:text-base line-clamp-5"
           )}
           dangerouslySetInnerHTML={{ __html: award.description }}
         />
@@ -92,8 +92,8 @@ export const AwardCard: React.FC<AwardCardProps> = ({
             </h3>
             <div
               className={clsx(
-                "mb-4 text-neutral-400 content  leading-normal md:leading-[24px] text-justify",
-                showAwards ? "text-sm md:text-[14px]" : "text-sm md:text-base"
+                "mb-4 text-neutral-400 content  leading-normal lg:leading-[24px] text-justify",
+                showAwards ? "text-sm lg:text-[14px]" : "text-sm lg:text-base"
               )}
               dangerouslySetInnerHTML={{ __html: award.awarder }}
             />

@@ -19,16 +19,16 @@ export function CodeOfConduct({ data, filesData, locale }: CodeOfConductProps) {
       className="py-20 bg-[#091A24] text-white scroll-mt-10"
     >
       <div className="container mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8">
-          <div className="md:col-span-4">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8">
+          <div className="lg:col-span-4">
             <h2
               id="code-of-conduct-heading"
-              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
+              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
             >
               {data.title}
             </h2>
             <div
-              className="max-w-full prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-justify"
+              className="max-w-full prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
               dangerouslySetInnerHTML={{ __html: data.content || "" }}
             />
           </div>

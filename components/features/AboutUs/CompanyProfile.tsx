@@ -30,12 +30,12 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
       <div className="container mx-auto  ">
         <h2
           id="company-profile-title"
-          className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-4 text-center"
+          className="font-medium lg:text-[38px] text-[24px] lg:leading-[44px] mb-4 text-center"
         >
           {title}
         </h2>
         <div className="content primary !text-neutral-500 text-center mb-16">
-          <p className="ql-align-center">{subtitle}</p>
+          <p className="ql-align-center text-[14px] lg:text-[16px]">{subtitle}</p>
         </div>
 
         {data &&
@@ -47,7 +47,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
             return (
               <article
                 key={item.ulid}
-                className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col md:flex-row gap-y-2 md:gap-y-0"
+                className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-2 lg:gap-y-0"
               >
                 <div>
                   <h3 className="text-neutral-13 mb-2 text-lg font-medium">
@@ -73,7 +73,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                 <div className="flex lg:items-center gap-8 w-full md:w-fit">
                   <a
                     href={itemViewUrl}
-                    className="flex items-center gap-2 text-blue-base font-medium"
+                    className="flex items-center gap-2 text-[#2474A5] font-medium"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -88,7 +88,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                   </a>
                   <a
                     href={itemDownloadUrl}
-                    className="flex items-center gap-2 text-blue-base font-medium"
+                    className="flex items-center gap-2 text-[#2474A5] font-medium"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

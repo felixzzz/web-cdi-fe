@@ -180,15 +180,15 @@ export const Awards: React.FC<AwardsProps> = ({
   return (
     <section className="py-20 bg-[#091A24]" aria-labelledby="awards-title">
       <div className="container mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
           <h2
             id="awards-title"
-            className="text-awards text-4xl md:text-6xl font-medium text-white"
+            className="text-awards text-4xl lg:text-6xl font-medium text-white"
           >
             {title || "Recognized for our commitment"}
           </h2>
           <div
-            className="prose prose-invert prose-base text-neutral-100 max-w-none text-sm md:text-base leading-snug md:leading-loose text-justify"
+            className="prose prose-invert prose-base text-neutral-100 max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify"
             dangerouslySetInnerHTML={{ __html: description || "" }}
           />
         </div>
@@ -250,7 +250,7 @@ export const Awards: React.FC<AwardsProps> = ({
             </div>
           ) : filteredData.length > 0 ? (
             <>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 text-white">
+              <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-10 text-white">
                 {filteredData.map((award, index) => (
                   <li key={`${award.title}-${award.year}-${index}`}>
                     <AwardCard

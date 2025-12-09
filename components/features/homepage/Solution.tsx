@@ -53,13 +53,13 @@ export const Solution: React.FC<BusinessSolutionsProps> = ({
       <div className="container mx-auto  ">
         <h2
           id="solutions-title"
-          className="mb-11 lg:mb-20 text-2xl md:text-[38px] md:leading-[44px] font-medium max-w-2xl mx-auto text-center"
+          className="mb-11 lg:mb-20 text-2xl lg:text-[38px] lg:leading-[44px] font-medium max-w-2xl mx-auto text-center"
         >
           {home_infrastructure_title.title}
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4">
         {solutionsData.map((solution) => (
           <SolutionCard
             key={solution.title}

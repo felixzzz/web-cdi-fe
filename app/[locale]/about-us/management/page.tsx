@@ -188,8 +188,8 @@ export default async function Page({
           about_us_management_overview.title || "The People Behind Our Success"
         }
       >
-        <div
-          className="prose prose-invert prose-base text-neutral-200 text-sm md:text-base leading-relaxed md:leading-loose text-justify"
+        <span
+          className="prose prose-invert prose-base text-neutral-200 text-sm lg:text-base leading-relaxed lg:leading-loose text-justify"
           // className="text-[12px] leading-[24px] font-normal text-white py-1"
           dangerouslySetInnerHTML={{
             __html: about_us_management_overview.content || "",

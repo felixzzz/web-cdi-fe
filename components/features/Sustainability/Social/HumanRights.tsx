@@ -22,13 +22,13 @@ export function HumanRights({ data }: HumanRightsProps) {
           <div>
             <h2
               id="human-rights-heading"
-              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
+              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
             >
               {TITLE}
             </h2>
 
             <div
-              className="prose prose-invert prose-base max-w-full text-sm md:text-base leading-snug md:leading-loose text-justify text-neutral-300"
+              className="prose prose-invert prose-base max-w-full text-sm lg:text-base leading-snug lg:leading-loose text-justify text-neutral-300"
               dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
             ></div>
 

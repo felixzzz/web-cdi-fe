@@ -39,22 +39,22 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="overlay-banner h-full w-full absolute left-0 right-0 top-0 bottom-0" />
 
       <section className="container mx-auto  ">
-        <div className="text-white grid md:grid-cols-2 gap-2 relative z-[1] items-end">
+        <div className="text-white grid lg:grid-cols-2 gap-2 relative z-[1] items-end">
           <div>
             <h1
-              className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-medium max-w-2xl mb-1 md:mb-6"
+              className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-medium max-w-2xl mb-1 lg:mb-6"
               id="home_banner_title"
             >
               {title}
             </h1>
             <div
-             className="max-w-2xl prose prose-invert prose-base text-sm md:text-base text-white leading-snug md:leading-loose text-justify"
+             className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base text-white leading-snug lg:leading-loose text-justify"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
           </div>
 
           <div className="flex items-center gap-10">
-            <div className="h-[2px] w-full bg-[#BFBFBF] hidden md:block relative overflow-hidden">
+            <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
                                       <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
                                     </div>
                                     <Image

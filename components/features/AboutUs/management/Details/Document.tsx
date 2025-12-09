@@ -34,7 +34,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
         {items.map((item) => (
           <article
             key={item.title}
-            className="py-8 border-b border-b-neutral-5 flex md:items-center justify-between flex-col md:flex-row gap-y-2 md:gap-y-0"
+            className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-2 lg:gap-y-0"
           >
             <div>
               <h3 className="text-neutral-13 mb-2 text-lg font-medium">
@@ -58,7 +58,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
             <div className="flex items-end gap-8 w-fit">
               <Link
                 href={item.viewUrl}
-                className="flex items-center gap-2 text-blue-base font-medium"
+                className="flex items-center gap-2 text-[#2474A5] font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -73,7 +73,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
               </Link>
               <Link
                 href={item.downloadUrl}
-                className="flex items-center gap-2 text-blue-base font-medium"
+                className="flex items-center gap-2 text-[#2474A5] font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
               >

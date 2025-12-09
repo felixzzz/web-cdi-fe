@@ -6,9 +6,10 @@ import { useTranslations } from "next-intl";
 
 interface BusinessEthicsProps {
   data: ApiDataItem;
+  locale: string
 }
 
-export function BusinessEthics({ data }: BusinessEthicsProps) {
+export function BusinessEthics({ data, locale }: BusinessEthicsProps) {
   const t = useTranslations('Investor.Sustainability.Governance')
   if (!data) {
     return null;
@@ -16,8 +17,8 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
   const { title, content, image, file_information_en, ulid } = data;
   const fileInfo = file_information_en;
 
-  const ctaViewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/default/sustainability-content/${ulid}/${fileInfo?.title}`;
-  const ctaDownloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/default/sustainability-content/${ulid}/${fileInfo?.title}`;
+  const ctaViewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/sustainability-content/${ulid}/${fileInfo?.title}`;
+  const ctaDownloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/sustainability-content/${ulid}/${fileInfo?.title}`;
   return (
     <section
       aria-labelledby="business-ethics-heading"
@@ -35,23 +36,23 @@ export function BusinessEthics({ data }: BusinessEthicsProps) {
       <div className="absolute inset-0 overlay-business-2 z-10"></div>
 
       <div className="container mx-auto   relative z-20">
-        <div className="flex flex-col gap-8 md:max-w-[45%] me-auto">
+        <div className="flex flex-col gap-8 lg:max-w-[45%] me-auto">
           <div>
             <h2
               id="business-ethics-heading"
-              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
+              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
             >
               {title || "Business Ethics"}
             </h2>
-            <div
-              className="max-w-2xl prose prose-invert prose-base text-justify"
+            <span
+              className="max-w-2xl text-sm lg:text-base leading-snug lg:leading-loose prose prose-invert prose-base text-justify"
               dangerouslySetInnerHTML={{ __html: content || "" }}
-            ></div>
+            />
           </div>
 
           {fileInfo && (
             <div
-              className="button-gradient-custom p-4 !flex-col !items-start md:min-w-[50%] md:w-fit 
+              className="button-gradient-custom p-4 !flex-col !items-start lg:min-w-[50%] lg:w-fit 
               border 
               bg-[linear-gradient(#d6f5ff29,#091a2429)] 
               rounded-lg"

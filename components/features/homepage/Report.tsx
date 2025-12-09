@@ -30,12 +30,12 @@ export const Report: React.FC<ReportSectionProps> = ({
       aria-labelledby="report-section-title"
     >
       <div data-navbar-theme="dark" className="container mx-auto  ">
-        <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
+        <div className="flex lg:items-center justify-between mb-2 flex-col lg:flex-row">
           <div>
             <p className="text-neutral-500 text-base mb-4">{eyebrow}</p>
             <h2
               id="report-section-title"
-              className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-0"
+              className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-0"
             >
               {title}
             </h2>

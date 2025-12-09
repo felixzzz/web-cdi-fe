@@ -36,19 +36,19 @@ export function GrievanceMechanism({ data }: GrievanceMechanismProps) {
 
       <div className="container mx-auto   relative z-20">
         <div
-          className={`md:max-w-[45%] ${
+          className={`lg:max-w-[45%] ${
             data.align === "right" ? "ms-auto" : "me-auto"
           }`}
         >
           <h2
             id="grievance-heading"
-            className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-6 text-blue-lighter"
+            className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-6 text-blue-lighter"
           >
             {TITLE}
           </h2>
 
           <div
-            className="max-w-3xl prose prose-invert prose-base text-justify"
+            className="max-w-3xl text-sm lg:text-base leading-snug lg:leading-loose prose prose-invert prose-base text-justify"
             dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
           ></div>
         </div>

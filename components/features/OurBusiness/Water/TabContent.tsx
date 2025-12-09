@@ -42,16 +42,16 @@ function ContentBlock({
       ></div>
 
       <div className="container mx-auto   relative z-[2]">
-        <div className={clsx("md:max-w-[45%]", alignmentClass)}>
+        <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
           {tagline && <p className="text-neutral-200 mb-4">{tagline}</p>}
 
           {title && (
-            <h3 className="text-2xl md:text-[28px] font-medium mb-6 text-[#47C1EA]">
+            <h3 className="lg:text-2xl text-[28px] font-medium mb-6 text-[#47C1EA]">
               {title}
             </h3>
           )}
           <div
-            className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-relaxed md:leading-loose text-justify"
+            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-relaxed lg:leading-loose text-justify"
             dangerouslySetInnerHTML={{ __html: contentHtml || "" }}
           />
         </div>
@@ -73,13 +73,13 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
         <div className="py-16 bg-[#091A24]">
           <div className="container mx-auto  ">
             {tab.sub_title && (
-              <h2 className="text-3xl md:text-[38px] md:leading-[44px] font-medium text-white mb-6">
+              <h2 className="lg:text-3xl text-[38px] lg:leading-[44px] font-medium text-white mb-6">
                 {tab.sub_title}
               </h2>
             )}
             {tab.description && (
               <div
-                className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-relaxed md:leading-loose text-justify"
+                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-relaxed lg:leading-loose text-justify"
                 dangerouslySetInnerHTML={{ __html: tab.description }}
               />
             )}
@@ -93,7 +93,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
             {content.heading && (
               <div className="py-10 bg-[#091A24]">
                 <div className="container mx-auto  ">
-                  <h3 className="font-medium text-2xl md:text-[28px] mb-4 text-white text-start">
+                  <h3 className="font-medium lg:text-2xl text-[28px] mb-4 text-white text-start">
                     {content.heading}
                   </h3>
                 </div>

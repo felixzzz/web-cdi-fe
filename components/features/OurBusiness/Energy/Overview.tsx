@@ -36,16 +36,16 @@ export function Overview({
         aria-labelledby="overview-heading"
         className="container mx-auto   relative z-[2]"
       >
-        <div className="md:max-w-[45%] ms-auto">
+        <div className="lg:max-w-[45%] ms-auto">
           <h2
             id="overview-heading"
-            className="text-2xl md:text-[28px] font-medium mb-6 text-[#47C1EA]"
+            className="text-2xl lg:text-[28px] font-medium mb-6 text-[#47C1EA]"
           >
             {title}
           </h2>
 
-          <div
-          className="max-w-2xl prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-justify"
+          <span
+          className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
             // className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
             dangerouslySetInnerHTML={{
               __html: description || "",
