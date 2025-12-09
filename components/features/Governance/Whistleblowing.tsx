@@ -34,8 +34,8 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
       className="bg-[#091A24] py-20 text-white scroll-mt-10"
     >
       <div className="container mx-auto  ">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8 ">
-          <div className="lg:col-span-3">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8 ">
+          <div className="md:col-span-3">
             <h2
               id="whistleblowing-heading"
               className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
@@ -57,7 +57,7 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
             </Link>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="md:col-span-2">
             <Image
               src={IMAGE_URL}
               alt={IMAGE_ALT}
