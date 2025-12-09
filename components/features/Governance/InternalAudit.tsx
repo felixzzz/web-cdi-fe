@@ -9,9 +9,10 @@ import { FileDownloadCTA } from "./FileDownloadCTA";
 interface InternalAuditProps {
   data: GovernanceSection;
   filesData: ApiFileResponse;
+  locale: string
 }
 
-export function InternalAudit({ data, filesData }: InternalAuditProps) {
+export function InternalAudit({ data, filesData, locale }: InternalAuditProps) {
   return (
     <section
       id="internal-audit"
@@ -46,8 +47,8 @@ export function InternalAudit({ data, filesData }: InternalAuditProps) {
         </div>
 
         {filesData.map((file) => {
-          const viewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${file.type}/${file.unique_key}/${file.name}`;
-          const downloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/default/${file.type}/${file.unique_key}/`;
+          const viewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/${file.type}/${file.unique_key}/${file.name}`;
+          const downloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/${file.type}/${file.unique_key}/`;
 
           return (
             <FileDownloadCTA

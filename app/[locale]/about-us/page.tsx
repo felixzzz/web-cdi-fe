@@ -213,6 +213,7 @@ export default async function Page({ params: { locale } }: AboutPageProps) {
           "Gain deeper insights into our story, growth, and latest achievements by downloading our company profile"
         }
         data={profileData}
+        locale={locale}
       />
       <Information
         eyebrow={t("eye_information")}

@@ -11,6 +11,7 @@ interface ReportSectionProps {
   downloadAllUrl: string;
   seeAllUrl: string;
   reports: ApiReportItem[];
+  locale: string;
 }
 
 export const Report: React.FC<ReportSectionProps> = ({
@@ -19,6 +20,7 @@ export const Report: React.FC<ReportSectionProps> = ({
   downloadAllUrl,
   seeAllUrl,
   reports,
+  locale,
 }) => {
   const t = useTranslations("Report")
   return (
@@ -80,8 +82,8 @@ export const Report: React.FC<ReportSectionProps> = ({
               size: report.file.size,
               tagView: t('download_view'),
               tagDawnload: t('download_download'),
-              viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/report/${report.ulid}/${report.name_slug}`,
-              downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/report/${report.ulid}/`,
+              viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/report/${report.ulid}/${report.name_slug}`,
+              downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/report/${report.ulid}/`,
             };
 
             return <ReportItem key={report.id} {...transformedProps} />;

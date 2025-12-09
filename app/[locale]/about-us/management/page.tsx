@@ -150,8 +150,8 @@ export default async function Page({
   const guidelineItems: DownloadItem[] = GuideData.map((guide) => ({
     title: guide.name,
     size: guide.file?.size || "N/A",
-    viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${guide.type}/${guide.unique_key}`,
-    downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/${guide.type}/${guide.unique_key}`,
+    viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/${guide.type}/${guide.unique_key}`,
+    downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/${guide.type}/${guide.unique_key}`,
     format: guide.file?.format || "pdf",
   }));
 

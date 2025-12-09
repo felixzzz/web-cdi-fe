@@ -34,31 +34,16 @@ const unformatReportType = (type: string): string => {
   return type.toLowerCase().replace(" ", "_");
 };
 
-const FILE_PREVIEW_BASE_URL =
-  `${process.env.NEXT_PUBLIC_URL}/file/preview/default/report/`;
-const FILE_DOWNLOAD_BASE_URL =
-  `${process.env.NEXT_PUBLIC_URL}/file/download/default/report/`;
-
 const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
   return data.items.flatMap((yearGroup) => yearGroup.items);
 };
 
-const transformItem = (item: CalendarEventItem): Report => ({
-  id: item.id,
-  title: item.name,
-  date: item.date,
-  size: item.file.size,
-  type: formatReportType(item.type),
-  year: item.year,
-  viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
-  downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
-});
-
 interface FinancialCalendarProps {
   initialData: CalendarApiResponse;
+  locale: string
 }
 
-export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
+export function FinancialCalendar({ initialData, locale }: FinancialCalendarProps) {
   const t = useTranslations("Investor.Report");
   const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
     flattenData(initialData)
@@ -123,6 +108,20 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
     fetchData();
   }, [currentPage, activeYear, activeType, initialData]);
 
+  const FILE_PREVIEW_BASE_URL = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/report/`;
+  const FILE_DOWNLOAD_BASE_URL = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/report/`;
+
+  const transformItem = (item: CalendarEventItem): Report => ({
+    id: item.id,
+    title: item.name,
+    date: item.date,
+    size: item.file.size,
+    type: formatReportType(item.type),
+    year: item.year,
+    viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
+    downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
+  });
+
   const displayedReports = useMemo(() => {
     return reportItems.map(transformItem).filter((report) => {
       return report.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -147,9 +146,9 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
 
   return (
     <section
-    className="container mx-auto py-20  "
-    data-navbar-theme="dark"
-    aria-labelledby="calendar-heading"
+      className="container mx-auto py-20  "
+      data-navbar-theme="dark"
+      aria-labelledby="calendar-heading"
     >
       <h2
         id="calendar-heading"
@@ -160,7 +159,9 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
 
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
-        <span className="text-sm md:text-base leading-normal md:leading-[24px] text-justify">{t("calendar_subtitle")}</span>
+        <span className="text-sm md:text-base leading-normal md:leading-[24px] text-justify">
+          {t("calendar_subtitle")}
+        </span>
       </div>
 
       <nav

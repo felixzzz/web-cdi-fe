@@ -201,6 +201,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         downloadAllUrl={`${process.env.NEXT_PUBLIC_URL}/file/download/default/report/all`}
         seeAllUrl="/investor/financial-information"
         reports={reportData}
+        locale={locale}
       />
       <Article articles={articleData} />
       <Information

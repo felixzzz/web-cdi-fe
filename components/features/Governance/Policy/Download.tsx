@@ -289,7 +289,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                     locale === "id" ? item.name_id : item.name_en;
 
                   // Construct dynamic links based on API data
-                  const viewLink = `${process.env.NEXT_PUBLIC_URL}/file/preview/${item.type}/${item.unique_key}/${item.name_en}`;
+                  const viewLink = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/${item.type}/${item.unique_key}/${item.name_en}`;
                   const downloadEnLink = `${process.env.NEXT_PUBLIC_URL}/file/download/en/${item.type}/${item.unique_key}/`;
                   const downloadIdLink = `${process.env.NEXT_PUBLIC_URL}/file/download/id/${item.type}/${item.unique_key}/`;
 

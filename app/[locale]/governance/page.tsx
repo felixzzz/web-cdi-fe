@@ -142,8 +142,8 @@ export default async function Page({
       id: file.id,
       title: file.name,
       fileSize: file.file.size,
-      viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${file.type}/${file.unique_key}/${file.name}`,
-      downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/${file.type}/${file.unique_key}/`,
+      viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/${file.type}/${file.unique_key}/${file.name}`,
+      downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/${file.type}/${file.unique_key}/`,
     })),
   };
 
@@ -157,8 +157,8 @@ export default async function Page({
         id: tab.id,
         title: tab.file_name,
         fileSize: tab.file.size,
-        viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/committee/${tab.file_name}/`,
-        downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/committee/${tab.file_name}/`,
+        viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/committee/${tab.file_name}/`,
+        downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/committee/${tab.file_name}/`,
       },
     ],
   }));
@@ -197,16 +197,19 @@ export default async function Page({
         sectionData={governance_corporate_secretary}
         personData={governance_corporate_secretary_team}
         filesData={corporateFiles}
+        locale={locale}
       />
       <InternalAudit
         filesData={internalFiles}
         data={governance_internal_audit_unit}
+        locale={locale}
       />
       <Committee tabs={allTabs} />
       <RiskManagement data={governance_risk_management} />
       <CodeOfConduct
         filesData={productFiles}
         data={governance_code_of_conduct}
+        locale={locale}
       />
       <Policy data={governance_policy} />
       <Whistleblowing data={governance_whistleblowing} image={governance_whistleblowing_id.file_url} locale={locale} />

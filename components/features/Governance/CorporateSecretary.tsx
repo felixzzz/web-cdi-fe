@@ -10,12 +10,14 @@ interface CorporateSecretaryProps {
   sectionData: GovernanceSection;
   personData: GovernanceSection;
   filesData: ApiFileResponse;
+  locale: string
 }
 
 export function CorporateSecretary({
   sectionData,
   personData,
   filesData,
+  locale,
 }: CorporateSecretaryProps) {
   return (
     <section
@@ -56,8 +58,8 @@ export function CorporateSecretary({
 
             {/* Render file downloads dynamically */}
             {filesData.map((file) => {
-              const viewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${file.type}/${file.unique_key}/${file.name}`;
-              const downloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/default/${file.type}/${file.unique_key}/`;
+              const viewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/${file.type}/${file.unique_key}/${file.name}`;
+              const downloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/${file.type}/${file.unique_key}/`;
 
               return (
                 <FileDownloadCTA

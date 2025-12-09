@@ -8,6 +8,7 @@ interface CompanyProfileProps {
   title: string;
   subtitle: string;
   data: CompanyProfileResponse;
+  locale: string;
 }
 
 export const CompanyProfile: React.FC<CompanyProfileProps> = ({
@@ -15,6 +16,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
   title,
   subtitle,
   data,
+  locale,
 }) => {
 
   const t = useTranslations("AboutUs");
@@ -39,8 +41,8 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
         {data &&
           data.length > 0 &&
           data.map((item) => {
-            const itemViewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${item.type}/${item.unique_key}/`;
-            const itemDownloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/default/${item.type}/${item.unique_key}/`;
+            const itemViewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/${item.type}/${item.unique_key}/`;
+            const itemDownloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/${item.type}/${item.unique_key}/`;
 
             return (
               <article

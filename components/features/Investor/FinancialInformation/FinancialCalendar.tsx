@@ -44,34 +44,18 @@ const unformatReportType = (type: string): string => {
   return type.toLowerCase().replace(" ", "_");
 };
 
-const FILE_PREVIEW_BASE_URL =
-  `${process.env.NEXT_PUBLIC_URL}/file/preview/default/report/`;
-const FILE_DOWNLOAD_BASE_URL =
-  `${process.env.NEXT_PUBLIC_URL}/file/download/default/report/`;
-
 const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
   return data.items.flatMap((yearGroup) => yearGroup.items);
 };
-
-const transformItem = (item: CalendarEventItem): Report => ({
-  id: item.id,
-  title: item.name,
-  date: item.datetime,
-  displayDate: item.date,
-  size: item.file.size,
-  type: formatReportType(item.type),
-  year: item.year,
-  viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
-  downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
-});
 
 const typeFilters = ["All Type", "Annual Report", "Financial Report"];
 
 interface FinancialCalendarProps {
   initialData: CalendarApiResponse;
+  locale: string
 }
 
-export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
+export function FinancialCalendar({ initialData, locale }: FinancialCalendarProps) {
   const t = useTranslations("Investor.Financial");
   const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
     flattenData(initialData)
@@ -127,6 +111,21 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
     fetchData();
   }, [currentPage, activeYear, activeType, initialData]);
 
+  const FILE_PREVIEW_BASE_URL = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/report/`;
+  const FILE_DOWNLOAD_BASE_URL = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/report/`;
+
+  const transformItem = (item: CalendarEventItem): Report => ({
+    id: item.id,
+    title: item.name,
+    date: item.datetime,
+    displayDate: item.date,
+    size: item.file.size,
+    type: formatReportType(item.type),
+    year: item.year,
+    viewUrl: `${FILE_PREVIEW_BASE_URL}${item.ulid}/${item.name_slug}`,
+    downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
+  });
+
   const paginatedAndGroupedReports = useMemo(() => {
     const transformed = reportItems.map(transformItem);
 
@@ -165,7 +164,9 @@ export function FinancialCalendar({ initialData }: FinancialCalendarProps) {
       </h2>
       <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
         <Languages size={16} />
-        <span className="text-sm md:text-base leading-normal md:leading-[24px] text-justify">{t("subtitle")}</span>
+        <span className="text-sm md:text-base leading-normal md:leading-[24px] text-justify">
+          {t("subtitle")}
+        </span>
       </div>
       <nav
         aria-label="Filter by year"
@@ -333,7 +334,7 @@ function Pagination({
   itemsPerPage: number;
   onPageChange: (page: number) => void;
 }) {
-  const t = useTranslations('pagination')
+  const t = useTranslations("pagination");
   const [jumpPage, setJumpPage] = useState<string>("");
 
   const startItem = (currentPage - 1) * itemsPerPage + 1;
@@ -361,7 +362,7 @@ function Pagination({
   return (
     <section className="mt-5 py-10 flex w-full justify-center md:justify-between items-center gap-4 flex-col md:flex-row">
       <p className="text-neutral-10 text-sm max-md:hidden">
-        {startItem}-{endItem} {t('of')} {totalItems} {t('items')}
+        {startItem}-{endItem} {t("of")} {totalItems} {t("items")}
       </p>
 
       <ul className="flex items-center justify-center gap-2">
@@ -443,12 +444,12 @@ function Pagination({
 
       <div className="flex items-center gap-4 justify-center md:justify-between w-full md:w-auto">
         <p className="text-neutral-10 text-sm md:hidden">
-          {startItem}-{endItem} {t('of')} {totalItems} {t('items')}
+          {startItem}-{endItem} {t("of")} {totalItems} {t("items")}
         </p>
 
         <div className="flex items-center gap-4">
           <p className="text-neutral-10 text-sm whitespace-nowrap">
-            {t('jumpToPage')}
+            {t("jumpToPage")}
           </p>
           <input
             type="number"
@@ -462,7 +463,7 @@ function Pagination({
             onClick={handleJumpPage}
             className="text-[#2474A5] text-xs font-bold cursor-pointer hover:underline"
           >
-            {t('go')}
+            {t("go")}
           </button>
         </div>
       </div>

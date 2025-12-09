@@ -8,9 +8,10 @@ import { FileDownloadCTA } from "./FileDownloadCTA";
 interface CodeOfConductProps {
   data: GovernanceSection;
   filesData: ApiFileResponse;
+  locale: string
 }
 
-export function CodeOfConduct({ data, filesData }: CodeOfConductProps) {
+export function CodeOfConduct({ data, filesData, locale }: CodeOfConductProps) {
   return (
     <section
       id="code-of-conduct"
@@ -34,8 +35,8 @@ export function CodeOfConduct({ data, filesData }: CodeOfConductProps) {
         </div>
 
         {filesData.map((file) => {
-          const viewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${file.type}/${file.unique_key}/${file.name}`;
-          const downloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/default/${file.type}/${file.unique_key}/`;
+          const viewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/${file.type}/${file.unique_key}/${file.name}`;
+          const downloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/${file.type}/${file.unique_key}/`;
 
           return (
             <FileDownloadCTA
