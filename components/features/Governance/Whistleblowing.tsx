@@ -63,7 +63,7 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
               alt={IMAGE_ALT}
               width={600}
               height={400}
-              className="w-full h-auto rounded-lg"
+              className="w-full sm:w-[90%] h-auto rounded-lg"
               priority
             />
           </div>
