@@ -26,7 +26,7 @@ export const ReportItem: React.FC<ReportItemProps> = ({
         <h3 className="text-neutral-13 mb-2 text-lg font-medium">{title}</h3>
       </div>
 
-      <div className="flex flex-col md:flex-row lg:items-center justify-between gap-8 w-full">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-8 w-full">
         <div className="flex items-center text-base text-neutral-8 gap-3">
           <div className="flex items-baseline gap-3">
             <span>{date}</span>
@@ -45,7 +45,7 @@ export const ReportItem: React.FC<ReportItemProps> = ({
         <div className="flex flex-row gap-8">
           <Link
             href={viewUrl}
-            className="flex items-center gap-2 text-blue-base font-medium"
+            className="flex items-center gap-2 text-blue-base font-medium text-[#2474A5]"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -60,7 +60,7 @@ export const ReportItem: React.FC<ReportItemProps> = ({
           </Link>
           <Link
             href={downloadUrl}
-            className="flex items-center gap-2 text-blue-base font-medium"
+            className="flex items-center gap-2 text-blue-base font-medium text-[#2474A5]"
             target="_blank"
             rel="noopener noreferrer"
           >

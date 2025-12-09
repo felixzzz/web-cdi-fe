@@ -22,15 +22,15 @@ export function AntiCorruption({ data }: AntiCorruptionProps) {
     >
       <div className="py-20">
         <div className="container mx-auto   relative z-[1]">
-          <div className="mb-16 grid grid-cols-1 gap-4 md:grid-cols-2 items-center">
+          <div className="mb-16 grid grid-cols-1 gap-4 lg:grid-cols-2 items-center">
             <h2
               id="anti-corruption-heading"
-              className="text-2xl md:text-[38px] md:leading-[44px] font-medium text-blue-lighter max-w-[277px]"
+              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium text-blue-lighter max-w-[277px]"
             >
               {TITLE}
             </h2>
             <div
-              className="max-w-2xl prose prose-invert prose-base text-justify"
+              className="max-w-2xl text-sm lg:text-base leading-snug lg:leading-loose prose prose-invert prose-base text-justify text-neutral-300"
               dangerouslySetInnerHTML={{ __html: INTRO_TEXT }}
             ></div>
           </div>
@@ -53,7 +53,7 @@ export function AntiCorruption({ data }: AntiCorruptionProps) {
 
         <div className="container mx-auto   relative z-20">
           <div
-            className={`md:max-w-[35%] ${
+            className={`lg:max-w-[35%] ${
               data.align === "right" ? "ms-auto" : "me-auto"
             }`}
           >

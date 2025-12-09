@@ -24,12 +24,12 @@ export const Information: React.FC<InformationSectionProps> = ({
       aria-labelledby="quick-links-title"
     >
       <div className="container mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
           <div>
             <p className="text-neutral-7 text-base mb-4">{eyebrow}</p>
             <h2
               id="quick-links-title"
-              className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-0 max-w-[414px]"
+              className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-0 max-w-[414px]"
             >
               {title}
             </h2>

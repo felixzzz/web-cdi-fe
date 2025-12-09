@@ -54,10 +54,10 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
         priority
       />
 
-      <div className="container mx-auto   relative z-10 py-20 md:py-0">
+      <div className="container mx-auto   relative z-10 py-20 lg:py-0">
         <h1
           id="latest-news-heading"
-          className="text-2xl leading-6 md:text-[52px] md:leading-[60px] font-semibold text-white mb-9"
+          className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-semibold text-white mb-9"
           dangerouslySetInnerHTML={{ __html: heroTitle }}
         ></h1>
 
@@ -76,8 +76,8 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
         >
           {sliderData.map((slide) => (
             <SwiperSlide key={slide.id}>
-              <article className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="relative aspect-video md:h-[380px] w-full rounded-xl overflow-hidden">
+              <article className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="relative aspect-video lg:h-[380px] w-full rounded-xl overflow-hidden">
                   <Image
                     src={slide.imageUrl}
                     alt={slide.title}
@@ -94,14 +94,14 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
                     {slide.title}
                   </h2>
                   <p
-                    className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3 text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify"
+                    className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3 text-[14px] leading-normal md:leading-[24px] text-justify"
                     dangerouslySetInnerHTML={{ __html: slide.description }}
                   ></p>
                   <Link
                     href={slide.linkUrl}
-                    className="text-[#2474A5] flex items-center text-[12px] gap-2"
+                    className="text-[#2474A5] flex items-center text-[16px] gap-2"
                   >
-                    {t("Media")}
+                    {t("Media_Link")}
                     <ChevronRight className="text-2xl" />
                   </Link>
                 </div>

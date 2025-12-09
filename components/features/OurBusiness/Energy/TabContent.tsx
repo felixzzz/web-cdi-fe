@@ -41,14 +41,14 @@ function ContentBlock({
       ></div>
 
       <div className="container mx-auto   relative z-[2]">
-        <div className={clsx("md:max-w-[45%]", alignmentClass)}>
+        <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
           {title && (
-            <h3 className="text-2xl md:text-[28px] leading-normal font-medium mb-6 text-[#47C1EA]">
+            <h3 className="lg:text-2xl text-[28px] leading-normal font-medium mb-6 text-[#47C1EA]">
               {title}
             </h3>
           )}
           <div
-            className="prose prose-invert prose-base text-sm md:text-base leading-relaxed md:leading-loose text-justify max-w-none"
+            className="prose prose-invert prose-base text-sm lg:text-base leading-relaxed md:leading-loose text-justify max-w-none"
             dangerouslySetInnerHTML={{ __html: contentHtml || "" }}
           />
         </div>
@@ -71,13 +71,13 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
         <div className="py-16 bg-[#091A24]">
           <div className="container mx-auto  ">
             {tab.sub_title && (
-              <h2 className="text-3xl md:text-[38px] md:leading-[44px] font-medium text-white mb-6">
+              <h2 className="lg:text-3xl text-[38px] lg:leading-[44px] font-medium text-white mb-6">
                 {tab.sub_title}
               </h2>
             )}
             {tab.description && (
               <div
-                className="prose prose-invert prose-base text-sm md:text-base leading-relaxed md:leading-loose text-justify max-w-none"
+                className="prose prose-invert prose-base text-sm lg:text-base leading-relaxed md:leading-loose text-justify max-w-none"
                 dangerouslySetInnerHTML={{ __html: tab.description }}
               />
             )}

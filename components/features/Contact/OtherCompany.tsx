@@ -22,7 +22,7 @@ export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
       <div data-navbar-theme="dark" className="container mx-auto  ">
         <h2
           id="other-addresses-heading"
-          className="text-neutral-13 text-2xl md:text-[38px] md:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-6 mb-8"
+          className="text-neutral-13 text-2xl lg:text-[38px] lg:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-6 mb-8"
         >
           {t('other_company')}
         </h2>
@@ -67,12 +67,12 @@ export function OtherCompany({ companyAddressData }: OtherCompanyProps) {
                         </address>
                         <div className="flex items-center gap-4 text-neutral-500">
                           {loc.phone && (
-                            <div className="flex items-center text-xs md:text-sm gap-2">
+                            <div className="flex items-center text-xs lg:text-sm gap-2">
                               <Phone className="text-[#2474A5]" size={14} aria-hidden="true" /> {loc.phone}
                             </div>
                           )}
                           {loc.fax && (
-                            <div className="flex items-center text-xs md:text-sm gap-2">
+                            <div className="flex items-center text-xs lg:text-sm gap-2">
                               <Printer className="text-[#2474A5]" size={14} aria-hidden="true" /> {loc.fax}
                             </div>
                           )}

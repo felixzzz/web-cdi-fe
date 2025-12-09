@@ -11,7 +11,7 @@ export interface TeamMember {
 
 export const TeamMemberCard: React.FC<TeamMember> = ({ name, role, imageUrl, href }) => {
   return (
-    <li className="w-full max-w-md md:max-w-sm">
+    <li className="w-fit max-w-md lg:max-w-sm">
       <Link
         href={href}
         className="flex flex-col items-center text-center group transition-all duration-300"

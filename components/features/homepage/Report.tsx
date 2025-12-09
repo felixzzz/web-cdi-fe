@@ -11,6 +11,7 @@ interface ReportSectionProps {
   downloadAllUrl: string;
   seeAllUrl: string;
   reports: ApiReportItem[];
+  locale: string;
 }
 
 export const Report: React.FC<ReportSectionProps> = ({
@@ -19,6 +20,7 @@ export const Report: React.FC<ReportSectionProps> = ({
   downloadAllUrl,
   seeAllUrl,
   reports,
+  locale,
 }) => {
   const t = useTranslations("Report")
   return (
@@ -28,12 +30,12 @@ export const Report: React.FC<ReportSectionProps> = ({
       aria-labelledby="report-section-title"
     >
       <div data-navbar-theme="dark" className="container mx-auto  ">
-        <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
+        <div className="flex lg:items-center justify-between mb-2 flex-col lg:flex-row">
           <div>
             <p className="text-neutral-500 text-base mb-4">{eyebrow}</p>
             <h2
               id="report-section-title"
-              className="text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] mb-0"
+              className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-0"
             >
               {title}
             </h2>
@@ -80,8 +82,8 @@ export const Report: React.FC<ReportSectionProps> = ({
               size: report.file.size,
               tagView: t('download_view'),
               tagDawnload: t('download_download'),
-              viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/default/report/${report.ulid}/${report.name_slug}`,
-              downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/default/report/${report.ulid}/`,
+              viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/report/${report.ulid}/${report.name_slug}`,
+              downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/report/${report.ulid}/`,
             };
 
             return <ReportItem key={report.id} {...transformedProps} />;

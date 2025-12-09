@@ -25,7 +25,7 @@ export const History: React.FC<HistoryProps> = ({ data }) => {
           title={item.title}
         >
           <div
-          className="prose prose-invert prose-base text-neutral-300 text-justify max-w-full text-sm md:text-base leading-snug md:leading-loose"
+          className="prose prose-invert prose-base text-neutral-300 text-justify max-w-full text-sm lg:text-base leading-snug lg:leading-loose"
           dangerouslySetInnerHTML={{ __html: item.content }} />
           {/* {convertHtmlToReact(item.content)} */}
         </HistoryBlock>

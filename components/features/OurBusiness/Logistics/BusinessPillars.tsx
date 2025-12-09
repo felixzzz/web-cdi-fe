@@ -65,7 +65,7 @@ function AssetBlock({
             {title}
           </h4>
           <div
-            className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-snug md:leading-loose text-justify"
+            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>
@@ -90,7 +90,7 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
   return (
     <div className="bg-[#091A24]">
       <div className="container mx-auto   pt-8">
-        <div className="flex flex-col md:flex-row border-b border-[#BFBFBF]/20">
+        <div className="flex flex-col lg:flex-row border-b border-[#BFBFBF]/20">
           {tabs.map((tab) => (
             <TabButton
               key={tab.id}
@@ -120,7 +120,7 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
                 {activeTab.sub_title}
               </h3>
               <div
-                className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-snug md:leading-loose text-justify"
+                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify"
                 dangerouslySetInnerHTML={{
                   __html: activeTab.description || "",
                 }}

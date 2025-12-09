@@ -117,7 +117,7 @@ export default async function Page({ params: { locale } }: FinancialPageProps) {
       />
       <NavbarThemeTrigger theme="light" />
 
-      <FinancialCalendar initialData={initialCalendarData} />
+      <FinancialCalendar initialData={initialCalendarData} locale={locale} />
     </main>
   );
 }

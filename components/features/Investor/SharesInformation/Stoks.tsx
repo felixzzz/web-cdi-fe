@@ -18,12 +18,12 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
     <div
     data-navbar-theme="dark"
     >
-      <h2 className="mb-10 text-2xl md:text-[28px] font-medium text-neutral-13">
+      <h2 className="mb-10 text-2xl lg:text-[28px] font-medium text-neutral-13">
         {data.title || "Top 10 Shareholders"}
       </h2>
       {data.content && (
         <div
-        className="prose prose-invert prose-base text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-500 w-full"
+        className="prose prose-invert prose-base text-[11px] lg:text-[12px] leading-normal lg:leading-[24px] text-justify text-neutral-500 w-full"
           dangerouslySetInnerHTML={{ __html: data.content }}
         />
       )}
@@ -83,7 +83,7 @@ const DividendContent: React.FC<DividendContentProps> = ({ data }) => {
   return (
     <div>
       <div
-      className="prose prose-invert prose-base text-[11px] md:text-[12px] leading-normal md:leading-[24px] text-justify text-neutral-500 max-w-full"
+      className="prose prose-invert prose-base text-[11px] lg:text-[12px] leading-normal lg:leading-[24px] text-justify text-neutral-500 max-w-full"
         dangerouslySetInnerHTML={{ __html: data.content || "" }}
       ></div>
     </div>
@@ -143,17 +143,17 @@ export function StocksInformation({
   return (
     <div className="py-20">
       <section className="container mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
-          <nav className="flex md:flex-col md:items-start w-full border-b-2 md:border-none border-b-neutral-100">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+          <nav className="flex lg:flex-col lg:items-start w-full border-b-2 lg:border-none border-b-neutral-100">
             <Link
               href={`${process.env.NEXT_PUBLIC_URL}/investor/shares-information?tab=stocks`}
-              className="text-neutral-13 text-lg p-4 md:w-full md:text-start font-medium md:border-l-4 border-l-neutral-100 md:border-l-[#2474A5] md:border-t-2 md:border-t-neutral-100 border-b-4 md:border-b-2 border-b-[#2474A5] md:border-b-neutral-100"
+              className="text-neutral-13 text-lg p-4 lg:w-full lg:text-start font-medium lg:border-l-4 border-l-neutral-100 lg:border-l-[#2474A5] lg:border-t-2 lg:border-t-neutral-100 border-b-4 lg:border-b-2 border-b-[#2474A5] lg:border-b-neutral-100"
             >
               {t('title')}
             </Link>
           </nav>
 
-          <div className="md:col-span-4">
+          <div className="lg:col-span-4">
             <nav
               role="tablist"
               aria-label="Stock Information Tabs"

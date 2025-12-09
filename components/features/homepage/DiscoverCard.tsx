@@ -30,7 +30,7 @@ export const DiscoverCard: React.FC<DiscoverCardProps> = ({
                    transition-opacity duration-300 ease-out"
       >
         <div className="absolute inset-0 flex flex-col gap-4 p-5 lg:p-8 text-white z-10">
-          <h2 className="text-xl md:text-[23px] lg:text-[32px] font-medium">
+          <h2 className="text-xl lg:text-[23px] lg:text-[32px] font-medium">
             {title}
           </h2>
           <div className="content text-justify text-shadow-1 !text-neutral-300">

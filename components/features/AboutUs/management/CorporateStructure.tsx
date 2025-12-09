@@ -49,7 +49,7 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
     <section id="corporate-structure" className="border-b-2 border-neutral-5">
       <h2 className="sr-only">{TITLE}</h2>
       <div
-        className={`bg-neutral-3 text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] transition hover:bg-[#2474A5] hover:text-white
+        className={`bg-neutral-3 text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] transition hover:bg-[#2474A5] hover:text-white
           ${isOpen ? "!bg-[#2474A5] !text-white" : ""}
         `}
       >
@@ -82,7 +82,7 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
             className="py-20 overflow-hidden"
           >
             <div className="container mx-auto  ">
-              <h3 className="text-2xl md:text-[28px] font-medium text-[#2474A5] mb-6">
+              <h3 className="lg:text-2xl text-[24px] font-medium text-[#2474A5] mb-6">
                 {TITLE}
               </h3>
               <Image

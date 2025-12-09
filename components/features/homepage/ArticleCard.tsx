@@ -46,7 +46,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           <span className="text-sm text-gray-500">{date}</span>
         </div>
 
-        <h3 className="text-3xl font-medium mb-4 line-clamp-3 flex-grow">
+        <h3 className="text-2xl lg:text-3xl font-medium mb-4 line-clamp-3 flex-grow">
           {title}
         </h3>
 

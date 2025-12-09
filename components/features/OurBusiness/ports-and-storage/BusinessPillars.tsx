@@ -16,8 +16,8 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
   const keyAssetsTitle = tab?.contents[0]?.heading || "Key Assets";
   return (
     <article aria-labelledby="pillars-heading-ports" className="bg-[#091A24] text-white">
-      <div className="container mx-auto  ">
-        <h2 id="pillars-heading-ports" className="font-medium text-2xl md:text-[38px] md:leading-[44px] text-center pt-20">
+      <div className="container mx-auto">
+        <h2 id="pillars-heading-ports" className="font-medium lg:text-4xl text-[24px] lg:leading-[44px] text-center pt-20">
           {title || "Business Pillars"}
         </h2>
       </div>
@@ -28,7 +28,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
             aria-labelledby={`company-heading-${tab.id}`}
             className="py-16 bg-blue-dark"
           >
-            <div className="container mx-auto   grid grid-cols-1 md:grid-cols-3 gap-20 max-lg:gap-y-10">
+            <div className="container mx-auto   grid grid-cols-1 lg:grid-cols-3 gap-20 max-lg:gap-y-10">
               <div className="relative w-full aspect-square">
                 <Image
                   src={tab.image} 
@@ -38,15 +38,15 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
                   className="rounded-[20px]"
                 />
               </div>
-              <div className="md:col-span-2">
+              <div className="lg:col-span-2">
                 <h3
                   id={`company-heading-${tab.id}`}
-                  className="font-medium text-2xl md:text-[38px] md:leading-[44px] mb-4 text-white"
+                  className="font-medium lg:text-4xl text-[24px] lg:leading-[44px] mb-4 text-white"
                 >
                   {tab.title} 
                 </h3>
                 <div
-                className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-snug md:leading-loose text-justify"
+                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify"
                   dangerouslySetInnerHTML={{
                     __html: tab.description || "", 
                   }}
@@ -63,7 +63,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
               <div className="container mx-auto  ">
                 <h4
                   id="key-assets-heading"
-                  className="font-medium text-2xl md:text-[28px] mb-4 text-white text-center"
+                  className="font-medium lg:text-3xl text-[28px] mb-4 text-white text-center"
                 >
                   {keyAssetsTitle}
                 </h4>
@@ -119,12 +119,12 @@ function AssetBlock({
       ></div>
 
       <div className="container mx-auto   relative z-[2]">
-        <div className={clsx("md:max-w-[45%]", alignmentClass)}>
-          <h5 className="text-2xl md:text-[28px] font-medium mb-6 text-blue-lighter">
+        <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
+          <h5 className="lg:text-2xl text-[28px] font-medium mb-6 text-blue-lighter">
             {title}
           </h5>
           <div
-          className="prose prose-invert prose-base max-w-none text-sm md:text-base leading-snug md:leading-loose text-justify"
+          className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>

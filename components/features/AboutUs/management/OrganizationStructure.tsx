@@ -27,7 +27,7 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
     >
       <h2 className="sr-only">{TITLE}</h2>
       <div
-        className={`bg-neutral-50 text-neutral-13 font-medium text-2xl md:text-[38px] md:leading-[44px] transition hover:bg-[#2474A5] hover:text-white
+        className={`bg-neutral-50 text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] transition hover:bg-[#2474A5] hover:text-white
           ${isOpen ? "!bg-[#2474A5] !text-white" : ""}
         `}
       >

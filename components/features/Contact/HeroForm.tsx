@@ -110,9 +110,9 @@ export function HeroForm({
   }, []);
 
   return (
-    <div data-navbar-theme="dark" className="bg-gray-100 py-24">
+    <div data-navbar-theme="dark" className="bg-neutral-2 py-24">
       <section className="container mx-auto   pt-[5%]">
-        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-16">
           <ContactInfoCard
             imageSrc={pageData.file_url}
             imageAlt="CDI Group Team"
@@ -124,8 +124,8 @@ export function HeroForm({
             email={contactData.localized_main.fax}
           />
 
-          <div className="pt-10 md:pt-0 md:col-span-2">
-            <h1 className="text-gray-900 font-medium text-2xl md:leading-snug md:text-[38px] mb-8">
+          <div className="pt-10 lg:pt-0 lg:col-span-2">
+            <h1 className="text-gray-900 font-medium text-2xl lg:leading-snug text-[24px] lg:text-[38px] mb-8 mt-10 lg:mt-0">
               {pageData.title}
             </h1>
 
@@ -147,7 +147,7 @@ export function HeroForm({
                         <FormControl>
                           <Input
                             placeholder={t("first_name_placeholder")}
-                            className="input-custom bg-gray-100 placeholder:text-base"
+                            className="input-custom bg-neutral-2 placeholder:text-base"
                             {...field}
                           />
                         </FormControl>
@@ -167,7 +167,7 @@ export function HeroForm({
                         <FormControl>
                           <Input
                             placeholder={t("last_name_placeholder")}
-                            className="input-custom bg-gray-100 placeholder:text-base"
+                            className="input-custom bg-neutral-2 placeholder:text-base"
                             {...field}
                           />
                         </FormControl>
@@ -190,7 +190,7 @@ export function HeroForm({
                           <Input
                             type="email"
                             placeholder={t("email_placeholder")}
-                            className="input-custom bg-gray-100 placeholder:text-base"
+                            className="input-custom bg-neutral-2 placeholder:text-base"
                             {...field}
                           />
                         </FormControl>
@@ -212,7 +212,7 @@ export function HeroForm({
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger className="input-custom bg-gray-100 text-base !text-black">
+                            <SelectTrigger className="input-custom bg-neutral-2 text-base !text-black">
                               <SelectValue
                                 placeholder={t("country_id_placeholder")}
                               />
@@ -249,7 +249,7 @@ export function HeroForm({
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="input-custom bg-gray-100 text-base !text-black">
+                          <SelectTrigger className="input-custom bg-neutral-2 text-base !text-black">
                             <SelectValue
                               placeholder={t("topic_id_placeholder")}
                             />
@@ -283,7 +283,7 @@ export function HeroForm({
                       <FormControl>
                         <Textarea
                           placeholder={t("message_placeholder")}
-                          className="input-custom !h-auto bg-gray-100 placeholder:text-base"
+                          className="input-custom !h-auto bg-neutral-2 placeholder:text-base"
                           rows={8}
                           {...field}
                         />

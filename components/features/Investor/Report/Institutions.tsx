@@ -25,12 +25,12 @@ export const SupportingInstitutions = ({
       <div className="container mx-auto  ">
         <h2
           id="institutions-heading"
-          className="text-neutral-13 text-2xl md:text-[38px] md:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-400 mb-8"
+          className="text-neutral-13 text-2xl lg:text-[38px] lg:leading-[44px] font-medium pb-8 w-full border-b border-b-neutral-400 mb-8"
         >
           {t('institution_title')}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {data.map((item, index) => (
             <div key={item.id} className="flex gap-2">
               <p className="text-neutral-300 font-medium text-[52px]">

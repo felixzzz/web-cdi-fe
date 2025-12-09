@@ -158,7 +158,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         linkIcon={<ArrowUpRight size={14} />}
       >
         <div
-          className="text-sm md:text-base leading-snug md:leading-loose text-justify font-normal text-white space-y-6"
+          className="text-sm lg:text-base leading-snug lg:leading-loose text-justify font-normal text-white space-y-6"
           dangerouslySetInnerHTML={{ __html: home_about_section.content || "" }}
         />
       </AboutUs>
@@ -186,8 +186,8 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         stats={statsData}
         links={linksData}
       >
-        <div
-          className="prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-neutral-300 text-justify"
+        <span
+          className="prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-neutral-300 text-justify"
           // className="text-[12px] leading-[24px] font-normal text-white py-1 space-y-6"
           dangerouslySetInnerHTML={{
             __html: home_journey_content.content || "",
@@ -201,6 +201,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         downloadAllUrl={`${process.env.NEXT_PUBLIC_URL}/file/download/default/report/all`}
         seeAllUrl="/investor/financial-information"
         reports={reportData}
+        locale={locale}
       />
       <Article articles={articleData} />
       <Information

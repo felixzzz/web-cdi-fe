@@ -8,9 +8,10 @@ import { FileDownloadCTA } from "./FileDownloadCTA";
 interface CodeOfConductProps {
   data: GovernanceSection;
   filesData: ApiFileResponse;
+  locale: string
 }
 
-export function CodeOfConduct({ data, filesData }: CodeOfConductProps) {
+export function CodeOfConduct({ data, filesData, locale }: CodeOfConductProps) {
   return (
     <section
       id="code-of-conduct"
@@ -18,24 +19,24 @@ export function CodeOfConduct({ data, filesData }: CodeOfConductProps) {
       className="py-20 bg-[#091A24] text-white scroll-mt-10"
     >
       <div className="container mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-8">
-          <div className="md:col-span-4">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8">
+          <div className="lg:col-span-4">
             <h2
               id="code-of-conduct-heading"
-              className="text-2xl md:text-[38px] md:leading-[44px] font-medium mb-4"
+              className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
             >
               {data.title}
             </h2>
             <div
-              className="max-w-full prose prose-invert prose-base text-sm md:text-base leading-snug md:leading-loose text-justify"
+              className="max-w-full prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
               dangerouslySetInnerHTML={{ __html: data.content || "" }}
             />
           </div>
         </div>
 
         {filesData.map((file) => {
-          const viewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/default/${file.type}/${file.unique_key}/${file.name}`;
-          const downloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/default/${file.type}/${file.unique_key}/`;
+          const viewUrl = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/${file.type}/${file.unique_key}/${file.name}`;
+          const downloadUrl = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/${file.type}/${file.unique_key}/`;
 
           return (
             <FileDownloadCTA

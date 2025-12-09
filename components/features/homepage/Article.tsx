@@ -27,14 +27,14 @@ export const Article: React.FC<ArticleProps> = ({ articles }) => {
   return (
     <section className="py-20 bg-white" aria-labelledby="article-section-title">
       <div data-navbar-theme="dark" className="container mx-auto  ">
-        <div className="flex lg:items-center justify-between mb-2 flex-col md:flex-row">
+        <div className="flex lg:items-center justify-between mb-2 flex-col lg:flex-row">
           <div>
-            <p className="text-neutral-500 text-base mb-4">
+            <p className="text-neutral-500 text-[16px] mb-4">
               {t("latest_articles")}
             </p>
             <h2
               id="article-section-title"
-              className="text-neutral-900 font-medium text-4xl lg:text-[28px] mb-0 max-w-sm"
+              className="text-neutral-900 font-medium text-[24px] mb-0 max-w-sm"
             >
               {t("description")}
             </h2>

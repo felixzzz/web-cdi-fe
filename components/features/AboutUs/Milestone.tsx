@@ -110,7 +110,7 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
           </div>
 
           {isGrid ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 lg:gap-x-12 gap-y-10">
               {data.map((milestone) => (
                 <MilestoneItem key={milestone.ulid || milestone.id} milestone={milestone} />
               ))}
@@ -155,7 +155,7 @@ const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] 
       }}
     >
       <div
-        className="prose prose-invert prose-base max-w-none text-neutral-200 text-sm md:text-base leading-snug md:leading-loose text-justify"
+        className="prose prose-invert prose-base max-w-none text-neutral-200 text-sm lg:text-base leading-snug lg:leading-loose text-justify"
         dangerouslySetInnerHTML={{ __html: milestone.content || "" }}
       />
     </div>

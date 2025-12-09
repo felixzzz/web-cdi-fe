@@ -45,7 +45,7 @@ export function News({
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const defaultCategoryLabel = locale === "id" ? "Semua" : "All";
+  const defaultCategoryLabel = locale === "id" ? "Semua" : "Semua";
 
   const newsCategories = useMemo(() => {
     const categoryNames = categoryData.map((cat) => {
@@ -166,7 +166,7 @@ export function News({
             key={category}
             onClick={() => handleCategoryClick(category)}
             className={clsx(
-              "text-xs md:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition",
+              "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition",
               activeCategory === category && "bg-[#2474A5] text-white"
             )}
             style={{
@@ -182,7 +182,7 @@ export function News({
       </nav>
 
       {activeTab === "news" && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {paginatedArticles.length > 0 ? (
             paginatedArticles.map((article: ArticleItem) => (
               <ArticleCard
@@ -206,11 +206,11 @@ export function News({
 
       {activeTab === "press-release" && (
         <>
-          <div className="mt-10 mb-8 flex items-center justify-between flex-col md:flex-row gap-4">
+          <div className="mt-10 mb-8 flex items-center justify-between flex-col lg:flex-row gap-4">
             <button className="text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:bg-[#2474A5] hover:text-white transition">
               Filter <SlidersHorizontal size={18} />
             </button>
-            <div className="w-full md:w-[264px] rounded-full border border-neutral-300 px-4 py-2 flex items-center gap-2">
+            <div className="w-full lg:w-[264px] rounded-full border border-neutral-300 px-4 py-2 flex items-center gap-2">
               <Search className="text-neutral-400" size={20} />
               <input
                 type="text"
@@ -337,14 +337,14 @@ function PressReleaseCard({ item, locale }: { item: PressReleaseItem, locale: st
   const downloadIcon = "/assets/icons/ic_download_file.svg";
 
   return (
-    <li className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 md:gap-y-0">
+    <li className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 lg:gap-y-0">
       <div className="w-full max-w-3xl">
         <h3 className="text-neutral-13 mb-2 text-lg font-medium line-clamp-2">
           {item.name_id}
         </h3>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-between w-full">
+      <div className="flex flex-col lg:flex-row justify-between w-full">
         <div className="flex items-center text-base text-neutral-8 gap-3">
           <div className="flex items-baseline gap-3">
             <span>{item.date}</span>
@@ -360,7 +360,7 @@ function PressReleaseCard({ item, locale }: { item: PressReleaseItem, locale: st
             className="inline-block"
           />
         </div>
-        <div className="flex flex-row items-center gap-4 sm:gap-8 w-full md:w-fit">
+        <div className="flex flex-row items-center gap-4 sm:gap-8 w-full lg:w-fit">
           <Link
             href={locale == "id" ? viewUrl_id : viewUrl_en}
             className="flex items-center gap-2 text-blue-base font-medium"

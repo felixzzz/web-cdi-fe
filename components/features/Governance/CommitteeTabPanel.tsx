@@ -47,7 +47,7 @@ export const CommitteeTabPanel: React.FC<CommitteeTabPanelProps> = ({
           prose-img:w-full   
           prose-img:h-auto
           prose-p:text-wrap   
-          text-sm md:text-base leading-snug md:leading-loose text-justify
+          text-sm lg:text-base leading-snug lg:leading-loose text-justify
           text-neutral-300
         `}
         dangerouslySetInnerHTML={{ __html: sanitizedContent }}

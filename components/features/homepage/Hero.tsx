@@ -31,7 +31,7 @@ export const Hero = ({
   }, []);
 
   return (
-    <header className="relative overflow-hidden aspect-square md:aspect-[4/2] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end">
+    <header className="relative overflow-hidden aspect-square lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end">
       <div
         className="overlay-history absolute inset-0 z-[1]"
         aria-hidden="true"
@@ -60,27 +60,27 @@ export const Hero = ({
         className="container mx-auto   relative z-[2]"
         aria-labelledby="home_banner_title"
       >
-        <div className="text-white grid lg:flex-col gap-0 md:gap-2 items-end">
+        <div className="text-white grid lg:flex-col gap-0 lg:gap-2 items-end">
           <div className="mb-0 max-w-3xl">
-            <p className="max-w-md text-xs md:text-lg font-light !text-neutral-300 uppercase">
+            <p className="max-w-md text-xs lg:text-lg font-light !text-neutral-300 uppercase">
               {preTitle}
             </p>
 
             <h1
-              className="text-2xl leading-6 md:text-[52px] md:leading-[58px] font-medium md:mb-6 w-full md:max-w-lg lg:max-w-2xl"
+              className="text-2xl leading-6 lg:text-[52px] lg:leading-[58px] font-medium lg:mb-6 w-full md:max-w-lg lg:max-w-2xl"
               id="home_banner_title"
             >
               {title}
             </h1>
           </div>
 
-          <div className="flex flex-col gap-4 md:flex-row items-center lg:justify-between">
+          <div className="flex flex-col gap-2 lg:gap-4 lg:flex-row items-center lg:justify-between">
             <div
-              className="md:max-w-md w-full text-sm md:text-base !text-neutral-200"
+              className="lg:max-w-md w-full text-sm lg:text-base !text-neutral-200"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
-            <div className="flex items-center justify-start md:justify-end gap-2 w-full">
-              <div className="h-[2px] w-3/5 bg-[#BFBFBF] hidden md:block relative overflow-hidden">
+            <div className="flex items-center justify-start lg:justify-end gap-2 w-full">
+              <div className="h-[2px] w-3/5 bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
                 <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
               </div>
 

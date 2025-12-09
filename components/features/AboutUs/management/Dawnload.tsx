@@ -27,7 +27,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
       <div className="container mx-auto  ">
         <h2
           id={`${id || "downloads"}-title`}
-          className="font-medium text-2xl md:text-[38px] md:leading-[44px] mb-4 text-center"
+          className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-4 text-center"
         >
           {title}
         </h2>
@@ -44,7 +44,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
         {items.map((item) => (
           <article
             key={item.title}
-            className="py-8 border-b border-b-neutral-5 flex md:items-center justify-between flex-col md:flex-row gap-y-2 md:gap-y-0"
+            className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-2 lg:gap-y-0"
           >
             <div>
               <h3 className="text-neutral-13 mb-2 text-lg font-medium">
@@ -68,7 +68,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
             <div className="flex items-end gap-8 w-fit">
               <Link
                 href={item.viewUrl}
-                className="flex items-center gap-2 text-blue-base font-medium"
+                className="flex items-center gap-2 text-[#2474A5] font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -83,7 +83,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
               </Link>
               <Link
                 href={item.downloadUrl}
-                className="flex items-center gap-2 text-blue-base font-medium"
+                className="flex items-center gap-2 text-[#2474A5] font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
               >

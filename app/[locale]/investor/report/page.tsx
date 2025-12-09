@@ -125,7 +125,7 @@ export default async function Page({ params: { locale } }: ReportPageProps) {
       <FinancialBanner data={investor_report_overview} />
       <FinancialTable data={investor_report_table} />
       <SupportingInstitutions data={institutions} />
-      <FinancialCalendar initialData={financialData} />
+      <FinancialCalendar initialData={financialData} locale={locale} />
     </main>
   );
 }
