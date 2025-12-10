@@ -46,7 +46,7 @@ export const SolutionCard: React.FC<SolutionCardProps> = ({
           className="bg-white/20 text-white px-6 py-2 border border-white rounded-full whitespace-nowrap gap-3 flex items-center w-fit mt-10"
         >
           {linkText}
-          <ArrowUpRight size={14} />
+          <ArrowUpRight size={20} />
         </Link>
       </div>
     </div>

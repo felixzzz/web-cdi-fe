@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ZoomIn } from "lucide-react";
 import { ImageZoomModal } from "./ImageZoomModal";
 import { CorporateStructureTable } from "./CorporateStructureTable";
+import { useTranslations } from "next-intl";
 
 interface TransTableHeader {
   text: string;
@@ -33,8 +34,6 @@ interface CorporateStructureProps {
   showTable: boolean;
 }
 
-const TITLE = "Corporate Structure"; 
-
 export const CorporateStructure: React.FC<CorporateStructureProps> = ({
   chartImageUrl,
   chartImageAlt,
@@ -42,12 +41,13 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
   tableData,
   showTable,
 }) => {
+  const t = useTranslations('Management')
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section id="corporate-structure" className="border-b-2 border-neutral-5">
-      <h2 className="sr-only">{TITLE}</h2>
+      <h2 className="sr-only">{t('Corporate_Structure')}</h2>
       <div
         className={`bg-neutral-3 text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] transition hover:bg-[#2474A5] hover:text-white
           ${isOpen ? "!bg-[#2474A5] !text-white" : ""}
@@ -60,7 +60,7 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
             aria-expanded={isOpen}
             aria-controls="corp-structure-content"
           >
-            <span className="font-medium">{TITLE}</span>
+            <span className="font-medium">{t('Corporate_Structure')}</span>
             <ChevronDown
               size={24}
               className={`transition-transform duration-200 ${
@@ -83,7 +83,7 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
           >
             <div className="container mx-auto  ">
               <h3 className="lg:text-2xl text-[24px] font-medium text-[#2474A5] mb-6">
-                {TITLE}
+                {t('Corporate_Structure')}
               </h3>
               <Image
                 src={chartImageUrl}
@@ -115,7 +115,7 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
         <ImageZoomModal
           imageUrl={chartImageUrl}
           imageAlt={chartImageAlt}
-          title={TITLE}
+          title={t('Corporate_Structure')}
           onClose={() => setIsModalOpen(false)}
         />
       )}

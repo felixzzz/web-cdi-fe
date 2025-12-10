@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { ManagementTeam } from "./ManagementTeam";
 import { TeamMember } from "./TeamMemberCard";
 
@@ -12,6 +13,7 @@ export const Stakeholder: React.FC<StakeholderSectionProps> = ({
   directors,
   commissioners,
 }) => {
+  const t = useTranslations('Management')
   return (
     <section
     id="board-of-commissioners"
@@ -24,15 +26,15 @@ export const Stakeholder: React.FC<StakeholderSectionProps> = ({
       <div className="container mx-auto  ">
         <ManagementTeam
           id="board-of-directors"
-          title="Board of Directors"
+          title={t('Board of Directors')}
           members={directors}
-        />
+          />
 
         <div className="h-16" />
 
         <ManagementTeam
           id="board-of-commissioners"
-          title="Board of Commissioners"
+          title={t('Board of Commissioners')}
           members={commissioners}
         />
       </div>

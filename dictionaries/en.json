@@ -17,7 +17,8 @@
     "eye_information": "QUICK LINKS",
     "title_information": "Need to access detailed information?",
     "journey_career": "Join With Us",
-    "journey_awards": "All Awards"
+    "journey_awards": "All Awards",
+    "Learn More": "Learn More"
   },
   "AboutUs": {
     "company_profile_view": "View",
@@ -48,7 +49,9 @@
     "Board_of_Commissioners": "Board of Commissioners",
     "Organization_Structure": "Organization Structure",
     "Corporate_Structure": "Corporate Structure",
-    "Guidelines_of_Work": "Guidelines of Work"
+    "Guidelines_of_Work": "Guidelines of Work",
+    "Board of Directors": "Board of Directors",
+    "Board of Commissioners": "Board of Commissioners"
   },
   "Awards": {
     "not_found": "No items found for the selected criteria.",
@@ -60,10 +63,10 @@
   },
   "OurBusiness": {
     "Energy": {
-      "help": "Please select a tab."
+      "help": "No data available."
     },
     "Water": {
-      "help": "Please select a tab."
+      "help": "No data available."
     },
     "learn_more": "Learn More"
   },
@@ -84,7 +87,7 @@
       "download_view": "View",
       "download_download": "Download",
       "search": "Search anything...",
-      "help": "Please select a tab.",
+      "help": "No data available.",
       "Prospectus": "Prospectus",
       "General Meeting of Shareholders": "General Meeting of Shareholders",
       "Public Announcement": "Public Announcement",
@@ -145,7 +148,7 @@
         "download_view": "View",
         "download_id": "Download-ID",
         "download_en": "Download-EN",
-        "help": "Please select a tab.",
+        "help": "No data available.",
         "Governance": "Governance",
         "search": "Search anything..."
       }
