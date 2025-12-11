@@ -157,8 +157,8 @@ export default async function Page({
         id: tab.id,
         title: tab.file_name,
         fileSize: tab.file.size,
-        viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/committee/${tab.file_name}/`,
-        downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/committee/${tab.file_name}/`,
+        viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/committe/${tab.title}/`,
+        downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/committe/${tab.title}/`,
       },
     ],
   }));

@@ -5,18 +5,19 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ZoomIn } from "lucide-react";
 import { ImageZoomModal } from "./ImageZoomModal";
+import { useTranslations } from "next-intl";
 
 interface OrganizationStructureProps {
   chartImageUrl: string;
   chartImageAlt: string;
 }
 
-const TITLE = "Organization Structure";
 
 export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
   chartImageUrl,
   chartImageAlt,
 }) => {
+  const t = useTranslations('Management')
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,7 +26,7 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
       id="organization-structure"
       className="border-b-2 border-neutral-5"
     >
-      <h2 className="sr-only">{TITLE}</h2>
+      <h2 className="sr-only">{t('Organization_Structure')}</h2>
       <div
         className={`bg-neutral-50 text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] transition hover:bg-[#2474A5] hover:text-white
           ${isOpen ? "!bg-[#2474A5] !text-white" : ""}
@@ -38,7 +39,7 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
             aria-expanded={isOpen}
             aria-controls="org-structure-content"
           >
-            <span className="font-medium">{TITLE}</span>
+            <span className="font-medium">{t('Organization_Structure')}</span>
             <ChevronDown
               size={36}
               className={`transition-transform duration-200 ${
@@ -61,7 +62,7 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
           >
             <div className="container mx-auto  ">
               <h3 className="text-2xl md:text-[28px] font-medium text-[#2474A5] mb-6">
-                {TITLE}
+                {t('Organization_Structure')}
               </h3>
               <Image
                 src={chartImageUrl} 
@@ -85,7 +86,7 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
         <ImageZoomModal
           imageUrl={chartImageUrl} 
           imageAlt={chartImageAlt} 
-          title={TITLE}
+          title={t('Organization_Structure')}
           onClose={() => setIsModalOpen(false)}
         />
       )}

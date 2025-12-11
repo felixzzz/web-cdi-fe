@@ -17,7 +17,8 @@
     "eye_information": "TAUTAN CEPAT",
     "title_information": "Butuh akses informasi terperinci?",
     "journey_career": "Bergabung Bersama Kami",
-    "journey_awards": "Semua Penghargaan"
+    "journey_awards": "Semua Penghargaan",
+    "Learn More": "Pelajari Lebih Lanjut"
   },
   "AboutUs": {
     "company_profile_view": "Lihat",
@@ -48,7 +49,9 @@
     "Board_of_Commissioners": "Dewan Komisaris",
     "Organization_Structure": "Struktur Organisasi",
     "Corporate_Structure": "Struktur Perusahaan",
-    "Guidelines_of_Work": "Pedoman Kerja"
+    "Guidelines_of_Work": "Pedoman Kerja",
+    "Board of Directors": "Dewan Direksi",
+    "Board of Commissioners": "Dewan Komisaris"
   },
   "Awards": {
     "not_found": "Tidak ada item yang ditemukan untuk kriteria yang dipilih.",
@@ -60,10 +63,10 @@
   },
   "OurBusiness": {
     "Energy": {
-      "help": "Silakan pilih tab."
+      "help": "Data Belum Tersedia."
     },
     "Water": {
-      "help": "Silakan pilih tab."
+      "help": "Data Belum Tersedia."
     },
     "learn_more": "Pelajari Lebih Lanjut"
   },
@@ -84,7 +87,7 @@
       "download_view": "Lihat",
       "download_download": "Unduh",
       "search": "Cari apa saja...",
-      "help": "Silakan pilih tab.",
+      "help": "Data Belum Tersedia.",
       "Prospectus": "Prospektus",
       "General Meeting of Shareholders": "Rapat Umum Pemegang Saham",
       "Public Announcement": "Pengumuman Publik",
@@ -145,7 +148,7 @@
         "download_id": "Unduh-ID",
         "download_en": "Unduh-EN",
         "download_view": "Lihat",
-        "help": "Silakan pilih tab.",
+        "help": "Data Belum Tersedia.",
         "Governance": "Tata Kelola",
         "search": "Cari apa saja..."
       }
@@ -166,7 +169,7 @@
     "press_release": "Siaran Pers",
     "News": "Berita",
     "Media": "Berita",
-    "Media_Link": "Read More",
+    "Media_Link": "Baca Selengkapnya",
     "share": "Bagikan postingan ini",
     "latest_articles": "ARTIKEL TERBARU",
     "description": "Temukan informasi terbaru dari industri energi",

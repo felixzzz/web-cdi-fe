@@ -2,6 +2,7 @@ import React from "react";
 import { HomePageSection } from "@/types/Homepage/home";
 import { SolutionCard } from "./SolutionCard";
 import { stripHtml } from "@/lib/localization";
+import { useTranslations } from "next-intl";
 
 interface BusinessSolutionsProps {
   home_infrastructure_title: HomePageSection;
@@ -18,6 +19,7 @@ export const Solution: React.FC<BusinessSolutionsProps> = ({
   home_infrastructure_port_storage,
   home_infrastructure_logistic,
 }) => {
+  const t = useTranslations('Homepage')
   const solutionsData = [
     {
       title: home_infrastructure_energy.title,
@@ -67,7 +69,7 @@ export const Solution: React.FC<BusinessSolutionsProps> = ({
             description={solution.description || ""} 
             imageUrl={solution.imageUrl}
             linkHref={solution.linkHref}
-            linkText={"Learn More"}
+            linkText={t('Learn More')}
           />
         ))}
       </div>
