@@ -18,6 +18,7 @@ jobs:
             cd ~/app
             sh cicd-cdi.sh
             cd ~/app
+            . ~/.nvm/nvm.sh
             pm2 start pm2.config.js
           # Hostname or IP address of the server.
           host: ${{secrets.HOST_ADDRESS}}
