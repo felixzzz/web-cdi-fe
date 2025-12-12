@@ -6,9 +6,68 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .hover-underline-middle {
+    @apply relative pb-1;
+  }
+
+  .hover-underline-middle::after {
+    @apply content-[''] absolute bottom-0 left-0 w-full h-[2px];
+
+    background-color: var(--nav-hover-color, #47c1ea);
+
+    @apply scale-x-0 origin-center;
+    @apply transition-transform duration-300 ease-out;
+  }
+
+  .hover-underline-middle:hover::after {
+    @apply scale-x-100;
+  }
+
+ .container {
+    width: 100%;
+    margin-left: auto;   
+    margin-right: auto; 
+    padding-left: 1rem;  
+    padding-right: 1rem; 
+  }
+
+  @media (min-width: 40rem) {
+    .container {
+      max-width: 48rem; 
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .container {
+      max-width: 46rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .container {
+      max-width: 64rem;
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .container {
+      max-width: 76rem;
+    }
+  }
+
+  @media (min-width: 96rem) {
+    .container {
+      max-width: 86rem;
+    }
+  }
+
+  @media (min-width: 115rem) {
+    .container {
+      max-width: 105rem;
+    }
+  }
 }
-
-
 
 @layer base {
   :root {
@@ -66,8 +125,6 @@
   }
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
@@ -75,4 +132,70 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.text-awards {
+  color: #0000;
+  background: linear-gradient(
+    90deg,
+    #b38d2c,
+    #f7ef8a 35%,
+    #d1ab46 65%,
+    #eac666
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+#our-history > div:first-child .overlay-history {
+  @apply bg-gradient-to-r from-black/80 to-transparent;
+}
+
+#our-history > div:last-child .overlay-history {
+  @apply bg-gradient-to-t from-black/80 to-transparent;
+}
+
+.overlay-history {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.custom-dot-button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-dot-button.active {
+  background-color: #2474a5;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
 }

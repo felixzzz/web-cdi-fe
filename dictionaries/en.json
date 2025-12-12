@@ -1,0 +1,262 @@
+{
+  "Report": {
+    "dawnload_title": "Download All",
+    "download_download": "Download",
+    "download_view": "View",
+    "see_title": "See All",
+    "description": "Documents are available in both English and Bahasa Indonesia. Change the website language to view them in another language."
+  },
+  "StoksInformation": {
+    "title": "Stocks"
+  },
+  "Homepage": {
+    "more": "Learn More",
+    "about": "About Us",
+    "eye_report": "LATEST DOCUMENTS",
+    "title_report": "Financial Reports",
+    "eye_information": "QUICK LINKS",
+    "title_information": "Need to access detailed information?",
+    "journey_career": "Join With Us",
+    "journey_awards": "All Awards",
+    "Learn More": "Learn More"
+  },
+  "AboutUs": {
+    "company_profile_view": "View",
+    "company_profile_download": "Download",
+    "eye_information": "QUICK LINKS",
+    "title_information": "Need to access detailed information?",
+    "vision": "Our Vision",
+    "mission": "Our Mission",
+    "About_Us": "Company Overview",
+    "Vision_Mission": "Vision & Mission",
+    "Our_History": "Our History",
+    "Milestone": "Milestone",
+    "Company_Profile": "Company Profile",
+    "button_back": "Back",
+    "Read_More": "Read More",
+    "Awarded": "Awarder",
+    "Categories": "Categories",
+    "title_modal": "Detail Certification"
+  },
+  "Management": {
+    "download_title": "Good Corporate Governance",
+    "download_subtitle": "Review the Guidelines of Work for the Board of Directors and Board of Commissioners.",
+    "download_view": "View",
+    "download_download": "Download",
+    "eye_information": "QUICK LINKS",
+    "title_information": "Need to access detailed information?",
+    "Board_of_Directors": "Board of Directors",
+    "Board_of_Commissioners": "Board of Commissioners",
+    "Organization_Structure": "Organization Structure",
+    "Corporate_Structure": "Corporate Structure",
+    "Guidelines_of_Work": "Guidelines of Work",
+    "Board of Directors": "Board of Directors",
+    "Board of Commissioners": "Board of Commissioners"
+  },
+  "Awards": {
+    "not_found": "No items found for the selected criteria.",
+    "eye_information": "QUICK LINKS",
+    "title_information": "Need to access detailed information?",
+    "Awards": "Awards",
+    "Certification": "Certification",
+    "Membership": "Membership"
+  },
+  "OurBusiness": {
+    "Energy": {
+      "help": "No data available."
+    },
+    "Water": {
+      "help": "No data available."
+    },
+    "learn_more": "Learn More"
+  },
+  "Investor": {
+    "Financial": {
+      "not_found": "No reports found matching your criteria.",
+      "download_view": "View",
+      "download_download": "Download",
+      "search": "Search anything...",
+      "title": "Financial Calendar",
+      "subtitle": "Documents are available in both English and Bahasa Indonesia.",
+      "All Type": "All Type",
+      "Annual Report": "Annual Report",
+      "Financial Report": "Financial Report"
+    },
+    "Publication": {
+      "not_found": "No reports found matching your criteria.",
+      "download_view": "View",
+      "download_download": "Download",
+      "search": "Search anything...",
+      "help": "No data available.",
+      "Prospectus": "Prospectus",
+      "General Meeting of Shareholders": "General Meeting of Shareholders",
+      "Public Announcement": "Public Announcement",
+      "Earnings Update": "Earnings Update"
+    },
+    "Report": {
+      "financial_title": "Financial Data Table",
+      "institution_title": "Supporting Institutions & Professionals",
+      "calendar_title": "Financial Calendar",
+      "calendar_subtitle": "Documents are available in both English and Bahasa Indonesia. Change the website language to view them in another language.",
+      "search": "Search anything...",
+      "download_view": "View",
+      "download_download": "Download",
+      "not_found": "No reports found matching your criteria.",
+      "previous": "Previous",
+      "next": "Next",
+      "All Type": "All Type",
+      "Financial Report": "Financial Report",
+      "Annual Report": "Annual Report",
+      "All Year": "All Year"
+    },
+    "Governance": {
+      "download_view": "View",
+      "download_download": "Download",
+      "see_title": "See All",
+      "cta_whistle": "Submit Your Concerns",
+      "eye_information": "QUICK LINKS",
+      "title_information": "Need to access detailed information?",
+      "Corporate_Secretary": "Corporate Secretary",
+      "Internal_Audit_Unit": "Internal Audit Unit",
+      "Committee": "Committee",
+      "Risk_Management": "Risk Management",
+      "Code_of_Conduct": "Code of Conduct",
+      "Policy": "Policy",
+      "Whistleblowing": "Whistleblowing",
+      "WhistleblowingPage": {
+        "Governance": "Governance",
+        "Whistleblowing": "Whistleblowing",
+        "message": "Add your questions",
+        "message_placeholder": "Write your comment or additional question here",
+        "topic_id": "Topic",
+        "topic_id_placeholder": "Select Topic",
+        "country_id": "country",
+        "country_id_placeholder": "Select Your Country",
+        "email_placeholder": "Input Your Email",
+        "last_name": "Last Name",
+        "last_name_placeholder": "Input Your Last Name",
+        "first_name": "First Name",
+        "first_name_placeholder": "Input Your First Name",
+        "subtitle": "Thank you for your interest in CDI Group",
+        "other_company": "Other Company Addresses:",
+        "Submit": "Submit",
+        "submit_success_message": "Your message has been sent successfully! We will get back to you soon.",
+        "submit_error_message": "An error occurred. Please try again later."
+      },
+      "PolicyPage": {
+        "Policy": "Policy",
+        "download_view": "View",
+        "download_id": "Download-ID",
+        "download_en": "Download-EN",
+        "help": "No data available.",
+        "Governance": "Governance",
+        "search": "Search anything..."
+      }
+    },
+    "Sustainability": {
+      "Governance": {
+        "download_view": "View",
+        "download_download": "Download"
+      }
+    }
+  },
+  "Media": {
+    "Read_More": "Read More",
+    "download_id": "Download-ID",
+    "download_en": "Download-EN",
+    "download_view": "View",
+    "read_article_more": "Read Article More",
+    "press_release": "Press Release",
+    "News": "News",
+    "Media": "News",
+    "Media_Link": "Read More",
+    "share": "Share this article",
+    "latest_articles": "LATEST ARTICLES",
+    "description": "Discover the latest from the energy industry",
+    "see_title": "See All",
+    "read_full": "Read full article",
+    "title_not_found": "Content not available.",
+    "search": "Search anything..."
+  },
+  "Contact": {
+    "message": "Add your questions",
+    "message_placeholder": "Write your comment or additional question here",
+    "topic_id": "Topic",
+    "topic_id_placeholder": "Select Topic",
+    "country_id": "country",
+    "country_id_placeholder": "Select Your Country",
+    "email_placeholder": "Input Your Email",
+    "last_name": "Last Name",
+    "last_name_placeholder": "Input Your Last Name",
+    "first_name": "First Name",
+    "first_name_placeholder": "Input Your First Name",
+    "subtitle": "Thank you for your interest in CDI Group",
+    "other_company": "Other Company Addresses:",
+    "Submit": "Submit",
+    "submit_success_message": "Your message has been sent successfully! We will get back to you soon.",
+    "submit_error_message": "An error occurred. Please try again later."
+  },
+  "Regulation": {
+    "title_not_found": "Content not available."
+  },
+  "Navbar": {
+    "home": "Home",
+    "about_us": "About Us",
+    "who_we_are": "Who We Are",
+    "management": "Management",
+    "awards_certification": "Awards & Certification",
+    "our_business": "Our Business",
+    "what_we_do": "What We Do",
+    "energy": "Energy",
+    "water": "Water",
+    "ports_storage": "Ports & Storage",
+    "logistics": "Logistics",
+    "investor": "Investor",
+    "report": "Report",
+    "financial_information": "Financial Information",
+    "shares_information": "Shares Information",
+    "publications_for_investors": "Publications for Investors",
+    "governance": "Governance",
+    "sustainability": "Sustainability",
+    "overview": "Overview",
+    "environment": "Environment",
+    "social": "Social",
+    "governance_child": "Governance",
+    "media": "Media",
+    "career": "Career",
+    "contact_us": "Contact Us"
+  },
+  "Layout": {
+    "who_we_are": "Who We Are",
+    "our_business": "Our Business",
+    "sustainability": "Sustainability",
+    "investor": "Investor",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookies Consent",
+    "disclaimer": "Disclaimer",
+    "contact_us": "Contact Us"
+  },
+  "Cookies": {
+    "title": "This Site Uses Cookies",
+    "description": "By clicking “Accept”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.",
+    "more_info_text": "View our <privacy_policy>Privacy Policy</privacy_policy> and <cookies_notice>Cookies Notice</cookies_notice> for more information.",
+    "decline": "Decline",
+    "accept": "Accept"
+  },
+  "Footer": {
+    "WhoWeAre": "Who We Are",
+    "OurBusiness": "Our Business",
+    "Sustainability": "Sustainability",
+    "Investor": "Investor"
+  },
+  "pagination": {
+    "jumpToPage": "Jump Page",
+    "go": "Go",
+    "items": "items",
+    "of": "of"
+  },
+  "metadata": {
+    "description": "PT Chandra Daya Investasi Tbk (CDI Group) is an infrastructure investment arm of Chandra Asri Group, a leading chemical and energy solutions provider in Southeast Asia, and EGCO, a holding company focused on power business investments in Thailand. CDI Group's diverse operations encompass water supply and treatment, energy, port & storage, and logistics."
+  }
+}

@@ -10,7 +10,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   // Import translation files from both homepage and contact folders
   const homepageMessages = (
-    await import(`../dictionaries/homepage/${locale}.json`)
+    await import(`../dictionaries/${locale}.json`)
   ).default;
 
   // Merge the translations
