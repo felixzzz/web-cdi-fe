@@ -15,8 +15,8 @@ jobs:
         with:
           # Command to execute on the remote server.
           command: |
-            cd ~/app/csi-fe
-            sh cicd-csi.sh
+            cd ~/app/cdi-fe
+            sh cicd-cdi.sh
             cd ~/app
             pm2 start pm2.config.js
           # Hostname or IP address of the server.
@@ -31,7 +31,7 @@ jobs:
       - name: Google Chat Notification
         uses: Co-qn/google-chat-notification@releases/v1
         with:
-          name: CSI FE (Production) Deployment
+          name: CDI FE (Production) Deployment
           url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
           status: ${{ job.status }}
           if: always()
