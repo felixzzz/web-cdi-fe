@@ -9,7 +9,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Image from "next/image";

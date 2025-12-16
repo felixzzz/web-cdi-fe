@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ApiDataItem } from "@/types/Sustainabilitys/Governance";
 import { useTranslations } from "next-intl";
 
