@@ -142,7 +142,8 @@ const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] 
     </h3>
     <Image
       src="/assets/icons/ic_timeline.svg"
-      alt=""
+      alt="icon"
+      title="icon"
       aria-hidden="true"
       width={40}
       height={40}

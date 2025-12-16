@@ -33,6 +33,7 @@ export const ArticleCard = ({
 
   return (
     <Link
+      title={title}
       href={href}
       className="flex bg-white rounded-xl shadow-article border border-neutral-5 overflow-hidden h-full group"
     >

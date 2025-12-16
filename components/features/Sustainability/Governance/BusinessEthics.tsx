@@ -27,6 +27,7 @@ export function BusinessEthics({ data, locale }: BusinessEthicsProps) {
       <Image
         src={image}
         alt={title || "Business Ethics"}
+        title={title || "Business Ethics"}
         layout="fill"
         objectFit="cover"
         className="z-0"
@@ -68,6 +69,7 @@ export function BusinessEthics({ data, locale }: BusinessEthicsProps) {
                     <span>.</span>
                   </div>
                   <Image
+                  title="icon"
                     src="/assets/icons/ic_filepdf_white.svg"
                     width={28}
                     height={20}
@@ -78,12 +80,14 @@ export function BusinessEthics({ data, locale }: BusinessEthicsProps) {
               </div>
               <div className="flex items-center gap-8 w-full justify-center">
                 <Link
+                title="icon"
                   href={ctaViewUrl}
                   className="flex items-center gap-2 text-white font-medium"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <Image
+                  title="icon"
                     src="/assets/icons/ic_eye_white.svg"
                     width={28}
                     height={20}
@@ -92,13 +96,14 @@ export function BusinessEthics({ data, locale }: BusinessEthicsProps) {
                   />
                 {t('download_view')}
                 </Link>
-                <a
+                <Link
                   href={ctaDownloadUrl}
                   className="flex items-center gap-2 text-white font-medium"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <Image
+                  title="icon"
                     src="/assets/icons/ic_download_file_white.svg"
                     width={28}
                     height={20}
@@ -106,7 +111,7 @@ export function BusinessEthics({ data, locale }: BusinessEthicsProps) {
                     className="inline-block"
                   />{" "}
                   {t('download_download')}
-                </a>
+                </Link>
               </div>
             </div>
           )}

@@ -46,6 +46,7 @@ export function Policy({ data }: PolicyProps) {
               onClick={handleLinkClick}
               href={LINK_URL}
               rel="noopener noreferrer"
+              title="noopener noreferrer"
               className="px-6 py-2 rounded-full border border-white flex items-center gap-2 w-fit mt-8"
             >
               {t('see_title')}

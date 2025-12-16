@@ -32,6 +32,7 @@ export function CorporateSecretary({
               <Image
                 src={personData.file_url}
                 alt={personData.title || "Corporate Secretary"}
+                title={personData.title || "Corporate Secretary"}
                 layout="fill"
                 objectFit="cover"
               />

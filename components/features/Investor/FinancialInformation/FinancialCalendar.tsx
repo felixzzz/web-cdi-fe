@@ -52,10 +52,13 @@ const typeFilters = ["All Type", "Annual Report", "Financial Report"];
 
 interface FinancialCalendarProps {
   initialData: CalendarApiResponse;
-  locale: string
+  locale: string;
 }
 
-export function FinancialCalendar({ initialData, locale }: FinancialCalendarProps) {
+export function FinancialCalendar({
+  initialData,
+  locale,
+}: FinancialCalendarProps) {
   const t = useTranslations("Investor.Financial");
   const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
     flattenData(initialData)
@@ -258,6 +261,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
                           <span>.</span>
                         </p>
                         <Image
+                          title="icon"
                           src="/assets/icons/ic_filepdf.svg"
                           width={30}
                           height={24}
@@ -267,12 +271,14 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
                       </div>
                       <div className="flex items-center justify-start lg:justify-end gap-8 w-full">
                         <Link
+                          title="view"
                           href={report.viewUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
+                            title="icon"
                             src="/assets/icons/ic_eye.svg"
                             width={20}
                             height={20}
@@ -281,13 +287,15 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
                           />{" "}
                           {t("download_view")}
                         </Link>
-                        <a
+                        <Link
+                          title="download"
                           href={report.downloadUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
+                            title="icon"
                             src="/assets/icons/ic_download_file.svg"
                             width={20}
                             height={20}
@@ -295,7 +303,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
                             className="inline-block"
                           />{" "}
                           {t("download_download")}
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </article>

@@ -17,6 +17,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
       <Image
         src={imageUrl}
         alt={title || "Overview"}
+        title={title || "Overview"}
         layout="fill"
         objectFit="cover"
         className="z-0"

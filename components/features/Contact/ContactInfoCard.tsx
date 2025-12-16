@@ -28,6 +28,7 @@ export function ContactInfoCard({
       <Image
         src={imageSrc}
         alt={imageAlt}
+        title={imageAlt}
         layout="fill"
         objectFit="cover"
         className="z-0"

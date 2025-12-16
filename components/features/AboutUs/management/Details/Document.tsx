@@ -46,6 +46,7 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
                   <span>.</span>
                 </div>
                 <Image
+                  title="icon"
                   src="/assets/icons/ic_filepdf.svg"
                   width={28}
                   height={20}
@@ -57,12 +58,14 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
 
             <div className="flex items-end gap-8 w-fit">
               <Link
+                title={title}
                 href={item.viewUrl}
                 className="flex items-center gap-2 text-[#2474A5] font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Image
+                  title="icon"
                   src="/assets/icons/ic_eye.svg"
                   width={20}
                   height={20}
@@ -72,12 +75,14 @@ export const DocumentDownload: React.FC<DocumentDownloadProps> = ({
                 {t("download_view")}
               </Link>
               <Link
+                title={title}
                 href={item.downloadUrl}
                 className="flex items-center gap-2 text-[#2474A5] font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Image
+                  title="icon"
                   src="/assets/icons/ic_download_file.svg"
                   width={20}
                   height={20}

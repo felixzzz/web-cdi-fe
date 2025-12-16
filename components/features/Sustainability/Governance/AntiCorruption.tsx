@@ -41,6 +41,7 @@ export function AntiCorruption({ data }: AntiCorruptionProps) {
         <Image
           src={BACKGROUND_IMAGE_URL}
           alt={TITLE} 
+          title={TITLE} 
           layout="fill"
           objectFit="cover"
           className="z-0"

@@ -42,10 +42,11 @@ export function BusinessCard({
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
-      <Link href={route}>
+      <Link title={'business'} href={route}>
         <Image
           src={imageUrl}
           alt={title}
+          title={title}
           layout="fill"
           objectFit="cover"
           className="z-0"

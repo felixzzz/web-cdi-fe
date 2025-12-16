@@ -25,6 +25,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
   return (
     <Link
+    title={title}
       href={href}
       className="group flex flex-col bg-white rounded-xl border border-gray-200 overflow-hidden h-full text-gray-800 duration-300"
     >
@@ -32,6 +33,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
         <Image
           src={imageUrl}
           alt={title}
+          title={title}
           layout="fill"
           objectFit="cover"
           className="transition-transform duration-400 ease-in-out group-hover:scale-110"

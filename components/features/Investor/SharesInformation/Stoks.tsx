@@ -146,6 +146,7 @@ export function StocksInformation({
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           <nav className="flex lg:flex-col lg:items-start w-full border-b-2 lg:border-none border-b-neutral-100">
             <Link
+            title="stocks"
               href={`${process.env.NEXT_PUBLIC_URL}/investor/shares-information?tab=stocks`}
               className="text-neutral-13 text-lg p-4 lg:w-full lg:text-start font-medium lg:border-l-4 border-l-neutral-100 lg:border-l-[#2474A5] lg:border-t-2 lg:border-t-neutral-100 border-b-4 lg:border-b-2 border-b-[#2474A5] lg:border-b-neutral-100"
             >

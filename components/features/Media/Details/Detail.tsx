@@ -88,7 +88,7 @@ export const NewsDetail = ({
         <div className="flex gap-1 text-neutral-10 items-center">
           {breadcrumbs.map((item) => (
             <div key={item.href} className="flex items-center gap-1">
-              <Link href={item.href} className="text-[#2474A5] font-extralight">
+              <Link title={item.label} href={item.href} className="text-[#2474A5] font-extralight">
                 {item.label}
               </Link>
               <ChevronRight size={18} className="text-lg" />
@@ -105,6 +105,7 @@ export const NewsDetail = ({
         <Image
           src={featureImageUrl}
           alt={articleTitle}
+          title={articleTitle}
           width={1200}
           height={675}
           className="w-full rounded-xl mb-10 object-cover"

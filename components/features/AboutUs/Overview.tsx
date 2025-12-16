@@ -54,6 +54,7 @@ export const Overview: React.FC<OverviewSectionProps> = ({
             <Image
               src={logoSrc}
               alt={logoAlt}
+              title={logoAlt}
               width={logoWidth}
               height={logoHeight}
               className="h-20 w-auto mb-4"
@@ -73,6 +74,7 @@ export const Overview: React.FC<OverviewSectionProps> = ({
             <Image
               src={mainImageUrl}
               alt={mainImageAlt}
+              title={mainImageAlt}
               width={mainImageWidth}
               height={mainImageHeight}
               className="w-full lg:w-[80%] rounded-xl ms-auto"

@@ -7,7 +7,8 @@ const DecorativeCorners: React.FC = () => {
     <>
       <Image
         src="/assets/icons/ic_tagline_top_right.svg"
-        alt=""
+        alt="icon"
+        title="icon"
         aria-hidden="true"
         width={size}
         height={size}
@@ -15,7 +16,8 @@ const DecorativeCorners: React.FC = () => {
       />
       <Image
         src="/assets/icons/ic_tagline_top_left.svg"
-        alt=""
+        alt="icon"
+        title="icon"
         aria-hidden="true"
         width={size}
         height={size}
@@ -23,7 +25,8 @@ const DecorativeCorners: React.FC = () => {
       />
       <Image
         src="/assets/icons/ic_tagline_bottom_left.svg"
-        alt=""
+        alt="icon"
+        title="icon"
         aria-hidden="true"
         width={size}
         height={size}
@@ -31,7 +34,8 @@ const DecorativeCorners: React.FC = () => {
       />
       <Image
         src="/assets/icons/ic_tagline_bottom_right.svg"
-        alt=""
+        alt="icon"
+        title="icon"
         aria-hidden="true"
         width={size}
         height={size}
@@ -86,6 +90,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
             <Image
               src={visionData.imageUrl}
               alt="Our Vision graphic"
+              title="Our Vision graphic"
               width={200}
               height={200}
               className="mb-8"
@@ -108,6 +113,7 @@ export const VisionMission: React.FC<VisionMissionSectionProps> = ({
             <Image
               src={missionData.imageUrl}
               alt="Our Mission graphic"
+              title="Our Mission graphic"
               width={200}
               height={200}
               className="mb-8"

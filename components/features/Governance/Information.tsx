@@ -16,6 +16,15 @@ export const Information: React.FC<InformationSectionProps> = ({
   backgroundImageUrl,
   links,
 }) => {
+  const getRelativePath = (urlString: string) => {
+    try {
+      const url = new URL(urlString);
+      return url.pathname;
+    } catch {
+      return urlString;
+    }
+  };
+
   return (
     <section
       className="py-20 bg-neutral-3 bg-contain lg:bg-cover bg-no-repeat bg-bottom"
@@ -37,17 +46,21 @@ export const Information: React.FC<InformationSectionProps> = ({
 
           <nav aria-label="Quick links">
             <ul className="flex flex-col gap-8">
-              {links.map((link) => (
-                <li key={link.url}>
-                  <Link
-                    href={link.url}
-                    className="flex items-center justify-between text-neutral-13 border-b border-b-neutral-5 pb-8"
-                  >
-                    <p className="text-[22px] font-medium">{link.name}</p>
-                    <ArrowRight size={24} />
-                  </Link>
-                </li>
-              ))}
+              {links.map((link) => {
+                              const relativeHref = getRelativePath(link.url);
+              
+                              return (
+                                <li key={link.url}>
+                                  <Link
+                                    href={relativeHref}
+                                    className="flex items-center justify-between text-neutral-13 border-b border-b-neutral-5 pb-8"
+                                  >
+                                    <p className="text-[22px] font-medium">{link.name}</p>
+                                    <ArrowRight size={20} />
+                                  </Link>
+                                </li>
+                              );
+                            })}
             </ul>
           </nav>
         </div>

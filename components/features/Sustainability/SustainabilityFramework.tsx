@@ -51,6 +51,7 @@ export const SustainabilityFramework: React.FC<FrameworkProps> = ({
             {policyDescription}
         </p>
         <Link 
+        title={policyTitle}
           href={policyFileUrl} 
           className="px-6 py-2 rounded-full whitespace-nowrap bg-blue-base flex items-center gap-2 text-white mt-2 w-fit" 
           target="_blank"
@@ -59,6 +60,7 @@ export const SustainabilityFramework: React.FC<FrameworkProps> = ({
           <Image 
             src={DOWNLOAD_ICON_URL} 
             alt="Download Icon" 
+            title="Download Icon" 
             width={16} 
             height={16} 
           />
@@ -120,6 +122,7 @@ export const SustainabilityFramework: React.FC<FrameworkProps> = ({
                   {activeItem.points.map((point, index) => (
                     <div key={index} className="flex gap-2 items-center">
                       <Image 
+                      title="icon"
                         src={CHECK_ICON_URL} 
                         alt="Check icon" 
                         width={16} 

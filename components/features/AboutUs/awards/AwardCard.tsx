@@ -56,6 +56,7 @@ export const AwardCard: React.FC<AwardCardProps> = ({
             <Image
               src={award.imageUrl}
               alt={`Image for ${award.title}`}
+              title={`Image for ${award.title}`}
               width={400}
               height={444}
               className="aspect-[9/10] object-cover rounded-xl border-2 border-blue-dark outline-2 outline-[#f8f192c4] bg-white w-full hover:opacity-95 transition-opacity"

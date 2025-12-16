@@ -105,6 +105,7 @@ function TabPanelContent({ tab, isActive }: TabPanelProps) {
       <Image
         src={content.image}
         alt={`${content.title} background`}
+        title={`${content.title} background`}
         layout="fill"
         objectFit="cover"
         className="z-0"
