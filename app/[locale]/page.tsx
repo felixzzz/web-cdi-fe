@@ -19,9 +19,13 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(
+  {
+    params: { locale },
+  }: HomePageProps ): Promise<Metadata> {
   const t = await getTranslations('metadata')
   const title = "Chandra Daya Investasi";
+
   return {
     title: title,
     description: t('description'),
@@ -33,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "CDI Group",
     ],
 
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL_LP}/${locale}`),
 
     viewport: {
       width: "device-width",
@@ -45,6 +49,10 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       canonical: "/",
+      languages: {
+        "en-US": "/en",
+        "id-ID": "/id",
+      },
     },
     icons: {
       shortcut: "/assets/frontend/favicon.png",

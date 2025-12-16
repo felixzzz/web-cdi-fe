@@ -35,12 +35,20 @@ export async function generateMetadata({
   const imageUrl = article.image || "/assets/frontend/favicon.png";
 
   const pagePath = `/media/news/${params.slug}`;
-  const currentPath = params.locale === "en" ? pagePath : `/${params.locale}${pagePath}`;
+  
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  
+  const getCanonicalPath = (lang: string) => {
+    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
+    return `${baseUrl}/${lang}${pagePath}`;      
+  };
+
+  const currentUrl = getCanonicalPath(params.locale);
 
   return {
     title: title,
     description: description,
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL_LP}/${params.locale}`),
 
     keywords: [
       "Chandra Daya Investasi",
@@ -65,17 +73,17 @@ export async function generateMetadata({
     },
 
     alternates: {
-      canonical: currentPath,
+      canonical: currentUrl,
       languages: {
-        "en-US": `/en${pagePath}`,
-        "id-ID": `/id${pagePath}`,
+        "en-US": getCanonicalPath('en'), // Selalu return .../en/media/news
+        "id-ID": getCanonicalPath('id'), // Selalu return .../media/news
       },
     },
 
     openGraph: {
       title: title,
       description: description,
-      url: currentPath,
+      url: currentUrl,
       siteName: "Chandra Daya Investasi",
       locale: params.locale,
       type: "website",
