@@ -105,8 +105,6 @@ export default async function Page({ params: { locale } }: ContactPageProps) {
     companyAddressService.getOptionData(locale),
   ]);
 
-  console.log(getOptionData)
-
   return (
     <main>
       <NavbarThemeTrigger theme="light" />
