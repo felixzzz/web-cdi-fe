@@ -8,8 +8,8 @@ import { clsx } from "clsx";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useNavbarTheme } from "@/context/NavbarThemeContext";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 // import { usePathname, useRouter } from "@/i18n/routing";
-import { usePathname, useRouter, Link } from "@/i18n/routing";
 
 const languages = [
   {
