@@ -33,7 +33,7 @@ export async function generateMetadata({
       "CDI Group",
     ],
 
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
 
     viewport: {
       width: "device-width",

@@ -40,7 +40,7 @@ export async function generateMetadata({
   return {
     title: title,
     description: description,
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
 
     keywords: [
       "Chandra Daya Investasi",
