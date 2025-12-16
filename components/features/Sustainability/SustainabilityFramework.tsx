@@ -4,7 +4,7 @@
 
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { MaterialityItem, MaterialityResponse } from "@/types/Sustainabilitys/Sustainability";
 
 const ARROW_ICON_URL = `${process.env.NEXT_PUBLIC_URL}/assets/icons/ic_arrow_roulette.svg`;

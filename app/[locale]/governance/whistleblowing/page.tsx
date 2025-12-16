@@ -20,13 +20,20 @@ export async function generateMetadata({
 
   const pagePath = "/governance/whistleblowing";
 
-  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
+const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+
+  const getCanonicalPath = (lang: string) => {
+    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
+    return `${baseUrl}/${lang}${pagePath}`;      
+  };
+
+  const currentUrl = getCanonicalPath(locale);
 
   const title = "Chandra Daya Investasi";
   return {
     title: title,
     description: t('description'),
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
+    metadataBase: new URL(`${baseUrl}/${locale}`),
 
     keywords: [
       "Chandra Daya Investasi",
@@ -51,10 +58,10 @@ export async function generateMetadata({
     },
 
     alternates: {
-      canonical: currentPath,
+      canonical: currentUrl,
       languages: {
-        "en-US": "/en/governance/whistleblowing",
-        "id-ID": "/id/governance/whistleblowing",
+        "en-US": getCanonicalPath('en'), // Selalu return .../en/media/news
+        "id-ID": getCanonicalPath('id'), // Selalu return .../media/news
       },
     },
 

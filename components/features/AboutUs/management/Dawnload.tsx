@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { DownloadItem } from "@/types/AboutUs/Management";
 import { useTranslations } from "next-intl";
 

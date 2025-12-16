@@ -28,15 +28,22 @@ export async function generateMetadata({
 
   const pagePath = "/about-us/management";
 
-  const currentPath = locale === "en" ? pagePath : `/${locale}${pagePath}`;
-
   const title =
     "Management and Organization Structure | Chandra Daya Investasi";
+
+const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+
+  const getCanonicalPath = (lang: string) => {
+    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
+    return `${baseUrl}/${lang}${pagePath}`;      
+  };
+
+  const currentUrl = getCanonicalPath(locale);
 
   return {
     title: title,
     description: t("description"),
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
+    metadataBase: new URL(`${baseUrl}/${locale}`),
 
     keywords: [
       "Chandra Daya Investasi",
@@ -62,17 +69,17 @@ export async function generateMetadata({
     },
 
     alternates: {
-      canonical: currentPath,
+      canonical: currentUrl,
       languages: {
-        "en-US": "/en/about-us/management",
-        "id-ID": "/id/about-us/management",
+        "en-US": getCanonicalPath('en'), // Selalu return .../en/media/news
+        "id-ID": getCanonicalPath('id'), // Selalu return .../media/news
       },
     },
 
     openGraph: {
       title: title,
       description: t("description"),
-      url: currentPath,
+      url: currentUrl,
       siteName: "Chandra Daya Investasi",
       locale: locale,
       type: "website",
