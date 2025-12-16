@@ -54,7 +54,7 @@ export const RelatedPosts = ({
             <ArticleCard
               key={article.id}
               locale={locale}
-              href={`/${locale}/media/news/${article.slug}`}
+              href={`/media/news/${article.slug}`}
               imageUrl={article.image}
               category={
                 locale === "id"
