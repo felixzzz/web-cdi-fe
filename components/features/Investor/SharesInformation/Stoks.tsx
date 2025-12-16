@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { clsx } from "clsx";
 import { TableInvestorSection } from "@/types/Investor/Shares";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 interface ShareholdersContentProps {

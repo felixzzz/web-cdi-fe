@@ -15,7 +15,7 @@ export async function generateMetadata({
     const t = await getTranslations("metadata");
   const pagePath = "/terms-and-conditions";
 
-const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
     if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 

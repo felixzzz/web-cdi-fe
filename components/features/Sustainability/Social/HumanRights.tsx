@@ -1,5 +1,5 @@
 import React from "react";
-// import Link from "next/link";
+// import { Link } from "@/i18n/navigation";
 // import { Download } from "lucide-react";
 import { ApiDataItem } from "@/types/Sustainabilitys/Social";
 

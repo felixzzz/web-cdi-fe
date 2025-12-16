@@ -7,7 +7,7 @@ import { WaterPageProps } from "@/types/OurBusiness/Water";
 import { MoveRightIcon } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export async function generateMetadata({
   params: { locale },

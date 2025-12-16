@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-// import Link from "next/link";
+// import { Link } from "@/i18n/navigation";
 // import { Link } from "@/navigation";
 import Image from "next/image";
 import { clsx } from "clsx";

@@ -1,5 +1,5 @@
 import { formatExternalUrl } from "@/lib/localization";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export interface JourneyStat {
   value: string;

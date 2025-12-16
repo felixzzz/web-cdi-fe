@@ -31,7 +31,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { ContactInfoCard } from "./ContactInfoCard";
 import { GovernanceSection } from "@/types/Governances/Whistleblowing";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ChevronRight } from "lucide-react";
 
 interface HeroFormProps {
