@@ -17,12 +17,12 @@ export const Hero: React.FC<HeroProps> = ({
   iconSrc,
 }) => {
   useEffect(() => {
-        const timer = setTimeout(() => {
-          window.dispatchEvent(new Event("finishProgressBar"));
-        }, 100);
-    
-        return () => clearTimeout(timer);
-      }, []);
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div
@@ -48,22 +48,23 @@ export const Hero: React.FC<HeroProps> = ({
               {title}
             </h1>
             <div
-             className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base text-white leading-snug lg:leading-loose text-justify"
+              className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base text-white leading-snug lg:leading-loose text-justify"
               dangerouslySetInnerHTML={{ __html: subtitle || "" }}
             />
           </div>
 
           <div className="flex items-center gap-10">
             <div className="h-[2px] w-full bg-[#BFBFBF] hidden lg:block relative overflow-hidden">
-                                      <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
-                                    </div>
-                                    <Image
-                                                  width={46}
-                                                  height={46}
-                                                  alt="icon"
-                                                  className="bg-cover"
-                                                  src={iconSrc}
-                                                />
+              <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
+            </div>
+            <Image
+              title="icon"
+              width={46}
+              height={46}
+              alt="icon"
+              className="bg-cover"
+              src={iconSrc}
+            />
           </div>
         </div>
       </section>

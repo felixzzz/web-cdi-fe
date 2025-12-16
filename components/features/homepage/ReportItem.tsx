@@ -35,6 +35,7 @@ export const ReportItem: React.FC<ReportItemProps> = ({
             <span>.</span>
           </div>
           <Image
+            title="icon"
             src="/assets/icons/ic_filepdf.svg"
             width={28}
             height={20}
@@ -44,12 +45,14 @@ export const ReportItem: React.FC<ReportItemProps> = ({
         </div>
         <div className="flex flex-row gap-8">
           <Link
+            title={title}
             href={viewUrl}
             className="flex items-center gap-2 text-blue-base font-medium text-[#2474A5]"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Image
+              title="icon"
               src="/assets/icons/ic_eye.svg"
               width={24}
               height={24}
@@ -59,12 +62,14 @@ export const ReportItem: React.FC<ReportItemProps> = ({
             {tagView}
           </Link>
           <Link
+            title={title}
             href={downloadUrl}
             className="flex items-center gap-2 text-blue-base font-medium text-[#2474A5]"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Image
+              title="icon"
               src="/assets/icons/ic_download_file.svg"
               width={24}
               height={24}

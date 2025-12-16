@@ -68,6 +68,7 @@ export const Journey: React.FC<JourneySectionProps> = ({
           {links.map((link) =>
             link.external ? (
               <Link
+                title={link.text}
                 key={link.text}
                 href={formatExternalUrl(link.href)}
                 className="px-6 py-2 rounded-full whitespace-nowrap border border-white"
@@ -78,6 +79,7 @@ export const Journey: React.FC<JourneySectionProps> = ({
               </Link>
             ) : (
               <Link
+                title={link.text}
                 key={link.text}
                 href={link.href}
                 className="px-6 py-2 rounded-full whitespace-nowrap border border-white"

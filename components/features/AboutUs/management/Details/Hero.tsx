@@ -14,8 +14,7 @@ type BocDetailHeroProps = {
   backLinkLabel?: string;
 };
 
-const HERO_BACKGROUND_IMAGE =
-  `${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/about/team_background_hero.webp`;
+const HERO_BACKGROUND_IMAGE = `${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/about/team_background_hero.webp`;
 
 export const DetailHero = ({
   name,
@@ -40,6 +39,7 @@ export const DetailHero = ({
       <div className="flex items-center bg-cover flex-col relative z-[1] h-full w-full aspect-[4/3] md:aspect-[16/7] py-[5%] md:py-[8%]">
         <section className="container w-full mx-auto  ">
           <Link
+            title={title}
             href={backLinkHref}
             className="flex gap-2 items-center text-white"
           >
@@ -65,6 +65,7 @@ export const DetailHero = ({
               <Image
                 src={imageUrl}
                 alt={name}
+                title={name}
                 width={500}
                 height={800}
                 // className="absolute bottom-0 h-[80%] w-auto"

@@ -38,6 +38,7 @@ export function InternalAudit({ data, filesData, locale }: InternalAuditProps) {
             <Image
               src={data.file_url}
               alt={data.title || "Internal audit unit graph"}
+              title={data.title || "Internal audit unit graph"}
               width={800}
               height={450}
               className="w-full h-auto"

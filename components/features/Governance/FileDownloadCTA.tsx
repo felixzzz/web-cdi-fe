@@ -16,7 +16,7 @@ export function FileDownloadCTA({
   viewUrl,
   downloadUrl,
 }: FileDownloadCTAProps) {
-  const t = useTranslations('Investor.Governance')
+  const t = useTranslations("Investor.Governance");
   return (
     <div
       className="p-6 flex flex-col lg:flex-row lg:items-center lg:justify-between w-full
@@ -33,6 +33,7 @@ export function FileDownloadCTA({
           <span className="text-sm">{fileSize}</span>
           <span className="text-sm">.</span>
           <Image
+            title="icon"
             src="/assets/icons/ic_filepdf_white.svg"
             width={16}
             height={16}
@@ -51,12 +52,13 @@ export function FileDownloadCTA({
           rel="noopener noreferrer"
         >
           <Image
+            title="icon"
             src="/assets/icons/ic_eye_white.svg"
             width={20}
             height={20}
             alt="View icon"
           />{" "}
-          {t('download_view')}
+          {t("download_view")}
         </a>
         <a
           href={downloadUrl}
@@ -65,12 +67,13 @@ export function FileDownloadCTA({
           rel="noopener noreferrer"
         >
           <Image
+            title="icon"
             src="/assets/icons/ic_download_file_white.svg"
             width={20}
             height={20}
             alt="Download icon"
-            />{" "}
-            {t('download_download')}
+          />{" "}
+          {t("download_download")}
         </a>
       </div>
     </div>

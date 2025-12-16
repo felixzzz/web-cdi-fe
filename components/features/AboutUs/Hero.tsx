@@ -17,12 +17,12 @@ export const Hero: React.FC<HeroProps> = ({
   iconSrc,
 }) => {
   useEffect(() => {
-      const timer = setTimeout(() => {
-        window.dispatchEvent(new Event("finishProgressBar"));
-      }, 100);
-  
-      return () => clearTimeout(timer);
-    }, []);
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div
       className="relative overflow-hidden aspect-[4/3] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end bg-cover"
@@ -59,6 +59,7 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
             {/* <img src={iconSrc} alt="" /> */}
             <Image
+              title={title}
               width={46}
               height={46}
               alt="icon"

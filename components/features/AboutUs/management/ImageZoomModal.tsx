@@ -96,6 +96,7 @@ export const ImageZoomModal: React.FC<ImageZoomModalProps> = ({
         <Image
           src={imageUrl}
           alt={imageAlt}
+          title={imageAlt}
           width={1000}
           height={1000}
           className="select-none max-w-full max-h-full object-contain pointer-events-none"

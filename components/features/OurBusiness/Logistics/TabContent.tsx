@@ -30,6 +30,7 @@ function ContentBlock({
       <Image
         src={imageUrl}
         alt={alt}
+        title={alt}
         layout="fill"
         objectFit="cover"
         className="z-0"

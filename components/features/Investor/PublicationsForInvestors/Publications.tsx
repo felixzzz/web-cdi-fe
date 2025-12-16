@@ -399,6 +399,7 @@ export function Publications({
                           <span>.</span>
                         </p>
                         <Image
+                          title="icon"
                           src="/assets/icons/ic_filepdf.svg"
                           width={30}
                           height={24}
@@ -408,12 +409,14 @@ export function Publications({
                       </div>
                       <div className="flex items-center justify-start lg:justify-end gap-8 w-full">
                         <Link
+                          title={item.title}
                           href={`${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/report/${item.id}/${item.title}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
+                            title="icon"
                             src="/assets/icons/ic_eye.svg"
                             width={20}
                             height={20}
@@ -423,12 +426,14 @@ export function Publications({
                           {t("download_view")}
                         </Link>
                         <Link
+                          title={item.title}
                           href={`${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/report/${item.id}/${item.title}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-blue-base font-medium"
                         >
                           <Image
+                            title="icon"
                             src="/assets/icons/ic_download_file.svg"
                             width={20}
                             height={20}

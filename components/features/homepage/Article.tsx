@@ -41,6 +41,7 @@ export const Article: React.FC<ArticleProps> = ({ articles }) => {
           </div>
           <div className="flex items-center gap-4 justify-start lg:justify-center mt-4 lg:mt-0">
             <Link
+            title="news"
               href="/media/news"
               className="py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] font-medium"
             >

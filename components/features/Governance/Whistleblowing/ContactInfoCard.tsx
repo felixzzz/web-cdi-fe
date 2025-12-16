@@ -28,6 +28,7 @@ export function ContactInfoCard({
       <Image
         src={imageSrc}
         alt={imageAlt}
+        title={imageAlt}
         layout="fill"
         objectFit="cover"
         className="z-0"
@@ -57,6 +58,7 @@ export function ContactInfoCard({
               <Image
                 src="/assets/icons/ic_phone.svg"
                 alt="Phone"
+                title="Phone"
                 width={14}
                 height={14}
               />
@@ -66,6 +68,7 @@ export function ContactInfoCard({
               <Image
                 src="/assets/icons/ic_printer.svg"
                 alt="Fax"
+                title="Fax"
                 width={14}
                 height={14}
               />

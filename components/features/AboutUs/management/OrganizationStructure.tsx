@@ -67,6 +67,7 @@ export const OrganizationStructure: React.FC<OrganizationStructureProps> = ({
               <Image
                 src={chartImageUrl} 
                 alt={chartImageAlt} 
+                title={chartImageAlt} 
                 width={1200}
                 height={800}
                 className="w-full h-auto"

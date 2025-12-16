@@ -61,6 +61,7 @@ export const Hero: React.FC<HeroProps> = ({
                           width={46}
                           height={46}
                           alt="icon"
+                          title="icon"
                           className="bg-cover"
                           src={iconSrc}
                         />

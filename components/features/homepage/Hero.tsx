@@ -85,6 +85,7 @@ export const Hero = ({
               </div>
 
               <Link
+                title={title}
                 href={linkHref}
                 className="bg-white text-[#151718] px-3 py-[5px] lg:px-5 lg:py-[6px] border border-neutral-950 rounded-full whitespace-nowrap gap-4 flex items-center w-fit text-xs lg:text-base"
               >

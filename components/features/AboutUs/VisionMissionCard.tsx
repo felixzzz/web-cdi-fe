@@ -22,6 +22,7 @@ export const VisionMissionCard: React.FC<VisionMissionCardProps> = ({
       <div>
         <Image
           src={imageUrl}
+          title={label}
           alt={`${label} visual representation`}
           width={imageWidth}
           height={imageHeight}

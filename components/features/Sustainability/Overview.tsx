@@ -20,6 +20,7 @@ export function Overview({ data }: OverviewProps) {
       <Image
         src={imageUrl}
         alt="Abstract blue texture for overview background"
+        title="Abstract blue texture for overview background"
         layout="fill"
         objectFit="cover"
         className="z-0"
