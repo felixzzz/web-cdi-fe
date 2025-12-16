@@ -24,7 +24,7 @@ export async function generateMetadata({
   return {
     title: title,
     description: t("description"),
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
 
     keywords: [
       "Chandra Daya Investasi",
@@ -104,6 +104,8 @@ export default async function Page({ params: { locale } }: ContactPageProps) {
     companyAddressService.getCountriesData(locale),
     companyAddressService.getOptionData(locale),
   ]);
+
+  console.log(getOptionData)
 
   return (
     <main>
