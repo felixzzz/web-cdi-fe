@@ -75,6 +75,7 @@ export const SubNavbar: React.FC<SubNavProps> = ({ links }) => {
             return (
               <li key={link.text}>
                 <Link
+                  title={link.text}
                   href={`#${link.targetId}`}
                   onClick={(e) => handleScrollTo(e, link.targetId)}
                   className={`

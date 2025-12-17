@@ -88,6 +88,7 @@ export const CorporateStructure: React.FC<CorporateStructureProps> = ({
               <Image
                 src={chartImageUrl}
                 alt={chartImageAlt}
+                title={chartImageAlt}
                 width={1200}
                 height={800}
                 className="w-full h-auto"

@@ -61,6 +61,7 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
             <Image
               src={IMAGE_URL}
               alt={IMAGE_ALT}
+              title={IMAGE_ALT}
               width={600}
               height={400}
               className="w-full md:w-[90%] h-auto rounded-lg"

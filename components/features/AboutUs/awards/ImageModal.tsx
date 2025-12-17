@@ -45,6 +45,7 @@ export const ImageModal: React.FC<ImageModalProps> = ({
                 <Image
                   src={imageUrl}
                   alt="Full view"
+                  title="Full view"
                   width={800}
                   height={1000}
                   className="max-h-[60vh] w-auto object-contain"
@@ -82,6 +83,7 @@ export const ImageModal: React.FC<ImageModalProps> = ({
                   <Image
                     src={imageUrl}
                     alt="Zoomed view"
+                    title="Zoomed view"
                     width={1200}
                     height={1200}
                     className="object-contain max-h-[80vh] w-auto"

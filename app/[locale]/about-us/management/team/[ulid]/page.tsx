@@ -145,7 +145,7 @@ export default async function page({ params }: PageProps) {
         name={member.name}
         title={member.position}
         imageUrl={`${process.env.NEXT_PUBLIC_URL}/file-storage/${member.image_hero}`}
-        backLinkHref={`/${params.locale}/about-us/management`}
+        backLinkHref={`/about-us/management`}
       />
       <BocBiography biographyHtml={description} />
       <div className="border border-neutral-200 w-full"></div>

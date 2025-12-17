@@ -41,6 +41,7 @@ export const RelatedPosts = ({
           </div>
           <div className="flex items-center gap-4 justify-start lg:justify-center max-lg:mt-4 text-[#2474A5]">
             <Link
+            title="news"
               className="py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-blue-base"
               href={`/${locale}/media/news`}
             >
@@ -53,7 +54,7 @@ export const RelatedPosts = ({
             <ArticleCard
               key={article.id}
               locale={locale}
-              href={`/${locale}/media/news/${article.slug}`}
+              href={`/media/news/${article.slug}`}
               imageUrl={article.image}
               category={
                 locale === "id"

@@ -22,7 +22,7 @@ export const Report: React.FC<ReportSectionProps> = ({
   reports,
   locale,
 }) => {
-  const t = useTranslations("Report")
+  const t = useTranslations("Report");
   return (
     <section
       id="home_report"
@@ -43,13 +43,15 @@ export const Report: React.FC<ReportSectionProps> = ({
 
           <div className="flex items-center gap-4 justify-start lg:justify-center mt-4 lg:mt-0">
             <Link
+              title={title}
               href={downloadAllUrl}
               className="px-6 py-2 rounded-full whitespace-nowrap border border-[#2474A5] flex items-center gap-2 text-[#2474A5]"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {t('dawnload_title')}
+              {t("dawnload_title")}
               <Image
+                title="icon"
                 src="/assets/icons/ic_download.svg"
                 width={16}
                 height={16}
@@ -58,10 +60,11 @@ export const Report: React.FC<ReportSectionProps> = ({
               />
             </Link>
             <Link
+              title={title}
               href={seeAllUrl}
               className="px-6 py-2 rounded-full whitespace-nowrap border border-[#2474A5] flex items-center gap-2 text-[#2474A5]"
-              >
-              {t('see_title')}
+            >
+              {t("see_title")}
               <MoveRight className="font-light" size={16} />
             </Link>
           </div>
@@ -69,9 +72,7 @@ export const Report: React.FC<ReportSectionProps> = ({
 
         <div className="flex items-center gap-2 rounded-sm bg-[#ECF8FF] border border-light-blue-2 text-[#2474A5] text-xs w-fit p-[6px]">
           <Languages size={16} />
-          <span>
-              {t('description')}
-          </span>
+          <span>{t("description")}</span>
         </div>
 
         <ul className="mt-4">
@@ -80,8 +81,8 @@ export const Report: React.FC<ReportSectionProps> = ({
               title: report.name,
               date: report.date,
               size: report.file.size,
-              tagView: t('download_view'),
-              tagDawnload: t('download_download'),
+              tagView: t("download_view"),
+              tagDawnload: t("download_download"),
               viewUrl: `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/report/${report.ulid}/${report.name_slug}`,
               downloadUrl: `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/report/${report.ulid}/`,
             };

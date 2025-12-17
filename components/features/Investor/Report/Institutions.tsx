@@ -52,11 +52,11 @@ export const SupportingInstitutions = ({
 
                   <div className="flex items-center gap-4 text-neutral-600">
                     <div className="flex items-center text-sm gap-2">
-                      <Image src={phoneIconUrl} alt="" width={20} height={20} />
+                      <Image title="icon" src={phoneIconUrl} alt="icon" width={20} height={20} />
                       {item.localized_main.phone}
                     </div>
                     <div className="flex items-center text-sm gap-2">
-                      <Image src={faxIconUrl} alt="" width={20} height={20} />
+                      <Image title="icon" src={faxIconUrl} alt="icon" width={20} height={20} />
                       {item.localized_main.fax}
                     </div>
                   </div>

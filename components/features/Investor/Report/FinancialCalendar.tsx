@@ -40,10 +40,13 @@ const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
 
 interface FinancialCalendarProps {
   initialData: CalendarApiResponse;
-  locale: string
+  locale: string;
 }
 
-export function FinancialCalendar({ initialData, locale }: FinancialCalendarProps) {
+export function FinancialCalendar({
+  initialData,
+  locale,
+}: FinancialCalendarProps) {
   const t = useTranslations("Investor.Report");
   const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
     flattenData(initialData)
@@ -237,6 +240,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
                     <span>.</span>
                   </p>
                   <Image
+                    title="icon"
                     src="/assets/icons/ic_filepdf.svg"
                     width={28}
                     height={20}
@@ -253,6 +257,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
                   className="flex items-center gap-2 text-[#2474A5] font-medium"
                 >
                   <Image
+                    title="icon"
                     src="/assets/icons/ic_eye.svg"
                     width={20}
                     height={20}
@@ -268,6 +273,7 @@ export function FinancialCalendar({ initialData, locale }: FinancialCalendarProp
                   className="flex items-center gap-2 text-[#2474A5] font-medium"
                 >
                   <Image
+                    title="icon"
                     src="/assets/icons/ic_download_file.svg"
                     width={20}
                     height={20}

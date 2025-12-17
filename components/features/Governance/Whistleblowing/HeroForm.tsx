@@ -117,7 +117,7 @@ export function HeroForm({
     <div data-navbar-theme="dark" className="bg-neutral-2 py-20 lg:py-12">
       <section className="container mx-auto   pt-[5%]">
         <div className="flex gap-1 text-neutral-10 items-center text-sm lg:text-base">
-          <Link className="text-[#2474A5] hover:underline" href="/governance">
+          <Link title="governance" className="text-[#2474A5] hover:underline" href="/governance">
             {t("Governance")}
           </Link>
           <ChevronRight className="text-lg w-4 h-4" />

@@ -52,6 +52,7 @@ export const Hero: React.FC<HeroProps> = ({
                           <div className="absolute h-full w-full bg-[#47C1EA] animate-run" />
                         </div>
                         <Image
+                        title="icon"
                                       width={46}
                                       height={46}
                                       alt="icon"

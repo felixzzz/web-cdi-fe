@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { CompanyProfileResponse } from "@/types/AboutUs/About";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 interface CompanyProfileProps {
   id?: string;
@@ -18,7 +19,6 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
   data,
   locale,
 }) => {
-
   const t = useTranslations("AboutUs");
 
   return (
@@ -35,7 +35,9 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
           {title}
         </h2>
         <div className="content primary !text-neutral-500 text-center mb-16">
-          <p className="ql-align-center text-[14px] lg:text-[16px]">{subtitle}</p>
+          <p className="ql-align-center text-[14px] lg:text-[16px]">
+            {subtitle}
+          </p>
         </div>
 
         {data &&
@@ -60,6 +62,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                     </div>
                     {item.file.format === "pdf" && (
                       <Image
+                        title="icon"
                         src="/assets/icons/ic_filepdf.svg"
                         width={28}
                         height={20}
@@ -71,13 +74,15 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                 </div>
 
                 <div className="flex lg:items-center gap-8 w-full md:w-fit">
-                  <a
+                  <Link
+                    title={title}
                     href={itemViewUrl}
                     className="flex items-center gap-2 text-[#2474A5] font-medium"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Image
+                      title="icon"
                       src="/assets/icons/ic_eye.svg"
                       width={20}
                       height={20}
@@ -85,14 +90,16 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                       className="inline-block"
                     />
                     {t("company_profile_view")}
-                  </a>
-                  <a
+                  </Link>
+                  <Link
+                    title={title}
                     href={itemDownloadUrl}
                     className="flex items-center gap-2 text-[#2474A5] font-medium"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Image
+                      title="icon"
                       src="/assets/icons/ic_download_file.svg"
                       width={20}
                       height={20}
@@ -100,7 +107,7 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({
                       className="inline-block"
                     />
                     {t("company_profile_download")}
-                  </a>
+                  </Link>
                 </div>
               </article>
             );

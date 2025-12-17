@@ -8,7 +8,7 @@ import { Navigation, Pagination } from "swiper/modules";
 
 import { ChevronRight } from "lucide-react";
 import { ApiLatestNewsResponse, HeroNewsSection } from "@/types/Media/Media";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface HeroNewsProps {
   media: HeroNewsSection;
@@ -17,6 +17,7 @@ interface HeroNewsProps {
 
 export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
   const t = useTranslations("Media");
+  const locale = useLocale()
   const sliderData = latestNewsData.map((item) => ({
     id: item.data.id,
     title: item.data.title,
@@ -24,7 +25,7 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
     category: item.data.category_name,
     date: item.data.date,
     description: item.data.short_content,
-    linkUrl: `${process.env.NEXT_PUBLIC_URL_LP}/media/news/${item.data.slug}`,
+    linkUrl: `${process.env.NEXT_PUBLIC_URL_LP}/${locale}/media/news/${item.data.slug}`,
   }));
 
   const heroTitle =

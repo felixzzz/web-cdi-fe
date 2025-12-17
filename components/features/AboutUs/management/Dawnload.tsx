@@ -17,7 +17,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
   subtitle,
   items,
 }) => {
-  const t = useTranslations("Management")
+  const t = useTranslations("Management");
   return (
     <section
       id={id}
@@ -31,9 +31,9 @@ export const Downloads: React.FC<DownloadsProps> = ({
         >
           {title}
         </h2>
-        <div 
-        // className="content primary !text-neutral-8  mb-16"
-        className="prose prose-invert prose-base text-neutral-500 mb-16" 
+        <div
+          // className="content primary !text-neutral-8  mb-16"
+          className="prose prose-invert prose-base text-neutral-500 mb-16"
         >
           <div
             className="ql-align-center"
@@ -56,6 +56,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
                   <span>.</span>
                 </div>
                 <Image
+                  title="icon"
                   src="/assets/icons/ic_filepdf.svg"
                   width={28}
                   height={20}
@@ -67,6 +68,7 @@ export const Downloads: React.FC<DownloadsProps> = ({
 
             <div className="flex items-end gap-8 w-fit">
               <Link
+                title="icon"
                 href={item.viewUrl}
                 className="flex items-center gap-2 text-[#2474A5] font-medium"
                 target="_blank"
@@ -77,11 +79,13 @@ export const Downloads: React.FC<DownloadsProps> = ({
                   width={20}
                   height={20}
                   alt="View icon"
+                  title="icon"
                   className="inline-block"
                 />
-                {t('download_view')}
+                {t("download_view")}
               </Link>
               <Link
+                title="icon"
                 href={item.downloadUrl}
                 className="flex items-center gap-2 text-[#2474A5] font-medium"
                 target="_blank"
@@ -92,9 +96,10 @@ export const Downloads: React.FC<DownloadsProps> = ({
                   width={20}
                   height={20}
                   alt="Download icon"
+                  title="icon"
                   className="inline-block"
                 />
-                {t('download_download')}
+                {t("download_download")}
               </Link>
             </div>
           </article>

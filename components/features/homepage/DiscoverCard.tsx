@@ -19,6 +19,7 @@ export const DiscoverCard: React.FC<DiscoverCardProps> = ({
 }) => {
   return (
     <Link
+      title={title}
       target={target}
       href={linkHref}
       className="relative block aspect-[9/16] bg-cover bg-no-repeat text-white group"

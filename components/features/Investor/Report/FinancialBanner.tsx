@@ -19,6 +19,7 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
         <Image
           src={backgroundImageUrl}
           alt={title || "Financial Banner"} 
+          title={title || "Financial Banner"} 
           layout="fill"
           objectFit="cover"
           className="z-0"

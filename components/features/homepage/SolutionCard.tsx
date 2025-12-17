@@ -42,6 +42,7 @@ export const SolutionCard: React.FC<SolutionCardProps> = ({
                    transition-opacity duration-300 ease-out"
       >
         <Link
+        title={linkText}
           href={linkHref}
           className="bg-white/20 text-white px-6 py-2 border border-white rounded-full whitespace-nowrap gap-3 flex items-center w-fit mt-10"
         >

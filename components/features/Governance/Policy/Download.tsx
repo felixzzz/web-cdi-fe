@@ -40,7 +40,7 @@ function Pagination({
   to,
   onPageChange,
 }: PaginationProps) {
-  const t = useTranslations('pagination')
+  const t = useTranslations("pagination");
   const [jumpPage, setJumpPage] = useState<string>("");
 
   useEffect(() => {
@@ -67,7 +67,7 @@ function Pagination({
   return (
     <section className="mt-5 py-10 flex w-full justify-center lg:justify-between items-center gap-4 flex-col lg:flex-row">
       <p className="text-neutral-10 text-sm max-md:hidden">
-        {from}-{to} {t('of')} {totalItems} {t('items')}
+        {from}-{to} {t("of")} {totalItems} {t("items")}
       </p>
 
       <ul className="flex items-center justify-center gap-2">
@@ -164,11 +164,13 @@ function Pagination({
 
       <div className="flex items-center gap-4 justify-center lg:justify-between w-full lg:w-auto">
         <p className="text-neutral-10 text-sm lg:hidden">
-          {from}-{to} {t('of')} {totalItems} {t('items')}
+          {from}-{to} {t("of")} {totalItems} {t("items")}
         </p>
 
         <div className="flex items-center gap-4">
-          <p className="text-neutral-10 text-sm whitespace-nowrap">{t('jumpToPage')}</p>
+          <p className="text-neutral-10 text-sm whitespace-nowrap">
+            {t("jumpToPage")}
+          </p>
           <input
             type="number"
             min="1"
@@ -181,7 +183,7 @@ function Pagination({
             onClick={handleJumpPage}
             className="text-[#2474A5] text-xs font-bold cursor-pointer hover:underline"
           >
-            {t('go')}
+            {t("go")}
           </button>
         </div>
       </div>
@@ -217,28 +219,30 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
   };
 
   useEffect(() => {
-      const timer = setTimeout(() => {
-        window.dispatchEvent(new Event("finishProgressBar"));
-      }, 100);
-  
-      return () => clearTimeout(timer);
-    }, []);
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("finishProgressBar"));
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className="container mx-auto py-36">
       <div className="flex gap-1 text-neutral-10 items-center text-sm lg:text-base">
-        <Link className="text-[#2474A5] hover:underline" href="/governance">
-          {t('Governance')}
+        <Link
+          className="text-[#2474A5] hover:underline"
+          href="/governance"
+          title="governance"
+        >
+          {t("Governance")}
         </Link>
         <ChevronRight className="text-lg w-4 h-4" />
-        <span className="font-medium">{t('Policy')}</span>
+        <span className="font-medium">{t("Policy")}</span>
       </div>
 
       <div className="mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          <nav
-            className="flex lg:flex-col lg:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap"
-          >
+          <nav className="flex lg:flex-col lg:items-start w-full max-md:overflow-x-auto max-md:whitespace-nowrap">
             {navLinks.map((link) => (
               <button
                 key={link.id}
@@ -258,7 +262,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
             <div className="grid lg:grid-cols-2 gap-2 pb-10 border-b border-b-neutral-5">
               <div>
                 <p className="text-2xl lg:text-[28px] font-medium text-neutral-13">
-                  {t('Policy')}
+                  {t("Policy")}
                 </p>
               </div>
               <div>
@@ -269,7 +273,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full placeholder:text-neutral-7 text-sm outline-none text-neutral-13 bg-transparent"
-                    placeholder={t('search')}
+                    placeholder={t("search")}
                   />
                 </div>
               </div>
@@ -293,12 +297,9 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                   const downloadEnLink = `${process.env.NEXT_PUBLIC_URL}/file/download/en/${item.type}/${item.unique_key}/`;
                   const downloadIdLink = `${process.env.NEXT_PUBLIC_URL}/file/download/id/${item.type}/${item.unique_key}/`;
 
-                  const pdfIcon =
-                    "/assets/icons/ic_filepdf.svg";
-                  const viewIcon =
-                    "/assets/icons/ic_eye.svg";
-                  const downloadIcon =
-                    "/assets/icons/ic_download_file.svg";
+                  const pdfIcon = "/assets/icons/ic_filepdf.svg";
+                  const viewIcon = "/assets/icons/ic_eye.svg";
+                  const downloadIcon = "/assets/icons/ic_download_file.svg";
 
                   return (
                     <div
@@ -318,6 +319,7 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                               <span>.</span>
                             </div>
                             <Image
+                              title="icon"
                               src={pdfIcon}
                               width={28}
                               height={20}
@@ -330,12 +332,14 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
 
                       <div className="flex flex-row items-center gap-4 sm:gap-8 w-full lg:w-fit mt-4 lg:mt-0">
                         <Link
+                        title="icon"
                           href={viewLink}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-blue-base font-medium hover:underline"
                         >
                           <Image
+                            title="icon"
                             src={viewIcon}
                             width={24}
                             height={24}
@@ -345,12 +349,14 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                           {t("download_view")}
                         </Link>
                         <Link
+                        title="icon"
                           href={downloadEnLink}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-blue-base font-medium hover:underline"
                         >
                           <Image
+                            title="icon"
                             src={downloadIcon}
                             width={24}
                             height={24}
@@ -360,12 +366,14 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
                           {t("download_en")}
                         </Link>
                         <Link
+                        title="icon"
                           href={downloadIdLink}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-blue-base font-medium hover:underline"
                         >
                           <Image
+                            title="icon"
                             src={downloadIcon}
                             width={24}
                             height={24}
@@ -398,4 +406,4 @@ export const DownloadsPolicy = ({ locale, data }: DownloadsProps) => {
       </div>
     </section>
   );
-}
+};

@@ -35,6 +35,7 @@ export const AboutUs: React.FC<AboutUsSectionProps> = ({
           </h2>
 
           <Link
+          title={linkText}
             href={linkHref}
             className="bg-white text-[#2474A5] px-4 py-[6px] lg:px-5 lg:py-[6px] border border-neutral-13 rounded-full whitespace-nowrap gap-3 flex items-center w-fit mt-10 text-xs lg:text-base"
           >

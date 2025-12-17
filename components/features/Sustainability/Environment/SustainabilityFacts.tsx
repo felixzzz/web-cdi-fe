@@ -19,6 +19,7 @@ export function SustainabilityFacts({ data }: SustainabilityFactsProps) {
                 <Image
                   src={item.icon}
                   alt={item.title || "Fact icon"}
+                  title={item.title || "Fact icon"}
                   width={48}
                   height={48}
                   className="w-full"

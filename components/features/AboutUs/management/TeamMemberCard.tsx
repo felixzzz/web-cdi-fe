@@ -13,12 +13,14 @@ export const TeamMemberCard: React.FC<TeamMember> = ({ name, role, imageUrl, hre
   return (
     <li className="w-fit max-w-md lg:max-w-sm">
       <Link
+      title={name}
         href={href}
         className="flex flex-col items-center text-center group transition-all duration-300"
       >
         <Image
           src={imageUrl}
           alt={name}
+          title={name}
           width={200}
           height={200}
           className="aspect-square w-[300px] h-[300px] overflow-hidden rounded-full object-cover shadow-article mb-5 border-2 border-transparent outline-2 outline-offset-4 outline-transparent group-hover:outline-[#47C1EA] hover:border-[#47C1EA] transition-all"

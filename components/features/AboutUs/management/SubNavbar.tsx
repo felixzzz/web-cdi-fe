@@ -75,6 +75,7 @@ export const SubNavbar: React.FC<SubNavProps> = ({ links }) => {
             return (
               <li key={link.text}>
                 <Link
+                  title={link.text}
                   href={`#${link.targetId}`}
                   onClick={(e) => handleScrollTo(e, link.targetId)}
                   className={`
@@ -100,13 +101,7 @@ export const SubNavbar: React.FC<SubNavProps> = ({ links }) => {
   );
 };
 
-
-
-
-
-
-
-// "use client"; 
+// "use client";
 
 // import React from 'react';
 // import { Link } from "@/i18n/navigation";
@@ -125,9 +120,9 @@ export const SubNavbar: React.FC<SubNavProps> = ({ links }) => {
 //   const pathname = usePathname();
 
 //   return (
-//     <nav 
-//       className="bg-[#091A24] sticky top-0 z-10 py-4" 
-//       aria-label="Secondary" 
+//     <nav
+//       className="bg-[#091A24] sticky top-0 z-10 py-4"
+//       aria-label="Secondary"
 //     >
 //       <section className="container mx-auto  ">
 //         <ul className="gap-10 flex items-center overflow-x-auto overflow-y-hidden">

@@ -21,6 +21,7 @@ export function Overview({
       <Image
         src={imageUrl}
         alt={title || "Overview"}
+        title={title || "Overview"}
         layout="fill"
         objectFit="cover"
         className="z-0"
