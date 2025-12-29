@@ -7,6 +7,8 @@ const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/other-offices`;
 const API_CONTACT_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-page/contact_us_main`;
 const API_COUNTRIES = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/countries`;
 const API_OPTION = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/contact-us-topics`;
+
+// method untuk fetch data alamat atau biodata setiap list perusahaan
 export async function getCompanyAddressPageData(locale: string): Promise<OtherCompanyAddressesApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -32,6 +34,7 @@ export async function getCompanyAddressPageData(locale: string): Promise<OtherCo
   }
 }
 
+// method untuk fetch data contact page
 export async function getContactPageData(locale: string): Promise<ContactSectionData> {
   try {
     const res = await fetch(API_CONTACT_URL, {
@@ -57,6 +60,7 @@ export async function getContactPageData(locale: string): Promise<ContactSection
   }
 }
 
+// method untuk fetch data contact data 
 export async function getContactData(locale: string): Promise<CompanyLocationResponse> {
   try {
     const res = await fetch(API_URL_FOOTER, {
@@ -82,6 +86,7 @@ export async function getContactData(locale: string): Promise<CompanyLocationRes
   }
 }
 
+// method untuk fetch data list negara untuk form
 export async function getCountriesData(locale: string): Promise<CountryList> {
   try {
     const res = await fetch(API_COUNTRIES, {
@@ -107,6 +112,7 @@ export async function getCountriesData(locale: string): Promise<CountryList> {
   }
 }
 
+// method untuk fetch data list topics untuk form
 export async function getOptionData(locale: string): Promise<OptionList> {
   try {
     const res = await fetch(API_OPTION, {

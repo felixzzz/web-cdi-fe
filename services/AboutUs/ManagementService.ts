@@ -10,6 +10,7 @@ const API_URL_BOD = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/teams/bod`;
 const API_URL_BOC = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/teams/boc`;
 const API_URL_GUIDE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/guideline`;
 
+// method untuk fetch data page management about us
 export async function getManagementPageData(
   locale: string
 ): Promise<AboutUsManagementApiResponse> {
@@ -37,6 +38,7 @@ export async function getManagementPageData(
   }
 }
 
+// method untuk fetch component data bod membership page management
 export async function getManagementBodData(
   locale: string
 ): Promise<ManagementApiResponse> {
@@ -64,6 +66,7 @@ export async function getManagementBodData(
   }
 }
 
+// method untuk fetch component data boc membership page management
 export async function getManagementBocData(
   locale: string
 ): Promise<ManagementApiResponse> {
@@ -91,6 +94,7 @@ export async function getManagementBocData(
   }
 }
 
+// method untuk fetch component guide bod membership page management
 export async function getManagementGuideData(
   locale: string
 ): Promise<GuidelineApiResponse> {
@@ -124,18 +128,3 @@ export const managementService = {
   getManagementBocData,
   getManagementGuideData,
 };
-
-// export const extractYouTubeId = (url: string | null): string => {
-//   if (!url) return "GMJycZe_zpE";
-//   try {
-//     const urlObj = new URL(url);
-//     if (urlObj.pathname.startsWith("/embed/")) {
-//       return urlObj.pathname.split("/")[2].split("?")[0];
-//     }
-//   } catch (e) {
-//     if (url.includes("embed/")) {
-//       return url.split("embed/")[1].split("?")[0];
-//     }
-//   }
-//   return "GMJycZe_zpE";
-// };

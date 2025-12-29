@@ -4,6 +4,7 @@ import { InvestorGovernanceApiResponse } from "@/types/Governances/Governance";
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/governance`;
 const API_OPTION = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/whistleblowing-topics`;
 
+// method untuk fetch data page governance form
 export async function getGovernancePageData(locale: string,): Promise<InvestorGovernanceApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -29,7 +30,7 @@ export async function getGovernancePageData(locale: string,): Promise<InvestorGo
   }
 }
 
-
+// method untuk fetch data list option pada form governance
 export async function getOptionData(locale: string): Promise<OptionList> {
   try {
     const res = await fetch(API_OPTION, {

@@ -3,6 +3,7 @@ import { ApiContentResponse, SustainabilityEnvironmentApiResponse } from "@/type
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/sustainability/environment`;
 const API_URL_CONTENT = `${process.env.NEXT_PUBLIC_BASE_URL}/sustainability/contents/environment`;
 
+// method untuk fetch data page environment sustainability
 export async function getEnviromentPageData(locale: string): Promise<SustainabilityEnvironmentApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -28,6 +29,7 @@ export async function getEnviromentPageData(locale: string): Promise<Sustainabil
   }
 }
 
+// method untuk fetch data content page environment sustainability
 export async function getEnviromentContentData(locale: string): Promise<ApiContentResponse> {
   try {
     const res = await fetch(API_URL_CONTENT, {

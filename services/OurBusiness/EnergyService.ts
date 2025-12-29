@@ -2,6 +2,7 @@ import { EnergyApiResponse } from "@/types/OurBusiness/Energy";
 
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/business/detail/energy`;
 
+// method untuk fetch data page energy business
 export async function getEnergyPageData(locale: string): Promise<EnergyApiResponse> {
   try {
     const res = await fetch(API_URL, {

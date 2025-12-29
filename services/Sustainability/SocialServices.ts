@@ -4,6 +4,7 @@ const API_URL_MAIN = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/sustainability
 const API_URL_TAB = `${process.env.NEXT_PUBLIC_BASE_URL}/sustainability/tab-contents/social`;
 const API_URL_CONTENT = `${process.env.NEXT_PUBLIC_BASE_URL}/sustainability/contents/social`;
 
+// method untuk fetch data page social sustainability
 export async function getSocialPageData(locale: string): Promise<SustainabilitySocialApiResponse> {
   try {
     const res = await fetch(API_URL_MAIN, {
@@ -29,6 +30,7 @@ export async function getSocialPageData(locale: string): Promise<SustainabilityS
   }
 }
 
+// method untuk fetch data tab page social sustainability
 export async function getSocialTabData(locale: string): Promise<SustainabilitySocialTab[]> {
   try {
     const res = await fetch(API_URL_TAB, {
@@ -54,6 +56,8 @@ export async function getSocialTabData(locale: string): Promise<SustainabilitySo
   }
 }
 
+
+// method untuk fetch data content page social sustainability
 export async function getSocialContentData(locale: string): Promise<ApiContentResponse> {
   try {
     const res = await fetch(API_URL_CONTENT, {

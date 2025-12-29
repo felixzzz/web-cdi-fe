@@ -3,6 +3,7 @@ import { InvestorPublicationApiResponse, PublicationApiResponse, PublicationTab 
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
 const API_BASE_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/investor`;
 
+// method untuk fetch data page publication investor
 export async function getPublicationPageData(locale: string): Promise<InvestorPublicationApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -28,6 +29,7 @@ export async function getPublicationPageData(locale: string): Promise<InvestorPu
   }
 }
 
+// method untuk fetch data tab publication investor
 export async function getPublicationTabData(
   locale: string,
   tab: PublicationTab,
