@@ -3,6 +3,7 @@ import { BusinessItem, OurBusinessApiResponse } from "@/types/OurBusiness/Bussin
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/our-business`;
 const API_URL_OVERVIEW = `${process.env.NEXT_PUBLIC_BASE_URL}/business/overview-list`;
 
+// method untuk fetch data page business
 export async function getBusinessPageData(locale: string): Promise<OurBusinessApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -28,6 +29,7 @@ export async function getBusinessPageData(locale: string): Promise<OurBusinessAp
   }
 }
 
+// method untuk fetch data overview business
 export async function getOverviewData(locale: string): Promise<BusinessItem[]> {
   try {
     const res = await fetch(API_URL_OVERVIEW, {

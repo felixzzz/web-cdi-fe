@@ -3,6 +3,7 @@ import { InvestorSustainabilityApiResponse, MaterialityResponse } from "@/types/
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/sustainability/overview`;
 const API_URL_FRAMEWORK = `${process.env.NEXT_PUBLIC_BASE_URL}/sustainability/responsibles`;
 
+// method untuk fetch data page sustainability
 export async function getSustainabilityPageData(locale: string): Promise<InvestorSustainabilityApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -28,7 +29,7 @@ export async function getSustainabilityPageData(locale: string): Promise<Investo
   }
 }
 
-
+// method untuk fetch data page materiality framework
 export async function getFrameworkPageData(locale: string): Promise<MaterialityResponse> {
   try {
     const res = await fetch(API_URL_FRAMEWORK, {

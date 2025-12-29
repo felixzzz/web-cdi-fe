@@ -2,6 +2,7 @@ import { InvestorSharesApiResponse } from "@/types/Investor/Shares";
 
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
 
+// method untuk fetch data page financial investor
 export async function getSharesPageData(locale: string): Promise<InvestorSharesApiResponse> {
   try {
     const res = await fetch(API_URL, {

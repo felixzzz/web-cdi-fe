@@ -12,6 +12,7 @@ const API_URL_CERTIFICATION =
 const API_URL_MEMBERSHIP =
   `${process.env.NEXT_PUBLIC_BASE_URL}/memberships/list?tab=membership`;
 
+// method untuk fetch data page awards
 export async function getAwardsPageData(
   locale: string
 ): Promise<AboutUsAwardApiResponse> {
@@ -39,6 +40,7 @@ export async function getAwardsPageData(
   }
 }
 
+// method untuk fetch component data tabs page awards
 export async function getAwardsTabPageData(
   locale: string
 ): Promise<AwardsApiResponse> {
@@ -66,6 +68,7 @@ export async function getAwardsTabPageData(
   }
 }
 
+// method untuk fetch component data tab certifications page awards
 export async function getCertificationTabPageData(
   locale: string
 ): Promise<CertificationApiResponse> {
@@ -83,6 +86,7 @@ export async function getCertificationTabPageData(
   }
 }
 
+// method untuk fetch component data tab membership page awards
 export async function getMembershipTabPageData(
   locale: string
 ): Promise<MembershipApiResponse> {
@@ -107,18 +111,3 @@ export const awardsService = {
   getCertificationTabPageData,
   getMembershipTabPageData,
 };
-
-// export const extractYouTubeId = (url: string | null): string => {
-//   if (!url) return "GMJycZe_zpE";
-//   try {
-//     const urlObj = new URL(url);
-//     if (urlObj.pathname.startsWith("/embed/")) {
-//       return urlObj.pathname.split("/")[2].split("?")[0];
-//     }
-//   } catch (e) {
-//     if (url.includes("embed/")) {
-//       return url.split("embed/")[1].split("?")[0];
-//     }
-//   }
-//   return "GMJycZe_zpE";
-// };

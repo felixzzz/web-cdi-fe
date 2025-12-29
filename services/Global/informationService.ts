@@ -6,6 +6,7 @@ const API_URL_LINKS = `${process.env.NEXT_PUBLIC_URL}/api/utility/quick-link/hom
 const API_URL_FOOTER = `${process.env.NEXT_PUBLIC_URL}/api/utility/main-office`;
 const API_URL_CREDENTIAL = `${process.env.NEXT_PUBLIC_URL}/api/utility/social-media`;
 
+// method untuk fetch data data informasi quick links pada homepage dan management
 export async function getHomeQuickLinks(locale: string): Promise<QuickLinksApiResponse> {
   try {
     const res = await fetch(API_URL_LINKS, {
@@ -31,6 +32,7 @@ export async function getHomeQuickLinks(locale: string): Promise<QuickLinksApiRe
   }
 }
 
+// method untuk fetch data footer company location, etc
 export async function getFooterData(locale: string): Promise<CompanyLocationResponse> {
   try {
     const res = await fetch(API_URL_FOOTER, {
@@ -56,6 +58,7 @@ export async function getFooterData(locale: string): Promise<CompanyLocationResp
   }
 }
 
+// method untuk fetch data credential social media footer
 export async function getCredentialData(locale: string): Promise<ApiCredentialResponse> {
   try {
     const res = await fetch(API_URL_CREDENTIAL, {
