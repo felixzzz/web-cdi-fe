@@ -6,6 +6,7 @@ import {
 const API_URL_MAIN = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/sustainability/governance`;
 const API_URL_CONTENT = `${process.env.NEXT_PUBLIC_BASE_URL}/sustainability/contents/governance`;
 
+// method untuk fetch data page governance sustainability
 export async function getGovernancePageData(locale: string): Promise<SustainabilityGovernanceApiResponse> {
   try {
     const res = await fetch(API_URL_MAIN, {
@@ -31,6 +32,7 @@ export async function getGovernancePageData(locale: string): Promise<Sustainabil
   }
 }
 
+// method untuk fetch data content page governance sustainability
 export async function getGovernanceContentData(locale: string): Promise<
   ApiContentResponse
 > {

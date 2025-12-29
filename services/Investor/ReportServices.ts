@@ -4,6 +4,7 @@ const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
 const API_URL_FINANCIAL = `${process.env.NEXT_PUBLIC_BASE_URL}/investor/calendar/list`;
 const API_URL_INSTITUTION = `${process.env.NEXT_PUBLIC_BASE_URL}/institutions/list`;
 
+// method untuk fetch data page report investor
 export async function getReportPageData(locale: string): Promise<InvestorReportApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -29,6 +30,7 @@ export async function getReportPageData(locale: string): Promise<InvestorReportA
   }
 }
 
+// method untuk fetch data list institution report investor
 export async function getInstitutionsData(locale: string): Promise<ApiInstitutionResponse> {
   try {
     const res = await fetch(API_URL_INSTITUTION, {
@@ -54,6 +56,7 @@ export async function getInstitutionsData(locale: string): Promise<ApiInstitutio
   }
 }
 
+// method untuk fetch data page financial calendar investor
 async function getFinancialData(
   locale: string,
   page: number = 1,

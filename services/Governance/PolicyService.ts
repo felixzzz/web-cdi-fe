@@ -2,6 +2,7 @@ import { GovernanceResponse } from "@/types/Governances/Policy";
 
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/governances/files/policy?page=`;
 
+// method untuk fetch data page privacy policy governance
 export async function getPolicyPageData(locale: string, currentPage: number): Promise<GovernanceResponse> {
   try {
     const res = await fetch(`${API_URL}${currentPage}`, {

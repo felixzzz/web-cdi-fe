@@ -5,6 +5,7 @@ const API_URL_REPORT = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/latest-repor
 // wconst API_URL_LINKS = "https://cdi-be.cmlabs.dev/api/utility/quick-link/home";
 const API_URL_ARTICLE = `${process.env.NEXT_PUBLIC_BASE_URL}/article/latest?category_id=all`
 
+// method untuk fetch data page homepage
 export async function getHomePageData(locale: string): Promise<HomePageApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -30,6 +31,7 @@ export async function getHomePageData(locale: string): Promise<HomePageApiRespon
   }
 }
 
+// method untuk fetch data page report homepage
 export async function getHomeReportData(locale: string): Promise<ReportApiResponse> {
   try {
     const res = await fetch(API_URL_REPORT, {
@@ -55,6 +57,7 @@ export async function getHomeReportData(locale: string): Promise<ReportApiRespon
   }
 }
 
+// method untuk fetch data page article homepage
 export async function getHomeArticle(locale: string): Promise<ApiArticleResponse> {
   try {
     const res = await fetch(API_URL_ARTICLE, {

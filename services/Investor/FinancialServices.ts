@@ -3,6 +3,7 @@ import { CalendarApiResponse, InvestorFinancialApiResponse } from "@/types/Inves
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
 const API_URL_CALENDAR = `${process.env.NEXT_PUBLIC_BASE_URL}/investor/calendar/list`;
 
+// method untuk fetch data page financial investor
 export async function getFinancialPageData(locale: string): Promise<InvestorFinancialApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -28,6 +29,7 @@ export async function getFinancialPageData(locale: string): Promise<InvestorFina
   }
 }
 
+// method untuk fetch data page financial calendar investor
 export async function getFinancialCalendarData(
   locale: string,
   page: number = 1,

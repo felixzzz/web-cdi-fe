@@ -2,6 +2,7 @@ import { WaterApiResponse } from "@/types/OurBusiness/Water";
 
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/business/detail/water`;
 
+// method untuk fetch data page water business
 export async function getWaterPageData(locale: string): Promise<WaterApiResponse> {
   try {
     const res = await fetch(API_URL, {

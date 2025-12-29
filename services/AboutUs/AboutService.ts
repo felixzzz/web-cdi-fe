@@ -5,6 +5,7 @@ const API_URL_HISTORY = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/our-histori
 const API_URL_MILSTONE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/milestones`;
 const API_URL_PROFILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/company-profile`;
 
+// method untuk fetch data about page keseluruhan
 export async function getAboutPageData(locale: string): Promise<AboutUsWhoWeAreApiResponse> {
   try {
     const res = await fetch(API_URL, {
@@ -30,6 +31,7 @@ export async function getAboutPageData(locale: string): Promise<AboutUsWhoWeAreA
   }
 }
 
+// method untuk fetch component data history pada page about 
 export async function getHistoryData(locale: string): Promise<HistoryApiResponse> {
   try {
     const res = await fetch(API_URL_HISTORY, {
@@ -55,6 +57,7 @@ export async function getHistoryData(locale: string): Promise<HistoryApiResponse
   }
 }
 
+// method untuk fetch component data milstone pada page about 
 export async function getMilstoneData(locale: string): Promise<MilestoneApiResponse> {
   try {
     const res = await fetch(API_URL_MILSTONE, {
@@ -80,6 +83,7 @@ export async function getMilstoneData(locale: string): Promise<MilestoneApiRespo
   }
 }
 
+// method untuk fetch component data detail profile anggota perusahaan pada page about
 export async function getProfileData(locale: string): Promise<CompanyProfileResponse> {
   try {
     const res = await fetch(API_URL_PROFILE, {
