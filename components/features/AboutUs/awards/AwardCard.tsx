@@ -20,6 +20,7 @@ interface AwardCardProps {
   onImageClick: (imageUrl: string) => void;
   showReadMore?: boolean;
   showAwards?: boolean;
+  withLineClamp?: boolean;
 }
 
 export const AwardCard: React.FC<AwardCardProps> = ({
