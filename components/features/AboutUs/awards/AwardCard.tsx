@@ -28,10 +28,11 @@ export const AwardCard: React.FC<AwardCardProps> = ({
   onImageClick,
   showReadMore = false,
   showAwards = false,
+  withLineClamp = false
 }) => {
   const t = useTranslations("AboutUs");
   const formatDate = (dateString?: string) => {
-    if (!dateString) return award.year;
+    if (!dateString || showAwards) return award.year;
     try {
       return new Date(dateString).toLocaleDateString("en-GB", {
         day: "numeric",
@@ -81,7 +82,9 @@ export const AwardCard: React.FC<AwardCardProps> = ({
           className={clsx(
             // "mb-4 text-neutral-400 content leading-normal md:leading-[24px] text-justify",
             "mb-4 text-neutral-400 content leading-normal lg:leading-[24px] text-justify break-words w-full max-w-full",
-            showAwards ? "text-sm lg:text-[14px]" : "text-sm lg:text-base line-clamp-5"
+            showAwards ? "text-sm lg:text-[14px]" : (
+              withLineClamp ? "text-sm lg:text-base line-clamp-5" : "text-sm lg:text-base"
+            )
           )}
           dangerouslySetInnerHTML={{ __html: award.description }}
         />
