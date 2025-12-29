@@ -257,6 +257,7 @@ export const Awards: React.FC<AwardsProps> = ({
                       award={award}
                       showReadMore={activeTab === "Certification"}
                       showAwards={activeTab === "Awards"}
+                      withLineClamp={activeTab === "Certification"}
                       onReadMore={(selected) => setSelectedAward(selected)}
                       onImageClick={(url) => setModalImageUrl(url)}
                     />
