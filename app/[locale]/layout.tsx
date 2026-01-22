@@ -15,6 +15,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { getTranslations } from "next-intl/server";
 import { ProgressBar } from "@/components/shared/ProgressBar";
 import { CookieConsent } from "@/components/shared/CookieConsent";
+import Script from "next/script";
 
 type Props = {
   children: React.ReactNode;
@@ -46,24 +47,41 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NavbarThemeProvider>
-    <NextIntlClientProvider>
-      <Navbar />
-      <ProgressBar />
-      <CookieConsent />
-      {children}
-      <Toaster />
-      <Footer
-        backgroundImageUrl="/assets/images/footer.webp"
-        logoSrc="/assets/icons/logo_cdi_footer_new.svg"
-        logoAlt="Chandra Daya Investasi Logo"
-        contactHref="/contact-us"
-        contactText={t("contact_us")}
-        companyData={footerData}
-        mainNavLinks={mainNavLinksData}
-        legalNavLinks={legalNavLinksData}
-        copyrightText="@2025 Chandra Daya Investasi"
-      />
-    </NextIntlClientProvider>
+      <NextIntlClientProvider>
+        <head>
+          <Script
+            strategy="afterInteractive"
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-SQT41F1001"
+          />
+
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-SQT41F1001');
+          `}
+          </Script>
+        </head>
+        <Navbar />
+        <ProgressBar />
+        <CookieConsent />
+        {children}
+        <Toaster />
+        <Footer
+          backgroundImageUrl="/assets/images/footer.webp"
+          logoSrc="/assets/icons/logo_cdi_footer_new.svg"
+          logoAlt="Chandra Daya Investasi Logo"
+          contactHref="/contact-us"
+          contactText={t("contact_us")}
+          companyData={footerData}
+          mainNavLinks={mainNavLinksData}
+          legalNavLinks={legalNavLinksData}
+          copyrightText="@2025 Chandra Daya Investasi"
+        />
+      </NextIntlClientProvider>
     </NavbarThemeProvider>
   );
 }
