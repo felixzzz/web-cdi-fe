@@ -48,23 +48,26 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <NavbarThemeProvider>
       <NextIntlClientProvider>
-        <head>
-          <Script
-            strategy="afterInteractive"
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-SQT41F1001"
-          />
+        {process.env.NEXT_PUBLIC_NODE_TARGET === "production" ? (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src="https://www.googletagmanager.com/gtag/js?id=G-SQT41F1001"
+            />
 
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
             gtag('config', 'G-SQT41F1001');
           `}
-          </Script>
-        </head>
+            </Script>
+          </>
+        ) : (
+          <></>
+        )}
         <Navbar />
         <ProgressBar />
         <CookieConsent />
