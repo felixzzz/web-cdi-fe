@@ -51,11 +51,11 @@ export default async function LocaleLayout({ children, params }: Props) {
         {process.env.NEXT_PUBLIC_NODE_TARGET === "production" ? (
           <>
             <Script
-              strategy="afterInteractive"
+              strategy="beforeInteractive"
               src="https://www.googletagmanager.com/gtag/js?id=G-SQT41F1001"
             />
 
-            <Script id="google-analytics" strategy="afterInteractive">
+            <Script id="google-analytics" strategy="beforeInteractive">
               {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -65,7 +65,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           `}
             </Script>
 
-            <Script id="google-tag-manager" strategy="afterInteractive">
+            <Script id="google-tag-manager" strategy="beforeInteractive">
               {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
