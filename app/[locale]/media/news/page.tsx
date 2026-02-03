@@ -98,17 +98,14 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params: { locale } }: NewsPageProps) {
-  const [mediaData, heroNewsData, blogData, pressReleaseData, latestNewsData, categoryData] =
+  const [mediaData, heroNewsData, pressReleaseData, latestNewsData, categoryData] =
     await Promise.all([
       mediaService.getMediaPageData(locale),
       mediaService.getHeroPageData(locale),
-      mediaService.getBlogsData(locale),
       pressReleaseService.getPressReleasePageData(locale),
       pressReleaseService.getLatestNewsData(locale),
       pressReleaseService.getCategoryData(locale),
     ]);
-
-  console.log("blogData", JSON.stringify(blogData));
 
   return (
     <main>
