@@ -49,7 +49,7 @@ export function News({
 
   const newsCategories = useMemo(() => {
     const categoryNames = categoryData.map((cat) => {
-      return locale === "id" ? cat.name_id : cat.name_en;
+      return cat[`name_${locale}`];
     });
 
     return [defaultCategoryLabel, ...categoryNames];
@@ -63,9 +63,7 @@ export function News({
         ? mediaData.items
         : mediaData.items.filter((item) => {
             const itemCategoryName =
-              locale === "id"
-                ? item.article_category.name_id
-                : item.article_category.name_en;
+              item.article_category[`name_${locale}`];
 
             return itemCategoryName === activeCategory;
           });
@@ -97,7 +95,7 @@ export function News({
       if (searchQuery) {
         const lowerQuery = searchQuery.toLowerCase();
         filtered = filtered.filter((item) =>
-          item.name_id.toLowerCase().includes(lowerQuery)
+          item[`name_${locale}`].toLowerCase().includes(lowerQuery)
         );
       }
 
@@ -113,7 +111,7 @@ export function News({
         totalPressPages: pages,
         totalPressItems: total,
       };
-    }, [currentPage, pressReleaseData.items, searchQuery]);
+    }, [currentPage, pressReleaseData.items, searchQuery, locale]);
 
   const totalPages = activeTab === "news" ? totalNewsPages : totalPressPages;
   const totalItems = activeTab === "news" ? totalNewsItems : totalPressItems;
@@ -189,7 +187,7 @@ export function News({
                 key={article.id}
                 href={`/media/news/${article.slug}`}
                 imageUrl={article.image}
-                category={locale === "id" ? article.article_category.name_id : article.article_category.name_en}
+                category={article.article_category[`name_${locale}`]}
                 date={article.date}
                 title={article.title}
               />
@@ -336,11 +334,13 @@ function PressReleaseCard({ item, locale }: { item: PressReleaseItem, locale: st
   const viewIcon = "/assets/icons/ic_eye.svg";
   const downloadIcon = "/assets/icons/ic_download_file.svg";
 
+  console.log('item[`name_${locale}`]', item[`name_${locale}`])
+
   return (
     <li className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 lg:gap-y-0">
       <div className="w-full max-w-3xl">
         <h3 className="text-neutral-13 mb-2 text-lg font-medium line-clamp-2">
-          {item.name_id}
+          {item[`name_${locale}`]}
         </h3>
       </div>
 
