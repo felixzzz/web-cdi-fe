@@ -52,6 +52,7 @@ export interface ArticleCategory {
   is_sustainability: number;
   created_at: string;
   updated_at: string;
+  [key: `name_${string}`]: string;
 }
 
 export interface ArticleMetaTag {
@@ -92,6 +93,7 @@ export interface IReportType {
   created_at: string;
   updated_at: string;
   name: string;
+  [key: `name_${string}`]: string;
 }
 
 export interface NewsApiResponse {
@@ -123,6 +125,7 @@ export interface PressReleaseItem {
   name_slug_en: string;
   file: FileDetails;
   date: string;
+  [key: `name_${string}`]: string;
 }
 
 export interface PressReleaseApiResponse {
