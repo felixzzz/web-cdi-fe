@@ -1,41 +1,42 @@
 export async function GET(): Promise<Response> {
-  let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "";
-  if (baseUrl.endsWith("/")) {
-    baseUrl = baseUrl.slice(0, -1);
-  }
+    let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "";
+    if (baseUrl.endsWith("/")) {
+        baseUrl = baseUrl.slice(0, -1);
+    }
 
-  const locales = ["en", "id"];
+    const locales = ["en", "id"];
 
-  const sitemapTypes = [
-    "/pages",
-    "/about-us",
-    "/management",
-    "/our-business",
-    "/investor",
-    "/governance",
-    "/sustainability",
-    "/media",
-  ];
+    const sitemapTypes = [
+        "/pages",
+        "/about-us",
+        "/management",
+        "/our-business",
+        "/investor",
+        "/governance",
+        "/sustainability",
+        "/media",
+        "/blog",
+    ];
 
-  // cSpell:disable-next-line
-  let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/style.xsl"?>
+    // cSpell:disable-next-line
+    let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/style.xsl"?>
   <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
-  locales.forEach((locale) => {
-    sitemapTypes.forEach((type) => {
-      xml += `
+    locales.forEach((locale) => {
+        sitemapTypes.forEach((type) => {
+            xml += `
       <sitemap>
         <loc>${baseUrl}/${locale}${type}.xml</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
       </sitemap>`;
+        });
     });
-  });
 
-  xml += `</sitemapindex>`;
+    xml += `</sitemapindex>`;
 
-  return new Response(xml, {
-    headers: {
-      "Content-Type": "application/xml",
-    },
-  });
+    return new Response(xml, {
+        headers: {
+            "Content-Type": "application/xml",
+        },
+    });
 }
