@@ -2,7 +2,6 @@ import {HeroNews} from "@/components/features/Media/Hero";
 import {News} from "@/components/features/Media/News";
 import {NavbarThemeTrigger} from "@/components/shared/NavbarThemeTrigger";
 import {
-    getMediaBlogPageData,
     mediaService,
     pressReleaseService,
 } from "@/services/Media/MediaService";
