@@ -23,7 +23,7 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: "News Not Found | Chandra Daya Investasi",
+      title: "Blog Not Found | Chandra Daya Investasi",
     };
   }
 
@@ -34,7 +34,7 @@ export async function generateMetadata({
   const description = stripHtml(rawContent);
   const imageUrl = article.image || "/assets/frontend/favicon.png";
 
-  const pagePath = `/media/news/${params.slug}`;
+  const pagePath = `/media/blog/${params.slug}`;
   
   const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
   
@@ -116,9 +116,9 @@ export async function generateMetadata({
 
 export default async function Page({ params }: PageProps) {
   const t = await getTranslations("Media");
-  const mediaData = await mediaService.getMediaPageData(params.locale);
+  const mediaBlogData = await mediaService.getMediaBlogPageData(params.locale);
 
-  const article = mediaData.items.find((item) => item.slug === params.slug);
+  const article = mediaBlogData.items.find((item) => item.slug === params.slug);
 
   if (!article) {
     notFound();
@@ -130,11 +130,11 @@ export default async function Page({ params }: PageProps) {
 
   const breadcrumbs = [
     { href: `/${params.locale}`, label: "Home" },
-    { href: `/${params.locale}/media/news`, label: t('News') },
+    { href: `/${params.locale}/media/blog`, label: t('blog') },
   ];
 
   const shareUrl = encodeURIComponent(
-    `${process.env.NEXT_PUBLIC_URL}/${params.locale}/media/news/${params.slug}`
+    `${process.env.NEXT_PUBLIC_URL}/${params.locale}/media/blog/${params.slug}`
   );
 
   return (
@@ -150,10 +150,10 @@ export default async function Page({ params }: PageProps) {
       />
       <NavbarThemeTrigger theme="light" />
       <RelatedPosts
-        allArticles={mediaData.items}
+        allArticles={mediaBlogData.items}
         currentArticle={article}
         locale={params.locale}
-        type="news"
+        type="blog"
       />
     </main>
   );
