@@ -1,117 +1,123 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import {Link} from "@/i18n/navigation";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Navigation, Pagination} from "swiper/modules";
 
-import { ChevronRight } from "lucide-react";
-import { ApiLatestNewsResponse, HeroNewsSection } from "@/types/Media/Media";
-import { useLocale, useTranslations } from "next-intl";
+import {ChevronRight} from "lucide-react";
+import {ApiLatestNewsResponse, HeroNewsSection} from "@/types/Media/Media";
+import {useLocale, useTranslations} from "next-intl";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface HeroNewsProps {
-  media: HeroNewsSection;
-  latestNewsData: ApiLatestNewsResponse;
+    media: HeroNewsSection;
+    latestNewsData: ApiLatestNewsResponse;
 }
 
-export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
-  const t = useTranslations("Media");
-  const locale = useLocale()
-  const sliderData = latestNewsData.map((item) => ({
-    id: item.data.id,
-    title: item.data.title,
-    imageUrl: item.data.image,
-    category: item.data.category_name,
-    date: item.data.date,
-    description: item.data.short_content,
-    linkUrl: `${process.env.NEXT_PUBLIC_URL_LP}/${locale}/media/news/${item.data.slug}`,
-  }));
+export function HeroNews({media, latestNewsData}: HeroNewsProps) {
+    const t = useTranslations("Media");
+    const locale = useLocale()
+    const sliderData = latestNewsData
+        .filter((item) => item?.data?.status === 1)
+        .map((item) => ({
+            id: item.data.id,
+            title: item.data.title,
+            imageUrl: item.data.image,
+            category: item.data.category_name,
+            date: item.data.date,
+            description: item.data.short_content,
+            linkUrl: `${process.env.NEXT_PUBLIC_URL_LP}/${locale}/media/news/${item.data.slug}`,
+        }));
 
-  const heroTitle =
-    latestNewsData.length > 0
-      ? latestNewsData[0].title
-      : '<span class="text-[#47C1EA]">Berita</span> Terbaru';
+    const heroTitle =
+        latestNewsData.length > 0
+            ? latestNewsData[0].title
+            : '<span class="text-[#47C1EA]">Berita</span> Terbaru';
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      window.dispatchEvent(new Event("finishProgressBar"));
-    }, 100);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            window.dispatchEvent(new Event("finishProgressBar"));
+        }, 100);
 
-    return () => clearTimeout(timer);
-  }, []);
+        return () => clearTimeout(timer);
+    }, []);
 
-  return (
-    <section
-      aria-labelledby="latest-news-heading"
-      className="py-[6%] lg:py-[8%] relative overflow-hidden w-full bg-cover"
-    >
-      <Image
-        src={media.file_url}
-        alt="Latar belakang abstrak berita terbaru"
-        layout="fill"
-        objectFit="cover"
-        className="z-0"
-        priority
-      />
-
-      <div className="container mx-auto   relative z-10 py-20 lg:py-0">
-        <h1
-          id="latest-news-heading"
-          className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-semibold text-white mb-9"
-          dangerouslySetInnerHTML={{ __html: heroTitle }}
-        ></h1>
-
-        <Swiper
-          modules={[Navigation, Pagination]}
-          navigation={{
-            prevEl: ".custom-prev-news",
-            nextEl: ".custom-next-news",
-          }}
-          pagination={{
-            el: ".custom-pagination-media",
-            clickable: true,
-          }}
-          slidesPerView={1}
-          className="custom-swiper"
+    return (
+        <section
+            aria-labelledby="latest-news-heading"
+            className="py-[6%] lg:py-[8%] relative overflow-hidden w-full bg-cover"
         >
-          {sliderData.map((slide) => (
-            <SwiperSlide key={slide.id}>
-              <article className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div className="relative aspect-video lg:h-[380px] w-full rounded-xl overflow-hidden">
-                  <Image
-                    src={slide.imageUrl}
-                    alt={slide.title}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </div>
-                <div className="p-6 rounded-xl bg-[#E6F0FA] border border-neutral-5 backdrop-blur-2xl">
+            <Image
+                src={media.file_url}
+                alt="Latar belakang abstrak berita terbaru"
+                layout="fill"
+                objectFit="cover"
+                className="z-0"
+                priority
+            />
+
+            <div className="container mx-auto   relative z-10 py-20 lg:py-0">
+                <h1
+                    id="latest-news-heading"
+                    className="text-2xl leading-6 lg:text-[52px] lg:leading-[60px] font-semibold text-white mb-9"
+                    dangerouslySetInnerHTML={{__html: heroTitle}}
+                ></h1>
+
+                <Swiper
+                    modules={[Navigation, Pagination]}
+                    navigation={{
+                        prevEl: ".custom-prev-news",
+                        nextEl: ".custom-next-news",
+                    }}
+                    pagination={{
+                        el: ".custom-pagination-media",
+                        clickable: true,
+                    }}
+                    slidesPerView={1}
+                    className="custom-swiper"
+                >
+                    {sliderData.map((slide) => (
+                        <SwiperSlide key={slide.id}>
+                            <article className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                <div className="relative aspect-video lg:h-[380px] w-full rounded-xl overflow-hidden">
+                                    <Image
+                                        src={slide.imageUrl}
+                                        alt={slide.title}
+                                        layout="fill"
+                                        objectFit="cover"
+                                    />
+                                </div>
+                                <div className="p-6 rounded-xl bg-[#E6F0FA] border border-neutral-5 backdrop-blur-2xl">
                   <span className="bg-[#2474A5] text-white px-3 py-1 text-sm rounded-full me-4">
                     {slide.category}
                   </span>
-                  <span className="text-sm text-neutral-10">{slide.date}</span>
-                  <h2 className="text-[22px] font-medium mt-4 text-neutral-13 line-clamp-2">
-                    {slide.title}
-                  </h2>
-                  <p
-                    className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3 text-[14px] leading-normal md:leading-[24px] text-justify"
-                    dangerouslySetInnerHTML={{ __html: slide.description }}
-                  ></p>
-                  <Link
-                    href={slide.linkUrl}
-                    className="text-[#2474A5] flex items-center text-[16px] gap-2"
-                  >
-                    {t("Media_Link")}
-                    <ChevronRight className="text-2xl" />
-                  </Link>
-                </div>
-              </article>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                                    <span className="text-sm text-neutral-10">{slide.date}</span>
+                                    <h2 className="text-[22px] font-medium mt-4 text-neutral-13 line-clamp-2">
+                                        {slide.title}
+                                    </h2>
+                                    <p
+                                        className="max-w-2xl prose prose-base text-neutral-700 mb-2 line-clamp-3 text-[14px] leading-normal md:leading-[24px] text-justify"
+                                        dangerouslySetInnerHTML={{__html: slide.description}}
+                                    ></p>
+                                    <Link
+                                        href={slide.linkUrl}
+                                        className="text-[#2474A5] flex items-center text-[16px] gap-2"
+                                    >
+                                        {t("Media_Link")}
+                                        <ChevronRight className="text-2xl"/>
+                                    </Link>
+                                </div>
+                            </article>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
 
-        {/* <nav aria-label="Navigasi Berita" className="grid grid-cols-2 mt-6">
+                {/* <nav aria-label="Navigasi Berita" className="grid grid-cols-2 mt-6">
           <div className="flex">
             <div className="custom-pagination-media flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"></div>
           </div>
@@ -130,7 +136,7 @@ export function HeroNews({ media, latestNewsData }: HeroNewsProps) {
             </button>
           </div>
         </nav> */}
-      </div>
-    </section>
-  );
+            </div>
+        </section>
+    );
 }

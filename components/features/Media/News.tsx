@@ -99,8 +99,6 @@ export function News({
             currentPage * ITEMS_PER_PAGE
         );
 
-        console.log("paginated", paginated.length)
-
         return {
             paginatedBlog: paginated,
             totalBlogPages: pages,
@@ -109,7 +107,7 @@ export function News({
     }, [
         activeCategory,
         currentPage,
-        mediaData.items,
+        mediaBlogData.items,
         locale,
         defaultCategoryLabel,
     ]);
@@ -226,7 +224,8 @@ export function News({
                                 imageUrl={article.image}
                                 category={article.article_category[`name_${locale}`]}
                                 date={article.date}
-                                title={article.title}
+                                title={`${article.title} - ${article.status}`}
+                                type="news"
                             />
                         ))
                     ) : (
@@ -296,7 +295,8 @@ export function News({
                                 imageUrl={article.image}
                                 category={article.category_name}
                                 date={article.date}
-                                title={article.title}
+                                title={`${article.title} - ${article.status}`}
+                                type="blog"
                             />
                         ))
                     ) : (
@@ -327,12 +327,14 @@ function ArticleCard({
                          category,
                          date,
                          title,
+                         type,
                      }: {
     href: string;
     imageUrl: string;
     category: string;
     date: string;
     title: string;
+    type: string;
 }) {
     const t = useTranslations("Media");
 
@@ -369,9 +371,11 @@ function ArticleCard({
                 </div>
                 <div className="p-6 flex flex-col grow">
                     <div className="flex items-center gap-4">
-            <span className="bg-neutral-300 px-3 py-1 text-sm rounded-full">
-              {category}
-            </span>
+                        {type != "blog" && (
+                            <span className="bg-neutral-300 px-3 py-1 text-sm rounded-full">
+                              {category}
+                            </span>
+                        )}
                         <span className="text-sm text-neutral-10">{date}</span>
                     </div>
                     <h3 className="text-[22px] font-medium mt-4 mb-7 line-clamp-3 grow">

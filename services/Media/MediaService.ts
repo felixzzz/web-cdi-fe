@@ -5,6 +5,7 @@ import {
     NewsApiResponse,
     PressReleaseApiResponse
 } from "@/types/Media/Media";
+import axios from "axios";
 
 const API_URL_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/news?`;
 const API_URL_MEDIA_BLOG = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/blog?`;
@@ -34,63 +35,66 @@ export async function getCategoryData(locale: string): Promise<IReportType[]> {
 }
 
 // method untuk fetch data page media news
-export async function getMediaPageData(locale: string): Promise<NewsApiResponse> {
-    const res = await fetch(API_URL_MEDIA, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            lang: locale
-        },
-        next: {
-            revalidate: 3600,
-        },
-    });
+export async function getMediaPageData(
+    locale: string
+): Promise<NewsApiResponse> {
+    try {
+        const response = await axios.get<NewsApiResponse>(
+            API_URL_MEDIA,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    lang: locale,
+                },
+            }
+        );
 
-    if (!res.ok) {
-        throw new Error(`Failed to fetch home data: ${res.statusText}`);
+        return response.data;
+    } catch (error: unknown) {
+        handleAxiosError(error, "Failed to fetch latest news data");
     }
-
-    return await res.json() as NewsApiResponse;
 }
 
 // method untuk fetch data page media blog
-export async function getMediaBlogPageData(locale: string): Promise<NewsApiResponse> {
-    const res = await fetch(API_URL_MEDIA_BLOG, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            lang: locale
-        },
-        next: {
-            revalidate: 3600,
-        },
-    });
+export async function getMediaBlogPageData(
+    locale: string
+): Promise<NewsApiResponse> {
+    try {
+        const response = await axios.get<NewsApiResponse>(
+            API_URL_MEDIA_BLOG,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    lang: locale,
+                },
+            }
+        );
 
-    if (!res.ok) {
-        throw new Error(`Failed to fetch home data: ${res.statusText}`);
+        return response.data;
+    } catch (error: unknown) {
+        handleAxiosError(error, "Failed to fetch latest news data");
     }
-
-    return await res.json() as NewsApiResponse;
 }
 
 // method untuk fetch data hero section media news
-export async function getHeroPageData(locale: string): Promise<HeroNewsSection> {
-    const res = await fetch(API_URL_HERO_MEDIA, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            lang: locale
-        },
-        next: {
-            revalidate: 3600,
-        },
-    });
+export async function getHeroPageData(
+    locale: string
+): Promise<HeroNewsSection> {
+    try {
+        const response = await axios.get<HeroNewsSection>(
+            API_URL_HERO_MEDIA,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    lang: locale,
+                },
+            }
+        );
 
-    if (!res.ok) {
-        throw new Error(`Failed to fetch home data: ${res.statusText}`);
+        return response.data;
+    } catch (error: unknown) {
+        handleAxiosError(error, "Failed to fetch latest news data");
     }
-
-    return await res.json() as HeroNewsSection;
 }
 
 export const mediaService = {
@@ -121,23 +125,34 @@ export async function getPressReleasePageData(locale: string): Promise<PressRele
 }
 
 // method untuk fetch data latest news media
-export async function getLatestNewsData(locale: string): Promise<ApiLatestNewsResponse> {
-    const res = await fetch(API_URL_MEDIA_LATEST, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            lang: locale
-        },
-        next: {
-            revalidate: 3600,
-        },
-    });
+export async function getLatestNewsData(
+    locale: string
+): Promise<ApiLatestNewsResponse> {
+    try {
+        const response = await axios.get<ApiLatestNewsResponse>(
+            API_URL_MEDIA_LATEST,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    lang: locale,
+                },
+            }
+        );
 
-    if (!res.ok) {
-        throw new Error(`Failed to fetch home data: ${res.statusText}`);
+        return response.data;
+    } catch (error: unknown) {
+        handleAxiosError(error, "Failed to fetch latest news data");
+    }
+}
+
+function handleAxiosError(error: unknown, message: string): never {
+    if (axios.isAxiosError(error)) {
+        throw new Error(
+            `${message}: ${error.response?.statusText || error.message}`
+        );
     }
 
-    return await res.json() as ApiLatestNewsResponse;
+    throw new Error(`${message}: Unknown error`);
 }
 
 export const pressReleaseService = {
