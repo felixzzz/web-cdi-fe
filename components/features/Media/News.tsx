@@ -99,8 +99,6 @@ export function News({
             currentPage * ITEMS_PER_PAGE
         );
 
-        console.log("paginated", paginated.length)
-
         return {
             paginatedBlog: paginated,
             totalBlogPages: pages,
