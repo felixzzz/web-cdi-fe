@@ -108,8 +108,6 @@ export default async function Page({params: {locale}}: NewsPageProps) {
             pressReleaseService.getCategoryData(locale),
         ]);
 
-    console.log("mediaBlogData", mediaBlogData)
-
     return (
         <main>
             <NavbarThemeTrigger theme="dark"/>
