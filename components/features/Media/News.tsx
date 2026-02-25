@@ -92,8 +92,6 @@ export function News({
 
     const {paginatedBlog, totalBlogPages, totalBlogItems} = useMemo(() => {
 
-        console.log("mediaBlogData", mediaBlogData)
-
         const total = mediaBlogData.items.length;
         const pages = Math.ceil(total / ITEMS_PER_PAGE);
         const paginated = mediaBlogData.items.slice(
@@ -109,7 +107,7 @@ export function News({
     }, [
         activeCategory,
         currentPage,
-        mediaData.items,
+        mediaBlogData.items,
         locale,
         defaultCategoryLabel,
     ]);
