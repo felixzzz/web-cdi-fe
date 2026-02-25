@@ -184,7 +184,7 @@ export function News({
                     onClick={() => handleTabClick("blog")}
                     className={clsx(
                         "border-b-2 text-neutral-13 text-lg text-center p-4 hover:border-b-[#2474A5] hover:border-b-4 hover:font-medium transition",
-                        activeTab === "press-release"
+                        activeTab === "blog"
                             ? "border-b-4 !border-b-[#2474A5] font-medium"
                             : "border-b-neutral-6"
                     )}
