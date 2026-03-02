@@ -1,7 +1,6 @@
 import {NewsDetail} from "@/components/features/Media/Details/Detail";
 import {RelatedPosts} from "@/components/features/Media/Details/RelatedPosts";
 import {NavbarThemeTrigger} from "@/components/shared/NavbarThemeTrigger";
-import {stripHtml} from "@/lib/localization";
 import {mediaService} from "@/services/Media/MediaService";
 import {Metadata} from "next";
 import {getTranslations} from "next-intl/server";
