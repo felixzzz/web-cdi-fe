@@ -2,7 +2,7 @@ import {NewsDetail} from "@/components/features/Media/Details/Detail";
 import {RelatedPosts} from "@/components/features/Media/Details/RelatedPosts";
 import {NavbarThemeTrigger} from "@/components/shared/NavbarThemeTrigger";
 import {stripHtml} from "@/lib/localization";
-import {getMediaBlogPageData, mediaService} from "@/services/Media/MediaService";
+import {mediaService} from "@/services/Media/MediaService";
 import {Metadata} from "next";
 import {getTranslations} from "next-intl/server";
 import {notFound} from "next/navigation";
@@ -17,7 +17,6 @@ export type PageProps = {
 export async function generateMetadata({
                                            params,
                                        }: PageProps): Promise<Metadata> {
-    const t = await getTranslations("Media");
     const mediaBlogData = await mediaService.getMediaBlogPageData(params.locale);
 
     const article = mediaBlogData.items.find((item) => item.slug === params.slug);
