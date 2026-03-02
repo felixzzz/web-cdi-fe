@@ -1,7 +1,6 @@
 import {NewsDetail} from "@/components/features/Media/Details/Detail";
 import {RelatedPosts} from "@/components/features/Media/Details/RelatedPosts";
 import {NavbarThemeTrigger} from "@/components/shared/NavbarThemeTrigger";
-import {stripHtml} from "@/lib/localization";
 import {mediaService} from "@/services/Media/MediaService";
 import {Metadata} from "next";
 import {getTranslations} from "next-intl/server";
@@ -28,10 +27,9 @@ export async function generateMetadata({
     }
 
     const articleTitle = params.locale === "id" ? article.title_id : article.title_en;
-    const rawContent = params.locale === "id" ? article.content_id : article.content_en;
 
     const title = `Chandra Daya Investasi | ${articleTitle}`;
-    const description = stripHtml(rawContent);
+    const description = (article?.meta_tag?.description || "");
     const imageUrl = article.image || "/assets/frontend/favicon.png";
 
     const pagePath = `/media/news/${params.slug}`;
@@ -56,6 +54,7 @@ export async function generateMetadata({
             "CDIA",
             "PT Chandra Daya Investasi Tbk",
             "CDI Group",
+            (article?.meta_tag?.keyword || "")
         ],
 
         robots: {
