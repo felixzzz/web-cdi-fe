@@ -78,7 +78,7 @@ export interface ArticleItem {
   updated_at: string;
   datetime: string;
   category_name: string;
-  title: string;
+  [key: `title_${string}`]: string;
   image: string;
   date: string;
   article_category: ArticleCategory;

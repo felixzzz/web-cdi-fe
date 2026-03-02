@@ -21,7 +21,7 @@ export interface PageProps {
 //     getLocalizedField(item, field, locale);
 
 
-export const stripHtml = (html: string | null) =>
+export const stripHtml = (html: string | undefined) =>
     html ? html.replace(/<[^>]+>/g, "") : "";
 
 
