@@ -224,7 +224,7 @@ export function News({
                                 imageUrl={article.image}
                                 category={article.article_category[`name_${locale}`]}
                                 date={article.date}
-                                title={`${article.title} - ${article.status}`}
+                                title={`${article[`title_${locale}`]}`}
                                 type="news"
                             />
                         ))
@@ -295,7 +295,7 @@ export function News({
                                 imageUrl={article.image}
                                 category={article.category_name}
                                 date={article.date}
-                                title={`${article.title} - ${article.status}`}
+                                title={`${article[`title_${locale}`]}`}
                                 type="blog"
                             />
                         ))
