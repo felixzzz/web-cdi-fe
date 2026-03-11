@@ -18,7 +18,9 @@ export async function generateMetadata({
                                        }: PageProps): Promise<Metadata> {
     const mediaBlogData = await mediaService.getMediaBlogPageData(params.locale);
 
-    const article = mediaBlogData.items.find((item) => item.slug === params.slug);
+    const slugKey = params.locale === "en" ? "slug" : "slug_id";
+
+    const article = mediaBlogData.items.find((item) => item[slugKey] === params.slug);
 
     if (!article) {
         notFound();
@@ -52,7 +54,7 @@ export async function generateMetadata({
             "CDIA",
             "PT Chandra Daya Investasi Tbk",
             "CDI Group",
-            (article?.meta_tag?.keyword || "")
+            (article?.[`meta_tag${params.locale === "id" ? "_id" : ""}`]?.keyword || "")
         ],
 
         robots: {
@@ -115,7 +117,9 @@ export default async function Page({params}: PageProps) {
     const t = await getTranslations("Media");
     const mediaBlogData = await mediaService.getMediaBlogPageData(params.locale);
 
-    const article = mediaBlogData.items.find((item) => item.slug === params.slug);
+    const slugKey = params.locale === "en" ? "slug" : "slug_id";
+
+    const article = mediaBlogData.items.find((item) => item[slugKey] === params.slug);
 
     if (!article) {
         notFound();

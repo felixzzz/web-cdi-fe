@@ -66,13 +66,14 @@ export interface ArticleItem {
   thumbnail: string;
   article_category_id: number;
   category: string;
-  slug: string;
+  [key: `slug${string}`]: string;
   title_en: string;
   title_id: string;
   content_en: string; 
   content_id: string; 
   tags: string[];
   meta_tag: ArticleMetaTag;
+  meta_tag_id: ArticleMetaTag;
   status: number;
   created_at: string;
   updated_at: string;
