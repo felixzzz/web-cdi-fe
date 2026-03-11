@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { mediaService } from "@/services/Media/MediaService";
 
 interface NewsArticle {
-  slug: string;
+  [key: `slug${string}`]: string;
   updated_at?: string;
   created_at?: string;
 }

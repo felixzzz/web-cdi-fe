@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 import { mediaService } from "@/services/Media/MediaService";
 
 interface NewsArticle {
-  slug: string;
+  [key: `slug${string}`]: string;
   updated_at?: string;
   created_at?: string;
 }
@@ -24,9 +24,12 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl
     
     if (mediaBlogData && mediaBlogData.items) {
       mediaBlogData.items.forEach((article: NewsArticle) => {
+
+        const slugKey = locale === "en" ? "slug" : "slug_id";
+
         xml += `
         <url>
-          <loc>${baseUrl}/${locale}/media/blog/${article.slug}</loc>
+          <loc>${baseUrl}/${locale}/media/blog/${article[slugKey]}</loc>
           <lastmod>${new Date(article.updated_at || article.created_at || new Date()).toISOString()}</lastmod>
           <priority>0.6</priority>
           <changefreq>weekly</changefreq>
