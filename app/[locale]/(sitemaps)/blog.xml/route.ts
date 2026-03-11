@@ -25,7 +25,6 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl
     if (mediaBlogData && mediaBlogData.items) {
       mediaBlogData.items.forEach((article: NewsArticle) => {
 
-
         const slugKey = locale === "en" ? "slug" : "slug_id";
 
         xml += `
