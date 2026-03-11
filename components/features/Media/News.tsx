@@ -151,6 +151,8 @@ export function News({
         setCurrentPage(1);
     };
 
+    const slugKey = locale === "en" ? "slug" : "slug_id";
+
     return (
         <section
             data-navbar-theme="light"
@@ -220,7 +222,7 @@ export function News({
                         paginatedArticles.map((article: ArticleItem) => (
                             <ArticleCard
                                 key={article.id}
-                                href={`/media/news/${article.slug}`}
+                                href={`/media/news/${article[slugKey]}`}
                                 imageUrl={article.image}
                                 category={article.article_category[`name_${locale}`]}
                                 date={article.date}
@@ -291,7 +293,7 @@ export function News({
                         paginatedBlog.map((article: ArticleItem) => (
                             <ArticleCard
                                 key={article.id}
-                                href={`/media/blog/${article.slug}`}
+                                href={`/media/blog/${article[slugKey]}`}
                                 imageUrl={article.image}
                                 category={article.category_name}
                                 date={article.date}
