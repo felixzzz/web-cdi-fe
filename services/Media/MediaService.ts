@@ -57,7 +57,7 @@ export async function getMediaPageData(
 
 // method untuk fetch data page media blog
 export async function getMediaBlogPageData(
-    locale: string
+    // locale: string
 ): Promise<NewsApiResponse> {
     try {
         const response = await axios.get<NewsApiResponse>(
@@ -65,7 +65,7 @@ export async function getMediaBlogPageData(
             {
                 headers: {
                     "Content-Type": "application/json",
-                    lang: locale,
+                    // lang: locale,
                 },
             }
         );
