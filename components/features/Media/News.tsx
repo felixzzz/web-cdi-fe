@@ -222,7 +222,7 @@ export function News({
                         paginatedArticles.map((article: ArticleItem) => (
                             <ArticleCard
                                 key={article.id}
-                                href={`/media/news/${article[slugKey]}`}
+                                href={`/media/news/${article[slugKey] == "" ? article.slug : article[slugKey]}`}
                                 imageUrl={article.image}
                                 category={article.article_category[`name_${locale}`]}
                                 date={article.date}
