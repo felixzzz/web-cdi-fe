@@ -101,7 +101,7 @@ export default async function Page({params: {locale}}: NewsPageProps) {
     const [mediaData, mediaBlogData, heroNewsData, pressReleaseData, latestNewsData, categoryData] =
         await Promise.all([
             mediaService.getMediaPageData(locale),
-            mediaService.getMediaBlogPageData(locale),
+            mediaService.getMediaBlogPageData(),
             mediaService.getHeroPageData(locale),
             pressReleaseService.getPressReleasePageData(locale),
             pressReleaseService.getLatestNewsData(locale),

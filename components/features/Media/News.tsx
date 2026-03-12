@@ -404,8 +404,6 @@ function PressReleaseCard({item, locale}: { item: PressReleaseItem, locale: stri
     const viewIcon = "/assets/icons/ic_eye.svg";
     const downloadIcon = "/assets/icons/ic_download_file.svg";
 
-    console.log('item[`name_${locale}`]', item[`name_${locale}`])
-
     return (
         <li className="py-8 border-b border-b-neutral-5 flex items-start justify-start flex-col gap-y-4 lg:gap-y-0">
             <div className="w-full max-w-3xl">
