@@ -29,8 +29,11 @@ export async function generateMetadata({
   const articleTitle =
     params.locale === "id" ? article.title_id : article.title_en;
 
+  const articleDesc =
+      params.locale === "id" ? article?.meta_tag_id?.description : article?.meta_tag?.description;
+
   const title = `${articleTitle} | Chandra Daya Investasi`;
-  const description = article?.meta_tag?.description || "";
+  const description = articleDesc || "";
   const imageUrl = article.image || "/assets/frontend/favicon.png";
 
   const pagePath = `/media/blog/${params.slug}`;
