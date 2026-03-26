@@ -92,6 +92,7 @@
       "General Meeting of Shareholders": "Rapat Umum Pemegang Saham",
       "Public Announcement": "Pengumuman Publik",
       "Earnings Update": "Info Terkini Kinerja",
+      "Investor Update": "Update Investor",
       "not_found_title": "Not Found"
     },
     "Report": {
@@ -124,6 +125,10 @@
       "Code_of_Conduct": "Kode Etik",
       "Policy": "Kebijakan",
       "Whistleblowing": "Pengungkapan Pelanggaran",
+      "Whistleblower_channel": "Saluran Pelaporan Pelanggaran",
+      "Whistleblower_hotline_email": "Email Hotline",
+      "Whistleblower_hotline_phone": "Nomor Telepon Hotline",
+      "Whistleblower_dropbox": "Kotak Pengaduan di",
       "WhistleblowingPage": {
         "Governance": "Tata Kelola",
         "Whistleblowing": "Pengungkapan Pelanggaran",
@@ -160,6 +165,11 @@
         "download_download": "Unduh"
       }
     }
+  },
+  "Sustainability": {
+    "Sustainability_policy": "Kebijakan dan Kerangka Kerja Keberlanjutan Kami",
+    "Sustainability_desc": "Kerangka dan Kebijakan Keberlanjutan kami menjadi acuan untuk berbagai keputusan strategis di seluruh aspek operasional, memastikan kesuksesan bisnis selaras dengan pengelolaan lingkungan, dan menciptakan dampak positif melalui praktek-praktik yang bertanggung jawab.",
+    "Sustainability_button": "Kebijakan Keberlanjutan"
   },
   "Media": {
     "Read_More": "Baca Selengkapnya",
