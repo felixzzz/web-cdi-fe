@@ -91,7 +91,8 @@
       "Prospectus": "Prospectus",
       "General Meeting of Shareholders": "General Meeting of Shareholders",
       "Public Announcement": "Public Announcement",
-      "Earnings Update": "Earnings Update"
+      "Earnings Update": "Earnings Update",
+      "Investor Update": "Investor Update"
     },
     "Report": {
       "financial_title": "Financial Data Table",
@@ -124,6 +125,10 @@
       "Code_of_Conduct": "Code of Conduct",
       "Policy": "Policy",
       "Whistleblowing": "Whistleblowing",
+      "Whistleblower_channel": "Whistleblower Channels",
+      "Whistleblower_hotline_email": "Hotline Email",
+      "Whistleblower_hotline_phone": "Hotline Phone",
+      "Whistleblower_dropbox": "Dropbox at",
       "WhistleblowingPage": {
         "Governance": "Governance",
         "Whistleblowing": "Whistleblowing",
@@ -160,6 +165,11 @@
         "download_download": "Download"
       }
     }
+  },
+  "Sustainability": {
+    "Sustainability_policy": "Our Sustainability Policy and Framework",
+    "Sustainability_desc": "Our Sustainability Framework and Policy guide our strategic decisions across all aspects of our operations, ensuring business success aligns with environmental stewardship, and creates positive impact through responsible practices.",
+    "Sustainability_button": "Sustainability Policy"
   },
   "Media": {
     "Read_More": "Read More",

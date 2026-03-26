@@ -148,4 +148,4 @@ export interface PublicationApiResponse {
   items: PublicationItem[];
 }
 
-export type PublicationTab = "prospectus" | "gms" | "disclosure" | "earnings";
+export type PublicationTab = "prospectus" | "gms" | "disclosure" | "earnings" | "investor-update";

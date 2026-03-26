@@ -65,8 +65,7 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
                             {/* 🔵 FLOATING HEADER */}
                             <div className="flex items-end">
                                 <div className="bg-[#B9C6D3] rounded-t-xl px-6 py-3 relative z-30"><h2
-                                    className="text-xl md:text-[20px] font-bold text-gray-900">Whistleblower
-                                    Channels</h2></div>
+                                    className="text-xl md:text-[20px] font-bold text-gray-900">{t("Whistleblower_channel")}</h2></div>
                                 <div className="bg-[#337ABC] rounded-t-xl h-[40px] w-16 -ml-3 relative z-20"></div>
                                 <div className="bg-[#53C3D9] rounded-t-xl h-[40px] w-16 -ml-3 relative z-10"></div>
                             </div>
@@ -84,7 +83,7 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
                                             <Mail size={18}/>
                                         </div>
                                         <div>
-                                            <p className="font-semibold">Hotline Email</p>
+                                            <p className="font-semibold">{t("Whistleblower_hotline_email")}</p>
                                             <p className="text-gray-700">
                                                 corporatesecretary.cdi@capcx.com
                                             </p>
@@ -98,7 +97,7 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
                                             <Phone size={18}/>
                                         </div>
                                         <div>
-                                            <p className="font-semibold">Hotline Phone</p>
+                                            <p className="font-semibold">{t("Whistleblower_hotline_phone")}</p>
                                             <ul className="list-disc list-inside text-gray-700">
                                                 <li>021-5307950</li>
                                             </ul>
@@ -112,7 +111,7 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
                                             <MapPin size={18}/>
                                         </div>
                                         <div>
-                                            <p className="font-semibold">Dropbox at:</p>
+                                            <p className="font-semibold">{t("Whistleblower_dropbox")}:</p>
 
                                             <div className="text-gray-700 mt-1">
                                                 <p className="font-semibold">Head Office</p>
