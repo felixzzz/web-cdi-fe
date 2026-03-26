@@ -20,7 +20,7 @@ export function Whistleblowing({data, image, locale}: WhistleblowingProps) {
     const CONTENT_HTML = data.content || "";
     const IMAGE_URL = locale == "id" ? image : data.file_url;
     const IMAGE_ALT = data.title || "Whistleblowing concept illustration";
-    const LINK_URL = `/governance/whistleblowing`;
+    // const LINK_URL = `/governance/whistleblowing`;
     // const LINK_URL = `${process.env.NEXT_PUBLIC_URL_LP}/governance/whistleblowing`;
 
     const handleLinkClick = () => {
