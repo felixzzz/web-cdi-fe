@@ -64,15 +64,15 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
 
                             {/* 🔵 FLOATING HEADER */}
                             <div className="flex items-end">
-                                <div className="bg-[#B9C6D3] rounded-t-xl px-6 py-3 relative"><h2
+                                <div className="bg-[#B9C6D3] rounded-t-xl px-6 py-3 relative z-3"><h2
                                     className="text-xl md:text-[20px] font-bold text-gray-900">{t("Whistleblower_channel")}</h2></div>
-                                <div className="bg-[#337ABC] rounded-t-xl h-[40px] w-16 -ml-3 relative z-20"></div>
-                                <div className="bg-[#53C3D9] rounded-t-xl h-[40px] w-16 -ml-3 relative z-10"></div>
+                                <div className="bg-[#337ABC] rounded-t-xl h-[40px] w-16 -ml-3 relative z-2"></div>
+                                <div className="bg-[#53C3D9] rounded-t-xl h-[40px] w-16 -ml-3 relative z-1"></div>
                             </div>
 
                             {/* 🧊 MAIN CARD */}
                             <div
-                                className="bg-[#B9C6D3] text-[#091A24] rounded-b-2xl rounded-tr-2xl p-6 md:p-8 relative -mt-[1px]">
+                                className="bg-[#B9C6D3] text-[#091A24] rounded-b-2xl rounded-tr-2xl p-6 md:p-8 relative z-3 -mt-[1px]">
 
                                 <div className="space-y-6 text-sm">
 
