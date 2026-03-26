@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import React from "react";
-import {ArrowUpRight} from "lucide-react";
-import {Link} from "@/i18n/navigation";
-import {GovernanceSection} from "@/types/Governances/Governance"; // Import the type
-import {useTranslations} from "next-intl";
+import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { GovernanceSection } from "@/types/Governances/Governance";
+import { useTranslations } from "next-intl";
 
 interface WhistleblowingProps {
     data: GovernanceSection;
@@ -13,15 +13,13 @@ interface WhistleblowingProps {
     locale: string;
 }
 
-export function Whistleblowing({data, image, locale}: WhistleblowingProps) {
+export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
     const t = useTranslations("Investor.Governance");
-    // Use data from props.
+
     const TITLE = data.title || "Whistleblowing";
     const CONTENT_HTML = data.content || "";
-    const IMAGE_URL = locale == "id" ? image : data.file_url;
-    const IMAGE_ALT = data.title || "Whistleblowing concept illustration";
-    // const LINK_URL = `/governance/whistleblowing`;
-    // const LINK_URL = `${process.env.NEXT_PUBLIC_URL_LP}/governance/whistleblowing`;
+    const IMAGE_URL = locale === "id" ? image : data.file_url;
+    const IMAGE_ALT = data.title || "Whistleblowing";
 
     const handleLinkClick = () => {
         window.dispatchEvent(new Event("startProgressBar"));
@@ -30,44 +28,116 @@ export function Whistleblowing({data, image, locale}: WhistleblowingProps) {
     return (
         <section
             id="whistleblowing"
-            aria-labelledby="whistleblowing-heading"
-            className="bg-[#091A24] py-20 text-white scroll-mt-10"
+            className="bg-[#091A24] py-20 text-white"
         >
-            <div className="container mx-auto  ">
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 mb-8 ">
+            <div className="container mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+
+                    {/* LEFT CONTENT */}
                     <div className="lg:col-span-3">
-                        <h2
-                            id="whistleblowing-heading"
-                            className="text-2xl lg:text-[38px] lg:leading-[44px] font-medium mb-4"
-                        >
+                        <h2 className="text-2xl lg:text-[38px] font-medium mb-4">
                             {TITLE}
                         </h2>
+
                         <div
-                            className="max-w-full prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
-                            dangerouslySetInnerHTML={{__html: CONTENT_HTML}}
+                            className="prose prose-invert text-sm lg:text-base leading-relaxed text-justify"
+                            dangerouslySetInnerHTML={{ __html: CONTENT_HTML }}
                         />
+
+                        {/* 🖼️ TIMELINE IMAGE (KEEP THIS) */}
+                        <div className="lg:w-5/12 mt-5">
+                            <Image
+                                src={IMAGE_URL}
+                                alt={IMAGE_ALT}
+                                width={600}
+                                height={400}
+                                className="w-full h-auto rounded-lg"
+                                priority
+                            />
+                        </div>
+                    </div>
+
+                    {/* RIGHT SIDE */}
+                    <div className="lg:col-span-2 space-y-6">
+
+                        <div className="relative">
+
+                            {/* 🔵 FLOATING HEADER */}
+                            <div className="flex items-end">
+                                <div className="bg-[#B9C6D3] rounded-t-xl px-6 py-3 relative z-30"><h2
+                                    className="text-xl md:text-[20px] font-bold text-gray-900">Whistleblower
+                                    Channels</h2></div>
+                                <div className="bg-[#337ABC] rounded-t-xl h-[40px] w-16 -ml-3 relative z-20"></div>
+                                <div className="bg-[#53C3D9] rounded-t-xl h-[40px] w-16 -ml-3 relative z-10"></div>
+                            </div>
+
+                            {/* 🧊 MAIN CARD */}
+                            <div
+                                className="bg-[#B9C6D3] text-[#091A24] rounded-b-2xl rounded-tr-2xl p-6 md:p-8 relative z-30 -mt-[1px]">
+
+                                <div className="space-y-6 text-sm">
+
+                                    {/* Email */}
+                                    <div className="flex gap-4">
+                                        <div
+                                            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#2F6FA3] text-white">
+                                            <Mail size={18}/>
+                                        </div>
+                                        <div>
+                                            <p className="font-semibold">Hotline Email</p>
+                                            <p className="text-gray-700">
+                                                corporatesecretary.cdi@capcx.com
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Phone */}
+                                    <div className="flex gap-4">
+                                        <div
+                                            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#2F6FA3] text-white">
+                                            <Phone size={18}/>
+                                        </div>
+                                        <div>
+                                            <p className="font-semibold">Hotline Phone</p>
+                                            <ul className="list-disc list-inside text-gray-700">
+                                                <li>021-5307950</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    {/* Address */}
+                                    <div className="flex gap-4">
+                                        <div
+                                            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#2F6FA3] text-white">
+                                            <MapPin size={18}/>
+                                        </div>
+                                        <div>
+                                            <p className="font-semibold">Dropbox at:</p>
+
+                                            <div className="text-gray-700 mt-1">
+                                                <p className="font-semibold">Head Office</p>
+                                                <p>Wisma Barito Pacific Tower A, 5th Floor</p>
+                                                <p>Jl Let. Jend. S. Parman Kav. 62–63, Jakarta 11410</p>
+                                                <p>Indonesia</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
                         <Link
                             onClick={handleLinkClick}
-                            // href={LINK_URL}
-                            href="mailto:corporatesecretary.cdi@capcx.com"
-                            rel="noopener noreferrer"
+                            href="mailto:whistleblower.channels@capcx.com"
                             className="px-6 py-2 rounded-full border border-white flex items-center gap-2 w-fit mt-8"
                         >
                             {t("cta_whistle")}
-                            <ArrowUpRight size={16}/>
+                            <ArrowUpRight size={16} />
                         </Link>
-                    </div>
-
-                    <div className="lg:col-span-2">
-                        <Image
-                            src={IMAGE_URL}
-                            alt={IMAGE_ALT}
-                            title={IMAGE_ALT}
-                            width={600}
-                            height={400}
-                            className="w-full md:w-[90%] h-auto rounded-lg"
-                            priority
-                        />
                     </div>
                 </div>
             </div>
