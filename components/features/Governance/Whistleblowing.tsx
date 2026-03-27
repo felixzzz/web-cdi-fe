@@ -45,7 +45,7 @@ export function Whistleblowing({ data, image, locale }: WhistleblowingProps) {
                         />
 
                         {/* 🖼️ TIMELINE IMAGE (KEEP THIS) */}
-                        <div className="lg:w-5/12 mt-5">
+                        <div className="w-full mx-auto mt-5 py-6">
                             <Image
                                 src={IMAGE_URL}
                                 alt={IMAGE_ALT}
