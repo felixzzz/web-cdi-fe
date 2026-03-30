@@ -20,7 +20,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
         title={title || "Overview"}
         layout="fill"
         objectFit="cover"
-        className="z-0"
+        className="z-0 object-left lg:object-center"
         priority
       />
 
