@@ -24,6 +24,7 @@ function ContentBlock({
   align,
 }: ContentBlockProps) {
   const alignmentClass = align === "right" ? "ms-auto" : "me-auto";
+  const imagePositionClass = align === "right" ? "object-left" : "object-right";
 
   return (
     <section className="py-28 text-white bg-[#091A24] relative overflow-hidden">
@@ -33,9 +34,10 @@ function ContentBlock({
         title={alt}
         layout="fill"
         objectFit="cover"
-        className="z-0"
+        className={`z-0 ${imagePositionClass} lg:object-center`}
         priority
       />
+
       <div
         className="absolute inset-0 overlay-business z-[1]"
         style={{ background: customGradient }}
