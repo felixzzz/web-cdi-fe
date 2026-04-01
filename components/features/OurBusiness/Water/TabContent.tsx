@@ -26,6 +26,8 @@ function ContentBlock({
 }: ContentBlockProps) {
   const alignmentClass = align === "right" ? "ms-auto" : "me-auto";
   const imagePositionClass = align === "right" ? "object-left" : "object-right";
+  // const gradientStyle =
+  //   "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
 
 
   return (
@@ -40,7 +42,8 @@ function ContentBlock({
         priority
       />
       <div
-        className="absolute inset-0 overlay-business z-[1]"
+        className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
+        // className="absolute inset-0 overlay-business z-[1]"
         style={{ backgroundImage: customGradient }}
       ></div>
 
