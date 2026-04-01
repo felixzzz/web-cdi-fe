@@ -8,11 +8,7 @@ interface OverviewProps {
   linkTitle: string | null;
 }
 
-export function Overview({
-  title,
-  description,
-  imageUrl,
-}: OverviewProps) {
+export function Overview({ title, description, imageUrl }: OverviewProps) {
   const gradientStyle =
     "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
 
@@ -29,8 +25,12 @@ export function Overview({
       />
 
       <div
-        // className="absolute inset-0 overlay-business z-[1]"
-        className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
+        className="absolute inset-0 overlay-business z-[1] bg-black/55 lg:bg-transparent"
+        style={{ backgroundImage: gradientStyle }}
+      ></div>
+
+      <div
+        className="absolute inset-0 overlay-business z-[1]"
         style={{ backgroundImage: gradientStyle }}
       ></div>
 
@@ -47,7 +47,7 @@ export function Overview({
           </h2>
 
           <span
-          className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
+            className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
             dangerouslySetInnerHTML={{
               __html: description || "",
             }}

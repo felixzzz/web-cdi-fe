@@ -41,7 +41,7 @@ function ContentBlock({
       />
 
       <div
-        className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
+        className="absolute inset-0 overlay-business z-[1] bg-black/55 lg:bg-transparent"
         style={{ backgroundImage: gradientStyle }}
       ></div>
 
