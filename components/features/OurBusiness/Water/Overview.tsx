@@ -29,7 +29,8 @@ export function Overview({
       />
 
       <div
-        className="absolute inset-0 overlay-business z-[1]"
+        // className="absolute inset-0 overlay-business z-[1]"
+        className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
         style={{ backgroundImage: gradientStyle }}
       ></div>
 

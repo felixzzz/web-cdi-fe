@@ -23,14 +23,15 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
         className="z-0 object-left"
         priority
       />
+      
       <div
-        className="absolute inset-0 overlay-business z-[1]"
+      className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
         style={{ backgroundImage: gradientStyle }}
       ></div>
 
       <section
         aria-labelledby="overview-heading"
-        className="container mx-auto   relative z-[2]"
+        className="container mx-auto relative z-[2] px-4 lg:px-8" 
       >
         <div className="lg:max-w-[45%] ms-auto">
           <h2
@@ -41,8 +42,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
           </h2>
 
           <span
-            className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
-            // className="text-[12px] leading-[24px] font-extralight text-white py-1 space-y-6"
+            className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify block"
             dangerouslySetInnerHTML={{
               __html: description || "",
             }}

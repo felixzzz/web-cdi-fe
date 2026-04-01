@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { clsx } from "clsx"; 
+import { clsx } from "clsx";
 import { TabData } from "./BusinessPillars";
 
 const customGradient =
@@ -12,7 +12,7 @@ type ContentBlockProps = {
   title: string | null;
   contentHtml: string;
   align: "left" | "right";
-  useCustomGradient: boolean; 
+  useCustomGradient: boolean;
 };
 
 function ContentBlock({
@@ -21,10 +21,12 @@ function ContentBlock({
   title,
   contentHtml,
   align,
-  useCustomGradient, 
+  useCustomGradient,
 }: ContentBlockProps) {
   const alignmentClass = align === "right" ? "ms-auto" : "me-auto";
   const imagePositionClass = align === "right" ? "object-left" : "object-right";
+  const gradientStyle =
+    "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
 
   return (
     <section className="py-28 text-white bg-[#091A24] relative overflow-hidden">
@@ -37,6 +39,16 @@ function ContentBlock({
         className={`z-0 ${imagePositionClass} lg:object-center`}
         priority
       />
+      {/* <div
+      className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
+      style={{ backgroundImage: gradientStyle }}
+      ></div> */}
+
+      <div
+        className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
+        style={{ backgroundImage: gradientStyle }}
+      ></div>
+
       <div
         className="absolute inset-0 overlay-business z-[1]"
         style={useCustomGradient ? { backgroundImage: customGradient } : {}}
