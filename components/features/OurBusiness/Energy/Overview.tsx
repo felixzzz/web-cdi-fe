@@ -25,6 +25,11 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
       />
 
       <div
+        className="absolute inset-0 overlay-business z-[1] bg-black/55 lg:bg-transparent"
+        style={{ backgroundImage: gradientStyle }}
+      ></div>
+
+      <div
         className="absolute inset-0 overlay-business z-[1]"
         style={{ backgroundImage: gradientStyle }}
       ></div>
