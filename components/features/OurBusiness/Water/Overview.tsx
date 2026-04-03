@@ -20,7 +20,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
         title={title || "Overview"}
         layout="fill"
         objectFit="cover"
-        className="z-0 object-left lg:object-center"
+        className="z-0 object-[20%_center] lg:object-[65%_center]"
         priority
       />
 
@@ -36,7 +36,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
 
       <section
         aria-labelledby="overview-heading"
-        className="container mx-auto   relative z-[2]"
+        className="container mx-auto relative z-[2] px-4 md:px-8"
       >
         <div className="lg:max-w-[45%] ms-auto">
           <h2
@@ -47,7 +47,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
           </h2>
 
           <span
-            className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify"
+            className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base leading-snug lg:leading-loose text-justify block" // Menambahkan 'block' agar max-w bekerja dengan baik pada span
             dangerouslySetInnerHTML={{
               __html: description || "",
             }}

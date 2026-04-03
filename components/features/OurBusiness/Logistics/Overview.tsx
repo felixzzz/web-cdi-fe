@@ -20,14 +20,9 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
         title={title || "Overview"}
         layout="fill"
         objectFit="cover"
-        className="z-0 object-left lg:object-center"
+        className="z-0 object-[20%_center] lg:object-[65%_center]"
         priority
       />
-
-      {/* <div
-      className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
-      style={{ backgroundImage: gradientStyle }}
-      ></div> */}
 
       <div
         className="absolute inset-0 overlay-business z-[1] bg-black/55 lg:bg-transparent"
@@ -36,7 +31,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
 
       <section
         aria-labelledby="overview-heading"
-        className="container   relative z-[2] mx-auto"
+        className="container relative z-[2] mx-auto px-4 md:px-8"
       >
         <div className="lg:max-w-[45%] ms-auto">
           <h2
@@ -47,7 +42,7 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
           </h2>
 
           <span
-            className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base text-white leading-snug lg:leading-loose text-justify"
+            className="max-w-2xl prose prose-invert prose-base text-sm lg:text-base text-white leading-snug lg:leading-loose text-justify block"
             dangerouslySetInnerHTML={{ __html: description || "" }}
           />
         </div>

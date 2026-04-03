@@ -7,16 +7,15 @@ interface BusinessPillarsProps {
   tab: BusinessTab; 
 }
 
-
 const customGradient =
   "linear-gradient(#091a24, #091a244d 8%, #091a2427 25%, #091a2400 75%, #091a2466 82%, #091a24)";
 
-
 export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
   const keyAssetsTitle = tab?.contents[0]?.heading || "Key Assets";
+  
   return (
     <article aria-labelledby="pillars-heading-ports" className="bg-[#091A24] text-white">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4 md:px-8">
         <h2 id="pillars-heading-ports" className="font-medium lg:text-4xl text-[24px] lg:leading-[44px] text-center pt-20">
           {title || "Business Pillars"}
         </h2>
@@ -28,7 +27,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
             aria-labelledby={`company-heading-${tab.id}`}
             className="py-16 bg-blue-dark"
           >
-            <div className="container mx-auto   grid grid-cols-1 lg:grid-cols-3 gap-20 max-lg:gap-y-10">
+            <div className="container mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-3 gap-20 max-lg:gap-y-10">
               <div className="relative w-full aspect-square">
                 <Image
                   src={tab.image} 
@@ -46,7 +45,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
                   {tab.title} 
                 </h3>
                 <div
-                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify"
+                  className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify block"
                   dangerouslySetInnerHTML={{
                     __html: tab.description || "", 
                   }}
@@ -60,7 +59,7 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
             className="bg-blue-dark"
           >
             <div className="py-10">
-              <div className="container mx-auto  ">
+              <div className="container mx-auto px-4 md:px-8">
                 <h4
                   id="key-assets-heading"
                   className="font-medium lg:text-3xl text-[28px] mb-4 text-white text-center"
@@ -104,6 +103,10 @@ function AssetBlock({
 }: AssetBlockProps) {
   const alignmentClass = alignment === "left" ? "me-auto" : "ms-auto";
 
+  const imagePositionClass = alignment === "right" 
+    ? "object-[20%_center] lg:object-[65%_center]" 
+    : "object-[80%_center] lg:object-[35%_center]"; 
+
   return (
     <div className="py-28 text-white bg-blue-dark relative overflow-hidden">
       <Image
@@ -112,21 +115,22 @@ function AssetBlock({
         title={alt}
         layout="fill"
         objectFit="cover"
-        className="z-0"
+        className={`z-0 ${imagePositionClass}`}
+        priority
       />
       <div
         className="absolute inset-0 overlay-business z-[1] bg-black/55 lg:bg-transparent"
-        // className="absolute inset-0 overlay-business z-[1]"
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto   relative z-[2]">
+      <div className="container mx-auto relative z-[2] px-4 md:px-8">
         <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
           <h5 className="lg:text-2xl text-[28px] font-medium mb-6 text-blue-lighter">
             {title}
           </h5>
           <div
-          className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify"
+            // Menambahkan block
+            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify block"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>

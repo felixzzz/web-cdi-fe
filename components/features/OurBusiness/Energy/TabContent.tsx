@@ -12,7 +12,6 @@ type ContentBlockProps = {
   title: string | null;
   contentHtml: string | null;
   align: string;
-  // align: "left" | "right";
   useCustomGradient: boolean;
 };
 
@@ -24,7 +23,11 @@ function ContentBlock({
   align,
 }: ContentBlockProps) {
   const alignmentClass = align === "right" ? "ms-auto" : "me-auto";
-  const imagePositionClass = align === "right" ? "object-left" : "object-right";
+  
+  const imagePositionClass = align === "right" 
+    ? "object-[20%_center] lg:object-[65%_center]"
+    : "object-[80%_center] lg:object-[35%_center]"; 
+
   const gradientStyle =
     "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
 
@@ -36,7 +39,7 @@ function ContentBlock({
         title={alt}
         layout="fill"
         objectFit="cover"
-        className={`z-0 ${imagePositionClass} lg:object-center`}
+        className={`z-0 ${imagePositionClass} priority`}
         priority
       />
 
@@ -50,8 +53,8 @@ function ContentBlock({
         style={{ background: customGradient }}
       ></div>
 
-      <div className="container mx-auto   relative z-[2]">
-        <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
+      <div className="container mx-auto relative z-[2]">
+        <div className={clsx("lg:max-w-[45%] px-4 md:px-8", alignmentClass)}>
           {title && (
             <h3 className="lg:text-2xl text-[28px] leading-normal font-medium mb-6 text-[#47C1EA]">
               {title}
@@ -79,7 +82,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
     <div className="bg-[#091A24] text-white">
       {(tab.sub_title || tab.description) && (
         <div className="py-16 bg-[#091A24]">
-          <div className="container mx-auto  ">
+          <div className="container mx-auto px-4 md:px-8">
             {tab.sub_title && (
               <h2 className="lg:text-3xl text-[38px] lg:leading-[44px] font-medium text-white mb-6">
                 {tab.sub_title}

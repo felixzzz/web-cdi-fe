@@ -20,18 +20,18 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
         title={title || "Overview"}
         layout="fill"
         objectFit="cover"
-        className="z-0 object-left"
+        className="z-0 object-[20%_center] lg:object-[65%_center]"
         priority
       />
-      
+
       <div
-      className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
+        className="absolute inset-0 overlay-business z-[1]"
         style={{ backgroundImage: gradientStyle }}
       ></div>
 
       <section
         aria-labelledby="overview-heading"
-        className="container mx-auto relative z-[2] px-4 lg:px-8" 
+        className="container mx-auto relative z-[2] px-4 md:px-8"
       >
         <div className="lg:max-w-[45%] ms-auto">
           <h2
