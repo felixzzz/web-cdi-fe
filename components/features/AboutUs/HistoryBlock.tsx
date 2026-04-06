@@ -16,7 +16,7 @@ export const HistoryBlock: React.FC<HistoryBlockProps> = ({
 
   return (
     <div
-      className="py-28 text-white bg-[#091A24] bg-cover relative"
+      className="py-28 text-white bg-[#091A24] bg-cover relative z-0 object-[20%_center] lg:object-[65%_center]"
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
     >
       <div

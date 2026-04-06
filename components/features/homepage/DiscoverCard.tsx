@@ -17,6 +17,9 @@ export const DiscoverCard: React.FC<DiscoverCardProps> = ({
   linkHref,
   target,
 }) => {
+  const gradientStyle =
+    "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
+
   return (
     <Link
       title={title}
@@ -25,6 +28,11 @@ export const DiscoverCard: React.FC<DiscoverCardProps> = ({
       className="relative block aspect-[9/16] bg-cover bg-no-repeat text-white group"
       style={{ backgroundImage: `url(${imageUrl})` }}
     >
+      <div
+        className="absolute inset-0 overlay-business z-[1] bg-black/30 lg:bg-transparent"
+        style={{ backgroundImage: gradientStyle }}
+      ></div>
+
       <div
         className="absolute inset-0 flex flex-col justify-between px-5 lg:px-10 pb-5 lg:pb-10 pt-[35%] z-10
                    bg-gradient-to-b from-black/60 via-transparent to-black/60
@@ -41,11 +49,11 @@ export const DiscoverCard: React.FC<DiscoverCardProps> = ({
 
         <div
           className="absolute inset-0 z-[11] bg-black/60
-                   opacity-0 group-hover:opacity-100
+                   opacity-0 group-hover:opacity-50
                    transition-opacity duration-300 ease-out"
         />
         <ArrowUpRight
-          className="absolute bottom-8 right-8 p-2 rounded-full font-bold border-2 border-white "
+          className="absolute bottom-8 right-8 z-20 p-2 rounded-full font-bold border-2 border-white"
           size={44}
           color="white"
         />
