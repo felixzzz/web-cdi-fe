@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({
                 alt={logoAlt}
                 width={200}
                 height={80}
-                className="h-16 md:h-20 w-auto cursor-pointer"
+                className="h-12 md:h-20 w-auto cursor-pointer"
               />
             </Link>
           </div>
