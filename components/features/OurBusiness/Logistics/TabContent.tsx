@@ -11,7 +11,7 @@ type ContentBlockProps = {
   alt: string;
   title: string | null;
   contentHtml: string;
-  align: "left" | "right";
+  align: "left" | "right" | string;
   useCustomGradient: boolean;
 };
 
@@ -24,7 +24,11 @@ function ContentBlock({
   useCustomGradient,
 }: ContentBlockProps) {
   const alignmentClass = align === "right" ? "ms-auto" : "me-auto";
-  const imagePositionClass = align === "right" ? "object-left" : "object-right";
+  
+  const imagePositionClass = align === "right" 
+    ? "object-[20%_center] lg:object-[65%_center]" 
+    : "object-[80%_center] lg:object-[35%_center]"; 
+
   const gradientStyle =
     "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
 
@@ -36,13 +40,9 @@ function ContentBlock({
         title={alt}
         layout="fill"
         objectFit="cover"
-        className={`z-0 ${imagePositionClass} lg:object-center`}
+        className={`z-0 ${imagePositionClass}`}
         priority
       />
-      {/* <div
-      className="absolute inset-0 overlay-business z-[1] bg-black/60 lg:bg-transparent"
-      style={{ backgroundImage: gradientStyle }}
-      ></div> */}
 
       <div
         className="absolute inset-0 overlay-business z-[1] bg-black/55 lg:bg-transparent"
@@ -54,7 +54,7 @@ function ContentBlock({
         style={useCustomGradient ? { backgroundImage: customGradient } : {}}
       ></div>
 
-      <div className="container mx-auto   relative z-[2]">
+      <div className="container mx-auto relative z-[2] px-4 md:px-8">
         <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
           {title && (
             <h3 className="text-2xl lg:text-[28px] font-medium mb-6 text-[#47C1EA]">
@@ -62,7 +62,7 @@ function ContentBlock({
             </h3>
           )}
           <div
-            className="prose prose-invert prose-base max-w-none"
+            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-relaxed lg:leading-loose text-justify block"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           />
         </div>
@@ -83,7 +83,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
     <div className="bg-[#091A24] text-white">
       {(tab.sub_title || tab.description) && (
         <div className="py-16 bg-[#091A24]">
-          <div className="container mx-auto  ">
+          <div className="container mx-auto px-4 md:px-8">
             {tab.sub_title && (
               <h2 className="text-3xl lg:text-[38px] lg:leading-[44px] font-medium text-white mb-6">
                 {tab.sub_title}
@@ -91,7 +91,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
             )}
             {tab.description && (
               <div
-                className="prose prose-invert prose-base max-w-none"
+                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-relaxed lg:leading-loose text-justify block"
                 dangerouslySetInnerHTML={{ __html: tab.description }}
               />
             )}
@@ -107,7 +107,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
             alt={content.name || content.title || "Business Content Image"}
             title={content.title}
             contentHtml={content.description}
-            align={content.align}
+            align={content.align as "left" | "right"}
             useCustomGradient={needsCustomGradient}
           />
         ))}

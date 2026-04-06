@@ -25,10 +25,10 @@ function ContentBlock({
   align,
 }: ContentBlockProps) {
   const alignmentClass = align === "right" ? "ms-auto" : "me-auto";
-  const imagePositionClass = align === "right" ? "object-left" : "object-right";
-  // const gradientStyle =
-  //   "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
-
+  
+  const imagePositionClass = align === "right" 
+    ? "object-[20%_center] lg:object-[65%_center]" 
+    : "object-[80%_center] lg:object-[35%_center]"; 
 
   return (
     <section className="py-28 text-white bg-[#091A24] relative overflow-hidden">
@@ -38,17 +38,16 @@ function ContentBlock({
         title={alt}
         layout="fill"
         objectFit="cover"
-        className={`z-0 ${imagePositionClass} lg:object-center`}
+        className={`z-0 ${imagePositionClass} priority`}
         priority
       />
       <div
         className="absolute inset-0 overlay-business z-[1] bg-black/55 lg:bg-transparent"
-        // className="absolute inset-0 overlay-business z-[1]"
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto   relative z-[2]">
-        <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
+      <div className="container mx-auto relative z-[2]">
+        <div className={clsx("lg:max-w-[45%] px-4 md:px-8", alignmentClass)}>
           {tagline && <p className="text-neutral-200 mb-4">{tagline}</p>}
 
           {title && (
@@ -57,7 +56,7 @@ function ContentBlock({
             </h3>
           )}
           <div
-            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-relaxed lg:leading-loose text-justify"
+            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-relaxed lg:leading-loose text-justify block"
             dangerouslySetInnerHTML={{ __html: contentHtml || "" }}
           />
         </div>
@@ -71,13 +70,11 @@ interface TabContentProps {
 }
 
 export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
-
   return (
     <div className="bg-[#091A24] text-white">
-      {/* BLOK INTRO (HTML Tipe 1) */}
       {(tab.sub_title || tab.description) && (
         <div className="py-16 bg-[#091A24]">
-          <div className="container mx-auto  ">
+          <div className="container mx-auto px-4 md:px-8">
             {tab.sub_title && (
               <h2 className="lg:text-3xl text-[38px] lg:leading-[44px] font-medium text-white mb-6">
                 {tab.sub_title}
@@ -85,7 +82,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
             )}
             {tab.description && (
               <div
-                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-relaxed lg:leading-loose text-justify"
+                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-relaxed lg:leading-loose text-justify block"
                 dangerouslySetInnerHTML={{ __html: tab.description }}
               />
             )}
@@ -98,7 +95,7 @@ export const TabContent: React.FC<TabContentProps> = ({ tab }) => {
           <React.Fragment key={content.id}>
             {content.heading && (
               <div className="py-10 bg-[#091A24]">
-                <div className="container mx-auto  ">
+                <div className="container mx-auto px-4 md:px-8">
                   <h3 className="font-medium lg:text-2xl text-[28px] mb-4 text-white text-start">
                     {content.heading}
                   </h3>

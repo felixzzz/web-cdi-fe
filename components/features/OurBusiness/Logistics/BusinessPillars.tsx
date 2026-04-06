@@ -45,6 +45,10 @@ function AssetBlock({
 }: AssetBlockProps) {
   const alignmentClass = alignment === "left" ? "me-auto" : "ms-auto";
 
+  const imagePositionClass = alignment === "right" 
+    ? "object-[20%_center] lg:object-[65%_center]" 
+    : "object-[80%_center] lg:object-[35%_center]"; 
+
   return (
     <div className="py-28 text-white bg-blue-dark relative overflow-hidden">
       <Image
@@ -53,20 +57,21 @@ function AssetBlock({
         title={alt}
         layout="fill"
         objectFit="cover"
-        className="z-0"
+        className={`z-0 ${imagePositionClass}`}
+        priority
       />
       <div
-        className="absolute inset-0 overlay-business z-[1]"
+        className="absolute inset-0 overlay-business z-[1] bg-black/55 lg:bg-transparent"
         style={{ backgroundImage: customGradient }}
       ></div>
 
-      <div className="container mx-auto   relative z-[2]">
+      <div className="container mx-auto relative z-[2] px-4 md:px-8">
         <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
           <h4 className="text-2xl lg:text-[28px] font-medium mb-6 text-[#47C1EA]">
             {title}
           </h4>
           <div
-            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify"
+            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify block"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>
@@ -90,8 +95,8 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
 
   return (
     <div className="bg-[#091A24]">
-      <div className="container mx-auto   pt-8">
-        <div className="flex flex-col lg:flex-row border-b border-[#BFBFBF]/20">
+      <div className="container mx-auto px-4 md:px-8 pt-8">
+        <div className="flex flex-col lg:flex-row border-b border-[#BFBFBF]/20 overflow-x-auto hide-scrollbar">
           {tabs.map((tab) => (
             <TabButton
               key={tab.id}
@@ -113,7 +118,7 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
             aria-labelledby={`company-heading-${activeTab.id}`}
             className="py-16 bg-[#091A24]"
           >
-            <div className="container mx-auto  ">
+            <div className="container mx-auto px-4 md:px-8">
               <h3
                 id={`company-heading-${activeTab.id}`}
                 className="font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-6 text-white"
@@ -121,7 +126,7 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
                 {activeTab.sub_title}
               </h3>
               <div
-                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify"
+                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify block"
                 dangerouslySetInnerHTML={{
                   __html: activeTab.description || "",
                 }}
