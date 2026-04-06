@@ -1,6 +1,7 @@
+
 import Image from "next/image";
 import React from "react";
-import { ApiDataItem } from "@/types/Sustainabilitys/Environment"; // Import the type
+import { ApiDataItem } from "@/types/Sustainabilitys/Environment";
 
 interface EnergyEmissionProps {
   data: ApiDataItem;
@@ -25,12 +26,12 @@ export function EnergyEmission({ data }: EnergyEmissionProps) {
         title={TITLE} 
         layout="fill"
         objectFit="cover"
-        className="z-0"
+        className="z-0 object-[20%_center] lg:object-[65%_center]"
         priority
       />
 
       <div
-        className="absolute inset-0 overlay-business z-[1]"
+        className="absolute inset-0 overlay-business z-[1] bg-black/30 lg:bg-transparent"
         style={{ backgroundImage: gradientStyle }}
       ></div>
 

@@ -23,12 +23,12 @@ export function Overview({ data }: OverviewProps) {
         title="Abstract blue texture for overview background"
         layout="fill"
         objectFit="cover"
-        className="z-0"
+        className="z-0 object-[20%_center] lg:object-[65%_center]"
         priority
       />
 
       <div
-        className="absolute inset-0 overlay-business z-[1]"
+        className="absolute inset-0 overlay-business z-[1] bg-black/30 lg:bg-transparent"
         style={{ backgroundImage: gradientStyle }}
       ></div>
 

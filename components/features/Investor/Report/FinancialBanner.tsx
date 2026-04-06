@@ -22,7 +22,7 @@ export function FinancialBanner({ data }: FinancialBannerProps) {
           title={title || "Financial Banner"} 
           layout="fill"
           objectFit="cover"
-          className="z-0"
+          className="z-0 object-[20%_center] lg:object-[65%_center]"
           priority
         />
 

@@ -25,12 +25,12 @@ export function WasteManagement({ data }: WasteManagementProps) {
         title={TITLE}
         layout="fill"
         objectFit="cover"
-        className="z-0"
+        className="z-0 object-[90%_right]"
         priority
       />
 
       <div
-        className="absolute inset-0 overlay-business z-[1]"
+        className="absolute inset-0 overlay-business z-[1] bg-black/30 lg:bg-transparent"
         style={{ backgroundImage: gradientStyle }}
       ></div>
 
