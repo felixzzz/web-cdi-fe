@@ -35,7 +35,7 @@ export const SolutionCard: React.FC<SolutionCardProps> = ({
                    transition-opacity duration-300 ease-out"
       >
         <div className="absolute inset-0 flex flex-col justify-between px-5 lg:px-10 pb-5 lg:pb-10 pt-[35%] text-white z-10">
-          <h2 className="text-2xl lg:text-[40px] lg:leading-[40px] xl:text-[52px] font-medium text-shadow-1">
+          <h2 className="text-2xl lg:text-[36px] lg:leading-[40px] xl:text-[40px] font-medium text-shadow-1">
             {title}
           </h2>
           <div className="content !font-normal text-justify text-shadow-1 !text-neutral-200 mb-1 text-sm lg:text-base">
