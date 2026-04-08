@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { TabButton } from "./TabButton";
-import { TabContent } from "./TabContent";
 import { useTranslations } from "next-intl";
+import { TabContent } from "./TabContent";
 
 interface TabContentItem {
   id: number;

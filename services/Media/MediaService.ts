@@ -1,5 +1,6 @@
 import {
     ApiLatestNewsResponse,
+    ArticleItem,
     HeroNewsSection,
     IReportType,
     NewsApiResponse,
@@ -8,7 +9,7 @@ import {
 import axios from "axios";
 
 const API_URL_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/news?`;
-const API_URL_MEDIA_BLOG = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/blog?`;
+const API_URL_MEDIA_BLOG = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/blog`;
 const API_URL_HERO_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-page/media_main`;
 const API_URL_RELEASE = `${process.env.NEXT_PUBLIC_BASE_URL}/press-releases/list`;
 const API_URL_MEDIA_LATEST = `${process.env.NEXT_PUBLIC_BASE_URL}/article/latest-media`;
@@ -56,23 +57,20 @@ export async function getMediaPageData(
 }
 
 // method untuk fetch data page media blog
-export async function getMediaBlogPageData(
-    // locale: string
-): Promise<NewsApiResponse> {
+export async function getMediaBlogPageData(page: number = 1): Promise<NewsApiResponse> {
     try {
         const response = await axios.get<NewsApiResponse>(
-            API_URL_MEDIA_BLOG,
+            `${API_URL_MEDIA_BLOG}?page=${page}`,
             {
                 headers: {
                     "Content-Type": "application/json",
-                    // lang: locale,
                 },
             }
         );
 
         return response.data;
     } catch (error: unknown) {
-        handleAxiosError(error, "Failed to fetch latest news data");
+        handleAxiosError(error, "Failed to fetch media blog data");
     }
 }
 
@@ -97,10 +95,28 @@ export async function getHeroPageData(
     }
 }
 
+
+export async function getMediaBlogDetailBySlug(slug: string): Promise<ArticleItem | null> {
+    try {
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/article/detail/blog/${slug}`
+        );
+
+        console.log(response)
+
+        return response.data?.data || response.data;
+    } catch (error: unknown) {
+        console.error(`Gagal mengambil detail artikel untuk slug ${slug}:`, error);
+        return null;
+    }
+}
+
 export const mediaService = {
     getMediaPageData,
     getMediaBlogPageData,
-    getHeroPageData
+    getHeroPageData,
+    getMediaBlogDetailBySlug
+
 };
 
 

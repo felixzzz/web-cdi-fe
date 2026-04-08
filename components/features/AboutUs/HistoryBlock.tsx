@@ -13,10 +13,9 @@ export const HistoryBlock: React.FC<HistoryBlockProps> = ({
   title,
   children,
 }) => {
-
   return (
     <div
-      className="py-28 text-white bg-[#091A24] bg-cover relative z-0 object-[20%_center] lg:object-[65%_center]"
+      className="py-28 text-white bg-[#091A24] relative z-0 bg-no-repeat bg-[position:80%_center] lg:bg-[position:100%_center] bg-cover lg:bg-[length:100%_auto]"
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
     >
       <div
@@ -24,7 +23,7 @@ export const HistoryBlock: React.FC<HistoryBlockProps> = ({
         aria-hidden="true"
         style={{
           background:
-            "linear-gradient(#091a24, #091a24cc 10%, #00000080, #091a24cc 90%, #091a24)",
+            "linear-gradient(#091a24, #091a24cc 10%, #00000080, #091a24cc 60%, #091a24)",
         }}
       />
 
@@ -34,7 +33,6 @@ export const HistoryBlock: React.FC<HistoryBlockProps> = ({
           <h2 className="text-shadow-2 font-medium text-2xl lg:text-[38px] lg:leading-[44px] max-w-2xl mb-8">
             {title}
           </h2>
-          {/* <div className="max-w-2xl prose prose-invert prose-base">{children}</div> */}
           <div className="max-w-6xl prose prose-invert prose-base">{children}</div>
         </div>
       </section>

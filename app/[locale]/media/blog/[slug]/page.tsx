@@ -5,6 +5,7 @@ import { mediaService } from "@/services/Media/MediaService";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
+import { cache } from "react";
 
 export type PageProps = {
   params: {
@@ -13,14 +14,44 @@ export type PageProps = {
   };
 };
 
+const getArticleBySlug = cache(async (slug: string) => {
+  const firstPageData = await mediaService.getMediaBlogPageData(1);
+  if (!firstPageData?.items) return null;
+
+  let article = firstPageData.items.find(
+    (item) => item.slug === slug || item.slug_id === slug,
+  );
+  
+  if (article) return article;
+
+  const lastPage = firstPageData.meta?.last_page || Math.ceil((firstPageData.meta?.total || 0) / (firstPageData.meta?.per_page || 15));
+
+  if (lastPage > 1) {
+    const promises = [];
+    for (let i = 2; i <= lastPage; i++) {
+      promises.push(mediaService.getMediaBlogPageData(i));
+    }
+    
+    const results = await Promise.all(promises);
+
+    for (const res of results) {
+      if (res?.items) {
+        article = res.items.find(
+          (item) => item.slug === slug || item.slug_id === slug,
+        );
+        if (article) return article;
+      }
+    }
+  }
+
+  return null;
+});
+
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const mediaBlogData = await mediaService.getMediaBlogPageData();
-
-  const article = mediaBlogData.items.find(
-    (item) => item.slug === params.slug || item.slug_id === params.slug,
-  );
+  const article = await getArticleBySlug(params.slug);
 
   if (!article) {
     notFound();
@@ -30,7 +61,9 @@ export async function generateMetadata({
     params.locale === "id" ? article.title_id : article.title_en;
 
   const articleDesc =
-      params.locale === "id" ? article?.meta_tag_id?.description : article?.meta_tag?.description;
+    params.locale === "id"
+      ? article?.meta_tag_id?.description
+      : article?.meta_tag?.description;
 
   const title = `${articleTitle} | Chandra Daya Investasi`;
   const description = articleDesc || "";
@@ -41,7 +74,6 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === "id") return `${baseUrl}/${lang}${pagePath}`;
     return `${baseUrl}/${lang}${pagePath}`;
   };
 
@@ -79,8 +111,8 @@ export async function generateMetadata({
     alternates: {
       canonical: currentUrl,
       languages: {
-        "en-US": getCanonicalPath("en"), // Selalu return .../en/media/news
-        "id-ID": getCanonicalPath("id"), // Selalu return .../media/news
+        "en-US": getCanonicalPath("en"),
+        "id-ID": getCanonicalPath("id"), 
       },
     },
 
@@ -121,11 +153,7 @@ export async function generateMetadata({
 export default async function Page({ params }: PageProps) {
   const t = await getTranslations("Media");
 
-  const mediaBlogData = await mediaService.getMediaBlogPageData();
-
-  const article = mediaBlogData.items.find(
-    (item) => item.slug === params.slug || item.slug_id === params.slug,
-  );
+  const article = await getArticleBySlug(params.slug);
 
   if (!article) {
     notFound();
@@ -166,6 +194,8 @@ export default async function Page({ params }: PageProps) {
     }).format(date);
   };
 
+  const firstPageBlogData = await mediaService.getMediaBlogPageData(1);
+
   return (
     <main>
       <NavbarThemeTrigger theme="light" />
@@ -179,7 +209,7 @@ export default async function Page({ params }: PageProps) {
       />
       <NavbarThemeTrigger theme="light" />
       <RelatedPosts
-        allArticles={mediaBlogData.items}
+        allArticles={firstPageBlogData?.items || []}
         currentArticle={article}
         locale={params.locale}
         type="blog"
