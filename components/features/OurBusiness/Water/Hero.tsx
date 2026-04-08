@@ -24,7 +24,7 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <div
-      className="relative overflow-hidden aspect-[4/3] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end bg-cover"
+      className="relative overflow-hidden aspect-[4/3] lg:aspect-video w-full py-[5%] lg:py-[8%] flex items-end bg-cover bg-[position:50%_center] lg:bg-[position:100%_center]"
       style={{ backgroundImage: `url("${imageSrc}")` }}
     >
       <div
