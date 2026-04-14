@@ -24,9 +24,9 @@ function ContentBlock({
 }: ContentBlockProps) {
   const alignmentClass = align === "right" ? "ms-auto" : "me-auto";
   
-  const imagePositionClass = align === "right"
-      ? "object-[30%_center] lg:object-[65%_center]" 
-      : "object-[90%_center] lg:object-[35%_center]";
+const imagePositionClass = align === "right"
+      ? "object-[30%_0%] lg:object-[65%_0%]" 
+      : "object-[90%_20%] lg:object-[35%_20%]";
 
   const gradientStyle =
     "linear-gradient(rgb(9, 26, 36), rgba(9, 26, 36, 0.3) 8%, rgba(9, 26, 36, 0.153) 25%, rgba(9, 26, 36, 0) 75%, rgba(9, 26, 36, 0.4) 82%, rgb(9, 26, 36))";
