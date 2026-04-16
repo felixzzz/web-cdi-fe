@@ -20,11 +20,11 @@ export async function generateMetadata({
 
   const pagePath = "/investor/report";
 
-const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
-    return `${baseUrl}/${lang}${pagePath}`;      
+    if (lang === "id") return `${baseUrl}/${lang}${pagePath}`;
+    return `${baseUrl}/${lang}${pagePath}`;
   };
 
   const currentUrl = getCanonicalPath(locale);
@@ -61,8 +61,8 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     alternates: {
       canonical: currentUrl,
       languages: {
-        "en-US": getCanonicalPath('en'), // Selalu return .../en/media/news
-        "id-ID": getCanonicalPath('id'), // Selalu return .../media/news
+        "en-US": getCanonicalPath("en"), // Selalu return .../en/media/news
+        "id-ID": getCanonicalPath("id"), // Selalu return .../media/news
       },
     },
 
@@ -106,11 +106,13 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 export default async function Page({ params: { locale } }: ReportPageProps) {
   // const t = useTranslations("homepage");
 
-  const [reportData, financialData, institutions] = await Promise.all([
-    reportService.getReportPageData(locale),
-    reportService.getFinancialData(locale),
-    reportService.getInstitutionsData(locale),
-  ]);
+  const [reportData, financialData, institutions, sustainabilityReports] =
+    await Promise.all([
+      reportService.getReportPageData(locale),
+      reportService.getFinancialData(locale),
+      reportService.getInstitutionsData(locale),
+      reportService.getSustainabilityReports(locale),
+    ]);
 
   const {
     investor_report_banner,
@@ -132,7 +134,11 @@ export default async function Page({ params: { locale } }: ReportPageProps) {
       <FinancialBanner data={investor_report_overview} />
       <FinancialTable data={investor_report_table} />
       <SupportingInstitutions data={institutions} />
-      <FinancialCalendar initialData={financialData} locale={locale} />
+      <FinancialCalendar
+        sustainabilityData={sustainabilityReports}
+        initialData={financialData}
+        locale={locale}
+      />
     </main>
   );
 }

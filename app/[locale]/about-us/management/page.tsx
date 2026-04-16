@@ -21,27 +21,24 @@ import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 export async function generateMetadata({
   params: { locale },
 }: ManagementPageProps): Promise<Metadata> {
-  const t = await getTranslations("metadata");
+  const t = await getTranslations("metadata-seo.about-us-management");
   const aboutData = await managementService.getManagementPageData(locale);
 
   const { about_us_management_banner } = aboutData;
 
   const pagePath = "/about-us/management";
 
-  const title =
-    "Management and Organization Structure | Chandra Daya Investasi";
-
-const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
-    return `${baseUrl}/${lang}${pagePath}`;      
+    if (lang === "id") return `${baseUrl}/${lang}${pagePath}`;
+    return `${baseUrl}/${lang}${pagePath}`;
   };
 
   const currentUrl = getCanonicalPath(locale);
 
   return {
-    title: title,
+    title: t("title"),
     description: t("description"),
     metadataBase: new URL(`${baseUrl}/${locale}`),
 
@@ -71,13 +68,13 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     alternates: {
       canonical: currentUrl,
       languages: {
-        "en-US": getCanonicalPath('en'), // Selalu return .../en/media/news
-        "id-ID": getCanonicalPath('id'), // Selalu return .../media/news
+        "en-US": getCanonicalPath("en"), // Selalu return .../en/media/news
+        "id-ID": getCanonicalPath("id"), // Selalu return .../media/news
       },
     },
 
     openGraph: {
-      title: title,
+      title: t("title"),
       description: t("description"),
       url: currentUrl,
       siteName: "Chandra Daya Investasi",
@@ -97,7 +94,7 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
     twitter: {
       card: "summary_large_image",
-      title: title,
+      title: t("title"),
       description: t("description"),
       images: [
         about_us_management_banner?.file_url || "/assets/frontend/favicon.png",
@@ -217,7 +214,9 @@ export default async function Page({
         chartImageAlt={"Corporate Structure Chart"}
         tableTitle={tableData.title}
         tableData={tableData.content_table_trans}
-        showTable={about_us_corporate_structure_table_show.content_en === "show"}
+        showTable={
+          about_us_corporate_structure_table_show.content_en === "show"
+        }
       />
       <Downloads
         id="guidelines-of-work"

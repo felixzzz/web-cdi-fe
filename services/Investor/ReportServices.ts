@@ -1,10 +1,12 @@
 import { ApiInstitutionResponse, CalendarApiResponse, InvestorReportApiResponse } from "@/types/Investor/Report";
+import { SustainabilityReportResponse } from "@/types/Investor/SustainabilityReport";
 
 import axios from "axios";
 
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
 const API_URL_FINANCIAL = `${process.env.NEXT_PUBLIC_BASE_URL}/investor/calendar/list`;
 const API_URL_INSTITUTION = `${process.env.NEXT_PUBLIC_BASE_URL}/institutions/list`;
+const API_URL_REPORT = `${process.env.NEXT_PUBLIC_BASE_URL}/sustainability/reports/report`;
 
 // method untuk fetch data page report investor
 export async function getReportPageData(locale: string): Promise<InvestorReportApiResponse> {
@@ -92,8 +94,42 @@ async function getFinancialData(
     }
 }
 
+
+export async function getSustainabilityReports(
+  locale: string,
+  page: number = 1
+): Promise<SustainabilityReportResponse> {
+  try {
+    const url = new URL(API_URL_REPORT);
+    url.searchParams.append("page", page.toString());
+
+    const res = await fetch(url.toString(), {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        lang: locale,
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch sustainability reports: ${res.statusText}`);
+    }
+
+    const data: SustainabilityReportResponse = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getSustainabilityReports:", error);
+    throw new Error("Could not fetch sustainability reports data.");
+  }
+}
+
+
 export const reportService = {
   getReportPageData,
   getInstitutionsData,
   getFinancialData,
+  getSustainabilityReports
 };
