@@ -23,11 +23,10 @@ export async function generateMetadata(
   {
     params: { locale },
   }: HomePageProps ): Promise<Metadata> {
-  const t = await getTranslations('metadata')
-  const title = "Chandra Daya Investasi";
+  const t = await getTranslations('metadata-seo.home')
 
   return {
-    title: title,
+    title: t('title'),
     description: t('description'),
     keywords: [
       "Chandra Daya Investasi",
@@ -59,16 +58,16 @@ export async function generateMetadata(
     },
 
     openGraph: {
-      title: title,
+      title: t('title'),
       description: t('description'),
       url: "/",
       type: "website",
-      siteName: title,
+      siteName: t('title'),
     },
 
     twitter: {
       card: "summary_large_image",
-      title: title,
+      title: t('title'),
       description: t('description'),
     },
 

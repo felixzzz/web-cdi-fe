@@ -9,6 +9,10 @@ import {
   CalendarEventItem,
   PaginationMeta,
 } from "@/types/Investor/Report";
+import {
+  SustainabilityReportItem,
+  SustainabilityReportResponse,
+} from "@/types/Investor/SustainabilityReport";
 import { useTranslations } from "next-intl";
 
 interface Report {
@@ -40,76 +44,18 @@ const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
 
 interface FinancialCalendarProps {
   initialData: CalendarApiResponse;
+  sustainabilityData: SustainabilityReportResponse;
   locale: string;
 }
 
+const SUSTAINABILITY_TYPE = "Sustainability Report";
+
 export function FinancialCalendar({
   initialData,
+  sustainabilityData,
   locale,
 }: FinancialCalendarProps) {
   const t = useTranslations("Investor.Report");
-  const [reportItems, setReportItems] = useState<CalendarEventItem[]>(
-    flattenData(initialData)
-  );
-  const [pagination, setPagination] = useState<PaginationMeta>(
-    initialData.meta
-  );
-  const [currentPage, setCurrentPage] = useState(1);
-  const [activeYear, setActiveYear] = useState<string | number>("All Year");
-  const [activeType, setActiveType] = useState<string>("All Type");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const allItemsForFilters = useMemo(
-    () => flattenData(initialData),
-    [initialData]
-  );
-  const yearFilters = useMemo(() => {
-    const years = Array.from(new Set(allItemsForFilters.map((r) => r.year)));
-    return ["All Year", ...years.sort((a, b) => b - a)];
-  }, [allItemsForFilters]);
-
-  const typeFilters = useMemo(() => {
-    const types = Array.from(
-      new Set(allItemsForFilters.map((r) => formatReportType(r.type)))
-    );
-    return ["All Type", ...types.sort()];
-  }, [allItemsForFilters]);
-
-  useEffect(() => {
-    if (
-      currentPage === 1 &&
-      activeYear === "All Year" &&
-      activeType === "All Type"
-    ) {
-      setReportItems(flattenData(initialData));
-      setPagination(initialData.meta);
-      return;
-    }
-
-    const fetchData = async () => {
-      setIsLoading(true);
-      const apiType = unformatReportType(activeType);
-      const apiYear = activeYear === "All Year" ? "" : activeYear;
-
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`
-        );
-        if (!res.ok) throw new Error("Failed to fetch data");
-        const data: CalendarApiResponse = await res.json();
-
-        setReportItems(flattenData(data));
-        setPagination(data.meta);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [currentPage, activeYear, activeType, initialData]);
 
   const FILE_PREVIEW_BASE_URL = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/report/`;
   const FILE_DOWNLOAD_BASE_URL = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/report/`;
@@ -125,8 +71,138 @@ export function FinancialCalendar({
     downloadUrl: `${FILE_DOWNLOAD_BASE_URL}${item.ulid}/${item.name_slug}`,
   });
 
+  const transformSustainabilityItem = (
+    item: SustainabilityReportItem,
+  ): Report => {
+    const dateObj = new Date(item.created_at);
+    const formattedDate = dateObj.toLocaleDateString(
+      locale === "id" ? "id-ID" : "en-US",
+      { day: "numeric", month: "short", year: "numeric" },
+    );
+
+    console.log({
+      id: item.id,
+      title: locale === "id" ? item.title_id : item.title_en,
+      date: formattedDate,
+      size: item.file?.size || "-",
+      type: SUSTAINABILITY_TYPE,
+      year: parseInt(item.release_year) || dateObj.getFullYear(),
+      viewUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/file-storage/${item.file?.path}`,
+      downloadUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/file-download/${item.file?.path}`,
+    });
+
+    return {
+      id: item.id,
+      title: locale === "id" ? item.title_id : item.title_en,
+      date: formattedDate,
+      size: item.file?.size || "-",
+      type: SUSTAINABILITY_TYPE,
+      year: parseInt(item.release_year) || dateObj.getFullYear(),
+      viewUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/file-storage/${item.file?.path}`,
+      downloadUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/file-download/${item.file?.path}`,
+    };
+  };
+
+  const [reportItems, setReportItems] = useState<Report[]>(
+    flattenData(initialData).map(transformItem),
+  );
+  const [pagination, setPagination] = useState<PaginationMeta>(
+    initialData.meta,
+  );
+  const [currentPage, setCurrentPage] = useState(1);
+  const [activeYear, setActiveYear] = useState<string | number>("All Year");
+  const [activeType, setActiveType] = useState<string>("All Type");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const yearFilters = useMemo(() => {
+    const financialYears = flattenData(initialData).map((r) => r.year);
+    const sustainabilityYears = sustainabilityData.items.map(
+      (r) => parseInt(r.release_year) || new Date(r.created_at).getFullYear(),
+    );
+
+    const years = Array.from(
+      new Set([...financialYears, ...sustainabilityYears]),
+    );
+    return ["All Year", ...years.sort((a, b) => b - a)];
+  }, [initialData, sustainabilityData]);
+
+  const typeFilters = useMemo(() => {
+    const financialTypes = Array.from(
+      new Set(flattenData(initialData).map((r) => formatReportType(r.type))),
+    );
+    return ["All Type", ...financialTypes.sort(), SUSTAINABILITY_TYPE];
+  }, [initialData]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      try {
+        if (activeType === SUSTAINABILITY_TYPE) {
+          if (currentPage === 1 && activeYear === "All Year") {
+            setReportItems(
+              sustainabilityData.items.map(transformSustainabilityItem),
+            );
+            setPagination(sustainabilityData.meta);
+            setIsLoading(false);
+            return;
+          }
+
+          const apiYear = activeYear === "All Year" ? "" : activeYear;
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_URL}/api/sustainability/reports/report?page=${currentPage}${
+              apiYear ? `&year=${apiYear}` : ""
+            }`,
+          );
+          if (!res.ok) throw new Error("Failed to fetch sustainability data");
+          const data: SustainabilityReportResponse = await res.json();
+
+          setReportItems(data.items.map(transformSustainabilityItem));
+          setPagination(data.meta);
+        } else {
+          if (
+            currentPage === 1 &&
+            activeYear === "All Year" &&
+            activeType === "All Type"
+          ) {
+            setReportItems(flattenData(initialData).map(transformItem));
+            setPagination(initialData.meta);
+            setIsLoading(false);
+            return;
+          }
+
+          const apiType = unformatReportType(activeType);
+          const apiYear = activeYear === "All Year" ? "" : activeYear;
+
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_URL}/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`,
+          );
+          if (!res.ok) throw new Error("Failed to fetch data");
+          const data: CalendarApiResponse = await res.json();
+
+          setReportItems(flattenData(data).map(transformItem));
+          setPagination(data.meta);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [
+    currentPage,
+    activeYear,
+    activeType,
+    initialData,
+    sustainabilityData,
+    locale,
+  ]);
+
   const displayedReports = useMemo(() => {
-    return reportItems.map(transformItem).filter((report) => {
+    return reportItems.filter((report) => {
       return report.title.toLowerCase().includes(searchQuery.toLowerCase());
     });
   }, [reportItems, searchQuery]);
@@ -149,7 +225,7 @@ export function FinancialCalendar({
 
   return (
     <section
-      className="container mx-auto py-20  "
+      className="container mx-auto py-20"
       data-navbar-theme="dark"
       aria-labelledby="calendar-heading"
     >
@@ -169,7 +245,7 @@ export function FinancialCalendar({
 
       <nav
         aria-label="Filter by year"
-        className="gap-10 flex items-center overflow-y-auto mt-10 border-b-2 border-b-neutral-6"
+        className="gap-10 flex items-center overflow-y-auto mt-10 border-b-2 border-b-neutral-6 scrollbar-hide"
       >
         {yearFilters.map((year) => (
           <button
@@ -177,7 +253,7 @@ export function FinancialCalendar({
             onClick={() => handleYearClick(year)}
             className={clsx(
               "text-base font-normal text-neutral-900 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
-              activeYear === year && "!text-[#2474A5] !border-b-[#2474A5]"
+              activeYear === year && "!text-[#2474A5] !border-b-[#2474A5]",
             )}
           >
             {year}
@@ -188,18 +264,20 @@ export function FinancialCalendar({
       <div className="grid lg:grid-cols-2 gap-4 my-10">
         <nav
           aria-label="Filter by report type"
-          className="flex items-center gap-2 flex-wrap"
+          className="flex items-center gap-2 flex-nowrap"
         >
           {typeFilters.map((type) => (
             <button
               key={type}
               onClick={() => handleTypeClick(type)}
               className={clsx(
-                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5]  transition",
-                activeType === type && "bg-[#2474A5] text-gray-100"
+                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5] transition",
+                activeType === type && "bg-[#2474A5] text-gray-100",
               )}
             >
-              {t(type)}
+              {type === SUSTAINABILITY_TYPE
+                ? t("sustainability_report")
+                : t(type)}
             </button>
           ))}
         </nav>
@@ -225,7 +303,7 @@ export function FinancialCalendar({
         ) : displayedReports.length > 0 ? (
           displayedReports.map((report) => (
             <article
-              key={report.id}
+              key={`${report.type}-${report.id}`}
               className="py-8 border-b border-b-neutral-5 flex lg:items-center justify-between flex-col lg:flex-row gap-y-4 lg:gap-y-0"
             >
               <div>
@@ -254,7 +332,7 @@ export function FinancialCalendar({
                   href={report.viewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[#2474A5] font-medium"
+                  className="flex items-center gap-2 text-[#2474A5] font-medium hover:opacity-80 transition"
                 >
                   <Image
                     title="icon"
@@ -270,7 +348,7 @@ export function FinancialCalendar({
                   href={report.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[#2474A5] font-medium"
+                  className="flex items-center gap-2 text-[#2474A5] font-medium hover:opacity-80 transition"
                 >
                   <Image
                     title="icon"
@@ -292,15 +370,15 @@ export function FinancialCalendar({
 
       {pagination.last_page > 1 && (
         <div className="mt-16">
-          <div className="flex justify-center gap-2">
+          <div className="flex justify-center items-center gap-2">
             <button
               onClick={() => handlePageChange(pagination.current_page - 1)}
               disabled={pagination.current_page === 1 || isLoading}
-              className="px-4 py-2 border rounded disabled:opacity-50"
+              className="px-4 py-2 border rounded text-sm disabled:opacity-50 hover:bg-neutral-50 transition"
             >
               {t("previous")}
             </button>
-            <span className="px-4 py-2">
+            <span className="px-4 py-2 text-sm text-neutral-13">
               Page {pagination.current_page} of {pagination.last_page}
             </span>
             <button
@@ -308,7 +386,7 @@ export function FinancialCalendar({
               disabled={
                 pagination.current_page === pagination.last_page || isLoading
               }
-              className="px-4 py-2 border rounded disabled:opacity-50"
+              className="px-4 py-2 border rounded text-sm disabled:opacity-50 hover:bg-neutral-50 transition"
             >
               {t("next")}
             </button>

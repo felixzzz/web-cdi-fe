@@ -12,27 +12,25 @@ import { Link } from "@/i18n/navigation";
 export async function generateMetadata({
   params: { locale },
 }: WaterPageProps): Promise<Metadata> {
-  const t = await getTranslations("metadata");
+  const t = await getTranslations("metadata-seo.our-business-water");
 
   const waterData = await waterService.getWaterPageData(locale);
   const { banner_image, banner_title } = waterData;
 
   const pagePath = "/our-business/water";
 
-const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
-    return `${baseUrl}/${lang}${pagePath}`;      
+    if (lang === "id") return `${baseUrl}/${lang}${pagePath}`;
+    return `${baseUrl}/${lang}${pagePath}`;
   };
 
   const currentUrl = getCanonicalPath(locale);
 
-  const title = "Chandra Daya Investasi";
-
   return {
-    title: title,
-    description: t('description'),
+    title: t("title"),
+    description: t("description"),
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL_LP}/${locale}`),
 
     keywords: [
@@ -60,14 +58,14 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     alternates: {
       canonical: currentUrl,
       languages: {
-        "en-US": getCanonicalPath('en'), // Selalu return .../en/media/news
-        "id-ID": getCanonicalPath('id'), // Selalu return .../media/news
+        "en-US": getCanonicalPath("en"), // Selalu return .../en/media/news
+        "id-ID": getCanonicalPath("id"), // Selalu return .../media/news
       },
     },
 
     openGraph: {
-      title: title,
-      description: t('description'),
+      title: t("title"),
+      description: t("description"),
       url: currentUrl,
       siteName: "Chandra Daya Investasi",
       locale: locale,
@@ -84,8 +82,8 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: t('description'),
+      title: t("title"),
+      description: t("description"),
       images: [banner_image || "/assets/frontend/favicon.png"],
     },
 
@@ -100,7 +98,7 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 }
 
 export default async function Page({ params: { locale } }: WaterPageProps) {
-  const t = await getTranslations('OurBusiness')
+  const t = await getTranslations("OurBusiness");
   const waterData = await waterService.getWaterPageData(locale);
 
   return (
@@ -128,9 +126,7 @@ export default async function Page({ params: { locale } }: WaterPageProps) {
           href={waterData.link_url}
           className="bg-white text-neutral-950 px-6 py-2 rounded-full whitespace-nowrap w-fit flex flex-row gap-4 justify-center items-center"
         >
-          <span className="text-sm lg:text-base">
-            {t('learn_more')}
-          </span>
+          <span className="text-sm lg:text-base">{t("learn_more")}</span>
           <span>
             <MoveRightIcon size={14} className="font-thin" />
           </span>
