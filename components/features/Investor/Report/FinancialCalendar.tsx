@@ -250,17 +250,17 @@ export function FinancialCalendar({
         ))}
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-4 my-10">
+      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 my-10">
         <nav
           aria-label="Filter by report type"
-          className="flex items-center gap-2 flex-nowrap overflow-x-auto custom-scrollbar w-full pb-1"
+          className="flex items-center gap-3 flex-nowrap overflow-x-auto custom-scrollbar w-full xl:w-[calc(100%-320px)] pb-3"
         >
           {typeFilters.map((type) => (
             <button
               key={type}
               onClick={() => handleTypeClick(type)}
               className={clsx(
-                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex-shrink-0 flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5] transition",
+                "text-sm lg:text-base cursor-pointer px-8 py-2.5 rounded-full whitespace-nowrap flex-shrink-0 flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5] transition-colors",
                 activeType === type && "bg-[#2474A5] text-gray-100",
               )}
             >
@@ -270,15 +270,14 @@ export function FinancialCalendar({
             </button>
           ))}
         </nav>
-        <div className="relative w-full lg:w-[264px] lg:ms-auto">
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-7">
-            <Search size={16} />
-          </div>
+
+        <div className="flex items-center w-full xl:w-[300px] border border-neutral-7 rounded-full px-4 bg-transparent focus-within:ring-2 focus-within:ring-[#2474A5] transition-shadow flex-shrink-0">
+          <Search size={18} className="text-neutral-7 flex-shrink-0" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-full border border-neutral-7 px-10 py-2 placeholder:text-neutral-7 text-sm outline-none text-neutral-13 focus:ring-2 focus:ring-[#2474A5]"
+            className="w-full bg-transparent py-2.5 pl-3 text-sm outline-none placeholder:text-neutral-7 text-neutral-13"
             placeholder={t("search")}
           />
         </div>
