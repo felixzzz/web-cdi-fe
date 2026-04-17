@@ -80,19 +80,6 @@ export function FinancialCalendar({
       { day: "numeric", month: "short", year: "numeric" },
     );
 
-    console.log({
-      id: item.id,
-      title: locale === "id" ? item.title_id : item.title_en,
-      date: formattedDate,
-      size: item.file?.size || "-",
-      type: SUSTAINABILITY_TYPE,
-      year: parseInt(item.release_year) || dateObj.getFullYear(),
-      viewUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/file-storage/${item.file?.path}`,
-      downloadUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/file-download/${item.file?.path}`,
-    });
-
-    // test redeploy
-
     return {
       id: item.id,
       title: locale === "id" ? item.title_id : item.title_en,
@@ -100,8 +87,8 @@ export function FinancialCalendar({
       size: item.file?.size || "-",
       type: SUSTAINABILITY_TYPE,
       year: parseInt(item.release_year) || dateObj.getFullYear(),
-      viewUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/file-storage/${item.file?.path}`,
-      downloadUrl: `${process.env.NEXT_PUBLIC_BASE_PATH}/file-download/${item.file?.path}`,
+      viewUrl: `${process.env.NEXT_PUBLIC_BASE_PATH || "https://chandradaya-investasi.com"}/file-storage/${item.file?.path}`,
+      downloadUrl: `${process.env.NEXT_PUBLIC_BASE_PATH || "https://chandradaya-investasi.com"}/file-download/${item.file?.path}`,
     };
   };
 
@@ -266,14 +253,14 @@ export function FinancialCalendar({
       <div className="grid lg:grid-cols-2 gap-4 my-10">
         <nav
           aria-label="Filter by report type"
-          className="flex items-center gap-2 flex-nowrap"
+          className="flex items-center gap-2 flex-nowrap overflow-x-auto custom-scrollbar w-full pb-1"
         >
           {typeFilters.map((type) => (
             <button
               key={type}
               onClick={() => handleTypeClick(type)}
               className={clsx(
-                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5] transition",
+                "text-xs lg:text-base cursor-pointer px-6 py-2 rounded-full whitespace-nowrap flex-shrink-0 flex items-center gap-2 text-[#2474A5] border border-[#2474A5] hover:text-neutral-100 hover:bg-[#2474A5] transition",
                 activeType === type && "bg-[#2474A5] text-gray-100",
               )}
             >
