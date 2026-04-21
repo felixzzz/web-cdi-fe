@@ -8,7 +8,7 @@ import {
 } from "@/types/Media/Media";
 import axios from "axios";
 
-const API_URL_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/news?`;
+const API_URL_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/news`;
 const API_URL_MEDIA_BLOG = `${process.env.NEXT_PUBLIC_BASE_URL}/article/list/blog`;
 const API_URL_HERO_MEDIA = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-page/media_main`;
 const API_URL_RELEASE = `${process.env.NEXT_PUBLIC_BASE_URL}/press-releases/list`;
@@ -37,11 +37,12 @@ export async function getCategoryData(locale: string): Promise<IReportType[]> {
 
 // method untuk fetch data page media news
 export async function getMediaPageData(
-    locale: string
+    locale: string,
+    page: number = 1
 ): Promise<NewsApiResponse> {
     try {
         const response = await axios.get<NewsApiResponse>(
-            API_URL_MEDIA,
+            `${API_URL_MEDIA}?page=${page}`,
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -119,23 +120,20 @@ export const mediaService = {
 
 
 // method untuk fetch data page press release
-export async function getPressReleasePageData(locale: string): Promise<PressReleaseApiResponse> {
-    const res = await fetch(API_URL_RELEASE, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            lang: locale
-        },
-        next: {
-            revalidate: 3600,
-        },
-    });
+export async function getPressReleasePageData(locale: string, page: number = 1): Promise<PressReleaseApiResponse> {
+    try {
+        const res = await axios.get(`${API_URL_RELEASE}?page=${page}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                lang: locale
+            }
+        });
 
-    if (!res.ok) {
-        throw new Error(`Failed to fetch home data: ${res.statusText}`);
+        return await res.data
+    } catch (error: unknown) {
+        handleAxiosError(error, "Failed to fetch latest news data");
     }
-
-    return await res.json() as PressReleaseApiResponse;
 }
 
 // method untuk fetch data latest news media

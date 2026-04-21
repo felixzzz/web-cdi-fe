@@ -84,7 +84,7 @@ const DividendContent: React.FC<DividendContentProps> = ({ data }) => {
   const tableData = data.content_table?.tableData || [];
 
   const getLocalizedText = (item: { lang_en: string; lang_id: string }) => {
-    return locale === "id" ? item.lang_id : item.lang_en;
+    return locale === "en" ? item.lang_id : item.lang_en;
   };
 
   return (
