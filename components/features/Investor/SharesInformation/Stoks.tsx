@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { clsx } from "clsx";
 import { TableInvestorSection } from "@/types/Investor/Shares";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface ShareholdersContentProps {
   data: TableInvestorSection;
@@ -15,15 +15,13 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
   const tableData = data.content_table_trans?.tableData || [];
 
   return (
-    <div
-    data-navbar-theme="dark"
-    >
+    <div data-navbar-theme="dark">
       <h2 className="mb-10 text-2xl lg:text-[28px] font-medium text-neutral-13">
         {data.title || "Top 10 Shareholders"}
       </h2>
       {data.content && (
         <div
-        className="prose prose-invert prose-base text-[11px] lg:text-[12px] leading-normal lg:leading-[24px] text-justify text-neutral-500 w-full"
+          className="prose prose-invert prose-base text-[11px] lg:text-[12px] leading-normal lg:leading-[24px] text-justify text-neutral-500 w-full"
           dangerouslySetInnerHTML={{ __html: data.content }}
         />
       )}
@@ -39,7 +37,7 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
                     "py-4 px-6 font-medium border",
                     header.text.toLowerCase().includes("shareholders")
                       ? "text-left"
-                      : "text-left"
+                      : "text-left",
                   )}
                 >
                   {header.text}
@@ -57,7 +55,7 @@ const ShareholdersContent: React.FC<ShareholdersContentProps> = ({ data }) => {
                         key={cellIndex}
                         className={clsx(
                           "py-4 px-6 border",
-                          cellIndex === 0 ? "text-left" : "text-left"
+                          cellIndex === 0 ? "text-left" : "text-left",
                         )}
                       >
                         {cell.text}
@@ -80,12 +78,65 @@ interface DividendContentProps {
 }
 
 const DividendContent: React.FC<DividendContentProps> = ({ data }) => {
+  const locale = useLocale();
+  
+  const headers = data.content_table?.headers || [];
+  const tableData = data.content_table?.tableData || [];
+
+  const getLocalizedText = (item: { lang_en: string; lang_id: string }) => {
+    return locale === "id" ? item.lang_id : item.lang_en;
+  };
+
   return (
     <div>
       <div
-      className="prose prose-invert prose-base text-[11px] lg:text-[12px] leading-normal lg:leading-[24px] text-justify text-neutral-500 max-w-full"
+        className="prose prose-invert prose-base text-[11px] lg:text-[12px] leading-normal lg:leading-[24px] text-justify text-neutral-500 max-w-full"
         dangerouslySetInnerHTML={{ __html: data.content || "" }}
       ></div>
+      <div className="table-main overflow-x-auto mt-10">
+        <table className="w-full">
+          <thead className="bg-[#2474A5] text-white">
+            <tr>
+              {headers.map((header) => (
+                <th
+                  scope="col"
+                  key={header.lang_en}
+                  className={clsx(
+                    "py-4 px-6 font-medium border text-left",
+                    header.lang_en?.toLowerCase().includes("shareholders")
+                      ? "text-left"
+                      : "text-left",
+                  )}
+                >
+                  {getLocalizedText(header)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="text-neutral-13">
+            {tableData.map((row, rowIndex) => {
+              if (Array.isArray(row)) {
+                return (
+                  <tr key={rowIndex} className="border border-neutral-4">
+                    {row.map((cell, cellIndex) => (
+                      <td
+                        key={cellIndex}
+                        className={clsx(
+                          "py-4 px-6 border",
+                          cellIndex === 0 ? "text-left" : "text-left",
+                        )}
+                      >
+                        {getLocalizedText(cell)}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              }
+              return null;
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
@@ -146,11 +197,11 @@ export function StocksInformation({
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           <nav className="flex lg:flex-col lg:items-start w-full border-b-2 lg:border-none border-b-neutral-100">
             <Link
-            title="stocks"
+              title="stocks"
               href={`${process.env.NEXT_PUBLIC_URL}/investor/shares-information?tab=stocks`}
               className="text-neutral-13 text-lg p-4 lg:w-full lg:text-start font-medium lg:border-l-4 border-l-neutral-100 lg:border-l-[#2474A5] lg:border-t-2 lg:border-t-neutral-100 border-b-4 lg:border-b-2 border-b-[#2474A5] lg:border-b-neutral-100"
             >
-              {t('title')}
+              {t("title")}
             </Link>
           </nav>
 
@@ -171,7 +222,7 @@ export function StocksInformation({
                   className={clsx(
                     "border-b-2 border-b-transparent text-neutral-13 text-lg text-center p-4 hover:border-b-[#2474A5] hover:border-b-4 hover:font-medium transition cursor-pointer",
                     activeTab === tab.id &&
-                      "border-b-4 !border-b-[#2474A5] font-medium"
+                      "border-b-4 !border-b-[#2474A5] font-medium",
                   )}
                 >
                   {tab.title}

@@ -102,8 +102,6 @@ export async function getMediaBlogDetailBySlug(slug: string): Promise<ArticleIte
             `${process.env.NEXT_PUBLIC_BASE_URL}/article/detail/blog/${slug}`
         );
 
-        console.log(response)
-
         return response.data?.data || response.data;
     } catch (error: unknown) {
         console.error(`Gagal mengambil detail artikel untuk slug ${slug}:`, error);
