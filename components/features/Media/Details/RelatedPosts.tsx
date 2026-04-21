@@ -45,7 +45,7 @@ export const RelatedPosts = ({
                         <Link
                             title={type == "news" ? "news" : "news"}
                             className="py-2 rounded-full whitespace-nowrap flex items-center gap-2 text-blue-base"
-                            href={`/media/news`}
+                            href={`/media/${type}`}
                         >
                             {seeAllText} <ArrowRight className="w-4 h-4"/>
                         </Link>
@@ -56,7 +56,7 @@ export const RelatedPosts = ({
                         <ArticleCard
                             key={article.id}
                             locale={locale}
-                            href={`/media/news/${article.slug}`}
+                            href={`/media/${type}/${article.slug}`}
                             imageUrl={article.image}
                             category={
                                 locale === "id"
