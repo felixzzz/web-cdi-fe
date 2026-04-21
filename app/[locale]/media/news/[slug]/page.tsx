@@ -1,3 +1,4 @@
+import { cache } from "react";
 // import { ArticleCarousel } from "@/components/features/homepage/ArticleCarousel";
 import { NewsDetail } from "@/components/features/Media/Details/Detail";
 import { RelatedPosts } from "@/components/features/Media/Details/RelatedPosts";
@@ -15,18 +16,49 @@ export type PageProps = {
   };
 };
 
+const getArticleData = cache(async (slug: string, locale: string) => {
+  const firstPageData = await mediaService.getMediaPageData(locale, 1);
+  let article = firstPageData.items.find(
+    (item) => item.slug === slug || item.slug_id === slug,
+  );
+
+  const relatedPosts = firstPageData.items;
+
+  if (article) {
+    return { article, relatedPosts };
+  }
+
+  const lastPage =
+    (firstPageData as unknown as { meta?: { last_page?: number } }).meta
+      ?.last_page || 1;
+
+  if (lastPage > 1) {
+    const promises = [];
+    for (let i = 2; i <= lastPage; i++) {
+      promises.push(mediaService.getMediaPageData(locale, i));
+    }
+
+    const remainingPagesData = await Promise.all(promises);
+
+    for (const pageData of remainingPagesData) {
+      if (pageData && pageData.items) {
+        article = pageData.items.find(
+          (item) => item.slug === slug || item.slug_id === slug,
+        );
+        if (article) {
+          return { article, relatedPosts };
+        }
+      }
+    }
+  }
+
+  return { article: null, relatedPosts };
+});
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const mediaData = await mediaService.getMediaPageData(params.locale);
-
-  // const slugKey = params.locale === "en" ? "slug" : "slug_id";
-
-  // const article = mediaData.items.find((item) => item[slugKey] === params.slug);
-
-  const article = mediaData.items.find(
-    (item) => item.slug === params.slug || item.slug_id === params.slug,
-  );
+  const { article } = await getArticleData(params.slug, params.locale);
 
   if (!article) {
     return {
@@ -42,11 +74,9 @@ export async function generateMetadata({
   const imageUrl = article.image || "/assets/frontend/favicon.png";
 
   const pagePath = `/media/news/${params.slug}`;
-
   const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === "id") return `${baseUrl}/${lang}${pagePath}`;
     return `${baseUrl}/${lang}${pagePath}`;
   };
 
@@ -84,8 +114,8 @@ export async function generateMetadata({
     alternates: {
       canonical: currentUrl,
       languages: {
-        "en-US": getCanonicalPath("en"), // Selalu return .../en/media/news
-        "id-ID": getCanonicalPath("id"), // Selalu return .../media/news
+        "en-US": getCanonicalPath("en"),
+        "id-ID": getCanonicalPath("id"),
       },
     },
 
@@ -125,14 +155,10 @@ export async function generateMetadata({
 
 export default async function Page({ params }: PageProps) {
   const t = await getTranslations("Media");
-  const mediaData = await mediaService.getMediaPageData(params.locale);
-  
-  // const slugKey = params.locale === "en" ? "slug" : "slug_id";
 
-  // const article = mediaData.items.find((item) => item[slugKey] === params.slug);
-
-  const article = mediaData.items.find(
-    (item) => item.slug === params.slug || item.slug_id === params.slug,
+  const { article, relatedPosts } = await getArticleData(
+    params.slug,
+    params.locale,
   );
 
   if (!article) {
@@ -157,9 +183,8 @@ export default async function Page({ params }: PageProps) {
 
     const date = new Date(dateString);
 
-    // check invalid date
     if (isNaN(date.getTime())) {
-      return dateString; // fallback original value
+      return dateString;
     }
 
     return new Intl.DateTimeFormat(params.locale === "id" ? "id-ID" : "en-GB", {
@@ -182,7 +207,7 @@ export default async function Page({ params }: PageProps) {
       />
       <NavbarThemeTrigger theme="light" />
       <RelatedPosts
-        allArticles={mediaData.items}
+        allArticles={relatedPosts}
         currentArticle={article}
         locale={params.locale}
         type="news"

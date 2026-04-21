@@ -58,9 +58,11 @@ export const ArticleCard = ({
         </div>
         <div className="p-6 flex flex-col grow">
           <div className="flex items-center gap-4">
-            <span className="bg-neutral-300 px-3 py-1 text-sm rounded-full">
-              {category}
-            </span>
+            {category && (
+              <span className="bg-neutral-300 px-3 py-1 text-sm rounded-full">
+                {category}
+              </span>
+            )}
             <span className="text-sm text-neutral-10">{date}</span>
           </div>
           <h3 className="text-[22px] font-medium mt-4 mb-7 line-clamp-3 grow">
