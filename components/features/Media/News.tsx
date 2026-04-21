@@ -21,7 +21,7 @@ import {
   IReportType,
 } from "@/types/Media/Media";
 import { useTranslations } from "next-intl";
-import { mediaService } from "@/services/Media/MediaService";
+import { mediaService, pressReleaseService } from "@/services/Media/MediaService";
 
 interface NewsProps {
   mediaData: NewsApiResponse;
@@ -47,6 +47,8 @@ export function News({
   const [activeCategory, setActiveCategory] = useState("Semua");
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [mediaDataContainer, setMediaDataContainer] = useState(mediaData.items);
+  const [mediaPressReleaseDataContainer, setMediaPressReleaseDataContainer] = useState(pressReleaseData.items);
 
   const defaultCategoryLabel = locale === "id" ? "Semua" : "Semua";
 
@@ -68,17 +70,18 @@ export function News({
   );
   const [isLoadingBlog, setIsLoadingBlog] = useState(false);
 
-  const { paginatedArticles, totalNewsPages, totalNewsItems } = useMemo(() => {
+  const { totalNewsPages, totalNewsItems } = useMemo(() => {
     const filteredByCategory =
       activeCategory === defaultCategoryLabel
-        ? mediaData.items
-        : mediaData.items.filter((item) => {
+        ? mediaDataContainer
+        : mediaDataContainer.filter((item) => {
             const itemCategoryName = item.article_category[`name_${locale}`];
 
             return itemCategoryName === activeCategory;
           });
 
-    const total = filteredByCategory.length;
+    // const total = filteredByCategory.length;
+    const total = mediaData.meta.total;
     const pages = Math.ceil(total / ITEMS_PER_PAGE);
     const paginated = filteredByCategory.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
@@ -98,7 +101,7 @@ export function News({
     defaultCategoryLabel,
   ]);
 
-  useEffect(() => {
+  useMemo(() => {
     if (activeTab === "blog") {
       const fetchBlogData = async () => {
         setIsLoadingBlog(true);
@@ -125,7 +128,51 @@ export function News({
         setTotalBlogData(mediaBlogData?.meta?.total || 0);
       }
     }
-  }, [currentPage, activeTab, mediaBlogData]);
+    if (activeTab === "news") {
+      const fetchNewsData = async () => {
+        setIsLoadingBlog(true);
+        try {
+          const newData = await mediaService.getMediaPageData(locale, currentPage);
+          if (newData && newData.items) {
+            setMediaDataContainer(newData.items);
+          }
+        } catch (error) {
+          console.error("Gagal mengambil data news:", error);
+        } finally {
+          setIsLoadingBlog(false);
+        }
+      };
+      
+      
+      if (currentPage !== 1) {
+        fetchNewsData();
+      } else {
+        setMediaDataContainer(mediaData?.items || []);
+      }
+    }
+    if (activeTab === "press-release") {
+      const fetchPressReleaseData = async () => {
+        setIsLoadingBlog(true);
+        try {
+          const newData = await pressReleaseService.getPressReleasePageData(locale, currentPage);
+          if (newData && newData.items) {
+            setMediaPressReleaseDataContainer(newData.items);
+          }
+        } catch (error) {
+          console.error("Gagal mengambil data press release:", error);
+        } finally {
+          setIsLoadingBlog(false);
+        }
+      };
+      
+      
+      if (currentPage !== 1) {
+        fetchPressReleaseData();
+      } else {
+        setMediaPressReleaseDataContainer(pressReleaseData?.items || []);
+      }
+    }
+  }, [currentPage, activeTab, mediaBlogData, mediaData, pressReleaseData]);
 
   const { paginatedBlog, totalBlogPages, totalBlogItems } = useMemo(() => {
     const total = totalBlogData;
@@ -139,7 +186,7 @@ export function News({
     };
   }, [blogItems, totalBlogData]);
 
-  const { paginatedPressReleases, totalPressPages, totalPressItems } =
+  const { totalPressPages, totalPressItems } =
     useMemo(() => {
       let filtered = pressReleaseData.items;
 
@@ -150,7 +197,7 @@ export function News({
         );
       }
 
-      const total = filtered.length;
+      const total = pressReleaseData.meta.total
       const pages = Math.ceil(total / ITEMS_PER_PAGE);
       const paginated = filtered.slice(
         (currentPage - 1) * ITEMS_PER_PAGE,
@@ -256,8 +303,14 @@ export function News({
 
       {activeTab === "news" && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {paginatedArticles.length > 0 ? (
-            paginatedArticles.map((article: ArticleItem) => (
+          {isLoadingBlog ? (
+            <div className="col-span-full py-20 flex justify-center items-center">
+              <p className="text-neutral-500 text-lg font-medium">
+                Memuat data...
+              </p>
+            </div>
+          ) : mediaDataContainer.length > 0 ? (
+            mediaDataContainer.map((article: ArticleItem) => (
               <ArticleCard
                 key={article.id}
                 href={`/media/news/${article[slugKey] == "" ? article.slug : article[slugKey]}`}
@@ -299,9 +352,15 @@ export function News({
             </div>
           </div>
 
-          {paginatedPressReleases.length > 0 ? (
+          {isLoadingBlog ? (
+            <div className="col-span-full py-20 flex justify-center items-center">
+              <p className="text-neutral-500 text-lg font-medium">
+                Memuat data...
+              </p>
+            </div>
+          ) : mediaPressReleaseDataContainer.length > 0 ? (
             <ul className="flex flex-col">
-              {paginatedPressReleases.map((press: PressReleaseItem) => (
+              {mediaPressReleaseDataContainer.map((press: PressReleaseItem) => (
                 <PressReleaseCard key={press.id} item={press} locale={locale} />
               ))}
             </ul>
@@ -313,14 +372,6 @@ export function News({
             </div>
           )}
         </>
-      )}
-
-      {activeTab === "press-release" && (
-        <ul className="flex flex-col">
-          {paginatedPressReleases.map((press: PressReleaseItem) => (
-            <PressReleaseCard key={press.id} item={press} locale={locale} />
-          ))}
-        </ul>
       )}
 
       {activeTab === "blog" && (

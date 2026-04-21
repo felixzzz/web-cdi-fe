@@ -1,4 +1,5 @@
 import { CalendarApiResponse, InvestorFinancialApiResponse } from "@/types/Investor/Financial";
+import axios from "axios";
 
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/investor`;
 const API_URL_CALENDAR = `${process.env.NEXT_PUBLIC_BASE_URL}/investor/calendar/list`;
@@ -6,23 +7,14 @@ const API_URL_CALENDAR = `${process.env.NEXT_PUBLIC_BASE_URL}/investor/calendar/
 // method untuk fetch data page financial investor
 export async function getFinancialPageData(locale: string): Promise<InvestorFinancialApiResponse> {
   try {
-    const res = await fetch(API_URL, {
+    const res = await axios.get(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         lang: locale
       },
-      next: {
-        revalidate: 3600,
-      },
     });
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch home data: ${res.statusText}`);
-    }
-
-    const data: InvestorFinancialApiResponse = await res.json();
-    return data;
+    return res.data;
   } catch (error) {
     console.error("Error in getHomePageData:", error);
     throw new Error("Could not fetch homepage data.");
