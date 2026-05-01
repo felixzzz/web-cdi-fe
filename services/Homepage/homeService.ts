@@ -1,4 +1,5 @@
 import { ApiArticleResponse, HomePageApiResponse, ReportApiResponse } from "@/types/Homepage/home";
+import axios from "axios";
 
 const API_URL = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/home`;
 const API_URL_REPORT = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/latest-reports`;
@@ -8,22 +9,15 @@ const API_URL_ARTICLE = `${process.env.NEXT_PUBLIC_BASE_URL}/article/latest?cate
 // method untuk fetch data page homepage
 export async function getHomePageData(locale: string): Promise<HomePageApiResponse> {
   try {
-    const res = await fetch(API_URL, {
+    const res = await axios.get(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         lang: locale,
       },
-      next: {
-        revalidate: 3600,
-      },
     });
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch home data: ${res.statusText}`);
-    }
-
-    const data: HomePageApiResponse = await res.json();
+    const data: HomePageApiResponse = await res.data;
     return data;
   } catch (error) {
     console.error("Error in getHomePageData:", error);
