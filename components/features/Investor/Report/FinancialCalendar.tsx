@@ -124,22 +124,61 @@ export function FinancialCalendar({
   }, [initialData]);
 
   useEffect(() => {
-    const scrollToCalendar = () => {
-      if (typeof window !== "undefined" && window.location.hash === "#detailed-calendar") {
-        const el = document.getElementById("detailed-calendar");
-        if (el) {
-          setTimeout(() => {
-            // Menambahkan offset agar heading tidak tertutup sticky navbar (misal 100px)
-            const y = el.getBoundingClientRect().top + window.scrollY - 100;
-            window.scrollTo({ top: y, behavior: "smooth" });
-          }, 500); // Waktu diperpanjang sedikit untuk memastikan aset gambar di atasnya sudah beres di-render
-        }
+    const targetHash = "#detailed-calendar";
+
+    const executeScroll = () => {
+      const el = document.getElementById("detailed-calendar");
+      if (el) {
+        // Kalkulasi jarak dari atas halaman
+        const headerOffset = 100; // Ganti jika tinggi sticky navbar Anda berbeda
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
       }
     };
 
-    scrollToCalendar();
-    window.addEventListener("hashchange", scrollToCalendar);
-    return () => window.removeEventListener("hashchange", scrollToCalendar);
+    if (typeof window !== "undefined") {
+      // 1. Penanganan Direct Access (Akses langsung lewat URL / Refresh)
+      if (window.location.hash === targetHash) {
+        // Hapus hash sementara dari URL menggunakan history API agar browser
+        // tidak melakukan lompatan otomatis secara instan
+        window.history.replaceState(
+          null, 
+          "", 
+          window.location.pathname + window.location.search
+        );
+        
+        // Kunci posisi scroll di paling atas (0,0)
+        window.scrollTo(0, 0);
+
+        // Berikan waktu (1 detik) agar Next.js selesai me-render gambar/Hero.
+        // Setelah layout stabil, eksekusi animasi smooth scroll.
+        setTimeout(() => {
+          executeScroll();
+          
+          // Setelah scroll berjalan, kembalikan hash ke URL tanpa me-refresh halaman
+          window.history.replaceState(
+            null, 
+            "", 
+            window.location.pathname + window.location.search + targetHash
+          );
+        }, 1000); 
+      }
+
+      // 2. Penanganan Navigasi Internal (Klik anchor link di dalam halaman yang sama)
+      const handleHashChange = () => {
+        if (window.location.hash === targetHash) {
+          executeScroll();
+        }
+      };
+
+      window.addEventListener("hashchange", handleHashChange);
+      return () => window.removeEventListener("hashchange", handleHashChange);
+    }
   }, []);
 
   useEffect(() => {
@@ -234,7 +273,7 @@ export function FinancialCalendar({
   return (
     <section
       id="detailed-calendar"
-      className="container mx-auto py-20"
+      className="container mx-auto py-20 scroll-mt-[100px]" // <-- Tambahkan scroll-mt-[100px] di sini
       data-navbar-theme="dark"
       aria-labelledby="calendar-heading"
     >
