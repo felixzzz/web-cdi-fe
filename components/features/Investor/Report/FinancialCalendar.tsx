@@ -124,6 +124,25 @@ export function FinancialCalendar({
   }, [initialData]);
 
   useEffect(() => {
+    const scrollToCalendar = () => {
+      if (typeof window !== "undefined" && window.location.hash === "#detailed-calendar") {
+        const el = document.getElementById("detailed-calendar");
+        if (el) {
+          setTimeout(() => {
+            // Menambahkan offset agar heading tidak tertutup sticky navbar (misal 100px)
+            const y = el.getBoundingClientRect().top + window.scrollY - 100;
+            window.scrollTo({ top: y, behavior: "smooth" });
+          }, 500); // Waktu diperpanjang sedikit untuk memastikan aset gambar di atasnya sudah beres di-render
+        }
+      }
+    };
+
+    scrollToCalendar();
+    window.addEventListener("hashchange", scrollToCalendar);
+    return () => window.removeEventListener("hashchange", scrollToCalendar);
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
 
@@ -214,6 +233,7 @@ export function FinancialCalendar({
 
   return (
     <section
+      id="detailed-calendar"
       className="container mx-auto py-20"
       data-navbar-theme="dark"
       aria-labelledby="calendar-heading"
