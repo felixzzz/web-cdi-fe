@@ -95,8 +95,6 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
     return null;
   }
 
-  console.log(tabs[1])
-
   return (
     <div className="bg-[#091A24]">
       <div className="container mx-auto px-4 md:px-8 pt-8">
