@@ -45,8 +45,6 @@ function AssetBlock({
 }: AssetBlockProps) {
   const alignmentClass = alignment === "left" ? "me-auto" : "ms-auto";
 
-  console.log(contentHtml)
-
   const imagePositionClass = alignment === "right" 
     ? "object-[20%_center] lg:object-[65%_center]" 
     : "object-[80%_center] lg:object-[35%_center]"; 
