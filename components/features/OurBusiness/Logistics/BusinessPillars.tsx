@@ -45,6 +45,8 @@ function AssetBlock({
 }: AssetBlockProps) {
   const alignmentClass = alignment === "left" ? "me-auto" : "ms-auto";
 
+  console.log(contentHtml)
+
   const imagePositionClass = alignment === "right" 
     ? "object-[20%_center] lg:object-[65%_center]" 
     : "object-[80%_center] lg:object-[35%_center]"; 
@@ -66,12 +68,12 @@ function AssetBlock({
       ></div>
 
       <div className="container mx-auto relative z-[2] px-4 md:px-8">
-        <div className={clsx("lg:max-w-[45%]", alignmentClass)}>
+        <div className={clsx("w-full lg:max-w-[45%]", alignmentClass)}>
           <h4 className="text-2xl lg:text-[28px] font-medium mb-6 text-[#47C1EA]">
             {title}
           </h4>
           <div
-            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify block"
+            className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify block text-wrap break-words overflow-hidden w-full"
             dangerouslySetInnerHTML={{ __html: contentHtml }}
           ></div>
         </div>
@@ -92,6 +94,8 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
   if (!tabs || tabs.length === 0) {
     return null;
   }
+
+  console.log(tabs[1])
 
   return (
     <div className="bg-[#091A24]">
@@ -126,7 +130,7 @@ export function BusinessPillars({ tabs }: BusinessPillarsProps) {
                 {activeTab.sub_title}
               </h3>
               <div
-                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify block"
+                className="prose prose-invert prose-base max-w-none text-sm lg:text-base leading-snug lg:leading-loose text-justify block break-words overflow-hidden w-full"
                 dangerouslySetInnerHTML={{
                   __html: activeTab.description || "",
                 }}
