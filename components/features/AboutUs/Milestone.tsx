@@ -1,10 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
-import { gsap } from "gsap";
+import React, { useState, useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { MilestoneApiResponse } from "@/types/AboutUs/About";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+
+import "swiper/css";
 
 interface MilestoneSectionProps {
   title: string;
@@ -19,42 +23,21 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
   backgroundImageUrl,
   data,
 }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isGrid, setIsGrid] = useState(true);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const swiperRef = useRef<SwiperType | null>(null);
 
-  const slidesContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const checkLayout = () => {
-      setIsGrid(window.innerWidth >= 768);
-    };
-
-    checkLayout();
-    window.addEventListener("resize", checkLayout);
-    return () => window.removeEventListener("resize", checkLayout);
-  }, []);
-
-  useLayoutEffect(() => {
-    if (isGrid || !slidesContainerRef.current) return;
-
-    const targetSlide = slidesContainerRef.current.children[activeIndex] as HTMLElement;
-    if (!targetSlide) return;
-
-    const targetX = -targetSlide.offsetLeft;
-
-    gsap.to(slidesContainerRef.current, {
-      x: targetX,
-      duration: 0.5,
-      ease: "power3.inOut",
-    });
-  }, [activeIndex, isGrid]);
+  const updateNavigationState = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
 
   const handlePrev = () => {
-    if (activeIndex > 0) setActiveIndex((prev) => prev - 1);
+    swiperRef.current?.slidePrev();
   };
 
   const handleNext = () => {
-    if (activeIndex < data.length - 1) setActiveIndex((prev) => prev + 1);
+    swiperRef.current?.slideNext();
   };
 
   return (
@@ -76,14 +59,14 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
               </div>
             </div>
 
-            {!isGrid && (
+            {data && data.length > 1 && (
               <div className="flex items-center gap-4 flex-shrink-0">
                 <button
                   onClick={handlePrev}
-                  disabled={activeIndex === 0}
+                  disabled={isBeginning}
                   className={`w-12 h-12 rounded-full border flex items-center justify-center transition-colors duration-200
                     ${
-                      activeIndex === 0
+                      isBeginning
                         ? "border-white/30 text-white/30 cursor-not-allowed"
                         : "border-white text-white hover:bg-white hover:text-blue-dark cursor-pointer"
                     }
@@ -94,10 +77,10 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
 
                 <button
                   onClick={handleNext}
-                  disabled={activeIndex === data.length - 1}
+                  disabled={isEnd}
                   className={`w-12 h-12 rounded-full border flex items-center justify-center transition-colors duration-200
                     ${
-                      activeIndex === data.length - 1
+                      isEnd
                         ? "border-white/30 text-white/30 cursor-not-allowed"
                         : "border-white text-white hover:bg-white hover:text-blue-dark cursor-pointer"
                     }
@@ -109,26 +92,32 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
             )}
           </div>
 
-          {isGrid ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 lg:gap-x-12 gap-y-10">
+          <div className="overflow-hidden">
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={16}
+              slidesPerView={1}
+              breakpoints={{
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 24,
+                },
+              }}
+              onBeforeInit={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              onInit={updateNavigationState}
+              onSlideChange={updateNavigationState}
+              onUpdate={updateNavigationState}
+              className="w-full"
+            >
               {data.map((milestone) => (
-                <MilestoneItem key={milestone.ulid || milestone.id} milestone={milestone} />
+                <SwiperSlide key={milestone.ulid || milestone.id} className="!h-auto">
+                  <MilestoneItem milestone={milestone} />
+                </SwiperSlide>
               ))}
-            </div>
-          ) : (
-            <div className="overflow-hidden">
-              <div className="flex relative" ref={slidesContainerRef}>
-                {data.map((milestone) => (
-                  <div
-                    key={milestone.ulid || milestone.id}
-                    className="w-full flex-shrink-0 pr-4"
-                  >
-                    <MilestoneItem milestone={milestone} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+            </Swiper>
+          </div>
         </div>
       </div>
     </section>
@@ -136,7 +125,7 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
 };
 
 const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] }) => (
-  <div>
+  <div className="h-full flex flex-col">
     <h3 className="text-3xl font-bold text-[#47C1EA] mb-5">
       {milestone.year}
     </h3>
@@ -150,7 +139,7 @@ const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] 
       className="mb-6 w-full"
     />
     <div
-      className="backdrop-blur-sm rounded-lg p-6 min-h-[200px] border border-white/20 h-auto"
+      className="backdrop-blur-sm rounded-lg p-6 min-h-[200px] border border-white/20 flex-grow"
       style={{
         background: "linear-gradient(#d6f5ff29, #091a2429)",
       }}
