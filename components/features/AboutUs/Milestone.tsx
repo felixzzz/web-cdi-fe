@@ -27,6 +27,24 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
   const [isEnd, setIsEnd] = useState(false);
   const swiperRef = useRef<SwiperType | null>(null);
 
+  const groupedData = React.useMemo(() => {
+    if (!data) return [];
+    const groups: { [key: string]: MilestoneApiResponse } = {};
+    data.forEach((item) => {
+      const year = String(item.year);
+      if (!groups[year]) {
+        groups[year] = [];
+      }
+      groups[year].push(item);
+    });
+    return Object.keys(groups)
+      .sort((a, b) => parseInt(a) - parseInt(b))
+      .map((year) => ({
+        year,
+        items: groups[year],
+      }));
+  }, [data]);
+
   const updateNavigationState = (swiper: SwiperType) => {
     setIsBeginning(swiper.isBeginning);
     setIsEnd(swiper.isEnd);
@@ -59,7 +77,7 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
               </div>
             </div>
 
-            {data && data.length > 1 && (
+            {groupedData && groupedData.length > 1 && (
               <div className="flex items-center gap-4 flex-shrink-0">
                 <button
                   onClick={handlePrev}
@@ -111,9 +129,9 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
               onUpdate={updateNavigationState}
               className="w-full"
             >
-              {data.map((milestone) => (
-                <SwiperSlide key={milestone.ulid || milestone.id} className="!h-auto">
-                  <MilestoneItem milestone={milestone} />
+              {groupedData.map((group) => (
+                <SwiperSlide key={group.year} className="!h-auto">
+                  <MilestoneItem year={group.year} items={group.items} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -124,10 +142,10 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
   );
 };
 
-const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] }) => (
+const MilestoneItem = ({ year, items }: { year: string; items: MilestoneApiResponse }) => (
   <div className="h-full flex flex-col">
     <h3 className="text-3xl font-bold text-[#47C1EA] mb-5">
-      {milestone.year}
+      {year}
     </h3>
     <Image
       src="/assets/icons/ic_timeline.svg"
@@ -139,15 +157,18 @@ const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] 
       className="mb-6 w-full"
     />
     <div
-      className="backdrop-blur-sm rounded-lg p-6 min-h-[200px] border border-white/20 flex-grow"
+      className="backdrop-blur-sm rounded-lg p-6 min-h-[200px] border border-white/20 flex-grow flex flex-col gap-4"
       style={{
         background: "linear-gradient(#d6f5ff29, #091a2429)",
       }}
     >
-      <div
-        className="prose prose-invert prose-base max-w-none text-neutral-200 text-sm lg:text-base leading-snug lg:leading-loose text-justify"
-        dangerouslySetInnerHTML={{ __html: milestone.content || "" }}
-      />
+      {items.map((item) => (
+        <div
+          key={item.ulid || item.id}
+          className="prose prose-invert prose-base max-w-none text-neutral-200 text-sm lg:text-base leading-snug lg:leading-loose text-justify"
+          dangerouslySetInnerHTML={{ __html: item.content || "" }}
+        />
+      ))}
     </div>
   </div>
 );

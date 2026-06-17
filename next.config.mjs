@@ -9,6 +9,30 @@ const nextConfig = {
      dangerouslyAllowSVG: true,
     remotePatterns: [
       {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+        pathname: "/file-storage/**",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+        pathname: "/assets/frontend/**",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "8000",
+        pathname: "/file-storage/**",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "8000",
+        pathname: "/assets/frontend/**",
+      },
+      {
         protocol: "https",
         hostname: "cmlabs-co.s3.ap-southeast-1.amazonaws.com",
         port: "",
