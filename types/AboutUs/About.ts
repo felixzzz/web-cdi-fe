@@ -66,6 +66,7 @@ interface MilestoneItem {
   created_at: string;
   updated_at: string;
   content: string;
+  priority?: number;
 }
 
 export type MilestoneApiResponse = MilestoneItem[];

@@ -5,6 +5,8 @@ const API_URL_HISTORY = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/our-histori
 const API_URL_MILSTONE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/milestones`;
 const API_URL_PROFILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/company-profile`;
 
+const REVALIDATE_TIME = process.env.NODE_ENV === 'development' ? 0 : 360;
+
 // method untuk fetch data about page keseluruhan
 export async function getAboutPageData(locale: string): Promise<AboutUsWhoWeAreApiResponse> {
   try {
@@ -15,7 +17,7 @@ export async function getAboutPageData(locale: string): Promise<AboutUsWhoWeAreA
         lang: locale,
       },
       next: {
-        revalidate: 3600,
+        revalidate: REVALIDATE_TIME,
       },
     });
 
@@ -41,7 +43,7 @@ export async function getHistoryData(locale: string): Promise<HistoryApiResponse
         lang: locale,
       },
       next: {
-        revalidate: 3600,
+        revalidate: REVALIDATE_TIME,
       },
     });
 
@@ -67,7 +69,7 @@ export async function getMilstoneData(locale: string): Promise<MilestoneApiRespo
         lang: locale,
       },
       next: {
-        revalidate: 3600,
+        revalidate: REVALIDATE_TIME,
       },
     });
 
@@ -93,7 +95,7 @@ export async function getProfileData(locale: string): Promise<CompanyProfileResp
         lang: locale,
       },
       next: {
-        revalidate: 3600,
+        revalidate: REVALIDATE_TIME,
       },
     });
 
