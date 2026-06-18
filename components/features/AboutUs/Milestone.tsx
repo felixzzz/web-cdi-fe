@@ -7,6 +7,7 @@ import { MilestoneApiResponse } from "@/types/AboutUs/About";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
+import { cleanNbsp } from "@/lib/utils";
 
 import "swiper/css";
 
@@ -154,8 +155,8 @@ const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] 
       }}
     >
       <div
-        className="prose prose-invert prose-base max-w-none text-neutral-200 text-sm lg:text-base leading-snug lg:leading-loose text-justify"
-        dangerouslySetInnerHTML={{ __html: milestone.content || "" }}
+        className="prose prose-invert prose-base max-w-none text-neutral-200 text-sm lg:text-base leading-snug lg:leading-loose text-justify break-words whitespace-normal"
+        dangerouslySetInnerHTML={{ __html: cleanNbsp(milestone.content) }}
       />
     </div>
   </div>
