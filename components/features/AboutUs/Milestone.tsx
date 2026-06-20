@@ -28,13 +28,22 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
   const [isEnd, setIsEnd] = useState(false);
   const swiperRef = useRef<SwiperType | null>(null);
 
-  const sortedData = React.useMemo(() => {
+  const groupedData = React.useMemo(() => {
     if (!data) return [];
-    return [...data].sort((a, b) => {
-      const yearDiff = parseInt(String(a.year)) - parseInt(String(b.year));
-      if (yearDiff !== 0) return yearDiff;
-      return (a.priority || 0) - (b.priority || 0);
+    const groups: { [key: string]: MilestoneApiResponse } = {};
+    data.forEach((item) => {
+      const year = String(item.year);
+      if (!groups[year]) {
+        groups[year] = [];
+      }
+      groups[year].push(item);
     });
+    return Object.keys(groups)
+      .sort((a, b) => parseInt(a) - parseInt(b))
+      .map((year) => ({
+        year,
+        items: groups[year].sort((a, b) => (a.priority || 0) - (b.priority || 0)),
+      }));
   }, [data]);
 
   const updateNavigationState = (swiper: SwiperType) => {
@@ -69,7 +78,7 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
               </div>
             </div>
 
-            {sortedData && sortedData.length > 1 && (
+            {groupedData && groupedData.length > 1 && (
               <div className="flex items-center gap-4 flex-shrink-0">
                 <button
                   onClick={handlePrev}
@@ -121,14 +130,11 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
               onUpdate={updateNavigationState}
               className="w-full"
             >
-              {sortedData.map((milestone, index) => {
-                const showYear = index === 0 || milestone.year !== sortedData[index - 1].year;
-                return (
-                  <SwiperSlide key={milestone.ulid || milestone.id} className="!h-auto">
-                    <MilestoneItem milestone={milestone} showYear={showYear} />
-                  </SwiperSlide>
-                );
-              })}
+              {groupedData.map((group) => (
+                <SwiperSlide key={group.year} className="!h-auto">
+                  <MilestoneItem year={group.year} items={group.items} />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>
@@ -137,16 +143,10 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
   );
 };
 
-const MilestoneItem = ({
-  milestone,
-  showYear,
-}: {
-  milestone: MilestoneApiResponse[number];
-  showYear: boolean;
-}) => (
+const MilestoneItem = ({ year, items }: { year: string; items: MilestoneApiResponse }) => (
   <div className="h-full flex flex-col">
-    <h3 className={`text-3xl font-bold text-[#47C1EA] mb-5 ${showYear ? "" : "invisible"}`}>
-      {milestone.year}
+    <h3 className="text-3xl font-bold text-[#47C1EA] mb-5">
+      {year}
     </h3>
     <Image
       src="/assets/icons/ic_timeline.svg"
@@ -158,15 +158,18 @@ const MilestoneItem = ({
       className="mb-6 w-full"
     />
     <div
-      className="backdrop-blur-sm rounded-lg p-6 min-h-[200px] border border-white/20 flex-grow"
+      className="backdrop-blur-sm rounded-lg p-6 min-h-[200px] border border-white/20 flex-grow flex flex-col gap-4"
       style={{
         background: "linear-gradient(#d6f5ff29, #091a2429)",
       }}
     >
-      <div
-        className="prose prose-invert prose-base max-w-none text-neutral-200 text-sm lg:text-base leading-snug lg:leading-loose text-justify break-words whitespace-normal"
-        dangerouslySetInnerHTML={{ __html: cleanNbsp(milestone.content) }}
-      />
+      {items.map((item) => (
+        <div
+          key={item.ulid || item.id}
+          className="prose prose-invert prose-base max-w-none text-neutral-200 text-sm lg:text-base leading-snug lg:leading-loose text-justify break-words whitespace-normal"
+          dangerouslySetInnerHTML={{ __html: cleanNbsp(item.content) }}
+        />
+      ))}
     </div>
   </div>
 );

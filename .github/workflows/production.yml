@@ -2,11 +2,10 @@ name: production-deployment
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   nodejs-deploy:
-
     runs-on: ubuntu-latest
     steps:
       - name: SSH remote command executer
@@ -20,12 +19,13 @@ jobs:
             git stash
             git stash clear
             git pull origin main
-            rm -rf package-lock.json
             nvm exec v22.21.1 npm install
             nvm exec v22.21.1 npm run build
             nvm exec v22.21.1 npm install
             cd ~/app
+            pm2 restart 0
             pm2 start pm2.config.js
+
           # Hostname or IP address of the server.
           host: ${{secrets.HOST_ADDRESS}}
           # Username for authentication to server.
@@ -34,7 +34,7 @@ jobs:
           port: 22
           # File Location or string that contains a private key for either key-based or hostbased user authentication (OpenSSH format)
           key: ${{secrets.PRIVATE_KEY}}
-          
+
       - name: Google Chat Notification
         uses: Co-qn/google-chat-notification@releases/v1
         with:
