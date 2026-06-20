@@ -121,11 +121,14 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
               onUpdate={updateNavigationState}
               className="w-full"
             >
-              {sortedData.map((milestone) => (
-                <SwiperSlide key={milestone.ulid || milestone.id} className="!h-auto">
-                  <MilestoneItem milestone={milestone} />
-                </SwiperSlide>
-              ))}
+              {sortedData.map((milestone, index) => {
+                const showYear = index === 0 || milestone.year !== sortedData[index - 1].year;
+                return (
+                  <SwiperSlide key={milestone.ulid || milestone.id} className="!h-auto">
+                    <MilestoneItem milestone={milestone} showYear={showYear} />
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
           </div>
         </div>
@@ -134,9 +137,15 @@ export const Milestone: React.FC<MilestoneSectionProps> = ({
   );
 };
 
-const MilestoneItem = ({ milestone }: { milestone: MilestoneApiResponse[number] }) => (
+const MilestoneItem = ({
+  milestone,
+  showYear,
+}: {
+  milestone: MilestoneApiResponse[number];
+  showYear: boolean;
+}) => (
   <div className="h-full flex flex-col">
-    <h3 className="text-3xl font-bold text-[#47C1EA] mb-5">
+    <h3 className={`text-3xl font-bold text-[#47C1EA] mb-5 ${showYear ? "" : "invisible"}`}>
       {milestone.year}
     </h3>
     <Image
