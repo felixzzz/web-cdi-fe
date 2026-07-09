@@ -2,7 +2,7 @@
 
 import {Link} from "@/i18n/navigation";
 import Image from "@/components/shared/SafeImage";
-import {ChevronRight} from "lucide-react";
+import {ChevronRight, CalendarDays, UserPen} from "lucide-react";
 import {useTranslations} from "next-intl";
 import {useEffect} from "react";
 
@@ -15,6 +15,7 @@ type NewsDetailProps = {
     breadcrumbs: BreadcrumbItem[];
     articleTitle: string;
     publishDate: string;
+    updatedDate?: string;
     shareUrl: string;
     featureImageUrl: string;
     articleContent: string;
@@ -69,6 +70,7 @@ export const NewsDetail = ({
                                breadcrumbs,
                                articleTitle,
                                publishDate,
+                               updatedDate,
                                shareUrl,
                                featureImageUrl,
                                articleContent,
@@ -97,8 +99,22 @@ export const NewsDetail = ({
                     <span className="font-medium">{articleTitle}</span>
                 </div>
 
-                <div className="flex items-center justify-between gap-2 my-4">
-                    <p className="text-neutral-10">{publishDate}</p>
+                <div className="flex flex-wrap items-center justify-between gap-3 my-4">
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-500">
+                        {publishDate && (
+                            <span className="flex items-center gap-1.5">
+                                <CalendarDays size={15} className="shrink-0 text-neutral-400" />
+                                <span>{publishDate}</span>
+                            </span>
+                        )}
+                        {updatedDate && updatedDate !== publishDate && (
+                            <span className="flex items-center gap-1.5 text-neutral-400">
+                                <span className="hidden sm:inline">·</span>
+                                <span className="text-xs font-medium uppercase tracking-wide text-neutral-400">{t("last_updated")}</span>
+                                <span>{updatedDate}</span>
+                            </span>
+                        )}
+                    </div>
                     <ShareButtons shareUrl={shareUrl}/>
                 </div>
 
@@ -216,7 +232,25 @@ export const NewsDetail = ({
                     </article>
                 </div>
 
-                <div className="mt-16 flex-col text-center">
+                {/* Author Box */}
+                <div className="mt-12 border border-neutral-100 rounded-2xl bg-neutral-50/60 p-6 flex items-center gap-5">
+                    <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-[#2474A5] to-[#1a5a8a] flex items-center justify-center shadow-md">
+                        <UserPen size={24} className="text-white" />
+                    </div>
+                    <div className="min-w-0">
+                        <p className="text-[11px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">
+                            {t("written_by")}
+                        </p>
+                        <p className="font-semibold text-neutral-800 text-base leading-snug">
+                            CDI Editorial Team
+                        </p>
+                        <p className="text-sm text-neutral-500 mt-0.5">
+                            PT Chandra Daya Investasi Tbk
+                        </p>
+                    </div>
+                </div>
+
+                <div className="mt-10 flex-col text-center">
                     <p className="font-medium text-neutral-13 lg:text-lg mb-4">
                         {t("share")}
                     </p>

@@ -204,6 +204,7 @@ export default async function Page({ params }: PageProps) {
         breadcrumbs={breadcrumbs}
         articleTitle={title}
         publishDate={formatDatePublish(article.date)}
+        updatedDate={formatDatePublish(article.updated_at)}
         shareUrl={shareUrl}
         featureImageUrl={article.image}
         articleContent={content}
@@ -224,6 +225,7 @@ export default async function Page({ params }: PageProps) {
             headline: title,
             imageUrl: article.image || undefined,
             datePublished: article.date || article.created_at || '',
+            dateModified: article.updated_at || article.date || article.created_at || '',
             url: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/news/${params.slug}`
           })} />
           <JsonLd data={buildBreadcrumbSchema([

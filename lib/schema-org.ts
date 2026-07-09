@@ -14,6 +14,7 @@ export interface ArticleParams {
   headline: string;
   imageUrl?: string;
   datePublished: string;
+  dateModified?: string;
   authorName?: string;
   url: string;
 }
@@ -116,10 +117,14 @@ export function buildArticleSchema(params: ArticleParams) {
     headline: params.headline,
     image: params.imageUrl ? [params.imageUrl] : [],
     datePublished: params.datePublished,
-    dateModified: params.datePublished,
+    dateModified: params.dateModified || params.datePublished,
     author: {
       '@type': 'Organization',
-      name: params.authorName || 'PT Chandra Daya Investasi Tbk'
+      name: params.authorName || 'CDI Editorial Team',
+      memberOf: {
+        '@type': 'Organization',
+        name: 'PT Chandra Daya Investasi Tbk'
+      }
     },
     publisher: {
       '@type': 'Organization',
