@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import Image from "next/image";
+import Image from "@/components/shared/SafeImage";
 
 const DecorativeCorners: React.FC = () => {
   const size = 10;

@@ -1,7 +1,7 @@
 "use client";
 
 import {Link} from "@/i18n/navigation";
-import Image from "next/image";
+import Image from "@/components/shared/SafeImage";
 import {ChevronRight} from "lucide-react";
 import {useTranslations} from "next-intl";
 import {useEffect} from "react";

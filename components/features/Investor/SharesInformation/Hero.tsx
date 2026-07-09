@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/shared/SafeImage";
 import React, { useEffect } from "react";
 
 interface HeroProps {

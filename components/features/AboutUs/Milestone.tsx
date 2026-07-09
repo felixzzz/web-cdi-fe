@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/shared/SafeImage";
 import React, { useState, useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { MilestoneApiResponse } from "@/types/AboutUs/About";

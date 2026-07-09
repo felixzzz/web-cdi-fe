@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/shared/SafeImage";
 import React from "react";
 import { ApiInstitutionResponse } from "@/types/Investor/Report"; 
 import { useTranslations } from "next-intl";
