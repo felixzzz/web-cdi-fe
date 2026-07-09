@@ -1,6 +1,19 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import localFont from "next/font/local";
+import "../globals.css";
+
+const jakartaSans = localFont({
+  src: [
+    {
+      path: "../fonts/PlusJakartaSans-VariableFont_wght.ttf",
+      style: "normal",
+    }
+  ],
+  variable: "--font-plus-jakarta-sans",
+  display: "swap",
+});
 
 // import "swiper/css";
 // import "swiper/css/navigation";
@@ -46,8 +59,10 @@ export default async function LocaleLayout({ children, params }: Props) {
   ];
 
   return (
-    <NavbarThemeProvider>
-      <NextIntlClientProvider>
+    <html lang={locale}>
+      <body className={`${jakartaSans.variable} font-sans`}>
+        <NavbarThemeProvider>
+          <NextIntlClientProvider>
         {process.env.NEXT_PUBLIC_NODE_TARGET === "production" ? (
           <>
             <Script
@@ -107,7 +122,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           legalNavLinks={legalNavLinksData}
           copyrightText="@2025 Chandra Daya Investasi"
         />
-      </NextIntlClientProvider>
-    </NavbarThemeProvider>
+          </NextIntlClientProvider>
+        </NavbarThemeProvider>
+      </body>
+    </html>
   );
 }
