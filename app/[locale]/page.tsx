@@ -24,6 +24,8 @@ export async function generateMetadata(
     params: { locale },
   }: HomePageProps ): Promise<Metadata> {
   const t = await getTranslations('metadata-seo.home')
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "https://chandradaya-investasi.com";
+  const currentUrl = `${baseUrl}/${locale}`;
 
   return {
     title: t('title'),
@@ -36,7 +38,7 @@ export async function generateMetadata(
       "CDI Group",
     ],
 
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL_LP}/${locale}`),
+    metadataBase: new URL(currentUrl),
 
     viewport: {
       width: "device-width",
@@ -47,11 +49,11 @@ export async function generateMetadata(
       follow: true,
     },
     alternates: {
-      canonical: "/",
+      canonical: currentUrl,
       languages: {
-        en: "/en",
-        id: "/id",
-        "x-default": "/en",
+        en: `${baseUrl}/en`,
+        id: `${baseUrl}/id`,
+        "x-default": `${baseUrl}/en`,
       },
     },
     icons: {
@@ -61,7 +63,7 @@ export async function generateMetadata(
     openGraph: {
       title: t('title'),
       description: t('description'),
-      url: "/",
+      url: currentUrl,
       type: "website",
       siteName: t('title'),
     },
