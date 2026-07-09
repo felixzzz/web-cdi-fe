@@ -111,8 +111,9 @@ export async function generateMetadata({
     alternates: {
       canonical: currentUrl,
       languages: {
-        "en-US": getCanonicalPath("en"),
-        "id-ID": getCanonicalPath("id"), 
+        en: getCanonicalPath("en"),
+        id: getCanonicalPath("id"),
+        "x-default": getCanonicalPath("en"),
       },
     },
 

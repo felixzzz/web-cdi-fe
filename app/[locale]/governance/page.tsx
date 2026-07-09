@@ -66,8 +66,9 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     alternates: {
       canonical: currentUrl,
       languages: {
-        "en-US": "/en/governance",
-        "id-ID": "/id/governance",
+        en: "/en/governance",
+        id: "/id/governance",
+        "x-default": "/en/governance",
       },
     },
 

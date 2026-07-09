@@ -58,8 +58,9 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     alternates: {
       canonical: currentUrl,
       languages: {
-        "en-US": getCanonicalPath('en'), // Selalu return .../en/media/news
-        "id-ID": getCanonicalPath('id'), // Selalu return .../media/news
+        en: getCanonicalPath('en'),
+        id: getCanonicalPath('id'),
+        "x-default": getCanonicalPath('en'),
       },
     },
 
