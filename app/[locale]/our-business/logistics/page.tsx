@@ -8,6 +8,8 @@ import { MoveRightIcon } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { cleanJsonLdString, buildServiceSchema } from "@/lib/schema-org";
+import JsonLd from "@/components/shared/JsonLd";
 
 export async function generateMetadata({
   params: { locale },
@@ -141,6 +143,16 @@ export default async function Page({ params: { locale } }: LogisticPageProps) {
           </span>
         </Link>
       </div>
+      {/* JSON-LD Structured Data Schema Markup */}
+      {cleanJsonLdString(logisticData.json_ld) ? (
+        <JsonLd data={cleanJsonLdString(logisticData.json_ld)!} />
+      ) : (
+        <JsonLd data={buildServiceSchema({
+          name: logisticData.title || "Logistics Business",
+          description: logisticData.description || "",
+          url: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${locale}/our-business/logistics`
+        })} />
+      )}
     </main>
   );
 }

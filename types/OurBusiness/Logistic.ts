@@ -84,4 +84,5 @@ export interface LogisticsApiResponse {
   banner_description: string | null;
   overview_title: string;
   overview_description: string;
+  json_ld?: string;
 }

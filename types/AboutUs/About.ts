@@ -34,6 +34,7 @@ export interface AboutUsWhoWeAreApiResponse {
   about_us_milestone: AboutUsSection;
   about_us_company_profile: AboutUsSection;
   about_us_youtube: AboutUsSection;
+  json_ld_about_us?: AboutUsSection;
 }
 
 

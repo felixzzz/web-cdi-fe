@@ -18,6 +18,8 @@ import { HomePageProps } from "@/types/Homepage/home";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { cleanJsonLdString, buildOrganizationSchema, buildWebSiteSchema } from "@/lib/schema-org";
+import JsonLd from "@/components/shared/JsonLd";
 
 export async function generateMetadata(
   {
@@ -220,6 +222,15 @@ export default async function Page({ params: { locale } }: HomePageProps) {
         backgroundImageUrl={`${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/homepage/quick_links.webp`}
         links={quickLinksData}
       />
+      {/* JSON-LD Structured Data Schema Markup */}
+      {cleanJsonLdString(homeData.json_ld_homepage?.content) ? (
+        <JsonLd data={cleanJsonLdString(homeData.json_ld_homepage?.content)!} />
+      ) : (
+        <>
+          <JsonLd data={buildOrganizationSchema({ locale })} />
+          <JsonLd data={buildWebSiteSchema()} />
+        </>
+      )}
     </main>
   );
 }

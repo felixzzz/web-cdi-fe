@@ -43,6 +43,7 @@ export interface HomePageApiResponse {
   home_journey_info_1: HomePageSection;
   home_journey_info_2: HomePageSection;
   home_journey_info_3: HomePageSection;
+  json_ld_homepage?: HomePageSection;
 }
 
 export interface ReportFile {
@@ -120,6 +121,7 @@ export interface ApiArticle {
   date: string;
   route: string;
   article_category: ArticleCategory;
+  json_ld?: string;
 }
 
 export type ApiArticleResponse = ApiArticle[];

@@ -8,6 +8,8 @@ import { mediaService } from "@/services/Media/MediaService";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { cleanJsonLdString, buildArticleSchema, buildBreadcrumbSchema } from "@/lib/schema-org";
+import JsonLd from "@/components/shared/JsonLd";
 
 export type PageProps = {
   params: {
@@ -213,6 +215,24 @@ export default async function Page({ params }: PageProps) {
         locale={params.locale}
         type="news"
       />
+      {/* JSON-LD Structured Data Schema Markup */}
+      {cleanJsonLdString(article.json_ld) ? (
+        <JsonLd data={cleanJsonLdString(article.json_ld)!} />
+      ) : (
+        <>
+          <JsonLd data={buildArticleSchema({
+            headline: title,
+            imageUrl: article.image || undefined,
+            datePublished: article.date || article.created_at || '',
+            url: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/news/${params.slug}`
+          })} />
+          <JsonLd data={buildBreadcrumbSchema([
+            { name: 'Home', item: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}` },
+            { name: t("News"), item: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/news` },
+            { name: title, item: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/news/${params.slug}` }
+          ])} />
+        </>
+      )}
     </main>
   );
 }

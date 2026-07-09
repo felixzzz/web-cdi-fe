@@ -17,6 +17,8 @@ import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { stripHtml } from "@/lib/localization";
+import { cleanJsonLdString, buildOrganizationSchema } from "@/lib/schema-org";
+import JsonLd from "@/components/shared/JsonLd";
 
 export async function generateMetadata({
   params: { locale },
@@ -226,6 +228,12 @@ export default async function Page({ params: { locale } }: AboutPageProps) {
         backgroundImageUrl={`${process.env.NEXT_PUBLIC_URL}/assets/frontend/images/homepage/quick_links.webp`}
         links={quickLinksData}
       />
+      {/* JSON-LD Structured Data Schema Markup */}
+      {cleanJsonLdString(aboutData.json_ld_about_us?.content) ? (
+        <JsonLd data={cleanJsonLdString(aboutData.json_ld_about_us?.content)!} />
+      ) : (
+        <JsonLd data={buildOrganizationSchema({ locale })} />
+      )}
     </main>
   );
 }

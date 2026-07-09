@@ -1,14 +1,17 @@
 import React from 'react';
 
 interface JsonLdProps {
-  data: Record<string, unknown>;
+  data: string | Record<string, unknown>;
 }
 
 const JsonLd: React.FC<JsonLdProps> = ({ data }) => {
+  if (!data) return null;
+  const jsonString = typeof data === 'string' ? data : JSON.stringify(data);
+  
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: jsonString }}
     />
   );
 };

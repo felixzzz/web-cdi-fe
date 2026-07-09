@@ -83,6 +83,7 @@ export interface ArticleItem {
   image: string;
   date: string;
   article_category: ArticleCategory;
+  json_ld?: string;
 }
 
 export interface IReportType {
