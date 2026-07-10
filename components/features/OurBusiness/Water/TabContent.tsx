@@ -36,9 +36,8 @@ function ContentBlock({
         src={imageUrl}
         alt={alt}
         title={alt}
-        layout="fill"
-        objectFit="cover"
-        className={`z-0 ${imagePositionClass} priority`}
+        fill
+        className={`object-cover z-0 ${imagePositionClass}`}
         priority
       />
       <div

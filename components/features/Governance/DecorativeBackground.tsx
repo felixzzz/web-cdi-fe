@@ -23,10 +23,8 @@ export function RiskManagement({ data }: RiskManagementProps) {
         src={BACKGROUND_IMAGE_URL}
         alt={TITLE || "Abstract background pattern"}
         title={TITLE || "Abstract background pattern"}
-        layout="fill"
-        objectFit="contain"
-        objectPosition="right"
-        className="z-[1]"
+        fill
+        className="object-contain object-right z-[1]"
         priority
       />
 

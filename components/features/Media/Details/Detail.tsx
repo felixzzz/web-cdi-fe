@@ -15,7 +15,9 @@ type NewsDetailProps = {
     breadcrumbs: BreadcrumbItem[];
     articleTitle: string;
     publishDate: string;
+    rawPublishDate?: string;
     updatedDate?: string;
+    rawUpdatedDate?: string;
     shareUrl: string;
     featureImageUrl: string;
     articleContent: string;
@@ -70,7 +72,9 @@ export const NewsDetail = ({
                                breadcrumbs,
                                articleTitle,
                                publishDate,
+                               rawPublishDate,
                                updatedDate,
+                               rawUpdatedDate,
                                shareUrl,
                                featureImageUrl,
                                articleContent,
@@ -104,14 +108,14 @@ export const NewsDetail = ({
                         {publishDate && (
                             <span className="flex items-center gap-1.5">
                                 <CalendarDays size={15} className="shrink-0 text-neutral-400" />
-                                <span>{publishDate}</span>
+                                <time dateTime={rawPublishDate || publishDate}>{publishDate}</time>
                             </span>
                         )}
                         {updatedDate && updatedDate !== publishDate && (
                             <span className="flex items-center gap-1.5 text-neutral-400">
                                 <span className="hidden sm:inline">·</span>
                                 <span className="text-xs font-medium uppercase tracking-wide text-neutral-400">{t("last_updated")}</span>
-                                <span>{updatedDate}</span>
+                                <time dateTime={rawUpdatedDate || updatedDate}>{updatedDate}</time>
                             </span>
                         )}
                     </div>

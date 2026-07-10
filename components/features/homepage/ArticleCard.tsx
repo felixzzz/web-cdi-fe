@@ -34,9 +34,8 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           src={imageUrl}
           alt={title}
           title={title}
-          layout="fill"
-          objectFit="cover"
-          className="transition-transform duration-400 ease-in-out group-hover:scale-110"
+          fill
+          className="object-cover transition-transform duration-400 ease-in-out group-hover:scale-110"
         />
       </div>
 

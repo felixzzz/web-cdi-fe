@@ -16,6 +16,9 @@ import { GovernancePageProps } from "@/types/Governances/Governance";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
+// ISR: revalidate every 1 hour — serves cached HTML for instant TTFB
+export const revalidate = 3600;
+
 export async function generateMetadata({
   params: { locale },
 }: GovernancePageProps): Promise<Metadata> {

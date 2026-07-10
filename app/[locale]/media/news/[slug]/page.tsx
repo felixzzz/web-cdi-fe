@@ -152,6 +152,9 @@ export async function generateMetadata({
       "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
       "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
       "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+      // Article date signals for SEO
+      ...(article?.date ? { "article:published_time": article.date } : {}),
+      ...(article?.updated_at ? { "article:modified_time": article.updated_at } : {}),
     },
   };
 }
@@ -204,7 +207,9 @@ export default async function Page({ params }: PageProps) {
         breadcrumbs={breadcrumbs}
         articleTitle={title}
         publishDate={formatDatePublish(article.date)}
+        rawPublishDate={article.date || ''}
         updatedDate={formatDatePublish(article.updated_at)}
+        rawUpdatedDate={article.updated_at || ''}
         shareUrl={shareUrl}
         featureImageUrl={article.image}
         articleContent={content}

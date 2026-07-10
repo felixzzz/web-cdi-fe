@@ -32,9 +32,8 @@ export function BusinessPillars({ title, tab }: BusinessPillarsProps) {
                 <Image
                   src={tab.image} 
                   alt={tab.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-[20px]"
+                  fill
+                  className="object-cover rounded-[20px]"
                 />
               </div>
               <div className="lg:col-span-2">
@@ -113,9 +112,8 @@ function AssetBlock({
         src={imageUrl}
         alt={alt}
         title={alt}
-        layout="fill"
-        objectFit="cover"
-        className={`z-0 ${imagePositionClass}`}
+        fill
+        className={`object-cover z-0 ${imagePositionClass}`}
         priority
       />
       <div

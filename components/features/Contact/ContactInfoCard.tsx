@@ -29,9 +29,8 @@ export function ContactInfoCard({
         src={imageSrc}
         alt={imageAlt}
         title={imageAlt}
-        layout="fill"
-        objectFit="cover"
-        className="z-0"
+        fill
+        className="object-cover z-0"
         priority
       />
       <div className="relative z-10">

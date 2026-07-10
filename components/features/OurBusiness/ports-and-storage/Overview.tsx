@@ -22,9 +22,8 @@ export function Overview({
         src={imageUrl}
         alt={title || "Overview"}
         title={title || "Overview"}
-        layout="fill"
-        objectFit="cover"
-        className="z-0 object-[20%_center] lg:object-[65%_center]"
+        fill
+        className="object-cover z-0 object-[20%_center] lg:object-[65%_center]"
         priority
       />
 

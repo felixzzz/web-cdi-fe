@@ -24,9 +24,8 @@ export function GrievanceMechanism({ data }: GrievanceMechanismProps) {
         src={BACKGROUND_IMAGE_URL}
         alt={TITLE} 
         title={TITLE} 
-        layout="fill"
-        objectFit="cover"
-        className="z-0"
+        fill
+        className="object-cover z-0"
         priority
       />
 

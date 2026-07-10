@@ -20,6 +20,9 @@ import { stripHtml } from "@/lib/localization";
 import { cleanJsonLdString, buildOrganizationSchema } from "@/lib/schema-org";
 import JsonLd from "@/components/shared/JsonLd";
 
+// ISR: revalidate every 1 hour — serves cached HTML for instant TTFB
+export const revalidate = 3600;
+
 export async function generateMetadata({
   params: { locale },
 }: AboutPageProps): Promise<Metadata> {

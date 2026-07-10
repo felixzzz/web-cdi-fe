@@ -18,8 +18,8 @@ export function Overview({ title, description, imageUrl }: OverviewProps) {
         src={imageUrl}
         alt={title || "Overview"}
         title={title || "Overview"}
-        layout="fill"
-        className="z-0 object-cover object-[30%_center] lg:object-[65%_center]"
+        fill
+        className="object-cover z-0 object-[30%_center] lg:object-[65%_center]"
         priority
       />
 

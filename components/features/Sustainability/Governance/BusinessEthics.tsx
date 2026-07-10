@@ -28,9 +28,8 @@ export function BusinessEthics({ data, locale }: BusinessEthicsProps) {
         src={image}
         alt={title || "Business Ethics"}
         title={title || "Business Ethics"}
-        layout="fill"
-        objectFit="cover"
-        className="z-0"
+        fill
+        className="object-cover z-0"
         priority
       />
 

@@ -21,9 +21,8 @@ export function Overview({ data }: OverviewProps) {
         src={imageUrl}
         alt="Abstract blue texture for overview background"
         title="Abstract blue texture for overview background"
-        layout="fill"
-        objectFit="cover"
-        className="z-0 object-[20%_center] lg:object-[65%_center]"
+        fill
+        className="object-cover z-0 object-[20%_center] lg:object-[65%_center]"
         priority
       />
 

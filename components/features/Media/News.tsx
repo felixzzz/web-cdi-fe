@@ -455,8 +455,8 @@ function ArticleCard({
               <Image
                 src={imageUrl}
                 alt={title}
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
                 onError={() => setHasError(true)}
               />
             )}

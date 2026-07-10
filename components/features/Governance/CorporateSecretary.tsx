@@ -33,8 +33,8 @@ export function CorporateSecretary({
                 src={personData.file_url}
                 alt={personData.title || "Corporate Secretary"}
                 title={personData.title || "Corporate Secretary"}
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
               />
             </div>
             <p className="mb-3 font-medium text-lg lg:text-[22px]">

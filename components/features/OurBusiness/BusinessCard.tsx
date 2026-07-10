@@ -47,9 +47,8 @@ export function BusinessCard({
           src={imageUrl}
           alt={title}
           title={title}
-          layout="fill"
-          objectFit="cover"
-          className="z-0"
+          fill
+          className="object-cover z-0"
           priority
         />
         <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-black/10 to-transparent" />

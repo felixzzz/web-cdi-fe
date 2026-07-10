@@ -55,9 +55,8 @@ export function HeroNews({media, latestNewsData}: HeroNewsProps) {
             <Image
                 src={media.file_url}
                 alt="Latar belakang abstrak berita terbaru"
-                layout="fill"
-                objectFit="cover"
-                className="z-0"
+                fill
+                className="object-cover z-0"
                 priority
             />
 
@@ -85,11 +84,11 @@ export function HeroNews({media, latestNewsData}: HeroNewsProps) {
                         <SwiperSlide key={slide.id}>
                             <article className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                 <div className="relative aspect-video lg:h-[380px] w-full rounded-xl overflow-hidden">
-                                    <Image
+                                <Image
                                         src={slide.imageUrl}
                                         alt={slide.title}
-                                        layout="fill"
-                                        objectFit="cover"
+                                        fill
+                                        className="object-cover"
                                     />
                                 </div>
                                 <div className="p-6 rounded-xl bg-[#E6F0FA] border border-neutral-5 backdrop-blur-2xl">
