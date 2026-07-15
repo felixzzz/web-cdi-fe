@@ -117,19 +117,21 @@ export default async function Page({
 }: ManagementPageProps) {
   const t = await getTranslations("Management");
 
-  const [managementData, quickLinksData, BodData, BocData, GuideData] =
+  const [managementData, quickLinksData, BodData, BocData, GuideData, managementDataId] =
     await Promise.all([
       managementService.getManagementPageData(locale),
       informationService.getHomeQuickLinks(locale),
       managementService.getManagementBodData(locale),
       managementService.getManagementBocData(locale),
       managementService.getManagementGuideData(locale),
+      // Always fetch the "id" locale for corporate structure image,
+      // since the CMS only updates the ID version.
+      managementService.getManagementPageData("id"),
     ]);
   const {
     about_us_management_banner,
     about_us_management_overview,
     about_us_organization_structure,
-    about_us_corporate_structure,
     about_us_corporate_structure_table,
     about_us_corporate_structure_table_show,
     about_us_guideline,
@@ -211,7 +213,7 @@ export default async function Page({
         chartImageAlt="Organization Structure Chart"
       />
       <CorporateStructure
-        chartImageUrl={about_us_corporate_structure.file_url}
+        chartImageUrl={managementDataId.about_us_corporate_structure.file_url}
         chartImageAlt={"Corporate Structure Chart"}
         tableTitle={tableData.title}
         tableData={tableData.content_table_trans}
