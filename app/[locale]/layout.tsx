@@ -28,6 +28,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { getTranslations } from "next-intl/server";
 import { ProgressBar } from "@/components/shared/ProgressBar";
 import { CookieConsent } from "@/components/shared/CookieConsent";
+import { StickyCTA } from "@/components/shared/StickyCTA";
 import Script from "next/script";
 
 type Props = {
@@ -110,6 +111,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         )}
 
         {children}
+        <StickyCTA />
         <Toaster />
         <Footer
           backgroundImageUrl="/assets/images/footer.webp"
