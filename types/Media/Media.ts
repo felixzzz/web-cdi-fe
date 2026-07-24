@@ -60,6 +60,14 @@ export interface ArticleMetaTag {
   keyword: string | null;
 }
 
+export interface ArticleReference {
+  id?: string | number;
+  title: string;
+  url: string;
+  publisherName?: string;
+  publisher_name?: string;
+}
+
 export interface ArticleItem {
   id: number;
   ulid: string;
@@ -84,6 +92,8 @@ export interface ArticleItem {
   date: string;
   article_category: ArticleCategory;
   json_ld?: string;
+  references?: ArticleReference[];
+  sources?: ArticleReference[];
 }
 
 export interface IReportType {

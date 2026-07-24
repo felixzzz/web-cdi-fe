@@ -213,6 +213,7 @@ export default async function Page({ params }: PageProps) {
         shareUrl={shareUrl}
         featureImageUrl={article.image}
         articleContent={content}
+        references={article.references || article.sources}
       />
       <NavbarThemeTrigger theme="light" />
       <RelatedPosts

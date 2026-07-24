@@ -6,6 +6,8 @@ import {ChevronRight, CalendarDays, UserPen} from "lucide-react";
 import {useTranslations} from "next-intl";
 import {useEffect} from "react";
 
+import ArticleReferences, { Reference } from "./ArticleReferences";
+
 type BreadcrumbItem = {
     href: string;
     label: string;
@@ -21,6 +23,7 @@ type NewsDetailProps = {
     shareUrl: string;
     featureImageUrl: string;
     articleContent: string;
+    references?: Reference[];
 };
 
 const shareIcons = [
@@ -78,6 +81,7 @@ export const NewsDetail = ({
                                shareUrl,
                                featureImageUrl,
                                articleContent,
+                               references,
                            }: NewsDetailProps) => {
     const t = useTranslations("Media");
     useEffect(() => {
@@ -235,6 +239,9 @@ export const NewsDetail = ({
                         />
                     </article>
                 </div>
+
+                {/* Article References */}
+                <ArticleReferences references={references} />
 
                 {/* Author Box */}
                 <div className="mt-12 border border-neutral-100 rounded-2xl bg-neutral-50/60 p-6 flex items-center gap-5">
