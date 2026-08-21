@@ -87,7 +87,7 @@ export function Navbar() {
     {
       id: "career",
       label: t("career"),
-      href: "https://careers.capcx.com/",
+      href: "https://careers.chandra-asri.com/",
       external: true,
     },
     { id: "contact", label: t("contact_us"), href: "/contact-us" },
