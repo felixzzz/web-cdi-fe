@@ -9,6 +9,7 @@ import {Navigation, Pagination} from "swiper/modules";
 import {ChevronRight} from "lucide-react";
 import {ApiLatestNewsResponse, HeroNewsSection} from "@/types/Media/Media";
 import {useLocale, useTranslations} from "next-intl";
+import {formatLocalizedDate} from "@/lib/dateUtils";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -95,7 +96,7 @@ export function HeroNews({media, latestNewsData}: HeroNewsProps) {
                   <span className="bg-[#2474A5] text-white px-3 py-1 text-sm rounded-full me-4">
                     {slide.category}
                   </span>
-                                    <span className="text-sm text-neutral-10">{slide.date}</span>
+                  <span className="text-sm text-neutral-10">{formatLocalizedDate(slide.date, locale)}</span>
                                     <h2 className="text-[22px] font-medium mt-4 text-neutral-13 line-clamp-2">
                                         {slide.title}
                                     </h2>

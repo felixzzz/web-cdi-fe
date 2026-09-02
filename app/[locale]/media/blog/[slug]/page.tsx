@@ -8,6 +8,7 @@ import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
 import { cleanJsonLdString, buildArticleSchema, buildBreadcrumbSchema } from "@/lib/schema-org";
 import JsonLd from "@/components/shared/JsonLd";
+import { formatLocalizedDate, toISODateString } from "@/lib/dateUtils";
 
 export type PageProps = {
   params: {
@@ -149,6 +150,9 @@ export async function generateMetadata({
       "download-file": `${process.env.NEXT_PUBLIC_BASE_URL}/file-download`,
       "add-file-preview": `${process.env.NEXT_PUBLIC_BASE_URL}/file/preview`,
       "add-file-download": `${process.env.NEXT_PUBLIC_BASE_URL}/file/download`,
+      // Article date signals for SEO
+      ...(article?.date ? { "article:published_time": toISODateString(article.date) || article.date } : {}),
+      ...(article?.updated_at ? { "article:modified_time": toISODateString(article.updated_at) || article.updated_at } : {}),
     },
   };
 }
@@ -181,22 +185,6 @@ export default async function Page({ params }: PageProps) {
     `${process.env.NEXT_PUBLIC_URL}/${params.locale}/media/blog/${params.slug}`,
   );
 
-  const formatDatePublish = (dateString?: string) => {
-    if (!dateString) return dateString ?? "";
-
-    const date = new Date(dateString);
-
-    if (isNaN(date.getTime())) {
-      return dateString;
-    }
-
-    return new Intl.DateTimeFormat(params.locale === "id" ? "id-ID" : "en-GB", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    }).format(date);
-  };
-
   const firstPageBlogData = await mediaService.getMediaBlogPageData(1);
 
   return (
@@ -205,8 +193,10 @@ export default async function Page({ params }: PageProps) {
       <NewsDetail
         breadcrumbs={breadcrumbs}
         articleTitle={title}
-        publishDate={formatDatePublish(article.date)}
-        updatedDate={formatDatePublish(article.updated_at)}
+        publishDate={formatLocalizedDate(article.date, params.locale)}
+        rawPublishDate={toISODateString(article.date) || article.date || ""}
+        updatedDate={formatLocalizedDate(article.updated_at, params.locale)}
+        rawUpdatedDate={toISODateString(article.updated_at) || article.updated_at || ""}
         shareUrl={shareUrl}
         featureImageUrl={article.image}
         articleContent={content}
@@ -227,8 +217,8 @@ export default async function Page({ params }: PageProps) {
           <JsonLd data={buildArticleSchema({
             headline: title,
             imageUrl: article.image || undefined,
-            datePublished: article.date || article.created_at || '',
-            dateModified: article.updated_at || article.date || article.created_at || '',
+            datePublished: toISODateString(article.date) || article.created_at || '',
+            dateModified: toISODateString(article.updated_at) || toISODateString(article.date) || article.created_at || '',
             url: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/blog/${params.slug}`
           })} />
           <JsonLd data={buildBreadcrumbSchema([

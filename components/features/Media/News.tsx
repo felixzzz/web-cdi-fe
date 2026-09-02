@@ -22,6 +22,7 @@ import {
 } from "@/types/Media/Media";
 import { useTranslations } from "next-intl";
 import { mediaService, pressReleaseService } from "@/services/Media/MediaService";
+import { formatLocalizedDate } from "@/lib/dateUtils";
 
 interface NewsProps {
   mediaData: NewsApiResponse;
@@ -319,6 +320,7 @@ export function News({
                 date={article.date}
                 title={`${article[`title_${locale}`]}`}
                 type="news"
+                locale={locale}
               />
             ))
           ) : (
@@ -392,6 +394,7 @@ export function News({
                 date={article.date}
                 title={`${article[`title_${locale}`]}`}
                 type="blog"
+                locale={locale}
               />
             ))
           ) : (
@@ -423,6 +426,7 @@ function ArticleCard({
   date,
   title,
   type,
+  locale,
 }: {
   href: string;
   imageUrl: string;
@@ -430,6 +434,7 @@ function ArticleCard({
   date: string;
   title: string;
   type: string;
+  locale?: string;
 }) {
   const t = useTranslations("Media");
 
@@ -469,7 +474,7 @@ function ArticleCard({
                 {category}
               </span>
             )}
-            <span className="text-sm text-neutral-10">{date}</span>
+            <span className="text-sm text-neutral-10">{formatLocalizedDate(date, locale)}</span>
           </div>
           <h3 className="text-[22px] font-medium mt-4 mb-7 line-clamp-3 grow">
             {title}
@@ -512,7 +517,7 @@ function PressReleaseCard({
       <div className="flex flex-col lg:flex-row justify-between w-full">
         <div className="flex items-center text-base text-neutral-8 gap-3">
           <div className="flex items-baseline gap-3">
-            <span>{item.date}</span>
+            <span>{formatLocalizedDate(item.date, locale)}</span>
             <span>.</span>
             <span>{item.file_en.size}</span>
             <span>.</span>

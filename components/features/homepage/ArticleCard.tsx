@@ -4,7 +4,8 @@ import { Link } from "@/i18n/navigation";
 import React from "react";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { formatLocalizedDate } from "@/lib/dateUtils";
 
 export interface ArticleCardProps {
   href: string;
@@ -21,7 +22,8 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   date,
   title,
 }) => {
-  const t = useTranslations('Media')
+  const t = useTranslations('Media');
+  const locale = useLocale();
 
   return (
     <Link
@@ -44,7 +46,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           <span className="bg-gray-300 px-3 py-1 text-sm rounded-full text-neutral-900 font-medium">
             {category}
           </span>
-          <span className="text-sm text-gray-500">{date}</span>
+          <span className="text-sm text-gray-500">{formatLocalizedDate(date, locale)}</span>
         </div>
 
         <h3 className="text-2xl lg:text-3xl font-medium mb-4 line-clamp-3 flex-grow">

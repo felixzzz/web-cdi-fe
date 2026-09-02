@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { ChevronRight, ImageOff } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { formatLocalizedDate } from "@/lib/dateUtils";
 
 interface ArticleCardProps {
   href: string;
@@ -63,7 +64,7 @@ export const ArticleCard = ({
                 {category}
               </span>
             )}
-            <span className="text-sm text-neutral-10">{date}</span>
+            <span className="text-sm text-neutral-10">{formatLocalizedDate(date, locale)}</span>
           </div>
           <h3 className="text-[22px] font-medium mt-4 mb-7 line-clamp-3 grow">
             {title}
