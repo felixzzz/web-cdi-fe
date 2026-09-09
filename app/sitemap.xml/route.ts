@@ -1,5 +1,5 @@
 export async function GET(): Promise<Response> {
-    let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "";
+    let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "https://chandradaya-investasi.com";
     if (baseUrl.endsWith("/")) {
         baseUrl = baseUrl.slice(0, -1);
     }
@@ -14,7 +14,7 @@ export async function GET(): Promise<Response> {
         "/investor",
         "/governance",
         "/sustainability",
-        "/media",
+        "/news",
         "/blog",
     ];
 

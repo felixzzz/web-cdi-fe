@@ -5,7 +5,10 @@ export async function GET(
   { params }: { params: { locale: string } }
 ): Promise<Response> {
   const { locale } = params;
-  const baseUrl = process.env.NEXT_PUBLIC_URL_LP;
+  let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "https://chandradaya-investasi.com";
+  if (baseUrl.endsWith("/")) {
+    baseUrl = baseUrl.slice(0, -1);
+  }
 
   const staticPages = [
     { path: "/", priority: 1.0 },               
@@ -15,7 +18,6 @@ export async function GET(
     { path: "/governance", priority: 0.8 },      
     { path: "/sustainability", priority: 0.8 },
     { path: "/media/news", priority: 0.8 },     
-    { path: "/career", priority: 0.7 },        
     { path: "/contact-us", priority: 0.7 },     
     { path: "/terms-and-conditions", priority: 0.5 },
     { path: "/privacy-policy", priority: 0.5 },  

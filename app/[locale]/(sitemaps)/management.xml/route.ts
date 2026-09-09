@@ -13,7 +13,10 @@ export async function GET(
   { params }: { params: { locale: string } }
 ): Promise<Response> {
   const { locale } = params;
-  const baseUrl = process.env.NEXT_PUBLIC_URL_LP;
+  let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "https://chandradaya-investasi.com";
+  if (baseUrl.endsWith("/")) {
+    baseUrl = baseUrl.slice(0, -1);
+  }
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/style.xsl"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;

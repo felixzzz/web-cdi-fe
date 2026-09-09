@@ -184,7 +184,7 @@ export default async function Page({ params }: PageProps) {
   const baseUrl =
     process.env.NEXT_PUBLIC_URL_LP ||
     process.env.NEXT_PUBLIC_URL ||
-    "https://cdi.co.id";
+    "https://chandradaya-investasi.com";
   const shareUrl = `${baseUrl}/${params.locale}/media/blog/${params.slug}`;
 
   const firstPageBlogData = await mediaService.getMediaBlogPageData(1);

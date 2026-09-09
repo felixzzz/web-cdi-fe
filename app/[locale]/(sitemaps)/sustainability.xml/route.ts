@@ -2,7 +2,10 @@ import { NextRequest } from "next/server";
 
 export async function GET(_request: NextRequest, { params }: { params: { locale: string } }): Promise<Response> {
   const { locale } = params;
-  const baseUrl = process.env.NEXT_PUBLIC_URL_LP;
+  let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "https://chandradaya-investasi.com";
+  if (baseUrl.endsWith("/")) {
+    baseUrl = baseUrl.slice(0, -1);
+  }
 
   const pages = [
     { path: "/sustainability", priority: 0.7 },

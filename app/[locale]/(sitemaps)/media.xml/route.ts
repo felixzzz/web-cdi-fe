@@ -1,18 +1,16 @@
 import { NextRequest } from "next/server";
 import { mediaService } from "@/services/Media/MediaService";
-
-interface NewsArticle {
-  [key: `slug${string}`]: string;
-  updated_at?: string;
-  created_at?: string;
-}
+import { ArticleItem } from "@/types/Media/Media";
 
 export async function GET(
   _request: NextRequest,
   { params }: { params: { locale: string } }
 ): Promise<Response> {
   const { locale } = params;
-  const baseUrl = process.env.NEXT_PUBLIC_URL_LP;
+  let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "https://chandradaya-investasi.com";
+  if (baseUrl.endsWith("/")) {
+    baseUrl = baseUrl.slice(0, -1);
+  }
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/style.xsl"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
@@ -21,10 +19,13 @@ export async function GET(
     const mediaData = await mediaService.getMediaPageData(locale);
     
     if (mediaData && mediaData.items) {
-      mediaData.items.forEach((article: NewsArticle) => {
+      mediaData.items.forEach((article: ArticleItem) => {
+        const slug = locale === "en" ? (article.slug || article.slug_id) : (article.slug_id || article.slug);
+        if (!slug) return;
+
         xml += `
         <url>
-          <loc>${baseUrl}/${locale}/media/news/${article.slug}</loc>
+          <loc>${baseUrl}/${locale}/media/news/${slug}</loc>
           <lastmod>${new Date(article.updated_at || article.created_at || new Date()).toISOString()}</lastmod>
           <priority>0.6</priority>
           <changefreq>weekly</changefreq>
