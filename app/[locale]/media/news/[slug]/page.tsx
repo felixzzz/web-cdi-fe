@@ -181,9 +181,11 @@ export default async function Page({ params }: PageProps) {
     { href: `/media/news`, label: t("News") },
   ];
 
-  const shareUrl = encodeURIComponent(
-    `${process.env.NEXT_PUBLIC_URL}/${params.locale}/media/news/${params.slug}`,
-  );
+  const baseUrl =
+    process.env.NEXT_PUBLIC_URL_LP ||
+    process.env.NEXT_PUBLIC_URL ||
+    "https://cdi.co.id";
+  const shareUrl = `${baseUrl}/${params.locale}/media/news/${params.slug}`;
 
   return (
     <main>

@@ -2,9 +2,10 @@
 
 import {Link} from "@/i18n/navigation";
 import Image from "@/components/shared/SafeImage";
-import {ChevronRight, CalendarDays, UserPen} from "lucide-react";
+import {ChevronRight, CalendarDays, UserPen, Check} from "lucide-react";
 import {useTranslations} from "next-intl";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {toast} from "sonner";
 
 import ArticleReferences, { Reference } from "./ArticleReferences";
 
@@ -26,50 +27,110 @@ type NewsDetailProps = {
     references?: Reference[];
 };
 
-const shareIcons = [
-    {
-        name: "Copy",
-        hrefBase: "#",
-        iconSrc:
-            "/assets/icons/ic_share_copy_rounded.svg",
-    },
-    {
-        name: "LinkedIn",
-        hrefBase: "https://www.linkedin.com/shareArticle?mini=true&url=",
-        iconSrc:
-            "/assets/icons/ic_share_linkedin_rounded.svg",
-    },
-    {
-        name: "X/Twitter",
-        hrefBase: "https://x.com/intent/tweet?url=",
-        iconSrc:
-            "/assets/icons/ic_share_x_rounded.svg",
-    },
-    {
-        name: "Facebook",
-        hrefBase: "https://www.facebook.com/sharer/sharer.php?u=",
-        iconSrc:
-            "/assets/icons/ic_share_fb_rounded.svg",
-    },
-];
+const ShareButtons = ({shareUrl}: { shareUrl: string }) => {
+    const t = useTranslations("Media");
+    const [copied, setCopied] = useState(false);
+    const [activeUrl, setActiveUrl] = useState<string>(() => {
+        try {
+            return decodeURIComponent(shareUrl);
+        } catch {
+            return shareUrl;
+        }
+    });
 
-const ShareButtons = ({shareUrl}: { shareUrl: string }) => (
-    <div className="flex items-center gap-2">
-        {shareIcons.map((icon) => (
-            <a
-                key={icon.name}
-                href={
-                    icon.name === "Copy" ? icon.hrefBase : `${icon.hrefBase}${shareUrl}`
-                }
-                target={icon.name === "Copy" ? "_self" : "_blank"}
-                rel="noopener noreferrer"
-                aria-label={`Share on ${icon.name}`}
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setActiveUrl(window.location.href);
+        }
+    }, []);
+
+    const handleCopy = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        const urlToCopy = activeUrl || (typeof window !== "undefined" ? window.location.href : "");
+        if (!urlToCopy) return;
+
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(urlToCopy);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = urlToCopy;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand("copy");
+                textArea.remove();
+            }
+            setCopied(true);
+            toast.success(t("link_copied") || "Link copied to clipboard!");
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error("Failed to copy URL:", err);
+            toast.error("Failed to copy link");
+        }
+    };
+
+    const encodedUrl = encodeURIComponent(activeUrl);
+
+    const socialLinks = [
+        {
+            name: "LinkedIn",
+            href: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}`,
+            iconSrc: "/assets/icons/ic_share_linkedin_rounded.svg",
+        },
+        {
+            name: "X/Twitter",
+            href: `https://x.com/intent/tweet?url=${encodedUrl}`,
+            iconSrc: "/assets/icons/ic_share_x_rounded.svg",
+        },
+        {
+            name: "Facebook",
+            href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+            iconSrc: "/assets/icons/ic_share_fb_rounded.svg",
+        },
+    ];
+
+    return (
+        <div className="flex items-center gap-2">
+            <button
+                type="button"
+                onClick={handleCopy}
+                aria-label={copied ? "Link Copied" : (t("copy_link") || "Copy link")}
+                title={copied ? "Link Copied" : (t("copy_link") || "Copy link")}
+                className="relative inline-flex items-center justify-center rounded-full transition-transform duration-200 hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2474A5] focus-visible:ring-offset-2"
             >
-                <Image src={icon.iconSrc} alt="" width={32} height={32}/>
-            </a>
-        ))}
-    </div>
-);
+                <Image
+                    src="/assets/icons/ic_share_copy_rounded.svg"
+                    alt={t("copy_link") || "Copy link"}
+                    width={32}
+                    height={32}
+                    className={`transition-opacity duration-200 ${copied ? "opacity-20" : "opacity-100"}`}
+                />
+                {copied && (
+                    <span className="absolute inset-0 flex items-center justify-center bg-[#2474A5] rounded-full text-white animate-in fade-in zoom-in duration-200 shadow-sm">
+                        <Check size={16} strokeWidth={2.5} />
+                    </span>
+                )}
+            </button>
+            {socialLinks.map((icon) => (
+                <a
+                    key={icon.name}
+                    href={icon.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Share on ${icon.name}`}
+                    title={`Share on ${icon.name}`}
+                    className="inline-flex items-center justify-center rounded-full transition-transform duration-200 hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2474A5] focus-visible:ring-offset-2"
+                >
+                    <Image src={icon.iconSrc} alt={icon.name} width={32} height={32}/>
+                </a>
+            ))}
+        </div>
+    );
+};
 
 export const NewsDetail = ({
                                breadcrumbs,
