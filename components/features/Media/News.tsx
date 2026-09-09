@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import { clsx } from "clsx";
 import {
   ChevronLeft,
@@ -44,7 +45,14 @@ export function News({
   locale,
 }: NewsProps) {
   const t = useTranslations("Media");
-  const [activeTab, setActiveTab] = useState("news");
+  const searchParams = useSearchParams();
+  const tabFromQuery = searchParams?.get("tab");
+  const [activeTab, setActiveTab] = useState(() => {
+    if (tabFromQuery && ["news", "press-release", "blog"].includes(tabFromQuery)) {
+      return tabFromQuery;
+    }
+    return "news";
+  });
   const [activeCategory, setActiveCategory] = useState("Semua");
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,6 +60,15 @@ export function News({
   const [mediaPressReleaseDataContainer, setMediaPressReleaseDataContainer] = useState(pressReleaseData.items);
 
   const defaultCategoryLabel = locale === "id" ? "Semua" : "Semua";
+
+  useEffect(() => {
+    const tabParam = searchParams?.get("tab");
+    if (tabParam && ["news", "press-release", "blog"].includes(tabParam)) {
+      setActiveTab(tabParam);
+      setActiveCategory(defaultCategoryLabel);
+      setCurrentPage(1);
+    }
+  }, [searchParams, defaultCategoryLabel]);
 
   const newsCategories = useMemo(() => {
     const categoryNames = categoryData.map((cat) => {
@@ -229,6 +246,15 @@ export function News({
     setActiveTab(tab);
     setActiveCategory(defaultCategoryLabel);
     setCurrentPage(1);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      if (tab === "news") {
+        url.searchParams.delete("tab");
+      } else {
+        url.searchParams.set("tab", tab);
+      }
+      window.history.replaceState(null, "", url.pathname + (url.search ? url.search : ""));
+    }
   };
 
   const handleCategoryClick = (category: string) => {

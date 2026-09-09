@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { HeroNews } from "@/components/features/Media/Hero";
 import { News } from "@/components/features/Media/News";
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
@@ -118,13 +119,15 @@ export default async function Page({ params: { locale } }: NewsPageProps) {
       <NavbarThemeTrigger theme="dark" />
       <HeroNews media={heroNewsData} latestNewsData={latestNewsData} />
       <NavbarThemeTrigger theme="light" />
-      <News
-        mediaData={mediaData}
-        mediaBlogData={mediaBlogData}
-        pressReleaseData={pressReleaseData}
-        categoryData={categoryData}
-        locale={locale}
-      />
+      <Suspense fallback={null}>
+        <News
+          mediaData={mediaData}
+          mediaBlogData={mediaBlogData}
+          pressReleaseData={pressReleaseData}
+          categoryData={categoryData}
+          locale={locale}
+        />
+      </Suspense>
     </main>
   );
 }

@@ -32,7 +32,7 @@ export function HeroNews({media, latestNewsData}: HeroNewsProps) {
             category: item.data.category_name,
             date: item.data.date,
             description: item.data.short_content,
-            linkUrl: `${process.env.NEXT_PUBLIC_URL_LP}/${locale}/media/news/${item.data.slug}`,
+            linkUrl: `/media/news/${item.data.slug}`,
         }));
 
     const heroTitle =

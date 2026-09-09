@@ -178,7 +178,7 @@ export default async function Page({ params }: PageProps) {
 
   const breadcrumbs = [
     { href: `/`, label: "Home" },
-    { href: `/media/news`, label: t("blog") },
+    { href: `/media/news?tab=blog`, label: t("blog") },
   ];
 
   const baseUrl =
