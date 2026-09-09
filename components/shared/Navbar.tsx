@@ -72,7 +72,6 @@ export function Navbar() {
         },
       ],
     },
-    { id: "governance", label: t("governance"), href: "/governance" },
     {
       id: "sustainability",
       label: t("sustainability"),
@@ -82,7 +81,8 @@ export function Navbar() {
         { label: t("social"), href: "/sustainability/social" },
         { label: t("governance_child"), href: "/sustainability/governance" },
       ],
-    },
+    }, 
+    { id: "governance", label: t("governance"), href: "/governance" },
     { id: "media", label: t("media"), href: "/media/news" },
     {
       id: "career",

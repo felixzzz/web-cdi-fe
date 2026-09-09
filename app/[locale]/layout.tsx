@@ -122,7 +122,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           companyData={footerData}
           mainNavLinks={mainNavLinksData}
           legalNavLinks={legalNavLinksData}
-          copyrightText="@2025 Chandra Daya Investasi"
+          copyrightText={`@${new Date().getFullYear()} Chandra Daya Investasi`}
         />
           </NextIntlClientProvider>
         </NavbarThemeProvider>

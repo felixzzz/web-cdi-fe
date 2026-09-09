@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { CompanyLocationResponse } from "@/types/global/footer"; 
+import { Instagram, Facebook, Linkedin } from "lucide-react";
 
 interface NavLink {
   href: string;
@@ -19,6 +20,24 @@ interface FooterProps {
   legalNavLinks: NavLink[];
   copyrightText: string;
 }
+
+const socialLinks = [
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/chandradayainvestasi/",
+    icon: Instagram,
+  },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/chandradayainvestasi",
+    icon: Facebook,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://id.linkedin.com/company/chandradayainvestasi",
+    icon: Linkedin,
+  },
+];
 
 export const Footer: React.FC<FooterProps> = ({
   backgroundImageUrl,
@@ -96,24 +115,39 @@ export const Footer: React.FC<FooterProps> = ({
           </nav>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-3 lg:grid-rows-1 items-center text-center lg:text-left">
-          <p className="text-sm text-neutral-3 lg:col-start-1 lg:row-start-1">
+        <div className="grid grid-cols-1 lg:grid-cols-3 items-center text-center lg:text-left gap-y-4 lg:gap-y-0">
+          <p className="text-sm text-neutral-3 lg:col-start-1">
             {copyrightText}
           </p>
 
-          <div className="flex gap-4 items-center justify-center row-start-3 lg:row-start-1">
+          <div className="flex gap-5 items-center justify-center lg:col-start-2">
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  className="text-neutral-400 hover:text-white transition-colors duration-200"
+                >
+                  <Icon size={20} />
+                </a>
+              );
+            })}
           </div>
 
           <nav
             aria-label="Legal navigation"
-            className="flex gap-4 items-center justify-center lg:justify-end lg:col-start-3 lg:row-start-1"
+            className="flex gap-4 items-center justify-center lg:justify-end lg:col-start-3"
           >
             <ul className="flex gap-4 items-center">
               {legalNavLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-neutral-3 "
+                    className="text-sm text-neutral-3 hover:text-white transition-colors duration-200"
                   >
                     {link.text}
                   </Link>

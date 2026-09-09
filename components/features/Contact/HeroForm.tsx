@@ -58,7 +58,7 @@ export function HeroForm({
       last_name: "",
       email: "",
       country_id: "",
-      topic_id: "",
+      topic_id: topics?.[0]?.id ? String(topics[0].id) : "1",
       message: "",
     },
   });
@@ -100,6 +100,12 @@ export function HeroForm({
       );
     }
   }
+
+  useEffect(() => {
+    if (topics?.[0]?.id && !form.getValues("topic_id")) {
+      form.setValue("topic_id", String(topics[0].id), { shouldValidate: true });
+    }
+  }, [topics, form]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -236,39 +242,16 @@ export function HeroForm({
                   />
                 </div>
 
+                {/* Temporary hidden input for topic_id */}
                 <FormField
                   control={form.control}
                   name="topic_id"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-900 text-sm block mb-[6px]">
-                        {t("topic_id")} <span className="text-red-600">*</span>
-                      </FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="input-custom bg-neutral-2 text-base !text-black">
-                            <SelectValue
-                              placeholder={t("topic_id_placeholder")}
-                            />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {topics?.map((topic) => (
-                            <SelectItem
-                              className="text-base"
-                              key={topic.id}
-                              value={String(topic.id)}
-                            >
-                              {topic.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
+                    <input
+                      type="hidden"
+                      {...field}
+                      value={field.value || (topics?.[0]?.id ? String(topics[0].id) : "1")}
+                    />
                   )}
                 />
 
