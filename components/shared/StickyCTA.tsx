@@ -11,7 +11,7 @@ export const StickyCTA = () => {
     <div className="fixed bottom-6 right-6 z-50">
       <Link 
         href="/contact-us"
-        className="flex items-center justify-center gap-2.5 bg-[#2474A5] text-white px-5 py-3 rounded-full shadow-lg hover:bg-[#1d628b] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-medium text-sm md:text-base group"
+        className="flex items-center justify-center gap-2.5 bg-[#2474A5] text-white px-5 py-3 rounded-full shadow-lg hover:bg-[#1d628b] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-medium text-sm md:text-base group gtm_consult_now_click"
         aria-label={t("title")}
       >
         <svg 

@@ -278,7 +278,7 @@ export function HeroForm({
 
                 <Button
                   type="submit"
-                  className="bg-[#47C1EA] hover:bg-[#3ab0d8] px-6 py-2 rounded-full font-medium w-fit text-white cursor-pointer disabled:bg-neutral-700 disabled:text-neutral-200 disabled:cursor-not-allowed"
+                  className="bg-[#47C1EA] hover:bg-[#3ab0d8] px-6 py-2 rounded-full font-medium w-fit text-white cursor-pointer disabled:bg-neutral-700 disabled:text-neutral-200 disabled:cursor-not-allowed gtm_form_submit"
                   disabled={!isValid || isSubmitting}
                 >
                   {form.formState.isSubmitting ? t("Submit") : t("Submit")}
