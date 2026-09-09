@@ -58,15 +58,18 @@ export async function getMediaPageData(
 }
 
 // method untuk fetch data page media blog
-export async function getMediaBlogPageData(page: number = 1): Promise<NewsApiResponse> {
+export async function getMediaBlogPageData(page: number = 1, locale?: string): Promise<NewsApiResponse> {
     try {
+        const headers: Record<string, string> = {
+            "Content-Type": "application/json",
+        };
+        if (locale) {
+            headers["lang"] = locale;
+        }
+
         const response = await axios.get<NewsApiResponse>(
             `${API_URL_MEDIA_BLOG}?page=${page}`,
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
+            { headers }
         );
 
         return response.data;
@@ -96,26 +99,40 @@ export async function getHeroPageData(
     }
 }
 
-
-export async function getMediaBlogDetailBySlug(slug: string): Promise<ArticleItem | null> {
+export async function getArticleDetail(
+    type: string,
+    slug: string,
+    locale?: string
+): Promise<ArticleItem | null> {
     try {
+        const headers: Record<string, string> = {
+            "Content-Type": "application/json",
+        };
+        if (locale) {
+            headers["lang"] = locale;
+        }
+
         const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/article/detail/blog/${slug}`
+            `${process.env.NEXT_PUBLIC_BASE_URL}/article/detail/${type}/${slug}`,
+            { headers }
         );
 
         return response.data?.data || response.data;
     } catch (error: unknown) {
-        console.error(`Gagal mengambil detail artikel untuk slug ${slug}:`, error);
         return null;
     }
+}
+
+export async function getMediaBlogDetailBySlug(slug: string, locale?: string): Promise<ArticleItem | null> {
+    return getArticleDetail("blog", slug, locale);
 }
 
 export const mediaService = {
     getMediaPageData,
     getMediaBlogPageData,
     getHeroPageData,
-    getMediaBlogDetailBySlug
-
+    getArticleDetail,
+    getMediaBlogDetailBySlug,
 };
 
 

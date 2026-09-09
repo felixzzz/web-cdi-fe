@@ -7,7 +7,7 @@ import { mediaService } from "@/services/Media/MediaService";
 // import { ArrowLeftCircleIcon } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { cleanJsonLdString, buildArticleSchema, buildBreadcrumbSchema } from "@/lib/schema-org";
 import JsonLd from "@/components/shared/JsonLd";
 import { formatLocalizedDate, toISODateString } from "@/lib/dateUtils";
@@ -20,19 +20,31 @@ export type PageProps = {
 };
 
 const getArticleData = cache(async (slug: string, locale: string) => {
+  // 1. Attempt direct detail fetch from backend
+  const directArticle = await mediaService.getArticleDetail("news", slug, locale);
   const firstPageData = await mediaService.getMediaPageData(locale, 1);
-  let article = firstPageData.items.find(
-    (item) => item.slug === slug || item.slug_id === slug,
-  );
+  const relatedPosts = firstPageData?.items || [];
 
-  const relatedPosts = firstPageData.items;
+  if (directArticle) {
+    return { article: directArticle, relatedPosts };
+  }
+
+  // 2. Search in first page of current locale
+  let article = firstPageData?.items?.find(
+    (item) =>
+      item.slug === slug ||
+      item.slug_id === slug ||
+      item.slug_en === slug ||
+      (item as unknown as { slug_en?: string }).slug_en === slug
+  );
 
   if (article) {
     return { article, relatedPosts };
   }
 
+  // 3. Search remaining pages of current locale
   const lastPage =
-    (firstPageData as unknown as { meta?: { last_page?: number } }).meta
+    (firstPageData as unknown as { meta?: { last_page?: number } })?.meta
       ?.last_page || 1;
 
   if (lastPage > 1) {
@@ -46,7 +58,54 @@ const getArticleData = cache(async (slug: string, locale: string) => {
     for (const pageData of remainingPagesData) {
       if (pageData && pageData.items) {
         article = pageData.items.find(
-          (item) => item.slug === slug || item.slug_id === slug,
+          (item) =>
+            item.slug === slug ||
+            item.slug_id === slug ||
+            item.slug_en === slug ||
+            (item as unknown as { slug_en?: string }).slug_en === slug
+        );
+        if (article) {
+          return { article, relatedPosts };
+        }
+      }
+    }
+  }
+
+  // 4. Cross-locale fallback: check opposite locale in case URL was requested with the other language's slug
+  const oppLocale = locale === "en" ? "id" : "en";
+  const oppFirstPage = await mediaService.getMediaPageData(oppLocale, 1);
+  article = oppFirstPage?.items?.find(
+    (item) =>
+      item.slug === slug ||
+      item.slug_id === slug ||
+      item.slug_en === slug ||
+      (item as unknown as { slug_en?: string }).slug_en === slug
+  );
+
+  if (article) {
+    return { article, relatedPosts };
+  }
+
+  const oppLastPage =
+    (oppFirstPage as unknown as { meta?: { last_page?: number } })?.meta
+      ?.last_page || 1;
+
+  if (oppLastPage > 1) {
+    const oppPromises = [];
+    for (let i = 2; i <= oppLastPage; i++) {
+      oppPromises.push(mediaService.getMediaPageData(oppLocale, i));
+    }
+
+    const oppRemainingPagesData = await Promise.all(oppPromises);
+
+    for (const pageData of oppRemainingPagesData) {
+      if (pageData && pageData.items) {
+        article = pageData.items.find(
+          (item) =>
+            item.slug === slug ||
+            item.slug_id === slug ||
+            item.slug_en === slug ||
+            (item as unknown as { slug_en?: string }).slug_en === slug
         );
         if (article) {
           return { article, relatedPosts };
@@ -70,25 +129,41 @@ export async function generateMetadata({
   }
 
   const articleTitle =
-    params.locale === "id" ? article.title_id : article.title_en;
+    params.locale === "id"
+      ? article.title_id || article.title_en
+      : article.title_en || article.title_id;
+
+  const articleDesc =
+    params.locale === "id"
+      ? article?.meta_tag_id?.description || article?.meta_tag?.description || ""
+      : article?.meta_tag?.description || article?.meta_tag_id?.description || "";
 
   const title = `${articleTitle} | Chandra Daya Investasi`;
-  const description = article?.meta_tag?.description || "";
+  const description = articleDesc;
   const imageUrl = article.image || "/assets/frontend/favicon.png";
 
-  const pagePath = `/media/news/${params.slug}`;
-  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = (
+    process.env.NEXT_PUBLIC_URL_LP ||
+    process.env.NEXT_PUBLIC_URL ||
+    "https://chandradaya-investasi.com"
+  ).replace(/\/+$/, "");
 
-  const getCanonicalPath = (lang: string) => {
-    return `${baseUrl}/${lang}${pagePath}`;
-  };
+  const enSlug = article.slug_en || article.slug || article.slug_id || params.slug;
+  const idSlug = article.slug_id || article.slug_en || article.slug || params.slug;
 
-  const currentUrl = getCanonicalPath(params.locale);
+  const enUrl = `${baseUrl}/en/media/news/${enSlug}`;
+  const idUrl = `${baseUrl}/id/media/news/${idSlug}`;
+  const currentUrl = params.locale === "id" ? idUrl : enUrl;
+
+  const keyword =
+    params.locale === "id"
+      ? article?.meta_tag_id?.keyword || article?.meta_tag?.keyword || ""
+      : article?.meta_tag?.keyword || article?.meta_tag_id?.keyword || "";
 
   return {
     title: title,
     description: description,
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL_LP}/${params.locale}`),
+    metadataBase: new URL(`${baseUrl}/${params.locale}`),
 
     keywords: [
       "Chandra Daya Investasi",
@@ -96,8 +171,7 @@ export async function generateMetadata({
       "CDIA",
       "PT Chandra Daya Investasi Tbk",
       "CDI Group",
-      article?.[`meta_tag${params.locale === "id" ? "_id" : ""}`]?.keyword ||
-        "",
+      keyword,
     ],
 
     robots: {
@@ -117,9 +191,9 @@ export async function generateMetadata({
     alternates: {
       canonical: currentUrl,
       languages: {
-        en: getCanonicalPath("en"),
-        id: getCanonicalPath("id"),
-        "x-default": getCanonicalPath("en"),
+        en: enUrl,
+        id: idUrl,
+        "x-default": enUrl,
       },
     },
 
@@ -172,20 +246,32 @@ export default async function Page({ params }: PageProps) {
     notFound();
   }
 
-  const title = params.locale === "id" ? article.title_id : article.title_en;
+  // Canonical slug redirect check: if the URL slug does not match the current locale's expected slug, redirect
+  const expectedSlug =
+    params.locale === "id"
+      ? article.slug_id || article.slug_en || article.slug
+      : article.slug_en || article.slug || article.slug_id;
+
+  if (expectedSlug && params.slug !== expectedSlug) {
+    redirect(`/${params.locale}/media/news/${expectedSlug}`);
+  }
+
+  const title = params.locale === "id" ? article.title_id || article.title_en : article.title_en || article.title_id;
   const content =
-    params.locale === "id" ? article.content_id : article.content_en;
+    params.locale === "id" ? article.content_id || article.content_en : article.content_en || article.content_id;
 
   const breadcrumbs = [
     { href: `/`, label: "Home" },
     { href: `/media/news`, label: t("News") },
   ];
 
-  const baseUrl =
+  const baseUrl = (
     process.env.NEXT_PUBLIC_URL_LP ||
     process.env.NEXT_PUBLIC_URL ||
-    "https://chandradaya-investasi.com";
-  const shareUrl = `${baseUrl}/${params.locale}/media/news/${params.slug}`;
+    "https://chandradaya-investasi.com"
+  ).replace(/\/+$/, "");
+  const canonicalSlug = expectedSlug || params.slug;
+  const shareUrl = `${baseUrl}/${params.locale}/media/news/${canonicalSlug}`;
 
   return (
     <main>
@@ -219,12 +305,12 @@ export default async function Page({ params }: PageProps) {
             imageUrl: article.image || undefined,
             datePublished: toISODateString(article.date) || article.created_at || '',
             dateModified: toISODateString(article.updated_at) || toISODateString(article.date) || article.created_at || '',
-            url: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/news/${params.slug}`
+            url: `${baseUrl}/${params.locale}/media/news/${canonicalSlug}`
           })} />
           <JsonLd data={buildBreadcrumbSchema([
-            { name: 'Home', item: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}` },
-            { name: t("News"), item: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/news` },
-            { name: title, item: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/news/${params.slug}` }
+            { name: 'Home', item: `${baseUrl}/${params.locale}` },
+            { name: t("News"), item: `${baseUrl}/${params.locale}/media/news` },
+            { name: title, item: `${baseUrl}/${params.locale}/media/news/${canonicalSlug}` }
           ])} />
         </>
       )}

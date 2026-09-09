@@ -74,7 +74,10 @@ export interface ArticleItem {
   thumbnail: string;
   article_category_id: number;
   category: string;
-  [key: `slug${string}`]: string;
+  slug: string;
+  slug_en?: string;
+  slug_id?: string;
+  [key: `slug${string}`]: string | undefined;
   title_en: string;
   title_id: string;
   content_en: string; 

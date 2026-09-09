@@ -17,22 +17,34 @@ export type PageProps = {
   };
 };
 
-const getArticleBySlug = cache(async (slug: string) => {
-  const firstPageData = await mediaService.getMediaBlogPageData(1);
-  if (!firstPageData?.items) return null;
+const getArticleBySlug = cache(async (slug: string, locale?: string) => {
+  // 1. Attempt direct detail fetch from backend
+  const directArticle = await mediaService.getArticleDetail("blog", slug, locale);
+  if (directArticle) {
+    return directArticle;
+  }
 
-  let article = firstPageData.items.find(
-    (item) => item.slug === slug || item.slug_id === slug,
+  // 2. Search in first page of current locale
+  const firstPageData = await mediaService.getMediaBlogPageData(1, locale);
+  let article = firstPageData?.items?.find(
+    (item) =>
+      item.slug === slug ||
+      item.slug_id === slug ||
+      item.slug_en === slug ||
+      (item as unknown as { slug_en?: string }).slug_en === slug
   );
   
   if (article) return article;
 
-  const lastPage = firstPageData.meta?.last_page || Math.ceil((firstPageData.meta?.total || 0) / (firstPageData.meta?.per_page || 15));
+  // 3. Search remaining pages of current locale
+  const lastPage =
+    firstPageData?.meta?.last_page ||
+    Math.ceil((firstPageData?.meta?.total || 0) / (firstPageData?.meta?.per_page || 15));
 
   if (lastPage > 1) {
     const promises = [];
     for (let i = 2; i <= lastPage; i++) {
-      promises.push(mediaService.getMediaBlogPageData(i));
+      promises.push(mediaService.getMediaBlogPageData(i, locale));
     }
     
     const results = await Promise.all(promises);
@@ -40,7 +52,50 @@ const getArticleBySlug = cache(async (slug: string) => {
     for (const res of results) {
       if (res?.items) {
         article = res.items.find(
-          (item) => item.slug === slug || item.slug_id === slug,
+          (item) =>
+            item.slug === slug ||
+            item.slug_id === slug ||
+            item.slug_en === slug ||
+            (item as unknown as { slug_en?: string }).slug_en === slug
+        );
+        if (article) return article;
+      }
+    }
+  }
+
+  // 4. Cross-locale fallback search
+  const oppLocale = locale === "en" ? "id" : "en";
+  const oppFirstPage = await mediaService.getMediaBlogPageData(1, oppLocale);
+  article = oppFirstPage?.items?.find(
+    (item) =>
+      item.slug === slug ||
+      item.slug_id === slug ||
+      item.slug_en === slug ||
+      (item as unknown as { slug_en?: string }).slug_en === slug
+  );
+
+  if (article) return article;
+
+  const oppLastPage =
+    oppFirstPage?.meta?.last_page ||
+    Math.ceil((oppFirstPage?.meta?.total || 0) / (oppFirstPage?.meta?.per_page || 15));
+
+  if (oppLastPage > 1) {
+    const oppPromises = [];
+    for (let i = 2; i <= oppLastPage; i++) {
+      oppPromises.push(mediaService.getMediaBlogPageData(i, oppLocale));
+    }
+
+    const oppResults = await Promise.all(oppPromises);
+
+    for (const res of oppResults) {
+      if (res?.items) {
+        article = res.items.find(
+          (item) =>
+            item.slug === slug ||
+            item.slug_id === slug ||
+            item.slug_en === slug ||
+            (item as unknown as { slug_en?: string }).slug_en === slug
         );
         if (article) return article;
       }
@@ -50,42 +105,53 @@ const getArticleBySlug = cache(async (slug: string) => {
   return null;
 });
 
-
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const article = await getArticleBySlug(params.slug);
+  const article = await getArticleBySlug(params.slug, params.locale);
 
   if (!article) {
-    notFound();
+    return {
+      title: "Blog Not Found | Chandra Daya Investasi",
+    };
   }
 
   const articleTitle =
-    params.locale === "id" ? article.title_id : article.title_en;
+    params.locale === "id"
+      ? article.title_id || article.title_en
+      : article.title_en || article.title_id;
 
   const articleDesc =
     params.locale === "id"
-      ? article?.meta_tag_id?.description
-      : article?.meta_tag?.description;
+      ? article?.meta_tag_id?.description || article?.meta_tag?.description || ""
+      : article?.meta_tag?.description || article?.meta_tag_id?.description || "";
 
   const title = `${articleTitle} | Chandra Daya Investasi`;
-  const description = articleDesc || "";
+  const description = articleDesc;
   const imageUrl = article.image || "/assets/frontend/favicon.png";
 
-  const pagePath = `/media/blog/${params.slug}`;
+  const baseUrl = (
+    process.env.NEXT_PUBLIC_URL_LP ||
+    process.env.NEXT_PUBLIC_URL ||
+    "https://chandradaya-investasi.com"
+  ).replace(/\/+$/, "");
 
-  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const enSlug = article.slug_en || article.slug || article.slug_id || params.slug;
+  const idSlug = article.slug_id || article.slug_en || article.slug || params.slug;
 
-  const getCanonicalPath = (lang: string) => {
-    return `${baseUrl}/${lang}${pagePath}`;
-  };
+  const enUrl = `${baseUrl}/en/media/blog/${enSlug}`;
+  const idUrl = `${baseUrl}/id/media/blog/${idSlug}`;
+  const currentUrl = params.locale === "id" ? idUrl : enUrl;
 
-  const currentUrl = getCanonicalPath(params.locale);
+  const keyword =
+    params.locale === "id"
+      ? article?.meta_tag_id?.keyword || article?.meta_tag?.keyword || ""
+      : article?.meta_tag?.keyword || article?.meta_tag_id?.keyword || "";
 
   return {
     title: title,
     description: description,
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL_LP}/${params.locale}`),
+    metadataBase: new URL(`${baseUrl}/${params.locale}`),
 
     keywords: [
       "Chandra Daya Investasi",
@@ -93,8 +159,7 @@ export async function generateMetadata({
       "CDIA",
       "PT Chandra Daya Investasi Tbk",
       "CDI Group",
-      article?.[`meta_tag${params.locale === "id" ? "_id" : ""}`]?.keyword ||
-        "",
+      keyword,
     ],
 
     robots: {
@@ -114,9 +179,9 @@ export async function generateMetadata({
     alternates: {
       canonical: currentUrl,
       languages: {
-        en: getCanonicalPath("en"),
-        id: getCanonicalPath("id"),
-        "x-default": getCanonicalPath("en"),
+        en: enUrl,
+        id: idUrl,
+        "x-default": enUrl,
       },
     },
 
@@ -160,34 +225,40 @@ export async function generateMetadata({
 export default async function Page({ params }: PageProps) {
   const t = await getTranslations("Media");
 
-  const article = await getArticleBySlug(params.slug);
+  const article = await getArticleBySlug(params.slug, params.locale);
 
   if (!article) {
     notFound();
   }
 
-  const expectedSlug = params.locale === "en" ? article.slug : article.slug_id;
+  // Canonical slug redirect check: if the URL slug does not match the current locale's expected slug, redirect
+  const expectedSlug =
+    params.locale === "id"
+      ? article.slug_id || article.slug_en || article.slug
+      : article.slug_en || article.slug || article.slug_id;
 
-  if (params.slug !== expectedSlug) {
+  if (expectedSlug && params.slug !== expectedSlug) {
     redirect(`/${params.locale}/media/blog/${expectedSlug}`);
   }
 
-  const title = params.locale === "id" ? article.title_id : article.title_en;
+  const title = params.locale === "id" ? article.title_id || article.title_en : article.title_en || article.title_id;
   const content =
-    params.locale === "id" ? article.content_id : article.content_en;
+    params.locale === "id" ? article.content_id || article.content_en : article.content_en || article.content_id;
 
   const breadcrumbs = [
     { href: `/`, label: "Home" },
     { href: `/media/news?tab=blog`, label: t("blog") },
   ];
 
-  const baseUrl =
+  const baseUrl = (
     process.env.NEXT_PUBLIC_URL_LP ||
     process.env.NEXT_PUBLIC_URL ||
-    "https://chandradaya-investasi.com";
-  const shareUrl = `${baseUrl}/${params.locale}/media/blog/${params.slug}`;
+    "https://chandradaya-investasi.com"
+  ).replace(/\/+$/, "");
+  const canonicalSlug = expectedSlug || params.slug;
+  const shareUrl = `${baseUrl}/${params.locale}/media/blog/${canonicalSlug}`;
 
-  const firstPageBlogData = await mediaService.getMediaBlogPageData(1);
+  const firstPageBlogData = await mediaService.getMediaBlogPageData(1, params.locale);
 
   return (
     <main>
@@ -221,12 +292,12 @@ export default async function Page({ params }: PageProps) {
             imageUrl: article.image || undefined,
             datePublished: toISODateString(article.date) || article.created_at || '',
             dateModified: toISODateString(article.updated_at) || toISODateString(article.date) || article.created_at || '',
-            url: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/blog/${params.slug}`
+            url: `${baseUrl}/${params.locale}/media/blog/${canonicalSlug}`
           })} />
           <JsonLd data={buildBreadcrumbSchema([
-            { name: 'Home', item: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}` },
-            { name: t("blog"), item: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/blog` },
-            { name: title, item: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${params.locale}/media/blog/${params.slug}` }
+            { name: 'Home', item: `${baseUrl}/${params.locale}` },
+            { name: t("blog"), item: `${baseUrl}/${params.locale}/media/blog` },
+            { name: title, item: `${baseUrl}/${params.locale}/media/blog/${canonicalSlug}` }
           ])} />
         </>
       )}

@@ -262,8 +262,6 @@ export function News({
     setCurrentPage(1);
   };
 
-  const slugKey = locale === "en" ? "slug" : "slug_id";
-
   return (
     <section
       data-navbar-theme="light"
@@ -337,18 +335,24 @@ export function News({
               </p>
             </div>
           ) : mediaDataContainer.length > 0 ? (
-            mediaDataContainer.map((article: ArticleItem) => (
-              <ArticleCard
-                key={article.id}
-                href={`/media/news/${article[slugKey] == "" ? article.slug : article[slugKey]}`}
-                imageUrl={article.image}
-                category={article.article_category[`name_${locale}`]}
-                date={article.date}
-                title={`${article[`title_${locale}`]}`}
-                type="news"
-                locale={locale}
-              />
-            ))
+            mediaDataContainer.map((article: ArticleItem) => {
+              const articleSlug =
+                locale === "id"
+                  ? article.slug_id || article.slug_en || article.slug
+                  : article.slug_en || article.slug || article.slug_id;
+              return (
+                <ArticleCard
+                  key={article.id}
+                  href={`/media/news/${articleSlug}`}
+                  imageUrl={article.image}
+                  category={article.article_category[`name_${locale}`]}
+                  date={article.date}
+                  title={`${article[`title_${locale}`]}`}
+                  type="news"
+                  locale={locale}
+                />
+              );
+            })
           ) : (
             <div className="col-span-full py-20 flex justify-center items-center">
               <p className="text-neutral-500 text-lg font-medium">
@@ -411,18 +415,24 @@ export function News({
               </p>
             </div>
           ) : paginatedBlog.length > 0 ? (
-            paginatedBlog.map((article: ArticleItem) => (
-              <ArticleCard
-                key={article.id}
-                href={`/media/blog/${article[slugKey]}`}
-                imageUrl={article.image}
-                category={article.category_name}
-                date={article.date}
-                title={`${article[`title_${locale}`]}`}
-                type="blog"
-                locale={locale}
-              />
-            ))
+            paginatedBlog.map((article: ArticleItem) => {
+              const articleSlug =
+                locale === "id"
+                  ? article.slug_id || article.slug_en || article.slug
+                  : article.slug_en || article.slug || article.slug_id;
+              return (
+                <ArticleCard
+                  key={article.id}
+                  href={`/media/blog/${articleSlug}`}
+                  imageUrl={article.image}
+                  category={article.category_name}
+                  date={article.date}
+                  title={`${article[`title_${locale}`]}`}
+                  type="blog"
+                  locale={locale}
+                />
+              );
+            })
           ) : (
             <div className="col-span-full py-20 flex justify-center items-center">
               <p className="text-neutral-500 text-lg font-medium">
