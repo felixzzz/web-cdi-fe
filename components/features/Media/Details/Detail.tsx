@@ -23,6 +23,7 @@ type NewsDetailProps = {
     rawUpdatedDate?: string;
     shareUrl: string;
     featureImageUrl: string;
+    featureImageAlt?: string;
     articleContent: string;
     references?: Reference[];
 };
@@ -141,6 +142,7 @@ export const NewsDetail = ({
                                rawUpdatedDate,
                                shareUrl,
                                featureImageUrl,
+                               featureImageAlt,
                                articleContent,
                                references,
                            }: NewsDetailProps) => {
@@ -189,8 +191,8 @@ export const NewsDetail = ({
 
                 <Image
                     src={featureImageUrl}
-                    alt={articleTitle}
-                    title={articleTitle}
+                    alt={featureImageAlt || articleTitle}
+                    title={featureImageAlt || articleTitle}
                     width={1200}
                     height={675}
                     className="w-full rounded-xl mb-10 object-cover"

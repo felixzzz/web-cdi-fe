@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ArticleCard } from "./ArticleCard";
 import { ApiArticle } from "@/types/Homepage/home";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useLocale } from "next-intl";
 
 interface ArticleCarouselProps {
   articles: ApiArticle[];
@@ -13,6 +14,7 @@ interface ArticleCarouselProps {
 export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
   articles,
 }) => {
+  const locale = useLocale();
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(4);
 
@@ -98,21 +100,28 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
     <div>
       <div className="overflow-hidden" ref={carouselViewportRef}>
         <div className="flex -mx-3 relative" ref={slidesContainerRef}>
-          {articles.map((article) => (
-            <div
-              key={article.id}
-              style={{ flex: `0 0 ${100 / slidesToShow}%` }}
-              className="px-3 h-full"
-            >
-              <ArticleCard
-                href={`/media/news/${article.slug}` || "/media/news"}
-                imageUrl={article.image}
-                category={article.category_name}
-                date={article.date}
-                title={article.title}
-              />
-            </div>
-          ))}
+          {articles.map((article) => {
+            const imageAlt =
+              locale === "id"
+                ? article.thumbnail_alt_id || article.thumbnail_alt || article.thumbnail_alt_en || article.title
+                : article.thumbnail_alt_en || article.thumbnail_alt || article.thumbnail_alt_id || article.title;
+            return (
+              <div
+                key={article.id}
+                style={{ flex: `0 0 ${100 / slidesToShow}%` }}
+                className="px-3 h-full"
+              >
+                <ArticleCard
+                  href={`/media/news/${article.slug}` || "/media/news"}
+                  imageUrl={article.image}
+                  imageAlt={imageAlt}
+                  category={article.category_name}
+                  date={article.date}
+                  title={article.title}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
 

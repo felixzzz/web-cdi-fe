@@ -340,11 +340,16 @@ export function News({
                 locale === "id"
                   ? article.slug_id || article.slug_en || article.slug
                   : article.slug_en || article.slug || article.slug_id;
+              const imageAlt =
+                locale === "id"
+                  ? article.thumbnail_alt_id || article.thumbnail_alt || article.thumbnail_alt_en || article[`title_${locale}`] || article.title_id
+                  : article.thumbnail_alt_en || article.thumbnail_alt || article.thumbnail_alt_id || article[`title_${locale}`] || article.title_en;
               return (
                 <ArticleCard
                   key={article.id}
                   href={`/media/news/${articleSlug}`}
                   imageUrl={article.image}
+                  imageAlt={imageAlt}
                   category={article.article_category[`name_${locale}`]}
                   date={article.date}
                   title={`${article[`title_${locale}`]}`}
@@ -420,11 +425,16 @@ export function News({
                 locale === "id"
                   ? article.slug_id || article.slug_en || article.slug
                   : article.slug_en || article.slug || article.slug_id;
+              const imageAlt =
+                locale === "id"
+                  ? article.thumbnail_alt_id || article.thumbnail_alt || article.thumbnail_alt_en || article[`title_${locale}`] || article.title_id
+                  : article.thumbnail_alt_en || article.thumbnail_alt || article.thumbnail_alt_id || article[`title_${locale}`] || article.title_en;
               return (
                 <ArticleCard
                   key={article.id}
                   href={`/media/blog/${articleSlug}`}
                   imageUrl={article.image}
+                  imageAlt={imageAlt}
                   category={article.category_name}
                   date={article.date}
                   title={`${article[`title_${locale}`]}`}
@@ -458,6 +468,7 @@ export function News({
 function ArticleCard({
   href,
   imageUrl,
+  imageAlt,
   category,
   date,
   title,
@@ -466,6 +477,7 @@ function ArticleCard({
 }: {
   href: string;
   imageUrl: string;
+  imageAlt?: string;
   category: string;
   date: string;
   title: string;
@@ -495,7 +507,7 @@ function ArticleCard({
             ) : (
               <Image
                 src={imageUrl}
-                alt={title}
+                alt={imageAlt || title}
                 fill
                 className="object-cover"
                 onError={() => setHasError(true)}

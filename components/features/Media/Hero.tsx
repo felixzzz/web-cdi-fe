@@ -25,15 +25,23 @@ export function HeroNews({media, latestNewsData}: HeroNewsProps) {
     const locale = useLocale()
     const sliderData = latestNewsData
         .filter((item) => item?.data?.status === 1)
-        .map((item) => ({
-            id: item.data.id,
-            title: item.data.title,
-            imageUrl: item.data.image,
-            category: item.data.category_name,
-            date: item.data.date,
-            description: item.data.short_content,
-            linkUrl: `/media/news/${item.data.slug}`,
-        }));
+        .map((item) => {
+            const thumbnailAlt =
+                locale === "id"
+                    ? item.data.thumbnail_alt_id || item.data.thumbnail_alt || item.data.thumbnail_alt_en || item.data.title
+                    : item.data.thumbnail_alt_en || item.data.thumbnail_alt || item.data.thumbnail_alt_id || item.data.title;
+
+            return {
+                id: item.data.id,
+                title: item.data.title,
+                imageUrl: item.data.image,
+                imageAlt: thumbnailAlt,
+                category: item.data.category_name,
+                date: item.data.date,
+                description: item.data.short_content,
+                linkUrl: `/media/news/${item.data.slug}`,
+            };
+        });
 
     const heroTitle =
         latestNewsData.length > 0
@@ -87,7 +95,7 @@ export function HeroNews({media, latestNewsData}: HeroNewsProps) {
                                 <div className="relative aspect-video lg:h-[380px] w-full rounded-xl overflow-hidden">
                                 <Image
                                         src={slide.imageUrl}
-                                        alt={slide.title}
+                                        alt={slide.imageAlt || slide.title}
                                         fill
                                         className="object-cover"
                                     />

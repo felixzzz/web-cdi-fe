@@ -209,7 +209,10 @@ export async function generateMetadata({
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: articleTitle,
+          alt:
+            params.locale === "id"
+              ? article?.thumbnail_alt_id || article?.thumbnail_alt || article?.thumbnail_alt_en || articleTitle
+              : article?.thumbnail_alt_en || article?.thumbnail_alt || article?.thumbnail_alt_id || articleTitle,
         },
       ],
     },
@@ -273,6 +276,11 @@ export default async function Page({ params }: PageProps) {
   const canonicalSlug = expectedSlug || params.slug;
   const shareUrl = `${baseUrl}/${params.locale}/media/news/${canonicalSlug}`;
 
+  const thumbnailAlt =
+    params.locale === "id"
+      ? article.thumbnail_alt_id || article.thumbnail_alt || article.thumbnail_alt_en || title
+      : article.thumbnail_alt_en || article.thumbnail_alt || article.thumbnail_alt_id || title;
+
   return (
     <main>
       <NavbarThemeTrigger theme="light" />
@@ -285,6 +293,7 @@ export default async function Page({ params }: PageProps) {
         rawUpdatedDate={toISODateString(article.updated_at) || article.updated_at || ''}
         shareUrl={shareUrl}
         featureImageUrl={article.image}
+        featureImageAlt={thumbnailAlt}
         articleContent={content}
         references={article.references || article.sources}
       />

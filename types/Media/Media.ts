@@ -72,6 +72,9 @@ export interface ArticleItem {
   id: number;
   ulid: string;
   thumbnail: string;
+  thumbnail_alt?: string;
+  thumbnail_alt_en?: string;
+  thumbnail_alt_id?: string;
   article_category_id: number;
   category: string;
   slug: string;
@@ -158,6 +161,9 @@ interface ArticleData {
   id: number;
   ulid: string;
   thumbnail: string;
+  thumbnail_alt?: string;
+  thumbnail_alt_en?: string;
+  thumbnail_alt_id?: string;
   article_category_id: number;
   category: string;
   slug: string;

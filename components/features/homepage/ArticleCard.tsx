@@ -10,6 +10,7 @@ import { formatLocalizedDate } from "@/lib/dateUtils";
 export interface ArticleCardProps {
   href: string;
   imageUrl: string;
+  imageAlt?: string;
   category: string;
   date: string;
   title: string;
@@ -18,6 +19,7 @@ export interface ArticleCardProps {
 export const ArticleCard: React.FC<ArticleCardProps> = ({
   href,
   imageUrl,
+  imageAlt,
   category,
   date,
   title,
@@ -34,7 +36,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
       <div className="w-full aspect-square overflow-hidden relative">
         <Image
           src={imageUrl}
-          alt={title}
+          alt={imageAlt || title}
           title={title}
           fill
           className="object-cover transition-transform duration-400 ease-in-out group-hover:scale-110"

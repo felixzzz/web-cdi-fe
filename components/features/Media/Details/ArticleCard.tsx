@@ -9,6 +9,7 @@ import { formatLocalizedDate } from "@/lib/dateUtils";
 interface ArticleCardProps {
   href: string;
   imageUrl: string;
+  imageAlt?: string;
   category: string;
   date: string;
   title: string;
@@ -18,6 +19,7 @@ interface ArticleCardProps {
 export const ArticleCard = ({
   href,
   imageUrl,
+  imageAlt,
   category,
   date,
   title,
@@ -48,7 +50,7 @@ export const ArticleCard = ({
             ) : (
               <Image
                 src={imageUrl}
-                alt={title}
+                alt={imageAlt || title}
                 fill
                 className="object-cover"
                 onError={() => setHasError(true)}

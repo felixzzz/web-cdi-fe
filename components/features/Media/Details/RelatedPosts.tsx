@@ -56,21 +56,28 @@ export const RelatedPosts = ({
                     </div>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {relatedArticles.map((article) => (
-                        <ArticleCard
-                            key={article.id}
-                            locale={locale}
-                            href={`/media/${type}/${article.slug}`}
-                            imageUrl={article.image}
-                            category={
-                                locale === "id"
-                                    ? article.article_category?.name_id
-                                    : article.article_category?.name_en
-                            }
-                            date={article.date}
-                            title={locale === "id" ? article.title_id : article.title_en}
-                        />
-                    ))}
+                    {relatedArticles.map((article) => {
+                        const imageAlt =
+                            locale === "id"
+                                ? article.thumbnail_alt_id || article.thumbnail_alt || article.thumbnail_alt_en || article.title_id || article.title_en
+                                : article.thumbnail_alt_en || article.thumbnail_alt || article.thumbnail_alt_id || article.title_en || article.title_id;
+                        return (
+                            <ArticleCard
+                                key={article.id}
+                                locale={locale}
+                                href={`/media/${type}/${article.slug}`}
+                                imageUrl={article.image}
+                                imageAlt={imageAlt}
+                                category={
+                                    locale === "id"
+                                        ? article.article_category?.name_id
+                                        : article.article_category?.name_en
+                                }
+                                date={article.date}
+                                title={locale === "id" ? article.title_id : article.title_en}
+                            />
+                        );
+                    })}
                 </div>
             </section>
         </div>
