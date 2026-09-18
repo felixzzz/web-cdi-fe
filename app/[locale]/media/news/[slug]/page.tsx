@@ -281,6 +281,11 @@ export default async function Page({ params }: PageProps) {
       ? article.thumbnail_alt_id || article.thumbnail_alt || article.thumbnail_alt_en || title
       : article.thumbnail_alt_en || article.thumbnail_alt || article.thumbnail_alt_id || title;
 
+  const thumbnailCaption =
+    params.locale === "id"
+      ? article.thumbnail_caption_id || article.thumbnail_caption || article.thumbnail_caption_en || ""
+      : article.thumbnail_caption_en || article.thumbnail_caption || article.thumbnail_caption_id || "";
+
   return (
     <main>
       <NavbarThemeTrigger theme="light" />
@@ -294,6 +299,7 @@ export default async function Page({ params }: PageProps) {
         shareUrl={shareUrl}
         featureImageUrl={article.image}
         featureImageAlt={thumbnailAlt}
+        featureImageCaption={thumbnailCaption}
         articleContent={content}
         references={article.references || article.sources}
       />

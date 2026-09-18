@@ -24,6 +24,7 @@ type NewsDetailProps = {
     shareUrl: string;
     featureImageUrl: string;
     featureImageAlt?: string;
+    featureImageCaption?: string;
     articleContent: string;
     references?: Reference[];
 };
@@ -143,6 +144,7 @@ export const NewsDetail = ({
                                shareUrl,
                                featureImageUrl,
                                featureImageAlt,
+                               featureImageCaption,
                                articleContent,
                                references,
                            }: NewsDetailProps) => {
@@ -189,15 +191,22 @@ export const NewsDetail = ({
                     <ShareButtons shareUrl={shareUrl}/>
                 </div>
 
-                <Image
-                    src={featureImageUrl}
-                    alt={featureImageAlt || articleTitle}
-                    title={featureImageAlt || articleTitle}
-                    width={1200}
-                    height={675}
-                    className="w-full rounded-xl mb-10 object-cover"
-                    priority
-                />
+                <figure className="mb-10">
+                    <Image
+                        src={featureImageUrl}
+                        alt={featureImageAlt || articleTitle}
+                        title={featureImageAlt || articleTitle}
+                        width={1200}
+                        height={675}
+                        className="w-full rounded-xl object-cover"
+                        priority
+                    />
+                    {featureImageCaption && (
+                        <figcaption className="mt-3 text-sm text-neutral-500 italic text-center">
+                            {featureImageCaption}
+                        </figcaption>
+                    )}
+                </figure>
 
                 <h1 className="text-neutral-13 font-medium text-2xl lg:text-[38px] lg:leading-[44px] mb-6">
                     {articleTitle}
