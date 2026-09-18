@@ -14,7 +14,6 @@ export async function GET(
     { path: "/", priority: 1.0 },               
     { path: "/about-us", priority: 0.8 },        
     { path: "/our-business", priority: 0.8 },  
-    { path: "/investor", priority: 0.8 },       
     { path: "/governance", priority: 0.8 },      
     { path: "/sustainability", priority: 0.8 },
     { path: "/media/news", priority: 0.8 },     

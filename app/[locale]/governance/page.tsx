@@ -28,11 +28,10 @@ export async function generateMetadata({
 
   const pagePath = "/governance";
 
-const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "https://chandradaya-investasi.com";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
-    return `${baseUrl}/${lang}${pagePath}`;      
+    return `${baseUrl}/${lang}${pagePath}`;
   };
 
   const currentUrl = getCanonicalPath(locale);
@@ -42,7 +41,7 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
   return {
     title: title,
     description: t('description'),
-    metadataBase: new URL(`${baseUrl}/${locale}`),
+    metadataBase: new URL(baseUrl),
 
     keywords: [
       "Chandra Daya Investasi",
@@ -69,9 +68,9 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     alternates: {
       canonical: currentUrl,
       languages: {
-        en: "/en/governance",
-        id: "/id/governance",
-        "x-default": "/en/governance",
+        en: getCanonicalPath("en"),
+        id: getCanonicalPath("id"),
+        "x-default": getCanonicalPath("en"),
       },
     },
 
