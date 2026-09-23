@@ -29,11 +29,11 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
   return (
     <Link
-    title={title}
+      title={title}
       href={href}
       className="group flex flex-col bg-white rounded-xl border border-gray-200 overflow-hidden h-full text-gray-800 duration-300"
     >
-      <div className="w-full aspect-square overflow-hidden relative">
+      <div className="w-full aspect-video overflow-hidden relative shrink-0">
         <Image
           src={imageUrl}
           alt={imageAlt || title}
@@ -44,14 +44,16 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
       </div>
 
       <div className="p-6 flex flex-col grow">
-        <div className="flex items-center gap-4 mb-4">
-          <span className="bg-gray-300 px-3 py-1 text-sm rounded-full text-neutral-900 font-medium">
-            {category}
-          </span>
+        <div className="flex items-center gap-4 mb-4 min-h-[32px]">
+          {category && (
+            <span className="bg-gray-300 px-3 py-1 text-sm rounded-full text-neutral-900 font-medium">
+              {category}
+            </span>
+          )}
           <span className="text-sm text-gray-500">{formatLocalizedDate(date, locale)}</span>
         </div>
 
-        <h3 className="text-2xl lg:text-3xl font-medium mb-4 line-clamp-3 flex-grow">
+        <h3 className="text-2xl lg:text-3xl font-medium mb-4 line-clamp-3 min-h-[5.5rem] lg:min-h-[6.5rem]">
           {title}
         </h3>
 

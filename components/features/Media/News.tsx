@@ -495,10 +495,10 @@ function ArticleCard({
   return (
     <Link
       href={href}
-      className="flex bg-white rounded-xl shadow-article border border-neutral-5 overflow-hidden h-full group"
+      className="flex flex-col bg-white rounded-xl shadow-article border border-neutral-5 overflow-hidden h-full group"
     >
-      <article className="flex flex-col text-neutral-13 w-full">
-        <div className="w-full aspect-square overflow-hidden">
+      <article className="flex flex-col text-neutral-13 w-full h-full">
+        <div className="w-full aspect-video overflow-hidden shrink-0">
           <div className="relative w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110">
             {!imageUrl || hasError ? (
               <div className="w-full h-full flex flex-col items-center justify-center text-neutral-400 gap-2">
@@ -516,7 +516,7 @@ function ArticleCard({
           </div>
         </div>
         <div className="p-6 flex flex-col grow">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 min-h-[32px]">
             {type != "blog" && (
               <span className="bg-neutral-300 px-3 py-1 text-sm rounded-full">
                 {category}
@@ -524,7 +524,7 @@ function ArticleCard({
             )}
             <span className="text-sm text-neutral-10">{formatLocalizedDate(date, locale)}</span>
           </div>
-          <h3 className="text-[22px] font-medium mt-4 mb-7 line-clamp-3 grow">
+          <h3 className="text-[22px] leading-snug font-medium mt-4 mb-7 line-clamp-3 min-h-[5rem] lg:min-h-[5.25rem]">
             {title}
           </h3>
           <div className="text-[#2474A5] flex items-center gap-2 cursor-pointer mt-auto">

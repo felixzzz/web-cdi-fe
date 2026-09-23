@@ -99,7 +99,7 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
   return (
     <div>
       <div className="overflow-hidden" ref={carouselViewportRef}>
-        <div className="flex -mx-3 relative" ref={slidesContainerRef}>
+        <div className="flex -mx-3 relative items-stretch" ref={slidesContainerRef}>
           {articles.map((article) => {
             const imageAlt =
               locale === "id"
@@ -109,7 +109,7 @@ export const ArticleCarousel: React.FC<ArticleCarouselProps> = ({
               <div
                 key={article.id}
                 style={{ flex: `0 0 ${100 / slidesToShow}%` }}
-                className="px-3 h-full"
+                className="px-3 flex flex-col"
               >
                 <ArticleCard
                   href={`/media/news/${article.slug}` || "/media/news"}
