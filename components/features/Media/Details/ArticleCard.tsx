@@ -52,7 +52,7 @@ export const ArticleCard = ({
                 src={imageUrl}
                 alt={imageAlt || title}
                 fill
-                className="object-cover"
+                className="object-cover object-top"
                 onError={() => setHasError(true)}
               />
             )}
