@@ -32,3 +32,12 @@ export interface ApiCredentialResponse {
   social_facebook: UtilitySection;
   email_pic_whistleblowing: UtilitySection | null;
 }
+
+export interface LlmsApiResponse {
+  llms_txt: string;
+  llms_full_txt: string;
+  raw?: {
+    llms_txt: UtilitySection | null;
+    llms_full_txt: UtilitySection | null;
+  };
+}
