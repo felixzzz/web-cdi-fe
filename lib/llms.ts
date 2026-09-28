@@ -3,186 +3,206 @@
  * when backend content is empty or unreachable.
  */
 
-function getSiteBaseUrl(): string {
-  let baseUrl = process.env.NEXT_PUBLIC_URL_LP ?? "https://chandradaya-investasi.com";
-  if (baseUrl.endsWith("/")) {
-    baseUrl = baseUrl.slice(0, -1);
-  }
-  return baseUrl;
-}
+export const DEFAULT_LLMS_CONTENT = `# Chandra Daya Investasi
 
-export function buildDefaultLlmsTxt(): string {
-  const baseUrl = getSiteBaseUrl();
+> Chandra Daya Investasi (CDI) adalah perusahaan investasi infrastruktur yang berfokus pada pengembangan dan pengelolaan bisnis infrastruktur di sektor energi, air, pelabuhan dan penyimpanan, serta logistik dan infrastruktur industri di Asia Tenggara.
 
-  return `# PT Chandra Daya Investasi Tbk (CDI Group)
+## Informasi Perusahaan
 
-> PT Chandra Daya Investasi Tbk (CDI Group) is an infrastructure investment arm of Chandra Asri Group, a leading chemical and energy solutions provider in Southeast Asia, and EGCO Group, a leading power and energy holding company in Thailand. CDI Group delivers reliable, sustainable infrastructure solutions across Energy, Water, Ports & Storage, and Logistics in Indonesia and Southeast Asia.
+- [Tentang Kami](https://chandradaya-investasi.com/id/about-us): Informasi mengenai profil dan perusahaan Chandra Daya Investasi.
+- [Manajemen](https://chandradaya-investasi.com/id/about-us/management): Informasi mengenai manajemen perusahaan.
+- [Penghargaan](https://chandradaya-investasi.com/id/about-us/awards): Penghargaan dan pencapaian perusahaan.
+- [Company Profile](https://chandradaya-investasi.com/file/preview/id/company_profile/Company_Profile_9429/): Profil perusahaan dan informasi mengenai bisnis CDI.
 
-## About Us
+## Gambaran Bisnis
 
-- [Who We Are](${baseUrl}/en/about-us): Company overview, vision, mission, corporate history, and milestones of PT Chandra Daya Investasi Tbk.
-- [Management](${baseUrl}/en/about-us/management): Board of Commissioners, Board of Directors, organizational structure, corporate structure, and work guidelines.
-- [Awards & Certifications](${baseUrl}/en/about-us/awards): Recognitions, awards, ISO certifications, and industry memberships.
+- [Bisnis Kami](https://chandradaya-investasi.com/id/our-business): Gambaran keseluruhan portofolio bisnis dan sektor infrastruktur CDI.
+- [Energi](https://chandradaya-investasi.com/id/our-business/energy): Bisnis infrastruktur energi CDI.
+- [Penyediaan dan Pengolahan Air](https://chandradaya-investasi.com/id/our-business/water): Bisnis penyediaan dan pengolahan air CDI.
+- [Pelabuhan dan Penyimpanan](https://chandradaya-investasi.com/id/our-business/ports-and-storage): Bisnis pelabuhan, terminal, penyimpanan, dan infrastruktur terkait CDI.
+- [Logistik dan Infrastruktur Industri](https://chandradaya-investasi.com/id/our-business/logistics): Bisnis logistik dan infrastruktur industri CDI.
 
-## Our Business
+## Infrastruktur Energi
 
-- [Our Business Overview](${baseUrl}/en/our-business): Overview of CDI Group's core infrastructure business pillars.
-- [Energy](${baseUrl}/en/our-business/energy): Power generation, distribution, and sustainable energy solutions supporting industrial and regional growth.
-- [Water](${baseUrl}/en/our-business/water): Integrated industrial water supply, water treatment, and wastewater management solutions.
-- [Ports & Storage](${baseUrl}/en/our-business/ports-and-storage): Chemical and liquid bulk storage tank terminals, jetties, and integrated port services.
-- [Logistics](${baseUrl}/en/our-business/logistics): End-to-end maritime and land logistics solutions, shipping, and supply chain infrastructure.
+- [Bisnis Energi](https://chandradaya-investasi.com/id/our-business/energy): Informasi mengenai bisnis infrastruktur energi CDI.
+- [Sumber Energi Terbarukan](https://chandradaya-investasi.com/id/media/blog/sumber-energi-terbarukan)
+- [Sumber Energi Alternatif](https://chandradaya-investasi.com/id/media/blog/sumber-energi-alternatif)
+- [Apa Itu Renewable Energy](https://chandradaya-investasi.com/id/media/blog/apa-itu-renewable-energy)
+- [Investasi Energi Terbarukan](https://chandradaya-investasi.com/id/media/blog/investasi-energi-terbarukan)
+- [Apa Itu Sustainable Energy](https://chandradaya-investasi.com/id/media/blog/apa-itu-sustainable-energy)
+- [Energi Terbarukan di Indonesia](https://chandradaya-investasi.com/id/media/blog/energi-terbarukan-di-indonesia)
+- [Panel Surya Industri](https://chandradaya-investasi.com/id/media/blog/panel-surya-industri)
+- [Apa Itu Clean Energy](https://chandradaya-investasi.com/id/media/blog/apa-itu-clean-energy)
+- [Instalasi Listrik Industrial](https://chandradaya-investasi.com/id/media/blog/instalasi-listrik-industrial)
+- [Apa Itu Captive Power Plant](https://chandradaya-investasi.com/id/media/blog/apa-itu-captive-power-plant)
+- [Apa Itu Combined Cycle Power Plant](https://chandradaya-investasi.com/id/media/blog/apa-itu-combined-cycle-power-plant)
+- [Smart Grid](https://chandradaya-investasi.com/id/media/blog/smart-grid-adalah)
+- [PLTGU](https://chandradaya-investasi.com/id/media/blog/pltgu-adalah)
+- [Grounding Listrik](https://chandradaya-investasi.com/id/media/blog/grounding-listrik)
+- [Transisi Energi](https://chandradaya-investasi.com/id/media/blog/transisi-energi)
+- [Manajemen Energi](https://chandradaya-investasi.com/id/media/blog/manajemen-energi)
+- [Efisiensi Energi](https://chandradaya-investasi.com/id/media/blog/efisiensi-energi)
+- [Strategi Dekarbonisasi](https://chandradaya-investasi.com/id/media/blog/strategi-dekarbonisasi)
+- [Panel Surya Atap](https://chandradaya-investasi.com/id/media/blog/panel-surya-atap)
+- [PLTS Ground Mounted](https://chandradaya-investasi.com/id/media/blog/plts-ground-mounted-adalah)
+- [Panel Surya On Grid](https://chandradaya-investasi.com/id/media/blog/panel-surya-on-grid)
+- [Energi Hidrogen](https://chandradaya-investasi.com/id/media/blog/energi-hidrogen)
+- [Predictive Maintenance](https://chandradaya-investasi.com/id/media/blog/apa-itu-predictive-maintenance)
+- [Fungsi Cooling Tower](https://chandradaya-investasi.com/id/media/blog/fungsi-cooling-tower)
 
-## Sustainability (ESG)
+## Penyediaan dan Pengolahan Air
 
-- [Sustainability Overview](${baseUrl}/en/sustainability): CDI Group's sustainability policy, framework, ESG ratings, and recognitions.
-- [Environment](${baseUrl}/en/sustainability/environment): Climate action, energy efficiency, water stewardship, emissions management, and circularity.
-- [Social](${baseUrl}/en/sustainability/social): Occupational health and safety (OHS), human capital development, and community empowerment.
-- [Governance (ESG)](${baseUrl}/en/sustainability/governance): Ethical business conduct, compliance, and sustainability governance structure.
+- [Bisnis Penyediaan dan Pengolahan Air](https://chandradaya-investasi.com/id/our-business/water): Informasi mengenai bisnis penyediaan dan pengolahan air CDI.
+- [Instalasi Pengolahan Air Limbah](https://chandradaya-investasi.com/id/media/blog/instalasi-pengolahan-air-limbah)
+- [Limbah B3](https://chandradaya-investasi.com/id/media/blog/limbah-b3)
+- [Pengolahan Air Bersih untuk Industri](https://chandradaya-investasi.com/id/media/blog/pengolahan-air-bersih-untuk-industri)
+- [Air Demin untuk Industri](https://chandradaya-investasi.com/id/media/blog/air-demin-untuk-industri)
+- [Instalasi Pengolahan Air](https://chandradaya-investasi.com/id/media/blog/instalasi-pengolahan-air)
+- [Pengolahan Air Limbah Industri](https://chandradaya-investasi.com/id/media/blog/pengolahan-air-limbah-industri)
+- [Air Limbah Domestik](https://chandradaya-investasi.com/id/media/blog/air-limbah-domestik-adalah)
+- [Parameter Kualitas Air](https://chandradaya-investasi.com/id/media/blog/parameter-kualitas-air)
+- [Mengenal Infrastruktur Air](https://chandradaya-investasi.com/id/media/blog/mengenal-infrastruktur-air)
+- [Konservasi Air](https://chandradaya-investasi.com/id/media/blog/konservasi-air)
+- [Reservoir Air](https://chandradaya-investasi.com/id/media/blog/reservoir-air)
+- [Pengelolaan Sumber Daya Air](https://chandradaya-investasi.com/id/media/blog/pengelolaan-sumber-daya-air)
+- [Karbon Aktif untuk Filter Air](https://chandradaya-investasi.com/id/media/blog/karbon-aktif-untuk-filter-air)
+- [Pengolahan Air Limbah](https://chandradaya-investasi.com/id/media/blog/pengolahan-air-limbah)
+- [Perbedaan Air Mineral dan Air Demineral](https://chandradaya-investasi.com/id/media/blog/perbedaan-air-mineral-dan-demineral)
+- [Air Umpan Boiler](https://chandradaya-investasi.com/id/media/blog/air-umpan-boiler)
+- [SWRO](https://chandradaya-investasi.com/id/media/blog/swro-adalah)
+- [Membran Ultrafiltrasi](https://chandradaya-investasi.com/id/media/blog/membran-ultrafiltrasi)
+- [Resin Penukar Ion](https://chandradaya-investasi.com/id/media/blog/resin-penukar-ion)
+- [Membrane Bioreactor](https://chandradaya-investasi.com/id/media/blog/membrane-bioreactor-adalah)
+- [Water Softener](https://chandradaya-investasi.com/id/media/blog/water-softener-adalah)
+- [Dissolved Air Flotation](https://chandradaya-investasi.com/id/media/blog/dissolved-air-flotation-adalah)
+- [Koagulan dan Flokulan](https://chandradaya-investasi.com/id/media/blog/koagulan-dan-flokulan)
+- [Fungsi Pressure Tank](https://chandradaya-investasi.com/id/media/blog/fungsi-pressure-tank)
+- [Perbedaan Tangki Atmosfer dan Tangki Tekanan](https://chandradaya-investasi.com/id/media/blog/beda-tangki-atmosfer-dan-tangki-tekanan)
 
-## Corporate Governance
+## Pelabuhan dan Penyimpanan
 
-- [Corporate Governance](${baseUrl}/en/governance): Good Corporate Governance (GCG) structure, Corporate Secretary, Internal Audit Unit, Committees, Risk Management, and Code of Conduct.
-- [Governance Policies](${baseUrl}/en/governance/policy): Corporate policies, SHE regulations, and governance charters.
-- [Whistleblowing System](${baseUrl}/en/governance/whistleblowing): Confidential whistleblowing reporting mechanism and ethics hotline.
+- [Bisnis Pelabuhan dan Penyimpanan](https://chandradaya-investasi.com/id/our-business/ports-and-storage): Informasi mengenai bisnis pelabuhan, terminal, dan penyimpanan CDI.
+- [Pelabuhan](https://chandradaya-investasi.com/id/media/blog/pelabuhan-adalah)
+- [Kapal Minyak](https://chandradaya-investasi.com/id/media/blog/kapal-minyak)
+- [Dermaga dan Jetty](https://chandradaya-investasi.com/id/media/blog/dermaga-jetty)
+- [Oil Boom](https://chandradaya-investasi.com/id/media/blog/oil-boom-adalah)
+- [Dry Bulk](https://chandradaya-investasi.com/id/media/blog/apa-itu-dry-bulk)
+- [Dry Port](https://chandradaya-investasi.com/id/media/blog/dry-port-adalah)
+- [Dermaga](https://chandradaya-investasi.com/id/media/blog/dermaga-adalah)
+- [Kapal LPG](https://chandradaya-investasi.com/id/media/blog/kapal-lpg)
+- [Floating Roof Tank](https://chandradaya-investasi.com/id/media/blog/mengenal-floating-roof-tank)
+- [Tangki Bitumen](https://chandradaya-investasi.com/id/media/blog/tangki-bitumen)
+- [Tank Farm](https://chandradaya-investasi.com/id/media/blog/tank-farm-adalah)
+- [Cargodoring](https://chandradaya-investasi.com/id/media/blog/cargodoring-adalah)
+- [Bongkar Muat Pelabuhan](https://chandradaya-investasi.com/id/media/blog/bongkar-muat-pelabuhan)
+- [Ballasting](https://chandradaya-investasi.com/id/media/blog/ballasting-adalah)
+- [ISPS Code](https://chandradaya-investasi.com/id/media/blog/isps-code-adalah)
+- [Liquid Bulk](https://chandradaya-investasi.com/id/media/blog/liquid-bulk)
+- [Pelabuhan Terbesar di Indonesia](https://chandradaya-investasi.com/id/media/blog/pelabuhan-terbesar-di-indonesia)
+- [Letter of Indemnity](https://chandradaya-investasi.com/id/media/blog/letter-of-indemnity-adalah)
+- [Laycan Kapal](https://chandradaya-investasi.com/id/media/blog/laycan-kapal-adalah)
+- [DWT Kapal](https://chandradaya-investasi.com/id/media/blog/dwt-kapal)
+- [Galangan Kapal](https://chandradaya-investasi.com/id/media/blog/galangan-kapal-adalah)
+- [Kapal Kargo](https://chandradaya-investasi.com/id/media/blog/kapal-kargo-adalah)
+- [Stowage Plan Kapal](https://chandradaya-investasi.com/id/media/blog/stowage-plan-kapal)
 
-## Investor Relations
+## Logistik dan Infrastruktur Industri
 
-- [Reports](${baseUrl}/en/investor/report): Annual reports, financial statements, sustainability reports, and supporting institutions.
-- [Financial Information](${baseUrl}/en/investor/financial-information): Financial highlights, financial calendar, and performance reports.
-- [Shares Information](${baseUrl}/en/investor/shares-information): Shareholder composition, dividend information, and bonds/securities data.
-- [Publications for Investors](${baseUrl}/en/investor/publications-for-investors): Prospectus, General Meeting of Shareholders (GMS), public disclosures, and earnings/investor updates.
+- [Bisnis Logistik dan Infrastruktur Industri](https://chandradaya-investasi.com/id/our-business/logistics): Informasi mengenai bisnis logistik dan infrastruktur industri CDI.
+- [Perbedaan Logistik dan Ekspedisi](https://chandradaya-investasi.com/id/media/blog/perbedaan-logistik-dan-ekspedisi)
+- [Armada Logistik](https://chandradaya-investasi.com/id/media/blog/armada-logistik)
+- [Kelebihan Pengiriman Kapal Laut](https://chandradaya-investasi.com/id/media/blog/kelebihan-pengiriman-kapal-laut)
+- [Gudang Logistik](https://chandradaya-investasi.com/id/media/blog/gudang-logistik-adalah)
+- [Logistik Darat](https://chandradaya-investasi.com/id/media/blog/logistik-darat)
+- [Green Supply Chain Management](https://chandradaya-investasi.com/id/media/blog/green-supply-chain-management-adalah)
+- [Sustainable Supply Chain](https://chandradaya-investasi.com/id/media/blog/mengenal-sustainable-supply-chain)
+- [Angkutan Multimoda](https://chandradaya-investasi.com/id/media/blog/angkutan-multimoda-adalah)
+- [Intermodal Transportation](https://chandradaya-investasi.com/id/media/blog/mengenal-intermodal-transportation)
+- [Cold Chain](https://chandradaya-investasi.com/id/media/blog/cold-chain-adalah)
+- [Logistik Laut](https://chandradaya-investasi.com/id/media/blog/logistik-laut)
+- [Manajemen Logistik](https://chandradaya-investasi.com/id/media/blog/manajemen-logistik)
+- [Warehouse Inventory](https://chandradaya-investasi.com/id/media/blog/apa-itu-warehouse-inventory)
+- [Layanan Logistik](https://chandradaya-investasi.com/id/media/blog/layanan-logistik)
+- [Freight Forwarding](https://chandradaya-investasi.com/id/media/blog/freight-forwarding-adalah)
+- [Ship Chartering](https://chandradaya-investasi.com/id/media/blog/mengenal-ship-chartering)
+- [Transhipment](https://chandradaya-investasi.com/id/media/blog/transhipment-adalah)
+- [Container Freight Index](https://chandradaya-investasi.com/id/media/blog/mengenal-container-freight-index)
+- [Inbound dan Outbound Logistik](https://chandradaya-investasi.com/id/media/blog/inbound-dan-outbound-logistik)
+- [Perbedaan FCL dan LCL](https://chandradaya-investasi.com/id/media/blog/perbedaan-fcl-dan-lcl)
+- [Keamanan Pengangkutan B3](https://chandradaya-investasi.com/id/media/blog/keamanan-pengangkutan-b3)
+- [Dwell Time Logistik](https://chandradaya-investasi.com/id/media/blog/dwell-time-logistik)
+- [ISO Tank](https://chandradaya-investasi.com/id/media/blog/iso-tank-adalah)
+- [Gudang Cold Storage](https://chandradaya-investasi.com/id/media/blog/gudang-cold-storage)
+- [Sistem Manajemen Gudang](https://chandradaya-investasi.com/id/media/blog/sistem-manajemen-gudang)
+- [Proses Loading dan Unloading Barang](https://chandradaya-investasi.com/id/media/blog/proses-loading-dan-unloading-barang)
+- [Integrasi Logistik](https://chandradaya-investasi.com/id/media/blog/integrasi-logistik)
 
-## Media & Contact
+## Keberlanjutan dan ESG
 
-- [News & Media](${baseUrl}/en/media/news): Latest corporate news, press releases, and industry articles.
-- [Contact Us](${baseUrl}/en/contact-us): Head office location, operational office addresses, and inquiry form.
-- [Full LLM Documentation](${baseUrl}/llms-full.txt): Comprehensive reference documentation about PT Chandra Daya Investasi Tbk (CDI Group).
+- [Keberlanjutan](https://chandradaya-investasi.com/id/sustainability): Informasi mengenai pendekatan keberlanjutan CDI.
+- [Lingkungan](https://chandradaya-investasi.com/id/sustainability/environment): Informasi mengenai aspek lingkungan dalam keberlanjutan CDI.
+- [Sosial](https://chandradaya-investasi.com/id/sustainability/social): Informasi mengenai aspek sosial dalam keberlanjutan CDI.
+- [Tata Kelola](https://chandradaya-investasi.com/id/sustainability/governance): Informasi mengenai tata kelola dalam keberlanjutan CDI.
+
+## Tata Kelola dan Investor
+
+- [Tata Kelola](https://chandradaya-investasi.com/id/governance): Informasi tata kelola perusahaan CDI.
+- [Kebijakan](https://chandradaya-investasi.com/id/governance/policy): Kebijakan perusahaan.
+- [Laporan Investor](https://chandradaya-investasi.com/id/investor/report): Laporan dan informasi untuk investor.
+- [Informasi Keuangan](https://chandradaya-investasi.com/id/investor/financial-information): Informasi keuangan perusahaan.
+
+## Portofolio dan Ekosistem Bisnis
+
+- [Company Profile](https://chandradaya-investasi.com/file/preview/id/company_profile/Company_Profile_9429/): Profil perusahaan dan gambaran ekosistem bisnis CDI.
+- [Bisnis Kami](https://chandradaya-investasi.com/id/our-business): Gambaran portofolio dan sektor bisnis CDI.
+- [Perusahaan Infrastruktur di Indonesia](https://chandradaya-investasi.com/id/media/blog/perusahaan-infrastruktur-di-indonesia): Informasi mengenai perusahaan dan sektor infrastruktur di Indonesia.
+
+## Berita dan Perkembangan Bisnis
+
+- [CDI Perkuat Ekosistem Logistik Terintegrasi](https://chandradaya-investasi.com/id/media/news/cdi-perkuat-ekosistem-logistik-terintegrasi)
+- [Advancing Infrastructure Integration: CDI Group Builds Bitumen Tank Facilities](https://chandradaya-investasi.com/id/media/news/advancing-infrastructure-integration-cdi-group-builds-bitumen-tank-facilities)
+- [Creating Productive Land Through Solar Energy: CDI Group Operates Ground Mounted Solar Power Plant](https://chandradaya-investasi.com/id/media/news/creating-productive-land-through-solar-energy-cdi-group-operates-ground-mounted-solar-power-plant)
+- [CDI Group Expands Solar Power Portfolio to 11 MWp by November 2025](https://chandradaya-investasi.com/id/media/news/cdi-group-expands-solar-power-portfolio-to-11-mwp-by-november-2025)
+- [KCE Explores Hydrogen Power Plant Study with HDF Energy and Air Liquide](https://chandradaya-investasi.com/id/media/news/kce-explores-hydrogen-power-plant-study-with-hdf-energy-and-air-liquide)
+- [CDI Group Strengthens Chemical Industry Supply Chain with Launch of New Chemical Logistics Vessel](https://chandradaya-investasi.com/id/media/news/cdi-group-strengthens-chemical-industry-supply-chain-with-launch-of-new-chemical-logistics-vessel)
+- [Perkuat Logistik Maritim, CDI Group Hadirkan Kapal Angkut Kimia Cair Boreas](https://chandradaya-investasi.com/id/media/news/perkuat-logistik-maritim-cdi-group-hadirkan-kapal-angkut-kimia-cair-boreas)
+- [PT Chandra Daya Investasi Tbk Resmikan Sandar Perdana Kapal Kimia Cair Novah](https://chandradaya-investasi.com/id/media/news/pt-chandra-daya-investasi-tbk-resmikan-sandar-perdana-kapal-kimia-cair-novah)
+- [CDI Group Commissions Ethylene Gas Carrier Vessels to Strengthen Petrochemical Supply Chain Integration](https://chandradaya-investasi.com/id/media/news/cdi-group-commissions-ethylene-gas-carrier-vessels-to-strengthen-petrochemical-supply-chain-integration)
+- [CDI Group Officially Listed on IDX to Support Southeast Asia's Expanding Infrastructure Needs](https://chandradaya-investasi.com/id/media/news/cdi-group-officially-listed-on-idx-to-support-southeast-asias-expanding-infrastructure-needs)
+
+## Hubungi Kami
+
+- [Hubungi Kami](https://chandradaya-investasi.com/id/contact-us): Informasi kontak dan kanal komunikasi CDI.
 
 ## Optional
 
-- [Indonesian Website (Bahasa Indonesia)](${baseUrl}/id): Full corporate website in Bahasa Indonesia.
-- [Privacy Policy](${baseUrl}/en/privacy-policy): Data privacy and personal data protection policy.
-- [Terms & Conditions](${baseUrl}/en/terms-and-conditions): Website terms of use.
-- [Cookies Notice](${baseUrl}/en/cookies-notice): Cookie usage and consent policy.
-- [Disclaimer](${baseUrl}/en/disclaimer): Legal and investment disclaimer.
-`;
+- [Investasi Infrastruktur](https://chandradaya-investasi.com/id/media/blog/investasi-infrastruktur)
+- [Ciri-Ciri Listrik Tidak Stabil](https://chandradaya-investasi.com/id/media/blog/ciri-ciri-listrik-tidak-stabil)
+- [Cara Kerja Kontaktor](https://chandradaya-investasi.com/id/media/blog/cara-kerja-kontaktor)
+- [Produk Teknologi Ramah Lingkungan](https://chandradaya-investasi.com/id/media/blog/produk-teknologi-ramah-lingkungan)
+- [FOB Shipping Point dan FOB Destination](https://chandradaya-investasi.com/id/media/blog/fob-shipping-point-dan-fob-destination)
+
+## Halaman Bahasa Inggris
+
+- [Beranda](https://chandradaya-investasi.com/en)
+- [Tentang Kami](https://chandradaya-investasi.com/en/about-us)
+- [Bisnis Kami](https://chandradaya-investasi.com/en/our-business)
+- [Manajemen](https://chandradaya-investasi.com/en/about-us/management)
+- [Keberlanjutan](https://chandradaya-investasi.com/en/sustainability)
+- [Tata Kelola](https://chandradaya-investasi.com/en/governance)
+- [Investor](https://chandradaya-investasi.com/en/investor)
+- [Media dan Berita](https://chandradaya-investasi.com/en/media/news)
+- [Hubungi Kami](https://chandradaya-investasi.com/en/contact-us)
+
+## Root
+
+- [Indonesia](https://chandradaya-investasi.com/id)
+- [English](https://chandradaya-investasi.com/en)`;
+
+export function buildDefaultLlmsTxt(): string {
+  return DEFAULT_LLMS_CONTENT;
 }
 
 export function buildDefaultLlmsFullTxt(): string {
-  const baseUrl = getSiteBaseUrl();
-
-  return `# PT Chandra Daya Investasi Tbk (CDI Group) — Comprehensive Documentation
-
-> PT Chandra Daya Investasi Tbk (CDI Group) is an infrastructure investment arm of Chandra Asri Group, a leading chemical and energy solutions provider in Southeast Asia, and EGCO Group, a leading power and energy holding company in Thailand. CDI Group's diverse operations encompass Energy, Water Supply & Treatment, Ports & Storage, and Logistics.
-
----
-
-## 1. Company Overview
-
-- **Legal Name:** PT Chandra Daya Investasi Tbk
-- **Brand / Short Name:** CDI Group / Chandra Daya Investasi
-- **Website:** ${baseUrl}
-- **Languages Supported:** English (\`/en\`) and Bahasa Indonesia (\`/id\`)
-- **Strategic Shareholders:**
-  - **Chandra Asri Group (PT Chandra Asri Pacific Tbk):** A leading chemical and infrastructure solutions company in Indonesia and Southeast Asia.
-  - **EGCO Group (Electricity Generating Public Company Limited):** A major power and energy holding company based in Thailand.
-
-### About CDI Group
-PT Chandra Daya Investasi Tbk (CDI Group) invests in, develops, and operates critical industrial and utility infrastructure across Indonesia and Southeast Asia. By combining deep operational expertise with strategic partnerships, CDI Group provides essential infrastructure backbone services—spanning electric power, industrial water, port and bulk liquid terminals, and integrated logistics—that enable industrial growth and sustainable development.
-
----
-
-## 2. Core Business Pillars
-
-### 2.1 Energy
-- **URL:** ${baseUrl}/en/our-business/energy (EN) | ${baseUrl}/id/our-business/energy (ID)
-- **Overview:** CDI Group operates reliable power generation and electricity distribution assets serving industrial estates, commercial customers, and national grid requirements.
-- **Key Capabilities:**
-  - Combined-cycle and cogeneration power plants
-  - Power distribution and substation infrastructure
-  - Renewable and low-carbon energy initiatives (solar PV, clean energy transition)
-  - High-reliability industrial power supply
-
-### 2.2 Water
-- **URL:** ${baseUrl}/en/our-business/water (EN) | ${baseUrl}/id/our-business/water (ID)
-- **Overview:** Integrated industrial water management solutions supporting major industrial complexes in Cilegon, Banten, and surrounding regions.
-- **Key Capabilities:**
-  - Raw water intake, treatment, and pipeline distribution
-  - Demineralized and process water production for petrochemical and heavy industries
-  - Industrial wastewater treatment and water recycling initiatives
-
-### 2.3 Ports & Storage
-- **URL:** ${baseUrl}/en/our-business/ports-and-storage (EN) | ${baseUrl}/id/our-business/ports-and-storage (ID)
-- **Overview:** Strategic marine port infrastructure and bulk liquid/chemical storage terminals located along key maritime corridors.
-- **Key Capabilities:**
-  - Dedicated jetties and berth facilities for liquid, gas, and dry bulk vessels
-  - Chemical and petroleum product storage tank terminals
-  - Pipeline connectivity and cargo handling services with international safety standards
-
-### 2.4 Logistics
-- **URL:** ${baseUrl}/en/our-business/logistics (EN) | ${baseUrl}/id/our-business/logistics (ID)
-- **Overview:** End-to-end maritime shipping and land logistics infrastructure connecting manufacturers with domestic and regional markets.
-- **Key Capabilities:**
-  - Chemical and gas carrier vessels / maritime shipping fleet
-  - Land transportation, trucking fleet, and intermodal logistics
-  - Supply chain management and warehousing services
-
----
-
-## 3. Sustainability & ESG
-
-CDI Group integrates Environmental, Social, and Governance (ESG) principles into all investment and operational decisions.
-
-- **Sustainability Overview:** ${baseUrl}/en/sustainability
-  - Sustainability Policy & Framework guiding responsible infrastructure operations.
-  - ESG Ratings, awards, and international sustainability recognitions.
-- **Environment:** ${baseUrl}/en/sustainability/environment
-  - Decarbonization, energy efficiency, renewable energy adoption, water conservation, waste reduction, and biodiversity protection.
-- **Social:** ${baseUrl}/en/sustainability/social
-  - Zero-harm occupational health, safety, and environment (SHE) culture, employee development, diversity & inclusion, and community development programs.
-- **Governance (ESG):** ${baseUrl}/en/sustainability/governance
-  - Board-level sustainability oversight, risk management, anti-corruption, and supply chain responsibility.
-
----
-
-## 4. Corporate Governance (GCG)
-
-CDI Group upholds Good Corporate Governance (GCG) in accordance with Indonesian Financial Services Authority (OJK) regulations and international best practices.
-
-- **Governance Overview:** ${baseUrl}/en/governance
-  - **Board of Commissioners & Board of Directors:** ${baseUrl}/en/about-us/management
-  - **Corporate Secretary:** Manages regulatory compliance, investor communications, and public disclosures.
-  - **Internal Audit Unit:** Provides independent assurance on internal controls and governance processes.
-  - **Board Committees:** Audit Committee, Sustainability Committee, and other governance committees.
-  - **Risk Management:** Enterprise-wide risk identification, mitigation, and monitoring framework.
-  - **Code of Conduct & SHE Regulations:** Ethical standards and Safety, Health, and Environment (SHE) rules binding all employees and partners.
-- **Governance Policies:** ${baseUrl}/en/governance/policy
-- **Whistleblowing System:** ${baseUrl}/en/governance/whistleblowing
-  - Secure and confidential channel for reporting suspected violations of laws, regulations, or the Code of Conduct.
-
----
-
-## 5. Investor Relations
-
-- **Reports:** ${baseUrl}/en/investor/report
-  - Annual Reports, Audited Financial Statements, Sustainability Reports, and Supporting Institutions & Professionals.
-- **Financial Information:** ${baseUrl}/en/investor/financial-information
-  - Key financial ratios, balance sheet and income statement highlights, and financial calendar.
-- **Shares Information:** ${baseUrl}/en/investor/shares-information
-  - Shareholder structure, dividend policy and history, and bond/debt securities information.
-- **Publications for Investors:** ${baseUrl}/en/investor/publications-for-investors
-  - Initial Public Offering (IPO) / Corporate Prospectus, General Meeting of Shareholders (GMS) announcements and minutes, Information Disclosures, Earnings Updates, and Investor Presentations.
-
----
-
-## 6. Media, Legal & Contact Directory
-
-- **News & Press Releases:** ${baseUrl}/en/media/news
-- **Contact Us:** ${baseUrl}/en/contact-us
-- **Privacy Policy:** ${baseUrl}/en/privacy-policy
-- **Terms & Conditions:** ${baseUrl}/en/terms-and-conditions
-- **Cookies Notice:** ${baseUrl}/en/cookies-notice
-- **Disclaimer:** ${baseUrl}/en/disclaimer
-- **Sitemap:** ${baseUrl}/sitemap.xml
-`;
+  return DEFAULT_LLMS_CONTENT;
 }
