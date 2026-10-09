@@ -30,20 +30,33 @@ export async function generateMetadata({
 
   const pagePath = `/about-us/management/team/${params.ulid}`;
 
-  const title = "Chandra Daya Investasi";
+  const title = member
+    ? `${member.name} - ${member.position} | Chandra Daya Investasi`
+    : "Management Team | Chandra Daya Investasi";
+
+  const rawBio = member
+    ? (params.locale === "id"
+        ? member.description_id || member.description_en || ""
+        : member.description_en || member.description_id || ""
+      ).replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim()
+    : "";
+  const description = rawBio
+    ? rawBio.length > 160
+      ? rawBio.slice(0, 157) + "..."
+      : rawBio
+    : t("description");
 
   const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
   
   const getCanonicalPath = (lang: string) => {
-    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
     return `${baseUrl}/${lang}${pagePath}`;      
   };
 
   const currentUrl = getCanonicalPath(params.locale);
 
   return {
-    title: title,
-    description: t("description"),
+    title,
+    description,
     metadataBase: new URL(`${baseUrl}/${params.locale}`),
 
     keywords: [
@@ -78,8 +91,8 @@ export async function generateMetadata({
     },
 
     openGraph: {
-      title: title,
-      description: t("description"),
+      title,
+      description,
       url: currentUrl,
       siteName: "Chandra Daya Investasi",
       locale: params.locale,
@@ -96,8 +109,8 @@ export async function generateMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: t("description"),
+      title,
+      description,
       images: [member?.image_hero || "/assets/frontend/favicon.png"],
     },
 

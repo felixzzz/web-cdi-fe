@@ -7,30 +7,33 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 // import { useTranslations } from "next-intl";
 
+import { seoService } from "@/services/Global/seoService";
+
 export async function generateMetadata({
   params: { locale },
 }: ContactPageProps): Promise<Metadata> {
-  const t = await getTranslations("metadata");
-  const getContactPageData = await companyAddressService.getContactPageData(
-    locale
-  );
+  const [seo, t, getContactPageData] = await Promise.all([
+    seoService.getPageSeoMetadata("meta_contact_us", locale),
+    getTranslations("metadata-seo.contact-us"),
+    companyAddressService.getContactPageData(locale),
+  ]);
+
+  const title = seo.title || t("title");
+  const description = seo.description || t("description");
 
   const pagePath = "/contact-us";
 
-  const title = "Chandra Daya Investasi";
-
-const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
     return `${baseUrl}/${lang}${pagePath}`;      
   };
 
   const currentUrl = getCanonicalPath(locale);
 
   return {
-    title: title,
-    description: t("description"),
+    title,
+    description,
     metadataBase: new URL(`${baseUrl}/${locale}`),
 
     keywords: [
@@ -65,8 +68,8 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     },
 
     openGraph: {
-      title: title,
-      description: t("description"),
+      title,
+      description,
       url: currentUrl,
       siteName: "Chandra Daya Investasi",
       locale: locale,
@@ -83,8 +86,8 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: t("description"),
+      title,
+      description,
       images: [getContactPageData.file_url || "/assets/frontend/favicon.png"],
     },
 

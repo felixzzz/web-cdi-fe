@@ -16,14 +16,22 @@ import { GovernancePageProps } from "@/types/Governances/Governance";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
+import { seoService } from "@/services/Global/seoService";
+
 // ISR: revalidate every 1 hour — serves cached HTML for instant TTFB
 export const revalidate = 3600;
 
 export async function generateMetadata({
   params: { locale },
 }: GovernancePageProps): Promise<Metadata> {
-    const t = await getTranslations('metadata')
-  const aboutData = await governanceService.getGovernancePageData(locale);
+  const [seo, t, aboutData] = await Promise.all([
+    seoService.getPageSeoMetadata("meta_governance", locale),
+    getTranslations("metadata-seo.governance"),
+    governanceService.getGovernancePageData(locale),
+  ]);
+
+  const title = seo.title || t("title");
+  const description = seo.description || t("description");
   const { governance_banner } = aboutData;
 
   const pagePath = "/governance";
@@ -36,11 +44,9 @@ export async function generateMetadata({
 
   const currentUrl = getCanonicalPath(locale);
 
-  const title = "Chandra Daya Investasi";
-
   return {
-    title: title,
-    description: t('description'),
+    title,
+    description,
     metadataBase: new URL(baseUrl),
 
     keywords: [
@@ -75,8 +81,8 @@ export async function generateMetadata({
     },
 
     openGraph: {
-      title: title,
-      description: t('description'),
+      title,
+      description,
       url: currentUrl,
       siteName: "Chandra Daya Investasi",
       locale: locale,
@@ -93,8 +99,8 @@ export async function generateMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: t('description'),
+      title,
+      description,
       images: [governance_banner.file_url || "/assets/frontend/favicon.png"],
     },
 

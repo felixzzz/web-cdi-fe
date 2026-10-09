@@ -2,24 +2,24 @@
 
   "metadata-seo": {
     "home": {
-      "title": "Chandra Daya Investasi | Perusahaan Infrastuktur di Indonesia dan Asia Tenggara",
-      "description": "CDI Group menghadirkan solusi infrastruktur dan investasi infrastruktur di Indonesia maupun Asia Tenggara pada sektor energi, air, logistik, dan pelabuhan & penyimpanan."
+      "title": "Chandra Daya Investasi | Investasi & Solusi Infrastruktur",
+      "description": "Chandra Daya Investasi (CDI Group) menyediakan solusi infrastruktur untuk industri di sektor energi, air, kepelabuhanan & penyimpanan, serta logistik di Indonesia."
     },
     "about-us": {
       "title": "Siapa Kami | Profil Perusahaan Chandra Daya Investasi",
       "description": "Profil perusahaan PT Chandra Daya Investasi Tbk (CDI Group) perusahaan investasi infrastruktur di Indonesia terkemuka hingga kancah Asia Tenggara."
     },
     "about-us-management": {
-      "title": "Manajemen dan Struktur Organisasi | Chandra Daya Investasi",
+      "title": "Manajemen & Dewan Komisaris | Chandra Daya Investasi",
       "description": "Mengenal tim manajemen dan struktur organisasi CDI Group untuk solusi infrastruktur terintegrasi di Indonesia hingga internasional."
     },
     "about-us-awards": {
-      "title": "Penghargaan dan Sertifikasi | Profil Perusahaan Chandra Daya Investasi",
-      "description": "Kredibilitas dan komitmen CDI Group sebagai perusahaan infrastuktur di Indonesia telah terbukti dalam berbagai penghargaan dan sertifikasi"
+      "title": "Penghargaan & Sertifikasi | Chandra Daya Investasi",
+      "description": "Kredibilitas dan komitmen CDI Group sebagai perusahaan infrastruktur di Indonesia dibuktikan lewat berbagai penghargaan dan sertifikasi industri."
     },
     "our-business": {
       "title": "Bisnis Kami | Chandra Daya Investasi",
-      "description": "CDI Group menyediakan solusi infrastuktur di sektor energi, air, logistik, dan pelabuhan & penyimpangan untuk pertumbuhan yang berkelanjutan."
+      "description": "CDI Group menyediakan solusi infrastruktur di sektor energi, air, logistik, serta kepelabuhanan & penyimpanan untuk pertumbuhan yang berkelanjutan."
     },
     "our-business-energy": {
       "title": "Solusi Energi | Chandra Daya Investasi",
@@ -31,15 +31,79 @@
     },
     "our-business-ports-and-storage": {
       "title": "Solusi Pelabuhan dan Penyimpanan | Chandra Daya Investasi",
-      "description": "Solusi pelabuhan dan peyimpanan CDI Group berstandar internasional dukung kelancaran logistik, impor bahan kimia, dan distribusi petrokimia."
+      "description": "Solusi pelabuhan dan penyimpanan CDI Group berstandar internasional mendukung kelancaran logistik, impor bahan kimia, dan distribusi petrokimia."
     },
     "our-business-logistic": {
-      "title": "Solusi Logistik | Chandra Daya Investasi",
+      "title": "Solusi Logistik Maritim & Darat | Chandra Daya Investasi",
       "description": "Solusi infrastruktur logistik laut dan darat CDI Group menyediakan pelayaran LPG dan kimia, cold chain, serta armada kapal terintegrasi."
     },
-    "our-business-news": {
-      "title": "Berita dan Artikel | Chandra Daya Investasi",
-      "description": "Update berita, artikel & pengumuman CDI Group tentang insight,proyek dan solusi infrastruktur terdepan di Indonesia."
+    "governance": {
+      "title": "Tata Kelola Perusahaan (GCG) | Chandra Daya Investasi",
+      "description": "Prinsip tata kelola perusahaan yang baik (GCG) CDI Group sebagai dasar transparansi, akuntabilitas, dan keberlanjutan bisnis infrastruktur di Indonesia."
+    },
+    "governance-policy": {
+      "title": "Kebijakan Tata Kelola | Chandra Daya Investasi",
+      "description": "Kebijakan dan pedoman tata kelola perusahaan CDI Group yang menjadi landasan praktik GCG, kepatuhan, dan etika bisnis di seluruh lini usaha."
+    },
+    "governance-whistleblowing": {
+      "title": "Sistem Pelaporan Pelanggaran (WBS) | CDI Group",
+      "description": "Saluran pelaporan pelanggaran etika, kecurangan, atau ketidakpatuhan secara aman, independen, dan rahasia melalui Whistleblowing System CDI Group."
+    },
+    "sustainability": {
+      "title": "Keberlanjutan (ESG) | Chandra Daya Investasi",
+      "description": "Komitmen keberlanjutan CDI Group mencakup aspek lingkungan, sosial, dan tata kelola (ESG) untuk pembangunan infrastruktur yang bertanggung jawab."
+    },
+    "sustainability-environment": {
+      "title": "Keberlanjutan Lingkungan | Chandra Daya Investasi",
+      "description": "Merupakan Inisiatif lingkungan CDI Group dalam efisiensi energi, pengelolaan air dan limbah, serta upaya menekan dampak operasional infrastruktur di Indonesia."
+    },
+    "sustainability-social": {
+      "title": "Keberlanjutan Sosial | Chandra Daya Investasi",
+      "description": "Program sosial dan pemberdayaan masyarakat CDI Group sebagai bagian dari komitmen keberlanjutan bisnis infrastruktur di Indonesia."
+    },
+    "sustainability-governance": {
+      "title": "Tata Kelola Keberlanjutan | Chandra Daya Investasi",
+      "description": "Pendekatan tata kelola keberlanjutan CDI Group yang mengintegrasikan prinsip ESG ke dalam strategi dan operasi bisnis infrastruktur."
+    },
+    "investor-report": {
+      "title": "Laporan Perusahaan | Investor Chandra Daya Investasi",
+      "description": "Unduh laporan keuangan, tahunan, dan publikasi CDI Group (CDIA) untuk mendukung keputusan investasi pada bisnis infrastruktur di Indonesia."
+    },
+    "investor-financial": {
+      "title": "Informasi Keuangan | Investor Chandra Daya Investasi",
+      "description": "Akses informasi dan laporan keuangan CDI Group (CDIA) untuk investor, mencakup kinerja keuangan dan posisi usaha infrastruktur di Indonesia."
+    },
+    "investor-shares": {
+      "title": "Informasi Saham (CDIA) | Chandra Daya Investasi",
+      "description": "Informasi terkait saham CDI Group (CDIA) berisikan struktur kepemilikan, aksi korporasi, dan data saham bagi investor perusahaan infrastruktur di Indonesia."
+    },
+    "investor-publications": {
+      "title": "Publikasi Investor | Chandra Daya Investasi",
+      "description": "Kumpulan publikasi, prospek bisnis, dan materi untuk investor CDI Group (CDIA) seputar kinerja dan prospek bisnis infrastruktur di Indonesia."
+    },
+    "contact-us": {
+      "title": "Hubungi Kami | Chandra Daya Investasi",
+      "description": "Hubungi Chandra Daya Investasi (CDI Group) untuk informasi solusi infrastruktur energi, air, kepelabuhanan & penyimpanan, dan logistik di Indonesia."
+    },
+    "media-news": {
+      "title": "Berita Terkini & Siaran Pers | Chandra Daya Investasi",
+      "description": "Update berita, artikel & pengumuman CDI Group tentang insight, proyek dan solusi infrastruktur terdepan di Indonesia."
+    },
+    "terms-and-conditions": {
+      "title": "Syarat dan Ketentuan | PT Chandra Daya Investasi Tbk",
+      "description": "Pelajari syarat dan ketentuan penggunaan situs web dan layanan digital resmi PT Chandra Daya Investasi Tbk (CDI Group)."
+    },
+    "privacy-policy": {
+      "title": "Kebijakan Privasi | PT Chandra Daya Investasi Tbk",
+      "description": "Informasi tentang bagaimana PT Chandra Daya Investasi Tbk mengumpulkan, memproses, dan melindungi data pribadi Anda sesuai regulasi yang berlaku."
+    },
+    "cookies-consent": {
+      "title": "Kebijakan Cookie | PT Chandra Daya Investasi Tbk",
+      "description": "Penjelasan mengenai penggunaan cookie dan teknologi pelacakan di situs web CDI Group untuk mengoptimalkan pengalaman browsing Anda."
+    },
+    "disclaimer": {
+      "title": "Penyangkalan Hukum (Disclaimer) | CDI Group",
+      "description": "Pernyataan sanggahan resmi mengenai keakuratan informasi, pernyataan prospektif, dan risiko investasi di situs web CDI Group."
     }
   },
   "Report": {

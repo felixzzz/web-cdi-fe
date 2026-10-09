@@ -11,12 +11,20 @@ import { Link } from "@/i18n/navigation";
 import { cleanJsonLdString, buildServiceSchema } from "@/lib/schema-org";
 import JsonLd from "@/components/shared/JsonLd";
 
+import { seoService } from "@/services/Global/seoService";
+
 export async function generateMetadata({
   params: { locale },
 }: WaterPageProps): Promise<Metadata> {
-  const t = await getTranslations("metadata-seo.our-business-water");
+  const [seo, t, waterData] = await Promise.all([
+    seoService.getPageSeoMetadata("meta_our_business_water", locale),
+    getTranslations("metadata-seo.our-business-water"),
+    waterService.getWaterPageData(locale),
+  ]);
 
-  const waterData = await waterService.getWaterPageData(locale);
+  const title = seo.title || t("title");
+  const description = seo.description || t("description");
+
   const { banner_image, banner_title } = waterData;
 
   const pagePath = "/our-business/water";
@@ -24,16 +32,15 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === "id") return `${baseUrl}/${lang}${pagePath}`;
     return `${baseUrl}/${lang}${pagePath}`;
   };
 
   const currentUrl = getCanonicalPath(locale);
 
   return {
-    title: t("title"),
-    description: t("description"),
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL_LP}/${locale}`),
+    title,
+    description,
+    metadataBase: new URL(`${baseUrl}/${locale}`),
 
     keywords: [
       "Chandra Daya Investasi",
@@ -67,8 +74,8 @@ export async function generateMetadata({
     },
 
     openGraph: {
-      title: t("title"),
-      description: t("description"),
+      title,
+      description,
       url: currentUrl,
       siteName: "Chandra Daya Investasi",
       locale: locale,
@@ -85,8 +92,8 @@ export async function generateMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title: t("title"),
-      description: t("description"),
+      title,
+      description,
       images: [banner_image || "/assets/frontend/favicon.png"],
     },
 

@@ -8,31 +8,36 @@ import { environmentService } from "@/services/Sustainability/EnvironmentService
 import { EnvironmentPageProps } from "@/types/Sustainabilitys/Environment";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { seoService } from "@/services/Global/seoService";
 
 export async function generateMetadata({
   params: { locale },
 }: EnvironmentPageProps): Promise<Metadata> {  
-  const t = await getTranslations("metadata");
-  const aboutData = await environmentService.getEnviromentPageData(locale);
+  const [seo, t, aboutData] = await Promise.all([
+    seoService.getPageSeoMetadata("meta_sustainability_environment", locale),
+    getTranslations("metadata-seo.sustainability-environment"),
+    environmentService.getEnviromentPageData(locale),
+  ]);
+
+  const title = seo.title || t("title");
+  const description = seo.description || t("description");
+
   const { sustainability_environment_banner } = aboutData;
 
   const pagePath = "/sustainability/environment";
 
-const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
     return `${baseUrl}/${lang}${pagePath}`;      
   };
 
   const currentUrl = getCanonicalPath(locale);
 
-  const title = "Chandra Daya Investasi";
-
   return {
-    title: title,
-    description: t('description'),
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL_LP}/${locale}`),
+    title,
+    description,
+    metadataBase: new URL(`${baseUrl}/${locale}`),
 
     keywords: [
       "Chandra Daya Investasi",
@@ -66,8 +71,8 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     },
 
     openGraph: {
-      title: title,
-      description: t('description'),
+      title,
+      description,
       url: currentUrl,
       siteName: "Chandra Daya Investasi",
       locale: locale,
@@ -86,8 +91,8 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: t('description'),
+      title,
+      description,
       images: [
         sustainability_environment_banner.file_url ||
           "/assets/frontend/favicon.png",

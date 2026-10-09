@@ -7,30 +7,35 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 // import { useTranslations } from "next-intl";
 
+import { seoService } from "@/services/Global/seoService";
+
 export async function generateMetadata({
   params: { locale },
 }: FinancialPageProps): Promise<Metadata> {
-  const t = await getTranslations("metadata");
+  const [seo, t, aboutData] = await Promise.all([
+    seoService.getPageSeoMetadata("meta_investor_financial", locale),
+    getTranslations("metadata-seo.investor-financial"),
+    financialService.getFinancialPageData(locale),
+  ]);
 
-  const aboutData = await financialService.getFinancialPageData(locale);
+  const title = seo.title || t("title");
+  const description = seo.description || t("description");
+
   const { investor_financial_banner } = aboutData;
 
   const pagePath = "/investor/financial-information";
 
-  const title = "Chandra Daya Investasi";
-
-const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
     return `${baseUrl}/${lang}${pagePath}`;      
   };
 
   const currentUrl = getCanonicalPath(locale);
 
   return {
-    title: title,
-    description: t("description"),
+    title,
+    description,
     metadataBase: new URL(`${baseUrl}/${locale}`),
 
     keywords: [
@@ -65,8 +70,8 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     },
 
     openGraph: {
-      title: title,
-      description: t("description"),
+      title,
+      description,
       url: currentUrl,
       siteName: "Chandra Daya Investasi",
       locale: locale,
@@ -85,8 +90,8 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: t("description"),
+      title,
+      description,
       images: [
         investor_financial_banner.file_url || "/assets/frontend/favicon.png",
       ],

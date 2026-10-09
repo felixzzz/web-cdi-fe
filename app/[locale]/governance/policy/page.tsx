@@ -5,6 +5,8 @@ import { policyService } from "@/services/Governance/PolicyService";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
+import { seoService } from "@/services/Global/seoService";
+
 export interface PolicyPageProps {
   params: {
     locale: "en" | "id";
@@ -15,23 +17,27 @@ export interface PolicyPageProps {
 export async function generateMetadata({
   params: { locale },
 }: PolicyPageProps): Promise<Metadata> {
-  const t = await getTranslations('metadata')
+  const [seo, t] = await Promise.all([
+    seoService.getPageSeoMetadata("meta_governance_policy", locale),
+    getTranslations("metadata-seo.governance-policy"),
+  ]);
+
+  const title = seo.title || t("title");
+  const description = seo.description || t("description");
 
   const pagePath = "/governance/policy";
 
-const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
   const getCanonicalPath = (lang: string) => {
-    if (lang === 'id') return `${baseUrl}/${lang}${pagePath}`; 
     return `${baseUrl}/${lang}${pagePath}`;      
   };
 
   const currentUrl = getCanonicalPath(locale);
 
-  const title = "Chandra Daya Investasi";
   return {
-    title: title,
-    description: t('description'),
+    title,
+    description,
     keywords: [
       "Chandra Daya Investasi",
       "CDI",
@@ -63,17 +69,17 @@ const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
     },
 
     openGraph: {
-      title: title,
-      description: t('description'),
-      url: "/",
+      title,
+      description,
+      url: currentUrl,
       type: "website",
       siteName: title,
     },
 
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: t('description'),
+      title,
+      description,
     },
 
     other: {

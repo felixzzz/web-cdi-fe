@@ -138,8 +138,22 @@ export async function generateMetadata({
       ? article?.meta_tag_id?.description || article?.meta_tag?.description || ""
       : article?.meta_tag?.description || article?.meta_tag_id?.description || "";
 
+  const rawContent =
+    params.locale === "id"
+      ? article.content_id || article.content_en || ""
+      : article.content_en || article.content_id || "";
+
+  const cleanExcerpt = rawContent
+    ? rawContent.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().slice(0, 160)
+    : "";
+
   const title = `${articleTitle} | Chandra Daya Investasi`;
-  const description = articleDesc;
+  const description =
+    articleDesc?.trim() ||
+    cleanExcerpt ||
+    (params.locale === "id"
+      ? `Baca berita terbaru mengenai ${articleTitle} dari PT Chandra Daya Investasi Tbk (CDI Group).`
+      : `Read the latest news regarding ${articleTitle} from PT Chandra Daya Investasi Tbk (CDI Group).`);
   const imageUrl = article.image || "/assets/frontend/favicon.png";
 
   const baseUrl = (

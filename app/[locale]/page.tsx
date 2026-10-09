@@ -21,6 +21,8 @@ import { getTranslations } from "next-intl/server";
 import { cleanJsonLdString, buildOrganizationSchema, buildWebSiteSchema } from "@/lib/schema-org";
 import JsonLd from "@/components/shared/JsonLd";
 
+import { seoService } from "@/services/Global/seoService";
+
 // ISR: revalidate every 1 hour — serves cached HTML for instant TTFB
 export const revalidate = 3600;
 
@@ -28,13 +30,18 @@ export async function generateMetadata(
   {
     params: { locale },
   }: HomePageProps ): Promise<Metadata> {
-  const t = await getTranslations('metadata-seo.home')
+  const [seo, t] = await Promise.all([
+    seoService.getPageSeoMetadata('meta_home', locale),
+    getTranslations('metadata-seo.home'),
+  ]);
+  const title = seo.title || t('title');
+  const description = seo.description || t('description');
   const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "https://chandradaya-investasi.com";
   const currentUrl = `${baseUrl}/${locale}`;
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title,
+    description,
     keywords: [
       "Chandra Daya Investasi",
       "CDI",
@@ -66,17 +73,17 @@ export async function generateMetadata(
     },
 
     openGraph: {
-      title: t('title'),
-      description: t('description'),
+      title,
+      description,
       url: currentUrl,
       type: "website",
-      siteName: t('title'),
+      siteName: title,
     },
 
     twitter: {
       card: "summary_large_image",
-      title: t('title'),
-      description: t('description'),
+      title,
+      description,
     },
 
     other: {
