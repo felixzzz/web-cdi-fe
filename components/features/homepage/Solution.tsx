@@ -25,7 +25,7 @@ export const Solution: React.FC<BusinessSolutionsProps> = ({
       title: home_infrastructure_energy.title,
       description: stripHtml(home_infrastructure_energy.content),
       imageUrl: home_infrastructure_energy.file_url,
-      linkHref: "/our-business/energy",
+      linkHref: "/our-business/power",
     },
     {
       title: home_infrastructure_water.title,

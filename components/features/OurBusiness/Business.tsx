@@ -14,6 +14,7 @@ export function Business({ overview, items }: BusinessProps) {
     tags: item.tabs.map((tab) => tab.title),
     route: `our-business/${item.title_en
       .toLowerCase()
+      .replace(/\benergy\b/g, "power")
       .replace(/\blogistic\b/g, "logistics")
       .replace(/&/g, "and")
       .replace(/\s+/g, "-")}`,

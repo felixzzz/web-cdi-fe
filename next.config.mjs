@@ -75,6 +75,21 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+
+  async redirects() {
+    return [
+      {
+        source: "/:locale/our-business/energy",
+        destination: "/:locale/our-business/power",
+        permanent: true,
+      },
+      {
+        source: "/our-business/energy",
+        destination: "/our-business/power",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

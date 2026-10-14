@@ -17,14 +17,14 @@ export const DEFAULT_LLMS_CONTENT = `# Chandra Daya Investasi
 ## Gambaran Bisnis
 
 - [Bisnis Kami](https://chandradaya-investasi.com/id/our-business): Gambaran keseluruhan portofolio bisnis dan sektor infrastruktur CDI.
-- [Energi](https://chandradaya-investasi.com/id/our-business/energy): Bisnis infrastruktur energi CDI.
+- [Energi](https://chandradaya-investasi.com/id/our-business/power): Bisnis infrastruktur energi CDI.
 - [Penyediaan dan Pengolahan Air](https://chandradaya-investasi.com/id/our-business/water): Bisnis penyediaan dan pengolahan air CDI.
 - [Pelabuhan dan Penyimpanan](https://chandradaya-investasi.com/id/our-business/ports-and-storage): Bisnis pelabuhan, terminal, penyimpanan, dan infrastruktur terkait CDI.
 - [Logistik dan Infrastruktur Industri](https://chandradaya-investasi.com/id/our-business/logistics): Bisnis logistik dan infrastruktur industri CDI.
 
 ## Infrastruktur Energi
 
-- [Bisnis Energi](https://chandradaya-investasi.com/id/our-business/energy): Informasi mengenai bisnis infrastruktur energi CDI.
+- [Bisnis Energi](https://chandradaya-investasi.com/id/our-business/power): Informasi mengenai bisnis infrastruktur energi CDI.
 - [Sumber Energi Terbarukan](https://chandradaya-investasi.com/id/media/blog/sumber-energi-terbarukan)
 - [Sumber Energi Alternatif](https://chandradaya-investasi.com/id/media/blog/sumber-energi-alternatif)
 - [Apa Itu Renewable Energy](https://chandradaya-investasi.com/id/media/blog/apa-itu-renewable-energy)

@@ -9,7 +9,7 @@ export async function GET(_request: NextRequest, { params }: { params: { locale:
 
   const pages = [
     { path: "/our-business", priority: 0.7 },
-    { path: "/our-business/energy", priority: 0.7 },
+    { path: "/our-business/power", priority: 0.7 },
     { path: "/our-business/water", priority: 0.7 },
     { path: "/our-business/ports-and-storage", priority: 0.7 },
     { path: "/our-business/logistics", priority: 0.7 },

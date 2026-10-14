@@ -47,7 +47,7 @@ export function Navbar() {
       label: t("our_business"),
       children: [
         { label: t("what_we_do"), href: "/our-business" },
-        { label: t("energy"), href: "/our-business/energy" },
+        { label: t("energy"), href: "/our-business/power" },
         { label: t("water"), href: "/our-business/water" },
         { label: t("ports_storage"), href: "/our-business/ports-and-storage" },
         { label: t("logistics"), href: "/our-business/logistics" },

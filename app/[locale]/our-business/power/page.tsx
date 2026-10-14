@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   const { banner_image, banner_title } = energyData;
 
-  const pagePath = "/our-business/energy";
+  const pagePath = "/our-business/power";
 
   const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
 
@@ -151,7 +151,7 @@ export default async function Page({ params: { locale } }: EnergyPageProps) {
         <JsonLd data={buildServiceSchema({
           name: energyData.title || "Energy Business",
           description: energyData.description || "",
-          url: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${locale}/our-business/energy`
+          url: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${locale}/our-business/power`
         })} />
       )}
     </main>
