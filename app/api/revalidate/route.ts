@@ -3,6 +3,12 @@ import { revalidatePath, revalidateTag } from "next/cache";
 
 export const dynamic = "force-dynamic";
 
+interface RevalidateRequestBody {
+  tag?: string;
+  path?: string;
+  type?: "page" | "layout";
+}
+
 function validateSecret(request: NextRequest): boolean {
   const secretFromQuery = request.nextUrl.searchParams.get("secret");
   const secretFromHeader = request.headers.get("x-revalidate-secret");
@@ -10,7 +16,7 @@ function validateSecret(request: NextRequest): boolean {
   const secretFromBearer = authHeader ? authHeader.replace(/^Bearer\s+/i, "") : null;
 
   const providedSecret = secretFromQuery || secretFromHeader || secretFromBearer;
-  const expectedSecret = process.env.REVALIDATION_SECRET_TOKEN || "cdi-revalidate-secret-token";
+  const expectedSecret = process.env.REVALIDATION_SECRET_TOKEN || "cdi-revalidate-secret-token-2026";
 
   return !!providedSecret && providedSecret === expectedSecret;
 }
@@ -21,9 +27,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
 
   try {
-    let body: any = {};
+    let body: RevalidateRequestBody = {};
     try {
-      body = await request.json();
+      body = (await request.json()) as RevalidateRequestBody;
     } catch {
       // Body is optional
     }
@@ -59,12 +65,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       timestamp: Date.now(),
       details: revalidatedItems,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
       {
         revalidated: false,
         message: "Failed to revalidate cache",
-        error: error?.message || String(error),
+        error: errorMessage,
       },
       { status: 500 }
     );
@@ -105,12 +112,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       timestamp: Date.now(),
       details: revalidatedItems,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
       {
         revalidated: false,
         message: "Failed to revalidate cache",
-        error: error?.message || String(error),
+        error: errorMessage,
       },
       { status: 500 }
     );
