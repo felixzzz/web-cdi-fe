@@ -22,8 +22,8 @@ export async function generateMetadata({
     logisticService.getLogisticPageData(locale),
   ]);
 
-  const title = seo.title || t("title");
-  const description = seo.description || t("description");
+  const title = logisticData.meta_title || seo.title || t("title");
+  const description = logisticData.meta_description || seo.description || t("description");
 
   const { banner_image, banner_title } = logisticData;
 

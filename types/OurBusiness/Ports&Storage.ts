@@ -84,5 +84,7 @@ export interface PortsAndStorageApiResponse {
   banner_description: string | null;
   overview_title: string;
   overview_description: string; 
+  meta_title?: string;
+  meta_description?: string;
   json_ld?: string;
 }

@@ -22,8 +22,8 @@ export async function generateMetadata({
     waterService.getWaterPageData(locale),
   ]);
 
-  const title = seo.title || t("title");
-  const description = seo.description || t("description");
+  const title = waterData.meta_title || seo.title || t("title");
+  const description = waterData.meta_description || seo.description || t("description");
 
   const { banner_image, banner_title } = waterData;
 

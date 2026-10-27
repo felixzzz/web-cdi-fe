@@ -22,8 +22,8 @@ export async function generateMetadata({
     portStorageService.getPortStoragePageData(locale),
   ]);
 
-  const title = seo.title || t("title");
-  const description = seo.description || t("description");
+  const title = portStorageData.meta_title || seo.title || t("title");
+  const description = portStorageData.meta_description || seo.description || t("description");
 
   const { banner_image, banner_title } = portStorageData;
 

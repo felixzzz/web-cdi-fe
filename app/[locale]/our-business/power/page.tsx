@@ -22,8 +22,8 @@ export async function generateMetadata({
     energyService.getEnergyPageData(locale),
   ]);
 
-  const title = seo.title || t("title");
-  const description = seo.description || t("description");
+  const title = energyData.meta_title || seo.title || t("title");
+  const description = energyData.meta_description || seo.description || t("description");
 
   const { banner_image, banner_title } = energyData;
 
