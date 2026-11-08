@@ -61,6 +61,36 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
+      <head>
+        <script
+          id="disable-next-version"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var _next = window.next;
+                  Object.defineProperty(window, 'next', {
+                    configurable: true,
+                    enumerable: false,
+                    get: function() {
+                      if (_next && typeof _next === 'object') {
+                        try { delete _next.version; } catch(e) {}
+                      }
+                      return _next;
+                    },
+                    set: function(val) {
+                      if (val && typeof val === 'object') {
+                        try { delete val.version; } catch(e) {}
+                      }
+                      _next = val;
+                    }
+                  });
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={`${jakartaSans.variable} font-sans`}>
         <NavbarThemeProvider>
           <NextIntlClientProvider>

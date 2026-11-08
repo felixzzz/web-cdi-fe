@@ -5,6 +5,17 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = {
+  poweredByHeader: false,
+
+  webpack: (config, { webpack }) => {
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        "process.env.__NEXT_VERSION": JSON.stringify(""),
+      })
+    );
+    return config;
+  },
+
   images: {
     dangerouslyAllowSVG: true,
     // Auto-serve modern formats (AVIF first, then WebP) for better LCP
