@@ -151,7 +151,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: blob: https:",
               "font-src 'self' data: https://fonts.gstatic.com",
-              "connect-src 'self' https://chandradaya-investasi.com https://cdi-be.cmlabs.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com http://localhost:* http://127.0.0.1:*",
+              "connect-src 'self' https://chandradaya-investasi.com https://cdi-be.cmlabs.dev https://analytics.google.com https://*.analytics.google.com https://www.google-analytics.com https://*.google-analytics.com https://googletagmanager.com https://*.googletagmanager.com http://localhost:* http://127.0.0.1:*",
               "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.googletagmanager.com",
               "media-src 'self' https: data: blob:",
               "object-src 'none'",
