@@ -149,8 +149,8 @@ export default async function Page({ params: { locale } }: EnergyPageProps) {
         <JsonLd data={cleanJsonLdString(energyData.json_ld)!} />
       ) : (
         <JsonLd data={buildServiceSchema({
-          name: energyData.title || "Energy Business",
-          description: energyData.description || "",
+          name: energyData.title || "Power Solutions",
+          description: energyData.description || "CDI Group's power infrastructure through KCE delivers power supply, electricity services, and renewable energy for industry and the public.",
           url: `${process.env.NEXT_PUBLIC_URL_LP || 'https://chandradaya-investasi.com'}/${locale}/our-business/power`
         })} />
       )}
