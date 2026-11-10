@@ -115,7 +115,7 @@ export default async function Page({ params: { locale } }: ReportPageProps) {
   const [reportData, financialData, institutions, sustainabilityReports] =
     await Promise.all([
       reportService.getReportPageData(locale),
-      reportService.getFinancialData(locale),
+      reportService.getFinancialData(locale, 1, "annual_report"),
       reportService.getInstitutionsData(locale),
       reportService.getSustainabilityReports(locale),
     ]);

@@ -48,7 +48,7 @@ const flattenData = (data: CalendarApiResponse): CalendarEventItem[] => {
   return data.items.flatMap((yearGroup) => yearGroup.items);
 };
 
-const typeFilters = ["All Type", "Annual Report", "Financial Report"];
+const typeFilters = ["Annual Report", "Financial Report"];
 
 interface FinancialCalendarProps {
   initialData: CalendarApiResponse;
@@ -66,24 +66,15 @@ export function FinancialCalendar({
   const [pagination, setPagination] = useState<PaginationMeta>(
     initialData.meta
   );
-  const [activeYear, setActiveYear] = useState<string | number>("All Year");
-  const [activeType, setActiveType] = useState<string>("All Type");
+  const [activeType, setActiveType] = useState<string>("Annual Report");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
-  const yearFilters = useMemo(() => {
-    const years = Array.from(
-      new Set(flattenData(initialData).map((r) => r.year))
-    );
-    return ["All Year", ...years.sort((a, b) => b - a)];
-  }, [initialData]);
-
   useEffect(() => {
     if (
       currentPage === 1 &&
-      activeYear === "All Year" &&
-      activeType === "All Type"
+      activeType === "Annual Report"
     ) {
       setReportItems(flattenData(initialData));
       setPagination(initialData.meta);
@@ -93,11 +84,10 @@ export function FinancialCalendar({
     const fetchData = async () => {
       setIsLoading(true);
       const apiType = unformatReportType(activeType);
-      const apiYear = activeYear === "All Year" ? "" : activeYear;
 
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`
+          `${process.env.NEXT_PUBLIC_URL}/api/investor/calendar/list?page=${currentPage}&type=${apiType}`
         );
         if (!res.ok) throw new Error("Failed to fetch data");
         const data: CalendarApiResponse = await res.json();
@@ -112,7 +102,7 @@ export function FinancialCalendar({
     };
 
     fetchData();
-  }, [currentPage, activeYear, activeType, initialData]);
+  }, [currentPage, activeType, initialData]);
 
   const FILE_PREVIEW_BASE_URL = `${process.env.NEXT_PUBLIC_URL}/file/preview/${locale}/report/`;
   const FILE_DOWNLOAD_BASE_URL = `${process.env.NEXT_PUBLIC_URL}/file/download/${locale}/report/`;
@@ -171,26 +161,6 @@ export function FinancialCalendar({
           {t("subtitle")}
         </span>
       </div>
-      <nav
-        aria-label="Filter by year"
-        className="gap-10 flex items-center overflow-y-auto mt-10 border-b-2 border-b-gray-300"
-      >
-        {yearFilters.map((year) => (
-          <button
-            key={year}
-            onClick={() => {
-              setActiveYear(year);
-              setCurrentPage(1);
-            }}
-            className={clsx(
-              "text-base font-normal text-neutral-800 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
-              activeYear === year && "!text-[#2474A5] !border-b-[#2474A5]"
-            )}
-          >
-            {year}
-          </button>
-        ))}
-      </nav>
       <div className="grid lg:grid-cols-2 gap-4 my-10">
         <nav
           aria-label="Filter by report type"

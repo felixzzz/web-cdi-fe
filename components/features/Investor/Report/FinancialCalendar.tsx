@@ -49,6 +49,7 @@ interface FinancialCalendarProps {
 }
 
 const SUSTAINABILITY_TYPE = "Sustainability Report";
+const typeFilters = ["Annual Report", "Financial Report", SUSTAINABILITY_TYPE];
 
 export function FinancialCalendar({
   initialData,
@@ -99,29 +100,9 @@ export function FinancialCalendar({
     initialData.meta,
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const [activeYear, setActiveYear] = useState<string | number>("All Year");
-  const [activeType, setActiveType] = useState<string>("All Type");
+  const [activeType, setActiveType] = useState<string>("Annual Report");
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const yearFilters = useMemo(() => {
-    const financialYears = flattenData(initialData).map((r) => r.year);
-    const sustainabilityYears = sustainabilityData.items.map(
-      (r) => parseInt(r.release_year) || new Date(r.created_at).getFullYear(),
-    );
-
-    const years = Array.from(
-      new Set([...financialYears, ...sustainabilityYears]),
-    );
-    return ["All Year", ...years.sort((a, b) => b - a)];
-  }, [initialData, sustainabilityData]);
-
-  const typeFilters = useMemo(() => {
-    const financialTypes = Array.from(
-      new Set(flattenData(initialData).map((r) => formatReportType(r.type))),
-    );
-    return ["All Type", ...financialTypes.sort(), SUSTAINABILITY_TYPE];
-  }, [initialData]);
 
   useEffect(() => {
     const targetHash = "#detailed-calendar";
@@ -187,7 +168,7 @@ export function FinancialCalendar({
 
       try {
         if (activeType === SUSTAINABILITY_TYPE) {
-          if (currentPage === 1 && activeYear === "All Year") {
+          if (currentPage === 1) {
             setReportItems(
               sustainabilityData.items.map(transformSustainabilityItem),
             );
@@ -196,11 +177,8 @@ export function FinancialCalendar({
             return;
           }
 
-          const apiYear = activeYear === "All Year" ? "" : activeYear;
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/sustainability/reports/report?page=${currentPage}${
-              apiYear ? `&year=${apiYear}` : ""
-            }`,
+            `${process.env.NEXT_PUBLIC_URL}/api/sustainability/reports/report?page=${currentPage}`,
           );
           if (!res.ok) throw new Error("Failed to fetch sustainability data");
           const data: SustainabilityReportResponse = await res.json();
@@ -210,8 +188,7 @@ export function FinancialCalendar({
         } else {
           if (
             currentPage === 1 &&
-            activeYear === "All Year" &&
-            activeType === "All Type"
+            activeType === "Annual Report"
           ) {
             setReportItems(flattenData(initialData).map(transformItem));
             setPagination(initialData.meta);
@@ -220,10 +197,9 @@ export function FinancialCalendar({
           }
 
           const apiType = unformatReportType(activeType);
-          const apiYear = activeYear === "All Year" ? "" : activeYear;
 
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/investor/calendar/list?page=${currentPage}&type=${apiType}&year=${apiYear}`,
+            `${process.env.NEXT_PUBLIC_URL}/api/investor/calendar/list?page=${currentPage}&type=${apiType}`,
           );
           if (!res.ok) throw new Error("Failed to fetch data");
           const data: CalendarApiResponse = await res.json();
@@ -241,7 +217,6 @@ export function FinancialCalendar({
     fetchData();
   }, [
     currentPage,
-    activeYear,
     activeType,
     initialData,
     sustainabilityData,
@@ -253,11 +228,6 @@ export function FinancialCalendar({
       return report.title.toLowerCase().includes(searchQuery.toLowerCase());
     });
   }, [reportItems, searchQuery]);
-
-  const handleYearClick = (year: string | number) => {
-    setActiveYear(year);
-    setCurrentPage(1);
-  };
 
   const handleTypeClick = (type: string) => {
     setActiveType(type);
@@ -290,24 +260,6 @@ export function FinancialCalendar({
           {t("calendar_subtitle")}
         </span>
       </div>
-
-      <nav
-        aria-label="Filter by year"
-        className="gap-10 flex items-center overflow-y-auto mt-10 border-b-2 border-b-neutral-6 scrollbar-hide"
-      >
-        {yearFilters.map((year) => (
-          <button
-            key={year}
-            onClick={() => handleYearClick(year)}
-            className={clsx(
-              "text-base font-normal text-neutral-900 py-3 border-b-2 border-b-transparent cursor-pointer whitespace-nowrap",
-              activeYear === year && "!text-[#2474A5] !border-b-[#2474A5]",
-            )}
-          >
-            {year}
-          </button>
-        ))}
-      </nav>
 
       <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 my-10">
         <nav

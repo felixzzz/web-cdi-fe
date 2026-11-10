@@ -112,7 +112,7 @@ export default async function Page({ params: { locale } }: FinancialPageProps) {
 
   const [financialData, initialCalendarData] = await Promise.all([
     financialService.getFinancialPageData(locale),
-    financialService.getFinancialCalendarData(locale, 1),
+    financialService.getFinancialCalendarData(locale, 1, "annual_report"),
   ]);
 
   const { investor_financial_banner } = financialData;
