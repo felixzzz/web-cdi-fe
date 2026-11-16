@@ -89,6 +89,7 @@ interface ManagementItem {
   type: string;
   name: string;
   position: string;
+  sort?: number;
   image: string;
   image_hero: string;
   description_en: string;
