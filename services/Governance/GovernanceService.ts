@@ -5,6 +5,7 @@ const API_URL_CORPORATE_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/addi
 const API_URL_INTERNAL_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/internal_audit`;
 const API_URL_COMITE_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/audit_committe`;
 const API_URL_PRODUCT_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/code_of_conduct`;
+const API_URL_GUIDELINE_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/additional-file/governance_guideline`;
 const API_URL_TAB_GOVERNANCE_FILE = `${process.env.NEXT_PUBLIC_BASE_URL}/utility/governance-committes`;
 
 // method untuk fetch data governance page
@@ -137,6 +138,32 @@ export async function getProductFileData(locale: string): Promise<ApiFileRespons
   }
 }
 
+// method untuk fetch data component file exits pada guideline governance
+export async function getGuidelineFileData(locale: string): Promise<ApiFileResponse> {
+  try {
+    const res = await fetch(API_URL_GUIDELINE_FILE, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        lang: locale,
+      },
+      next: {
+        revalidate: 3600,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch guideline file data: ${res.statusText}`);
+    }
+
+    const data: ApiFileResponse = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error in getGuidelineFileData:", error);
+    return [];
+  }
+}
+
 // method untuk fetch data component file exits pada tab governance
 export async function getGovernanceData(locale: string): Promise<ApiTabsResponse> {
   try {
@@ -169,5 +196,6 @@ export const governanceService = {
   getInternalFileData,
   getComiteFileData,
   getProductFileData,
+  getGuidelineFileData,
   getGovernanceData,
 };

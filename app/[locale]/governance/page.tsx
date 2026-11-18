@@ -9,6 +9,7 @@ import { InternalAudit } from "@/components/features/Governance/InternalAudit";
 import { Policy } from "@/components/features/Governance/Policy";
 import { SubNavbar } from "@/components/features/Governance/SubNavbar";
 import { Whistleblowing } from "@/components/features/Governance/Whistleblowing";
+import { Guideline } from "@/components/features/Governance/Guideline";
 import { NavbarThemeTrigger } from "@/components/shared/NavbarThemeTrigger";
 import { informationService } from "@/services/Global/informationService";
 import { governanceService } from "@/services/Governance/GovernanceService";
@@ -124,6 +125,7 @@ export default async function Page({
     internalFiles,
     comiteFiles,
     productFiles,
+    guidelineFiles,
     tabsData,
     quickLinksData,
   ] = await Promise.all([
@@ -132,6 +134,7 @@ export default async function Page({
     governanceService.getInternalFileData(locale),
     governanceService.getComiteFileData(locale),
     governanceService.getProductFileData(locale),
+    governanceService.getGuidelineFileData(locale),
     governanceService.getGovernanceData(locale),
     informationService.getHomeQuickLinks(locale),
   ]);
@@ -147,6 +150,8 @@ export default async function Page({
     governance_audit_committe,
     governance_whistleblowing,
     governance_whistleblowing_id,
+    governance_guideline,
+    governance_guideline_show,
   } = governanceData;
 
   const auditCommitteeTab: CommitteeTabData = {
@@ -187,6 +192,7 @@ export default async function Page({
     CODE_CONDUCT: "code-of-conduct",
     POLICY: "policy",
     WHISTLEBLOWING: "whistleblowing",
+    GUIDELINE: "guideline",
   };
 
   const aboutLinks = [
@@ -197,6 +203,9 @@ export default async function Page({
     { text: t("Code_of_Conduct"), targetId: SECTION_IDS.CODE_CONDUCT },
     { text: t("Policy"), targetId: SECTION_IDS.POLICY },
     { text: t("Whistleblowing"), targetId: SECTION_IDS.WHISTLEBLOWING },
+    ...(governance_guideline_show?.content_en !== "hide"
+      ? [{ text: t("Guideline"), targetId: SECTION_IDS.GUIDELINE }]
+      : []),
   ];
   const allTabs = [auditCommitteeTab, ...otherTabs];
 
@@ -229,6 +238,13 @@ export default async function Page({
       />
       <Policy data={governance_policy} />
       <Whistleblowing data={governance_whistleblowing} image={governance_whistleblowing_id.file_url} locale={locale} />
+      {governance_guideline_show?.content_en !== "hide" && (
+        <Guideline
+          data={governance_guideline}
+          filesData={guidelineFiles}
+          locale={locale}
+        />
+      )}
       <Information
         eyebrow={t("eye_information")}
         title={t("title_information")}

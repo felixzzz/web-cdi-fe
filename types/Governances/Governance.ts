@@ -44,6 +44,8 @@ export interface InvestorGovernanceApiResponse {
   governance_risk_management_show: GovernanceSection;
   governance_she_regulation_show: GovernanceSection;
   governance_policy_show: GovernanceSection;
+  governance_guideline?: GovernanceSection;
+  governance_guideline_show?: GovernanceSection;
 }
 
 interface FileInformation {
