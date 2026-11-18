@@ -30,8 +30,12 @@ export function FileDownloadCTA({
       <div className="flex flex-col gap-2 mb-4 lg:mb-0">
         <h3 className="text-2xl font-medium">{title}</h3>
         <div className="flex items-center text-base text-white gap-2">
-          <span className="text-sm">{fileSize}</span>
-          <span className="text-sm">.</span>
+          {fileSize && (
+            <>
+              <span className="text-sm">{fileSize}</span>
+              <span className="text-sm">.</span>
+            </>
+          )}
           <Image
             title="icon"
             src="/assets/icons/ic_filepdf_white.svg"
