@@ -202,10 +202,10 @@ export default async function Page({
     { text: t("Risk_Management"), targetId: SECTION_IDS.RISK_MGMT },
     { text: t("Code_of_Conduct"), targetId: SECTION_IDS.CODE_CONDUCT },
     { text: t("Policy"), targetId: SECTION_IDS.POLICY },
-    { text: t("Whistleblowing"), targetId: SECTION_IDS.WHISTLEBLOWING },
     ...(governance_guideline_show?.content_en !== "hide"
       ? [{ text: t("Guideline"), targetId: SECTION_IDS.GUIDELINE }]
       : []),
+    { text: t("Whistleblowing"), targetId: SECTION_IDS.WHISTLEBLOWING },
   ];
   const allTabs = [auditCommitteeTab, ...otherTabs];
 
@@ -237,7 +237,6 @@ export default async function Page({
         locale={locale}
       />
       <Policy data={governance_policy} />
-      <Whistleblowing data={governance_whistleblowing} image={governance_whistleblowing_id.file_url} locale={locale} />
       {governance_guideline_show?.content_en !== "hide" && (
         <Guideline
           data={governance_guideline}
@@ -245,6 +244,7 @@ export default async function Page({
           locale={locale}
         />
       )}
+      <Whistleblowing data={governance_whistleblowing} image={governance_whistleblowing_id.file_url} locale={locale} />
       <Information
         eyebrow={t("eye_information")}
         title={t("title_information")}
