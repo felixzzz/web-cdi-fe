@@ -33,7 +33,7 @@ export const formatExternalUrl = (url: string) => {
     return url.replace("https.", "https://");
   }
 
-  // Jika tidak ada protocol sama sekali (misal: "careers.capcx.com")
+  // Jika tidak ada protocol sama sekali (misal: "careers.chandra-asri.com")
   if (!url.startsWith("http://") && !url.startsWith("https://")) {
     return `https://${url}`;
   }

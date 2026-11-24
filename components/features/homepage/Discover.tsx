@@ -44,7 +44,7 @@ export const Discover: React.FC<DiscoverSectionProps> = ({
       title: home_discover_career.title,
       description: stripHtml(home_discover_career.content),
       imageUrl: home_discover_career.file_url,
-      linkHref: "https://careers.capcx.com/",
+      linkHref: "https://careers.chandra-asri.com/",
       target: "_blank",
     },
   ];

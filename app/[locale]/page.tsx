@@ -127,6 +127,7 @@ export default async function Page({ params: { locale } }: HomePageProps) {
     home_journey_info_1,
     home_journey_info_2,
     home_journey_info_3,
+    home_journey_career,
   } = homeData;
 
   const stripHtml = (html: string | null) =>
@@ -147,10 +148,23 @@ export default async function Page({ params: { locale } }: HomePageProps) {
     },
   ];
 
+  const careerUrl =
+    home_journey_career?.content ||
+    home_journey_career?.content_en ||
+    home_journey_career?.content_id ||
+    "https://careers.chandra-asri.com/";
+
+  const careerText =
+    home_journey_career?.title ||
+    (locale === "id"
+      ? home_journey_career?.title_id
+      : home_journey_career?.title_en) ||
+    t("journey_career");
+
   const linksData: JourneyLink[] = [
     {
-      href: "https.careers.capcx.com/",
-      text: t("journey_career"),
+      href: careerUrl,
+      text: careerText,
       external: true,
     },
     {

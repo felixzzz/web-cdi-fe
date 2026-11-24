@@ -43,6 +43,7 @@ export interface HomePageApiResponse {
   home_journey_info_1: HomePageSection;
   home_journey_info_2: HomePageSection;
   home_journey_info_3: HomePageSection;
+  home_journey_career?: HomePageSection;
   json_ld_homepage?: HomePageSection;
 }
 
