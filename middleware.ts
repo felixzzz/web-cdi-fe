@@ -1,19 +1,31 @@
+import { NextRequest, NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
 // import { routing } from "./i18n/routing";
 
 // export default createMiddleware(routing);
 
-export const locales = ['en', 'id'];
+export const locales = ['id', 'en'];
 export const defaultLocale = 'id';
 
-export default createMiddleware({
+const intlMiddleware = createMiddleware({
   locales: locales,
   defaultLocale: defaultLocale,
 
   // localePrefix: 'never'
   // localePrefix: 'as-needed' 
-  localePrefix: 'always'
+  localePrefix: 'always',
+  localeDetection: false,
 });
+
+export default function middleware(request: NextRequest) {
+  const { pathname, search } = request.nextUrl;
+
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL(`/id${search}`, request.url), 301);
+  }
+
+  return intlMiddleware(request);
+}
 
 export const config = {
   // Match all pathnames except for

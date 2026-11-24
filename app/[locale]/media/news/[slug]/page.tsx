@@ -207,7 +207,7 @@ export async function generateMetadata({
       languages: {
         en: enUrl,
         id: idUrl,
-        "x-default": enUrl,
+        "x-default": idUrl,
       },
     },
 

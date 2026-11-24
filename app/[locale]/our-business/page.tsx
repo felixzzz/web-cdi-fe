@@ -65,7 +65,7 @@ export async function generateMetadata({
       languages: {
         en: getCanonicalPath("en"),
         id: getCanonicalPath("id"),
-        "x-default": getCanonicalPath("en"),
+        "x-default": getCanonicalPath("id"),
       },
     },
 

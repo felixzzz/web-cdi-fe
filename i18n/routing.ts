@@ -8,7 +8,8 @@ export const routing = defineRouting({
 
   // Used when no locale matches
   defaultLocale: "id",
-  localePrefix: "always"
+  localePrefix: "always",
+  localeDetection: false,
 });
 
   export type Locale = (typeof routing.locales)[number];
