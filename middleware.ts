@@ -15,6 +15,7 @@ const intlMiddleware = createMiddleware({
   // localePrefix: 'as-needed' 
   localePrefix: 'always',
   localeDetection: false,
+  alternateLinks: false,
 });
 
 export default function middleware(request: NextRequest) {

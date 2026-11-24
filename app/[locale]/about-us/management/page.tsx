@@ -36,7 +36,7 @@ export async function generateMetadata({
 
   const pagePath = "/about-us/management";
 
-  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL_LP || "https://chandradaya-investasi.com";
 
   const getCanonicalPath = (lang: string) => {
     return `${baseUrl}/${lang}${pagePath}`;
